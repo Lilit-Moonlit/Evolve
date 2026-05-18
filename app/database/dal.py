@@ -317,7 +317,6 @@ async def master_has_services(master_id: int) -> bool:
 
 async def get_masters_by_services(service_ids: List[int], match_all: bool = True) -> List[dict]:
     service_ids = [int(sid) for sid in service_ids]
-    print(f"[DEBUG] Searching for Master with services: {service_ids} (match_all={match_all})")
 
     async with async_session() as session:
         # Крок 1: Знаходимо майстрів, які надають обрані послуги
@@ -384,7 +383,6 @@ async def get_masters_by_services(service_ids: List[int], match_all: bool = True
             data["all_services"] = all_svcs_map.get(uid, [])
             final_list.append(data)
 
-        print(f"[DEBUG] Found {len(final_list)} masters matching criteria.")
         return final_list
 
 async def create_booking(client_id: int, master_id: int, service_id: int, start_time: datetime | str, comment: str = None) -> Booking:

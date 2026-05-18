@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import os
 import sys
 import io
 from aiogram import Bot, Dispatcher
@@ -22,7 +23,19 @@ if sys.stderr.encoding != 'utf-8':
     except:
         pass
 
+def run_migrations():
+    from alembic.config import Config
+    from alembic import command
+    print("--- INFO: Running automatic database migrations ---", flush=True)
+    try:
+        alembic_cfg = Config("alembic.ini")
+        command.upgrade(alembic_cfg, "head")
+        print("--- SUCCESS: Migrations applied successfully ---", flush=True)
+    except Exception as e:
+        print(f"--- WARNING: Migrations failed: {e} ---", flush=True)
+
 async def main():
+    run_migrations()
     print("--- BOT STARTING ---", flush=True)
     logging.basicConfig(level=logging.INFO)
     
@@ -93,7 +106,6 @@ async def main():
         await runner.cleanup()
 
 if __name__ == "__main__":
-    import os
     print("Initializing...", flush=True)
     try:
         asyncio.run(main())

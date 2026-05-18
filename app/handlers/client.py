@@ -278,7 +278,6 @@ async def show_masters_list(event, state: FSMContext, match_all: bool):
     masters_data = await dal.get_masters_by_services(selected_services, match_all=match_all)
     
     if not masters_data:
-        print("[DEBUG] show_masters_list: no masters found")
         await state.update_data(search_master_message_ids=[])
         from app.keyboards.inline import get_not_found_keyboard
         await message.answer(
