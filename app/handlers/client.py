@@ -102,21 +102,31 @@ async def community_info(message: Message):
 
 @client_router.message(F.text.contains("Знайти майстра"))
 async def start_find_master(message: Message, state: FSMContext):
-    await state.clear() 
-    services = await dal.get_all_services()
-    if not services:
-        await message.answer("На жаль, поки що немає активних послуг.")
-        return
+    try:
+        await state.clear() 
+        services = await dal.get_all_services()
+        if not services:
+            await message.answer("На жаль, поки що немає активних послуг.")
+            return
+            
+        await state.set_state(ClientBooking.waiting_for_service_selection)
+        await state.update_data(selected_services=[])
         
-    await state.set_state(ClientBooking.waiting_for_service_selection)
-    await state.update_data(selected_services=[])
-    
-    from app.keyboards.main_kb import get_back_keyboard
-    from app.keyboards.inline import get_categories_keyboard
-    await message.answer("Які послуги вас цікавлять? (Можна обрати декілька)", reply_markup=get_back_keyboard())
-    
-    keyboard = get_categories_keyboard(services, set())
-    await message.answer("Каталог послуг. Оберіть категорію:", reply_markup=keyboard)
+        from app.keyboards.main_kb import get_back_keyboard
+        from app.keyboards.inline import get_categories_keyboard
+        await message.answer("Які послуги вас цікавлять? (Можна обрати декілька)", reply_markup=get_back_keyboard())
+        
+        keyboard = get_categories_keyboard(services, set())
+        await message.answer("Каталог послуг. Оберіть категорію:", reply_markup=keyboard)
+    except Exception as e:
+        import traceback
+        err_text = traceback.format_exc()
+        print(f"[ERROR] start_find_master crashed: {err_text}", flush=True)
+        await message.answer(
+            f"⚠️ Технічна помилка при пошуку майстра:\n<code>{type(e).__name__}: {str(e)[:300]}</code>",
+            parse_mode="HTML"
+        )
+
 
 @client_router.callback_query(F.data.startswith("select_cat_"))
 async def process_category_selection(callback: CallbackQuery, state: FSMContext):
