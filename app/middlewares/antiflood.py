@@ -3,8 +3,16 @@ import time
 from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject, Message
 
+# Ці тексти кнопок ніколи не блокуються антифлудом
+ALWAYS_ALLOWED = {
+    "🔎 Знайти майстра", "💼 Я майстер", "💅 Шукаю модель",
+    "📢 Вакансії", "📅 Мої записи", "🏰 Спільнота",
+    "⬆️Додати оголошення⬆️", "🏠 Головне меню", "🔄 /start",
+    "🔙 Назад", "❌ Скасувати",
+}
+
 class AntiFloodMiddleware(BaseMiddleware):
-    def __init__(self, limit: float = 0.7):
+    def __init__(self, limit: float = 0.5):
         """
         :param limit: Мінімальний час між запитами від одного користувача (в секундах)
         """
@@ -24,17 +32,20 @@ class AntiFloodMiddleware(BaseMiddleware):
         user_id = user.id
         now = time.time()
 
-        # НЕ застосовуємо Anti-Flood для альбомів та медіа-файлів
-        is_media = False
+        # Ніколи не блокуємо: альбоми, медіа та головні кнопки меню
         if isinstance(event, Message):
             if event.media_group_id or event.photo or event.video or event.animation or event.document:
-                is_media = True
-        
-        if not is_media and user_id in self.last_user_time:
+                self.last_user_time[user_id] = now
+                return await handler(event, data)
+            if event.text and event.text in ALWAYS_ALLOWED:
+                self.last_user_time[user_id] = now
+                return await handler(event, data)
+
+        if user_id in self.last_user_time:
             delta = now - self.last_user_time[user_id]
             if delta < self.limit:
-                # Ігноруємо занадто швидке повторне натискання (тільки для тексту/кнопок)
-                return
+                return  # Ігноруємо занадто швидкий запит
 
         self.last_user_time[user_id] = now
         return await handler(event, data)
+
