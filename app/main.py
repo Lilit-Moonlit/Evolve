@@ -35,7 +35,6 @@ def run_migrations():
         print(f"--- WARNING: Migrations failed: {e} ---", flush=True)
 
 async def main():
-    run_migrations()
     print("--- BOT STARTING ---", flush=True)
     logging.basicConfig(level=logging.INFO)
     
@@ -107,10 +106,10 @@ async def main():
 
 if __name__ == "__main__":
     print("Initializing...", flush=True)
+    run_migrations()  # Запускаємо ДО event loop — щоб asyncio.run всередині alembic працював
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
         print("\nSTOP: Bot stopped by user.", flush=True)
     except Exception as e:
-        # Use English for the error message
         print(f"\nCRITICAL ERROR: {e}", flush=True)

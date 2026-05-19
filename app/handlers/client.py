@@ -122,8 +122,9 @@ async def start_find_master(message: Message, state: FSMContext):
         import traceback
         err_text = traceback.format_exc()
         print(f"[ERROR] start_find_master crashed: {err_text}", flush=True)
+        safe_err = html.escape(f"{type(e).__name__}: {str(e)}"[:300])
         await message.answer(
-            f"⚠️ Технічна помилка при пошуку майстра:\n<code>{type(e).__name__}: {str(e)[:300]}</code>",
+            f"⚠️ Технічна помилка при пошуку майстра:\n<code>{safe_err}</code>",
             parse_mode="HTML"
         )
 
