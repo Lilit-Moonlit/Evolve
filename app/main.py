@@ -38,6 +38,13 @@ async def main():
     print("--- BOT STARTING ---", flush=True)
     logging.basicConfig(level=logging.INFO)
     
+    try:
+        from update_services import sync_services_catalog
+        print("--- INFO: Syncing service catalog with database ---", flush=True)
+        await sync_services_catalog()
+    except Exception as e:
+        print(f"--- WARNING: Service catalog sync failed: {e} ---", flush=True)
+    
     if BOT_TOKEN == "СЮДИ_ВСТАВТЕ_ВАШ_ТОКЕН" or BOT_TOKEN == "PUT_YOUR_TOKEN_HERE":
         print("ERROR: BOT_TOKEN is missing!", flush=True)
         return
