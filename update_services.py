@@ -23,9 +23,12 @@ async def sync_services_catalog() -> None:
                 service = query.scalars().first()
 
                 if not service:
-                    service = Service(name=service_name, category=category)
+                    service = Service(name=service_name, category=category, popularity=0)
                     session.add(service)
                     created += 1
+                elif service.popularity is None:
+                    service.popularity = 0
+                    updated += 1
 
         await session.commit()
 

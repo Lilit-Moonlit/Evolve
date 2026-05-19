@@ -266,11 +266,11 @@ async def get_all_services() -> List[Service]:
 async def increment_service_popularity(service_id: int):
     """Збільшує лічильник кліків для послуги."""
     async with async_session() as session:
-        from sqlalchemy import update
+        from sqlalchemy import update, func
         await session.execute(
             update(Service)
             .where(Service.id == service_id)
-            .values(popularity=Service.popularity + 1)
+            .values(popularity=func.coalesce(Service.popularity, 0) + 1)
         )
         await session.commit()
 
