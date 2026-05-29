@@ -1,7 +1,7 @@
 import datetime
 
 def print_hello():
-    print("Hello World")
+    print("Привіт Світ")
 
 def print_current_date():
     current_date = datetime.date.today()
