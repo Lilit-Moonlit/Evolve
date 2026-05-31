@@ -1,0 +1,12 @@
+node_modules/
+dist/
+build/
+.turbo/
+.env
+.DS_Store
+coverage/
+out/
+cache/
+*.log
+.aider*
+
