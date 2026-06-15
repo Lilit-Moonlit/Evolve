@@ -1,28 +1,40 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
+import { useApp } from "../store/AppContext";
 import { MobileProfileCard } from "../components/MobileProfileCard";
 
 export default function Home() {
   const router = useRouter();
+  const { t } = useTranslation();
+  const { profiles, loading } = useApp();
+
+  const currentProfile = profiles[0];
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Evolve</Text>
+        <Text style={styles.headerTitle}>{t("app.name")}</Text>
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.title}>Find Your Match</Text>
-        <Text style={styles.subtitle}>Swipe to connect</Text>
+        <Text style={styles.title}>{t("home.hero.title")}</Text>
+        <Text style={styles.subtitle}>{t("home.hero.subtitle")}</Text>
 
-        <MobileProfileCard
-          name="Jane Doe"
-          age={28}
-          location="San Francisco, CA"
-          bio="Adventure seeker and coffee lover"
-          onConnect={() => {}}
-          onViewProfile={() => {}}
-        />
+        {loading ? (
+          <Text style={styles.loadingText}>Loading profiles...</Text>
+        ) : currentProfile ? (
+          <MobileProfileCard
+            name={currentProfile.name}
+            age={currentProfile.age}
+            location=""
+            bio={currentProfile.bio}
+            onConnect={() => {}}
+            onViewProfile={() => router.push("/profile")}
+          />
+        ) : (
+          <Text style={styles.loadingText}>{t("home.filters.noProfiles")}</Text>
+        )}
 
         <View style={styles.actions}>
           <TouchableOpacity style={styles.passButton}>
@@ -36,19 +48,21 @@ export default function Home() {
 
       <View style={styles.tabBar}>
         <TouchableOpacity style={styles.tabItem}>
-          <Text style={styles.tabText}>Home</Text>
+          <Text style={[styles.tabText, styles.activeTab]}>
+            {t("navigation.swipe")}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.tabItem}
           onPress={() => router.push("/chat")}
         >
-          <Text style={styles.tabText}>Chat</Text>
+          <Text style={styles.tabText}>{t("navigation.messages")}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.tabItem}
           onPress={() => router.push("/profile")}
         >
-          <Text style={styles.tabText}>Profile</Text>
+          <Text style={styles.tabText}>{t("navigation.profile")}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -85,17 +99,8 @@ const styles = StyleSheet.create({
     color: "#666",
     marginBottom: 40,
   },
-  cardPlaceholder: {
-    width: "100%",
-    height: 400,
-    backgroundColor: "#f5f5f5",
-    borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 40,
-  },
-  cardText: {
-    fontSize: 18,
+  loadingText: {
+    fontSize: 16,
     color: "#999",
   },
   actions: {
@@ -136,6 +141,9 @@ const styles = StyleSheet.create({
   },
   tabText: {
     fontSize: 16,
+    color: "#999",
+  },
+  activeTab: {
     color: "#007AFF",
   },
 });

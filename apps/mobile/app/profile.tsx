@@ -6,6 +6,9 @@ import {
   ScrollView,
 } from "react-native";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
+import { useAuth } from "../store/AuthContext";
+import { useApp } from "../store/AppContext";
 import { MobileButton } from "../components/MobileButton";
 import { MobileProfileStakingCard } from "../components/MobileProfileStakingCard";
 import { MobileVerificationBadge } from "../components/MobileVerificationBadge";
@@ -13,6 +16,17 @@ import { MobileModeSelector } from "../components/MobileModeSelector";
 
 export default function Profile() {
   const router = useRouter();
+  const { t } = useTranslation();
+  const { user, logout } = useAuth();
+  const { profiles, documents } = useApp();
+
+  const stdUploaded = documents.some((d) => d.type === "STD");
+  const dnaUploaded = documents.some((d) => d.type === "DNA");
+
+  const handleLogout = async () => {
+    await logout();
+    router.replace("/auth");
+  };
 
   return (
     <View style={styles.container}>
@@ -20,8 +34,8 @@ export default function Profile() {
         <TouchableOpacity onPress={() => router.back()}>
           <Text style={styles.backButton}>←</Text>
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Profile</Text>
-        <TouchableOpacity>
+        <Text style={styles.headerTitle}>{t("navigation.profile")}</Text>
+        <TouchableOpacity onPress={() => router.push("/settings")}>
           <Text style={styles.settingsButton}>⚙</Text>
         </TouchableOpacity>
       </View>
@@ -29,36 +43,47 @@ export default function Profile() {
       <ScrollView style={styles.content}>
         <View style={styles.profileHeader}>
           <View style={styles.avatar}>
-            <Text style={styles.avatarText}>JD</Text>
+            <Text style={styles.avatarText}>
+              {user?.email?.[0]?.toUpperCase() || "U"}
+            </Text>
           </View>
-          <Text style={styles.name}>John Doe</Text>
+          <Text style={styles.name}>
+            {user?.email || user?.phoneNumber || "User"}
+          </Text>
           <Text style={styles.bio}>Decentralized dating enthusiast</Text>
-          <MobileVerificationBadge type="std" showLabel size="md" />
+          {stdUploaded && (
+            <MobileVerificationBadge type="std" showLabel size="md" />
+          )}
         </View>
 
         <View style={styles.stats}>
           <View style={styles.statItem}>
-            <Text style={styles.statNumber}>25</Text>
-            <Text style={styles.statLabel}>Matches</Text>
+            <Text style={styles.statNumber}>{profiles.length}</Text>
+            <Text style={styles.statLabel}>{t("navigation.swipe")}</Text>
           </View>
           <View style={styles.statItem}>
-            <Text style={styles.statNumber}>42</Text>
-            <Text style={styles.statLabel}>Likes</Text>
+            <Text style={styles.statNumber}>0</Text>
+            <Text style={styles.statLabel}>{t("navigation.messages")}</Text>
           </View>
           <View style={styles.statItem}>
-            <Text style={styles.statNumber}>98%</Text>
+            <Text style={styles.statNumber}>
+              {stdUploaded || dnaUploaded ? "100%" : "0%"}
+            </Text>
             <Text style={styles.statLabel}>Reputation</Text>
           </View>
         </View>
 
         <MobileProfileStakingCard
-          stakedAmount="1,000"
-          stakingPeriod="30 days"
+          stakedAmount="0"
+          stakingPeriod="0 days"
           style={styles.stakingCard}
         />
 
-        <MobileButton onPress={() => {}} style={styles.editButton}>
-          Edit Profile
+        <MobileButton
+          onPress={() => router.push("/settings")}
+          style={styles.editButton}
+        >
+          {t("navigation.settings")}
         </MobileButton>
 
         <MobileModeSelector
@@ -68,9 +93,9 @@ export default function Profile() {
         />
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Settings</Text>
+          <Text style={styles.sectionTitle}>{t("navigation.settings")}</Text>
           <TouchableOpacity style={styles.settingItem}>
-            <Text style={styles.settingText}>Wallet Connect</Text>
+            <Text style={styles.settingText}>Wallet</Text>
             <Text style={styles.settingArrow}>→</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.settingItem}>
@@ -78,10 +103,14 @@ export default function Profile() {
             <Text style={styles.settingArrow}>→</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.settingItem}>
-            <Text style={styles.settingText}>Notifications</Text>
+            <Text style={styles.settingText}>Documents</Text>
             <Text style={styles.settingArrow}>→</Text>
           </TouchableOpacity>
         </View>
+
+        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+          <Text style={styles.logoutText}>{t("auth.logout")}</Text>
+        </TouchableOpacity>
       </ScrollView>
 
       <View style={styles.tabBar}>
@@ -89,16 +118,18 @@ export default function Profile() {
           style={styles.tabItem}
           onPress={() => router.push("/home")}
         >
-          <Text style={styles.tabText}>Home</Text>
+          <Text style={styles.tabText}>{t("navigation.swipe")}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.tabItem}
           onPress={() => router.push("/chat")}
         >
-          <Text style={styles.tabText}>Chat</Text>
+          <Text style={styles.tabText}>{t("navigation.messages")}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.tabItem}>
-          <Text style={[styles.tabText, styles.activeTab]}>Profile</Text>
+          <Text style={[styles.tabText, styles.activeTab]}>
+            {t("navigation.profile")}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -215,6 +246,18 @@ const styles = StyleSheet.create({
   settingArrow: {
     fontSize: 20,
     color: "#999",
+  },
+  logoutButton: {
+    margin: 20,
+    padding: 16,
+    backgroundColor: "#FF3B30",
+    borderRadius: 8,
+  },
+  logoutText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
+    textAlign: "center",
   },
   tabBar: {
     flexDirection: "row",

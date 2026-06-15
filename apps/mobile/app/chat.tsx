@@ -6,15 +6,13 @@ import {
   ScrollView,
 } from "react-native";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
+import { useApp } from "../store/AppContext";
 
 export default function Chat() {
   const router = useRouter();
-
-  const mockChats = [
-    { id: 1, name: "Alice", lastMessage: "Hey! How are you?", time: "2m" },
-    { id: 2, name: "Bob", lastMessage: "Would love to meet!", time: "1h" },
-    { id: 3, name: "Carol", lastMessage: "That sounds great", time: "3h" },
-  ];
+  const { t } = useTranslation();
+  const { chats, loading } = useApp();
 
   return (
     <View style={styles.container}>
@@ -22,23 +20,33 @@ export default function Chat() {
         <TouchableOpacity onPress={() => router.back()}>
           <Text style={styles.backButton}>←</Text>
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Messages</Text>
+        <Text style={styles.headerTitle}>{t("chat.title")}</Text>
         <View style={{ width: 20 }} />
       </View>
 
       <ScrollView style={styles.content}>
-        {mockChats.map((chat) => (
-          <TouchableOpacity key={chat.id} style={styles.chatItem}>
-            <View style={styles.avatar}>
-              <Text style={styles.avatarText}>{chat.name[0]}</Text>
-            </View>
-            <View style={styles.chatInfo}>
-              <Text style={styles.chatName}>{chat.name}</Text>
-              <Text style={styles.chatMessage}>{chat.lastMessage}</Text>
-            </View>
-            <Text style={styles.chatTime}>{chat.time}</Text>
-          </TouchableOpacity>
-        ))}
+        {loading ? (
+          <Text style={styles.loadingText}>Loading chats...</Text>
+        ) : chats.length === 0 ? (
+          <Text style={styles.loadingText}>{t("chat.noMatches")}</Text>
+        ) : (
+          chats.map((chat) => (
+            <TouchableOpacity key={chat.profile.userId} style={styles.chatItem}>
+              <View style={styles.avatar}>
+                <Text style={styles.avatarText}>{chat.profile.name[0]}</Text>
+              </View>
+              <View style={styles.chatInfo}>
+                <Text style={styles.chatName}>{chat.profile.name}</Text>
+                <Text style={styles.chatMessage}>
+                  {chat.lastMessage?.text || t("chat.selectChat")}
+                </Text>
+              </View>
+              <Text style={styles.chatTime}>
+                {chat.lastMessage?.time || ""}
+              </Text>
+            </TouchableOpacity>
+          ))
+        )}
       </ScrollView>
 
       <View style={styles.tabBar}>
@@ -46,16 +54,18 @@ export default function Chat() {
           style={styles.tabItem}
           onPress={() => router.push("/home")}
         >
-          <Text style={styles.tabText}>Home</Text>
+          <Text style={styles.tabText}>{t("navigation.swipe")}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.tabItem}>
-          <Text style={[styles.tabText, styles.activeTab]}>Chat</Text>
+          <Text style={[styles.tabText, styles.activeTab]}>
+            {t("navigation.messages")}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.tabItem}
           onPress={() => router.push("/profile")}
         >
-          <Text style={styles.tabText}>Profile</Text>
+          <Text style={styles.tabText}>{t("navigation.profile")}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -85,6 +95,11 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+  },
+  loadingText: {
+    textAlign: "center",
+    color: "#999",
+    marginTop: 40,
   },
   chatItem: {
     flexDirection: "row",

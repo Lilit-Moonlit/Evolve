@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 
 export default function Onboarding() {
@@ -8,13 +8,11 @@ export default function Onboarding() {
     <View style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.title}>Welcome to Evolve</Text>
-        <Text style={styles.subtitle}>
-          Decentralized dating with on-chain reputation
-        </Text>
+        <Text style={styles.subtitle}>Decentralized Dating</Text>
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.replace("/home")}
+          onPress={() => router.replace("/auth")}
         >
           <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
@@ -38,23 +36,22 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
     marginBottom: 10,
-    textAlign: "center",
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 18,
     color: "#666",
     marginBottom: 40,
-    textAlign: "center",
   },
   button: {
     backgroundColor: "#007AFF",
-    paddingHorizontal: 40,
-    paddingVertical: 15,
-    borderRadius: 25,
+    padding: 16,
+    borderRadius: 8,
+    width: "100%",
   },
   buttonText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "600",
+    textAlign: "center",
   },
 });
