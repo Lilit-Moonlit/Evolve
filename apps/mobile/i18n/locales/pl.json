@@ -1,0 +1,89 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Zdecentralizowane randki op bazie Web3 & P2P",
+    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "Przesuwaj",
+    "messages": "Wiadomości",
+    "profile": "Profil"
+  },
+  "home": {
+    "hero": {
+      "title": "Znajdź swoje dopasowanie",
+      "subtitle": "Przesuwaj przez profile i poznawaj interesujących ludzi."
+    },
+    "filters": {
+      "verifiedStd": "Tylko ze zweryfikowanym STD",
+      "verifiedDna": "Tylko ze zweryfikowanym DNA",
+      "noProfiles": "Brak profili pasujących do wybranych filtrów."
+    },
+    "profile": {
+      "newMatch": "Nowe dopasowanie",
+      "noMoreProfiles": "Brak więcej profili na razie! Sprawdź później."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profil",
+      "reputation": "Reputacja"
+    },
+    "myProfile": {
+      "title": "Mój profil",
+      "verifiedUser": "Zweryfikowany użytkownik"
+    },
+    "status": {
+      "stdStatus": "Status STD",
+      "dnaStatus": "Status DNA",
+      "uploaded": "✓ Przesłano",
+      "notUploaded": "✗ Nie przesłano"
+    },
+    "upload": {
+      "title": "Prześlij testy zdrowotne",
+      "stdTest": "Test STD",
+      "dnaTest": "Test DNA",
+      "redactFields": "Zredaguj wrażliwe pola przed przesłaniem:",
+      "fullName": "Imię i nazwisko",
+      "address": "Adres",
+      "phoneNumber": "Numer telefonu",
+      "patientId": "ID pacjenta",
+      "encryptUpload": "Szyfruj & Prześlij PDF",
+      "uploadSuccess": "Dokument pomyślnie przesłany i zaszyfrowany!"
+    },
+    "documents": {
+      "title": "Moje dokumenty",
+      "noDocuments": "Brak przesłanych dokumentów."
+    },
+    "reputation": {
+      "title": "Wynik reputacji",
+      "score": "Wynik",
+      "description": "Twoja reputacja opiera się na wagach zaufania osób, które zaświadczyły za tobą.",
+      "votersTitle": "Głosujący & Sieć zaufania",
+      "weight": "Waga:"
+    },
+    "wallet": {
+      "title": "Portfel",
+      "address": "Adres",
+      "balance": "Saldo"
+    }
+  },
+  "chat": {
+    "title": "Czat",
+    "subtitle": "Połącz się ze swoimi dopasowaniami",
+    "requestAccess": "Zażądano dostępu do twojego testu {{testType}}.",
+    "approvedRequest": "Zatwierdziłem twoją prośbę! Możesz teraz przeglądać mój odszyfrowany raport testu {{testType}}.",
+    "approvedResponse": "Zatwierdziłem twoją prośbę o przeglądanie mojego testu {{testType}}.",
+    "declinedResponse": "Odrzuciłem twoją prośbę o przeglądanie mojego testu {{testType}}."
+  },
+  "language": {
+    "select": "Wybierz język",
+    "title": "Wybierz swój język",
+    "description": "Wybierz swój preferowany język, aby kontynuować"
+  },
+  "country": {
+    "select": "Wybierz kraj",
+    "title": "Wybierz swój kraj",
+    "description": "Wybierz swój kraj, aby dopasować się z osobami w pobliżu"
+  }
+}

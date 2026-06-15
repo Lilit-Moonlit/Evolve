@@ -1,0 +1,89 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Rencontres décentralisées basées sur Web3 & P2P",
+    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "Glisser",
+    "messages": "Messages",
+    "profile": "Profil"
+  },
+  "home": {
+    "hero": {
+      "title": "Trouvez votre match",
+      "subtitle": "Parcourez les profils et connectez-vous avec des personnes intéressantes."
+    },
+    "filters": {
+      "verifiedStd": "Seulement avec IST vérifié",
+      "verifiedDna": "Seulement avec ADN vérifié",
+      "noProfiles": "Aucun profil ne correspond aux filtres sélectionnés."
+    },
+    "profile": {
+      "newMatch": "Nouveau match",
+      "noMoreProfiles": "Plus de profils pour le moment ! Revenez plus tard."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profil",
+      "reputation": "Réputation"
+    },
+    "myProfile": {
+      "title": "Mon profil",
+      "verifiedUser": "Utilisateur vérifié"
+    },
+    "status": {
+      "stdStatus": "Statut IST",
+      "dnaStatus": "Statut ADN",
+      "uploaded": "✓ Téléchargé",
+      "notUploaded": "✗ Non téléchargé"
+    },
+    "upload": {
+      "title": "Télécharger les tests de santé",
+      "stdTest": "Test IST",
+      "dnaTest": "Test ADN",
+      "redactFields": "Masquer les champs sensibles avant le téléchargement :",
+      "fullName": "Nom complet",
+      "address": "Adresse",
+      "phoneNumber": "Numéro de téléphone",
+      "patientId": "ID patient",
+      "encryptUpload": "Chiffrer & Télécharger PDF",
+      "uploadSuccess": "Document téléchargé et chiffré avec succès !"
+    },
+    "documents": {
+      "title": "Mes documents",
+      "noDocuments": "Aucun document téléchargé pour le moment."
+    },
+    "reputation": {
+      "title": "Score de réputation",
+      "score": "Score",
+      "description": "Votre réputation est basée sur les poids de confiance des personnes qui ont recommandé pour vous.",
+      "votersTitle": "Recommandants & Réseau de confiance",
+      "weight": "Poids :"
+    },
+    "wallet": {
+      "title": "Portefeuille",
+      "address": "Adresse",
+      "balance": "Solde"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Connectez-vous avec vos matches",
+    "requestAccess": "Accès demandé à votre test {{testType}}.",
+    "approvedRequest": "J'ai approuvé votre demande ! Vous pouvez maintenant consulter mon rapport de test {{testType}} déchiffré.",
+    "approvedResponse": "J'ai approuvé votre demande de consulter mon test {{testType}}.",
+    "declinedResponse": "J'ai refusé votre demande de consulter mon test {{testType}}."
+  },
+  "language": {
+    "select": "Sélectionner la langue",
+    "title": "Choisissez votre langue",
+    "description": "Sélectionnez votre langue préférée pour continuer"
+  },
+  "country": {
+    "select": "Sélectionner le pays",
+    "title": "Choisissez votre pays",
+    "description": "Sélectionnez votre pays pour matcher avec des personnes à proximité"
+  }
+}

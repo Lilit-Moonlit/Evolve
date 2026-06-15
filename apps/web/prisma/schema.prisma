@@ -1,0 +1,85 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id               String     @id @default(uuid())
+  ethAddress       String?    @unique
+  email            String?    @unique
+  phoneNumber      String?    @unique
+  passwordHash     String?
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  profile          Profile?
+  sentMessages     Message[]  @relation("SentMessages")
+  receivedMessages Message[]  @relation("ReceivedMessages")
+  documents        Document[]
+  matches          Match[]    @relation("UserMatches")
+  matchedBy        Match[]    @relation("MatchedUserMatches")
+}
+
+model Profile {
+  id                String   @id @default(uuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name              String
+  age               Int
+  bio               String
+  interests         String[]
+  imageUrl          String?
+  verifiedStd       Boolean  @default(false)
+  verifiedDna       Boolean  @default(false)
+  reputationScore   Float    @default(0.0)
+  voters            Json?    // Array of voter: { name: String, weight: Float, relation: String }
+  dnaProfile        Json?    // STRProfile mapping
+  stdTestResult     String?
+  accessPermissions Json?    // State of access permissions
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Match {
+  id            String   @id @default(uuid())
+  userId        String
+  matchedUserId String
+  user          User     @relation("UserMatches", fields: [userId], references: [id], onDelete: Cascade)
+  matchedUser   User     @relation("MatchedUserMatches", fields: [matchedUserId], references: [id], onDelete: Cascade)
+  createdAt     DateTime @default(now())
+
+  @@unique([userId, matchedUserId])
+}
+
+model Message {
+  id            String   @id @default(uuid())
+  senderId      String
+  receiverId    String
+  text          String
+  time          String
+  isRequest     Boolean  @default(false)
+  requestType   String?  // "STD" | "DNA"
+  requestStatus String?  // "pending" | "approved" | "declined"
+  createdAt     DateTime @default(now())
+  sender        User     @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver      User     @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+}
+
+model Document {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name           String
+  size           String
+  type           String   // "STD" | "DNA"
+  uploadDate     String
+  isRedacted     Boolean  @default(false)
+  redactedFields String[]
+  status         String   @default("encrypted") // "encrypted" | "decrypted"
+  resultText     String
+  dnaProfile     Json?    // Optional STRProfile Json
+  createdAt      DateTime @default(now())
+}

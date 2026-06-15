@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Dezentrales Dating, aufgebaut auf Web3 & P2P",
+    "copyright": "© 2026 Evolve - Dezentrales Dating, aufgebaut auf Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "Wischen",
+    "messages": "Nachrichten",
+    "profile": "Profil",
+    "settings": "Einstellungen"
+  },
+  "home": {
+    "hero": {
+      "title": "Finde deinen Match",
+      "subtitle": "Wische durch Profile und verbinde dich mit interessanten Leuten."
+    },
+    "filters": {
+      "verifiedStd": "Nur mit verifiziertem STD",
+      "verifiedDna": "Nur mit verifizierter DNA",
+      "noProfiles": "Keine Profile, die den ausgewählten Filtern entsprechen."
+    },
+    "profile": {
+      "newMatch": "Neuer Match",
+      "noMoreProfiles": "Keine weiteren Profile für jetzt! Schau später nochmal vorbei."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profil",
+      "reputation": "Reputation"
+    },
+    "myProfile": {
+      "title": "Mein Profil",
+      "verifiedUser": "Verifizierter Benutzer"
+    },
+    "status": {
+      "stdStatus": "STD-Status",
+      "dnaStatus": "DNA-Status",
+      "uploaded": "✓ Hochgeladen",
+      "notUploaded": "✗ Nicht hochgeladen",
+      "verified": "Verifiziert"
+    },
+    "upload": {
+      "title": "Gesundheitstests hochladen",
+      "stdTest": "STD-Test",
+      "dnaTest": "DNA-Test",
+      "redactFields": "Sensible Felder vor dem Hochladen schwärzen:",
+      "fullName": "Vollständiger Name",
+      "address": "Adresse",
+      "phoneNumber": "Telefonnummer",
+      "patientId": "Patienten-ID",
+      "encryptUpload": "Verschlüsseln und PDF hochladen",
+      "uploadSuccess": "Dokument erfolgreich hochgeladen und verschlüsselt!"
+    },
+    "documents": {
+      "title": "Meine Dokumente",
+      "noDocuments": "Noch keine Dokumente hochgeladen."
+    },
+    "reputation": {
+      "title": "Reputationswert",
+      "score": "Punktzahl",
+      "description": "Ihre Reputation basiert auf den Vertrauensgewichten von Personen, die für Sie gebürgt haben.",
+      "votersTitle": "Wähler & Vertrauensnetzwerk",
+      "weight": "Gewicht:"
+    },
+    "wallet": {
+      "title": "Wallet",
+      "address": "Adresse",
+      "balance": "Guthaben"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Verbinde dich mit deinen Matches",
+    "requestAccess": "Hat Zugriff auf Ihren {{testType}}-Test angefordert.",
+    "approvedRequest": "Ich habe Ihre Anfrage genehmigt! Sie können jetzt meinen entschlüsselten {{testType}}-Testbericht einsehen.",
+    "approvedResponse": "Ich habe Ihre Anfrage zur Ansicht meines {{testType}}-Tests genehmigt.",
+    "declinedResponse": "Ich habe Ihre Anfrage zur Ansicht meines {{testType}}-Tests abgelehnt.",
+    "selectChat": "Wähle einen Match aus, um mit dem Chatten zu beginnen",
+    "noMatches": "Noch keine Matches",
+    "inputPlaceholder": "Nachricht eingeben...",
+    "send": "Senden",
+    "pendingVerification": "Verifizierung ausstehend",
+    "requestStd": "STD-Test anfordern",
+    "requestDna": "DNA-Test anfordern",
+    "approveStd": "STD-Zugriff genehmigen",
+    "approveDna": "DNA-Zugriff genehmigen",
+    "denyStd": "STD-Zugriff verweigern",
+    "denyDna": "DNA-Zugriff verweigern"
+  },
+  "language": {
+    "select": "Sprache auswählen",
+    "title": "Wählen Sie Ihre Sprache",
+    "description": "Wählen Sie Ihre bevorzugte Sprache, um fortzufahren"
+  },
+  "country": {
+    "select": "Land auswählen",
+    "title": "Wählen Sie Ihr Land",
+    "description": "Wählen Sie Ihr Land, um mit Personen in Ihrer Nähe zu matchen"
+  },
+  "settings": {
+    "currentMode": "Aktueller Modus",
+    "autoSaved": "Ihre Auswahl wird automatisch gespeichert. Kein Neuladen erforderlich."
+  },
+  "auth": {
+    "loading": "Sichere Sitzung wird geladen...",
+    "landing": {
+      "title": "Evolve — Dezentrales Dating",
+      "email": "\uD83D\uDCE7 Mit E-Mail anmelden",
+      "phone": "\uD83D\uDCF1 Mit Telefon anmelden",
+      "wallet": "\uD83D\uDCB3 Wallet verbinden"
+    },
+    "phone": {
+      "title": "Mit Telefon anmelden",
+      "description": "Geben Sie Ihre Telefonnummer ein, um einen Bestätigungscode zu erhalten",
+      "phone": "Telefonnummer",
+      "phonePlaceholder": "+380...",
+      "getCode": "Code anfordern",
+      "otp": "Bestätigungscode",
+      "otpPlaceholder": "6-stelligen Code eingeben",
+      "verify": "Bestätigen & Anmelden",
+      "resendCode": "Code erneut senden",
+      "otpSent": "Ein 6-stelliger Code wurde an {{phone}} gesendet"
+    },
+    "noMode": {
+      "title": "Wählen Sie Ihren Dating-Modus",
+      "description": "Bitte wählen Sie einen Modus, bevor Sie Profile durchsuchen",
+      "button": "Zu den Einstellungen"
+    },
+    "connectWallet": {
+      "title": "Wallet verbinden",
+      "description": "Willkommen bei Evolve! Verbinden Sie Ihre Ethereum-Wallet über RainbowKit, um auf Ihr verschlüsseltes medizinisches Profil zuzugreifen."
+    },
+    "signIn": {
+      "title": "Mit Ethereum anmelden",
+      "description": "Bitte signieren Sie die sichere kryptografische Nachricht, um den Besitz Ihrer Wallet zu bestätigen und Ihre privaten Daten zu laden.",
+      "button": "Mit Ethereum anmelden"
+    },
+    "logout": "Abmelden",
+    "email": {
+      "title": "Mit E-Mail anmelden",
+      "description": "Geben Sie Ihre E-Mail und Ihr Passwort ein",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "login": "Anmelden",
+      "register": "Konto erstellen",
+      "switchToRegister": "Noch kein Konto? Registrieren",
+      "switchToLogin": "Bereits ein Konto? Anmelden"
+    },
+    "modeSelector": {
+      "title": "Wählen Sie Ihren Dating-Modus",
+      "description": "Wählen Sie, wie Sie Evolve nutzen möchten",
+      "normal": {
+        "label": "Dating",
+        "description": "Standard-Dating mit E-Mail-Login",
+        "authType": "E-Mail- oder Telefon-Login"
+      },
+      "pregnancyBond": {
+        "label": "Empfängnis",
+        "description": "Familienorientiertes Matching, Wallet erforderlich",
+        "authType": "Ethereum-Wallet erforderlich"
+      },
+      "crypticChoice": {
+        "label": "Postkopulation",
+        "description": "Anonymes Matching, Wallet erforderlich",
+        "authType": "Ethereum-Wallet erforderlich"
+      }
+    }
+  }
+}

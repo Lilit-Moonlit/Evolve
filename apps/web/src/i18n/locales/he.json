@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "היכרויות מבוזרות על Web3 ו-P2P",
+    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "החלק",
+    "messages": "הודעות",
+    "profile": "פרופיל",
+    "settings": "הגדרות"
+  },
+  "home": {
+    "hero": {
+      "title": "מצא את ההתאמה שלך",
+      "subtitle": "Swipe through profiles and connect with interesting people."
+    },
+    "filters": {
+      "verifiedStd": "Only with verified STD",
+      "verifiedDna": "Only with verified DNA",
+      "noProfiles": "No profiles matching the selected filters."
+    },
+    "profile": {
+      "newMatch": "New Match",
+      "noMoreProfiles": "No more profiles for now! Check back later."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profile",
+      "reputation": "Reputation"
+    },
+    "myProfile": {
+      "title": "My Profile",
+      "verifiedUser": "Verified User"
+    },
+    "status": {
+      "stdStatus": "STD Status",
+      "dnaStatus": "DNA Status",
+      "uploaded": "✓ Uploaded",
+      "notUploaded": "✗ Not Uploaded",
+      "verified": "מאומת"
+    },
+    "upload": {
+      "title": "Upload Health Tests",
+      "stdTest": "STD Test",
+      "dnaTest": "DNA Test",
+      "redactFields": "Redact sensitive fields before uploading:",
+      "fullName": "Full Name",
+      "address": "Address",
+      "phoneNumber": "Phone Number",
+      "patientId": "Patient ID",
+      "encryptUpload": "Encrypt & Upload PDF",
+      "uploadSuccess": "Document uploaded and encrypted successfully!"
+    },
+    "documents": {
+      "title": "My Documents",
+      "noDocuments": "No documents uploaded yet."
+    },
+    "wallet": {
+      "title": "ארנק",
+      "address": "כתובת",
+      "balance": "יתרה"
+    },
+    "reputation": {
+      "title": "Reputation Score",
+      "score": "Score",
+      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
+      "votersTitle": "Voters & Trust Network",
+      "weight": "Weight:"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Connect with your matches",
+    "requestAccess": "Requested access to your {{testType}} test.",
+    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
+    "approvedResponse": "I approved your request to view my {{testType}} test.",
+    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "selectChat": "בחר מッチ כדי להתחיל לשוחח",
+    "noMatches": "אין עדיין מッチים",
+    "inputPlaceholder": "הקלד הודעה...",
+    "send": "שלח",
+    "pendingVerification": "ממתין לאימות",
+    "requestStd": "בקש בדיקת IST",
+    "requestDna": "בקש בדיקת DNA",
+    "approveStd": "אשר גישה ל-IST",
+    "approveDna": "אשר גישה ל-DNA",
+    "denyStd": "דחה גישה ל-IST",
+    "denyDna": "דחה גישה ל-DNA"
+  },
+  "language": {
+    "select": "Select Language",
+    "title": "Choose your language",
+    "description": "Select your preferred language to continue"
+  },
+  "country": {
+    "select": "Select Country",
+    "title": "Choose your country",
+    "description": "Select your country to match with people nearby"
+  },
+  "settings": {
+    "currentMode": "מצב נוכחי",
+    "autoSaved": "הבחירה שלך נשמרת אוטומטית. אין צורך לרענן."
+  },
+  "auth": {
+    "loading": "Loading secure session...",
+    "landing": {
+      "title": "Evolve — היכרויות מבוזרות",
+      "email": "📧 כניסה עם אימייל",
+      "phone": "📱 כניסה עם טלפון",
+      "wallet": "💳 חבר ארנק"
+    },
+    "connectWallet": {
+      "title": "Connect Your Wallet",
+      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+    },
+    "signIn": {
+      "title": "Sign In with Ethereum",
+      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
+      "button": "Sign-In with Ethereum"
+    },
+    "logout": "Logout",
+    "email": {
+      "title": "Sign in with Email",
+      "description": "Enter your email and password to continue",
+      "email": "Email",
+      "password": "Password",
+      "login": "Sign In",
+      "register": "Create Account",
+      "switchToRegister": "Don't have an account? Register",
+      "switchToLogin": "Already have an account? Sign In"
+    },
+    "phone": {
+      "title": "כניסה עם טלפון",
+      "description": "הזן את מספר הטלפון שלך כדי לקבל קוד אימות",
+      "phone": "מספר טלפון",
+      "phonePlaceholder": "+380...",
+      "getCode": "קבל קוד",
+      "otp": "קוד אימות",
+      "otpPlaceholder": "הזן קוד בן 6 ספרות",
+      "verify": "אמת והיכנס",
+      "resendCode": "שלח קוד מחדש",
+      "otpSent": "קוד בן 6 ספרות נשלח ל-{{phone}}"
+    },
+    "modeSelector": {
+      "title": "Choose Your Dating Mode",
+      "description": "Select how you want to use Evolve",
+      "normal": {
+        "label": "Dating",
+        "description": "Standard dating with email login",
+        "authType": "Email or phone login"
+      },
+      "pregnancyBond": {
+        "label": "Conception",
+        "description": "Family-focused matching, requires wallet",
+        "authType": "Ethereum wallet required"
+      },
+      "crypticChoice": {
+        "label": "Postcopulation",
+        "description": "Anonymous matching, requires wallet",
+        "authType": "Ethereum wallet required"
+      }
+    },
+    "noMode": {
+      "title": "בחר מצב היכרויות",
+      "description": "בחר מצב לפני גלישה בפרופילים",
+      "button": "前往 הגדרות"
+    }
+  }
+}

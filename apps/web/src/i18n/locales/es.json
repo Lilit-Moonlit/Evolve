@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Citas descentralizadas construidas sobre Web3 y P2P",
+    "copyright": "© 2026 Evolve - Citas descentralizadas construidas sobre Web3 y P2P"
+  },
+  "navigation": {
+    "swipe": "Deslizar",
+    "messages": "Mensajes",
+    "profile": "Perfil",
+    "settings": "Ajustes"
+  },
+  "home": {
+    "hero": {
+      "title": "Encuentra tu Match",
+      "subtitle": "Desliza perfiles y conéctate con personas interesantes."
+    },
+    "filters": {
+      "verifiedStd": "Solo con ETS verificada",
+      "verifiedDna": "Solo con ADN verificado",
+      "noProfiles": "No hay perfiles que coincidan con los filtros seleccionados."
+    },
+    "profile": {
+      "newMatch": "Nuevo Match",
+      "noMoreProfiles": "¡No hay más perfiles por ahora! Vuelve más tarde."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Perfil",
+      "reputation": "Reputación"
+    },
+    "myProfile": {
+      "title": "Mi Perfil",
+      "verifiedUser": "Usuario Verificado"
+    },
+    "status": {
+      "stdStatus": "Estado ETS",
+      "dnaStatus": "Estado ADN",
+      "uploaded": "✓ Subido",
+      "notUploaded": "✗ No subido",
+      "verified": "Verificado"
+    },
+    "upload": {
+      "title": "Subir Pruebas de Salud",
+      "stdTest": "Prueba ETS",
+      "dnaTest": "Prueba ADN",
+      "redactFields": "Ocultar campos sensibles antes de subir:",
+      "fullName": "Nombre Completo",
+      "address": "Dirección",
+      "phoneNumber": "Teléfono",
+      "patientId": "ID del Paciente",
+      "encryptUpload": "Cifrar y Subir PDF",
+      "uploadSuccess": "¡Documento subido y cifrado exitosamente!"
+    },
+    "documents": {
+      "title": "Mis Documentos",
+      "noDocuments": "Aún no se han subido documentos."
+    },
+    "reputation": {
+      "title": "Puntuación de Reputación",
+      "score": "Puntuación",
+      "description": "Tu reputación se basa en los pesos de confianza de las personas que han dado fe de ti.",
+      "votersTitle": "Votantes y Red de Confianza",
+      "weight": "Peso:"
+    },
+    "wallet": {
+      "title": "Billetera",
+      "address": "Dirección",
+      "balance": "Saldo"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Conéctate con tus matches",
+    "requestAccess": "Solicitó acceso a tu prueba de {{testType}}.",
+    "approvedRequest": "¡He aprobado tu solicitud! Ahora puedes ver mi informe de prueba {{testType}} descifrado.",
+    "approvedResponse": "Aprobé tu solicitud para ver mi prueba de {{testType}}.",
+    "declinedResponse": "Rechacé tu solicitud para ver mi prueba de {{testType}}.",
+    "selectChat": "Selecciona un match para empezar a chatear",
+    "noMatches": "Aún no hay matches",
+    "inputPlaceholder": "Escribe un mensaje...",
+    "send": "Enviar",
+    "pendingVerification": "Verificación pendiente",
+    "requestStd": "Solicitar Prueba ETS",
+    "requestDna": "Solicitar Prueba ADN",
+    "approveStd": "Aprobar Acceso ETS",
+    "approveDna": "Aprobar Acceso ADN",
+    "denyStd": "Denegar Acceso ETS",
+    "denyDna": "Denegar Acceso ADN"
+  },
+  "language": {
+    "select": "Seleccionar idioma",
+    "title": "Elige tu idioma",
+    "description": "Selecciona tu idioma preferido para continuar"
+  },
+  "country": {
+    "select": "Seleccionar país",
+    "title": "Elige tu país",
+    "description": "Selecciona tu país para conectar con personas cercanas"
+  },
+  "settings": {
+    "currentMode": "Modo actual",
+    "autoSaved": "Su selección se guarda automáticamente. No es necesario recargar."
+  },
+  "auth": {
+    "loading": "Cargando sesión segura...",
+    "landing": {
+      "title": "Evolve — Citas descentralizadas",
+      "email": "\uD83D\uDCE7 Iniciar sesión con correo",
+      "phone": "\uD83D\uDCF1 Iniciar sesión con teléfono",
+      "wallet": "\uD83D\uDCB3 Conectar billetera"
+    },
+    "phone": {
+      "title": "Iniciar sesión con teléfono",
+      "description": "Ingrese su número de teléfono para recibir un código de verificación",
+      "phone": "Número de teléfono",
+      "phonePlaceholder": "+380...",
+      "getCode": "Obtener código",
+      "otp": "Código de verificación",
+      "otpPlaceholder": "Ingrese el código de 6 dígitos",
+      "verify": "Verificar e iniciar sesión",
+      "resendCode": "Reenviar código",
+      "otpSent": "Se ha enviado un código de 6 dígitos a {{phone}}"
+    },
+    "noMode": {
+      "title": "Elige tu modo de citas",
+      "description": "Selecciona un modo antes de explorar perfiles",
+      "button": "Ir a configuración"
+    },
+    "connectWallet": {
+      "title": "Conectar tu billetera",
+      "description": "¡Bienvenido a Evolve! Conecta tu billetera Ethereum con RainbowKit para acceder a tu perfil médico cifrado."
+    },
+    "signIn": {
+      "title": "Iniciar sesión con Ethereum",
+      "description": "Firma el mensaje criptográfico seguro para verificar la propiedad de tu billetera y cargar tus datos privados.",
+      "button": "Iniciar sesión con Ethereum"
+    },
+    "logout": "Cerrar sesión",
+    "email": {
+      "title": "Iniciar sesión con correo",
+      "description": "Ingrese su correo y contraseña",
+      "email": "Correo",
+      "password": "Contraseña",
+      "login": "Iniciar sesión",
+      "register": "Crear cuenta",
+      "switchToRegister": "¿No tienes cuenta? Regístrate",
+      "switchToLogin": "¿Ya tienes cuenta? Inicia sesión"
+    },
+    "modeSelector": {
+      "title": "Elige tu modo de citas",
+      "description": "Selecciona cómo quieres usar Evolve",
+      "normal": {
+        "label": "Citas",
+        "description": "Citas estándar con inicio de sesión por correo",
+        "authType": "Inicio de sesión por correo o teléfono"
+      },
+      "pregnancyBond": {
+        "label": "Concepción",
+        "description": "Búsqueda familiar, requiere billetera",
+        "authType": "Se requiere billetera Ethereum"
+      },
+      "crypticChoice": {
+        "label": "Postcopulación",
+        "description": "Búsqueda anónima, requiere billetera",
+        "authType": "Se requiere billetera Ethereum"
+      }
+    }
+  }
+}

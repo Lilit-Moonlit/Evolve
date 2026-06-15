@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Web3とP2Pで構築された分散型デーティング",
+    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "スワイプ",
+    "messages": "メッセージ",
+    "profile": "プロフィール",
+    "settings": "設定"
+  },
+  "home": {
+    "hero": {
+      "title": "マッチを見つけよう",
+      "subtitle": "プロフィールをスワイプして、素敵な人とつながりましょう。"
+    },
+    "filters": {
+      "verifiedStd": "STD検証済みのみ",
+      "verifiedDna": "DNA検証済みのみ",
+      "noProfiles": "選択したフィルターに一致するプロフィールがありません。"
+    },
+    "profile": {
+      "newMatch": "新しいマッチ",
+      "noMoreProfiles": "今はプロフィールがありません！後でまた確認してください。"
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "プロフィール",
+      "reputation": "評判"
+    },
+    "myProfile": {
+      "title": "マイプロフィール",
+      "verifiedUser": "認証済みユーザー"
+    },
+    "status": {
+      "stdStatus": "STDステータス",
+      "dnaStatus": "DNAステータス",
+      "uploaded": "✓ アップロード済み",
+      "notUploaded": "✗ 未アップロード",
+      "verified": "確認済み"
+    },
+    "upload": {
+      "title": "健康検査をアップロード",
+      "stdTest": "STD検査",
+      "dnaTest": "DNA検査",
+      "redactFields": "アップロード前に機密フィールドを編集:",
+      "fullName": "氏名",
+      "address": "住所",
+      "phoneNumber": "電話番号",
+      "patientId": "患者ID",
+      "encryptUpload": "暗号化してPDFをアップロード",
+      "uploadSuccess": "ドキュメントが正常にアップロード・暗号化されました！"
+    },
+    "documents": {
+      "title": "マイドキュメント",
+      "noDocuments": "まだドキュメントがアップロードされていません。"
+    },
+    "reputation": {
+      "title": "評判スコア",
+      "score": "スコア",
+      "description": "評判は、あなたを保証した人々の信頼ウェイトに基づいています。",
+      "votersTitle": "投票者と信頼ネットワーク",
+      "weight": "ウェイト:"
+    },
+    "wallet": {
+      "title": "ウォレット",
+      "address": "アドレス",
+      "balance": "残高"
+    }
+  },
+  "chat": {
+    "title": "チャット",
+    "subtitle": "マッチとつながる",
+    "requestAccess": "{{testType}}検査へのアクセスをリクエストしました。",
+    "approvedRequest": "リクエストを承認しました！復号化された{{testType}}検査レポートを閲覧できます。",
+    "approvedResponse": "{{testType}}検査の閲覧リクエストを承認しました。",
+    "declinedResponse": "{{testType}}検査の閲覧リクエストを拒否しました。",
+    "selectChat": "チャットを開始するマッチを選択",
+    "noMatches": "まだマッチがありません",
+    "inputPlaceholder": "メッセージを入力...",
+    "send": "送信",
+    "pendingVerification": "確認保留中",
+    "requestStd": "STDテストをリクエスト",
+    "requestDna": "DNAテストをリクエスト",
+    "approveStd": "STDアクセスを承認",
+    "approveDna": "DNAアクセスを承認",
+    "denyStd": "STDアクセスを拒否",
+    "denyDna": "DNAアクセスを拒否"
+  },
+  "language": {
+    "select": "言語を選択",
+    "title": "言語を選んでください",
+    "description": "続行するには希望の言語を選択してください"
+  },
+  "country": {
+    "select": "国を選択",
+    "title": "国を選んでください",
+    "description": "近くの人とマッチするために国を選択してください"
+  },
+  "settings": {
+    "currentMode": "現在のモード",
+    "autoSaved": "選択は自動的に保存されます。リロードは不要です。"
+  },
+  "auth": {
+    "loading": "セキュアセッションを読み込み中...",
+    "landing": {
+      "title": "Evolve — 分散型出会い",
+      "email": "📧 メールでサインイン",
+      "phone": "📱 電話でサインイン",
+      "wallet": "💳 ウォレットを接続"
+    },
+    "phone": {
+      "title": "電話でサインイン",
+      "description": "電話番号を入力して認証コードを受け取る",
+      "phone": "電話番号",
+      "phonePlaceholder": "+380...",
+      "getCode": "コードを取得",
+      "otp": "認証コード",
+      "otpPlaceholder": "6桁のコードを入力",
+      "verify": "確認してサインイン",
+      "resendCode": "コードを再送信",
+      "otpSent": "6桁のコードが {{phone}} に送信されました"
+    },
+    "noMode": {
+      "title": "出会いモードを選択",
+      "description": "プロフィールを閲覧する前にモードを選択してください",
+      "button": "設定へ"
+    },
+    "connectWallet": {
+      "title": "ウォレットを接続",
+      "description": "Evolveへようこそ！RainbowKitでEthereumウォレットを接続し、暗号化された医療プロフィールにアクセスしてください。"
+    },
+    "signIn": {
+      "title": "Ethereumでサインイン",
+      "description": "ウォレットの所有権を確認し、プライベートデータを読み込むために、安全な暗号メッセージに署名してください。",
+      "button": "Ethereumでサインイン"
+    },
+    "logout": "ログアウト",
+    "email": {
+      "title": "メールでログイン",
+      "description": "メールアドレスとパスワードを入力してください",
+      "email": "メール",
+      "password": "パスワード",
+      "login": "ログイン",
+      "register": "アカウント作成",
+      "switchToRegister": "アカウントがありませんか？登録",
+      "switchToLogin": "すでにアカウントをお持ちですか？ログイン"
+    },
+    "modeSelector": {
+      "title": "出会いモードを選択",
+      "description": "Evolveの使い方を選択してください",
+      "normal": {
+        "label": "出会い",
+        "description": "メールログインによる標準的な出会い",
+        "authType": "メールまたは電話でログイン"
+      },
+      "pregnancyBond": {
+        "label": "妊娠",
+        "description": "家族向けマッチング、ウォレット必須",
+        "authType": "Ethereumウォレットが必要"
+      },
+      "crypticChoice": {
+        "label": "ポスト交尾",
+        "description": "匿名マッチング、ウォレット必須",
+        "authType": "Ethereumウォレットが必要"
+      }
+    }
+  }
+}

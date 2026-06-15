@@ -1,0 +1,89 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Citas descentralizadas basadas en Web3 & P2P",
+    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "Deslizar",
+    "messages": "Mensajes",
+    "profile": "Perfil"
+  },
+  "home": {
+    "hero": {
+      "title": "Encuentra tu match",
+      "subtitle": "Desliza por los perfiles y conecta con personas interesantes."
+    },
+    "filters": {
+      "verifiedStd": "Solo con ETS verificado",
+      "verifiedDna": "Solo con ADN verificado",
+      "noProfiles": "No hay perfiles que coincidan con los filtros seleccionados."
+    },
+    "profile": {
+      "newMatch": "Nuevo match",
+      "noMoreProfiles": "¡No hay más perfiles por ahora! Vuelve más tarde."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Perfil",
+      "reputation": "Reputación"
+    },
+    "myProfile": {
+      "title": "Mi perfil",
+      "verifiedUser": "Usuario verificado"
+    },
+    "status": {
+      "stdStatus": "Estado ETS",
+      "dnaStatus": "Estado ADN",
+      "uploaded": "✓ Subido",
+      "notUploaded": "✗ No subido"
+    },
+    "upload": {
+      "title": "Subir pruebas de salud",
+      "stdTest": "Prueba ETS",
+      "dnaTest": "Prueba ADN",
+      "redactFields": "Redactar campos sensibles antes de subir:",
+      "fullName": "Nombre completo",
+      "address": "Dirección",
+      "phoneNumber": "Número de teléfono",
+      "patientId": "ID de paciente",
+      "encryptUpload": "Cifrar & Subir PDF",
+      "uploadSuccess": "¡Documento subido y cifrado exitosamente!"
+    },
+    "documents": {
+      "title": "Mis documentos",
+      "noDocuments": "Aún no se han subido documentos."
+    },
+    "reputation": {
+      "title": "Puntuación de reputación",
+      "score": "Puntuación",
+      "description": "Su reputación se basa en los pesos de confianza de las personas que han avalado por usted.",
+      "votersTitle": "Votantes & Red de confianza",
+      "weight": "Peso:"
+    },
+    "wallet": {
+      "title": "Billetera",
+      "address": "Dirección",
+      "balance": "Saldo"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Conéctate con tus matches",
+    "requestAccess": "Acceso solicitado a tu prueba {{testType}}.",
+    "approvedRequest": "¡He aprobado tu solicitud! Ahora puedes ver mi informe de prueba {{testType}} descifrado.",
+    "approvedResponse": "He aprobado tu solicitud para ver mi prueba {{testType}}.",
+    "declinedResponse": "He rechazado tu solicitud para ver mi prueba {{testType}}."
+  },
+  "language": {
+    "select": "Seleccionar idioma",
+    "title": "Elige tu idioma",
+    "description": "Selecciona tu idioma preferido para continuar"
+  },
+  "country": {
+    "select": "Seleccionar país",
+    "title": "Elige tu país",
+    "description": "Selecciona tu país para hacer match con personas cercanas"
+  }
+}

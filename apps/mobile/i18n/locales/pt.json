@@ -1,0 +1,89 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Encontros descentralizados baseados em Web3 & P2P",
+    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "Deslizar",
+    "messages": "Mensagens",
+    "profile": "Perfil"
+  },
+  "home": {
+    "hero": {
+      "title": "Encontre seu match",
+      "subtitle": "Deslize pelos perfis e conecte-se com pessoas interessantes."
+    },
+    "filters": {
+      "verifiedStd": "Apenas com DST verificado",
+      "verifiedDna": "Apenas com DNA verificado",
+      "noProfiles": "Nenhum perfil correspondente aos filtros selecionados."
+    },
+    "profile": {
+      "newMatch": "Novo match",
+      "noMoreProfiles": "Não há mais perfis por enquanto! Volte mais tarde."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Perfil",
+      "reputation": "Reputação"
+    },
+    "myProfile": {
+      "title": "Meu perfil",
+      "verifiedUser": "Usuário verificado"
+    },
+    "status": {
+      "stdStatus": "Status DST",
+      "dnaStatus": "Status DNA",
+      "uploaded": "✓ Enviado",
+      "notUploaded": "✗ Não enviado"
+    },
+    "upload": {
+      "title": "Enviar testes de saúde",
+      "stdTest": "Teste DST",
+      "dnaTest": "Teste DNA",
+      "redactFields": "Redigir campos sensíveis antes de enviar:",
+      "fullName": "Nome completo",
+      "address": "Endereço",
+      "phoneNumber": "Número de telefone",
+      "patientId": "ID do paciente",
+      "encryptUpload": "Criptografar & Enviar PDF",
+      "uploadSuccess": "Documento enviado e criptografado com sucesso!"
+    },
+    "documents": {
+      "title": "Meus documentos",
+      "noDocuments": "Nenhum documento enviado ainda."
+    },
+    "reputation": {
+      "title": "Pontuação de reputação",
+      "score": "Pontuação",
+      "description": "Sua reputação é baseada nos pesos de confiança das pessoas que atestaram por você.",
+      "votersTitle": "Votantes & Rede de confiança",
+      "weight": "Peso:"
+    },
+    "wallet": {
+      "title": "Carteira",
+      "address": "Endereço",
+      "balance": "Saldo"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Conecte-se com seus matches",
+    "requestAccess": "Acesso solicitado ao seu teste {{testType}}.",
+    "approvedRequest": "Aprovo seu pedido! Agora você pode visualizar meu relatório de teste {{testType}} descriptografado.",
+    "approvedResponse": "Aprovo seu pedido para visualizar meu teste {{testType}}.",
+    "declinedResponse": "Recuso seu pedido para visualizar meu teste {{testType}}."
+  },
+  "language": {
+    "select": "Selecionar idioma",
+    "title": "Escolha seu idioma",
+    "description": "Selecione seu idioma preferido para continuar"
+  },
+  "country": {
+    "select": "Selecionar país",
+    "title": "Escolha seu país",
+    "description": "Selecione seu país para fazer match com pessoas próximas"
+  }
+}

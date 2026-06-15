@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Encontros descentralizados construídos sobre Web3 e P2P",
+    "copyright": "© 2026 Evolve - Encontros descentralizados construídos sobre Web3 e P2P"
+  },
+  "navigation": {
+    "swipe": "Deslizar",
+    "messages": "Mensagens",
+    "profile": "Perfil",
+    "settings": "Configurações"
+  },
+  "home": {
+    "hero": {
+      "title": "Encontre seu Match",
+      "subtitle": "Deslize pelos perfis e conecte-se com pessoas interessantes."
+    },
+    "filters": {
+      "verifiedStd": "Apenas com DST verificada",
+      "verifiedDna": "Apenas com DNA verificado",
+      "noProfiles": "Nenhum perfil corresponde aos filtros selecionados."
+    },
+    "profile": {
+      "newMatch": "Novo Match",
+      "noMoreProfiles": "Sem mais perfis por agora! Volte mais tarde."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Perfil",
+      "reputation": "Reputação"
+    },
+    "myProfile": {
+      "title": "Meu Perfil",
+      "verifiedUser": "Usuário Verificado"
+    },
+    "status": {
+      "stdStatus": "Status DST",
+      "dnaStatus": "Status DNA",
+      "uploaded": "✓ Enviado",
+      "notUploaded": "✗ Não enviado",
+      "verified": "Verificado"
+    },
+    "upload": {
+      "title": "Enviar Exames de Saúde",
+      "stdTest": "Exame DST",
+      "dnaTest": "Exame DNA",
+      "redactFields": "Ocultar campos sensíveis antes do envio:",
+      "fullName": "Nome Completo",
+      "address": "Endereço",
+      "phoneNumber": "Telefone",
+      "patientId": "ID do Paciente",
+      "encryptUpload": "Criptografar e Enviar PDF",
+      "uploadSuccess": "Documento enviado e criptografado com sucesso!"
+    },
+    "documents": {
+      "title": "Meus Documentos",
+      "noDocuments": "Nenhum documento enviado ainda."
+    },
+    "reputation": {
+      "title": "Pontuação de Reputação",
+      "score": "Pontuação",
+      "description": "Sua reputação é baseada nos pesos de confiança das pessoas que atestaram por você.",
+      "votersTitle": "Eleitores e Rede de Confiança",
+      "weight": "Peso:"
+    },
+    "wallet": {
+      "title": "Carteira",
+      "address": "Endereço",
+      "balance": "Saldo"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Conecte-se com seus matches",
+    "requestAccess": "Solicitou acesso ao seu exame de {{testType}}.",
+    "approvedRequest": "Aprovei sua solicitação! Agora você pode ver meu relatório do exame {{testType}} descriptografado.",
+    "approvedResponse": "Aprovei sua solicitação para ver meu exame de {{testType}}.",
+    "declinedResponse": "Recusei sua solicitação para ver meu exame de {{testType}}.",
+    "selectChat": "Selecione um match para começar a conversar",
+    "noMatches": "Ainda sem matches",
+    "inputPlaceholder": "Digite uma mensagem...",
+    "send": "Enviar",
+    "pendingVerification": "Verificação pendente",
+    "requestStd": "Solicitar Exame DST",
+    "requestDna": "Solicitar Exame DNA",
+    "approveStd": "Aprovar Acesso DST",
+    "approveDna": "Aprovar Acesso DNA",
+    "denyStd": "Negar Acesso DST",
+    "denyDna": "Negar Acesso DNA"
+  },
+  "language": {
+    "select": "Selecionar idioma",
+    "title": "Escolha seu idioma",
+    "description": "Selecione seu idioma preferido para continuar"
+  },
+  "country": {
+    "select": "Selecionar país",
+    "title": "Escolha seu país",
+    "description": "Selecione seu país para encontrar pessoas próximas"
+  },
+  "settings": {
+    "currentMode": "Modo atual",
+    "autoSaved": "Sua seleção é salva automaticamente. Não é necessário recarregar."
+  },
+  "auth": {
+    "loading": "Carregando sessão segura...",
+    "landing": {
+      "title": "Evolve — Encontros descentralizados",
+      "email": "\uD83D\uDCE7 Entrar com e-mail",
+      "phone": "\uD83D\uDCF1 Entrar com telefone",
+      "wallet": "\uD83D\uDCB3 Conectar carteira"
+    },
+    "phone": {
+      "title": "Entrar com telefone",
+      "description": "Digite seu número de telefone para receber um código de verificação",
+      "phone": "Número de telefone",
+      "phonePlaceholder": "+380...",
+      "getCode": "Obter código",
+      "otp": "Código de verificação",
+      "otpPlaceholder": "Digite o código de 6 dígitos",
+      "verify": "Verificar e entrar",
+      "resendCode": "Reenviar código",
+      "otpSent": "Um código de 6 dígitos foi enviado para {{phone}}"
+    },
+    "noMode": {
+      "title": "Escolha seu modo de namoro",
+      "description": "Selecione um modo antes de navegar pelos perfis",
+      "button": "Ir para configurações"
+    },
+    "connectWallet": {
+      "title": "Conectar carteira",
+      "description": "Bem-vindo ao Evolve! Conecte sua carteira Ethereum via RainbowKit para acessar seu perfil médico criptografado."
+    },
+    "signIn": {
+      "title": "Entrar com Ethereum",
+      "description": "Assine a mensagem criptográfica segura para verificar a propriedade da sua carteira e carregar seus dados privados.",
+      "button": "Entrar com Ethereum"
+    },
+    "logout": "Sair",
+    "email": {
+      "title": "Entrar com e-mail",
+      "description": "Digite seu e-mail e senha",
+      "email": "E-mail",
+      "password": "Senha",
+      "login": "Entrar",
+      "register": "Criar conta",
+      "switchToRegister": "Não tem conta? Cadastre-se",
+      "switchToLogin": "Já tem conta? Entre"
+    },
+    "modeSelector": {
+      "title": "Escolha seu modo de namoro",
+      "description": "Selecione como usar o Evolve",
+      "normal": {
+        "label": "Encontros",
+        "description": "Encontros padrão com login por e-mail",
+        "authType": "Login por e-mail ou telefone"
+      },
+      "pregnancyBond": {
+        "label": "Concepção",
+        "description": "Busca familiar, requer carteira",
+        "authType": "Carteira Ethereum necessária"
+      },
+      "crypticChoice": {
+        "label": "Pós-copulação",
+        "description": "Busca anônima, requer carteira",
+        "authType": "Carteira Ethereum necessária"
+      }
+    }
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Incontri decentralizzati basati su Web3 e P2P",
+    "copyright": "© 2026 Evolve - Incontri decentralizzati basati su Web3 e P2P"
+  },
+  "navigation": {
+    "swipe": "Scorri",
+    "messages": "Messaggi",
+    "profile": "Profilo",
+    "settings": "Impostazioni"
+  },
+  "home": {
+    "hero": {
+      "title": "Trova il tuo Match",
+      "subtitle": "Scorri i profili e connettiti con persone interessanti."
+    },
+    "filters": {
+      "verifiedStd": "Solo con MST verificata",
+      "verifiedDna": "Solo con DNA verificato",
+      "noProfiles": "Nessun profilo corrisponde ai filtri selezionati."
+    },
+    "profile": {
+      "newMatch": "Nuovo Match",
+      "noMoreProfiles": "Niente più profili per ora! Ripassa più tardi."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profilo",
+      "reputation": "Reputazione"
+    },
+    "myProfile": {
+      "title": "Il Mio Profilo",
+      "verifiedUser": "Utente Verificato"
+    },
+    "status": {
+      "stdStatus": "Stato MST",
+      "dnaStatus": "Stato DNA",
+      "uploaded": "✓ Caricato",
+      "notUploaded": "✗ Non caricato",
+      "verified": "Verificato"
+    },
+    "upload": {
+      "title": "Carica Test Sanitari",
+      "stdTest": "Test MST",
+      "dnaTest": "Test DNA",
+      "redactFields": "Oscura i campi sensibili prima del caricamento:",
+      "fullName": "Nome Completo",
+      "address": "Indirizzo",
+      "phoneNumber": "Numero di telefono",
+      "patientId": "ID Paziente",
+      "encryptUpload": "Crittografa e Carica PDF",
+      "uploadSuccess": "Documento caricato e crittografato con successo!"
+    },
+    "documents": {
+      "title": "I Miei Documenti",
+      "noDocuments": "Nessun documento ancora caricato."
+    },
+    "reputation": {
+      "title": "Punteggio di Reputazione",
+      "score": "Punteggio",
+      "description": "La tua reputazione si basa sui pesi di fiducia delle persone che hanno garantito per te.",
+      "votersTitle": "Votanti e Rete di Fiducia",
+      "weight": "Peso:"
+    },
+    "wallet": {
+      "title": "Wallet",
+      "address": "Indirizzo",
+      "balance": "Bilancio"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Connettiti con i tuoi match",
+    "requestAccess": "Ha richiesto l'accesso al tuo test {{testType}}.",
+    "approvedRequest": "Ho approvato la tua richiesta! Ora puoi visualizzare il mio rapporto decifrato del test {{testType}}.",
+    "approvedResponse": "Ho approvato la tua richiesta di vedere il mio test {{testType}}.",
+    "declinedResponse": "Ho rifiutato la tua richiesta di vedere il mio test {{testType}}.",
+    "selectChat": "Seleziona un match per iniziare a chattare",
+    "noMatches": "Ancora nessun match",
+    "inputPlaceholder": "Scrivi un messaggio...",
+    "send": "Invia",
+    "pendingVerification": "Verifica in sospeso",
+    "requestStd": "Richiedi Test MST",
+    "requestDna": "Richiedi Test DNA",
+    "approveStd": "Approva Accesso MST",
+    "approveDna": "Approva Accesso DNA",
+    "denyStd": "Nega Accesso MST",
+    "denyDna": "Nega Accesso DNA"
+  },
+  "language": {
+    "select": "Seleziona lingua",
+    "title": "Scegli la tua lingua",
+    "description": "Seleziona la lingua preferita per continuare"
+  },
+  "country": {
+    "select": "Seleziona paese",
+    "title": "Scegli il tuo paese",
+    "description": "Seleziona il tuo paese per matchare con persone vicine"
+  },
+  "settings": {
+    "currentMode": "Modalità attuale",
+    "autoSaved": "La tua selezione è salvata automaticamente. Non è necessario ricaricare."
+  },
+  "auth": {
+    "loading": "Caricamento sessione sicura...",
+    "landing": {
+      "title": "Evolve — Incontri decentralizzati",
+      "email": "\uD83D\uDCE7 Accedi con email",
+      "phone": "\uD83D\uDCF1 Accedi con telefono",
+      "wallet": "\uD83D\uDCB3 Connetti wallet"
+    },
+    "phone": {
+      "title": "Accedi con telefono",
+      "description": "Inserisci il tuo numero di telefono per ricevere un codice di verifica",
+      "phone": "Numero di telefono",
+      "phonePlaceholder": "+380...",
+      "getCode": "Ottieni codice",
+      "otp": "Codice di verifica",
+      "otpPlaceholder": "Inserisci il codice a 6 cifre",
+      "verify": "Verifica e accedi",
+      "resendCode": "Invia di nuovo il codice",
+      "otpSent": "Un codice a 6 cifre è stato inviato a {{phone}}"
+    },
+    "noMode": {
+      "title": "Scegli la modalità di incontri",
+      "description": "Seleziona una modalità prima di navigare i profili",
+      "button": "Vai alle impostazioni"
+    },
+    "connectWallet": {
+      "title": "Connetti il tuo wallet",
+      "description": "Benvenuto su Evolve! Connetti il tuo wallet Ethereum con RainbowKit per accedere al tuo profilo medico crittografato."
+    },
+    "signIn": {
+      "title": "Accedi con Ethereum",
+      "description": "Firma il messaggio crittografico sicuro per verificare la proprietà del tuo wallet e caricare i tuoi dati privati.",
+      "button": "Accedi con Ethereum"
+    },
+    "logout": "Esci",
+    "email": {
+      "title": "Accedi con email",
+      "description": "Inserisci email e password",
+      "email": "Email",
+      "password": "Password",
+      "login": "Accedi",
+      "register": "Crea account",
+      "switchToRegister": "Non hai un account? Registrati",
+      "switchToLogin": "Hai già un account? Accedi"
+    },
+    "modeSelector": {
+      "title": "Scegli la modalità di incontri",
+      "description": "Seleziona come usare Evolve",
+      "normal": {
+        "label": "Incontri",
+        "description": "Incontri standard con accesso email",
+        "authType": "Accesso con email o telefono"
+      },
+      "pregnancyBond": {
+        "label": "Concepimento",
+        "description": "Ricerca familiare, richiede wallet",
+        "authType": "Wallet Ethereum richiesto"
+      },
+      "crypticChoice": {
+        "label": "Postcopulazione",
+        "description": "Ricerca anonima, richiede wallet",
+        "authType": "Wallet Ethereum richiesto"
+      }
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Децентралізовані знайомства на базі Web3 & P2P",
+    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "Свайп",
+    "messages": "Повідомлення",
+    "profile": "Профіль"
+  },
+  "home": {
+    "hero": {
+      "title": "Знайдіть свою пару",
+      "subtitle": "Свайпайте по профілях та знайомтеся з цікавими людьми."
+    },
+    "filters": {
+      "verifiedStd": "Тільки з перевіреним STD",
+      "verifiedDna": "Тільки з перевіреним DNA",
+      "noProfiles": "Немає профілів, що відповідають вибраним фільтрам."
+    },
+    "profile": {
+      "newMatch": "Нова пара",
+      "noMoreProfiles": "Більше немає профілів наразі! Перевірте пізніше."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Профіль",
+      "reputation": "Репутація"
+    },
+    "myProfile": {
+      "title": "Мій профіль",
+      "verifiedUser": "Перевірений користувач"
+    },
+    "status": {
+      "stdStatus": "Статус STD",
+      "dnaStatus": "Статус DNA",
+      "uploaded": "✓ Завантажено",
+      "notUploaded": "✗ Не завантажено"
+    },
+    "upload": {
+      "title": "Завантажити тести здоров'я",
+      "stdTest": "Тест STD",
+      "dnaTest": "Тест DNA",
+      "redactFields": "Редагувати чутливі поля перед завантаженням:",
+      "fullName": "Повне ім'я",
+      "address": "Адреса",
+      "phoneNumber": "Номер телефону",
+      "patientId": "ID пацієнта",
+      "encryptUpload": "Шифрувати & Завантажити PDF",
+      "uploadSuccess": "Документ успішно завантажено та зашифровано!"
+    },
+    "documents": {
+      "title": "Мої документи",
+      "noDocuments": "Документів ще не завантажено."
+    },
+    "reputation": {
+      "title": "Рейтинг репутації",
+      "score": "Рейтинг",
+      "description": "Ваша репутація базується на вагах довіри людей, які поручилися за вас.",
+      "votersTitle": "Голосуючі & Мережа довіри",
+      "weight": "Вага:"
+    }
+  },
+  "chat": {
+    "title": "Чат",
+    "subtitle": "З'єднайтесь зі своїми парами",
+    "requestAccess": "Запит на доступ до вашого тесту {{testType}}.",
+    "approvedRequest": "Я схвалив ваш запит! Тепер ви можете переглянути мій розшифрований звіт тесту {{testType}}.",
+    "approvedResponse": "Я схвалив ваш запит на перегляд мого тесту {{testType}}.",
+    "declinedResponse": "Я відхилив ваш запит на перегляд мого тесту {{testType}}."
+  },
+  "language": {
+    "select": "Вибрати мову",
+    "title": "Виберіть свою мову",
+    "description": "Виберіть бажану мову для продовження"
+  },
+  "country": {
+    "select": "Вибрати країну",
+    "title": "Виберіть свою країну",
+    "description": "Виберіть свою країну, щоб знайти пару поруч"
+  }
+}

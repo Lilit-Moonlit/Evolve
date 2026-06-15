@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Web3 र P2P मा आधारित विकेन्द्रित डेटिङ",
+    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "स्वाइप",
+    "messages": "सन्देश",
+    "profile": "प्रोफाइल",
+    "settings": "सेटिङ्हरू"
+  },
+  "home": {
+    "hero": {
+      "title": "आफ्नो म्याच खोज्नुहोस्",
+      "subtitle": "Swipe through profiles and connect with interesting people."
+    },
+    "filters": {
+      "verifiedStd": "Only with verified STD",
+      "verifiedDna": "Only with verified DNA",
+      "noProfiles": "No profiles matching the selected filters."
+    },
+    "profile": {
+      "newMatch": "New Match",
+      "noMoreProfiles": "No more profiles for now! Check back later."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profile",
+      "reputation": "Reputation"
+    },
+    "myProfile": {
+      "title": "My Profile",
+      "verifiedUser": "Verified User"
+    },
+    "status": {
+      "stdStatus": "STD Status",
+      "dnaStatus": "DNA Status",
+      "uploaded": "✓ Uploaded",
+      "notUploaded": "✗ Not Uploaded",
+      "verified": "प्रमाणित"
+    },
+    "upload": {
+      "title": "Upload Health Tests",
+      "stdTest": "STD Test",
+      "dnaTest": "DNA Test",
+      "redactFields": "Redact sensitive fields before uploading:",
+      "fullName": "Full Name",
+      "address": "Address",
+      "phoneNumber": "Phone Number",
+      "patientId": "Patient ID",
+      "encryptUpload": "Encrypt & Upload PDF",
+      "uploadSuccess": "Document uploaded and encrypted successfully!"
+    },
+    "documents": {
+      "title": "My Documents",
+      "noDocuments": "No documents uploaded yet."
+    },
+    "reputation": {
+      "title": "Reputation Score",
+      "score": "Score",
+      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
+      "votersTitle": "Voters & Trust Network",
+      "weight": "Weight:"
+    },
+    "wallet": {
+      "title": "वालेट",
+      "address": "ठेगाना",
+      "balance": "ब्यालेन्स"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Connect with your matches",
+    "requestAccess": "Requested access to your {{testType}} test.",
+    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
+    "approvedResponse": "I approved your request to view my {{testType}} test.",
+    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "selectChat": "च्याट सुरु गर्न म्याच छान्नुहोस्",
+    "noMatches": "अहिलेसम्म कुनै म्याच छैन",
+    "inputPlaceholder": "सन्देश टाइप गर्नुहोस्...",
+    "send": "पठाउनुहोस्",
+    "pendingVerification": "प्रमाणीकरण बाँकी",
+    "requestStd": "STD परीक्षण अनुरोध गर्नुहोस्",
+    "requestDna": "DNA परीक्षण अनुरोध गर्नुहोस्",
+    "approveStd": "STD पहुँच स्वीकृत गर्नुहोस्",
+    "approveDna": "DNA पहुँच स्वीकृत गर्नुहोस्",
+    "denyStd": "STD पहुँच अस्वीकृत गर्नुहोस्",
+    "denyDna": "DNA पहुँच अस्वीकृत गर्नुहोस्"
+  },
+  "language": {
+    "select": "Select Language",
+    "title": "Choose your language",
+    "description": "Select your preferred language to continue"
+  },
+  "country": {
+    "select": "Select Country",
+    "title": "Choose your country",
+    "description": "Select your country to match with people nearby"
+  },
+  "settings": {
+    "currentMode": "हालको मोड",
+    "autoSaved": "तपाईंको छनोट स्वचालित रूपमा सुरक्षित हुन्छ। पुन: लोड गर्नु पर्दैन।"
+  },
+  "auth": {
+    "loading": "Loading secure session...",
+    "landing": {
+      "title": "Evolve — विकेन्द्रित डेटिङ",
+      "email": "📧 इमेलबाट साइन इन गर्नुहोस्",
+      "phone": "📱 फोनबाट साइन इन गर्नुहोस्",
+      "wallet": "💳 वालेट जडान गर्नुहोस्"
+    },
+    "phone": {
+      "title": "फोनबाट साइन इन गर्नुहोस्",
+      "description": "प्रमाणीकरण कोड प्राप्त गर्न आफ्नो फोन नम्बर प्रविष्ट गर्नुहोस्",
+      "phone": "फोन नम्बर",
+      "phonePlaceholder": "+380...",
+      "getCode": "कोड प्राप्त गर्नुहोस्",
+      "otp": "प्रमाणीकरण कोड",
+      "otpPlaceholder": "६-अङ्कको कोड प्रविष्ट गर्नुहोस्",
+      "verify": "प्रमाणित गर्नुहोस् र साइन इन गर्नुहोस्",
+      "resendCode": "कोड पुन: पठाउनुहोस्",
+      "otpSent": "{{phone}} मा ६-अङ्कको कोड पठाइएको छ"
+    },
+    "noMode": {
+      "title": "डेटिङ मोड छान्नुहोस्",
+      "description": "कृपया प्रोफाइहरू ब्राउज गर्नु अघि एउटा मोड चयन गर्नुहोस्",
+      "button": "सेटिङ्हरूमा जानुहोस्"
+    },
+    "connectWallet": {
+      "title": "Connect Your Wallet",
+      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+    },
+    "signIn": {
+      "title": "Sign In with Ethereum",
+      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
+      "button": "Sign-In with Ethereum"
+    },
+    "logout": "Logout",
+    "email": {
+      "title": "Sign in with Email",
+      "description": "Enter your email and password to continue",
+      "email": "Email",
+      "password": "Password",
+      "login": "Sign In",
+      "register": "Create Account",
+      "switchToRegister": "Don't have an account? Register",
+      "switchToLogin": "Already have an account? Sign In"
+    },
+    "modeSelector": {
+      "title": "Choose Your Dating Mode",
+      "description": "Select how you want to use Evolve",
+      "normal": {
+        "label": "Dating",
+        "description": "Standard dating with email login",
+        "authType": "Email or phone login"
+      },
+      "pregnancyBond": {
+        "label": "Conception",
+        "description": "Family-focused matching, requires wallet",
+        "authType": "Ethereum wallet required"
+      },
+      "crypticChoice": {
+        "label": "Postcopulation",
+        "description": "Anonymous matching, requires wallet",
+        "authType": "Ethereum wallet required"
+      }
+    }
+  }
+}

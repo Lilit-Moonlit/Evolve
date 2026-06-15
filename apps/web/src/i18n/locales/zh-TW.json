@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "基於 Web3 和 P2P 的去中心化約會",
+    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "滑動",
+    "messages": "訊息",
+    "profile": "個人資料",
+    "settings": "設定"
+  },
+  "home": {
+    "hero": {
+      "title": "找到你的配對",
+      "subtitle": "Swipe through profiles and connect with interesting people."
+    },
+    "filters": {
+      "verifiedStd": "Only with verified STD",
+      "verifiedDna": "Only with verified DNA",
+      "noProfiles": "No profiles matching the selected filters."
+    },
+    "profile": {
+      "newMatch": "New Match",
+      "noMoreProfiles": "No more profiles for now! Check back later."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profile",
+      "reputation": "Reputation"
+    },
+    "myProfile": {
+      "title": "My Profile",
+      "verifiedUser": "Verified User"
+    },
+    "status": {
+      "stdStatus": "STD Status",
+      "dnaStatus": "DNA Status",
+      "uploaded": "✓ Uploaded",
+      "notUploaded": "✗ Not Uploaded",
+      "verified": "已驗證"
+    },
+    "upload": {
+      "title": "Upload Health Tests",
+      "stdTest": "STD Test",
+      "dnaTest": "DNA Test",
+      "redactFields": "Redact sensitive fields before uploading:",
+      "fullName": "Full Name",
+      "address": "Address",
+      "phoneNumber": "Phone Number",
+      "patientId": "Patient ID",
+      "encryptUpload": "Encrypt & Upload PDF",
+      "uploadSuccess": "Document uploaded and encrypted successfully!"
+    },
+    "documents": {
+      "title": "My Documents",
+      "noDocuments": "No documents uploaded yet."
+    },
+    "reputation": {
+      "title": "Reputation Score",
+      "score": "Score",
+      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
+      "votersTitle": "Voters & Trust Network",
+      "weight": "Weight:"
+    },
+    "wallet": {
+      "title": "錢包",
+      "address": "地址",
+      "balance": "餘額"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Connect with your matches",
+    "requestAccess": "Requested access to your {{testType}} test.",
+    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
+    "approvedResponse": "I approved your request to view my {{testType}} test.",
+    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "selectChat": "選擇配對開始聊天",
+    "noMatches": "尚無配對",
+    "inputPlaceholder": "輸入訊息...",
+    "send": "傳送",
+    "pendingVerification": "驗證中",
+    "requestStd": "請求STD檢測",
+    "requestDna": "請求DNA檢測",
+    "approveStd": "批准STD存取",
+    "approveDna": "批准DNA存取",
+    "denyStd": "拒絕STD存取",
+    "denyDna": "拒絕DNA存取"
+  },
+  "language": {
+    "select": "Select Language",
+    "title": "Choose your language",
+    "description": "Select your preferred language to continue"
+  },
+  "country": {
+    "select": "Select Country",
+    "title": "Choose your country",
+    "description": "Select your country to match with people nearby"
+  },
+  "settings": {
+    "currentMode": "目前模式",
+    "autoSaved": "您的選擇會自動儲存。無需重新載入。"
+  },
+  "auth": {
+    "loading": "Loading secure session...",
+    "landing": {
+      "title": "Evolve — \u53BB\u4E2D\u5FC3\u5316\u7D04\u6703",
+      "email": "\uD83D\uDCE7 \u4F7F\u7528\u96FB\u5B50\u90F5\u4EF6\u767B\u5165",
+      "phone": "\uD83D\uDCF1 \u4F7F\u7528\u624B\u6A5F\u767B\u5165",
+      "wallet": "\uD83D\uDCB3 \u9023\u63A5\u9322\u5305"
+    },
+    "phone": {
+      "title": "\u4F7F\u7528\u624B\u6A5F\u767B\u5165",
+      "description": "\u8F38\u5165\u60A8\u7684\u624B\u6A5F\u865F\u78BC\u4EE5\u63A5\u6536\u9A57\u8B49\u78BC",
+      "phone": "\u624B\u6A5F\u865F\u78BC",
+      "phonePlaceholder": "+380...",
+      "getCode": "\u7372\u53D6\u4EE3\u78BC",
+      "otp": "\u9A57\u8B49\u78BC",
+      "otpPlaceholder": "\u8F38\u51656\u4F4D\u6578\u4EE3\u78BC",
+      "verify": "\u9A57\u8B49\u4E26\u767B\u5165",
+      "resendCode": "\u91CD\u65B0\u767C\u9001\u4EE3\u78BC",
+      "otpSent": "6\u4F4D\u6578\u4EE3\u78BC\u5DF2\u767C\u9001\u81F3 {{phone}}"
+    },
+    "noMode": {
+      "title": "\u9078\u64C7\u60A8\u7684\u7D04\u6703\u6A21\u5F0F",
+      "description": "\u8ACB\u5728\u700F\u89BD\u500B\u4EBA\u8CC7\u6599\u524D\u9078\u64C7\u6A21\u5F0F",
+      "button": "\u524D\u5F80\u8A2D\u5B9A"
+    },
+    "connectWallet": {
+      "title": "Connect Your Wallet",
+      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+    },
+    "signIn": {
+      "title": "Sign In with Ethereum",
+      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
+      "button": "Sign-In with Ethereum"
+    },
+    "logout": "Logout",
+    "email": {
+      "title": "使用電子郵件登入",
+      "description": "輸入您的電子郵件和密碼",
+      "email": "電子郵件",
+      "password": "密碼",
+      "login": "登入",
+      "register": "建立帳戶",
+      "switchToRegister": "還沒有帳戶？註冊",
+      "switchToLogin": "已有帳戶？登入"
+    },
+    "modeSelector": {
+      "title": "選擇交友模式",
+      "description": "選擇您使用Evolve的方式",
+      "normal": {
+        "label": "約會",
+        "description": "使用電子郵件登入的標準約會",
+        "authType": "電子郵件或電話登入"
+      },
+      "pregnancyBond": {
+        "label": "懷孕",
+        "description": "家庭導向配對，需要錢包",
+        "authType": "需要以太坊錢包"
+      },
+      "crypticChoice": {
+        "label": "交配後",
+        "description": "匿名配對，需要錢包",
+        "authType": "需要以太坊錢包"
+      }
+    }
+  }
+}

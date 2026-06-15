@@ -1,0 +1,89 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Dezentrales Dating basierend auf Web3 & P2P",
+    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "Wischen",
+    "messages": "Nachrichten",
+    "profile": "Profil"
+  },
+  "home": {
+    "hero": {
+      "title": "Finde dein Match",
+      "subtitle": "Wische durch Profile und verbinde dich mit interessanten Menschen."
+    },
+    "filters": {
+      "verifiedStd": "Nur mit verifiziertem STD-Test",
+      "verifiedDna": "Nur mit verifiziertem DNA-Test",
+      "noProfiles": "Keine Profile, die den ausgewählten Filtern entsprechen."
+    },
+    "profile": {
+      "newMatch": "Neues Match",
+      "noMoreProfiles": "Keine weiteren Profile für jetzt! Schau später wieder vorbei."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profil",
+      "reputation": "Ruf"
+    },
+    "myProfile": {
+      "title": "Mein Profil",
+      "verifiedUser": "Verifizierter Benutzer"
+    },
+    "status": {
+      "stdStatus": "STD-Status",
+      "dnaStatus": "DNA-Status",
+      "uploaded": "✓ Hochgeladen",
+      "notUploaded": "✗ Nicht hochgeladen"
+    },
+    "upload": {
+      "title": "Gesundheitstests hochladen",
+      "stdTest": "STD-Test",
+      "dnaTest": "DNA-Test",
+      "redactFields": "Vertrauliche Felder vor dem Hochladen schwärzen:",
+      "fullName": "Vollständiger Name",
+      "address": "Adresse",
+      "phoneNumber": "Telefonnummer",
+      "patientId": "Patienten-ID",
+      "encryptUpload": "Verschlüsseln & PDF hochladen",
+      "uploadSuccess": "Dokument erfolgreich hochgeladen und verschlüsselt!"
+    },
+    "documents": {
+      "title": "Meine Dokumente",
+      "noDocuments": "Noch keine Dokumente hochgeladen."
+    },
+    "reputation": {
+      "title": "Rufwert",
+      "score": "Wert",
+      "description": "Ihr Ruf basiert auf den Vertrauensgewichtungen von Personen, die für Sie bürgen.",
+      "votersTitle": "Befürworter & Vertrauensnetzwerk",
+      "weight": "Gewichtung:"
+    },
+    "wallet": {
+      "title": "Wallet",
+      "address": "Adresse",
+      "balance": "Guthaben"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Verbinde dich mit deinen Matches",
+    "requestAccess": "Zugriff auf Ihren {{testType}}-Test angefordert.",
+    "approvedRequest": "Ich habe Ihre Anfrage genehmigt! Sie können jetzt meinen entschlüsselten {{testType}}-Testbericht einsehen.",
+    "approvedResponse": "Ich habe Ihre Anfrage genehmigt, meinen {{testType}}-Test einzusehen.",
+    "declinedResponse": "Ich habe Ihre Anfrage abgelehnt, meinen {{testType}}-Test einzusehen."
+  },
+  "language": {
+    "select": "Sprache auswählen",
+    "title": "Wählen Sie Ihre Sprache",
+    "description": "Wählen Sie Ihre bevorzugte Sprache, um fortzufahren"
+  },
+  "country": {
+    "select": "Land auswählen",
+    "title": "Wählen Sie Ihr Land",
+    "description": "Wählen Sie Ihr Land, um mit Personen in Ihrer Nähe zu matchen"
+  }
+}

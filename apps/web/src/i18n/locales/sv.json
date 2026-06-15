@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Decentraliserad dejting byggd på Web3 & P2P",
+    "copyright": "© 2026 Evolve - Decentraliserad dejting byggd på Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "Svep",
+    "messages": "Meddelanden",
+    "profile": "Profil",
+    "settings": "Inställningar"
+  },
+  "home": {
+    "hero": {
+      "title": "Hitta din match",
+      "subtitle": "Svep igenom profiler och träffa intressanta personer."
+    },
+    "filters": {
+      "verifiedStd": "Endast med verifierat STD",
+      "verifiedDna": "Endast med verifierat DNA",
+      "noProfiles": "Inga profiler matchar de valda filtren."
+    },
+    "profile": {
+      "newMatch": "Ny match",
+      "noMoreProfiles": "Inga fler profiler just nu! Kom tillbaka senare."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profil",
+      "reputation": "Rykte"
+    },
+    "myProfile": {
+      "title": "Min profil",
+      "verifiedUser": "Verifierad användare"
+    },
+    "status": {
+      "stdStatus": "STD-status",
+      "dnaStatus": "DNA-status",
+      "uploaded": "✓ Uppladdad",
+      "notUploaded": "✗ Ej uppladdad",
+      "verified": "Verifierad"
+    },
+    "upload": {
+      "title": "Ladda upp hälsotester",
+      "stdTest": "STD-test",
+      "dnaTest": "DNA-test",
+      "redactFields": "Redigera känsliga fält före uppladdning:",
+      "fullName": "Fullständigt namn",
+      "address": "Adress",
+      "phoneNumber": "Telefonnummer",
+      "patientId": "Patient-ID",
+      "encryptUpload": "Kryptera & ladda upp PDF",
+      "uploadSuccess": "Dokument uppladdat och krypterat!"
+    },
+    "documents": {
+      "title": "Mina dokument",
+      "noDocuments": "Inga dokument uppladdade ännu."
+    },
+    "reputation": {
+      "title": "Ryktet",
+      "score": "Poäng",
+      "description": "Ditt rykte baseras på förtroendevikterna hos personer som har intygat för dig.",
+      "votersTitle": "Röstande & förtroendenätverk",
+      "weight": "Vikt:"
+    },
+    "wallet": {
+      "title": "Plånbok",
+      "address": "Adress",
+      "balance": "Saldo"
+    }
+  },
+  "chat": {
+    "title": "Chatt",
+    "subtitle": "Anslut med dina matchningar",
+    "requestAccess": "Begärde åtkomst till ditt {{testType}}-test.",
+    "approvedRequest": "Jag har godkänt din begäran! Du kan nu se min dekrypterade {{testType}}-testrapport.",
+    "approvedResponse": "Jag godkände din begäran att se mitt {{testType}}-test.",
+    "declinedResponse": "Jag avböjde din begäran att se mitt {{testType}}-test.",
+    "selectChat": "Välj en matchning för att börja chatta",
+    "noMatches": "Inga matchningar än",
+    "inputPlaceholder": "Skriv ett meddelande...",
+    "send": "Skicka",
+    "pendingVerification": "Verifiering väntar",
+    "requestStd": "Begär STD-test",
+    "requestDna": "Begär DNA-test",
+    "approveStd": "Godkänn STD-åtkomst",
+    "approveDna": "Godkänn DNA-åtkomst",
+    "denyStd": "Neka STD-åtkomst",
+    "denyDna": "Neka DNA-åtkomst"
+  },
+  "language": {
+    "select": "Välj språk",
+    "title": "Välj ditt språk",
+    "description": "Välj ditt föredragna språk för att fortsätta"
+  },
+  "country": {
+    "select": "Välj land",
+    "title": "Välj ditt land",
+    "description": "Välj ditt land för att matcha med personer i närheten"
+  },
+  "settings": {
+    "currentMode": "Aktuellt läge",
+    "autoSaved": "Ditt val sparas automatiskt. Ingen omladdning behövs."
+  },
+  "auth": {
+    "loading": "Laddar säker session...",
+    "landing": {
+      "title": "Evolve — Decentraliserad dejting",
+      "email": "\uD83D\uDCE7 Logga in med e-post",
+      "phone": "\uD83D\uDCF1 Logga in med telefon",
+      "wallet": "\uD83D\uDCB3 Anslut plånbok"
+    },
+    "phone": {
+      "title": "Logga in med telefon",
+      "description": "Ange ditt telefonnummer för att få en verifieringskod",
+      "phone": "Telefonnummer",
+      "phonePlaceholder": "+380...",
+      "getCode": "Hämta kod",
+      "otp": "Verifieringskod",
+      "otpPlaceholder": "Ange 6-siffrig kod",
+      "verify": "Verifiera och logga in",
+      "resendCode": "Skicka koden igen",
+      "otpSent": "En 6-siffrig kod har skickats till {{phone}}"
+    },
+    "noMode": {
+      "title": "Välj ditt dejtingsätt",
+      "description": "Välj ett läge innan du bläddrar bland profiler",
+      "button": "Gå till inställningar"
+    },
+    "connectWallet": {
+      "title": "Anslut din plånbok",
+      "description": "Välkommen till Evolve! Anslut din Ethereum-plånbok via RainbowKit för att komma åt din krypterade medicinska profil."
+    },
+    "signIn": {
+      "title": "Logga in med Ethereum",
+      "description": "Signera det säkra kryptografiska meddelandet för att verifiera ägandet av din plånbok och ladda dina privata data.",
+      "button": "Logga in med Ethereum"
+    },
+    "logout": "Logga ut",
+    "email": {
+      "title": "Logga in med e-post",
+      "description": "Ange din e-post och ditt lösenord",
+      "email": "E-post",
+      "password": "Lösenord",
+      "login": "Logga in",
+      "register": "Skapa konto",
+      "switchToRegister": "Har du inget konto? Registrera",
+      "switchToLogin": "Har du redan ett konto? Logga in"
+    },
+    "modeSelector": {
+      "title": "Välj ditt dejtingsätt",
+      "description": "Välj hur du vill använda Evolve",
+      "normal": {
+        "label": "Dejting",
+        "description": "Standarddejting med e-postinloggning",
+        "authType": "E-post eller telefoninloggning"
+      },
+      "pregnancyBond": {
+        "label": "Befruktning",
+        "description": "Familjeinriktad matchning, kräver plånbok",
+        "authType": "Ethereum-plånbok krävs"
+      },
+      "crypticChoice": {
+        "label": "Postkopulation",
+        "description": "Anonym matchning, kräver plånbok",
+        "authType": "Ethereum-plånbok krävs"
+      }
+    }
+  }
+}

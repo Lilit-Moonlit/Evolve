@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Mahusiano yasiyokuwa na kituo kwenye Web3 na P2P",
+    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "Telezesha",
+    "messages": "Ujumbe",
+    "profile": "Wasifu",
+    "settings": "Mipangilio"
+  },
+  "home": {
+    "hero": {
+      "title": "Pata mechi yako",
+      "subtitle": "Swipe through profiles and connect with interesting people."
+    },
+    "filters": {
+      "verifiedStd": "Only with verified STD",
+      "verifiedDna": "Only with verified DNA",
+      "noProfiles": "No profiles matching the selected filters."
+    },
+    "profile": {
+      "newMatch": "New Match",
+      "noMoreProfiles": "No more profiles for now! Check back later."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profile",
+      "reputation": "Reputation"
+    },
+    "myProfile": {
+      "title": "My Profile",
+      "verifiedUser": "Verified User"
+    },
+    "status": {
+      "stdStatus": "STD Status",
+      "dnaStatus": "DNA Status",
+      "uploaded": "✓ Uploaded",
+      "notUploaded": "✗ Not Uploaded",
+      "verified": "Imethibitishwa"
+    },
+    "upload": {
+      "title": "Upload Health Tests",
+      "stdTest": "STD Test",
+      "dnaTest": "DNA Test",
+      "redactFields": "Redact sensitive fields before uploading:",
+      "fullName": "Full Name",
+      "address": "Address",
+      "phoneNumber": "Phone Number",
+      "patientId": "Patient ID",
+      "encryptUpload": "Encrypt & Upload PDF",
+      "uploadSuccess": "Document uploaded and encrypted successfully!"
+    },
+    "documents": {
+      "title": "My Documents",
+      "noDocuments": "No documents uploaded yet."
+    },
+    "reputation": {
+      "title": "Reputation Score",
+      "score": "Score",
+      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
+      "votersTitle": "Voters & Trust Network",
+      "weight": "Weight:"
+    },
+    "wallet": {
+      "title": "Wallet",
+      "address": "Anwani",
+      "balance": "Salio"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Connect with your matches",
+    "requestAccess": "Requested access to your {{testType}} test.",
+    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
+    "approvedResponse": "I approved your request to view my {{testType}} test.",
+    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "selectChat": "Chagua mechi kuanza kuzungumza",
+    "noMatches": "Hakuna mechi bado",
+    "inputPlaceholder": "Andika ujumbe...",
+    "send": "Tuma",
+    "pendingVerification": "Uthibitishaji unakamilika",
+    "requestStd": "Omba mtihani wa IST",
+    "requestDna": "Omba mtihani wa DNA",
+    "approveStd": "Idhinisha upatikanaji wa IST",
+    "approveDna": "Idhinisha upatikanaji wa DNA",
+    "denyStd": "Kataa upatikanaji wa IST",
+    "denyDna": "Kataa upatikanaji wa DNA"
+  },
+  "language": {
+    "select": "Select Language",
+    "title": "Choose your language",
+    "description": "Select your preferred language to continue"
+  },
+  "country": {
+    "select": "Select Country",
+    "title": "Choose your country",
+    "description": "Select your country to match with people nearby"
+  },
+  "settings": {
+    "currentMode": "Hali ya sasa",
+    "autoSaved": "Chaguo lako linahifadhiwa moja kwa moja. Hakuna haja ya kupakia upya."
+  },
+  "auth": {
+    "loading": "Loading secure session...",
+    "landing": {
+      "title": "Evolve — Mahusiano Yasiyokuwa na Kituo",
+      "email": "📧 Ingia kwa Barua Pepe",
+      "phone": "📱 Ingia kwa Simu",
+      "wallet": "💳 Unganisha Wallet"
+    },
+    "phone": {
+      "title": "Ingia kwa Simu",
+      "description": "Weka namba yako ya simu ili kupokea msimbo wa uthibitishaji",
+      "phone": "Namba ya Simu",
+      "phonePlaceholder": "+380...",
+      "getCode": "Pata Msimbo",
+      "otp": "Msimbo wa Uthibitishaji",
+      "otpPlaceholder": "Weka msimbo wa tarakimu 6",
+      "verify": "Thibitisha na Ingia",
+      "resendCode": "Tuma Msimbo Tena",
+      "otpSent": "Msimbo wa tarakimu 6 umetumwa kwa {{phone}}"
+    },
+    "noMode": {
+      "title": "Chagua Hali ya Mahusiano",
+      "description": "Tafadhali chagua hali kabla ya kuvinjari wasifu",
+      "button": "Nenda kwenye Mipangilio"
+    },
+    "connectWallet": {
+      "title": "Connect Your Wallet",
+      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+    },
+    "signIn": {
+      "title": "Sign In with Ethereum",
+      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
+      "button": "Sign-In with Ethereum"
+    },
+    "logout": "Logout",
+    "email": {
+      "title": "Sign in with Email",
+      "description": "Enter your email and password to continue",
+      "email": "Email",
+      "password": "Password",
+      "login": "Sign In",
+      "register": "Create Account",
+      "switchToRegister": "Don't have an account? Register",
+      "switchToLogin": "Already have an account? Sign In"
+    },
+    "modeSelector": {
+      "title": "Choose Your Dating Mode",
+      "description": "Select how you want to use Evolve",
+      "normal": {
+        "label": "Dating",
+        "description": "Standard dating with email login",
+        "authType": "Email or phone login"
+      },
+      "pregnancyBond": {
+        "label": "Conception",
+        "description": "Family-focused matching, requires wallet",
+        "authType": "Ethereum wallet required"
+      },
+      "crypticChoice": {
+        "label": "Postcopulation",
+        "description": "Anonymous matching, requires wallet",
+        "authType": "Ethereum wallet required"
+      }
+    }
+  }
+}

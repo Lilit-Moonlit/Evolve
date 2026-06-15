@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Hajautettu deittailu Web3:lla ja P2P:llä",
+    "copyright": "© 2026 Evolve - Hajautettu deittailu Web3:lla ja P2P:llä"
+  },
+  "navigation": {
+    "swipe": "Pyyhkäise",
+    "messages": "Viestit",
+    "profile": "Profiili",
+    "settings": "Asetukset"
+  },
+  "home": {
+    "hero": {
+      "title": "Löydä matchisi",
+      "subtitle": "Pyyhkäise profiileja ja tapaa mielenkiintoisia ihmisiä."
+    },
+    "filters": {
+      "verifiedStd": "Vain vahvistetulla STD:llä",
+      "verifiedDna": "Vain vahvistetulla DNA:lla",
+      "noProfiles": "Yksikään profiili ei vastaa valittuja suodattimia."
+    },
+    "profile": {
+      "newMatch": "Uusi match",
+      "noMoreProfiles": "Ei enempää profiileja nyt! Tarkista myöhemmin."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profiili",
+      "reputation": "Maine"
+    },
+    "myProfile": {
+      "title": "Oma profiili",
+      "verifiedUser": "Vahvistettu käyttäjä"
+    },
+    "status": {
+      "stdStatus": "STD-tila",
+      "dnaStatus": "DNA-tila",
+      "uploaded": "✓ Ladattu",
+      "notUploaded": "✗ Ei ladattu",
+      "verified": "Vahvistettu"
+    },
+    "upload": {
+      "title": "Lataa terveystestit",
+      "stdTest": "STD-testi",
+      "dnaTest": "DNA-testi",
+      "redactFields": "Muokkaa arkaluontoiset kentät ennen latausta:",
+      "fullName": "Koko nimi",
+      "address": "Osoite",
+      "phoneNumber": "Puhelinnumero",
+      "patientId": "Potilastunnus",
+      "encryptUpload": "Salaa & lataa PDF",
+      "uploadSuccess": "Asiakirja ladattu ja salattu!"
+    },
+    "documents": {
+      "title": "Omat asiakirjat",
+      "noDocuments": "Asiakirjoja ei ole vielä ladattu."
+    },
+    "wallet": {
+      "title": "Lompakko",
+      "address": "Osoite",
+      "balance": "Saldo"
+    },
+    "reputation": {
+      "title": "Mainepisteet",
+      "score": "Pisteet",
+      "description": "Maineesi perustuu sinua suositelleiden henkilöiden luottamuspainoihin.",
+      "votersTitle": "Äänestäjät & luottamusverkosto",
+      "weight": "Paino:"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Yhdistä matcheihisi",
+    "requestAccess": "Pyysi pääsyä {{testType}}-testiisi.",
+    "approvedRequest": "Hyväksyin pyyntösi! Voit nyt nähdä salatun {{testType}}-testiraporttini.",
+    "approvedResponse": "Hyväksyin pyyntösi nähdä {{testType}}-testini.",
+    "declinedResponse": "Hylkäsin pyyntösi nähdä {{testType}}-testini.",
+    "selectChat": "Valitse match aloittaaksesi chatin",
+    "noMatches": "Ei matcheja vielä",
+    "inputPlaceholder": "Kirjoita viesti...",
+    "send": "Lähetä",
+    "pendingVerification": "Vahvistus odottaa",
+    "requestStd": "Pyydä STD-testiä",
+    "requestDna": "Pyydä DNA-testiä",
+    "approveStd": "Hyväksy STD-pääsy",
+    "approveDna": "Hyväksy DNA-pääsy",
+    "denyStd": "Estä STD-pääsy",
+    "denyDna": "Estä DNA-pääsy"
+  },
+  "language": {
+    "select": "Valitse kieli",
+    "title": "Valitse kielesi",
+    "description": "Valitse haluamasi kieli jatkaaksesi"
+  },
+  "country": {
+    "select": "Valitse maa",
+    "title": "Valitse maasi",
+    "description": "Valitse maasi löytääksesi lähellä olevia ihmisiä"
+  },
+  "settings": {
+    "currentMode": "Nykyinen tila",
+    "autoSaved": "Valintasi tallennetaan automaattisesti. Ei tarvetta ladata uudelleen."
+  },
+  "auth": {
+    "loading": "Ladataan suojattua istuntoa...",
+    "landing": {
+      "title": "Evolve — Hajaistutettu treffaaminen",
+      "email": "📧 Kirjaudu sähköpostilla",
+      "phone": "📱 Kirjaudu puhelimella",
+      "wallet": "💳 Yhdistä lompakko"
+    },
+    "connectWallet": {
+      "title": "Yhdistä lompakko",
+      "description": "Tervetuloa Evolveen! Yhdistä Ethereum-lompakkosi RainbowKitin kautta päästäksesi salattuun lääketieteelliseen profiiliisi."
+    },
+    "signIn": {
+      "title": "Kirjaudu Ethereumilla",
+      "description": "Allekirjoita suojattu salaustekninen viesti vahvistaaksesi lompakon omistajuuden ja ladataksesi yksityiset tietosi.",
+      "button": "Kirjaudu Ethereumilla"
+    },
+    "logout": "Kirjaudu ulos",
+    "email": {
+      "title": "Kirjaudu sähköpostilla",
+      "description": "Syötä sähköpostisi ja salasanasi",
+      "email": "Sähköposti",
+      "password": "Salasana",
+      "login": "Kirjaudu sisään",
+      "register": "Luo tili",
+      "switchToRegister": "Eikö sinulla ole tiliä? Rekisteröidy",
+      "switchToLogin": "Onko sinulla jo tili? Kirjaudu"
+    },
+    "phone": {
+      "title": "Kirjaudu puhelimella",
+      "description": "Syötä puhelinnumerosi saadaksesi vahvistuskoodin",
+      "phone": "Puhelinnumero",
+      "phonePlaceholder": "+380...",
+      "getCode": "Hanki koodi",
+      "otp": "Vahvistuskoodi",
+      "otpPlaceholder": "Syötä 6-numeroinen koodi",
+      "verify": "Vahvista ja kirjaudu",
+      "resendCode": "Lähetä koodi uudelleen",
+      "otpSent": "6-numeroinen koodi on lähetetty numerolle {{phone}}"
+    },
+    "modeSelector": {
+      "title": "Valitse treffitilasi",
+      "description": "Valitse miten haluat käyttää Evolvea",
+      "normal": {
+        "label": "Deittailu",
+        "description": "Perusdeittailu sähköpostikirjautumisella",
+        "authType": "Sähköposti tai puhelin kirjautuminen"
+      },
+      "pregnancyBond": {
+        "label": "Hedelmöitys",
+        "description": "Perhekeskeinen matchaus, lompakko vaaditaan",
+        "authType": "Ethereum-lompakko vaaditaan"
+      },
+      "crypticChoice": {
+        "label": "Postkopulaatio",
+        "description": "Anonyymi matchaus, lompakko vaaditaan",
+        "authType": "Ethereum-lompakko vaaditaan"
+      }
+    },
+    "noMode": {
+      "title": "Valitse treffitila",
+      "description": "Valitse tila ennen kuin selaat profiileja",
+      "button": "Siirry asetuksiin"
+    }
+  }
+}

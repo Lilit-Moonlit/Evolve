@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Gedecentraliseerd daten gebouwd op Web3 & P2P",
+    "copyright": "© 2026 Evolve - Gedecentraliseerd daten gebouwd op Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "Veeg",
+    "messages": "Berichten",
+    "profile": "Profiel",
+    "settings": "Instellingen"
+  },
+  "home": {
+    "hero": {
+      "title": "Vind je Match",
+      "subtitle": "Veeg door profielen en maak verbinding met interessante mensen."
+    },
+    "filters": {
+      "verifiedStd": "Alleen met geverifieerde SOA",
+      "verifiedDna": "Alleen met geverifieerd DNA",
+      "noProfiles": "Geen profielen die overeenkomen met de geselecteerde filters."
+    },
+    "profile": {
+      "newMatch": "Nieuwe Match",
+      "noMoreProfiles": "Geen profielen meer voor nu! Kom later terug."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profiel",
+      "reputation": "Reputatie"
+    },
+    "myProfile": {
+      "title": "Mijn Profiel",
+      "verifiedUser": "Geverifieerde Gebruiker"
+    },
+    "status": {
+      "stdStatus": "SOA-status",
+      "dnaStatus": "DNA-status",
+      "uploaded": "✓ Geüpload",
+      "notUploaded": "✗ Niet geüpload",
+      "verified": "Geverifieerd"
+    },
+    "upload": {
+      "title": "Gezondheidstests uploaden",
+      "stdTest": "SOA-test",
+      "dnaTest": "DNA-test",
+      "redactFields": "Gevoelige velden redigeren vóór upload:",
+      "fullName": "Volledige naam",
+      "address": "Adres",
+      "phoneNumber": "Telefoonnummer",
+      "patientId": "Patiënt-ID",
+      "encryptUpload": "Versleutel en upload PDF",
+      "uploadSuccess": "Document succesvol geüpload en versleuteld!"
+    },
+    "documents": {
+      "title": "Mijn Documenten",
+      "noDocuments": "Nog geen documenten geüpload."
+    },
+    "reputation": {
+      "title": "Reputatiescore",
+      "score": "Score",
+      "description": "Uw reputatie is gebaseerd op de vertrouwensgewichten van mensen die voor u hebben ingestaan.",
+      "votersTitle": "Stemmers & vertrouwensnetwerk",
+      "weight": "Gewicht:"
+    },
+    "wallet": {
+      "title": "Wallet",
+      "address": "Adres",
+      "balance": "Saldo"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Maak verbinding met je matches",
+    "requestAccess": "Heeft toegang gevraagd tot uw {{testType}}-test.",
+    "approvedRequest": "Ik heb uw verzoek goedgekeurd! U kunt nu mijn ontsleutelde {{testType}}-testrapport bekijken.",
+    "approvedResponse": "Ik heb uw verzoek om mijn {{testType}}-test te bekijken goedgekeurd.",
+    "declinedResponse": "Ik heb uw verzoek om mijn {{testType}}-test te bekijken afgewezen.",
+    "selectChat": "Selecteer een match om te chatten",
+    "noMatches": "Nog geen matches",
+    "inputPlaceholder": "Typ een bericht...",
+    "send": "Verstuur",
+    "pendingVerification": "Verificatie in behandeling",
+    "requestStd": "SOA-test aanvragen",
+    "requestDna": "DNA-test aanvragen",
+    "approveStd": "SOA-toegang goedkeuren",
+    "approveDna": "DNA-toegang goedkeuren",
+    "denyStd": "SOA-toegang weigeren",
+    "denyDna": "DNA-toegang weigeren"
+  },
+  "language": {
+    "select": "Taal selecteren",
+    "title": "Kies je taal",
+    "description": "Selecteer je voorkeurstaal om door te gaan"
+  },
+  "country": {
+    "select": "Land selecteren",
+    "title": "Kies je land",
+    "description": "Selecteer je land om te matchen met mensen in de buurt"
+  },
+  "settings": {
+    "currentMode": "Huidige modus",
+    "autoSaved": "Uw selectie wordt automatisch opgeslagen. Geen herladen nodig."
+  },
+  "auth": {
+    "loading": "Beveiligde sessie laden...",
+    "landing": {
+      "title": "Evolve — Gedecentraliseerd daten",
+      "email": "\uD83D\uDCE7 Inloggen met e-mail",
+      "phone": "\uD83D\uDCF1 Inloggen met telefoon",
+      "wallet": "\uD83D\uDCB3 Wallet verbinden"
+    },
+    "phone": {
+      "title": "Inloggen met telefoon",
+      "description": "Voer uw telefoonnummer in om een verificatiecode te ontvangen",
+      "phone": "Telefoonnummer",
+      "phonePlaceholder": "+380...",
+      "getCode": "Code ontvangen",
+      "otp": "Verificatiecode",
+      "otpPlaceholder": "Voer 6-cijferige code in",
+      "verify": "Verifiëren en inloggen",
+      "resendCode": "Code opnieuw verzenden",
+      "otpSent": "Een 6-cijferige code is verzonden naar {{phone}}"
+    },
+    "noMode": {
+      "title": "Kies uw datingsmodus",
+      "description": "Selecteer een modus voordat u profielen bekijkt",
+      "button": "Ga naar instellingen"
+    },
+    "connectWallet": {
+      "title": "Wallet verbinden",
+      "description": "Welkom bij Evolve! Verbind je Ethereum-wallet via RainbowKit om toegang te krijgen tot je versleutelde medische profiel."
+    },
+    "signIn": {
+      "title": "Inloggen met Ethereum",
+      "description": "Onderteken het beveiligde cryptografische bericht om het eigendom van je wallet te verifiëren en je privégegevens te laden.",
+      "button": "Inloggen met Ethereum"
+    },
+    "logout": "Uitloggen",
+    "email": {
+      "title": "Inloggen met e-mail",
+      "description": "Voer uw e-mail en wachtwoord in",
+      "email": "E-mail",
+      "password": "Wachtwoord",
+      "login": "Inloggen",
+      "register": "Account aanmaken",
+      "switchToRegister": "Nog geen account? Registreer",
+      "switchToLogin": "Al een account? Inloggen"
+    },
+    "modeSelector": {
+      "title": "Kies uw datingsmodus",
+      "description": "Selecteer hoe u Evolve wilt gebruiken",
+      "normal": {
+        "label": "Datings",
+        "description": "Standaard datings met e-mail login",
+        "authType": "E-mail of telefoon login"
+      },
+      "pregnancyBond": {
+        "label": "Conceptie",
+        "description": "Gezinsgericht matchen, wallet vereist",
+        "authType": "Ethereum wallet vereist"
+      },
+      "crypticChoice": {
+        "label": "Postcopulatie",
+        "description": "Anoniem matchen, wallet vereist",
+        "authType": "Ethereum wallet vereist"
+      }
+    }
+  }
+}

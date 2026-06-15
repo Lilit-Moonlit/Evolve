@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Decentraliseret dating bygget på Web3 & P2P",
+    "copyright": "© 2026 Evolve - Decentraliseret dating bygget på Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "Swipe",
+    "messages": "Beskeder",
+    "profile": "Profil",
+    "settings": "Indstillinger"
+  },
+  "home": {
+    "hero": {
+      "title": "Find dit match",
+      "subtitle": "Swipe gennem profiler og mød interessante mennesker."
+    },
+    "filters": {
+      "verifiedStd": "Kun med verificeret STD",
+      "verifiedDna": "Kun med verificeret DNA",
+      "noProfiles": "Ingen profiler matcher de valgte filtre."
+    },
+    "profile": {
+      "newMatch": "Nyt match",
+      "noMoreProfiles": "Ingen flere profiler lige nu! Tjek tilbage senere."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profil",
+      "reputation": "Omdømme"
+    },
+    "myProfile": {
+      "title": "Min profil",
+      "verifiedUser": "Verificeret bruger"
+    },
+    "status": {
+      "stdStatus": "STD-status",
+      "dnaStatus": "DNA-status",
+      "uploaded": "✓ Uploadet",
+      "notUploaded": "✗ Ikke uploadet",
+      "verified": "Verificeret"
+    },
+    "upload": {
+      "title": "Upload sundhedstests",
+      "stdTest": "STD-test",
+      "dnaTest": "DNA-test",
+      "redactFields": "Rediger følsomme felter før upload:",
+      "fullName": "Fulde navn",
+      "address": "Adresse",
+      "phoneNumber": "Telefonnummer",
+      "patientId": "Patient-ID",
+      "encryptUpload": "Krypter & upload PDF",
+      "uploadSuccess": "Dokument uploadet og krypteret!"
+    },
+    "documents": {
+      "title": "Mine dokumenter",
+      "noDocuments": "Ingen dokumenter uploadet endnu."
+    },
+    "wallet": {
+      "title": "Tegnebog",
+      "address": "Adresse",
+      "balance": "Saldo"
+    },
+    "reputation": {
+      "title": "Omdømme",
+      "score": "Score",
+      "description": "Dit omdømme er baseret på tillidsvægtene fra personer, der har garanteret for dig.",
+      "votersTitle": "Vælgere & tillidsnetværk",
+      "weight": "Vægt:"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Forbind med dine matches",
+    "requestAccess": "Anmodede om adgang til din {{testType}}-test.",
+    "approvedRequest": "Jeg har godkendt din anmodning! Du kan nu se min dekrypterede {{testType}}-testrapport.",
+    "approvedResponse": "Jeg godkendte din anmodning om at se min {{testType}}-test.",
+    "declinedResponse": "Jeg afviste din anmodning om at se min {{testType}}-test.",
+    "selectChat": "Vælg et match for at begynde at chatte",
+    "noMatches": "Ingen matches endnu",
+    "inputPlaceholder": "Skriv en besked...",
+    "send": "Send",
+    "pendingVerification": "Verifikation afventer",
+    "requestStd": "Anmod om STD-test",
+    "requestDna": "Anmod om DNA-test",
+    "approveStd": "Godkend STD-adgang",
+    "approveDna": "Godkend DNA-adgang",
+    "denyStd": "Afvis STD-adgang",
+    "denyDna": "Afvis DNA-adgang"
+  },
+  "language": {
+    "select": "Vælg sprog",
+    "title": "Vælg dit sprog",
+    "description": "Vælg dit foretrukne sprog for at fortsætte"
+  },
+  "country": {
+    "select": "Vælg land",
+    "title": "Vælg dit land",
+    "description": "Vælg dit land for at matche med folk i nærheden"
+  },
+  "settings": {
+    "currentMode": "Aktuel tilstand",
+    "autoSaved": "Dit val gemmes automatisk. Ingen genindlæsning nødvendig."
+  },
+  "auth": {
+    "loading": "Indlæser sikker session...",
+    "landing": {
+      "title": "Evolve — Decentraliseret dating",
+      "email": "📧 Log ind med Email",
+      "phone": "📱 Log ind med Telefon",
+      "wallet": "💳 Forbind Tegnebog"
+    },
+    "connectWallet": {
+      "title": "Forbind din tegnebog",
+      "description": "Velkommen til Evolve! Forbind din Ethereum-tegnebog via RainbowKit for at få adgang til din krypterede medicinske profil."
+    },
+    "signIn": {
+      "title": "Log ind med Ethereum",
+      "description": "Underskriv den sikre kryptografiske besked for at bekræfte ejerskab af din tegnebog og indlæse dine private data.",
+      "button": "Log ind med Ethereum"
+    },
+    "logout": "Log ud",
+    "email": {
+      "title": "Log ind med e-mail",
+      "description": "Indtast din e-mail og adgangskode",
+      "email": "E-mail",
+      "password": "Adgangskode",
+      "login": "Log ind",
+      "register": "Opret konto",
+      "switchToRegister": "Har du ikke en konto? Registrer",
+      "switchToLogin": "Har du allerede en konto? Log ind"
+    },
+    "phone": {
+      "title": "Log ind med Telefon",
+      "description": "Indtast dit telefonnummer for at modtage en bekræftelseskode",
+      "phone": "Telefonnummer",
+      "phonePlaceholder": "+380...",
+      "getCode": "Få kode",
+      "otp": "Bekræftelseskode",
+      "otpPlaceholder": "Indtast 6-cifret kode",
+      "verify": "Bekræft og log ind",
+      "resendCode": "Gen-send kode",
+      "otpSent": "En 6-cifret kode er sendt til {{phone}}"
+    },
+    "modeSelector": {
+      "title": "Vælg din datings-tilstand",
+      "description": "Vælg hvordan du vil bruge Evolve",
+      "normal": {
+        "label": "Dating",
+        "description": "Standard dating med e-mail-login",
+        "authType": "E-mail eller telefon-login"
+      },
+      "pregnancyBond": {
+        "label": "Undfangelse",
+        "description": "Familiefokuseret matching, tegnebog påkrævet",
+        "authType": "Ethereum-tegnebog påkrævet"
+      },
+      "crypticChoice": {
+        "label": "Postkopulation",
+        "description": "Anonym matching, tegnebog påkrævet",
+        "authType": "Ethereum-tegnebog påkrævet"
+      }
+    },
+    "noMode": {
+      "title": "Vælg din dating-tilstand",
+      "description": "Vælg en tilstand før du gennemser profiler",
+      "button": "Gå til Indstillinger"
+    }
+  }
+}

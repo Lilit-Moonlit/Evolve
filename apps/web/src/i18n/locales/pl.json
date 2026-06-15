@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Zdecentralizowane randki zbudowane na Web3 i P2P",
+    "copyright": "© 2026 Evolve - Zdecentralizowane randki zbudowane na Web3 i P2P"
+  },
+  "navigation": {
+    "swipe": "Przesuń",
+    "messages": "Wiadomości",
+    "profile": "Profil",
+    "settings": "Ustawienia"
+  },
+  "home": {
+    "hero": {
+      "title": "Znajdź swoją parę",
+      "subtitle": "Przeglądaj profile i łącz się z interesującymi osobami."
+    },
+    "filters": {
+      "verifiedStd": "Tylko z zweryfikowaną STD",
+      "verifiedDna": "Tylko z zweryfikowanym DNA",
+      "noProfiles": "Brak profili pasujących do wybranych filtrów."
+    },
+    "profile": {
+      "newMatch": "Nowe dopasowanie",
+      "noMoreProfiles": "Koniec profili na teraz! Wróć później."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profil",
+      "reputation": "Reputacja"
+    },
+    "myProfile": {
+      "title": "Mój Profil",
+      "verifiedUser": "Zweryfikowany Użytkownik"
+    },
+    "status": {
+      "stdStatus": "Status STD",
+      "dnaStatus": "Status DNA",
+      "uploaded": "✓ Przesłano",
+      "notUploaded": "✗ Nie przesłano",
+      "verified": "Zweryfikowano"
+    },
+    "upload": {
+      "title": "Prześlij testy zdrowotne",
+      "stdTest": "Test STD",
+      "dnaTest": "Test DNA",
+      "redactFields": "Usuń poufne pola przed przesłaniem:",
+      "fullName": "Pełne imię i nazwisko",
+      "address": "Adres",
+      "phoneNumber": "Numer telefonu",
+      "patientId": "ID Pacjenta",
+      "encryptUpload": "Szyfruj i prześlij PDF",
+      "uploadSuccess": "Dokument przesłany i zaszyfrowany pomyślnie!"
+    },
+    "documents": {
+      "title": "Moje Dokumenty",
+      "noDocuments": "Nie przesłano jeszcze żadnych dokumentów."
+    },
+    "reputation": {
+      "title": "Wynik Reputacji",
+      "score": "Wynik",
+      "description": "Twoja reputacja opiera się na wagach zaufania osób, które za Ciebie poręczyły.",
+      "votersTitle": "Głosujący i Sieć Zaufania",
+      "weight": "Waga:"
+    },
+    "wallet": {
+      "title": "Portfel",
+      "address": "Adres",
+      "balance": "Saldo"
+    }
+  },
+  "chat": {
+    "title": "Czat",
+    "subtitle": "Połącz się ze swoimi dopasowaniami",
+    "requestAccess": "Poprosił o dostęp do Twojego testu {{testType}}.",
+    "approvedRequest": "Zatwierdziłem Twoją prośbę! Możesz teraz zobaczyć mój odszyfrowany raport testu {{testType}}.",
+    "approvedResponse": "Zatwierdziłem Twoją prośbę o obejrzenie mojego testu {{testType}}.",
+    "declinedResponse": "Odrzuciłem Twoją prośbę o obejrzenie mojego testu {{testType}}.",
+    "selectChat": "Wybierz dopasowanie, aby rozpocząć czat",
+    "noMatches": "Brak dopasowań",
+    "inputPlaceholder": "Napisz wiadomość...",
+    "send": "Wyślij",
+    "pendingVerification": "Weryfikacja w toku",
+    "requestStd": "Poproś o test STD",
+    "requestDna": "Poproś o test DNA",
+    "approveStd": "Zatwierdź dostęp do STD",
+    "approveDna": "Zatwierdź dostęp do DNA",
+    "denyStd": "Odmów dostępu do STD",
+    "denyDna": "Odmów dostępu do DNA"
+  },
+  "language": {
+    "select": "Wybierz język",
+    "title": "Wybierz swój język",
+    "description": "Wybierz preferowany język, aby kontynuować"
+  },
+  "country": {
+    "select": "Wybierz kraj",
+    "title": "Wybierz swój kraj",
+    "description": "Wybierz kraj, aby dopasować osoby w pobliżu"
+  },
+  "settings": {
+    "currentMode": "Aktualny tryb",
+    "autoSaved": "Twój wybór jest zapisywany automatycznie. Nie trzeba odświeżać."
+  },
+  "auth": {
+    "loading": "Ładowanie bezpiecznej sesji...",
+    "landing": {
+      "title": "Evolve — Zdecentralizowane randki",
+      "email": "📧 Zaloguj przez e-mail",
+      "phone": "📱 Zaloguj przez telefon",
+      "wallet": "💳 Połącz portfel"
+    },
+    "phone": {
+      "title": "Zaloguj przez telefon",
+      "description": "Wpisz numer telefonu, aby otrzymać kod weryfikacyjny",
+      "phone": "Numer telefonu",
+      "phonePlaceholder": "+380...",
+      "getCode": "Uzyskaj kod",
+      "otp": "Kod weryfikacyjny",
+      "otpPlaceholder": "Wpisz 6-cyfrowy kod",
+      "verify": "Zweryfikuj i zaloguj",
+      "resendCode": "Wyślij kod ponownie",
+      "otpSent": "6-cyfrowy kod został wysłany na {{phone}}"
+    },
+    "noMode": {
+      "title": "Wybierz tryb randkowania",
+      "description": "Wybierz tryb przed przeglądaniem profili",
+      "button": "Przejdź do ustawień"
+    },
+    "connectWallet": {
+      "title": "Połącz portfel",
+      "description": "Witaj w Evolve! Połącz swój portfel Ethereum przez RainbowKit, aby uzyskać dostęp do zaszyfrowanego profilu medycznego."
+    },
+    "signIn": {
+      "title": "Zaloguj się przez Ethereum",
+      "description": "Podpisz bezpieczną wiadomość kryptograficzną, aby potwierdzić własność portfela i załadować prywatne dane.",
+      "button": "Zaloguj się przez Ethereum"
+    },
+    "logout": "Wyloguj",
+    "email": {
+      "title": "Zaloguj przez e-mail",
+      "description": "Wpisz swój e-mail i hasło",
+      "email": "E-mail",
+      "password": "Hasło",
+      "login": "Zaloguj się",
+      "register": "Utwórz konto",
+      "switchToRegister": "Nie masz konta? Zarejestruj się",
+      "switchToLogin": "Masz już konto? Zaloguj się"
+    },
+    "modeSelector": {
+      "title": "Wybierz tryb randkowania",
+      "description": "Wybierz, jak chcesz używać Evolve",
+      "normal": {
+        "label": "Randki",
+        "description": "Standardowe randki z logowaniem e-mail",
+        "authType": "Logowanie przez e-mail lub telefon"
+      },
+      "pregnancyBond": {
+        "label": "Poczęcie",
+        "description": "Dopasowanie rodzinne, wymaga portfela",
+        "authType": "Wymagany portfel Ethereum"
+      },
+      "crypticChoice": {
+        "label": "Postkopulacja",
+        "description": "Anonimowe dopasowanie, wymaga portfela",
+        "authType": "Wymagany portfel Ethereum"
+      }
+    }
+  }
+}

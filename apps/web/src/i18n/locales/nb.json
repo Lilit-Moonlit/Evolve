@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Desentralisert dating bygget på Web3 & P2P",
+    "copyright": "© 2026 Evolve - Desentralisert dating bygget på Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "Sveip",
+    "messages": "Meldinger",
+    "profile": "Profil",
+    "settings": "Innstillinger"
+  },
+  "home": {
+    "hero": {
+      "title": "Finn din match",
+      "subtitle": "Sveip gjennom profiler og møt interessante mennesker."
+    },
+    "filters": {
+      "verifiedStd": "Kun med verifisert STD",
+      "verifiedDna": "Kun med verifisert DNA",
+      "noProfiles": "Ingen profiler matcher de valgte filtrene."
+    },
+    "profile": {
+      "newMatch": "Ny match",
+      "noMoreProfiles": "Ingen flere profiler akkurat nå! Sjekk tilbake senere."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profil",
+      "reputation": "Omdømme"
+    },
+    "myProfile": {
+      "title": "Min profil",
+      "verifiedUser": "Verifisert bruker"
+    },
+    "status": {
+      "stdStatus": "STD-status",
+      "dnaStatus": "DNA-status",
+      "uploaded": "✓ Lastet opp",
+      "notUploaded": "✗ Ikke lastet opp",
+      "verified": "Verifisert"
+    },
+    "upload": {
+      "title": "Last opp helsetester",
+      "stdTest": "STD-test",
+      "dnaTest": "DNA-test",
+      "redactFields": "Rediger sensitive felt før opplasting:",
+      "fullName": "Fullt navn",
+      "address": "Adresse",
+      "phoneNumber": "Telefonnummer",
+      "patientId": "Pasient-ID",
+      "encryptUpload": "Krypter & last opp PDF",
+      "uploadSuccess": "Dokument lastet opp og kryptert!"
+    },
+    "documents": {
+      "title": "Mine dokumenter",
+      "noDocuments": "Ingen dokumenter lastet opp ennå."
+    },
+    "wallet": {
+      "title": "Lommebok",
+      "address": "Adresse",
+      "balance": "Saldo"
+    },
+    "reputation": {
+      "title": "Omdømme",
+      "score": "Poeng",
+      "description": "Ditt omdømme er basert på tillitsvektene til personer som har garantert for deg.",
+      "votersTitle": "Stemmer & tillitsnettverk",
+      "weight": "Vekt:"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Koble til med matchene dine",
+    "requestAccess": "Ba om tilgang til {{testType}}-testen din.",
+    "approvedRequest": "Jeg har godkjent forespørselen din! Du kan nå se min dekrypterte {{testType}}-testrapport.",
+    "approvedResponse": "Jeg godkjente forespørselen din om å se {{testType}}-testen min.",
+    "declinedResponse": "Jeg avslo forespørselen din om å se {{testType}}-testen min.",
+    "selectChat": "Velg en match for å begynne å chatte",
+    "noMatches": "Ingen matcher ennå",
+    "inputPlaceholder": "Skriv en melding...",
+    "send": "Send",
+    "pendingVerification": "Verifisering venter",
+    "requestStd": "Be om STD-test",
+    "requestDna": "Be om DNA-test",
+    "approveStd": "Godkjenn STD-tilgang",
+    "approveDna": "Godkjenn DNA-tilgang",
+    "denyStd": "Nekte STD-tilgang",
+    "denyDna": "Nekte DNA-tilgang"
+  },
+  "language": {
+    "select": "Velg språk",
+    "title": "Velg ditt språk",
+    "description": "Velg foretrukket språk for å fortsette"
+  },
+  "country": {
+    "select": "Velg land",
+    "title": "Velg ditt land",
+    "description": "Velg landet ditt for å matche med folk i nærheten"
+  },
+  "settings": {
+    "currentMode": "Gjeldende modus",
+    "autoSaved": "Valget ditt lagres automatisk. Ingen omlasting nødvendig."
+  },
+  "auth": {
+    "loading": "Laster sikker økt...",
+    "landing": {
+      "title": "Evolve — Desentralisert dating",
+      "email": "📧 Logg inn med e-post",
+      "phone": "📱 Logg inn med telefon",
+      "wallet": "💳 Koble lommebok"
+    },
+    "connectWallet": {
+      "title": "Koble til lommeboken",
+      "description": "Velkommen til Evolve! Koble til Ethereum-lommeboken din via RainbowKit for å få tilgang til din krypterte medisinske profil."
+    },
+    "signIn": {
+      "title": "Logg inn med Ethereum",
+      "description": "Signer den sikre kryptografiske meldingen for å bekrefte eierskapet av lommeboken og laste private data.",
+      "button": "Logg inn med Ethereum"
+    },
+    "logout": "Logg ut",
+    "email": {
+      "title": "Logg inn med e-post",
+      "description": "Skriv inn e-post og passord",
+      "email": "E-post",
+      "password": "Passord",
+      "login": "Logg inn",
+      "register": "Opprett konto",
+      "switchToRegister": "Har du ikke konto? Registrer",
+      "switchToLogin": "Har du allerede konto? Logg inn"
+    },
+    "phone": {
+      "title": "Logg inn med telefon",
+      "description": "Skriv inn telefonnummeret ditt for å motta en bekreftelseskode",
+      "phone": "Telefonnummer",
+      "phonePlaceholder": "+380...",
+      "getCode": "Få kode",
+      "otp": "Bekreftelseskode",
+      "otpPlaceholder": "Skriv inn 6-sifret kode",
+      "verify": "Bekreft og logg inn",
+      "resendCode": "Send kode på nytt",
+      "otpSent": "En 6-sifret kode er sendt til {{phone}}"
+    },
+    "modeSelector": {
+      "title": "Velg din datemodus",
+      "description": "Velg hvordan du vil bruke Evolve",
+      "normal": {
+        "label": "Dating",
+        "description": "Standard dating med e-post pålogging",
+        "authType": "E-post eller telefon pålogging"
+      },
+      "pregnancyBond": {
+        "label": "Unnfangelse",
+        "description": "Familiefokusert matching, krever lommebok",
+        "authType": "Ethereum-lommebok kreves"
+      },
+      "crypticChoice": {
+        "label": "Postkopulasjon",
+        "description": "Anonym matching, krever lommebok",
+        "authType": "Ethereum-lommebok kreves"
+      }
+    },
+    "noMode": {
+      "title": "Velg din dating-modus",
+      "description": "Velg en modus før du blar gjennom profiler",
+      "button": "Gå til Innstillinger"
+    }
+  }
+}

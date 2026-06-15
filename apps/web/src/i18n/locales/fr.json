@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Rencontres décentralisées construites sur Web3 & P2P",
+    "copyright": "© 2026 Evolve - Rencontres décentralisées construites sur Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "Balayer",
+    "messages": "Messages",
+    "profile": "Profil",
+    "settings": "Paramètres"
+  },
+  "home": {
+    "hero": {
+      "title": "Trouvez votre Match",
+      "subtitle": "Balayez les profils et connectez-vous avec des personnes intéressantes."
+    },
+    "filters": {
+      "verifiedStd": "Uniquement avec MST vérifiée",
+      "verifiedDna": "Uniquement avec ADN vérifié",
+      "noProfiles": "Aucun profil ne correspond aux filtres sélectionnés."
+    },
+    "profile": {
+      "newMatch": "Nouveau Match",
+      "noMoreProfiles": "Plus de profils pour le moment ! Revenez plus tard."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profil",
+      "reputation": "Réputation"
+    },
+    "myProfile": {
+      "title": "Mon Profil",
+      "verifiedUser": "Utilisateur Vérifié"
+    },
+    "status": {
+      "stdStatus": "Statut MST",
+      "dnaStatus": "Statut ADN",
+      "uploaded": "✓ Téléchargé",
+      "notUploaded": "✗ Non téléchargé",
+      "verified": "Vérifié"
+    },
+    "upload": {
+      "title": "Télécharger des Tests de Santé",
+      "stdTest": "Test MST",
+      "dnaTest": "Test ADN",
+      "redactFields": "Masquer les champs sensibles avant le téléchargement :",
+      "fullName": "Nom Complet",
+      "address": "Adresse",
+      "phoneNumber": "Numéro de téléphone",
+      "patientId": "ID Patient",
+      "encryptUpload": "Chiffrer et Télécharger le PDF",
+      "uploadSuccess": "Document téléchargé et chiffré avec succès !"
+    },
+    "documents": {
+      "title": "Mes Documents",
+      "noDocuments": "Aucun document téléchargé pour l'instant."
+    },
+    "reputation": {
+      "title": "Score de Réputation",
+      "score": "Score",
+      "description": "Votre réputation est basée sur les poids de confiance des personnes qui se sont portées garantes pour vous.",
+      "votersTitle": "Votants et Réseau de Confiance",
+      "weight": "Poids :"
+    },
+    "wallet": {
+      "title": "Portefeuille",
+      "address": "Adresse",
+      "balance": "Solde"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Connectez-vous avec vos matches",
+    "requestAccess": "A demandé l'accès à votre test {{testType}}.",
+    "approvedRequest": "J'ai approuvé votre demande ! Vous pouvez maintenant consulter mon rapport de test {{testType}} déchiffré.",
+    "approvedResponse": "J'ai approuvé votre demande pour voir mon test {{testType}}.",
+    "declinedResponse": "J'ai refusé votre demande pour voir mon test {{testType}}.",
+    "selectChat": "Sélectionnez un match pour commencer à discuter",
+    "noMatches": "Pas encore de matches",
+    "inputPlaceholder": "Écrivez un message...",
+    "send": "Envoyer",
+    "pendingVerification": "Vérification en attente",
+    "requestStd": "Demander un Test MST",
+    "requestDna": "Demander un Test ADN",
+    "approveStd": "Approuver l'accès MST",
+    "approveDna": "Approuver l'accès ADN",
+    "denyStd": "Refuser l'accès MST",
+    "denyDna": "Refuser l'accès ADN"
+  },
+  "language": {
+    "select": "Choisir la langue",
+    "title": "Choisissez votre langue",
+    "description": "Sélectionnez votre langue préférée pour continuer"
+  },
+  "country": {
+    "select": "Choisir le pays",
+    "title": "Choisissez votre pays",
+    "description": "Sélectionnez votre pays pour matcher avec des personnes à proximité"
+  },
+  "settings": {
+    "currentMode": "Mode actuel",
+    "autoSaved": "Votre sélection est sauvegardée automatiquement. Aucun rechargement nécessaire."
+  },
+  "auth": {
+    "loading": "Chargement de la session sécurisée...",
+    "landing": {
+      "title": "Evolve — Rencontres décentralisées",
+      "email": "\uD83D\uDCE7 Connexion par e-mail",
+      "phone": "\uD83D\uDCF1 Connexion par téléphone",
+      "wallet": "\uD83D\uDCB3 Connecter un portefeuille"
+    },
+    "phone": {
+      "title": "Connexion par téléphone",
+      "description": "Entrez votre numéro de téléphone pour recevoir un code de vérification",
+      "phone": "Numéro de téléphone",
+      "phonePlaceholder": "+380...",
+      "getCode": "Obtenir le code",
+      "otp": "Code de vérification",
+      "otpPlaceholder": "Entrez le code à 6 chiffres",
+      "verify": "Vérifier et se connecter",
+      "resendCode": "Renvoyer le code",
+      "otpSent": "Un code à 6 chiffres a été envoyé au {{phone}}"
+    },
+    "noMode": {
+      "title": "Choisissez votre mode de rencontre",
+      "description": "Veuillez sélectionner un mode avant de parcourir les profils",
+      "button": "Aller aux paramètres"
+    },
+    "connectWallet": {
+      "title": "Connecter votre portefeuille",
+      "description": "Bienvenue sur Evolve ! Connectez votre portefeuille Ethereum via RainbowKit pour accéder à votre profil médical chiffré."
+    },
+    "signIn": {
+      "title": "Se connecter avec Ethereum",
+      "description": "Veuillez signer le message cryptographique sécurisé pour vérifier la propriété de votre portefeuille et charger vos données privées.",
+      "button": "Se connecter avec Ethereum"
+    },
+    "logout": "Déconnexion",
+    "email": {
+      "title": "Connexion par e-mail",
+      "description": "Entrez votre e-mail et mot de passe",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "login": "Connexion",
+      "register": "Créer un compte",
+      "switchToRegister": "Pas de compte ? Inscrivez-vous",
+      "switchToLogin": "Déjà un compte ? Connectez-vous"
+    },
+    "modeSelector": {
+      "title": "Choisissez votre mode de rencontre",
+      "description": "Sélectionnez comment utiliser Evolve",
+      "normal": {
+        "label": "Rencontres",
+        "description": "Rencontres standard avec connexion e-mail",
+        "authType": "Connexion par e-mail ou téléphone"
+      },
+      "pregnancyBond": {
+        "label": "Conception",
+        "description": "Rencontres familiales, portefeuille requis",
+        "authType": "Portefeuille Ethereum requis"
+      },
+      "crypticChoice": {
+        "label": "Postcopulation",
+        "description": "Rencontres anonymes, portefeuille requis",
+        "authType": "Portefeuille Ethereum requis"
+      }
+    }
+  }
+}

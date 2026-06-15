@@ -1,0 +1,171 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Децентрализирано запознанства на Web3 и P2P",
+    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "Плъзни",
+    "messages": "Съобщения",
+    "profile": "Профил",
+    "settings": "Настройки"
+  },
+  "home": {
+    "hero": {
+      "title": "Намерете своя match",
+      "subtitle": "Swipe through profiles and connect with interesting people."
+    },
+    "filters": {
+      "verifiedStd": "Only with verified STD",
+      "verifiedDna": "Only with verified DNA",
+      "noProfiles": "No profiles matching the selected filters."
+    },
+    "profile": {
+      "newMatch": "New Match",
+      "noMoreProfiles": "No more profiles for now! Check back later."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profile",
+      "reputation": "Reputation"
+    },
+    "myProfile": {
+      "title": "My Profile",
+      "verifiedUser": "Verified User"
+    },
+    "status": {
+      "stdStatus": "STD Status",
+      "dnaStatus": "DNA Status",
+      "uploaded": "✓ Uploaded",
+      "notUploaded": "✗ Not Uploaded",
+      "verified": "Потвърдено"
+    },
+    "upload": {
+      "title": "Upload Health Tests",
+      "stdTest": "STD Test",
+      "dnaTest": "DNA Test",
+      "redactFields": "Redact sensitive fields before uploading:",
+      "fullName": "Full Name",
+      "address": "Address",
+      "phoneNumber": "Phone Number",
+      "patientId": "Patient ID",
+      "encryptUpload": "Encrypt & Upload PDF",
+      "uploadSuccess": "Document uploaded and encrypted successfully!"
+    },
+    "documents": {
+      "title": "My Documents",
+      "noDocuments": "No documents uploaded yet."
+    },
+    "wallet": {
+      "title": "Портфейл",
+      "address": "Адрес",
+      "balance": "Баланс"
+    },
+    "reputation": {
+      "title": "Reputation Score",
+      "score": "Score",
+      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
+      "votersTitle": "Voters & Trust Network",
+      "weight": "Weight:"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Connect with your matches",
+    "requestAccess": "Requested access to your {{testType}} test.",
+    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
+    "approvedResponse": "I approved your request to view my {{testType}} test.",
+    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "selectChat": "Изберете мач за чат",
+    "noMatches": "Все още няма мачове",
+    "inputPlaceholder": "Напишете съобщение...",
+    "send": "Изпрати",
+    "pendingVerification": "Потвърждение в процес",
+    "requestStd": "Заяви IST тест",
+    "requestDna": "Заяви DNA тест",
+    "approveStd": "Одобрете IST достъп",
+    "approveDna": "Одобрете DNA достъп",
+    "denyStd": "Отхвърлете IST достъп",
+    "denyDna": "Отхвърлете DNA достъп"
+  },
+  "language": {
+    "select": "Select Language",
+    "title": "Choose your language",
+    "description": "Select your preferred language to continue"
+  },
+  "country": {
+    "select": "Select Country",
+    "title": "Choose your country",
+    "description": "Select your country to match with people nearby"
+  },
+  "settings": {
+    "currentMode": "Текущ режим",
+    "autoSaved": "Изборът ви се записва автоматично. Не е необходимо презареждане."
+  },
+  "auth": {
+    "loading": "Loading secure session...",
+    "landing": {
+      "title": "Evolve — Децентралени запознанства",
+      "email": "📧 Вход с имейл",
+      "phone": "📱 Вход с телефон",
+      "wallet": "💳 Свържи портфейл"
+    },
+    "connectWallet": {
+      "title": "Connect Your Wallet",
+      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+    },
+    "signIn": {
+      "title": "Sign In with Ethereum",
+      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
+      "button": "Sign-In with Ethereum"
+    },
+    "logout": "Logout",
+    "email": {
+      "title": "Sign in with Email",
+      "description": "Enter your email and password to continue",
+      "email": "Email",
+      "password": "Password",
+      "login": "Sign In",
+      "register": "Create Account",
+      "switchToRegister": "Don't have an account? Register",
+      "switchToLogin": "Already have an account? Sign In"
+    },
+    "phone": {
+      "title": "Вход с телефон",
+      "description": "Въведете телефона си, за да получите код за потвърждение",
+      "phone": "Телефон",
+      "phonePlaceholder": "+380...",
+      "getCode": "Получи код",
+      "otp": "Код за потвърждение",
+      "otpPlaceholder": "Въведете 6-цифрен код",
+      "verify": "Потвърди и влез",
+      "resendCode": "Изпрати отново",
+      "otpSent": "6-цифрен код е изпратен на {{phone}}"
+    },
+    "modeSelector": {
+      "title": "Choose Your Dating Mode",
+      "description": "Select how you want to use Evolve",
+      "normal": {
+        "label": "Dating",
+        "description": "Standard dating with email login",
+        "authType": "Email or phone login"
+      },
+      "pregnancyBond": {
+        "label": "Conception",
+        "description": "Family-focused matching, requires wallet",
+        "authType": "Ethereum wallet required"
+      },
+      "crypticChoice": {
+        "label": "Postcopulation",
+        "description": "Anonymous matching, requires wallet",
+        "authType": "Ethereum wallet required"
+      }
+    },
+    "noMode": {
+      "title": "Изберете режим на запознанства",
+      "description": "Моля, изберете режим преди да разглеждате профили",
+      "button": "Към настройки"
+    }
+  }
+}

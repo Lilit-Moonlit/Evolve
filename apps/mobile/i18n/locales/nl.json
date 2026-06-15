@@ -1,0 +1,89 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Gedecentraliseerd daten gebaseerd op Web3 & P2P",
+    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
+  },
+  "navigation": {
+    "swipe": "Swipe",
+    "messages": "Berichten",
+    "profile": "Profiel"
+  },
+  "home": {
+    "hero": {
+      "title": "Vind je match",
+      "subtitle": "Swipe door profielen en maak verbinding met interessante mensen."
+    },
+    "filters": {
+      "verifiedStd": "Alleen met geverifieerde SOA",
+      "verifiedDna": "Alleen met geverifieerd DNA",
+      "noProfiles": "Geen profielen die overeenkomen met de geselecteerde filters."
+    },
+    "profile": {
+      "newMatch": "Nieuwe match",
+      "noMoreProfiles": "Geen profielen meer voor nu! Kom later terug."
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profiel",
+      "reputation": "Reputatie"
+    },
+    "myProfile": {
+      "title": "Mijn profiel",
+      "verifiedUser": "Geverifieerde gebruiker"
+    },
+    "status": {
+      "stdStatus": "SOA-status",
+      "dnaStatus": "DNA-status",
+      "uploaded": "✓ Geüpload",
+      "notUploaded": "✗ Niet geüpload"
+    },
+    "upload": {
+      "title": "Gezondheidstests uploaden",
+      "stdTest": "SOA-test",
+      "dnaTest": "DNA-test",
+      "redactFields": "Gevoelige velden doorstrepen voor uploaden:",
+      "fullName": "Volledige naam",
+      "address": "Adres",
+      "phoneNumber": "Telefoonnummer",
+      "patientId": "Patiënt-ID",
+      "encryptUpload": "Versleutelen & PDF uploaden",
+      "uploadSuccess": "Document succesvol geüpload en versleuteld!"
+    },
+    "documents": {
+      "title": "Mijn documenten",
+      "noDocuments": "Nog geen documenten geüpload."
+    },
+    "reputation": {
+      "title": "Reputatiescore",
+      "score": "Score",
+      "description": "Uw reputatie is gebaseerd op de vertrouwensgewichten van mensen die voor u hebben getuigd.",
+      "votersTitle": "Stemmers & Vertrouwensnetwerk",
+      "weight": "Gewicht:"
+    },
+    "wallet": {
+      "title": "Wallet",
+      "address": "Adres",
+      "balance": "Saldo"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Verbind met je matches",
+    "requestAccess": "Toegang aangevraagd tot uw {{testType}}-test.",
+    "approvedRequest": "Ik heb uw verzoek goedgekeurd! U kunt nu mijn gedecodeerd {{testType}}-testrapport bekijken.",
+    "approvedResponse": "Ik heb uw verzoek goedgekeurd om mijn {{testType}}-test te bekijken.",
+    "declinedResponse": "Ik heb uw verzoek afgewezen om mijn {{testType}}-test te bekijken."
+  },
+  "language": {
+    "select": "Taal selecteren",
+    "title": "Kies uw taal",
+    "description": "Selecteer uw voorkeurstaal om door te gaan"
+  },
+  "country": {
+    "select": "Land selecteren",
+    "title": "Kies uw land",
+    "description": "Selecteer uw land om te matchen met mensen in de buurt"
+  }
+}

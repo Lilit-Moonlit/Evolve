@@ -1,0 +1,236 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "ethAddress": "0x71C7656EC7ab88b098defB751B7401B5f6d1476B",
+      "createdAt": "2026-06-09T14:13:13.099Z"
+    },
+    {
+      "id": "2",
+      "ethAddress": "0x3AcA7bbf08F6D6cf92ED9C5B7FDE7b944208a0e8",
+      "createdAt": "2026-06-09T14:13:13.099Z"
+    },
+    {
+      "id": "3",
+      "ethAddress": "0x90F8bf6A479f320ced073E824F25135bc93C7a4e",
+      "createdAt": "2026-06-09T14:13:13.099Z"
+    },
+    {
+      "id": "0fxxttsis",
+      "email": "goldroono@gmail.com",
+      "passwordHash": "55345016",
+      "createdAt": "2026-06-09T14:25:07.414Z"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "1",
+      "userId": "1",
+      "name": "Alice",
+      "age": 28,
+      "bio": "Passionate about blockchain and decentralized apps. Looking for meaningful connections.",
+      "interests": [
+        "Web3",
+        "Crypto",
+        "Gaming",
+        "Travel"
+      ],
+      "imageUrl": "https://randomuser.me/api/portraits/women/1.jpg",
+      "verifiedStd": true,
+      "verifiedDna": false,
+      "reputationScore": 8.7,
+      "voters": [
+        {
+          "name": "Bob",
+          "weight": 8.2,
+          "relation": "Peer"
+        },
+        {
+          "name": "Charlie",
+          "weight": 6.5,
+          "relation": "Colleague"
+        },
+        {
+          "name": "Diana",
+          "weight": 9.1,
+          "relation": "Vouched match"
+        }
+      ],
+      "dnaProfile": {
+        "D3S1358": [
+          15,
+          18
+        ],
+        "vWA": [
+          16,
+          17
+        ],
+        "FGA": [
+          21,
+          24
+        ],
+        "D8S1179": [
+          13,
+          14
+        ],
+        "D21S11": [
+          29,
+          31.2
+        ],
+        "D18S51": [
+          12,
+          15
+        ],
+        "D5S818": [
+          11,
+          12
+        ],
+        "D13S317": [
+          8,
+          12
+        ],
+        "D7S820": [
+          10,
+          11
+        ]
+      },
+      "stdTestResult": "NEGATIVE for all common pathogens (HIV-1/2, Syphilis, Chlamydia, Gonorrhea, HSV-1/2)",
+      "accessPermissions": {
+        "stdRequested": false,
+        "stdApproved": false,
+        "dnaRequested": false,
+        "dnaApproved": false,
+        "myStdApprovedToThem": false,
+        "myDnaApprovedToThem": false
+      }
+    },
+    {
+      "id": "2",
+      "userId": "2",
+      "name": "Bob",
+      "age": 32,
+      "bio": "Early crypto adopter and a big fan of open-source. Enjoy hiking and coding.",
+      "interests": [
+        "Hiking",
+        "Coding",
+        "Ethereum",
+        "DeFi"
+      ],
+      "imageUrl": "https://randomuser.me/api/portraits/men/1.jpg",
+      "verifiedStd": true,
+      "verifiedDna": true,
+      "reputationScore": 9.4,
+      "voters": [
+        {
+          "name": "Alice",
+          "weight": 8.7,
+          "relation": "Developer Partner"
+        },
+        {
+          "name": "Elena",
+          "weight": 9.5,
+          "relation": "Verified Partner"
+        },
+        {
+          "name": "Frank",
+          "weight": 7.8,
+          "relation": "Node Operator"
+        }
+      ],
+      "dnaProfile": {
+        "D3S1358": [
+          14,
+          15
+        ],
+        "vWA": [
+          14,
+          16
+        ],
+        "FGA": [
+          20,
+          22
+        ],
+        "D8S1179": [
+          12,
+          13
+        ],
+        "D21S11": [
+          28,
+          30
+        ],
+        "D18S51": [
+          14,
+          16
+        ],
+        "D5S818": [
+          11,
+          13
+        ],
+        "D13S317": [
+          9,
+          11
+        ],
+        "D7S820": [
+          8,
+          10
+        ]
+      },
+      "stdTestResult": "NEGATIVE for all common pathogens (HIV-1/2, Syphilis, Chlamydia, Gonorrhea, HSV-1/2)",
+      "accessPermissions": {
+        "stdRequested": false,
+        "stdApproved": false,
+        "dnaRequested": false,
+        "dnaApproved": false,
+        "myStdApprovedToThem": false,
+        "myDnaApprovedToThem": false
+      }
+    },
+    {
+      "id": "3",
+      "userId": "3",
+      "name": "Charlie",
+      "age": 25,
+      "bio": "Loves exploring new technologies and meeting like-minded people. Coffee enthusiast.",
+      "interests": [
+        "Coffee",
+        "AI",
+        "Startups",
+        "Art"
+      ],
+      "imageUrl": "https://randomuser.me/api/portraits/men/2.jpg",
+      "verifiedStd": false,
+      "verifiedDna": false,
+      "reputationScore": 6.2,
+      "voters": [
+        {
+          "name": "Bob",
+          "weight": 8.2,
+          "relation": "Hackathon Teammate"
+        }
+      ],
+      "accessPermissions": {
+        "stdRequested": false,
+        "stdApproved": false,
+        "dnaRequested": false,
+        "dnaApproved": false,
+        "myStdApprovedToThem": false,
+        "myDnaApprovedToThem": false
+      }
+    },
+    {
+      "id": "ktsnq8910",
+      "userId": "0fxxttsis",
+      "name": "goldroono",
+      "age": 25,
+      "bio": "New Evolve member.",
+      "interests": [],
+      "verifiedStd": false,
+      "verifiedDna": false,
+      "reputationScore": 5,
+      "voters": []
+    }
+  ],
+  "matches": [],
+  "messages": [],
+  "documents": []
+}

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Exec(npm run *)",
+      "Exec(npx *)",
+      "Exec(git *)"
+    ],
+    "deny": [
+      "Exec(sudo)"
+    ],
+    "ask": []
+  },
+  "mcpServers": {}
+}
