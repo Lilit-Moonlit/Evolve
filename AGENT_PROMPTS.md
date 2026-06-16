@@ -4,6 +4,18 @@ Unique task IDs: `ANTI-1`, `ANTI-2`, `DEVIN-1`, `DEVIN-2`, `DEVIN-3`, `CLINE-1`,
 
 ---
 
+| ID       | Owner       | Deliverable                      | Status     | Link                                                              |
+| -------- | ----------- | -------------------------------- | ---------- | ----------------------------------------------------------------- |
+| ANTI-1   | Antigravity | apps/mobile/CODE-REVIEW.md       | ✅ DONE    | [CODE-REVIEW.md](file:///c:/CFC/apps/mobile/CODE-REVIEW.md)       |
+| ANTI-2   | Antigravity | apps/web/src/i18n/TIER1-AUDIT.md | ✅ DONE    | [TIER1-AUDIT.md](file:///c:/CFC/apps/web/src/i18n/TIER1-AUDIT.md) |
+| DEVIN-1  | Devin       | Mobile i18n (t() updates)        | ✅ DONE    | [mobile app screens](file:///c:/CFC/apps/mobile/app)              |
+| DEVIN-2  | Devin       | apps/mobile/lib/wagmi.tsx config | ✅ DONE    | [wagmi.tsx](file:///c:/CFC/apps/mobile/lib/wagmi.tsx)             |
+| DEVIN-3  | Devin       | Tier‑2 locale updates (8 langs)  | ✅ DONE    | [Tier-2 locales](file:///c:/CFC/apps/web/src/i18n/locales)        |
+| CLINE-1  | Cline       | Tier‑2 locale updates (7 langs)  | 🕒 PENDING | –                                                                 |
+| CLINE-2  | Cline       | apps/web/QA-REPORT.md            | ✅ DONE    | [QA-REPORT.md](file:///c:/CFC/apps/web/QA-REPORT.md)              |
+| CLINE-3  | Cline       | README & docs/MOBILE_STATUS.md   | 🕒 PENDING | –                                                                 |
+| FINAL‑QA | Antigravity | AGENTS-QA-RESULTS.md             | ✅ DONE    | [AGENTS‑QA‑RESULTS.md](file:///c:/CFC/AGENTS-QA-RESULTS.md)       |
+
 ## Antigravity (Auditor Only)
 
 ### ANTI-1: Code Review Mobile
