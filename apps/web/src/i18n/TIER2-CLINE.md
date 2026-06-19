@@ -1,38 +1,29 @@
-# Tier-2 Locale Updates Report (Cline)
+# Cline — Tier‑2 Locale Update Report
 
 ## Overview
 
-Updated 7 Tier-2 locale files with missing keys from the English baseline. These locales were not covered by Devin's batch.
+Updated **7 Tier‑2 locale files** with English text and local-language descriptions for all missing keys.
 
 ## Updated Files
 
-- `apps/web/src/i18n/locales/lt.json` (Lithuanian)
-- `apps/web/src/i18n/locales/lv.json` (Latvian)
-- `apps/web/src/i18n/locales/ne.json` (Nepali)
-- `apps/web/src/i18n/locales/ro.json` (Romanian)
-- `apps/web/src/i18n/locales/sk.json` (Slovak)
-- `apps/web/src/i18n/locales/sl.json` (Slovenian)
-- `apps/web/src/i18n/locales/vi.json` (Vietnamese)
+| #   | Locale              | File                                | Status     |
+| --- | ------------------- | ----------------------------------- | ---------- |
+| 1   | **lt** (Lithuanian) | `apps/web/src/i18n/locales/lt.json` | ✅ Updated |
+| 2   | **lv** (Latvian)    | `apps/web/src/i18n/locales/lv.json` | ✅ Updated |
+| 3   | **ne** (Nepali)     | `apps/web/src/i18n/locales/ne.json` | ✅ Updated |
+| 4   | **ro** (Romanian)   | `apps/web/src/i18n/locales/ro.json` | ✅ Updated |
+| 5   | **sk** (Slovak)     | `apps/web/src/i18n/locales/sk.json` | ✅ Updated |
+| 6   | **sl** (Slovenian)  | `apps/web/src/i18n/locales/sl.json` | ✅ Updated |
+| 7   | **vi** (Vietnamese) | `apps/web/src/i18n/locales/vi.json` | ✅ Updated |
 
-## Keys Added Per Locale
+## Translation Rules Applied
 
-| Key                                   | English                                                        | Purpose           |
-| ------------------------------------- | -------------------------------------------------------------- | ----------------- |
-| `chat.hiddenProfile`                  | "Hidden profile"                                               | Privacy indicator |
-| `chat.hiddenContent`                  | "This profile is hidden by the user. Rating is still visible." | Privacy notice    |
-| `settings.hideProfileFromLowerLevels` | "Hide profile from lower levels (content & photos)"            | Privacy setting   |
-| `settings.privacy`                    | "Privacy"                                                      | Settings label    |
-| `auth.landing.wallet`                 | "💳 Sign in with Wallet"                                       | Auth button       |
-
-## Translation Rules
-
-- Technical terms (CFC, EVOLVE, Web3, P2P, Ethereum, RainbowKit, STD, DNA) remain unchanged
-- Mode names (Dating, Conception, Postcopulation) translated
-- Statuses (Verified, Uploaded, Pending) translated
-- UI elements (Settings, Profile, Chat) translated
-- JSON structure preserved with 2-space indentation
-- Privacy-related strings fully translated for each locale
+- **Technical terms** (e.g., "EVM", "libp2p", "IPFS", "Arweave", "Lit Protocol", "ERC-20", "ERC-721", "ERC-4337", "SIWE", "STD", "DNA", "EVOLVE") — left in English.
+- **Brand/product names** (e.g., "Evolve", "RainbowKit", "WalletConnect", "MetaMask") — left in English.
+- **User-facing UI strings** — English text with local-language description in parentheses.
+- **Placeholders** (`{name}`, `{amount}`, `{count}`, etc.) — preserved as-is.
+- **Consistency** — same English source text used across all 7 locales for identical keys.
 
 ## Status
 
-✅ PASS - All 7 Tier-2 locale files updated with 5 missing keys each
+✅ **PASS** — All 7 Tier‑2 locale files updated and verified.
