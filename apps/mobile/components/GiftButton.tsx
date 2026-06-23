@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useTranslation } from "react-i18next";
 
 interface GiftButtonProps {
   onPress: () => void;
@@ -6,6 +7,7 @@ interface GiftButtonProps {
 }
 
 export function GiftButton({ onPress, disabled = false }: GiftButtonProps) {
+  const { t } = useTranslation();
   return (
     <TouchableOpacity
       style={[styles.container, disabled && styles.disabled]}
@@ -13,7 +15,7 @@ export function GiftButton({ onPress, disabled = false }: GiftButtonProps) {
       disabled={disabled}
     >
       <Text style={styles.icon}>🎁</Text>
-      <Text style={styles.text}>Send Gift</Text>
+      <Text style={styles.text}>{t("gift.sendGift")}</Text>
     </TouchableOpacity>
   );
 }

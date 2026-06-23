@@ -13,56 +13,56 @@
   "home": {
     "hero": {
       "title": "Tìm match của bạn",
-      "subtitle": "Swipe through profiles and connect with interesting people."
+      "subtitle": "Vuốt qua các hồ sơ và kết nối với những người thú vị."
     },
     "filters": {
-      "verifiedStd": "Only with verified STD",
-      "verifiedDna": "Only with verified DNA",
-      "noProfiles": "No profiles matching the selected filters."
+      "verifiedStd": "Chỉ người có STD đã xác minh",
+      "verifiedDna": "Chỉ người có DNA đã xác minh",
+      "noProfiles": "Không có hồ sơ nào khớp với bộ lọc đã chọn."
     },
     "profile": {
-      "newMatch": "New Match",
-      "noMoreProfiles": "No more profiles for now! Check back later."
+      "newMatch": "Match mới",
+      "noMoreProfiles": "Hiện tại không còn hồ sơ nào khác! Hãy quay lại sau."
     }
   },
   "profile": {
     "tabs": {
-      "profile": "Profile",
-      "reputation": "Reputation"
+      "profile": "Hồ sơ",
+      "reputation": "Uy tín"
     },
     "myProfile": {
-      "title": "My Profile",
-      "verifiedUser": "Verified User"
+      "title": "Hồ sơ của tôi",
+      "verifiedUser": "Người dùng đã xác minh"
     },
     "status": {
-      "stdStatus": "STD Status",
-      "dnaStatus": "DNA Status",
-      "uploaded": "✓ Uploaded",
-      "notUploaded": "✗ Not Uploaded",
+      "stdStatus": "Trạng thái STD",
+      "dnaStatus": "Trạng thái DNA",
+      "uploaded": "✓ Đã tải lên",
+      "notUploaded": "✗ Chưa tải lên",
       "verified": "Đã xác minh"
     },
     "upload": {
-      "title": "Upload Health Tests",
-      "stdTest": "STD Test",
-      "dnaTest": "DNA Test",
-      "redactFields": "Redact sensitive fields before uploading:",
-      "fullName": "Full Name",
-      "address": "Address",
-      "phoneNumber": "Phone Number",
-      "patientId": "Patient ID",
-      "encryptUpload": "Encrypt & Upload PDF",
-      "uploadSuccess": "Document uploaded and encrypted successfully!"
+      "title": "Tải lên xét nghiệm sức khỏe",
+      "stdTest": "Xét nghiệm STD",
+      "dnaTest": "Xét nghiệm DNA",
+      "redactFields": "Che các trường nhạy cảm trước khi tải lên:",
+      "fullName": "Họ và tên",
+      "address": "Địa chỉ",
+      "phoneNumber": "Số điện thoại",
+      "patientId": "Mã bệnh nhân",
+      "encryptUpload": "Mã hóa & Tải lên PDF",
+      "uploadSuccess": "Tài liệu đã được tải lên và mã hóa thành công!"
     },
     "documents": {
-      "title": "My Documents",
-      "noDocuments": "No documents uploaded yet."
+      "title": "Tài liệu của tôi",
+      "noDocuments": "Chưa có tài liệu nào được tải lên."
     },
     "reputation": {
-      "title": "Reputation Score",
-      "score": "Score",
-      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
-      "votersTitle": "Voters & Trust Network",
-      "weight": "Weight:"
+      "title": "Điểm uy tín",
+      "score": "Điểm số",
+      "description": "Uy tín của bạn dựa trên trọng số tin cậy của những người đã bảo chứng cho bạn.",
+      "votersTitle": "Người bình chọn & Mạng lưới tin cậy",
+      "weight": "Trọng số:"
     },
     "wallet": {
       "title": "Ví",
@@ -71,12 +71,12 @@
     }
   },
   "chat": {
-    "title": "Chat",
-    "subtitle": "Connect with your matches",
-    "requestAccess": "Requested access to your {{testType}} test.",
-    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
-    "approvedResponse": "I approved your request to view my {{testType}} test.",
-    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "title": "Trò chuyện",
+    "subtitle": "Kết nối với các match của bạn",
+    "requestAccess": "Đã yêu cầu quyền truy cập vào xét nghiệm {{testType}} của bạn.",
+    "approvedRequest": "Tôi đã chấp nhận yêu cầu của bạn! Bây giờ bạn có thể xem báo cáo xét nghiệm {{testType}} đã giải mã của tôi.",
+    "approvedResponse": "Tôi đã chấp nhận yêu cầu xem xét nghiệm {{testType}} của tôi.",
+    "declinedResponse": "Tôi đã từ chối yêu cầu xem xét nghiệm {{testType}} của tôi.",
     "selectChat": "Chọn match để bắt đầu trò chuyện",
     "noMatches": "Chưa có match nào",
     "inputPlaceholder": "Nhập tin nhắn...",
@@ -87,29 +87,33 @@
     "approveStd": "Chấp nhận quyền truy cập IST",
     "approveDna": "Chấp nhận quyền truy cập DNA",
     "denyStd": "Từ chối quyền truy cập IST",
-    "denyDna": "Từ chối quyền truy cập DNA"
+    "denyDna": "Từ chối quyền truy cập DNA",
+    "hiddenProfile": "Hồ sơ ẩn",
+    "hiddenContent": "Hồ sơ này được ẩn bởi người dùng. Điểm uy tín vẫn hiển thị."
   },
   "language": {
-    "select": "Select Language",
-    "title": "Choose your language",
-    "description": "Select your preferred language to continue"
+    "select": "Chọn ngôn ngữ",
+    "title": "Chọn ngôn ngữ của bạn",
+    "description": "Chọn ngôn ngữ ưa thích của bạn để tiếp tục"
   },
   "country": {
-    "select": "Select Country",
-    "title": "Choose your country",
-    "description": "Select your country to match with people nearby"
+    "select": "Chọn quốc gia",
+    "title": "Chọn quốc gia của bạn",
+    "description": "Chọn quốc gia của bạn để match với những người ở gần"
   },
   "settings": {
     "currentMode": "Chế độ hiện tại",
-    "autoSaved": "Lựa chọn của bạn được lưu tự động. Không cần tải lại."
+    "autoSaved": "Lựa chọn của bạn được lưu tự động. Không cần tải lại.",
+    "hideProfileFromLowerLevels": "Ẩn hồ sơ khỏi các cấp thấp hơn (nội dung và ảnh)",
+    "privacy": "Quyền riêng tư"
   },
   "auth": {
-    "loading": "Loading secure session...",
+    "loading": "Đang tải phiên bảo mật...",
     "landing": {
       "title": "Evolve — Hẹn hò phi tập trung",
       "email": "📧 Đăng nhập bằng Email",
       "phone": "📱 Đăng nhập bằng Điện thoại",
-      "wallet": "💳 Kết nối Ví"
+      "wallet": "💳 Đăng nhập bằng Ví"
     },
     "phone": {
       "title": "Đăng nhập bằng Điện thoại",
@@ -129,43 +133,57 @@
       "button": "Đi tới Cài đặt"
     },
     "connectWallet": {
-      "title": "Connect Your Wallet",
-      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+      "title": "Kết nối ví của bạn",
+      "description": "Chào mừng đến với Evolve! Kết nối ví Ethereum của bạn bằng RainbowKit để truy cập hồ sơ y tế đã mã hóa."
     },
     "signIn": {
-      "title": "Sign In with Ethereum",
-      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
-      "button": "Sign-In with Ethereum"
+      "title": "Đăng nhập bằng Ethereum",
+      "description": "Vui lòng ký thông điệp mã hóa bảo mật để xác minh quyền sở hữu ví và tải dữ liệu riêng tư của bạn.",
+      "button": "Đăng nhập bằng Ethereum"
     },
-    "logout": "Logout",
+    "logout": "Đăng xuất",
     "email": {
-      "title": "Sign in with Email",
-      "description": "Enter your email and password to continue",
-      "email": "Email",
-      "password": "Password",
-      "login": "Sign In",
-      "register": "Create Account",
-      "switchToRegister": "Don't have an account? Register",
-      "switchToLogin": "Already have an account? Sign In"
+      "title": "Đăng nhập bằng Email",
+      "description": "Nhập email và mật khẩu của bạn để tiếp tục",
+      "email": "Thư điện tử",
+      "password": "Mật khẩu",
+      "login": "Đăng nhập",
+      "register": "Tạo tài khoản",
+      "switchToRegister": "Chưa có tài khoản? Đăng ký",
+      "switchToLogin": "Đã có tài khoản? Đăng nhập"
     },
     "modeSelector": {
-      "title": "Choose Your Dating Mode",
-      "description": "Select how you want to use Evolve",
+      "title": "Chọn chế độ hẹn hò",
+      "description": "Chọn cách bạn muốn sử dụng Evolve",
       "normal": {
-        "label": "Dating",
-        "description": "Standard dating with email login",
-        "authType": "Email or phone login"
+        "label": "Hẹn hò",
+        "description": "Hẹn hò tiêu chuẩn bằng đăng nhập email",
+        "authType": "Đăng nhập bằng email hoặc điện thoại"
       },
       "pregnancyBond": {
-        "label": "Conception",
-        "description": "Family-focused matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Thụ thai",
+        "description": "Ghép đôi tập trung vào gia đình, yêu cầu ví",
+        "authType": "Yêu cầu ví Ethereum"
       },
       "crypticChoice": {
-        "label": "Postcopulation",
-        "description": "Anonymous matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Hậu giao hợp",
+        "description": "Ghép đôi ẩn danh, yêu cầu ví",
+        "authType": "Yêu cầu ví Ethereum"
       }
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

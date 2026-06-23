@@ -87,7 +87,9 @@
     "approveStd": "Approve STD Access",
     "approveDna": "Approve DNA Access",
     "denyStd": "Deny STD Access",
-    "denyDna": "Deny DNA Access"
+    "denyDna": "Deny DNA Access",
+    "hiddenProfile": "Hidden profile",
+    "hiddenContent": "This profile is hidden by the user. Rating is still visible."
   },
   "language": {
     "select": "Select Language",
@@ -101,7 +103,9 @@
   },
   "settings": {
     "currentMode": "Current mode",
-    "autoSaved": "Your selection is saved automatically. No reload needed."
+    "autoSaved": "Your selection is saved automatically. No reload needed.",
+    "hideProfileFromLowerLevels": "Hide profile from lower levels (content & photos)",
+    "privacy": "Privacy"
   },
   "auth": {
     "loading": "Loading secure session...",
@@ -109,7 +113,7 @@
       "title": "Evolve — Decentralized Dating",
       "email": "📧 Sign in with Email",
       "phone": "📱 Sign in with Phone",
-      "wallet": "💳 Connect Wallet"
+      "wallet": "💳 Sign in with Wallet"
     },
     "connectWallet": {
       "title": "Connect Your Wallet",
@@ -167,5 +171,19 @@
       "description": "Please select a mode before browsing profiles",
       "button": "Go to Settings"
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

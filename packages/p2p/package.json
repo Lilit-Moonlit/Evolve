@@ -1,0 +1,35 @@
+{
+  "name": "@evolve/p2p",
+  "version": "0.0.0",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "license": "UNLICENSED",
+  "scripts": {
+    "lint": "eslint . --ext .ts,.tsx",
+    "test": "vitest run src/ --config ../../vitest.config.ts"
+  },
+  "dependencies": {
+    "@noble/secp256k1": "^2.0.0",
+    "@types/ws": "^8.5.10",
+    "cbor-x": "^1.5.8",
+    "events": "^3.3.0",
+    "lib0": "^0.2.112",
+    "libp2p": "^0.46.0",
+    "multiformats": "^11.0.2",
+    "nat-puncher": "^0.1.0",
+    "node-libs-browser": "^2.2.1",
+    "nostr-tools": "^2.3.0",
+    "ws": "^8.16.0",
+    "y-webrtc": "^10.3.0",
+    "yjs": "^13.5.40"
+  },
+  "devDependencies": {
+    "@types/events": "^3.0.0",
+    "@types/node": "^20.11.16",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.2"
+  }
+}

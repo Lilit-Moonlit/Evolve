@@ -109,7 +109,7 @@
       "title": "Evolve — Desentralisadong Pakikipag-date",
       "email": "📧 Mag-sign in gamit ang Email",
       "phone": "📱 Mag-sign in gamit ang Telepono",
-      "wallet": "💳 Ikonekta ang Wallet"
+      "wallet": "💳 Sign in with Wallet"
     },
     "phone": {
       "title": "Mag-sign in gamit ang Telepono",
@@ -167,5 +167,19 @@
         "authType": "Ethereum wallet required"
       }
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

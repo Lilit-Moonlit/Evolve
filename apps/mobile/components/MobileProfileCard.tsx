@@ -1,4 +1,7 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { useTranslation } from "react-i18next";
+
+type StdCompatibility = "safe" | "compatible" | "caution" | "risk" | "unknown";
 
 interface MobileProfileCardProps {
   name: string;
@@ -6,9 +9,26 @@ interface MobileProfileCardProps {
   location?: string;
   bio?: string;
   avatar?: string;
+  stdCompatibility?: StdCompatibility;
   onConnect?: () => void;
   onViewProfile?: () => void;
 }
+
+const STD_COMPATIBILITY_COLORS: Record<StdCompatibility, string> = {
+  safe: "#34d399",
+  compatible: "#3b82f6",
+  caution: "#fbbf24",
+  risk: "#ef4444",
+  unknown: "#9ca3af",
+};
+
+const STD_COMPATIBILITY_LABELS: Record<StdCompatibility, string> = {
+  safe: "Safe",
+  compatible: "Compatible",
+  caution: "Caution",
+  risk: "Risk",
+  unknown: "Unknown",
+};
 
 export function MobileProfileCard({
   name,
@@ -16,9 +36,15 @@ export function MobileProfileCard({
   location,
   bio,
   avatar,
+  stdCompatibility,
   onConnect,
   onViewProfile,
 }: MobileProfileCardProps) {
+  const { t } = useTranslation();
+  const compatibility = stdCompatibility || "unknown";
+  const badgeColor = STD_COMPATIBILITY_COLORS[compatibility];
+  const badgeLabel = STD_COMPATIBILITY_LABELS[compatibility];
+
   return (
     <View style={styles.card}>
       {avatar ? (
@@ -28,16 +54,23 @@ export function MobileProfileCard({
           <Text style={styles.avatarPlaceholderText}>{name.charAt(0)}</Text>
         </View>
       )}
-      <Text style={styles.name}>
-        {name}
-        {age ? `, ${age}` : ""}
-      </Text>
+      <View style={styles.nameRow}>
+        <Text style={styles.name}>
+          {name}
+          {age ? `, ${age}` : ""}
+        </Text>
+        {stdCompatibility && (
+          <View style={[styles.badge, { backgroundColor: badgeColor }]}>
+            <Text style={styles.badgeText}>{badgeLabel}</Text>
+          </View>
+        )}
+      </View>
       {location && <Text style={styles.location}>📍 {location}</Text>}
       {bio && <Text style={styles.bio}>{bio}</Text>}
       <View style={styles.actions}>
         {onConnect && (
           <TouchableOpacity style={styles.primaryButton} onPress={onConnect}>
-            <Text style={styles.buttonText}>Connect</Text>
+            <Text style={styles.buttonText}>{t("profile.connect")}</Text>
           </TouchableOpacity>
         )}
         {onViewProfile && (
@@ -45,7 +78,9 @@ export function MobileProfileCard({
             style={styles.outlineButton}
             onPress={onViewProfile}
           >
-            <Text style={styles.outlineButtonText}>View Profile</Text>
+            <Text style={styles.outlineButtonText}>
+              {t("profile.viewProfile")}
+            </Text>
           </TouchableOpacity>
         )}
       </View>
@@ -91,6 +126,22 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#111827",
     marginBottom: 4,
+  },
+  nameRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginBottom: 4,
+  },
+  badge: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  badgeText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#fff",
   },
   location: {
     fontSize: 14,

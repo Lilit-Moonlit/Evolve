@@ -1,0 +1,30 @@
+# Evolve subgraph schema (skeleton)
+# Mapping logic to be added after contract deployment
+
+type User @entity {
+  id: ID!
+  address: Bytes!
+  profileTokenId: BigInt
+  reputationScore: BigInt
+  createdAt: BigInt!
+  updatedAt: BigInt!
+  voters: [Voter!]! @derivedFrom(field: "user")
+  weights: [Weight!]! @derivedFrom(field: "user")
+}
+
+type Voter @entity {
+  id: ID!
+  user: User!
+  voterAddress: Bytes!
+  relation: String
+  createdAt: BigInt!
+  weights: [Weight!]! @derivedFrom(field: "voter")
+}
+
+type Weight @entity {
+  id: ID!
+  user: User!
+  voter: Voter!
+  value: BigInt!
+  updatedAt: BigInt!
+}

@@ -91,7 +91,7 @@ const Profile: React.FC = () => {
                 onClick={() => setAuthMode("normal")}
                 className={`flex flex-col items-center p-4 rounded-xl border text-center transition-all ${
                   authMode === "normal"
-                    ? "border-pink-500 bg-pink-50/50 text-pink-700 font-semibold"
+                    ? "border-blue-500 bg-blue-50/50 text-blue-700 font-semibold"
                     : "border-gray-200 hover:border-gray-300 text-gray-700 bg-white"
                 }`}
               >
@@ -107,7 +107,7 @@ const Profile: React.FC = () => {
                 onClick={() => setAuthMode("pregnancy-bond")}
                 className={`flex flex-col items-center p-4 rounded-xl border text-center transition-all ${
                   authMode === "pregnancy-bond"
-                    ? "border-pink-500 bg-pink-50/50 text-pink-700 font-semibold"
+                    ? "border-blue-500 bg-blue-50/50 text-blue-700 font-semibold"
                     : "border-gray-200 hover:border-gray-300 text-gray-700 bg-white"
                 }`}
               >
@@ -123,7 +123,7 @@ const Profile: React.FC = () => {
                 onClick={() => setAuthMode("cryptic-choice")}
                 className={`flex flex-col items-center p-4 rounded-xl border text-center transition-all ${
                   authMode === "cryptic-choice"
-                    ? "border-pink-500 bg-pink-50/50 text-pink-700 font-semibold"
+                    ? "border-blue-500 bg-blue-50/50 text-blue-700 font-semibold"
                     : "border-gray-200 hover:border-gray-300 text-gray-700 bg-white"
                 }`}
               >
@@ -167,8 +167,8 @@ const Profile: React.FC = () => {
                     : t("profile.status.notUploaded")}
                 </p>
               </div>
-              <div className="p-4 bg-purple-50 rounded-lg">
-                <p className="text-sm text-purple-600 font-medium">
+              <div className="p-4 bg-indigo-50 rounded-lg">
+                <p className="text-sm text-indigo-600 font-medium">
                   {t("profile.status.dnaStatus")}
                 </p>
                 <p

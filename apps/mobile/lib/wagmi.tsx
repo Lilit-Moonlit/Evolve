@@ -1,19 +1,19 @@
 import { createConfig, http, WagmiProvider } from "wagmi";
-import { mainnet } from "wagmi/chains";
+import { arbitrum } from "wagmi/chains";
 import { walletConnect } from "wagmi/connectors";
-import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 
 const queryClient = new QueryClient();
 
+const WALLETCONNECT_PROJECT_ID = "2ba9184554b7264a2730561579d4653f";
+
 const config = createConfig({
-  chains: [mainnet],
-  connectors: [walletConnect({ projectId: "YOUR_WALLETCONNECT_PROJECT_ID" })],
+  chains: [arbitrum],
+  connectors: [walletConnect({ projectId: WALLETCONNECT_PROJECT_ID })],
   transports: {
-    [mainnet.id]: http(),
+    [arbitrum.id]: http(),
   },
-  ssr: true,
 });
 
 export function WagmiProviderWrapper({
@@ -23,9 +23,7 @@ export function WagmiProviderWrapper({
 }) {
   return (
     <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>{children}</RainbowKitProvider>
-      </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
   );
 }

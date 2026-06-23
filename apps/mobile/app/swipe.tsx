@@ -7,9 +7,11 @@ import {
 } from "react-native";
 import { useRef, useState } from "react";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 export default function Swipe() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const panResponder = useRef(
     PanResponder.create({
@@ -38,7 +40,7 @@ export default function Swipe() {
         <TouchableOpacity onPress={() => router.back()}>
           <Text style={styles.backButton}>←</Text>
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Discover</Text>
+        <Text style={styles.headerTitle}>{t("swipe.title")}</Text>
         <View style={{ width: 20 }} />
       </View>
 
@@ -56,7 +58,7 @@ export default function Swipe() {
           {...panResponder.panHandlers}
         >
           <View style={styles.cardImage}>
-            <Text style={styles.cardImageText}>Photo</Text>
+            <Text style={styles.cardImageText}>{t("swipe.photo")}</Text>
           </View>
           <View style={styles.cardInfo}>
             <Text style={styles.cardName}>Alice, 28</Text>
@@ -81,19 +83,19 @@ export default function Swipe() {
           style={styles.tabItem}
           onPress={() => router.push("/home")}
         >
-          <Text style={styles.tabText}>Home</Text>
+          <Text style={styles.tabText}>{t("navigation.home")}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.tabItem}
           onPress={() => router.push("/chat")}
         >
-          <Text style={styles.tabText}>Chat</Text>
+          <Text style={styles.tabText}>{t("navigation.messages")}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.tabItem}
           onPress={() => router.push("/profile")}
         >
-          <Text style={styles.tabText}>Profile</Text>
+          <Text style={styles.tabText}>{t("navigation.profile")}</Text>
         </TouchableOpacity>
       </View>
     </View>

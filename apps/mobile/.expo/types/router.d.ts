@@ -11,11 +11,18 @@ declare module "expo-router" {
     > {
       StaticRoutes:
         | `/`
+        | `/..\..\..\packages\contracts\script\deploy-all`
+        | `/..\..\web\src\components\NetworkSelector`
+        | `/..\..\web\src\lib\bridge`
         | `/_sitemap`
+        | `/auth`
         | `/chat`
+        | `/documents`
         | `/home`
+        | `/language-selector`
         | `/onboarding`
         | `/profile`
+        | `/settings`
         | `/swipe`;
       DynamicRoutes: never;
       DynamicRouteTemplate: never;

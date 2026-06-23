@@ -12,50 +12,50 @@
   },
   "home": {
     "hero": {
-      "title": "Намерете своя match",
-      "subtitle": "Swipe through profiles and connect with interesting people."
+      "title": "Намерете своя съвпадение",
+      "subtitle": "Прелистете профили и се свържете с интересни хора."
     },
     "filters": {
-      "verifiedStd": "Only with verified STD",
-      "verifiedDna": "Only with verified DNA",
-      "noProfiles": "No profiles matching the selected filters."
+      "verifiedStd": "Само с потвърден STD",
+      "verifiedDna": "Само с потвърден DNA",
+      "noProfiles": "Няма профили, отговарящи на избраните филтри."
     },
     "profile": {
-      "newMatch": "New Match",
-      "noMoreProfiles": "No more profiles for now! Check back later."
+      "newMatch": "Ново съвпадение",
+      "noMoreProfiles": "Няма повече профили засега! Проверете по-късно."
     }
   },
   "profile": {
     "tabs": {
-      "profile": "Profile",
-      "reputation": "Reputation"
+      "profile": "Профил",
+      "reputation": "Репутация"
     },
     "myProfile": {
-      "title": "My Profile",
-      "verifiedUser": "Verified User"
+      "title": "Моят профил",
+      "verifiedUser": "Потвърден потребител"
     },
     "status": {
-      "stdStatus": "STD Status",
-      "dnaStatus": "DNA Status",
-      "uploaded": "✓ Uploaded",
-      "notUploaded": "✗ Not Uploaded",
+      "stdStatus": "STD статус",
+      "dnaStatus": "DNA статус",
+      "uploaded": "✓ Качено",
+      "notUploaded": "✗ Не е качено",
       "verified": "Потвърдено"
     },
     "upload": {
-      "title": "Upload Health Tests",
-      "stdTest": "STD Test",
-      "dnaTest": "DNA Test",
-      "redactFields": "Redact sensitive fields before uploading:",
-      "fullName": "Full Name",
-      "address": "Address",
-      "phoneNumber": "Phone Number",
-      "patientId": "Patient ID",
-      "encryptUpload": "Encrypt & Upload PDF",
-      "uploadSuccess": "Document uploaded and encrypted successfully!"
+      "title": "Качване на здравни тестове",
+      "stdTest": "STD тест",
+      "dnaTest": "DNA тест",
+      "redactFields": "Скрийте чувствителни полета преди качване:",
+      "fullName": "Пълно име",
+      "address": "Адрес",
+      "phoneNumber": "Телефонен номер",
+      "patientId": "ID на пациент",
+      "encryptUpload": "Криптирай и качи PDF",
+      "uploadSuccess": "Документът е качен и криптиран успешно!"
     },
     "documents": {
-      "title": "My Documents",
-      "noDocuments": "No documents uploaded yet."
+      "title": "Моите документи",
+      "noDocuments": "Все още няма качени документи."
     },
     "wallet": {
       "title": "Портфейл",
@@ -63,78 +63,78 @@
       "balance": "Баланс"
     },
     "reputation": {
-      "title": "Reputation Score",
-      "score": "Score",
-      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
-      "votersTitle": "Voters & Trust Network",
-      "weight": "Weight:"
+      "title": "Резултат от репутация",
+      "score": "Резултат",
+      "description": "Вашата репутация се основава на теглата на доверието на хората, които ви са препоръчали.",
+      "votersTitle": "Гласоподаватели и мрежа на доверието",
+      "weight": "Тегло:"
     }
   },
   "chat": {
-    "title": "Chat",
-    "subtitle": "Connect with your matches",
-    "requestAccess": "Requested access to your {{testType}} test.",
-    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
-    "approvedResponse": "I approved your request to view my {{testType}} test.",
-    "declinedResponse": "I declined your request to view my {{testType}} test.",
-    "selectChat": "Изберете мач за чат",
-    "noMatches": "Все още няма мачове",
+    "title": "Чат",
+    "subtitle": "Свържете се със своите съвпадения",
+    "requestAccess": "Заявете достъп до вашия {{testType}} тест.",
+    "approvedRequest": "Одобрих вашата заявка! Сега можете да видите моя дешифриран {{testType}} тестов доклад.",
+    "approvedResponse": "Одобрих вашата заявка за достъп до моя {{testType}} тест.",
+    "declinedResponse": "Отхвърлих вашата заявка за достъп до моя {{testType}} тест.",
+    "selectChat": "Изберете съвпадение за чат",
+    "noMatches": "Все още няма съвпадения",
     "inputPlaceholder": "Напишете съобщение...",
     "send": "Изпрати",
     "pendingVerification": "Потвърждение в процес",
-    "requestStd": "Заяви IST тест",
+    "requestStd": "Заяви STD тест",
     "requestDna": "Заяви DNA тест",
-    "approveStd": "Одобрете IST достъп",
-    "approveDna": "Одобрете DNA достъп",
-    "denyStd": "Отхвърлете IST достъп",
-    "denyDna": "Отхвърлете DNA достъп"
+    "approveStd": "Одобри STD достъп",
+    "approveDna": "Одобри DNA достъп",
+    "denyStd": "Отхвърли STD достъп",
+    "denyDna": "Отхвърли DNA достъп"
   },
   "language": {
-    "select": "Select Language",
-    "title": "Choose your language",
-    "description": "Select your preferred language to continue"
+    "select": "Изберете език",
+    "title": "Изберете вашия език",
+    "description": "Изберете предпочитания от вас език, за да продължите"
   },
   "country": {
-    "select": "Select Country",
-    "title": "Choose your country",
-    "description": "Select your country to match with people nearby"
+    "select": "Изберете държава",
+    "title": "Изберете вашата държава",
+    "description": "Изберете вашата държава, за да се свържете с хора наблизо"
   },
   "settings": {
     "currentMode": "Текущ режим",
     "autoSaved": "Изборът ви се записва автоматично. Не е необходимо презареждане."
   },
   "auth": {
-    "loading": "Loading secure session...",
+    "loading": "Зареждане на защитена сесия...",
     "landing": {
-      "title": "Evolve — Децентралени запознанства",
+      "title": "Evolve — Децентрализирани запознанства",
       "email": "📧 Вход с имейл",
       "phone": "📱 Вход с телефон",
-      "wallet": "💳 Свържи портфейл"
+      "wallet": "💳 Sign in with Wallet"
     },
     "connectWallet": {
-      "title": "Connect Your Wallet",
-      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+      "title": "Свържете вашия портфейл",
+      "description": "Добре дошли в Evolve! Свържете вашия Ethereum портфейл чрез RainbowKit, за да получите достъп до вашия криптиран медицински профил."
     },
     "signIn": {
-      "title": "Sign In with Ethereum",
-      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
-      "button": "Sign-In with Ethereum"
+      "title": "Вход с Ethereum",
+      "description": "Моля, подпишете защитното криптографско съобщение, за да потвърдите собствеността върху вашия портфейл и да заредите личните си данни.",
+      "button": "Вход с Ethereum"
     },
-    "logout": "Logout",
+    "logout": "Изход",
     "email": {
-      "title": "Sign in with Email",
-      "description": "Enter your email and password to continue",
-      "email": "Email",
-      "password": "Password",
-      "login": "Sign In",
-      "register": "Create Account",
-      "switchToRegister": "Don't have an account? Register",
-      "switchToLogin": "Already have an account? Sign In"
+      "title": "Вход с имейл",
+      "description": "Въведете имейл и парола, за да продължите",
+      "email": "Имейл",
+      "password": "Парола",
+      "login": "Вход",
+      "register": "Създайте акаунт",
+      "switchToRegister": "Нямате акаунт? Регистрирайте се",
+      "switchToLogin": "Вече имате акаунт? Влезте"
     },
     "phone": {
       "title": "Вход с телефон",
-      "description": "Въведете телефона си, за да получите код за потвърждение",
-      "phone": "Телефон",
+      "description": "Въведете вашия телефонен номер, за да получите код за потвърждение",
+      "phone": "Телефонен номер",
       "phonePlaceholder": "+380...",
       "getCode": "Получи код",
       "otp": "Код за потвърждение",
@@ -144,22 +144,22 @@
       "otpSent": "6-цифрен код е изпратен на {{phone}}"
     },
     "modeSelector": {
-      "title": "Choose Your Dating Mode",
-      "description": "Select how you want to use Evolve",
+      "title": "Изберете вашия режим на запознанства",
+      "description": "Изберете как искате да използвате Evolve",
       "normal": {
-        "label": "Dating",
-        "description": "Standard dating with email login",
-        "authType": "Email or phone login"
+        "label": "Запознанства",
+        "description": "Стандартни запознанства с вход по имейл",
+        "authType": "Вход по имейл или телефон"
       },
       "pregnancyBond": {
-        "label": "Conception",
-        "description": "Family-focused matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Зачеване",
+        "description": "Съвпадения, фокусирани върху семейството, изисква портфейл",
+        "authType": "Изисква се Ethereum портфейл"
       },
       "crypticChoice": {
-        "label": "Postcopulation",
-        "description": "Anonymous matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "След копулация",
+        "description": "Анонимни съвпадения, изисква портфейл",
+        "authType": "Изисква се Ethereum портфейл"
       }
     },
     "noMode": {
@@ -167,5 +167,19 @@
       "description": "Моля, изберете режим преди да разглеждате профили",
       "button": "Към настройки"
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

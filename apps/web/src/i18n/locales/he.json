@@ -13,49 +13,49 @@
   "home": {
     "hero": {
       "title": "מצא את ההתאמה שלך",
-      "subtitle": "Swipe through profiles and connect with interesting people."
+      "subtitle": "עבור בין פרופילים והתחבר עם אנשים מעניינים."
     },
     "filters": {
-      "verifiedStd": "Only with verified STD",
-      "verifiedDna": "Only with verified DNA",
-      "noProfiles": "No profiles matching the selected filters."
+      "verifiedStd": "רק עם STD מאומת",
+      "verifiedDna": "רק עם DNA מאומת",
+      "noProfiles": "אין פרופילים התואמים למסננים שנבחרו."
     },
     "profile": {
-      "newMatch": "New Match",
-      "noMoreProfiles": "No more profiles for now! Check back later."
+      "newMatch": "התאמה חדשה",
+      "noMoreProfiles": "אין עוד פרופילים כרגע! בדוק מאוחר יותר."
     }
   },
   "profile": {
     "tabs": {
-      "profile": "Profile",
-      "reputation": "Reputation"
+      "profile": "פרופיל",
+      "reputation": "מוניטין"
     },
     "myProfile": {
-      "title": "My Profile",
-      "verifiedUser": "Verified User"
+      "title": "הפרופיל שלי",
+      "verifiedUser": "משתמש מאומת"
     },
     "status": {
-      "stdStatus": "STD Status",
-      "dnaStatus": "DNA Status",
-      "uploaded": "✓ Uploaded",
-      "notUploaded": "✗ Not Uploaded",
+      "stdStatus": "סטטוס STD",
+      "dnaStatus": "סטטוס DNA",
+      "uploaded": "✓ הועלה",
+      "notUploaded": "✗ לא הועלה",
       "verified": "מאומת"
     },
     "upload": {
-      "title": "Upload Health Tests",
-      "stdTest": "STD Test",
-      "dnaTest": "DNA Test",
-      "redactFields": "Redact sensitive fields before uploading:",
-      "fullName": "Full Name",
-      "address": "Address",
-      "phoneNumber": "Phone Number",
-      "patientId": "Patient ID",
-      "encryptUpload": "Encrypt & Upload PDF",
-      "uploadSuccess": "Document uploaded and encrypted successfully!"
+      "title": "העלה בדיקות בריאות",
+      "stdTest": "בדיקת STD",
+      "dnaTest": "בדיקת DNA",
+      "redactFields": "הסתר שדות רגישים לפני העלאה:",
+      "fullName": "שם מלא",
+      "address": "כתובת",
+      "phoneNumber": "מספר טלפון",
+      "patientId": "מזהה מטופל",
+      "encryptUpload": "הצפן והעלה PDF",
+      "uploadSuccess": "המסמך הועלה והוצפן בהצלחה!"
     },
     "documents": {
-      "title": "My Documents",
-      "noDocuments": "No documents uploaded yet."
+      "title": "המסמכים שלי",
+      "noDocuments": "עדיין לא הועלו מסמכים."
     },
     "wallet": {
       "title": "ארנק",
@@ -63,73 +63,73 @@
       "balance": "יתרה"
     },
     "reputation": {
-      "title": "Reputation Score",
-      "score": "Score",
-      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
-      "votersTitle": "Voters & Trust Network",
-      "weight": "Weight:"
+      "title": "ניקוד מוניטין",
+      "score": "ניקוד",
+      "description": "המוניטין שלך מבוסס על משקלות האמון של אנשים שערבו לך.",
+      "votersTitle": "מצביעים ורשת אמון",
+      "weight": "משקל:"
     }
   },
   "chat": {
-    "title": "Chat",
-    "subtitle": "Connect with your matches",
-    "requestAccess": "Requested access to your {{testType}} test.",
-    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
-    "approvedResponse": "I approved your request to view my {{testType}} test.",
-    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "title": "צ'אט",
+    "subtitle": "התחבר עם ההתאמות שלך",
+    "requestAccess": "ביקשת גישה לבדיקת {{testType}} שלך.",
+    "approvedRequest": "אישרתי את הבקשה שלך! כעת אתה יכול לראות את דוח הבדיקה {{testType}} המפוענח שלי.",
+    "approvedResponse": "אישרתי את הבקשה שלך לצפות בבדיקת {{testType}} שלי.",
+    "declinedResponse": "דחיתי את הבקשה שלך לצפות בבדיקת {{testType}} שלי.",
     "selectChat": "בחר מッチ כדי להתחיל לשוחח",
     "noMatches": "אין עדיין מッチים",
     "inputPlaceholder": "הקלד הודעה...",
     "send": "שלח",
     "pendingVerification": "ממתין לאימות",
-    "requestStd": "בקש בדיקת IST",
+    "requestStd": "בקש בדיקת STD",
     "requestDna": "בקש בדיקת DNA",
-    "approveStd": "אשר גישה ל-IST",
+    "approveStd": "אשר גישה ל-STD",
     "approveDna": "אשר גישה ל-DNA",
-    "denyStd": "דחה גישה ל-IST",
+    "denyStd": "דחה גישה ל-STD",
     "denyDna": "דחה גישה ל-DNA"
   },
   "language": {
-    "select": "Select Language",
-    "title": "Choose your language",
-    "description": "Select your preferred language to continue"
+    "select": "בחר שפה",
+    "title": "בחר את השפה שלך",
+    "description": "בחר את השפה המועדפת שלך כדי להמשיך"
   },
   "country": {
-    "select": "Select Country",
-    "title": "Choose your country",
-    "description": "Select your country to match with people nearby"
+    "select": "בחר מדינה",
+    "title": "בחר את המדינה שלך",
+    "description": "בחר את המדינה שלך כדי להתאים עם אנשים בקרבת מקום"
   },
   "settings": {
     "currentMode": "מצב נוכחי",
     "autoSaved": "הבחירה שלך נשמרת אוטומטית. אין צורך לרענן."
   },
   "auth": {
-    "loading": "Loading secure session...",
+    "loading": "טעינת מפגש מאובטח...",
     "landing": {
       "title": "Evolve — היכרויות מבוזרות",
       "email": "📧 כניסה עם אימייל",
       "phone": "📱 כניסה עם טלפון",
-      "wallet": "💳 חבר ארנק"
+      "wallet": "💳 Sign in with Wallet"
     },
     "connectWallet": {
-      "title": "Connect Your Wallet",
-      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+      "title": "חבר את הארנק שלך",
+      "description": "ברוך הבא ל-Evolve! חבר את הארנק Ethereum שלך באמצעות RainbowKit כדי לגשת לפרופיל הרפואי המוצפן שלך."
     },
     "signIn": {
-      "title": "Sign In with Ethereum",
-      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
-      "button": "Sign-In with Ethereum"
+      "title": "כניסה עם Ethereum",
+      "description": "אנא חתום על ההודעה הקריפטוגרפית המאובטחת כדי לאמת את הבעלות על הארנק שלך ולטעון את הנתונים הפרטיים שלך.",
+      "button": "כניסה עם Ethereum"
     },
-    "logout": "Logout",
+    "logout": "התנתק",
     "email": {
-      "title": "Sign in with Email",
-      "description": "Enter your email and password to continue",
-      "email": "Email",
-      "password": "Password",
-      "login": "Sign In",
-      "register": "Create Account",
-      "switchToRegister": "Don't have an account? Register",
-      "switchToLogin": "Already have an account? Sign In"
+      "title": "כניסה עם אימייל",
+      "description": "הזן את האימייל והסיסמה שלך כדי להמשיך",
+      "email": "אימייל",
+      "password": "סיסמה",
+      "login": "כניסה",
+      "register": "צור חשבון",
+      "switchToRegister": "אין לך חשבון? הרשם",
+      "switchToLogin": "יש לך כבר חשבון? היכנס"
     },
     "phone": {
       "title": "כניסה עם טלפון",
@@ -144,28 +144,42 @@
       "otpSent": "קוד בן 6 ספרות נשלח ל-{{phone}}"
     },
     "modeSelector": {
-      "title": "Choose Your Dating Mode",
-      "description": "Select how you want to use Evolve",
+      "title": "בחר את מצב ההיכרויות שלך",
+      "description": "בחר כיצד ברצונך להשתמש ב-Evolve",
       "normal": {
-        "label": "Dating",
-        "description": "Standard dating with email login",
-        "authType": "Email or phone login"
+        "label": "היכרויות",
+        "description": "היכרויות סטנדרטיות עם כניסה באימייל",
+        "authType": "כניסה באימייל או טלפון"
       },
       "pregnancyBond": {
-        "label": "Conception",
-        "description": "Family-focused matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "הריון",
+        "description": "התאמה ממוקדת משפחה, דורש ארנק",
+        "authType": "נדרש ארנק Ethereum"
       },
       "crypticChoice": {
-        "label": "Postcopulation",
-        "description": "Anonymous matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "לאחר הזיווג",
+        "description": "התאמה אנונימית, דורש ארנק",
+        "authType": "נדרש ארנק Ethereum"
       }
     },
     "noMode": {
       "title": "בחר מצב היכרויות",
       "description": "בחר מצב לפני גלישה בפרופילים",
-      "button": "前往 הגדרות"
+      "button": "עבור להגדרות"
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

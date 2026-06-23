@@ -107,9 +107,9 @@
     "loading": "Carregando sessão segura...",
     "landing": {
       "title": "Evolve — Encontros descentralizados",
-      "email": "\uD83D\uDCE7 Entrar com e-mail",
-      "phone": "\uD83D\uDCF1 Entrar com telefone",
-      "wallet": "\uD83D\uDCB3 Conectar carteira"
+      "email": "📧 Entrar com e-mail",
+      "phone": "📱 Entrar com telefone",
+      "wallet": "💳 Entrar com carteira"
     },
     "phone": {
       "title": "Entrar com telefone",
@@ -167,5 +167,19 @@
         "authType": "Carteira Ethereum necessária"
       }
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

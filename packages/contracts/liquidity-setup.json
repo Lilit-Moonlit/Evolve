@@ -1,0 +1,20 @@
+{
+  "arbitrum": {
+    "dex": "uniswap-v3",
+    "tokenAddress": "",
+    "nativeToken": "ETH",
+    "amountEVOLVE": "1000000",
+    "amountNative": "1.0",
+    "feeTier": "0.3",
+    "poolId": ""
+  },
+  "avalanche": {
+    "dex": "trader-joe",
+    "tokenAddress": "",
+    "nativeToken": "AVAX",
+    "amountEVOLVE": "1000000",
+    "amountNative": "10.0",
+    "feeTier": "0.3",
+    "poolId": ""
+  }
+}

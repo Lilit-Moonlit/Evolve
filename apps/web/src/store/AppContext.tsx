@@ -3,6 +3,12 @@ import { useTranslation } from "react-i18next";
 import { useAccount, useDisconnect, useChainId } from "wagmi";
 import { BrowserProvider } from "ethers";
 import { SiweMessage } from "siwe";
+import {
+  parseStdTestResult,
+  StdTestParseResult,
+  checkStdCompatibility,
+  StdCompatibilityResult,
+} from "../lib/std-parser";
 
 export interface STRProfile {
   [locus: string]: [number, number];
@@ -53,6 +59,9 @@ export interface ProfileData {
   };
   dnaTestDetails?: STRProfile;
   stdTestResult?: string;
+  parsedStd?: StdTestParseResult;
+  authMode?: "normal" | "pregnancy-bond" | "cryptic-choice";
+  hideProfileFromLowerLevels?: boolean;
 }
 
 interface AppContextType {
@@ -64,6 +73,7 @@ interface AppContextType {
     stdUploaded: boolean;
     dnaUploaded: boolean;
     uploadedDocs: PDFDocument[];
+    hideProfileFromLowerLevels: boolean;
   };
   profiles: ProfileData[];
   filters: {
@@ -73,6 +83,7 @@ interface AppContextType {
   setFilters: React.Dispatch<
     React.SetStateAction<{ onlyVerifiedStd: boolean; onlyVerifiedDna: boolean }>
   >;
+  toggleHideProfile: () => void;
   uploadDocument: (doc: PDFDocument) => Promise<void>;
   requestAccess: (
     profileId: string,
@@ -96,6 +107,7 @@ interface AppContextType {
     isRequest?: boolean,
     requestType?: "STD" | "DNA",
   ) => Promise<void>;
+  checkCompatibility: (profile: ProfileData) => StdCompatibilityResult;
 
   // SIWE state & methods
   isAuthenticated: boolean;
@@ -168,6 +180,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({
     stdUploaded: false,
     dnaUploaded: false,
     uploadedDocs: [] as PDFDocument[],
+    hideProfileFromLowerLevels: false,
   });
 
   const [filters, setFilters] = useState({
@@ -222,6 +235,11 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({
             accessPermissions,
             dnaTestDetails: p.dnaProfile,
             stdTestResult: p.stdTestResult,
+            parsedStd: p.stdTestResult
+              ? parseStdTestResult(p.stdTestResult)
+              : undefined,
+            authMode: p.authMode || "normal",
+            hideProfileFromLowerLevels: p.hideProfileFromLowerLevels || false,
           };
         }),
       );
@@ -676,6 +694,34 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({
     await addMessage(profileId, t("chat.declinedResponse", { testType }), "me");
   };
 
+  const toggleHideProfile = () => {
+    setMyProfile((prev) => ({
+      ...prev,
+      hideProfileFromLowerLevels: !prev.hideProfileFromLowerLevels,
+    }));
+  };
+
+  // Get current user's parsed STD result
+  const myParsedStd = myProfile.stdUploaded
+    ? parseStdTestResult(
+        // Use the first uploaded STD document's result text
+        myProfile.uploadedDocs.find((d) => d.type === "STD")?.resultText || "",
+      )
+    : undefined;
+
+  const checkCompatibility = (profile: ProfileData): StdCompatibilityResult => {
+    if (!myParsedStd || !profile.parsedStd) {
+      return {
+        safe: false,
+        riskLevel: "potential_risk",
+        reason: "STD test data missing for one or both partners",
+        sharedPathogens: [],
+        riskyPathogens: [],
+      };
+    }
+    return checkStdCompatibility(myParsedStd, profile.parsedStd);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -683,11 +729,13 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({
         profiles,
         filters,
         setFilters,
+        toggleHideProfile,
         uploadDocument,
         requestAccess,
         approveAccess,
         denyAccess,
         addMessage,
+        checkCompatibility,
 
         isAuthenticated,
         isConnected,

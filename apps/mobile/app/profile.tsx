@@ -4,7 +4,10 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Image,
+  Alert,
 } from "react-native";
+import { useState } from "react";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../store/AuthContext";
@@ -13,15 +16,48 @@ import { MobileButton } from "../components/MobileButton";
 import { MobileProfileStakingCard } from "../components/MobileProfileStakingCard";
 import { MobileVerificationBadge } from "../components/MobileVerificationBadge";
 import { MobileModeSelector } from "../components/MobileModeSelector";
+import { pickImage, takePhoto, uploadToIPFS } from "../lib/media";
 
 export default function Profile() {
   const router = useRouter();
   const { t } = useTranslation();
   const { user, logout } = useAuth();
   const { profiles, documents } = useApp();
+  const [avatarUri, setAvatarUri] = useState<string | null>(null);
 
   const stdUploaded = documents.some((d) => d.type === "STD");
   const dnaUploaded = documents.some((d) => d.type === "DNA");
+
+  const handleEditPhoto = () => {
+    Alert.alert(
+      t("profile.editPhoto.title"),
+      t("profile.editPhoto.description"),
+      [
+        {
+          text: t("profile.editPhoto.camera"),
+          onPress: async () => {
+            const uri = await takePhoto();
+            if (uri) {
+              setAvatarUri(uri);
+            }
+          },
+        },
+        {
+          text: t("profile.editPhoto.gallery"),
+          onPress: async () => {
+            const uri = await pickImage();
+            if (uri) {
+              setAvatarUri(uri);
+            }
+          },
+        },
+        {
+          text: t("common.cancel"),
+          style: "cancel",
+        },
+      ],
+    );
+  };
 
   const handleLogout = async () => {
     await logout();
@@ -42,15 +78,26 @@ export default function Profile() {
 
       <ScrollView style={styles.content}>
         <View style={styles.profileHeader}>
-          <View style={styles.avatar}>
-            <Text style={styles.avatarText}>
-              {user?.email?.[0]?.toUpperCase() || "U"}
+          <TouchableOpacity onPress={handleEditPhoto}>
+            {avatarUri ? (
+              <Image source={{ uri: avatarUri }} style={styles.avatar} />
+            ) : (
+              <View style={styles.avatar}>
+                <Text style={styles.avatarText}>
+                  {user?.email?.[0]?.toUpperCase() || "U"}
+                </Text>
+              </View>
+            )}
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleEditPhoto}>
+            <Text style={styles.editPhotoText}>
+              {t("profile.editPhoto.button")}
             </Text>
-          </View>
+          </TouchableOpacity>
           <Text style={styles.name}>
             {user?.email || user?.phoneNumber || "User"}
           </Text>
-          <Text style={styles.bio}>Decentralized dating enthusiast</Text>
+          <Text style={styles.bio}>{t("profile.bio")}</Text>
           {stdUploaded && (
             <MobileVerificationBadge type="std" showLabel size="md" />
           )}
@@ -69,7 +116,7 @@ export default function Profile() {
             <Text style={styles.statNumber}>
               {stdUploaded || dnaUploaded ? "100%" : "0%"}
             </Text>
-            <Text style={styles.statLabel}>Reputation</Text>
+            <Text style={styles.statLabel}>{t("profile.reputation")}</Text>
           </View>
         </View>
 
@@ -95,15 +142,15 @@ export default function Profile() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t("navigation.settings")}</Text>
           <TouchableOpacity style={styles.settingItem}>
-            <Text style={styles.settingText}>Wallet</Text>
+            <Text style={styles.settingText}>{t("settings.wallet")}</Text>
             <Text style={styles.settingArrow}>→</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.settingItem}>
-            <Text style={styles.settingText}>Privacy</Text>
+            <Text style={styles.settingText}>{t("settings.privacy")}</Text>
             <Text style={styles.settingArrow}>→</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.settingItem}>
-            <Text style={styles.settingText}>Documents</Text>
+            <Text style={styles.settingText}>{t("settings.documents")}</Text>
             <Text style={styles.settingArrow}>→</Text>
           </TouchableOpacity>
         </View>
@@ -181,6 +228,11 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 36,
     fontWeight: "bold",
+  },
+  editPhotoText: {
+    fontSize: 14,
+    color: "#007AFF",
+    marginTop: 8,
   },
   name: {
     fontSize: 24,

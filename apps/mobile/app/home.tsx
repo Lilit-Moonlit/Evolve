@@ -22,7 +22,7 @@ export default function Home() {
         <Text style={styles.subtitle}>{t("home.hero.subtitle")}</Text>
 
         {loading ? (
-          <Text style={styles.loadingText}>Loading profiles...</Text>
+          <Text style={styles.loadingText}>{t("home.loading")}</Text>
         ) : currentProfile ? (
           <MobileProfileCard
             name={currentProfile.name}

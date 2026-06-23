@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,8 @@ import {
   StyleSheet,
   ViewStyle,
 } from "react-native";
+import { useTranslation } from "react-i18next";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type SearchMode = "normal" | "pregnancy-bond" | "cryptic-choice";
 
@@ -15,45 +17,63 @@ interface MobileModeSelectorProps {
   style?: ViewStyle;
 }
 
-const modeConfig: Record<
-  SearchMode,
-  { label: string; description: string; icon: string; color: string }
-> = {
+const modeConfig: Record<SearchMode, { icon: string; color: string }> = {
   normal: {
-    label: "Normal",
-    description: "Standard matching",
     icon: "💜",
     color: "#8b5cf6",
   },
   "pregnancy-bond": {
-    label: "Pregnancy Bond",
-    description: "Family-focused matching",
     icon: "🤰",
     color: "#ec4899",
   },
   "cryptic-choice": {
-    label: "Cryptic Choice",
-    description: "Anonymous matching",
     icon: "🎭",
     color: "#6366f1",
   },
 };
+
+const MODE_STORAGE_KEY = "evolve_auth_mode";
 
 export function MobileModeSelector({
   onModeChange,
   defaultMode = "normal",
   style,
 }: MobileModeSelectorProps) {
+  const { t } = useTranslation();
   const [selectedMode, setSelectedMode] = useState<SearchMode>(defaultMode);
+
+  useEffect(() => {
+    loadMode();
+  }, []);
+
+  const loadMode = async () => {
+    try {
+      const savedMode = await AsyncStorage.getItem(MODE_STORAGE_KEY);
+      if (savedMode) {
+        setSelectedMode(savedMode as SearchMode);
+      }
+    } catch (error) {
+      console.error("Failed to load mode:", error);
+    }
+  };
 
   const handleModeChange = (mode: SearchMode) => {
     setSelectedMode(mode);
+    saveMode(mode);
     onModeChange?.(mode);
+  };
+
+  const saveMode = async (mode: SearchMode) => {
+    try {
+      await AsyncStorage.setItem(MODE_STORAGE_KEY, mode);
+    } catch (error) {
+      console.error("Failed to save mode:", error);
+    }
   };
 
   return (
     <View style={[styles.container, style]}>
-      <Text style={styles.title}>Search Mode</Text>
+      <Text style={styles.title}>{t("auth.modeSelector.title")}</Text>
       {(Object.keys(modeConfig) as SearchMode[]).map((mode) => {
         const config = modeConfig[mode];
         const isSelected = selectedMode === mode;
@@ -72,12 +92,12 @@ export function MobileModeSelector({
                 <Text
                   style={[styles.modeLabel, isSelected && styles.selectedText]}
                 >
-                  {config.label}
+                  {t("auth.modeSelector." + mode + ".label")}
                 </Text>
                 <Text
                   style={[styles.modeDesc, isSelected && styles.selectedDesc]}
                 >
-                  {config.description}
+                  {t("auth.modeSelector." + mode + ".description")}
                 </Text>
               </View>
             </View>
@@ -92,8 +112,9 @@ export function MobileModeSelector({
         );
       })}
       <Text style={styles.footer}>
-        Current mode:{" "}
-        <Text style={styles.footerMode}>{modeConfig[selectedMode].label}</Text>
+        {t("auth.modeSelector.currentMode", {
+          mode: t("auth.modeSelector." + selectedMode + ".label"),
+        })}
       </Text>
     </View>
   );

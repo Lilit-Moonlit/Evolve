@@ -48,13 +48,13 @@ export default function AuthModeSelector({
             <button
               key={mode.id}
               onClick={() => onModeSelect(mode.id)}
-              className="flex flex-col items-center p-6 bg-slate-700 hover:bg-slate-600 border border-slate-600 hover:border-pink-500 rounded-xl transition-all transform hover:scale-[1.02] text-left"
+              className="flex flex-col items-center p-6 bg-slate-700 hover:bg-slate-600 border border-slate-600 hover:border-blue-500 rounded-xl transition-all transform hover:scale-[1.02] text-left"
             >
               <span className="text-4xl mb-4">{mode.icon}</span>
               <h3 className="text-xl font-bold text-white mb-2">
                 {mode.label}
               </h3>
-              <p className="text-pink-400 text-sm font-medium mb-1">
+              <p className="text-blue-400 text-sm font-medium mb-1">
                 {mode.authType}
               </p>
               <p className="text-gray-400 text-xs text-center">

@@ -107,9 +107,9 @@
     "loading": "Laddar säker session...",
     "landing": {
       "title": "Evolve — Decentraliserad dejting",
-      "email": "\uD83D\uDCE7 Logga in med e-post",
-      "phone": "\uD83D\uDCF1 Logga in med telefon",
-      "wallet": "\uD83D\uDCB3 Anslut plånbok"
+      "email": "📧 Logga in med e-post",
+      "phone": "📱 Logga in med telefon",
+      "wallet": "💳 Sign in with Wallet"
     },
     "phone": {
       "title": "Logga in med telefon",
@@ -167,5 +167,19 @@
         "authType": "Ethereum-plånbok krävs"
       }
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

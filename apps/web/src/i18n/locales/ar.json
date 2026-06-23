@@ -109,7 +109,7 @@
       "title": "Evolve — مواعدة لا مركزية",
       "email": "📧 تسجيل الدخول بالبريد الإلكتروني",
       "phone": "📱 تسجيل الدخول بالهاتف",
-      "wallet": "💳 ربط المحفظة"
+      "wallet": "💳 تسجيل الدخول بالمحفظة"
     },
     "phone": {
       "title": "تسجيل الدخول بالهاتف",
@@ -167,5 +167,19 @@
         "authType": "Ethereum wallet required"
       }
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

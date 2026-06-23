@@ -1,0 +1,47 @@
+{
+  "name": "contracts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "npx hardhat test",
+    "compile": "npx hardhat compile",
+    "coverage": "npx hardhat coverage",
+    "deploy:local": "npx hardhat ignition deploy ignition/modules/index.js --parameters ignition-parameters.json",
+    "deploy:localhost": "npx hardhat ignition deploy ignition/modules/index.js --parameters ignition-parameters.json --network localhost"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.6.1"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
+    "@nomicfoundation/hardhat-ethers": "^3.0.0",
+    "@nomicfoundation/hardhat-ignition": "^0.15.0",
+    "@nomicfoundation/hardhat-ignition-ethers": "^0.15.0",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@nomicfoundation/hardhat-verify": "^2.0.0",
+    "@nomicfoundation/ignition-core": "^0.15.0",
+    "@typechain/ethers-v6": "^0.5.0",
+    "@typechain/hardhat": "^9.0.0",
+    "@types/chai": "^5.2.3",
+    "@types/mocha": "^10.0.10",
+    "chai": "^4.5.0",
+    "ethers": "^6.16.0",
+    "hardhat": "^2.22.15",
+    "hardhat-gas-reporter": "^1.0.8",
+    "mocha": "^11.7.6",
+    "solidity-coverage": "^0.8.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.22.3",
+    "typechain": "^8.3.0",
+    "typescript": "^6.0.3"
+  }
+}

@@ -12,13 +12,27 @@ import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../store/AuthContext";
 
-type AuthView = "landing" | "email" | "phone" | "otp";
+import { useSignMessage, useConnect } from "wagmi";
+import { useAccount } from "wagmi";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+type AuthView = "landing" | "email" | "phone" | "otp" | "wallet";
 
 export default function AuthScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { loginWithEmail, registerWithEmail, requestPhoneOtp, verifyPhoneOtp } =
-    useAuth();
+  const {
+    loginWithEmail,
+    registerWithEmail,
+    requestPhoneOtp,
+    verifyPhoneOtp,
+    signInWithEthereum,
+    verifyWallet,
+  } = useAuth();
+
+  const { connect, connectors } = useConnect();
+  const { signMessageAsync } = useSignMessage();
+  const { address, isConnected } = useAccount();
 
   const [view, setView] = useState<AuthView>("landing");
   const [email, setEmail] = useState("");
@@ -29,6 +43,7 @@ export default function AuthScreen() {
   const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [signedIn, setSignedIn] = useState(false);
 
   const handleEmailSubmit = async () => {
     setError("");
@@ -41,7 +56,7 @@ export default function AuthScreen() {
       }
       router.replace("/home");
     } catch (err: any) {
-      setError(err.message || "Authentication failed");
+      setError(err.message || t("auth.error.failed"));
     } finally {
       setLoading(false);
     }
@@ -55,7 +70,7 @@ export default function AuthScreen() {
       setOtpSent(true);
       setView("otp");
     } catch (err: any) {
-      setError(err.message || "Failed to send OTP");
+      setError(err.message || t("auth.phone.error.sendFailed"));
     } finally {
       setLoading(false);
     }
@@ -68,7 +83,7 @@ export default function AuthScreen() {
       await verifyPhoneOtp(phoneNumber, otp);
       router.replace("/home");
     } catch (err: any) {
-      setError(err.message || "OTP verification failed");
+      setError(err.message || t("auth.phone.error.verifyFailed"));
     } finally {
       setLoading(false);
     }
@@ -97,7 +112,7 @@ export default function AuthScreen() {
 
           <TouchableOpacity
             style={[styles.authButton, styles.walletButton]}
-            onPress={() => Alert.alert("Wallet", "Coming soon")}
+            onPress={() => setView("wallet")}
           >
             <Text style={styles.authButtonText}>
               {t("auth.landing.wallet")}
@@ -113,7 +128,7 @@ export default function AuthScreen() {
       <View style={styles.container}>
         <View style={styles.content}>
           <TouchableOpacity onPress={() => setView("landing")}>
-            <Text style={styles.backText}>← Back</Text>
+            <Text style={styles.backText}>{t("common.back")}</Text>
           </TouchableOpacity>
 
           <Text style={styles.formTitle}>{t("auth.email.title")}</Text>
@@ -173,7 +188,7 @@ export default function AuthScreen() {
       <View style={styles.container}>
         <View style={styles.content}>
           <TouchableOpacity onPress={() => setView("landing")}>
-            <Text style={styles.backText}>← Back</Text>
+            <Text style={styles.backText}>{t("common.back")}</Text>
           </TouchableOpacity>
 
           <Text style={styles.formTitle}>{t("auth.phone.title")}</Text>
@@ -214,7 +229,7 @@ export default function AuthScreen() {
       <View style={styles.container}>
         <View style={styles.content}>
           <TouchableOpacity onPress={() => setView("phone")}>
-            <Text style={styles.backText}>← Back</Text>
+            <Text style={styles.backText}>{t("common.back")}</Text>
           </TouchableOpacity>
 
           <Text style={styles.formTitle}>{t("auth.phone.title")}</Text>
@@ -250,6 +265,79 @@ export default function AuthScreen() {
           <TouchableOpacity onPress={handleRequestOtp}>
             <Text style={styles.switchText}>{t("auth.phone.resendCode")}</Text>
           </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+
+  if (view === "wallet") {
+    const handleSignIn = async () => {
+      if (!isConnected || !address) {
+        connect({ connector: connectors[0] });
+        return;
+      }
+      try {
+        setLoading(true);
+        await signInWithEthereum(address);
+        const nonce = await AsyncStorage.getItem("evolve_siwe_nonce");
+        if (!nonce) throw new Error("No nonce");
+        const message = `Evolve Authentication: Sign in with Ethereum. Nonce: ${nonce}`;
+        const signature = await signMessageAsync({ message });
+        await verifyWallet(address, signature, message);
+        setSignedIn(true);
+        router.replace("/home");
+      } catch (err: any) {
+        setError(err.message || "SIWE failed");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    return (
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <TouchableOpacity onPress={() => setView("landing")}>
+            <Text style={styles.backText}>{t("common.back")}</Text>
+          </TouchableOpacity>
+
+          <Text style={styles.formTitle}>{t("auth.signIn.title")}</Text>
+          <Text style={styles.formDescription}>
+            {t("auth.signIn.description")}
+          </Text>
+
+          {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+          {!isConnected ? (
+            <TouchableOpacity
+              style={styles.submitButton}
+              onPress={() => connect({ connector: connectors[0] })}
+              disabled={loading}
+            >
+              <Text style={styles.submitButtonText}>
+                {t("auth.connectWallet.connectButton")}
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <>
+              <Text style={styles.infoText}>
+                {t("profile.wallet.address")}: {address?.slice(0, 6)}...
+                {address?.slice(-4)}
+              </Text>
+              <TouchableOpacity
+                style={styles.submitButton}
+                onPress={handleSignIn}
+                disabled={loading}
+              >
+                {loading ? (
+                  <ActivityIndicator color="#fff" />
+                ) : (
+                  <Text style={styles.submitButtonText}>
+                    {t("auth.signIn.button")}
+                  </Text>
+                )}
+              </TouchableOpacity>
+            </>
+          )}
         </View>
       </View>
     );
@@ -339,5 +427,11 @@ const styles = StyleSheet.create({
     color: "#FF3B30",
     textAlign: "center",
     marginBottom: 12,
+  },
+  infoText: {
+    fontSize: 14,
+    color: "#666",
+    textAlign: "center",
+    marginBottom: 20,
   },
 });

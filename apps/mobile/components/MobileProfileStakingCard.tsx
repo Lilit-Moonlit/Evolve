@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, ViewStyle } from "react-native";
+import { useTranslation } from "react-i18next";
 
 interface MobileProfileStakingCardProps {
   stakedAmount?: string;
@@ -11,26 +12,27 @@ export function MobileProfileStakingCard({
   stakingPeriod = "30 days",
   style,
 }: MobileProfileStakingCardProps) {
+  const { t } = useTranslation();
   return (
     <View style={[styles.card, style]}>
       <View style={styles.header}>
-        <Text style={styles.title}>Staked EVOLVE</Text>
+        <Text style={styles.title}>{t("staking.title")}</Text>
         <View style={styles.infoCircle}>
           <Text style={styles.infoIcon}>i</Text>
         </View>
       </View>
       <Text style={styles.amount}>{stakedAmount}</Text>
-      <Text style={styles.tokenLabel}>EVOLVE tokens</Text>
+      <Text style={styles.tokenLabel}>{t("staking.tokenLabel")}</Text>
       <View style={styles.divider} />
       <View style={styles.row}>
-        <Text style={styles.label}>Staking period</Text>
+        <Text style={styles.label}>{t("staking.period")}</Text>
         <Text style={styles.value}>{stakingPeriod}</Text>
       </View>
       <View style={styles.statusBox}>
-        <Text style={styles.statusLabel}>Status</Text>
+        <Text style={styles.statusLabel}>{t("staking.status")}</Text>
         <View style={styles.statusRow}>
           <View style={styles.greenDot} />
-          <Text style={styles.statusText}>Active</Text>
+          <Text style={styles.statusText}>{t("staking.active")}</Text>
         </View>
       </View>
     </View>

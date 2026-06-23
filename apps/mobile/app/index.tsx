@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { View, Text, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "../store/AuthContext";
 
 export default function Index() {
   const router = useRouter();
+  const { t } = useTranslation();
   const { isAuthenticated, loading } = useAuth();
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export default function Index() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <ActivityIndicator size="large" />
-      <Text style={{ marginTop: 20 }}>Loading Evolve...</Text>
+      <Text style={{ marginTop: 20 }}>{t("app.loading")}</Text>
     </View>
   );
 }

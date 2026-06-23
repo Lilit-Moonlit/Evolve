@@ -23,21 +23,21 @@ export default function AuthLanding({
       <div className="space-y-4">
         <button
           onClick={onSelectEmail}
-          className="w-full py-3 px-4 bg-slate-700 hover:bg-slate-600 border border-slate-600 hover:border-pink-500 text-white font-semibold rounded-lg transition-all transform hover:scale-[1.02] min-h-[48px]"
+          className="w-full py-3 px-4 bg-slate-700 hover:bg-slate-600 border border-slate-600 hover:border-blue-500 text-white font-semibold rounded-lg transition-all transform hover:scale-[1.02] min-h-[48px]"
         >
           {t("auth.landing.email")}
         </button>
 
         <button
           onClick={onSelectPhone}
-          className="w-full py-3 px-4 bg-slate-700 hover:bg-slate-600 border border-slate-600 hover:border-pink-500 text-white font-semibold rounded-lg transition-all transform hover:scale-[1.02] min-h-[48px]"
+          className="w-full py-3 px-4 bg-slate-700 hover:bg-slate-600 border border-slate-600 hover:border-blue-500 text-white font-semibold rounded-lg transition-all transform hover:scale-[1.02] min-h-[48px]"
         >
           {t("auth.landing.phone")}
         </button>
 
         <button
           onClick={onSelectWallet}
-          className="w-full py-3 px-4 bg-slate-700 hover:bg-slate-600 border border-slate-600 hover:border-pink-500 text-white font-semibold rounded-lg transition-all transform hover:scale-[1.02] min-h-[48px]"
+          className="w-full py-3 px-4 bg-slate-700 hover:bg-slate-600 border border-slate-600 hover:border-blue-500 text-white font-semibold rounded-lg transition-all transform hover:scale-[1.02] min-h-[48px]"
         >
           {t("auth.landing.wallet")}
         </button>

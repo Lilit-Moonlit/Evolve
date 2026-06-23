@@ -25,7 +25,7 @@ const modes = [
 
 export default function ProfileSettings() {
   const { t } = useTranslation();
-  const { authMode, setAuthMode } = useAppState();
+  const { authMode, setAuthMode, myProfile, toggleHideProfile } = useAppState();
   const navigate = useNavigate();
 
   const handleModeChange = (
@@ -39,7 +39,7 @@ export default function ProfileSettings() {
       <div className="flex items-center gap-4">
         <button
           onClick={() => navigate("/profile")}
-          className="text-pink-400 hover:text-pink-300"
+          className="text-blue-400 hover:text-blue-300"
         >
           ← {t("navigation.profile")}
         </button>
@@ -60,7 +60,7 @@ export default function ProfileSettings() {
           <div className="text-center mb-6">
             <span className="text-sm text-gray-400">
               {t("settings.currentMode")}:{" "}
-              <span className="text-pink-400 font-semibold">
+              <span className="text-blue-400 font-semibold">
                 {t(modes.find((m) => m.id === authMode)?.labelKey || "")}
               </span>
             </span>
@@ -74,8 +74,8 @@ export default function ProfileSettings() {
               onClick={() => handleModeChange(mode.id)}
               className={`flex flex-col items-center p-6 border rounded-xl transition-all transform hover:scale-[1.02] text-left min-h-[180px] ${
                 authMode === mode.id
-                  ? "bg-pink-600 border-pink-500 text-white"
-                  : "bg-slate-700 hover:bg-slate-600 border-slate-600 hover:border-pink-500 text-white"
+                  ? "bg-blue-600 border-blue-500 text-white"
+                  : "bg-slate-700 hover:bg-slate-600 border-slate-600 hover:border-blue-500 text-white"
               }`}
             >
               <span className="text-4xl mb-4">{mode.icon}</span>
@@ -86,12 +86,54 @@ export default function ProfileSettings() {
                 {t(mode.descKey)}
               </p>
               {authMode === mode.id && (
-                <span className="mt-3 w-6 h-6 rounded-full bg-white flex items-center justify-center text-sm font-bold text-pink-600">
+                <span className="mt-3 w-6 h-6 rounded-full bg-white flex items-center justify-center text-sm font-bold text-blue-600">
                   ✓
                 </span>
               )}
             </button>
           ))}
+        </div>
+
+        <p className="text-gray-500 text-xs text-center mt-6">
+          {t("settings.autoSaved")}
+        </p>
+      </section>
+
+      {/* Privacy section */}
+      <section className="bg-slate-800 border border-slate-700 rounded-2xl p-8 shadow-xl">
+        <h2 className="text-2xl font-bold text-white text-center mb-2">
+          {t("settings.privacy")}
+        </h2>
+        <p className="text-gray-400 text-center mb-8">
+          {t("settings.hideProfileFromLowerLevels")}
+        </p>
+
+        <div className="flex items-center justify-between p-4 bg-slate-700 rounded-xl">
+          <div>
+            <p className="text-white font-medium">
+              {t("settings.hideProfileFromLowerLevels")}
+            </p>
+            <p className="text-gray-400 text-sm mt-1">
+              {authMode === "normal" && "Level 1 — all profiles visible"}
+              {authMode === "pregnancy-bond" && "Level 2 — hide from Level 1"}
+              {authMode === "cryptic-choice" &&
+                "Level 3 — hide from Level 1 & 2"}
+            </p>
+          </div>
+          <button
+            onClick={toggleHideProfile}
+            className={`relative w-12 h-6 rounded-full transition-colors ${
+              myProfile.hideProfileFromLowerLevels
+                ? "bg-blue-600"
+                : "bg-gray-600"
+            }`}
+          >
+            <span
+              className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform ${
+                myProfile.hideProfileFromLowerLevels ? "translate-x-6" : ""
+              }`}
+            />
+          </button>
         </div>
 
         <p className="text-gray-500 text-xs text-center mt-6">

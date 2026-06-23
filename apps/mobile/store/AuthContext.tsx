@@ -8,6 +8,7 @@ interface User {
   ethAddress?: string;
   email?: string;
   phoneNumber?: string;
+  datingMode?: string;
 }
 
 interface AuthContextType {
@@ -18,7 +19,18 @@ interface AuthContextType {
   registerWithEmail: (email: string, password: string) => Promise<void>;
   requestPhoneOtp: (phoneNumber: string) => Promise<void>;
   verifyPhoneOtp: (phoneNumber: string, otp: string) => Promise<void>;
+  connectWallet: () => Promise<void>;
+  signInWithEthereum: (address: string) => Promise<void>;
+  verifyWallet: (
+    address: string,
+    signature: string,
+    message: string,
+  ) => Promise<void>;
   logout: () => Promise<void>;
+  setAuthMode: (mode: string) => Promise<void>;
+  walletAddress?: string;
+  datingMode?: string;
+  error?: string;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -60,12 +72,36 @@ async function apiFetch(path: string, init?: RequestInit) {
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [walletAddress, setWalletAddress] = useState<string | undefined>();
+  const [authError, setAuthError] = useState<string>("");
+  const [datingMode, setDatingMode] = useState<string | undefined>();
 
   const isAuthenticated = !!user;
 
   useEffect(() => {
     checkSession();
+    loadDatingMode();
   }, []);
+
+  const loadDatingMode = async () => {
+    const savedMode = await AsyncStorage.getItem("evolve_auth_mode");
+    if (savedMode) {
+      setDatingMode(savedMode);
+    }
+  };
+
+  const setAuthMode = async (mode: string) => {
+    await AsyncStorage.setItem("evolve_auth_mode", mode);
+    setDatingMode(mode);
+    try {
+      await apiFetch("/auth/mode", {
+        method: "POST",
+        body: JSON.stringify({ mode }),
+      });
+    } catch (e) {
+      console.error("Failed to save mode to backend:", e);
+    }
+  };
 
   const checkSession = async () => {
     setLoading(true);
@@ -175,6 +211,47 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const connectWallet = async () => {
+    setWalletAddress(undefined);
+  };
+
+  const signInWithEthereum = async (address: string) => {
+    setLoading(true);
+    try {
+      const nonceRes = await apiFetch("/auth/siwe/nonce");
+      const { nonce } = await nonceRes.json();
+      await AsyncStorage.setItem("evolve_siwe_nonce", nonce);
+      await AsyncStorage.setItem("evolve_siwe_address", address);
+      setWalletAddress(address);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const verifyWallet = async (
+    address: string,
+    signature: string,
+    message: string,
+  ) => {
+    setLoading(true);
+    try {
+      const res = await apiFetch("/auth/siwe/verify", {
+        method: "POST",
+        body: JSON.stringify({ address, signature, message }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setUser({ id: data.user.id, ethAddress: data.user.ethAddress });
+        await AsyncStorage.removeItem("evolve_siwe_nonce");
+        await AsyncStorage.removeItem("evolve_siwe_address");
+      } else {
+        throw new Error(data.error || "SIWE verification failed");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const logout = async () => {
     try {
       if (user?.email) {
@@ -199,7 +276,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         registerWithEmail,
         requestPhoneOtp,
         verifyPhoneOtp,
+        connectWallet,
+        signInWithEthereum,
+        verifyWallet,
         logout,
+        setAuthMode,
+        walletAddress,
+        datingMode,
+        error: authError,
       }}
     >
       {children}

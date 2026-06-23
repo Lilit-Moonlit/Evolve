@@ -1,0 +1,41 @@
+{
+  "name": "@evolve/storage",
+  "version": "0.0.0",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    }
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run clean && npm run build",
+    "lint": "eslint . --ext .ts,.tsx",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@lit-protocol/encryption": "^6.0.0",
+    "@lit-protocol/lit-node-client": "^6.0.0",
+    "@lit-protocol/types": "^6.0.0",
+    "@evolve/core": "*",
+    "arweave": "^1.14.0",
+    "ipfs-http-client": "^60.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "@vitest/coverage-v8": "^4.1.8",
+    "rimraf": "^3.0.2",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
+  }
+}

@@ -12,50 +12,50 @@
   },
   "home": {
     "hero": {
-      "title": "Leia oma match",
-      "subtitle": "Swipe through profiles and connect with interesting people."
+      "title": "Leia oma matš",
+      "subtitle": "Pühige profiile ja ühendage huvitavate inimestega."
     },
     "filters": {
-      "verifiedStd": "Only with verified STD",
-      "verifiedDna": "Only with verified DNA",
-      "noProfiles": "No profiles matching the selected filters."
+      "verifiedStd": "Ainult kinnitatud STD-ga",
+      "verifiedDna": "Ainult kinnitatud DNA-ga",
+      "noProfiles": "Valitud filtritele vastavaid profiile pole."
     },
     "profile": {
-      "newMatch": "New Match",
-      "noMoreProfiles": "No more profiles for now! Check back later."
+      "newMatch": "Uus matš",
+      "noMoreProfiles": "Praegu rohkem profiile pole! Kontrollige hiljem."
     }
   },
   "profile": {
     "tabs": {
-      "profile": "Profile",
-      "reputation": "Reputation"
+      "profile": "Profiil",
+      "reputation": "Reputatsioon"
     },
     "myProfile": {
-      "title": "My Profile",
-      "verifiedUser": "Verified User"
+      "title": "Minu profiil",
+      "verifiedUser": "Kinnitatud kasutaja"
     },
     "status": {
-      "stdStatus": "STD Status",
-      "dnaStatus": "DNA Status",
-      "uploaded": "✓ Uploaded",
-      "notUploaded": "✗ Not Uploaded",
+      "stdStatus": "STD staatus",
+      "dnaStatus": "DNA staatus",
+      "uploaded": "✓ Üles laaditud",
+      "notUploaded": "✗ Pole üles laaditud",
       "verified": "Kinnitatud"
     },
     "upload": {
-      "title": "Upload Health Tests",
-      "stdTest": "STD Test",
-      "dnaTest": "DNA Test",
-      "redactFields": "Redact sensitive fields before uploading:",
-      "fullName": "Full Name",
-      "address": "Address",
-      "phoneNumber": "Phone Number",
-      "patientId": "Patient ID",
-      "encryptUpload": "Encrypt & Upload PDF",
-      "uploadSuccess": "Document uploaded and encrypted successfully!"
+      "title": "Laadige üles tervisetestid",
+      "stdTest": "STD test",
+      "dnaTest": "DNA test",
+      "redactFields": "Tühjendage tundlikud väljad enne üleslaadimist:",
+      "fullName": "Täisnimi",
+      "address": "Aadress",
+      "phoneNumber": "Telefoninumber",
+      "patientId": "Patsiendi ID",
+      "encryptUpload": "Krüpteeri ja laadi üles PDF",
+      "uploadSuccess": "Dokument on edukalt üles laaditud ja krüpteeritud!"
     },
     "documents": {
-      "title": "My Documents",
-      "noDocuments": "No documents uploaded yet."
+      "title": "Minu dokumendid",
+      "noDocuments": "Dokumente pole veel üles laaditud."
     },
     "wallet": {
       "title": "Rahakott",
@@ -63,73 +63,73 @@
       "balance": "Saldo"
     },
     "reputation": {
-      "title": "Reputation Score",
-      "score": "Score",
-      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
-      "votersTitle": "Voters & Trust Network",
-      "weight": "Weight:"
+      "title": "Reputatsioonipunktid",
+      "score": "Punktid",
+      "description": "Teie reputatsioon põhineb inimeste usalduskaaludel, kes teid on soovitanud.",
+      "votersTitle": "Hääletajad ja usaldusvõrgustik",
+      "weight": "Kaal:"
     }
   },
   "chat": {
-    "title": "Chat",
-    "subtitle": "Connect with your matches",
-    "requestAccess": "Requested access to your {{testType}} test.",
-    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
-    "approvedResponse": "I approved your request to view my {{testType}} test.",
-    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "title": "Vestlus",
+    "subtitle": "Ühendage oma matšidega",
+    "requestAccess": "Taotlesite juurdepääsu oma {{testType}} testile.",
+    "approvedRequest": "Olen teie taotluse heaks kiitnud! Nüüd saate vaadata minu dekrüpteeritud {{testType}} testi aruannet.",
+    "approvedResponse": "Kiitsin teie taotluse juurdepääsuks minu {{testType}} testile.",
+    "declinedResponse": "Lükkasin teie taotluse juurdepääsuks minu {{testType}} testile tagasi.",
     "selectChat": "Vali vestluse alustamiseks matš",
     "noMatches": "Matše pole veel",
     "inputPlaceholder": "Kirjuta sõnum...",
     "send": "Saada",
     "pendingVerification": "Kinnitamine käib",
-    "requestStd": "Taotle IST testi",
+    "requestStd": "Taotle STD testi",
     "requestDna": "Taotle DNA testi",
-    "approveStd": "Kinnita IST juurdepääs",
+    "approveStd": "Kinnita STD juurdepääs",
     "approveDna": "Kinnita DNA juurdepääs",
-    "denyStd": "Keela IST juurdepääs",
+    "denyStd": "Keela STD juurdepääs",
     "denyDna": "Keela DNA juurdepääs"
   },
   "language": {
-    "select": "Select Language",
-    "title": "Choose your language",
-    "description": "Select your preferred language to continue"
+    "select": "Valige keel",
+    "title": "Valige oma keel",
+    "description": "Valige eelistatud keel jätkamiseks"
   },
   "country": {
-    "select": "Select Country",
-    "title": "Choose your country",
-    "description": "Select your country to match with people nearby"
+    "select": "Valige riik",
+    "title": "Valige oma riik",
+    "description": "Valige oma riik, et leida lähedalasuvaid inimesi"
   },
   "settings": {
     "currentMode": "Praegune režiim",
     "autoSaved": "Sinu valik salvestatakse automaatselt. Taaskäivitamine pole vajalik."
   },
   "auth": {
-    "loading": "Loading secure session...",
+    "loading": "Turvalise sessiooni laadimine...",
     "landing": {
       "title": "Evolve — Detsentraliseeritud tutvumine",
       "email": "📧 Logi sisse meiliga",
       "phone": "📱 Logi sisse telefoniga",
-      "wallet": "💳 Ühenda rahakott"
+      "wallet": "💳 Sign in with Wallet"
     },
     "connectWallet": {
-      "title": "Connect Your Wallet",
-      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+      "title": "Ühenda oma rahakott",
+      "description": "Tere tulemast Evolve'i! Ühenda oma Ethereum rahakott RainbowKit'i abil, et pääseda oma krüpteeritud meditsiinilise profiilile."
     },
     "signIn": {
-      "title": "Sign In with Ethereum",
-      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
-      "button": "Sign-In with Ethereum"
+      "title": "Logi sisse Ethereumiga",
+      "description": "Palun allkirjastage turvaline krüptograafiline sõnum, et kinnitada oma rahakoti omand ja laadida oma privaatsed andmed.",
+      "button": "Logi sisse Ethereumiga"
     },
-    "logout": "Logout",
+    "logout": "Logi välja",
     "email": {
-      "title": "Sign in with Email",
-      "description": "Enter your email and password to continue",
-      "email": "Email",
-      "password": "Password",
-      "login": "Sign In",
-      "register": "Create Account",
-      "switchToRegister": "Don't have an account? Register",
-      "switchToLogin": "Already have an account? Sign In"
+      "title": "Logi sisse meiliga",
+      "description": "Sisestage oma e-posti aadress ja parool jätkamiseks",
+      "email": "E-post",
+      "password": "Parool",
+      "login": "Logi sisse",
+      "register": "Loo konto",
+      "switchToRegister": "Pole kontot? Registreeruge",
+      "switchToLogin": "On juba konto? Logi sisse"
     },
     "phone": {
       "title": "Logi sisse telefoniga",
@@ -144,28 +144,42 @@
       "otpSent": "6-kohaline kood on saadetud numbrile {{phone}}"
     },
     "modeSelector": {
-      "title": "Choose Your Dating Mode",
-      "description": "Select how you want to use Evolve",
+      "title": "Valige oma tutvumisrežiim",
+      "description": "Valige, kuidas soovite Evolve'i kasutada",
       "normal": {
-        "label": "Dating",
-        "description": "Standard dating with email login",
-        "authType": "Email or phone login"
+        "label": "Tutvumine",
+        "description": "Standardne tutvumine meilisisselogimisega",
+        "authType": "Meili või telefoni sisselogimine"
       },
       "pregnancyBond": {
-        "label": "Conception",
-        "description": "Family-focused matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Soo",
+        "description": "Perekonnakeskne sobitamine, vajab rahakotti",
+        "authType": "Vajalik Ethereum rahakott"
       },
       "crypticChoice": {
-        "label": "Postcopulation",
-        "description": "Anonymous matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Pärast soo",
+        "description": "Anonüümne sobitamine, vajab rahakotti",
+        "authType": "Vajalik Ethereum rahakott"
       }
     },
     "noMode": {
       "title": "Vali tutvumisrežiim",
       "description": "Vali režiim enne profiilide sirvimist",
-      "button": "Minemine seadetesse"
+      "button": "Mine seadetesse"
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

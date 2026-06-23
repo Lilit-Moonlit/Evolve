@@ -1,0 +1,84 @@
+name: Deploy EVOLVE Token
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/contracts/src/**"
+      - "packages/contracts/script/**"
+
+env:
+  NODE_VERSION: "20"
+
+jobs:
+  deploy-arbitrum:
+    name: Deploy to Arbitrum
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        working-directory: ./packages/contracts
+        run: npm ci
+
+      - name: Compile contracts
+        working-directory: ./packages/contracts
+        run: npx hardhat compile
+
+      - name: Deploy to Arbitrum
+        working-directory: ./packages/contracts
+        env:
+          ARBITRUM_RPC_URL: ${{ secrets.ARBITRUM_RPC_URL }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        run: npx hardhat run script/deploy.ts --network arbitrum
+
+      - name: Verify on Arbiscan
+        working-directory: ./packages/contracts
+        env:
+          ARBITRUM_RPC_URL: ${{ secrets.ARBITRUM_RPC_URL }}
+          ARBISCAN_API_KEY: ${{ secrets.ARBISCAN_API_KEY }}
+          CONTRACT_ADDRESS: ${{ steps.deploy.outputs.address }}
+          DEPLOYER_ADDRESS: ${{ secrets.DEPLOYER_ADDRESS }}
+        run: npx hardhat run script/verify.ts --network arbitrum
+
+  deploy-avalanche:
+    name: Deploy to Avalanche
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        working-directory: ./packages/contracts
+        run: npm ci
+
+      - name: Compile contracts
+        working-directory: ./packages/contracts
+        run: npx hardhat compile
+
+      - name: Deploy to Avalanche
+        working-directory: ./packages/contracts
+        env:
+          AVALANCHE_RPC_URL: ${{ secrets.AVALANCHE_RPC_URL }}
+          AVAX_PRIVATE_KEY: ${{ secrets.AVAX_PRIVATE_KEY }}
+        run: npx hardhat run script/deploy.ts --network avalanche
+
+      - name: Verify on SnowTrace
+        working-directory: ./packages/contracts
+        env:
+          AVALANCHE_RPC_URL: ${{ secrets.AVALANCHE_RPC_URL }}
+          SNOWTRACE_API_KEY: ${{ secrets.SNOWTRACE_API_KEY }}
+          CONTRACT_ADDRESS: ${{ steps.deploy.outputs.address }}
+          DEPLOYER_ADDRESS: ${{ secrets.DEPLOYER_ADDRESS }}
+        run: npx hardhat run script/verify.ts --network avalanche

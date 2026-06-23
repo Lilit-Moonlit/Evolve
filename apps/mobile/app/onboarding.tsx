@@ -1,20 +1,22 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 export default function Onboarding() {
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.title}>Welcome to Evolve</Text>
-        <Text style={styles.subtitle}>Decentralized Dating</Text>
+        <Text style={styles.title}>{t("onboarding.title")}</Text>
+        <Text style={styles.subtitle}>{t("onboarding.subtitle")}</Text>
 
         <TouchableOpacity
           style={styles.button}
           onPress={() => router.replace("/auth")}
         >
-          <Text style={styles.buttonText}>Get Started</Text>
+          <Text style={styles.buttonText}>{t("onboarding.getStarted")}</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -26,7 +26,7 @@ export default function Chat() {
 
       <ScrollView style={styles.content}>
         {loading ? (
-          <Text style={styles.loadingText}>Loading chats...</Text>
+          <Text style={styles.loadingText}>{t("chat.loading")}</Text>
         ) : chats.length === 0 ? (
           <Text style={styles.loadingText}>{t("chat.noMatches")}</Text>
         ) : (

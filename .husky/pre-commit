@@ -1,0 +1,96 @@
+#!/bin/sh
+# Pre-commit hook: Agent ownership check + lint-staged
+
+# Get current branch name
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# Extract agent name from branch (e.g., "agent/opencode" -> "opencode")
+AGENT=""
+case "$BRANCH" in
+  agent/antigravity) AGENT="antigravity" ;;
+  agent/opencode) AGENT="opencode" ;;
+  agent/windsurf) AGENT="windsurf" ;;
+  agent/vscode) AGENT="vscode" ;;
+  main|master)
+    echo "ERROR: You are on main branch. Create a feature branch first."
+    echo "  git checkout -b agent/yourname"
+    exit 1
+    ;;
+  *)
+    echo "WARNING: Branch '$BRANCH' is not an agent branch. Skipping ownership check."
+    echo "  Agent branches: agent/antigravity, agent/opencode, agent/windsurf, agent/vscode"
+    ;;
+esac
+
+# If we detected an agent, check file ownership
+if [ -n "$AGENT" ]; then
+  echo "Agent: $AGENT"
+  echo "Checking file ownership..."
+  
+  # Get list of staged files
+  STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
+  
+  if [ -z "$STAGED_FILES" ]; then
+    echo "No files to commit."
+    exit 0
+  fi
+  
+  # Read registry
+  REGISTRY=".agents/registry.json"
+  if [ ! -f "$REGISTRY" ]; then
+    echo "WARNING: registry.json not found. Skipping ownership check."
+  else
+    BLOCKED=0
+    for FILE in $STAGED_FILES; do
+      # Normalize path
+      NORMALIZED=$(echo "$FILE" | sed 's|\\|/|g' | sed 's|^\.\/||')
+      
+      # Check each registry entry
+      OWNER=$(node -e "
+        const fs = require('fs');
+        const reg = JSON.parse(fs.readFileSync('$REGISTRY', 'utf8'));
+        let bestMatch = '';
+        let owner = null;
+        for (const [pattern, val] of Object.entries(reg)) {
+          if (pattern.startsWith('_')) continue;
+          if (pattern.endsWith('/')) {
+            if ('$NORMALIZED'.startsWith(pattern)) {
+              if (pattern.length > bestMatch.length) {
+                bestMatch = pattern;
+                owner = val;
+              }
+            }
+          } else {
+            if ('$NORMALIZED' === pattern) {
+              if (pattern.length > bestMatch.length) {
+                bestMatch = pattern;
+                owner = val;
+              }
+            }
+          }
+        }
+        console.log(owner || 'none');
+      " 2>/dev/null)
+      
+      if [ "$OWNER" = "$AGENT" ] || [ "$OWNER" = "none" ] || [ "$OWNER" = "shared" ]; then
+        echo "  OK: $FILE (owner: $OWNER)"
+      elif [ "$OWNER" = "shared-critical" ]; then
+        echo "  ASK USER: $FILE (shared-critical)"
+      else
+        echo "  BLOCKED: $FILE (owner: $OWNER)"
+        BLOCKED=1
+      fi
+    done
+    
+    if [ "$BLOCKED" -eq 1 ]; then
+      echo ""
+      echo "ERROR: You are trying to commit files owned by another agent."
+      echo "  Remove these files from staging and try again."
+      echo "  Or ask the user to reassign ownership."
+      exit 1
+    fi
+  fi
+fi
+
+# Run lint-staged (existing behavior)
+npx lint-staged

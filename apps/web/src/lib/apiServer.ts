@@ -4,6 +4,53 @@ import { generateNonce, SiweMessage } from "siwe";
 import { parse as parseUrl } from "url";
 import { otpStore } from "./otp-store";
 
+// --- Rate Limiter (in-memory) ---
+interface RateLimitEntry {
+  count: number;
+  resetAt: number;
+}
+
+const rateLimitStore = new Map<string, RateLimitEntry>();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const RATE_LIMIT_MAX_REQUESTS = 30; // per window
+
+function getClientIp(req: IncomingMessage): string {
+  return (
+    (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() ||
+    "127.0.0.1"
+  );
+}
+
+function isRateLimited(req: IncomingMessage): boolean {
+  const ip = getClientIp(req);
+  const now = Date.now();
+  const entry = rateLimitStore.get(ip);
+
+  if (!entry || now > entry.resetAt) {
+    rateLimitStore.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+
+  entry.count++;
+  if (entry.count > RATE_LIMIT_MAX_REQUESTS) {
+    return true;
+  }
+  return false;
+}
+
+// Clean up expired entries every 5 minutes
+setInterval(
+  () => {
+    const now = Date.now();
+    for (const [ip, entry] of rateLimitStore.entries()) {
+      if (now > entry.resetAt) {
+        rateLimitStore.delete(ip);
+      }
+    }
+  },
+  5 * 60 * 1000,
+);
+
 // Simple in-memory session store
 const sessions: Record<
   string,
@@ -78,6 +125,15 @@ export async function handleApiRequest(
   if (req.method === "OPTIONS") {
     res.statusCode = 200;
     res.end();
+    return true;
+  }
+
+  // Rate limiting
+  if (isRateLimited(req)) {
+    res.statusCode = 429;
+    res.end(
+      JSON.stringify({ error: "Too many requests. Please try again later." }),
+    );
     return true;
   }
 
@@ -207,6 +263,30 @@ export async function handleApiRequest(
           }),
         );
         return true;
+      }
+
+      // Stricter rate limit for OTP: 5 requests per 10 minutes per phone
+      const otpKey = `otp:${phoneNumber}`;
+      const otpEntry = rateLimitStore.get(otpKey);
+      const otpWindowMs = 10 * 60 * 1000;
+      const otpMaxRequests = 5;
+      if (otpEntry && Date.now() < otpEntry.resetAt) {
+        otpEntry.count++;
+        if (otpEntry.count > otpMaxRequests) {
+          res.statusCode = 429;
+          res.end(
+            JSON.stringify({
+              error:
+                "Too many OTP requests. Please wait before requesting again.",
+            }),
+          );
+          return true;
+        }
+      } else {
+        rateLimitStore.set(otpKey, {
+          count: 1,
+          resetAt: Date.now() + otpWindowMs,
+        });
       }
 
       // Generate OTP using the OTP store

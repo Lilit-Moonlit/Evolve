@@ -13,49 +13,49 @@
   "home": {
     "hero": {
       "title": "Pronađi svoj match",
-      "subtitle": "Swipe through profiles and connect with interesting people."
+      "subtitle": "Povucite kroz profile i povežite se s zanimljivim ljudima."
     },
     "filters": {
-      "verifiedStd": "Only with verified STD",
-      "verifiedDna": "Only with verified DNA",
-      "noProfiles": "No profiles matching the selected filters."
+      "verifiedStd": "Samo s verificiranim STD",
+      "verifiedDna": "Samo s verificiranim DNA",
+      "noProfiles": "Nema profila koji odgovaraju odabranim filterima."
     },
     "profile": {
-      "newMatch": "New Match",
-      "noMoreProfiles": "No more profiles for now! Check back later."
+      "newMatch": "Novi match",
+      "noMoreProfiles": "Nema više profila za sada! Provjerite kasnije."
     }
   },
   "profile": {
     "tabs": {
-      "profile": "Profile",
-      "reputation": "Reputation"
+      "profile": "Profil",
+      "reputation": "Reputacija"
     },
     "myProfile": {
-      "title": "My Profile",
-      "verifiedUser": "Verified User"
+      "title": "Moj profil",
+      "verifiedUser": "Verificirani korisnik"
     },
     "status": {
-      "stdStatus": "STD Status",
-      "dnaStatus": "DNA Status",
-      "uploaded": "✓ Uploaded",
-      "notUploaded": "✗ Not Uploaded",
+      "stdStatus": "STD status",
+      "dnaStatus": "DNA status",
+      "uploaded": "✓ Preneseno",
+      "notUploaded": "✗ Nije preneseno",
       "verified": "Verificirano"
     },
     "upload": {
-      "title": "Upload Health Tests",
-      "stdTest": "STD Test",
-      "dnaTest": "DNA Test",
-      "redactFields": "Redact sensitive fields before uploading:",
-      "fullName": "Full Name",
-      "address": "Address",
-      "phoneNumber": "Phone Number",
-      "patientId": "Patient ID",
-      "encryptUpload": "Encrypt & Upload PDF",
-      "uploadSuccess": "Document uploaded and encrypted successfully!"
+      "title": "Prenesite zdravstvene testove",
+      "stdTest": "STD test",
+      "dnaTest": "DNA test",
+      "redactFields": "Uklonite osjetljiva polja prije prijenosa:",
+      "fullName": "Puno ime",
+      "address": "Adresa",
+      "phoneNumber": "Broj telefona",
+      "patientId": "ID pacijenta",
+      "encryptUpload": "Šifriraj i prenesi PDF",
+      "uploadSuccess": "Dokument je uspješno prenesen i šifriran!"
     },
     "documents": {
-      "title": "My Documents",
-      "noDocuments": "No documents uploaded yet."
+      "title": "Moji dokumenti",
+      "noDocuments": "Još nema prenesenih dokumenata."
     },
     "wallet": {
       "title": "Novčanik",
@@ -63,73 +63,73 @@
       "balance": "Stanje"
     },
     "reputation": {
-      "title": "Reputation Score",
-      "score": "Score",
-      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
-      "votersTitle": "Voters & Trust Network",
-      "weight": "Weight:"
+      "title": "Bodovanje reputacije",
+      "score": "Bodovi",
+      "description": "Vaša reputacija temelji se na težinama povjerenja ljudi koji su vas preporučili.",
+      "votersTitle": "Glasači i mreža povjerenja",
+      "weight": "Težina:"
     }
   },
   "chat": {
     "title": "Chat",
-    "subtitle": "Connect with your matches",
-    "requestAccess": "Requested access to your {{testType}} test.",
-    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
-    "approvedResponse": "I approved your request to view my {{testType}} test.",
-    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "subtitle": "Povežite se sa svojim matchevima",
+    "requestAccess": "Zatražili ste pristup vašem {{testType}} testu.",
+    "approvedRequest": "Odobrio sam vaš zahtjev! Sada možete vidjeti moj dešifrirani izvještaj {{testType}} testa.",
+    "approvedResponse": "Odobrio sam vaš zahtjev za pristup mom {{testType}} testu.",
+    "declinedResponse": "Odbio sam vaš zahtjev za pristup mom {{testType}} testu.",
     "selectChat": "Odaberite match za početak chata",
     "noMatches": "Još nema matcheva",
     "inputPlaceholder": "Napišite poruku...",
     "send": "Pošalji",
     "pendingVerification": "Verifikacija u tijeku",
-    "requestStd": "Zatraži IST test",
+    "requestStd": "Zatraži STD test",
     "requestDna": "Zatraži DNA test",
-    "approveStd": "Odobri IST pristup",
+    "approveStd": "Odobri STD pristup",
     "approveDna": "Odobri DNA pristup",
-    "denyStd": "Odbij IST pristup",
+    "denyStd": "Odbij STD pristup",
     "denyDna": "Odbij DNA pristup"
   },
   "language": {
-    "select": "Select Language",
-    "title": "Choose your language",
-    "description": "Select your preferred language to continue"
+    "select": "Odaberite jezik",
+    "title": "Odaberite svoj jezik",
+    "description": "Odaberite preferirani jezik za nastavak"
   },
   "country": {
-    "select": "Select Country",
-    "title": "Choose your country",
-    "description": "Select your country to match with people nearby"
+    "select": "Odaberite zemlju",
+    "title": "Odaberite svoju zemlju",
+    "description": "Odaberite svoju zemlju za uparivanje s ljudima u blizini"
   },
   "settings": {
     "currentMode": "Trenutni način",
     "autoSaved": "Vaš odabir se automatski sprema. Nije potrebno osvježavanje."
   },
   "auth": {
-    "loading": "Loading secure session...",
+    "loading": "Učitavanje sigurne sesije...",
     "landing": {
       "title": "Evolve — Decentralizirano upoznavanje",
       "email": "📧 Prijavite se emailom",
       "phone": "📱 Prijavite se telefonom",
-      "wallet": "💳 Poveži novčanik"
+      "wallet": "💳 Sign in with Wallet"
     },
     "connectWallet": {
-      "title": "Connect Your Wallet",
-      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+      "title": "Povežite svoj novčanik",
+      "description": "Dobrodošli u Evolve! Povežite svoj Ethereum novčanik pomoću RainbowKit-a za pristup vašem šifriranom medicinskom profilu."
     },
     "signIn": {
-      "title": "Sign In with Ethereum",
-      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
-      "button": "Sign-In with Ethereum"
+      "title": "Prijavite se s Ethereumom",
+      "description": "Molim potpišite sigurnu kriptografsku poruku za potvrdu vlasništva vašeg novčanika i učitavanje vaših privatnih podataka.",
+      "button": "Prijavite se s Ethereumom"
     },
-    "logout": "Logout",
+    "logout": "Odjava",
     "email": {
-      "title": "Sign in with Email",
-      "description": "Enter your email and password to continue",
+      "title": "Prijavite se emailom",
+      "description": "Unesite svoj email i lozinku za nastavak",
       "email": "Email",
-      "password": "Password",
-      "login": "Sign In",
-      "register": "Create Account",
-      "switchToRegister": "Don't have an account? Register",
-      "switchToLogin": "Already have an account? Sign In"
+      "password": "Lozinka",
+      "login": "Prijavite se",
+      "register": "Kreiraj račun",
+      "switchToRegister": "Nemate račun? Registrirajte se",
+      "switchToLogin": "Već imate račun? Prijavite se"
     },
     "phone": {
       "title": "Prijavite se telefonom",
@@ -144,22 +144,22 @@
       "otpSent": "6-znamenkasti kod poslan je na {{phone}}"
     },
     "modeSelector": {
-      "title": "Choose Your Dating Mode",
-      "description": "Select how you want to use Evolve",
+      "title": "Odaberite svoj način upoznavanja",
+      "description": "Odaberite kako želite koristiti Evolve",
       "normal": {
-        "label": "Dating",
-        "description": "Standard dating with email login",
-        "authType": "Email or phone login"
+        "label": "Upoznavanje",
+        "description": "Standardno upoznavanje s prijavom emailom",
+        "authType": "Prijava emailom ili telefonom"
       },
       "pregnancyBond": {
-        "label": "Conception",
-        "description": "Family-focused matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Začeće",
+        "description": "Uparivanje fokusirano na obitelj, zahtijeva novčanik",
+        "authType": "Potreban je Ethereum novčanik"
       },
       "crypticChoice": {
-        "label": "Postcopulation",
-        "description": "Anonymous matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Nakon oplodnje",
+        "description": "Anonimno uparivanje, zahtijeva novčanik",
+        "authType": "Potreban je Ethereum novčanik"
       }
     },
     "noMode": {
@@ -167,5 +167,19 @@
       "description": "Odaberite način prije pregledavanja profila",
       "button": "Idi na Postavke"
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

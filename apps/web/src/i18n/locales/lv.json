@@ -13,49 +13,49 @@
   "home": {
     "hero": {
       "title": "Atrodi savu match",
-      "subtitle": "Swipe through profiles and connect with interesting people."
+      "subtitle": "Pavelciet cauri profiliem un sazinieties ar interesantiem cilvēkiem."
     },
     "filters": {
-      "verifiedStd": "Only with verified STD",
-      "verifiedDna": "Only with verified DNA",
-      "noProfiles": "No profiles matching the selected filters."
+      "verifiedStd": "Tikai ar apstiprinātu STD",
+      "verifiedDna": "Tikai ar apstiprinātu DNA",
+      "noProfiles": "Nav profilu, kas atbilstu atlasītajiem filtriem."
     },
     "profile": {
-      "newMatch": "New Match",
-      "noMoreProfiles": "No more profiles for now! Check back later."
+      "newMatch": "Jauns Match",
+      "noMoreProfiles": "Šobrīd vairs nam profilu! Pārbaudiet vēlāk."
     }
   },
   "profile": {
     "tabs": {
-      "profile": "Profile",
-      "reputation": "Reputation"
+      "profile": "Profils",
+      "reputation": "Reputācija"
     },
     "myProfile": {
-      "title": "My Profile",
-      "verifiedUser": "Verified User"
+      "title": "Mans profils",
+      "verifiedUser": "Apstiprināts lietotājs"
     },
     "status": {
-      "stdStatus": "STD Status",
-      "dnaStatus": "DNA Status",
-      "uploaded": "✓ Uploaded",
-      "notUploaded": "✗ Not Uploaded",
+      "stdStatus": "STD statuss",
+      "dnaStatus": "DNA statuss",
+      "uploaded": "✓ Augšupielādēts",
+      "notUploaded": "✗ Nav augšupielādēts",
       "verified": "Apstiprināts"
     },
     "upload": {
-      "title": "Upload Health Tests",
-      "stdTest": "STD Test",
-      "dnaTest": "DNA Test",
-      "redactFields": "Redact sensitive fields before uploading:",
-      "fullName": "Full Name",
-      "address": "Address",
-      "phoneNumber": "Phone Number",
-      "patientId": "Patient ID",
-      "encryptUpload": "Encrypt & Upload PDF",
-      "uploadSuccess": "Document uploaded and encrypted successfully!"
+      "title": "Augšupielādēt veselības testus",
+      "stdTest": "STD tests",
+      "dnaTest": "DNA tests",
+      "redactFields": "Pirms augšupielādes rediģējiet sensitīvos laukus:",
+      "fullName": "Vārds, uzvārds",
+      "address": "Adrese",
+      "phoneNumber": "Tālruņa numurs",
+      "patientId": "Pacienta ID",
+      "encryptUpload": "Šifrēt un augšupielādēt PDF",
+      "uploadSuccess": "Dokuments veiksmīgi augšupielādēts un šifrēts!"
     },
     "documents": {
-      "title": "My Documents",
-      "noDocuments": "No documents uploaded yet."
+      "title": "Mani dokumenti",
+      "noDocuments": "Vēl nav augšupielādētu dokumentu."
     },
     "wallet": {
       "title": "Maks",
@@ -63,20 +63,20 @@
       "balance": "Atlikums"
     },
     "reputation": {
-      "title": "Reputation Score",
-      "score": "Score",
-      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
-      "votersTitle": "Voters & Trust Network",
-      "weight": "Weight:"
+      "title": "Reputācijas rādītājs",
+      "score": "Rādītājs",
+      "description": "Jūsu reputācija ir balstīta uz to cilvēku uzticības svaru, kuri ir galvojuši par jums.",
+      "votersTitle": "Balsotāji un uzticības tīkls",
+      "weight": "Svars:"
     }
   },
   "chat": {
-    "title": "Chat",
-    "subtitle": "Connect with your matches",
-    "requestAccess": "Requested access to your {{testType}} test.",
-    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
-    "approvedResponse": "I approved your request to view my {{testType}} test.",
-    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "title": "Tērzēšana",
+    "subtitle": "Sazinieties ar saviem mačiem",
+    "requestAccess": "Pieprasīja piekļuvi jūsu {{testType}} testam.",
+    "approvedRequest": "Esmu apstiprinājis jūsu pieprasījumu! Tagad varat skatīt manu atšifrēto {{testType}} testa ziņojumu.",
+    "approvedResponse": "Es apstiprināju jūsu pieprasījumu skatīt manu {{testType}} testu.",
+    "declinedResponse": "Es noraidīju jūsu pieprasījumu skatīt manu {{testType}} testu.",
     "selectChat": "Izvēlieties maču, lai sāktu tērzēšanu",
     "noMatches": "Vēl nav maču",
     "inputPlaceholder": "Rakstīt ziņu...",
@@ -87,49 +87,53 @@
     "approveStd": "Apstiprināt IST piekļuvi",
     "approveDna": "Apstiprināt DNA piekļuvi",
     "denyStd": "Noraidīt IST piekļuvi",
-    "denyDna": "Noraidīt DNA piekļuvi"
+    "denyDna": "Noraidīt DNA piekļuvi",
+    "hiddenProfile": "Slēpts profils",
+    "hiddenContent": "Šis profils ir paslēpts lietotāja. Reitings joprojām redzams."
   },
   "language": {
-    "select": "Select Language",
-    "title": "Choose your language",
-    "description": "Select your preferred language to continue"
+    "select": "Izvēlēties valodu",
+    "title": "Izvēlieties savu valodu",
+    "description": "Lai turpinātu, izvēlieties vēlamo valodu"
   },
   "country": {
-    "select": "Select Country",
-    "title": "Choose your country",
-    "description": "Select your country to match with people nearby"
+    "select": "Izvēlēties valsti",
+    "title": "Izvēlieties savu valsti",
+    "description": "Izvēlieties savu valsti, lai satiktu tuvumā esošos cilvēkus"
   },
   "settings": {
     "currentMode": "Pašreizējais režīms",
-    "autoSaved": "Jūsu izvēle tiek saglabāta automātiski. Nav nepieciešams pārlādēt."
+    "autoSaved": "Jūsu izvēle tiek saglabāta automātiski. Nav nepieciešams pārlādēt.",
+    "hideProfileFromLowerLevels": "Paslēpt profilu no zemākiem līmeņiem (saturs un foto)",
+    "privacy": "Privātums"
   },
   "auth": {
-    "loading": "Loading secure session...",
+    "loading": "Ielādē drošu sesiju...",
     "landing": {
       "title": "Evolve — Decentralizēta iepazīšanās",
       "email": "📧 Pieteikties ar e-pastu",
       "phone": "📱 Pieteikties ar tālruni",
-      "wallet": "💳 Savienot maku"
+      "wallet": "💳 Pieteikties ar Maku"
     },
     "connectWallet": {
-      "title": "Connect Your Wallet",
-      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+      "title": "Savienojiet savu maku",
+      "description": "Laipni lūdzam Evolve! Savienojiet savu Ethereum maku, izmantojot RainbowKit, lai piekļūtu savam šifrētajam medicīniskajam profilim."
     },
     "signIn": {
-      "title": "Sign In with Ethereum",
-      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
-      "button": "Sign-In with Ethereum"
+      "title": "Pierakstīties ar Ethereum",
+      "description": "Lūdzu, parakstiet drošo kriptogrāfisko ziņojumu, lai verificētu sava maka īpašumtiesības un ielādētu savus privātos datus.",
+      "button": "Pierakstīties ar Ethereum"
     },
-    "logout": "Logout",
+    "logout": "Izrakstīties",
     "email": {
-      "title": "Sign in with Email",
-      "description": "Enter your email and password to continue",
-      "email": "Email",
-      "password": "Password",
-      "login": "Sign In",
-      "register": "Create Account",
-      "switchToRegister": "Don't have an account? Register",
-      "switchToLogin": "Already have an account? Sign In"
+      "title": "Pierakstīties ar e-pastu",
+      "description": "Ievadiet savu e-pastu un paroli, lai turpinātu",
+      "email": "E-pasts",
+      "password": "Parole",
+      "login": "Pierakstīties",
+      "register": "Izveidot kontu",
+      "switchToRegister": "Nav konta? Reģistrēties",
+      "switchToLogin": "Jā ir konts? Pierakstīties"
     },
     "phone": {
       "title": "Pieteikties ar tālruni",
@@ -144,22 +148,22 @@
       "otpSent": "6 ciparu kods nosūtīts uz {{phone}}"
     },
     "modeSelector": {
-      "title": "Choose Your Dating Mode",
-      "description": "Select how you want to use Evolve",
+      "title": "Izvēlieties savu iepazīšanās režīmu",
+      "description": "Izvēlieties, kā vēlaties izmantot Evolve",
       "normal": {
-        "label": "Dating",
-        "description": "Standard dating with email login",
-        "authType": "Email or phone login"
+        "label": "Iepazīšanās",
+        "description": "Standarta iepazīšanās ar e-pasta pieteikšanos",
+        "authType": "E-pasta vai tālruņa pieteikšanās"
       },
       "pregnancyBond": {
-        "label": "Conception",
-        "description": "Family-focused matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Apaugļošanās",
+        "description": "Uz ģimeni orientēta iepazīšanās, nepieciešams maks",
+        "authType": "Nepieciešams Ethereum maks"
       },
       "crypticChoice": {
-        "label": "Postcopulation",
-        "description": "Anonymous matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Pēcapaugļošanās",
+        "description": "Anonīma iepazīšanās, nepieciešams maks",
+        "authType": "Nepieciešams Ethereum maks"
       }
     },
     "noMode": {
@@ -167,5 +171,19 @@
       "description": "Lūdzu, izvēlieties režīmu pirms profulu pārlūkošanas",
       "button": "Doties uz iestatījumiem"
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

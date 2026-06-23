@@ -1,0 +1,21 @@
+{
+  "files.exclude": {
+    "**/dist": true,
+    "**/coverage": true,
+    "**/artifacts": true,
+    "**/build-info": true,
+    "**/node_modules": true,
+    "apps/web/public": true,
+    "packages/contracts/artifacts": true
+  },
+  "search.exclude": {
+    "**/dist": true,
+    "**/coverage": true,
+    "**/artifacts": true,
+    "**/build-info": true,
+    "**/node_modules": true,
+    "apps/web/public": true,
+    "packages/contracts/artifacts": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

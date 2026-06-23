@@ -13,49 +13,49 @@
   "home": {
     "hero": {
       "title": "Találd meg a párod",
-      "subtitle": "Swipe through profiles and connect with interesting people."
+      "subtitle": "Húzz végig a profilokon és kapcsolódj össze érdekes emberekkel."
     },
     "filters": {
-      "verifiedStd": "Only with verified STD",
-      "verifiedDna": "Only with verified DNA",
-      "noProfiles": "No profiles matching the selected filters."
+      "verifiedStd": "Csak ellenőrzött STD-vel",
+      "verifiedDna": "Csak ellenőrzött DNS-szel",
+      "noProfiles": "Nincsenek profilok, amelyek megfelelnek a kiválasztott szűrőknek."
     },
     "profile": {
-      "newMatch": "New Match",
-      "noMoreProfiles": "No more profiles for now! Check back later."
+      "newMatch": "Új pár",
+      "noMoreProfiles": "Jelenleg nincs több profil! Ellenőrizd később."
     }
   },
   "profile": {
     "tabs": {
-      "profile": "Profile",
-      "reputation": "Reputation"
+      "profile": "Profil",
+      "reputation": "Hírnév"
     },
     "myProfile": {
-      "title": "My Profile",
-      "verifiedUser": "Verified User"
+      "title": "Saját profil",
+      "verifiedUser": "Ellenőrzött felhasználó"
     },
     "status": {
-      "stdStatus": "STD Status",
-      "dnaStatus": "DNA Status",
-      "uploaded": "✓ Uploaded",
-      "notUploaded": "✗ Not Uploaded",
+      "stdStatus": "STD státusz",
+      "dnaStatus": "DNS státusz",
+      "uploaded": "✓ Feltöltve",
+      "notUploaded": "✗ Nincs feltöltve",
       "verified": "Ellenőrzött"
     },
     "upload": {
-      "title": "Upload Health Tests",
-      "stdTest": "STD Test",
-      "dnaTest": "DNA Test",
-      "redactFields": "Redact sensitive fields before uploading:",
-      "fullName": "Full Name",
-      "address": "Address",
-      "phoneNumber": "Phone Number",
-      "patientId": "Patient ID",
-      "encryptUpload": "Encrypt & Upload PDF",
-      "uploadSuccess": "Document uploaded and encrypted successfully!"
+      "title": "Egészségügyi tesztek feltöltése",
+      "stdTest": "STD teszt",
+      "dnaTest": "DNS teszt",
+      "redactFields": "Érzékeny mezők törlése a feltöltés előtt:",
+      "fullName": "Teljes név",
+      "address": "Cím",
+      "phoneNumber": "Telefonszám",
+      "patientId": "Beteg azonosító",
+      "encryptUpload": "Titkosítás és PDF feltöltése",
+      "uploadSuccess": "A dokumentum sikeresen feltöltve és titkosítva!"
     },
     "documents": {
-      "title": "My Documents",
-      "noDocuments": "No documents uploaded yet."
+      "title": "Saját dokumentumok",
+      "noDocuments": "Még nincsenek feltöltött dokumentumok."
     },
     "wallet": {
       "title": "Pénztárca",
@@ -63,73 +63,73 @@
       "balance": "Egyenleg"
     },
     "reputation": {
-      "title": "Reputation Score",
-      "score": "Score",
-      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
-      "votersTitle": "Voters & Trust Network",
-      "weight": "Weight:"
+      "title": "Hírnév pontszám",
+      "score": "Pontszám",
+      "description": "A hírneved azoknak az embereknek a bizalmi súlyán alapul, akik ajánlottak téged.",
+      "votersTitle": "Szavazók és bizalmi hálózat",
+      "weight": "Súly:"
     }
   },
   "chat": {
-    "title": "Chat",
-    "subtitle": "Connect with your matches",
-    "requestAccess": "Requested access to your {{testType}} test.",
-    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
-    "approvedResponse": "I approved your request to view my {{testType}} test.",
-    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "title": "Csevegés",
+    "subtitle": "Kapcsolódj össze a pároiddal",
+    "requestAccess": "Hozzáférést kért a {{testType}} teszthez.",
+    "approvedRequest": "Jóváhagytam a kérésed! Most már megtekintheted a dekódolt {{testType}} tesztjelentésemet.",
+    "approvedResponse": "Jóváhagytam a kérésedet a {{testType}} tesztem megtekintéséhez.",
+    "declinedResponse": "Elutasítottam a kérésedet a {{testType}} tesztem megtekintéséhez.",
     "selectChat": "Válassz matchet a csevegéshez",
     "noMatches": "Még nincsenek matchek",
     "inputPlaceholder": "Írj üzenetet...",
     "send": "Küldés",
     "pendingVerification": "Megerősítés folyamatban",
-    "requestStd": "IST teszt kérése",
-    "requestDna": "DNA teszt kérése",
-    "approveStd": "IST hozzáférés jóváhagyása",
-    "approveDna": "DNA hozzáférés jóváhagyása",
-    "denyStd": "IST hozzáférés elutasítása",
-    "denyDna": "DNA hozzáférés elutasítása"
+    "requestStd": "STD teszt kérése",
+    "requestDna": "DNS teszt kérése",
+    "approveStd": "STD hozzáférés jóváhagyása",
+    "approveDna": "DNS hozzáférés jóváhagyása",
+    "denyStd": "STD hozzáférés elutasítása",
+    "denyDna": "DNS hozzáférés elutasítása"
   },
   "language": {
-    "select": "Select Language",
-    "title": "Choose your language",
-    "description": "Select your preferred language to continue"
+    "select": "Nyelv kiválasztása",
+    "title": "Válaszd ki a nyelvedet",
+    "description": "Válaszd ki a preferált nyelvedet a folytatáshoz"
   },
   "country": {
-    "select": "Select Country",
-    "title": "Choose your country",
-    "description": "Select your country to match with people nearby"
+    "select": "Ország kiválasztása",
+    "title": "Válaszd ki az országodat",
+    "description": "Válaszd ki az országodat, hogy párosulj a közeli emberekkel"
   },
   "settings": {
     "currentMode": "Jelenlegi mód",
     "autoSaved": "A választásod automatikusan mentésre kerül. Nincs szükség újratöltésre."
   },
   "auth": {
-    "loading": "Loading secure session...",
+    "loading": "Biztonságos munkamenet betöltése...",
     "landing": {
       "title": "Evolve — Decentralizált randizás",
       "email": "📧 Bejelentkezés emaillel",
       "phone": "📱 Bejelentkezés telefonnal",
-      "wallet": "💳 Pénztárca csatlakoztatás"
+      "wallet": "💳 Sign in with Wallet"
     },
     "connectWallet": {
-      "title": "Connect Your Wallet",
-      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+      "title": "Csatlakoztassa a pénztárcáját",
+      "description": "Üdvözöljük az Evolve-ben! Csatlakoztassa az Ethereum pénztárcáját a RainbowKit segítségével a titkosított orvosi profiljához való hozzáféréshez."
     },
     "signIn": {
-      "title": "Sign In with Ethereum",
-      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
-      "button": "Sign-In with Ethereum"
+      "title": "Bejelentkezés Ethereummal",
+      "description": "Kérjük, írja alá a biztonságos kriptográfiai üzenetet a pénztárca tulajdonjogának ellenőrzéséhez és a privát adatainak betöltéséhez.",
+      "button": "Bejelentkezés Ethereummal"
     },
-    "logout": "Logout",
+    "logout": "Kijelentkezés",
     "email": {
-      "title": "Sign in with Email",
-      "description": "Enter your email and password to continue",
+      "title": "Bejelentkezés emaillel",
+      "description": "Adja meg az email címét és jelszavát a folytatáshoz",
       "email": "Email",
-      "password": "Password",
-      "login": "Sign In",
-      "register": "Create Account",
-      "switchToRegister": "Don't have an account? Register",
-      "switchToLogin": "Already have an account? Sign In"
+      "password": "Jelszó",
+      "login": "Bejelentkezés",
+      "register": "Fiók létrehozása",
+      "switchToRegister": "Nincs fiókja? Regisztráljon",
+      "switchToLogin": "Már van fiókja? Jelentkezzen be"
     },
     "phone": {
       "title": "Bejelentkezés telefonnal",
@@ -144,22 +144,22 @@
       "otpSent": "6 jegyű kód elküldve a(z) {{phone}} számra"
     },
     "modeSelector": {
-      "title": "Choose Your Dating Mode",
-      "description": "Select how you want to use Evolve",
+      "title": "Válassza ki a társkeresési módját",
+      "description": "Válassza ki, hogyan szeretné használni az Evolve-ot",
       "normal": {
-        "label": "Dating",
-        "description": "Standard dating with email login",
-        "authType": "Email or phone login"
+        "label": "Társkeresés",
+        "description": "Standard társkeresés email bejelentkezéssel",
+        "authType": "Email vagy telefonos bejelentkezés"
       },
       "pregnancyBond": {
-        "label": "Conception",
-        "description": "Family-focused matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Fogamzás",
+        "description": "Családközpontú párosítás, pénztárca szükséges",
+        "authType": "Ethereum pénztárca szükséges"
       },
       "crypticChoice": {
-        "label": "Postcopulation",
-        "description": "Anonymous matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Közösülés után",
+        "description": "Anonim párosítás, pénztárca szükséges",
+        "authType": "Ethereum pénztárca szükséges"
       }
     },
     "noMode": {
@@ -167,5 +167,19 @@
       "description": "Válassz módot a profilok böngészése előtt",
       "button": "Ugrás a beállításokhoz"
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

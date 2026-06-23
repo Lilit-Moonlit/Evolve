@@ -13,56 +13,56 @@
   "home": {
     "hero": {
       "title": "Βρες το ταίρι σου",
-      "subtitle": "Swipe through profiles and connect with interesting people."
+      "subtitle": "Περάστε προφίλ και συνδεθείτε με ενδιαφέρουσους ανθρώπους."
     },
     "filters": {
-      "verifiedStd": "Only with verified STD",
-      "verifiedDna": "Only with verified DNA",
-      "noProfiles": "No profiles matching the selected filters."
+      "verifiedStd": "Μόνο με επαληθευμένο STD",
+      "verifiedDna": "Μόνο με επαληθευμένο DNA",
+      "noProfiles": "Δεν υπάρχουν προφίλ που ταιριάζουν με τα επιλεγμένα φίλτρα."
     },
     "profile": {
-      "newMatch": "New Match",
-      "noMoreProfiles": "No more profiles for now! Check back later."
+      "newMatch": "Νέο ταίρι",
+      "noMoreProfiles": "Δεν υπάρχουν άλλα προφίλ προς το παρόν! Ελέγξτε αργότερα."
     }
   },
   "profile": {
     "tabs": {
-      "profile": "Profile",
-      "reputation": "Reputation"
+      "profile": "Προφίλ",
+      "reputation": "Φήμη"
     },
     "myProfile": {
-      "title": "My Profile",
-      "verifiedUser": "Verified User"
+      "title": "Το προφίλ μου",
+      "verifiedUser": "Επαληθευμένος χρήστης"
     },
     "status": {
-      "stdStatus": "STD Status",
-      "dnaStatus": "DNA Status",
-      "uploaded": "✓ Uploaded",
-      "notUploaded": "✗ Not Uploaded",
+      "stdStatus": "Κατάσταση STD",
+      "dnaStatus": "Κατάσταση DNA",
+      "uploaded": "✓ Ανέβηκε",
+      "notUploaded": "✗ Δεν ανέβηκε",
       "verified": "Επαληθευμένος"
     },
     "upload": {
-      "title": "Upload Health Tests",
-      "stdTest": "STD Test",
-      "dnaTest": "DNA Test",
-      "redactFields": "Redact sensitive fields before uploading:",
-      "fullName": "Full Name",
-      "address": "Address",
-      "phoneNumber": "Phone Number",
-      "patientId": "Patient ID",
-      "encryptUpload": "Encrypt & Upload PDF",
-      "uploadSuccess": "Document uploaded and encrypted successfully!"
+      "title": "Ανέβασμα Εξετάσεων Υγείας",
+      "stdTest": "Εξέταση STD",
+      "dnaTest": "Εξέταση DNA",
+      "redactFields": "Αφαιρέστε ευαίσθητα πεδία πριν το ανέβασμα:",
+      "fullName": "Πλήρες Όνομα",
+      "address": "Διεύθυνση",
+      "phoneNumber": "Αριθμός Τηλεφώνου",
+      "patientId": "ID Ασθενούς",
+      "encryptUpload": "Κρυπτογράφηση και Ανέβασμα PDF",
+      "uploadSuccess": "Το έγγραφο ανέβηκε και κρυπτογραφήθηκε επιτυχώς!"
     },
     "documents": {
-      "title": "My Documents",
-      "noDocuments": "No documents uploaded yet."
+      "title": "Τα Έγγραφά μου",
+      "noDocuments": "Δεν έχουν ανέβει έγγραφα ακόμα."
     },
     "reputation": {
-      "title": "Reputation Score",
-      "score": "Score",
-      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
-      "votersTitle": "Voters & Trust Network",
-      "weight": "Weight:"
+      "title": "Βαθμολογία Φήμης",
+      "score": "Βαθμολογία",
+      "description": "Η φήμη σας βασίζεται στα βάρη εμπιστοσύνης των ανθρώπων που σας έχουν εγγυηθεί.",
+      "votersTitle": "Ψηφοφόροι και Δίκτυο Εμπιστοσύνης",
+      "weight": "Βάρος:"
     },
     "wallet": {
       "title": "Πορτοφόλι",
@@ -72,44 +72,44 @@
   },
   "chat": {
     "title": "Chat",
-    "subtitle": "Connect with your matches",
-    "requestAccess": "Requested access to your {{testType}} test.",
-    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
-    "approvedResponse": "I approved your request to view my {{testType}} test.",
-    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "subtitle": "Συνδεθείτε με τα ταίρια σας",
+    "requestAccess": "Ζητήσατε πρόσβαση στο τεστ {{testType}}.",
+    "approvedRequest": "Έχω εγκρίνει το αίτημά σας! Τώρα μπορείτε να δείτε την αποκρυπτογραφημένη αναφορά τεστ {{testType}}.",
+    "approvedResponse": "Έγκρισα το αίτημά σας για πρόσβαση στο τεστ {{testType}}.",
+    "declinedResponse": "Απέρριψα το αίτημά σας για πρόσβαση στο τεστ {{testType}}.",
     "selectChat": "Επιλέξτε ταίρι για να ξεκινήσετε συνομιλία",
     "noMatches": "Δεν υπάρχουν ακόμη ταίρια",
     "inputPlaceholder": "Πληκτρολογήστε ένα μήνυμα...",
     "send": "Αποστολή",
     "pendingVerification": "Επαλήθευση σε εξέλιξη",
-    "requestStd": "Αίτηση τεστ IST",
+    "requestStd": "Αίτηση τεστ STD",
     "requestDna": "Αίτηση τεστ DNA",
-    "approveStd": "Έγκριση πρόσβασης IST",
+    "approveStd": "Έγκριση πρόσβασης STD",
     "approveDna": "Έγκριση πρόσβασης DNA",
-    "denyStd": "Άρνηση πρόσβασης IST",
+    "denyStd": "Άρνηση πρόσβασης STD",
     "denyDna": "Άρνηση πρόσβασης DNA"
   },
   "language": {
-    "select": "Select Language",
-    "title": "Choose your language",
-    "description": "Select your preferred language to continue"
+    "select": "Επιλέξτε Γλώσσα",
+    "title": "Επιλέξτε τη γλώσσα σας",
+    "description": "Επιλέξτε την προτιμώμενη γλώσσα σας για να συνεχίσετε"
   },
   "country": {
-    "select": "Select Country",
-    "title": "Choose your country",
-    "description": "Select your country to match with people nearby"
+    "select": "Επιλέξτε Χώρα",
+    "title": "Επιλέξτε τη χώρα σας",
+    "description": "Επιλέξτε τη χώρα σας για να ταιριάσετε με ανθρώπους κοντά σας"
   },
   "settings": {
     "currentMode": "Τρέχουσα λειτουργία",
     "autoSaved": "Η επιλογή σας αποθηκεύεται αυτόματα. Δεν χρειάζεται ανανέωση."
   },
   "auth": {
-    "loading": "Loading secure session...",
+    "loading": "Φόρτωση ασφαλούς συνεδρίας...",
     "landing": {
       "title": "Evolve — Αποκεντρωμένα ραντεβού",
       "email": "📧 Σύνδεση με Email",
       "phone": "📱 Σύνδεση με Τηλέφωνο",
-      "wallet": "💳 Σύνδεση Πορτοφολιού"
+      "wallet": "💳 Sign in with Wallet"
     },
     "phone": {
       "title": "Σύνδεση με Τηλέφωνο",
@@ -129,43 +129,57 @@
       "button": "Μετάβαση στις Ρυθμίσεις"
     },
     "connectWallet": {
-      "title": "Connect Your Wallet",
-      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+      "title": "Συνδέστε το Πορτοφόλι σας",
+      "description": "Καλώς ήρθατε στο Evolve! Συνδέστε το Ethereum πορτοφόλι σας χρησιμοποιώντας RainbowKit για πρόσβαση στο κρυπτογραφημένο ιατρικό σας προφίλ."
     },
     "signIn": {
-      "title": "Sign In with Ethereum",
-      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
-      "button": "Sign-In with Ethereum"
+      "title": "Σύνδεση με Ethereum",
+      "description": "Παρακαλώ υπογράψτε το ασφαλές κρυπτογραφικό μήνυμα για να επαληθεύσετε την ιδιοκτησία του πορτοφολιού σας και να φορτώσετε τα προσωπικά σας δεδομένα.",
+      "button": "Σύνδεση με Ethereum"
     },
-    "logout": "Logout",
+    "logout": "Αποσύνδεση",
     "email": {
-      "title": "Sign in with Email",
-      "description": "Enter your email and password to continue",
+      "title": "Σύνδεση με Email",
+      "description": "Εισαγάγετε το email και τον κωδικό σας για να συνεχίσετε",
       "email": "Email",
-      "password": "Password",
-      "login": "Sign In",
-      "register": "Create Account",
-      "switchToRegister": "Don't have an account? Register",
-      "switchToLogin": "Already have an account? Sign In"
+      "password": "Κωδικός",
+      "login": "Σύνδεση",
+      "register": "Δημιουργία Λογαριασμού",
+      "switchToRegister": "Δεν έχετε λογαριασμό; Εγγραφείτε",
+      "switchToLogin": "Έχετε ήδη λογαριασμό; Συνδεθείτε"
     },
     "modeSelector": {
-      "title": "Choose Your Dating Mode",
-      "description": "Select how you want to use Evolve",
+      "title": "Επιλέξτε τη Λειτουργία Dating",
+      "description": "Επιλέξτε πώς θέλετε να χρησιμοποιήσετε το Evolve",
       "normal": {
         "label": "Dating",
-        "description": "Standard dating with email login",
-        "authType": "Email or phone login"
+        "description": "Standard dating με σύνδεση email",
+        "authType": "Σύνδεση email ή τηλεφώνου"
       },
       "pregnancyBond": {
-        "label": "Conception",
-        "description": "Family-focused matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Σύλληψη",
+        "description": "Ταιριάσματα εστιασμένα στην οικογένεια, απαιτεί πορτοφόλι",
+        "authType": "Απαιτείται Ethereum πορτοφόλι"
       },
       "crypticChoice": {
-        "label": "Postcopulation",
-        "description": "Anonymous matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Μετά την Σύλληψη",
+        "description": "Ανώνυμα ταιριάσματα, απαιτεί πορτοφόλι",
+        "authType": "Απαιτείται Ethereum πορτοφόλι"
       }
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

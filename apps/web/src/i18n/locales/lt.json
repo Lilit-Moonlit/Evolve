@@ -13,49 +13,49 @@
   "home": {
     "hero": {
       "title": "Rask savo match",
-      "subtitle": "Swipe through profiles and connect with interesting people."
+      "subtitle": "Perbraukite profilius ir susisiekite su įdomiais žmonėmis."
     },
     "filters": {
-      "verifiedStd": "Only with verified STD",
-      "verifiedDna": "Only with verified DNA",
-      "noProfiles": "No profiles matching the selected filters."
+      "verifiedStd": "Tik su patvirtintu STD",
+      "verifiedDna": "Tik su patvirtintu DNA",
+      "noProfiles": "Nėra profilių, atitinkančių pasirinktus filtrus."
     },
     "profile": {
-      "newMatch": "New Match",
-      "noMoreProfiles": "No more profiles for now! Check back later."
+      "newMatch": "Naujas Match",
+      "noMoreProfiles": "Šiuo metu profilių daugiau nėra! Grįžkite vėliau."
     }
   },
   "profile": {
     "tabs": {
-      "profile": "Profile",
-      "reputation": "Reputation"
+      "profile": "Profilis",
+      "reputation": "Reputacija"
     },
     "myProfile": {
-      "title": "My Profile",
-      "verifiedUser": "Verified User"
+      "title": "Mano profilis",
+      "verifiedUser": "Patvirtintas naudotojas"
     },
     "status": {
-      "stdStatus": "STD Status",
-      "dnaStatus": "DNA Status",
-      "uploaded": "✓ Uploaded",
-      "notUploaded": "✗ Not Uploaded",
+      "stdStatus": "STD būsena",
+      "dnaStatus": "DNA būsena",
+      "uploaded": "✓ Įkelta",
+      "notUploaded": "✗ Neįkelta",
       "verified": "Patvirtinta"
     },
     "upload": {
-      "title": "Upload Health Tests",
-      "stdTest": "STD Test",
-      "dnaTest": "DNA Test",
-      "redactFields": "Redact sensitive fields before uploading:",
-      "fullName": "Full Name",
-      "address": "Address",
-      "phoneNumber": "Phone Number",
-      "patientId": "Patient ID",
-      "encryptUpload": "Encrypt & Upload PDF",
-      "uploadSuccess": "Document uploaded and encrypted successfully!"
+      "title": "Įkelti sveikatos testus",
+      "stdTest": "STD testas",
+      "dnaTest": "DNA testas",
+      "redactFields": "Prieš įkeldami redaguokite neskelbtinus laukus:",
+      "fullName": "Vardas, pavardė",
+      "address": "Adresas",
+      "phoneNumber": "Telefono numeris",
+      "patientId": "Paciento ID",
+      "encryptUpload": "Šifruoti ir įkelti PDF",
+      "uploadSuccess": "Dokumentas sėkmingai įkeltas ir užšifruotas!"
     },
     "documents": {
-      "title": "My Documents",
-      "noDocuments": "No documents uploaded yet."
+      "title": "Mano dokumentai",
+      "noDocuments": "Dar nėra įkeltų dokumentų."
     },
     "wallet": {
       "title": "Piniginė",
@@ -63,20 +63,20 @@
       "balance": "Balansas"
     },
     "reputation": {
-      "title": "Reputation Score",
-      "score": "Score",
-      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
-      "votersTitle": "Voters & Trust Network",
-      "weight": "Weight:"
+      "title": "Reputacijos balas",
+      "score": "Balas",
+      "description": "Jūsų reputacija pagrįsta jumis pasitikinčių žmonių pasitikėjimo svoriais.",
+      "votersTitle": "Balsuotojai ir pasitikėjimo tinklas",
+      "weight": "Svoris:"
     }
   },
   "chat": {
-    "title": "Chat",
-    "subtitle": "Connect with your matches",
-    "requestAccess": "Requested access to your {{testType}} test.",
-    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
-    "approvedResponse": "I approved your request to view my {{testType}} test.",
-    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "title": "Pokalbiai",
+    "subtitle": "Susisiekite su savo matchais",
+    "requestAccess": "Paprašė prieigos prie jūsų {{testType}} testo.",
+    "approvedRequest": "Aš patvirtinau jūsų prašymą! Dabar galite peržiūrėti mano iššifruotą {{testType}} testo ataskaitą.",
+    "approvedResponse": "Aš patvirtinau jūsų prašymą peržiūrėti mano {{testType}} testą.",
+    "declinedResponse": "Aš atmečiau jūsų prašymą peržiūrėti mano {{testType}} testą.",
     "selectChat": "Pasirinkite rungtynę pokalbiui pradėti",
     "noMatches": "Dar nėra rungtynių",
     "inputPlaceholder": "Įveskite žinutę...",
@@ -87,49 +87,53 @@
     "approveStd": "Patvirtinti IST prieigą",
     "approveDna": "Patvirtinti DNA prieigą",
     "denyStd": "Atmesti IST prieigą",
-    "denyDna": "Atmesti DNA prieigą"
+    "denyDna": "Atmesti DNA prieigą",
+    "hiddenProfile": "Paslėptas profilis",
+    "hiddenContent": "Šis profilis yra paslėptas naudotojo. Reitingas vis dar matomas."
   },
   "language": {
-    "select": "Select Language",
-    "title": "Choose your language",
-    "description": "Select your preferred language to continue"
+    "select": "Pasirinkti kalbą",
+    "title": "Pasirinkite savo kalbą",
+    "description": "Pasirinkite pageidaujamą kalbą, kad tęstumėte"
   },
   "country": {
-    "select": "Select Country",
-    "title": "Choose your country",
-    "description": "Select your country to match with people nearby"
+    "select": "Pasirinkti šalį",
+    "title": "Pasirinkite savo šalį",
+    "description": "Pasirinkite savo šalį, kad susitiktumėte su šalia esančiais žmonėmis"
   },
   "settings": {
     "currentMode": "Dabartinis režimas",
-    "autoSaved": "Jūsų pasirinkimas išsaugomas automatiškai. Perkrauti nereikia."
+    "autoSaved": "Jūsų pasirinkimas išsaugomas automatiškai. Perkrauti nereikia.",
+    "hideProfileFromLowerLevels": "Paslėpti profilį nuo žemesnių lygių (turinys ir nuotraukos)",
+    "privacy": "Privatumas"
   },
   "auth": {
-    "loading": "Loading secure session...",
+    "loading": "Įkeliama saugi sesija...",
     "landing": {
       "title": "Evolve — Decentralizuotos pažintys",
       "email": "📧 Prisijungti el. paštu",
       "phone": "📱 Prisijungti telefonu",
-      "wallet": "💳 Prijungti piniginę"
+      "wallet": "💳 Prisijungti su Pinigine"
     },
     "connectWallet": {
-      "title": "Connect Your Wallet",
-      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+      "title": "Prijunkite savo piniginę",
+      "description": "Sveiki atvykę į Evolve! Prijunkite savo Ethereum piniginę naudodami RainbowKit, kad pasiektumėte savo užšifruotą medicininį profilį."
     },
     "signIn": {
-      "title": "Sign In with Ethereum",
-      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
-      "button": "Sign-In with Ethereum"
+      "title": "Prisijungti su Ethereum",
+      "description": "Pasirašykite saugų kriptografinį pranešimą, kad patvirtintumėte savo piniginės nuosavybę ir įkeltumėte privačius duomenis.",
+      "button": "Prisijungti su Ethereum"
     },
-    "logout": "Logout",
+    "logout": "Atsijungti",
     "email": {
-      "title": "Sign in with Email",
-      "description": "Enter your email and password to continue",
-      "email": "Email",
-      "password": "Password",
-      "login": "Sign In",
-      "register": "Create Account",
-      "switchToRegister": "Don't have an account? Register",
-      "switchToLogin": "Already have an account? Sign In"
+      "title": "Prisijungti el. paštu",
+      "description": "Norėdami tęsti, įveskite savo el. pašto adresą ir slaptažodį",
+      "email": "El. paštas",
+      "password": "Slaptažodis",
+      "login": "Prisijungti",
+      "register": "Sukurti paskyrą",
+      "switchToRegister": "Neturite paskyros? Registruotis",
+      "switchToLogin": "Jau turite paskyrą? Prisijungti"
     },
     "phone": {
       "title": "Prisijungti telefonu",
@@ -144,22 +148,22 @@
       "otpSent": "6 skaitmenų kodas išsiųstas į {{phone}}"
     },
     "modeSelector": {
-      "title": "Choose Your Dating Mode",
-      "description": "Select how you want to use Evolve",
+      "title": "Pasirinkite savo pažinčių režimą",
+      "description": "Pasirinkite, kaip norite naudoti Evolve",
       "normal": {
-        "label": "Dating",
-        "description": "Standard dating with email login",
-        "authType": "Email or phone login"
+        "label": "Pažintys",
+        "description": "Standartinės pažintys su prisijungimu el. paštu",
+        "authType": "Prisijungimas el. paštu arba telefonu"
       },
       "pregnancyBond": {
-        "label": "Conception",
-        "description": "Family-focused matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Apvaisinimas",
+        "description": "Į šeimą orientuotos pažintys, reikalinga piniginė",
+        "authType": "Reikalinga Ethereum piniginė"
       },
       "crypticChoice": {
-        "label": "Postcopulation",
-        "description": "Anonymous matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Postkopuliacija",
+        "description": "Anoniminės pažintys, reikalinga piniginė",
+        "authType": "Reikalinga Ethereum piniginė"
       }
     },
     "noMode": {
@@ -167,5 +171,19 @@
       "description": "Pasirinkite režimą prieš naršant profilius",
       "button": "Eiti į nustatymus"
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

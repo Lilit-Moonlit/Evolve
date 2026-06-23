@@ -13,49 +13,49 @@
   "home": {
     "hero": {
       "title": "Nájdite svoj match",
-      "subtitle": "Swipe through profiles and connect with interesting people."
+      "subtitle": "Prechádzajte profilmi a spojte sa s zaujímavými ľuďmi."
     },
     "filters": {
-      "verifiedStd": "Only with verified STD",
-      "verifiedDna": "Only with verified DNA",
-      "noProfiles": "No profiles matching the selected filters."
+      "verifiedStd": "Iba s overeným STD",
+      "verifiedDna": "Iba s overeným DNA",
+      "noProfiles": "Žiadne profily nezodpovedajú vybraným filtrom."
     },
     "profile": {
-      "newMatch": "New Match",
-      "noMoreProfiles": "No more profiles for now! Check back later."
+      "newMatch": "Nový match",
+      "noMoreProfiles": "Nateraz žiadne ďalšie profily! Skontrolujte neskôr."
     }
   },
   "profile": {
     "tabs": {
-      "profile": "Profile",
-      "reputation": "Reputation"
+      "profile": "Profil",
+      "reputation": "Reputácia"
     },
     "myProfile": {
-      "title": "My Profile",
-      "verifiedUser": "Verified User"
+      "title": "Môj profil",
+      "verifiedUser": "Overený používateľ"
     },
     "status": {
-      "stdStatus": "STD Status",
-      "dnaStatus": "DNA Status",
-      "uploaded": "✓ Uploaded",
-      "notUploaded": "✗ Not Uploaded",
+      "stdStatus": "Stav STD",
+      "dnaStatus": "Stav DNA",
+      "uploaded": "✓ Odovzdané",
+      "notUploaded": "✗ Neodovzdané",
       "verified": "Overené"
     },
     "upload": {
-      "title": "Upload Health Tests",
-      "stdTest": "STD Test",
-      "dnaTest": "DNA Test",
-      "redactFields": "Redact sensitive fields before uploading:",
-      "fullName": "Full Name",
-      "address": "Address",
-      "phoneNumber": "Phone Number",
-      "patientId": "Patient ID",
-      "encryptUpload": "Encrypt & Upload PDF",
-      "uploadSuccess": "Document uploaded and encrypted successfully!"
+      "title": "Nahrať zdravotné testy",
+      "stdTest": "Test STD",
+      "dnaTest": "Test DNA",
+      "redactFields": "Pred nahraním zakryte citlivé polia:",
+      "fullName": "Celé meno",
+      "address": "Adresa",
+      "phoneNumber": "Telefónne číslo",
+      "patientId": "ID pacienta",
+      "encryptUpload": "Zašifrovať a nahrať PDF",
+      "uploadSuccess": "Dokument bol úspešne nahraný a zašifrovaný!"
     },
     "documents": {
-      "title": "My Documents",
-      "noDocuments": "No documents uploaded yet."
+      "title": "Moje dokumenty",
+      "noDocuments": "Zatiaľ neboli nahrané žiadne dokumenty."
     },
     "wallet": {
       "title": "Peňaženka",
@@ -63,20 +63,20 @@
       "balance": "Zostatok"
     },
     "reputation": {
-      "title": "Reputation Score",
-      "score": "Score",
-      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
-      "votersTitle": "Voters & Trust Network",
-      "weight": "Weight:"
+      "title": "Skóre reputácie",
+      "score": "Skóre",
+      "description": "Vaša reputácia je založená na dôležitosti dôvery ľudí, ktorí sa za vás zaručili.",
+      "votersTitle": "Voliči a sieť dôvery",
+      "weight": "Váha:"
     }
   },
   "chat": {
     "title": "Chat",
-    "subtitle": "Connect with your matches",
-    "requestAccess": "Requested access to your {{testType}} test.",
-    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
-    "approvedResponse": "I approved your request to view my {{testType}} test.",
-    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "subtitle": "Spojte sa so svojimi matchmi",
+    "requestAccess": "Požiadal o prístup k vášmu {{testType}} testu.",
+    "approvedRequest": "Schválil som vašu požiadavku! Teraz si môžete zobraziť môj dešifrovaný protokol {{testType}} testu.",
+    "approvedResponse": "Schválil som vašu požiadavku na zobrazenie môjho {{testType}} testu.",
+    "declinedResponse": "Zamietol som vašu požiadavku na zobrazenie môjho {{testType}} testu.",
     "selectChat": "Vyberte match pre chat",
     "noMatches": "Zatiaľ žiadne matchy",
     "inputPlaceholder": "Napíšte správu...",
@@ -87,49 +87,53 @@
     "approveStd": "Schváliť IST prístup",
     "approveDna": "Schváliť DNA prístup",
     "denyStd": "Zamietnuť IST prístup",
-    "denyDna": "Zamietnuť DNA prístup"
+    "denyDna": "Zamietnuť DNA prístup",
+    "hiddenProfile": "Skrytý profil",
+    "hiddenContent": "Tento profil je skrytý používateľom. Hodnotenie je stále viditeľné."
   },
   "language": {
-    "select": "Select Language",
-    "title": "Choose your language",
-    "description": "Select your preferred language to continue"
+    "select": "Vybrať jazyk",
+    "title": "Vyberte si svoj jazyk",
+    "description": "Ak chcete pokračovať, vyberte preferovaný jazyk"
   },
   "country": {
-    "select": "Select Country",
-    "title": "Choose your country",
-    "description": "Select your country to match with people nearby"
+    "select": "Vybrať krajinu",
+    "title": "Vyberte si svoju krajinu",
+    "description": "Vyberte svoju krajinu pre spárovanie s ľuďmi v okolí"
   },
   "settings": {
     "currentMode": "Aktuálny režim",
-    "autoSaved": "Vaša voľba sa automaticky uloží. Nie je potrebné obnoviť."
+    "autoSaved": "Vaša voľba sa automaticky uloží. Nie je potrebné obnoviť.",
+    "hideProfileFromLowerLevels": "Skryť profil pred nižšími úrovňami (obsah a fotografie)",
+    "privacy": "Súkromie"
   },
   "auth": {
-    "loading": "Loading secure session...",
+    "loading": "Načítava sa zabezpečená relácia...",
     "landing": {
       "title": "Evolve — Decentralizované zoznamovanie",
       "email": "📧 Prihlásiť cez Email",
       "phone": "📱 Prihlásiť cez Telefón",
-      "wallet": "💳 Pripojiť peňaženku"
+      "wallet": "💳 Prihlásiť sa cez Peňaženku"
     },
     "connectWallet": {
-      "title": "Connect Your Wallet",
-      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+      "title": "Pripojte si peňaženku",
+      "description": "Vitajte v Evolve! Pripojte svoju Ethereum peňaženku pomocou RainbowKit pre prístup k vášmu zašifrovanému lekárskemu profilu."
     },
     "signIn": {
-      "title": "Sign In with Ethereum",
-      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
-      "button": "Sign-In with Ethereum"
+      "title": "Prihlásiť sa cez Ethereum",
+      "description": "Podpíšte zabezpečenú kryptografickú správu na overenie vlastníctva vašej peňaženky a načítanie vašich súkromných údajov.",
+      "button": "Prihlásiť sa cez Ethereum"
     },
-    "logout": "Logout",
+    "logout": "Odhlásiť sa",
     "email": {
-      "title": "Sign in with Email",
-      "description": "Enter your email and password to continue",
+      "title": "Prihlásiť sa cez Email",
+      "description": "Pre pokračovanie zadajte svoj email a heslo",
       "email": "Email",
-      "password": "Password",
-      "login": "Sign In",
-      "register": "Create Account",
-      "switchToRegister": "Don't have an account? Register",
-      "switchToLogin": "Already have an account? Sign In"
+      "password": "Heslo",
+      "login": "Prihlásiť sa",
+      "register": "Vytvoriť účet",
+      "switchToRegister": "Nemáte účet? Zaregistrujte sa",
+      "switchToLogin": "Už máte účet? Prihláste sa"
     },
     "phone": {
       "title": "Prihlásiť cez Telefón",
@@ -144,22 +148,22 @@
       "otpSent": "6-miestny kód bol odoslaný na {{phone}}"
     },
     "modeSelector": {
-      "title": "Choose Your Dating Mode",
-      "description": "Select how you want to use Evolve",
+      "title": "Vyberte si svoj režim zoznamovania",
+      "description": "Vyberte, ako chcete používať Evolve",
       "normal": {
         "label": "Dating",
-        "description": "Standard dating with email login",
-        "authType": "Email or phone login"
+        "description": "Štandardné zoznamovanie s prihlásením cez email",
+        "authType": "Prihlásenie cez email alebo telefón"
       },
       "pregnancyBond": {
-        "label": "Conception",
-        "description": "Family-focused matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Počatie",
+        "description": "Zoznamovanie zamerané na rodinu, vyžaduje peňaženku",
+        "authType": "Vyžaduje sa Ethereum peňaženka"
       },
       "crypticChoice": {
-        "label": "Postcopulation",
-        "description": "Anonymous matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Postkopulácia",
+        "description": "Anonymné zoznamovanie, vyžaduje peňaženku",
+        "authType": "Vyžaduje sa Ethereum peňaženka"
       }
     },
     "noMode": {
@@ -167,5 +171,19 @@
       "description": "Vyberte režim pred prehliadaním profilov",
       "button": "Prejsť na nastavenia"
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

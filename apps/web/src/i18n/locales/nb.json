@@ -109,7 +109,7 @@
       "title": "Evolve — Desentralisert dating",
       "email": "📧 Logg inn med e-post",
       "phone": "📱 Logg inn med telefon",
-      "wallet": "💳 Koble lommebok"
+      "wallet": "💳 Sign in with Wallet"
     },
     "connectWallet": {
       "title": "Koble til lommeboken",
@@ -167,5 +167,19 @@
       "description": "Velg en modus før du blar gjennom profiler",
       "button": "Gå til Innstillinger"
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM"],
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "noEmit": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@evolve/core": ["./packages/core/src"],
+      "@evolve/storage": ["./packages/storage/src"],
+      "@evolve/p2p": ["./packages/p2p/src"],
+      "@evolve/ui": ["./packages/ui/src"],
+      "@evolve/matching": ["./packages/matching/src"]
+    }
+  },
+  "include": [
+    "apps/web/src/**/*",
+    "apps/mobile/**/*",
+    "packages/core/src/**/*",
+    "packages/p2p/src/**/*",
+    "packages/storage/src/**/*",
+    "packages/ui/src/**/*",
+    "packages/matching/src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/node_modules",
+    "**/dist",
+    "**/coverage",
+    "**/artifacts",
+    "**/build-info",
+    "apps/**/public",
+    "packages/**/ignition"
+  ]
+}

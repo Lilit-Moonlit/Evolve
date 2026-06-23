@@ -1,13 +1,17 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import Chat from "./Chat";
 import { AppStateProvider } from "../store/AppContext";
 
 test("renders Chat component placeholder", () => {
   render(
-    <AppStateProvider>
-      <Chat />
-    </AppStateProvider>,
+    <MemoryRouter>
+      <AppStateProvider>
+        <Chat />
+      </AppStateProvider>
+    </MemoryRouter>,
   );
-  const heading = screen.getByRole("heading", { name: /Chat/i });
-  expect(heading).toBeInTheDocument();
+  // Component uses i18n key chat.title - look for the tab button
+  const chatTab = screen.getByRole("button", { name: /chat\.title/i });
+  expect(chatTab).toBeInTheDocument();
 });

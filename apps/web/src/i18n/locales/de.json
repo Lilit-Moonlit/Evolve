@@ -107,9 +107,9 @@
     "loading": "Sichere Sitzung wird geladen...",
     "landing": {
       "title": "Evolve — Dezentrales Dating",
-      "email": "\uD83D\uDCE7 Mit E-Mail anmelden",
-      "phone": "\uD83D\uDCF1 Mit Telefon anmelden",
-      "wallet": "\uD83D\uDCB3 Wallet verbinden"
+      "email": "📧 Mit E-Mail anmelden",
+      "phone": "📱 Mit Telefon anmelden",
+      "wallet": "💳 Mit Wallet anmelden"
     },
     "phone": {
       "title": "Mit Telefon anmelden",
@@ -167,5 +167,19 @@
         "authType": "Ethereum-Wallet erforderlich"
       }
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

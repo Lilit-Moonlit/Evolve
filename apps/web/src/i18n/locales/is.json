@@ -12,50 +12,50 @@
   },
   "home": {
     "hero": {
-      "title": "Finndu þinn match",
-      "subtitle": "Swipe through profiles and connect with interesting people."
+      "title": "Finndu þinn samsvörun",
+      "subtitle": "Strjúkaðu í gegnum snið og tengistu við áhugaverða fólk."
     },
     "filters": {
-      "verifiedStd": "Only with verified STD",
-      "verifiedDna": "Only with verified DNA",
-      "noProfiles": "No profiles matching the selected filters."
+      "verifiedStd": "Aðeins með staðfestri STD",
+      "verifiedDna": "Aðeins með staðfestri DNA",
+      "noProfiles": "Engin snið sem samsvara völdum síum."
     },
     "profile": {
-      "newMatch": "New Match",
-      "noMoreProfiles": "No more profiles for now! Check back later."
+      "newMatch": "Ný samsvörun",
+      "noMoreProfiles": "Engin fleiri snið í augnablikinu! Athugaðu síðar."
     }
   },
   "profile": {
     "tabs": {
-      "profile": "Profile",
-      "reputation": "Reputation"
+      "profile": "Prófíll",
+      "reputation": "Orðstír"
     },
     "myProfile": {
-      "title": "My Profile",
-      "verifiedUser": "Verified User"
+      "title": "Sniðið mitt",
+      "verifiedUser": "Staðfestur notandi"
     },
     "status": {
-      "stdStatus": "STD Status",
-      "dnaStatus": "DNA Status",
-      "uploaded": "✓ Uploaded",
-      "notUploaded": "✗ Not Uploaded",
+      "stdStatus": "STD staða",
+      "dnaStatus": "DNA staða",
+      "uploaded": "✓ Upphlaðið",
+      "notUploaded": "✗ Ekki upphlaðið",
       "verified": "Staðfest"
     },
     "upload": {
-      "title": "Upload Health Tests",
-      "stdTest": "STD Test",
-      "dnaTest": "DNA Test",
-      "redactFields": "Redact sensitive fields before uploading:",
-      "fullName": "Full Name",
-      "address": "Address",
-      "phoneNumber": "Phone Number",
-      "patientId": "Patient ID",
-      "encryptUpload": "Encrypt & Upload PDF",
-      "uploadSuccess": "Document uploaded and encrypted successfully!"
+      "title": "Hlaða upp heilbrigðisprófum",
+      "stdTest": "STD próf",
+      "dnaTest": "DNA próf",
+      "redactFields": "Fjarlægðu viðkvæm svæði áðar en hlaðið upp:",
+      "fullName": "Fullt nafn",
+      "address": "Heimilisfang",
+      "phoneNumber": "Símanúmer",
+      "patientId": "Sjúklinga ID",
+      "encryptUpload": "Dulkóða og hlaða upp PDF",
+      "uploadSuccess": "Skjal hefur verið upphlaðið og dulkóðað vel!"
     },
     "documents": {
-      "title": "My Documents",
-      "noDocuments": "No documents uploaded yet."
+      "title": "Skjölin mín",
+      "noDocuments": "Engin skjölin hafa verið upphlaðið enn."
     },
     "wallet": {
       "title": "Veski",
@@ -63,73 +63,73 @@
       "balance": "Staða"
     },
     "reputation": {
-      "title": "Reputation Score",
-      "score": "Score",
-      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
-      "votersTitle": "Voters & Trust Network",
-      "weight": "Weight:"
+      "title": "Orðstír einkunn",
+      "score": "Einkunn",
+      "description": "Orðstír þinn byggir á traustþyngdum fólks sem hefur staðfest þig.",
+      "votersTitle": "Kjósendur og traustnet",
+      "weight": "Þyngd:"
     }
   },
   "chat": {
-    "title": "Chat",
-    "subtitle": "Connect with your matches",
-    "requestAccess": "Requested access to your {{testType}} test.",
-    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
-    "approvedResponse": "I approved your request to view my {{testType}} test.",
-    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "title": "Spjall",
+    "subtitle": "Tengistu við samsvörun þína",
+    "requestAccess": "Beiðið um aðgang að {{testType}} prófinu þínu.",
+    "approvedRequest": "Ég hefur samþykkt beiðni þína! Nú getur þú séð afkóðaða {{testType}} prófskýrsluna mína.",
+    "approvedResponse": "Ég samþykkti beiðni þína um aðgang að {{testType}} prófinu mínu.",
+    "declinedResponse": "Ég hafnaði beiðni þinni um aðgang að {{testType}} prófinu mínu.",
     "selectChat": "Veldu samsvörun til að byrja spjall",
     "noMatches": "Engar samsvoranir enn",
     "inputPlaceholder": "Skrifaðu skilaboð...",
     "send": "Senda",
     "pendingVerification": "Staðfesting í gangi",
-    "requestStd": "Biðja um IST próf",
+    "requestStd": "Biðja um STD próf",
     "requestDna": "Biðja um DNA próf",
-    "approveStd": "Samþykkja IST aðgang",
+    "approveStd": "Samþykkja STD aðgang",
     "approveDna": "Samþykkja DNA aðgang",
-    "denyStd": "Hafna IST aðgangi",
+    "denyStd": "Hafna STD aðgangi",
     "denyDna": "Hafna DNA aðgangi"
   },
   "language": {
-    "select": "Select Language",
-    "title": "Choose your language",
-    "description": "Select your preferred language to continue"
+    "select": "Veldu tungumál",
+    "title": "Veldu tungumálið þitt",
+    "description": "Veldu valið tungumál til að halda áfram"
   },
   "country": {
-    "select": "Select Country",
-    "title": "Choose your country",
-    "description": "Select your country to match with people nearby"
+    "select": "Veldu land",
+    "title": "Veldu landið þitt",
+    "description": "Veldu landið þitt til að samsvara við fólk í nágrenninu"
   },
   "settings": {
     "currentMode": "Núverandi hamur",
     "autoSaved": "Val þitt er vistað sjálfkrafa. Ekki þarf að endurhlaða."
   },
   "auth": {
-    "loading": "Loading secure session...",
+    "loading": "Hleður öruggu setu...",
     "landing": {
       "title": "Evolve — Dreifð stefnumótun",
       "email": "📧 Innskráning með tölvupósti",
       "phone": "📱 Innskráning með síma",
-      "wallet": "💳 Tengja veski"
+      "wallet": "💳 Sign in with Wallet"
     },
     "connectWallet": {
-      "title": "Connect Your Wallet",
-      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+      "title": "Tengdu veskið þitt",
+      "description": "Velkomin í Evolve! Tengdu Ethereum veskið þitt með RainbowKit til að fá aðgang að dulkóðaða læknisfræðilega sniðinu þínu."
     },
     "signIn": {
-      "title": "Sign In with Ethereum",
-      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
-      "button": "Sign-In with Ethereum"
+      "title": "Innskráning með Ethereum",
+      "description": "Vinsamlega undirritaðu örugga dulkóðunarskilaboðin til að staðfesta eignarhald á veski þínu og hlaða inn einkagögnum þínum.",
+      "button": "Innskráning með Ethereum"
     },
-    "logout": "Logout",
+    "logout": "Útskráning",
     "email": {
-      "title": "Sign in with Email",
-      "description": "Enter your email and password to continue",
-      "email": "Email",
-      "password": "Password",
-      "login": "Sign In",
-      "register": "Create Account",
-      "switchToRegister": "Don't have an account? Register",
-      "switchToLogin": "Already have an account? Sign In"
+      "title": "Innskráning með tölvupósti",
+      "description": "Sláðu inn tölvupóstfang og lykilorð til að halda áfram",
+      "email": "Tölvupóstur",
+      "password": "Lykilorð",
+      "login": "Innskráning",
+      "register": "Búa til aðgang",
+      "switchToRegister": "Ertu með engan aðgang? Skráðu þig",
+      "switchToLogin": "Ertu þegar með aðgang? Skráðu þig inn"
     },
     "phone": {
       "title": "Innskráning með síma",
@@ -144,22 +144,22 @@
       "otpSent": "6-stafa kóði hefur verið sendur á {{phone}}"
     },
     "modeSelector": {
-      "title": "Choose Your Dating Mode",
-      "description": "Select how you want to use Evolve",
+      "title": "Veldu stefnumótunarhaminn þinn",
+      "description": "Veldu hvernig þú vilt nota Evolve",
       "normal": {
-        "label": "Dating",
-        "description": "Standard dating with email login",
-        "authType": "Email or phone login"
+        "label": "Stefnumótun",
+        "description": "Venjuleg stefnumótun með tölvupóstskráningu",
+        "authType": "Tölvupóst eða símaskráning"
       },
       "pregnancyBond": {
-        "label": "Conception",
-        "description": "Family-focused matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Getnaður",
+        "description": "Fjölskylduframið samsvörun, krefst veskis",
+        "authType": "Ethereum veski krafist"
       },
       "crypticChoice": {
-        "label": "Postcopulation",
-        "description": "Anonymous matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Eftir samkönnun",
+        "description": "Nafnlaus samsvörun, krefst veskis",
+        "authType": "Ethereum veski krafist"
       }
     },
     "noMode": {
@@ -167,5 +167,19 @@
       "description": "Veldu ham áður en þú skoðar snið",
       "button": "Fara í stillingar"
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

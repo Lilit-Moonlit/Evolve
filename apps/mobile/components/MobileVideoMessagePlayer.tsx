@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
+import { useTranslation } from "react-i18next";
 
 interface MobileVideoMessagePlayerProps {
   videoUrl?: string;
@@ -10,6 +11,7 @@ export function MobileVideoMessagePlayer({
   videoUrl,
   thumbnailUrl,
 }: MobileVideoMessagePlayerProps) {
+  const { t } = useTranslation();
   const [isPlaying, setIsPlaying] = useState(false);
 
   const togglePlay = () => {
@@ -30,7 +32,7 @@ export function MobileVideoMessagePlayer({
         </TouchableOpacity>
       </View>
       <Text style={styles.status}>
-        {isPlaying ? "Playing..." : "Tap to play"}
+        {isPlaying ? t("video.playing") : t("video.tapToPlay")}
       </Text>
     </View>
   );

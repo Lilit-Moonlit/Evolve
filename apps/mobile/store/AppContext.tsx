@@ -15,6 +15,7 @@ export interface Profile {
   verifiedDna: boolean;
   reputationScore: number;
   voters: { name: string; weight: number; relation: string }[];
+  matchScore?: number;
 }
 
 export interface Message {
@@ -55,6 +56,8 @@ interface AppContextType {
   refreshProfiles: () => Promise<void>;
   refreshChats: () => Promise<void>;
   refreshDocuments: () => Promise<void>;
+  uploadDocument: (uri: string, type: "STD" | "DNA") => Promise<void>;
+  getSortedProfiles: () => Profile[];
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -219,6 +222,41 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const uploadDocument = async (uri: string, type: "STD" | "DNA") => {
+    if (!user?.id) return;
+    try {
+      await apiFetch("/documents", {
+        method: "POST",
+        body: JSON.stringify({
+          userId: user.id,
+          name: `${type} Test`,
+          size: "Unknown",
+          type,
+          uploadDate: new Date().toISOString(),
+          isRedacted: true,
+          status: "encrypted",
+          resultText: "",
+          uri,
+        }),
+      });
+
+      await refreshDocuments();
+    } catch (e) {
+      console.error("Failed to upload document:", e);
+    }
+  };
+
+  const getSortedProfiles = (): Profile[] => {
+    if (!user?.id) return profiles;
+
+    return profiles
+      .map((profile) => ({
+        ...profile,
+        matchScore: Math.random() * 100,
+      }))
+      .sort((a, b) => (b.matchScore || 0) - (a.matchScore || 0));
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -230,6 +268,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         refreshProfiles,
         refreshChats,
         refreshDocuments,
+        uploadDocument,
+        getSortedProfiles,
       }}
     >
       {children}

@@ -87,7 +87,7 @@ const CountrySelector: React.FC<CountrySelectorProps> = ({
       <select
         value={savedCountry || ""}
         onChange={handleCountryChange}
-        className="p-2 border border-slate-600 rounded-md bg-slate-900 text-white text-sm focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+        className="p-2 border border-slate-600 rounded-md bg-slate-900 text-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
       >
         <option value="">{t("country.select")}</option>
         {countries.map((country) => (

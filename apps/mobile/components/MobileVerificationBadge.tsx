@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
 
 type VerificationType = "std" | "genetic";
 
@@ -17,6 +18,7 @@ export function MobileVerificationBadge({
   size = "md",
   showLabel = false,
 }: MobileVerificationBadgeProps) {
+  const { t } = useTranslation();
   const isStd = type === "std";
   const badgeSize = sizeMap[size];
   const iconSz = iconSizeMap[size];
@@ -24,7 +26,7 @@ export function MobileVerificationBadge({
   const bgColor = isStd ? "#10b981" : "#8b5cf6";
   const textColor = isStd ? "#059669" : "#7c3aed";
   const icon = isStd ? "🛡" : "🧬";
-  const label = isStd ? "STD Verified" : "DNA Verified";
+  const label = isStd ? t("verification.std") : t("verification.dna");
 
   return (
     <View style={styles.container}>

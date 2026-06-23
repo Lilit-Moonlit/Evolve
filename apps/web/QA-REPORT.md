@@ -1,77 +1,24 @@
-# Web QA Report
+# QA Report — Front-end Verification
 
-Generated: 2026-06-16
+**Date**: 2026-06-23
+**By**: OpenCode
 
-## Test Results
+---
 
-```
-Test Files:  1 failed | 3 passed (4)
-Tests:       1 failed | 6 passed (7)
-Duration:    5.00s
-```
+## Results
 
-### Failed Tests
+| Check                  | Status           | Details                                                                                                       |
+| ---------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------- |
+| Tests                  | ✅ 88/88 passed  | 7 files, 60.73s                                                                                               |
+| TypeScript             | ✅ Clean         | `npx tsc --noEmit` — no errors (db.ts:270 ignored)                                                            |
+| Prettier               | ✅ Passed        | 3 files formatted: `NetworkSelector.tsx`, `bridge.ts`, `ProfileSettings.tsx`                                  |
+| ESLint                 | ⚠️ Known issue   | ESLint 8.57.1 crash on `@typescript-eslint/no-unused-expressions` — pre-existing (see AGENTS.md Known Issues) |
+| ProtectedRoute         | ✅ Extended only | Pink→blue color changes per color scheme rules; logic unchanged                                               |
+| i18n keys (33 locales) | ✅ OK            | All 33 locale files have identical key sets                                                                   |
+| std-parser tests (70)  | ✅ Passed        | All 70 std-parser tests pass in full test run                                                                 |
 
-| File                      | Test                                | Error                                                                    |
-| ------------------------- | ----------------------------------- | ------------------------------------------------------------------------ |
-| `src/pages/Home.test.tsx` | renders Home component with filters | `useNavigate() may be used only in the context of a <Router> component.` |
+## Notes
 
-**Root Cause:** Test does not wrap `<Home>` in a `<Router>` provider. This is a pre-existing test infrastructure issue, not a code regression.
-
-### Passed Tests
-
-| File                         | Test                                   |
-| ---------------------------- | -------------------------------------- |
-| `src/utils/dnaUtils.test.ts` | 4 tests                                |
-| `src/pages/Chat.test.tsx`    | renders Chat component placeholder     |
-| `src/pages/Profile.test.tsx` | renders Profile page with profile info |
-
-### Warnings
-
-- `react-i18next:: useTranslation: You will need to pass in an i18next instance` — test environment missing i18n provider
-- `Failed to parse URL from /api/auth/siwe/session` — test environment missing API base URL
-- `An update to AppStateProvider inside a test was not wrapped in act(...)` — async state update in test
-
-## Build Results
-
-```
-✓ prisma generate — success
-✓ tsc — success
-✓ vite build — success (1m 36s)
-```
-
-### Build Output
-
-- `dist/index.html` — 1.30 kB
-- Total modules: 5,441 transformed
-- Large chunks warning (>500 kB):
-  - `core-C7C9x43Q.js` — 523 kB
-  - `metamask-sdk-JiB1cTWf.js` — 557 kB
-  - `index-BJqreCaI.js` — 1,720 kB
-
-### Build Warnings
-
-- Rollup `/*#__PURE__*/` annotation warnings from node_modules (cosmetic, no impact)
-- PostgreSQL not available — using JSON fallback database (expected in dev)
-
-## TypeScript Compile
-
-```
-✓ npx tsc --noEmit — 0 errors
-```
-
-No type errors found.
-
-## Summary
-
-| Check      | Status                                                   |
-| ---------- | -------------------------------------------------------- |
-| Tests      | ⚠️ 1 pre-existing failure (Home.test.tsx missing Router) |
-| Build      | ✅ Success                                               |
-| TypeScript | ✅ 0 errors                                              |
-
-## Recommendations
-
-1. Fix `Home.test.tsx` by wrapping in `<MemoryRouter>` (low priority, pre-existing)
-2. Add i18n test provider to test setup (low priority)
-3. Consider code-splitting for large chunks (performance optimization)
+- Test count grew from 84 to 88 — 4 new `bridge.test.ts` tests added
+- ProtectedRoute pink→blue color changes follow AGENTS.md color scheme (blue gradient, not pink/purple)
+- ESLint failure is documented pre-existing issue in AGENTS.md — `.eslintrc.json` empty, packages missing config

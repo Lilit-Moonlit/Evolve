@@ -13,49 +13,49 @@
   "home": {
     "hero": {
       "title": "Găsește-ți perechea",
-      "subtitle": "Swipe through profiles and connect with interesting people."
+      "subtitle": "Glisează prin profiluri și conectează-te cu oameni interesanți."
     },
     "filters": {
-      "verifiedStd": "Only with verified STD",
-      "verifiedDna": "Only with verified DNA",
-      "noProfiles": "No profiles matching the selected filters."
+      "verifiedStd": "Doar cu STD verificat",
+      "verifiedDna": "Doar cu DNA verificat",
+      "noProfiles": "Nu există profiluri care să corespundă filtrelor selectate."
     },
     "profile": {
-      "newMatch": "New Match",
-      "noMoreProfiles": "No more profiles for now! Check back later."
+      "newMatch": "Meci nou",
+      "noMoreProfiles": "Nu mai sunt profiluri pentru moment! Reveniți mai târziu."
     }
   },
   "profile": {
     "tabs": {
-      "profile": "Profile",
-      "reputation": "Reputation"
+      "profile": "Profil",
+      "reputation": "Reputație"
     },
     "myProfile": {
-      "title": "My Profile",
-      "verifiedUser": "Verified User"
+      "title": "Profilul meu",
+      "verifiedUser": "Utilizator verificat"
     },
     "status": {
-      "stdStatus": "STD Status",
-      "dnaStatus": "DNA Status",
-      "uploaded": "✓ Uploaded",
-      "notUploaded": "✗ Not Uploaded",
+      "stdStatus": "Stare STD",
+      "dnaStatus": "Stare DNA",
+      "uploaded": "✓ Încărcat",
+      "notUploaded": "✗ Neîncărcat",
       "verified": "Verificat"
     },
     "upload": {
-      "title": "Upload Health Tests",
-      "stdTest": "STD Test",
-      "dnaTest": "DNA Test",
-      "redactFields": "Redact sensitive fields before uploading:",
-      "fullName": "Full Name",
-      "address": "Address",
-      "phoneNumber": "Phone Number",
-      "patientId": "Patient ID",
-      "encryptUpload": "Encrypt & Upload PDF",
-      "uploadSuccess": "Document uploaded and encrypted successfully!"
+      "title": "Încarcă teste de sănătate",
+      "stdTest": "Test STD",
+      "dnaTest": "Test DNA",
+      "redactFields": "Redactați câmpurile sensibile înainte de încărcare:",
+      "fullName": "Nume complet",
+      "address": "Adresă",
+      "phoneNumber": "Număr de telefon",
+      "patientId": "ID pacient",
+      "encryptUpload": "Criptează și încarcă PDF",
+      "uploadSuccess": "Document încărcat și criptat cu succes!"
     },
     "documents": {
-      "title": "My Documents",
-      "noDocuments": "No documents uploaded yet."
+      "title": "Documentele mele",
+      "noDocuments": "Nu au fost încărcate documente încă."
     },
     "wallet": {
       "title": "Portofel",
@@ -63,20 +63,20 @@
       "balance": "Sold"
     },
     "reputation": {
-      "title": "Reputation Score",
-      "score": "Score",
-      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
-      "votersTitle": "Voters & Trust Network",
-      "weight": "Weight:"
+      "title": "Scor de reputație",
+      "score": "Scor",
+      "description": "Reputația ta se bazează pe ponderile de încredere ale persoanelor care au garantat pentru tine.",
+      "votersTitle": "Votanți și rețea de încredere",
+      "weight": "Pondere:"
     }
   },
   "chat": {
     "title": "Chat",
-    "subtitle": "Connect with your matches",
-    "requestAccess": "Requested access to your {{testType}} test.",
-    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
-    "approvedResponse": "I approved your request to view my {{testType}} test.",
-    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "subtitle": "Conectează-te cu meciurile tale",
+    "requestAccess": "A solicitat acces la testul tău {{testType}}.",
+    "approvedRequest": "Ți-am aprobat solicitarea! Acum poți vizualiza raportul meu de test {{testType}} decriptat.",
+    "approvedResponse": "Am aprobat solicitarea ta de a vizualiza testul meu {{testType}}.",
+    "declinedResponse": "Am refuzat solicitarea ta de a vizualiza testul meu {{testType}}.",
     "selectChat": "Selectați un meci pentru a începe chatul",
     "noMatches": "Încă nu există meciuri",
     "inputPlaceholder": "Scrieți un mesaj...",
@@ -87,49 +87,53 @@
     "approveStd": "Aprobă accesul IST",
     "approveDna": "Aprobă accesul DNA",
     "denyStd": "Refuză accesul IST",
-    "denyDna": "Refuză accesul DNA"
+    "denyDna": "Refuză accesul DNA",
+    "hiddenProfile": "Profil ascuns",
+    "hiddenContent": "Acest profil este ascuns de utilizator. Ratingul este încă vizibil."
   },
   "language": {
-    "select": "Select Language",
-    "title": "Choose your language",
-    "description": "Select your preferred language to continue"
+    "select": "Selectează limba",
+    "title": "Alege-ți limba",
+    "description": "Selectează limba preferată pentru a continua"
   },
   "country": {
-    "select": "Select Country",
-    "title": "Choose your country",
-    "description": "Select your country to match with people nearby"
+    "select": "Selectează țara",
+    "title": "Alege-ți țara",
+    "description": "Selectează țara pentru a te potrivi cu oameni din apropiere"
   },
   "settings": {
     "currentMode": "Modul curent",
-    "autoSaved": "Selecția dvs. este salvată automat. Nu este necesară reîncărcarea."
+    "autoSaved": "Selecția dvs. este salvată automat. Nu este necesară reîncărcarea.",
+    "hideProfileFromLowerLevels": "Ascunde profilul de nivelurile inferioare (conținut și fotografii)",
+    "privacy": "Confidențialitate"
   },
   "auth": {
-    "loading": "Loading secure session...",
+    "loading": "Se încarcă sesiunea securizată...",
     "landing": {
       "title": "Evolve — Dating descentralizat",
       "email": "📧 Autentificare cu Email",
       "phone": "📱 Autentificare cu Telefon",
-      "wallet": "💳 Conectează portofel"
+      "wallet": "💳 Autentificare cu Portofel"
     },
     "connectWallet": {
-      "title": "Connect Your Wallet",
-      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+      "title": "Conectează-ți portofelul",
+      "description": "Bun venit la Evolve! Conectează-ți portofelul Ethereum folosind RainbowKit pentru a accesa profilul tău medical criptat."
     },
     "signIn": {
-      "title": "Sign In with Ethereum",
-      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
-      "button": "Sign-In with Ethereum"
+      "title": "Autentificare cu Ethereum",
+      "description": "Vă rugăm să semnați mesajul criptografic securizat pentru a verifica deținerea portofelului și pentru a vă încărca datele private.",
+      "button": "Autentificare cu Ethereum"
     },
-    "logout": "Logout",
+    "logout": "Deconectare",
     "email": {
-      "title": "Sign in with Email",
-      "description": "Enter your email and password to continue",
+      "title": "Autentificare cu Email",
+      "description": "Introduceți adresa de email și parola pentru a continua",
       "email": "Email",
-      "password": "Password",
-      "login": "Sign In",
-      "register": "Create Account",
-      "switchToRegister": "Don't have an account? Register",
-      "switchToLogin": "Already have an account? Sign In"
+      "password": "Parolă",
+      "login": "Autentificare",
+      "register": "Creează cont",
+      "switchToRegister": "Nu ai cont? Înregistrează-te",
+      "switchToLogin": "Ai deja cont? Autentifică-te"
     },
     "phone": {
       "title": "Autentificare cu Telefon",
@@ -144,22 +148,22 @@
       "otpSent": "Un cod de 6 cifre a fost trimis la {{phone}}"
     },
     "modeSelector": {
-      "title": "Choose Your Dating Mode",
-      "description": "Select how you want to use Evolve",
+      "title": "Alegeți modul de întâlniri",
+      "description": "Selectați cum doriți să utilizați Evolve",
       "normal": {
         "label": "Dating",
-        "description": "Standard dating with email login",
-        "authType": "Email or phone login"
+        "description": "Întâlniri standard cu autentificare prin email",
+        "authType": "Autentificare cu email sau telefon"
       },
       "pregnancyBond": {
-        "label": "Conception",
-        "description": "Family-focused matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Concepție",
+        "description": "Potrivire orientată spre familie, necesită portofel",
+        "authType": "Este necesar portofel Ethereum"
       },
       "crypticChoice": {
-        "label": "Postcopulation",
-        "description": "Anonymous matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "Postcopulație",
+        "description": "Potrivire anonimă, necesită portofel",
+        "authType": "Este necesar portofel Ethereum"
       }
     },
     "noMode": {
@@ -167,5 +171,19 @@
       "description": "Selectați un mod înainte de a naviga prin profile",
       "button": "Mergi la Setări"
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

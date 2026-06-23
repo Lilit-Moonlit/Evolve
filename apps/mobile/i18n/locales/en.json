@@ -2,18 +2,31 @@
   "app": {
     "name": "Evolve",
     "tagline": "Decentralized Dating built on Web3 & P2P",
-    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
+    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P",
+    "loading": "Loading Evolve..."
   },
   "navigation": {
     "swipe": "Swipe",
+    "home": "Home",
     "messages": "Messages",
-    "profile": "Profile"
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "onboarding": {
+    "title": "Welcome to Evolve",
+    "subtitle": "Decentralized Dating",
+    "getStarted": "Get Started"
+  },
+  "swipe": {
+    "title": "Discover",
+    "photo": "Photo"
   },
   "home": {
     "hero": {
       "title": "Find Your Match",
       "subtitle": "Swipe through profiles and connect with interesting people."
     },
+    "loading": "Loading profiles...",
     "filters": {
       "verifiedStd": "Only with verified STD",
       "verifiedDna": "Only with verified DNA",
@@ -25,6 +38,17 @@
     }
   },
   "profile": {
+    "bio": "Bio",
+    "connect": "Connect",
+    "viewProfile": "View Profile",
+    "editPhoto": {
+      "title": "Edit Photo",
+      "description": "Choose a photo source",
+      "camera": "Camera",
+      "gallery": "Gallery",
+      "button": "Edit Photo"
+    },
+    "reputationLabel": "Reputation",
     "tabs": {
       "profile": "Profile",
       "reputation": "Reputation"
@@ -71,14 +95,29 @@
   "chat": {
     "title": "Chat",
     "subtitle": "Connect with your matches",
+    "loading": "Loading chats...",
+    "noMatches": "No matches yet",
+    "selectChat": "Select a match to start chatting",
     "requestAccess": "Requested access to your {{testType}} test.",
     "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
     "approvedResponse": "I approved your request to view my {{testType}} test.",
-    "declinedResponse": "I declined your request to view my {{testType}} test."
+    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "inputPlaceholder": "Type a message...",
+    "send": "Send",
+    "noMessages": "No messages yet"
   },
   "auth": {
     "loading": "Loading secure session...",
     "logout": "Logout",
+    "error": {
+      "failed": "Authentication failed"
+    },
+    "landing": {
+      "title": "Evolve — Decentralized Dating",
+      "email": "📧 Sign in with Email",
+      "phone": "📱 Sign in with Phone",
+      "wallet": "💳 Sign in with Wallet"
+    },
     "email": {
       "title": "Sign in with Email",
       "description": "Enter your email and password to continue",
@@ -89,9 +128,27 @@
       "switchToRegister": "Don't have an account? Register",
       "switchToLogin": "Already have an account? Sign In"
     },
+    "phone": {
+      "title": "Sign in with Phone",
+      "description": "Enter your phone number to receive a verification code",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+1...",
+      "getCode": "Get Code",
+      "otp": "Verification Code",
+      "otpPlaceholder": "Enter 6-digit code",
+      "verify": "Verify & Sign In",
+      "resendCode": "Resend Code",
+      "otpSent": "6-digit code sent to {{phone}}",
+      "error": {
+        "sendFailed": "Failed to send code",
+        "verifyFailed": "Verification failed"
+      }
+    },
     "connectWallet": {
       "title": "Connect Your Wallet",
-      "description": "Connect your wallet to access your secure profile."
+      "description": "Connect your wallet to access your secure profile.",
+      "connectButton": "Connect Wallet",
+      "connected": "Connected: {{address}}"
     },
     "signIn": {
       "title": "Sign In with Ethereum",
@@ -99,21 +156,84 @@
       "button": "Sign-In with Ethereum"
     },
     "modeSelector": {
-      "title": "Choose Your Dating Mode",
-      "description": "Select how you want to use Evolve",
+      "title": "Search Mode",
+      "currentMode": "Current mode: {{mode}}",
       "normal": {
         "label": "Normal",
-        "description": "Standard matching with email login"
+        "description": "Standard matching"
       },
       "pregnancyBond": {
         "label": "Pregnancy Bond",
-        "description": "Family-focused matching, requires wallet"
+        "description": "Family-focused matching"
       },
       "crypticChoice": {
         "label": "Cryptic Choice",
-        "description": "Anonymous matching, requires wallet"
+        "description": "Anonymous matching"
       }
     }
+  },
+  "verification": {
+    "std": "STD Verified",
+    "dna": "DNA Verified"
+  },
+  "staking": {
+    "title": "Staked EVOLVE",
+    "tokenLabel": "EVOLVE tokens",
+    "period": "Staking period",
+    "status": "Status",
+    "active": "Active"
+  },
+  "gift": {
+    "sendGift": "Send Gift"
+  },
+  "video": {
+    "playing": "Playing...",
+    "tapToPlay": "Tap to play"
+  },
+  "camera": {
+    "title": "Edit Photo",
+    "takePhoto": "Camera",
+    "chooseGallery": "Gallery",
+    "permissionDenied": "Camera permission denied. Please enable it in settings."
+  },
+  "location": {
+    "title": "Location",
+    "selectCountry": "Select Country",
+    "selectCity": "Select City",
+    "permissionDenied": "Location permission denied. Please enable it in settings."
+  },
+  "privacy": {
+    "level1": "Normal",
+    "level2": "Pregnancy Bond",
+    "level3": "Cryptic Choice",
+    "hideFromLower": "Hide content from lower privacy levels"
+  },
+  "std": {
+    "safe": "Safe",
+    "compatible": "Compatible",
+    "caution": "Caution",
+    "risk": "Risk"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "enable": "Enable Notifications",
+    "permissionDenied": "Notification permission denied. Please enable it in settings."
+  },
+  "common": {
+    "back": "Back",
+    "cancel": "Cancel",
+    "ok": "OK"
+  },
+  "settings": {
+    "datingMode": "Dating Mode",
+    "currentMode": "Current mode",
+    "autoSaved": "Your selection is saved automatically.",
+    "language": "Language",
+    "account": "Account",
+    "wallet": "Wallet",
+    "privacy": "Privacy",
+    "notifications": "Notifications",
+    "documents": "Documents"
   },
   "language": {
     "select": "Select Language",

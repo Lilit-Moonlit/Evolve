@@ -109,7 +109,7 @@
       "title": "Evolve — Mahusiano Yasiyokuwa na Kituo",
       "email": "📧 Ingia kwa Barua Pepe",
       "phone": "📱 Ingia kwa Simu",
-      "wallet": "💳 Unganisha Wallet"
+      "wallet": "💳 Sign in with Wallet"
     },
     "phone": {
       "title": "Ingia kwa Simu",
@@ -167,5 +167,19 @@
         "authType": "Ethereum wallet required"
       }
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

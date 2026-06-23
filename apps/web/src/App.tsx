@@ -7,7 +7,19 @@ import {
   Outlet,
 } from "react-router-dom";
 import { WagmiProvider, createConfig, http } from "wagmi";
-import { mainnet, sepolia } from "wagmi/chains";
+import {
+  arbitrum,
+  avalanche,
+  polygon,
+  optimism,
+  zksync,
+  base,
+  bsc,
+  fantom,
+  aurora,
+  celo,
+  cronos,
+} from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   RainbowKitProvider,
@@ -41,10 +53,31 @@ const queryClient = new QueryClient();
 const config = getDefaultConfig({
   appName: "Evolve",
   projectId: "YOUR_PROJECT_ID_PLACEHOLDER",
-  chains: [mainnet, sepolia],
+  chains: [
+    arbitrum,
+    avalanche,
+    polygon,
+    optimism,
+    zksync,
+    base,
+    bsc,
+    fantom,
+    aurora,
+    celo,
+    cronos,
+  ],
   transports: {
-    [mainnet.id]: http(),
-    [sepolia.id]: http(),
+    [arbitrum.id]: http(),
+    [avalanche.id]: http(),
+    [polygon.id]: http(),
+    [optimism.id]: http(),
+    [zksync.id]: http(),
+    [base.id]: http(),
+    [bsc.id]: http(),
+    [fantom.id]: http(),
+    [aurora.id]: http(),
+    [celo.id]: http(),
+    [cronos.id]: http(),
   },
 });
 

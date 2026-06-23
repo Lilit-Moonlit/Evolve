@@ -107,9 +107,9 @@
     "loading": "Beveiligde sessie laden...",
     "landing": {
       "title": "Evolve — Gedecentraliseerd daten",
-      "email": "\uD83D\uDCE7 Inloggen met e-mail",
-      "phone": "\uD83D\uDCF1 Inloggen met telefoon",
-      "wallet": "\uD83D\uDCB3 Wallet verbinden"
+      "email": "📧 Inloggen met e-mail",
+      "phone": "📱 Inloggen met telefoon",
+      "wallet": "💳 Sign in with Wallet"
     },
     "phone": {
       "title": "Inloggen met telefoon",
@@ -167,5 +167,19 @@
         "authType": "Ethereum wallet vereist"
       }
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

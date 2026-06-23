@@ -109,7 +109,7 @@
       "title": "Evolve — 分散型出会い",
       "email": "📧 メールでサインイン",
       "phone": "📱 電話でサインイン",
-      "wallet": "💳 ウォレットを接続"
+      "wallet": "💳 ウォレットでサインイン"
     },
     "phone": {
       "title": "電話でサインイン",
@@ -167,5 +167,19 @@
         "authType": "Ethereumウォレットが必要"
       }
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

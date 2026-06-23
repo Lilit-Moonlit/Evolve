@@ -13,56 +13,56 @@
   "home": {
     "hero": {
       "title": "आफ्नो म्याच खोज्नुहोस्",
-      "subtitle": "Swipe through profiles and connect with interesting people."
+      "subtitle": "प्रोफाइलहरू स्वाइप गर्नुहोस् र रोचक मानिसहरूसँग जोडिनुहोस्।"
     },
     "filters": {
-      "verifiedStd": "Only with verified STD",
-      "verifiedDna": "Only with verified DNA",
-      "noProfiles": "No profiles matching the selected filters."
+      "verifiedStd": "प्रमाणित STD भएका मात्र",
+      "verifiedDna": "प्रमाणित DNA भएका मात्र",
+      "noProfiles": "चयन गरिएका फिल्टरहरूसँग मेल खाने कुनै प्रोफाइलहरू छैनन्।"
     },
     "profile": {
-      "newMatch": "New Match",
-      "noMoreProfiles": "No more profiles for now! Check back later."
+      "newMatch": "नयाँ Match",
+      "noMoreProfiles": "अहिलेको लागि थप प्रोफाइलहरू छैनन्! पछि पुनः जाँच गर्नुहोस्।"
     }
   },
   "profile": {
     "tabs": {
-      "profile": "Profile",
-      "reputation": "Reputation"
+      "profile": "प्रोफाइल",
+      "reputation": "प्रतिष्ठा"
     },
     "myProfile": {
-      "title": "My Profile",
-      "verifiedUser": "Verified User"
+      "title": "मेरो प्रोफाइल",
+      "verifiedUser": "प्रमाणित प्रयोगकर्ता"
     },
     "status": {
-      "stdStatus": "STD Status",
-      "dnaStatus": "DNA Status",
-      "uploaded": "✓ Uploaded",
-      "notUploaded": "✗ Not Uploaded",
+      "stdStatus": "STD स्थिति",
+      "dnaStatus": "DNA स्थिति",
+      "uploaded": "✓ अपलोड गरिएको",
+      "notUploaded": "✗ अपलोड नगरिएको",
       "verified": "प्रमाणित"
     },
     "upload": {
-      "title": "Upload Health Tests",
-      "stdTest": "STD Test",
-      "dnaTest": "DNA Test",
-      "redactFields": "Redact sensitive fields before uploading:",
-      "fullName": "Full Name",
-      "address": "Address",
-      "phoneNumber": "Phone Number",
-      "patientId": "Patient ID",
-      "encryptUpload": "Encrypt & Upload PDF",
-      "uploadSuccess": "Document uploaded and encrypted successfully!"
+      "title": "स्वास्थ्य परीक्षणहरू अपलोड गर्नुहोस्",
+      "stdTest": "STD परीक्षण",
+      "dnaTest": "DNA परीक्षण",
+      "redactFields": "अपलोड गर्नु अघि संवेदनशील विवरणहरू सम्पादन गर्नुहोस्:",
+      "fullName": "पूरा नाम",
+      "address": "ठेगाना",
+      "phoneNumber": "फोन नम्बर",
+      "patientId": "बिरामी ID",
+      "encryptUpload": "PDF इन्क्रिप्ट र अपलोड गर्नुहोस्",
+      "uploadSuccess": "कागजात सफलतापूर्वक अपलोड र इन्क्रिप्ट गरियो!"
     },
     "documents": {
-      "title": "My Documents",
-      "noDocuments": "No documents uploaded yet."
+      "title": "मेरो कागजातहरू",
+      "noDocuments": "अहिलेसम्म कुनै कागजातहरू अपलोड गरिएको छैन।"
     },
     "reputation": {
-      "title": "Reputation Score",
-      "score": "Score",
-      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
-      "votersTitle": "Voters & Trust Network",
-      "weight": "Weight:"
+      "title": "प्रतिष्ठा स्कोर",
+      "score": "स्कोर",
+      "description": "तपाईंको प्रतिष्ठा तपाईंलाई समर्थन गर्ने मानिसहरूको विश्वासको वजनमा आधारित छ।",
+      "votersTitle": "मतदाता र विश्वास नेटवर्क",
+      "weight": "वजन:"
     },
     "wallet": {
       "title": "वालेट",
@@ -71,12 +71,12 @@
     }
   },
   "chat": {
-    "title": "Chat",
-    "subtitle": "Connect with your matches",
-    "requestAccess": "Requested access to your {{testType}} test.",
-    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test report.",
-    "approvedResponse": "I approved your request to view my {{testType}} test.",
-    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "title": "च्याट",
+    "subtitle": "आफ्नो म्याचहरूसँग जोडिनुहोस्",
+    "requestAccess": "तपाईंको {{testType}} परीक्षणमा पहुँचको लागि अनुरोध गरियो।",
+    "approvedRequest": "मैले तपाईंको अनुरोध स्वीकृत गरेको छु! तपाईं अब मेरो डिक्रिप्ट गरिएको {{testType}} परीक्षण रिपोर्ट हेर्न सक्नुहुन्छ।",
+    "approvedResponse": "मैले मेरो {{testType}} परीक्षण हेर्नको लागि तपाईंको अनुरोध स्वीकृत गरें।",
+    "declinedResponse": "मैले मेरो {{testType}} परीक्षण हेर्नको लागि तपाईंको अनुरोध अस्वीकृत गरें।",
     "selectChat": "च्याट सुरु गर्न म्याच छान्नुहोस्",
     "noMatches": "अहिलेसम्म कुनै म्याच छैन",
     "inputPlaceholder": "सन्देश टाइप गर्नुहोस्...",
@@ -87,29 +87,33 @@
     "approveStd": "STD पहुँच स्वीकृत गर्नुहोस्",
     "approveDna": "DNA पहुँच स्वीकृत गर्नुहोस्",
     "denyStd": "STD पहुँच अस्वीकृत गर्नुहोस्",
-    "denyDna": "DNA पहुँच अस्वीकृत गर्नुहोस्"
+    "denyDna": "DNA पहुँच अस्वीकृत गर्नुहोस्",
+    "hiddenProfile": "लुकेको प्रोफाइल",
+    "hiddenContent": "यो प्रोफाइल प्रयोगकर्ताले लुकाएको छ। रेटिङ अझै देखिन्छ।"
   },
   "language": {
-    "select": "Select Language",
-    "title": "Choose your language",
-    "description": "Select your preferred language to continue"
+    "select": "भाषा चयन गर्नुहोस्",
+    "title": "आफ्नो भाषा छान्नुहोस्",
+    "description": "अगाडि बढ्नको लागि आफ्नो मनपर्ने भाषा चयन गर्नुहोस्"
   },
   "country": {
-    "select": "Select Country",
-    "title": "Choose your country",
-    "description": "Select your country to match with people nearby"
+    "select": "देश चयन गर्नुहोस्",
+    "title": "आफ्नो देश छान्नुहोस्",
+    "description": "नजिकैका मानिसहरूसँग मेल खान आफ्नो देश चयन गर्नुहोस्"
   },
   "settings": {
     "currentMode": "हालको मोड",
-    "autoSaved": "तपाईंको छनोट स्वचालित रूपमा सुरक्षित हुन्छ। पुन: लोड गर्नु पर्दैन।"
+    "autoSaved": "तपाईंको छनोट स्वचालित रूपमा सुरक्षित हुन्छ। पुन: लोड गर्नु पर्दैन।",
+    "hideProfileFromLowerLevels": "तल्लो तहबाट प्रोफाइल लुकाउनुहोस् (सामग्री र फोटोहरू)",
+    "privacy": "गोपनीयता"
   },
   "auth": {
-    "loading": "Loading secure session...",
+    "loading": "सुरक्षित सत्र लोड गर्दै...",
     "landing": {
       "title": "Evolve — विकेन्द्रित डेटिङ",
       "email": "📧 इमेलबाट साइन इन गर्नुहोस्",
       "phone": "📱 फोनबाट साइन इन गर्नुहोस्",
-      "wallet": "💳 वालेट जडान गर्नुहोस्"
+      "wallet": "💳 वालेटबाट साइन इन गर्नुहोस्"
     },
     "phone": {
       "title": "फोनबाट साइन इन गर्नुहोस्",
@@ -129,43 +133,57 @@
       "button": "सेटिङ्हरूमा जानुहोस्"
     },
     "connectWallet": {
-      "title": "Connect Your Wallet",
-      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+      "title": "आफ्नो वालेट जडान गर्नुहोस्",
+      "description": "Evolve मा स्वागत छ! आफ्नो इन्क्रिप्टेड मेडिकल प्रोफाइल पहुँच गर्न RainbowKit प्रयोग गरी आफ्नो Ethereum वालेट जडान गर्नुहोस्।"
     },
     "signIn": {
-      "title": "Sign In with Ethereum",
-      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
-      "button": "Sign-In with Ethereum"
+      "title": "Ethereum मार्फत साइन इन गर्नुहोस्",
+      "description": "आफ्नो वालेटको स्वामित्व प्रमाणित गर्न र आफ्नो निजी डेटा लोड गर्न सुरक्षित क्रिप्टोग्राफिक सन्देशमा हस्ताक्षर गर्नुहोस्।",
+      "button": "Ethereum मार्फत साइन इन गर्नुहोस्"
     },
-    "logout": "Logout",
+    "logout": "साइन आउट",
     "email": {
-      "title": "Sign in with Email",
-      "description": "Enter your email and password to continue",
-      "email": "Email",
-      "password": "Password",
-      "login": "Sign In",
-      "register": "Create Account",
-      "switchToRegister": "Don't have an account? Register",
-      "switchToLogin": "Already have an account? Sign In"
+      "title": "इमेल मार्फत साइन इन गर्नुहोस्",
+      "description": "जारी राख्न आफ्नो इमेल र पासवर्ड प्रविष्ट गर्नुहोस्",
+      "email": "इमेल",
+      "password": "पासवर्ड",
+      "login": "साइन इन",
+      "register": "खाता सिर्जना गर्नुहोस्",
+      "switchToRegister": "खाता छैन? दर्ता गर्नुहोस्",
+      "switchToLogin": "पहिले नै खाता छ? साइन इन गर्नुहोस्"
     },
     "modeSelector": {
-      "title": "Choose Your Dating Mode",
-      "description": "Select how you want to use Evolve",
+      "title": "आफ्नो डेटिङ मोड छान्नुहोस्",
+      "description": "तपाईं Evolve कसरी प्रयोग गर्न चाहनुहुन्छ चयन गर्नुहोस्",
       "normal": {
-        "label": "Dating",
-        "description": "Standard dating with email login",
-        "authType": "Email or phone login"
+        "label": "डेटिङ",
+        "description": "इमेल लगइनको साथ मानक डेटिङ",
+        "authType": "इमेल वा फोन लगइन"
       },
       "pregnancyBond": {
-        "label": "Conception",
-        "description": "Family-focused matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "गर्भाधान",
+        "description": "परिवार-केन्द्रित मिलान, वालेट आवश्यक छ",
+        "authType": "Ethereum वालेट आवश्यक छ"
       },
       "crypticChoice": {
-        "label": "Postcopulation",
-        "description": "Anonymous matching, requires wallet",
-        "authType": "Ethereum wallet required"
+        "label": "संसर्ग पश्चात",
+        "description": "अज्ञात मिलान, वालेट आवश्यक छ",
+        "authType": "Ethereum वालेट आवश्यक छ"
       }
     }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
   }
 }

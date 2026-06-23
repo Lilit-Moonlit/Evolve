@@ -52,7 +52,7 @@ export default function PhoneAuthForm({ onBack }: PhoneAuthFormProps) {
       <div className="flex items-center">
         <button
           onClick={onBack}
-          className="text-pink-400 hover:text-pink-300 text-sm mr-4"
+          className="text-blue-400 hover:text-blue-300 text-sm mr-4"
         >
           ← Back
         </button>
@@ -78,7 +78,7 @@ export default function PhoneAuthForm({ onBack }: PhoneAuthFormProps) {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder={t("auth.phone.phonePlaceholder")}
-              className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-pink-500"
+              className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-blue-500"
               required
             />
           </div>
@@ -86,7 +86,7 @@ export default function PhoneAuthForm({ onBack }: PhoneAuthFormProps) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white font-semibold rounded-lg shadow-lg transition-all transform hover:scale-[1.02] min-h-[48px] disabled:opacity-50"
+            className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition-all transform hover:scale-[1.02] min-h-[48px] disabled:opacity-50"
           >
             {loading ? t("auth.loading") : t("auth.phone.getCode")}
           </button>
@@ -112,7 +112,7 @@ export default function PhoneAuthForm({ onBack }: PhoneAuthFormProps) {
                 setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))
               }
               placeholder={t("auth.phone.otpPlaceholder")}
-              className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-pink-500 text-center text-2xl tracking-widest"
+              className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-blue-500 text-center text-2xl tracking-widest"
               required
             />
           </div>
@@ -120,7 +120,7 @@ export default function PhoneAuthForm({ onBack }: PhoneAuthFormProps) {
           <button
             type="submit"
             disabled={loading || otp.length !== 6}
-            className="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white font-semibold rounded-lg shadow-lg transition-all transform hover:scale-[1.02] min-h-[48px] disabled:opacity-50"
+            className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition-all transform hover:scale-[1.02] min-h-[48px] disabled:opacity-50"
           >
             {loading ? t("auth.loading") : t("auth.phone.verify")}
           </button>
@@ -129,7 +129,7 @@ export default function PhoneAuthForm({ onBack }: PhoneAuthFormProps) {
             type="button"
             onClick={handleRequestOtp}
             disabled={loading}
-            className="w-full py-2 text-pink-400 hover:text-pink-300 text-sm transition-colors"
+            className="w-full py-2 text-blue-400 hover:text-blue-300 text-sm transition-colors"
           >
             {t("auth.phone.resendCode")}
           </button>
