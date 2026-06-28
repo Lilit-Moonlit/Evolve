@@ -55,8 +55,12 @@ export default function AuthScreen() {
         await loginWithEmail(email, password);
       }
       router.replace("/home");
-    } catch {
-      setError(t("auth.error.failed"));
+    } catch (error) {
+      if (error instanceof AppError) {
+        setError(error.message);
+      } else {
+        setError(t("auth.error.failed"));
+      }
     } finally {
       setLoading(false);
     }
