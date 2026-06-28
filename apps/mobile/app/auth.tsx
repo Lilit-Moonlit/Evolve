@@ -55,8 +55,8 @@ export default function AuthScreen() {
         await loginWithEmail(email, password);
       }
       router.replace("/home");
-    } catch (err: any) {
-      setError(err.message || t("auth.error.failed"));
+    } catch {
+      setError(t("auth.error.failed"));
     } finally {
       setLoading(false);
     }
@@ -69,8 +69,8 @@ export default function AuthScreen() {
       await requestPhoneOtp(phoneNumber);
       setOtpSent(true);
       setView("otp");
-    } catch (err: any) {
-      setError(err.message || t("auth.phone.error.sendFailed"));
+    } catch {
+      setError(t("auth.phone.error.sendFailed"));
     } finally {
       setLoading(false);
     }
@@ -82,8 +82,8 @@ export default function AuthScreen() {
     try {
       await verifyPhoneOtp(phoneNumber, otp);
       router.replace("/home");
-    } catch (err: any) {
-      setError(err.message || t("auth.phone.error.verifyFailed"));
+    } catch {
+      setError(t("auth.phone.error.verifyFailed"));
     } finally {
       setLoading(false);
     }
@@ -280,14 +280,14 @@ export default function AuthScreen() {
         setLoading(true);
         await signInWithEthereum(address);
         const nonce = await AsyncStorage.getItem("evolve_siwe_nonce");
-        if (!nonce) throw new Error("No nonce");
-        const message = `Evolve Authentication: Sign in with Ethereum. Nonce: ${nonce}`;
+        if (!nonce) throw new Error(t("auth.signIn.errors.missingNonce"));
+        const message = `${t("auth.signIn.statement")} Nonce: ${nonce}`;
         const signature = await signMessageAsync({ message });
         await verifyWallet(address, signature, message);
         setSignedIn(true);
         router.replace("/home");
-      } catch (err: any) {
-        setError(err.message || "SIWE failed");
+      } catch {
+        setError(t("auth.error.failed"));
       } finally {
         setLoading(false);
       }
