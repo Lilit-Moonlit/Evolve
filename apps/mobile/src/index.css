@@ -1,0 +1,10 @@
+/* Micro‑animation for BridgeScreen button */
+.bridge-button {
+  background-color: #add8e6;
+  color: #4b0082;
+  transition: transform 0.2s ease-in-out;
+}
+
+.bridge-button:hover {
+  transform: scale(1.05);
+}

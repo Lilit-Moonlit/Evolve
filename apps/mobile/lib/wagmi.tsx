@@ -61,11 +61,11 @@ const config = createConfig({
     [aurora.id]: http(getRPCUrl("aurora")),
     [celo.id]: http(getRPCUrl("celo")),
     [cronos.id]: http(getRPCUrl("cronos")),
-    // Testnet transports – використовуйте ті ж функції getRPCUrl, передаючи назву тестової мережі
-    [arbitrumSepolia.id]: http(getRPCUrl("arbitrumSepolia")),
-    [polygonAmoy.id]: http(getRPCUrl("polygonAmoy")),
-    [optimismSepolia.id]: http(getRPCUrl("optimismSepolia")),
-    [baseSepolia.id]: http(getRPCUrl("baseSepolia")),
+    // Testnet transports – use RPC URLs defined in .env.example
+    [arbitrumSepolia.id]: http(process.env.ARBITRUM_SEPOLIA_RPC_URL ?? ""),
+    [polygonAmoy.id]: http(process.env.POLYGON_AMOY_RPC_URL ?? ""),
+    [optimismSepolia.id]: http(process.env.OPTIMISM_SEPOLIA_RPC_URL ?? ""),
+    [baseSepolia.id]: http(process.env.BASE_SEPOLIA_RPC_URL ?? ""),
   },
 });
 
