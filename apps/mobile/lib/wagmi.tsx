@@ -1,11 +1,15 @@
 import { createConfig, http, WagmiProvider } from "wagmi";
 import {
   arbitrum,
+  arbitrumSepolia,
   avalanche,
   polygon,
+  polygonAmoy,
   optimism,
+  optimismSepolia,
   zksync,
   base,
+  baseSepolia,
   bsc,
   fantom,
   aurora,
@@ -25,6 +29,7 @@ const WALLETCONNECT_PROJECT_ID =
 
 const config = createConfig({
   chains: [
+    // Mainnet chains (kept for production)
     arbitrum,
     avalanche,
     polygon,
@@ -36,9 +41,15 @@ const config = createConfig({
     aurora,
     celo,
     cronos,
+    // Testnet chains
+    arbitrumSepolia,
+    polygonAmoy,
+    optimismSepolia,
+    baseSepolia,
   ],
   connectors: [walletConnect({ projectId: WALLETCONNECT_PROJECT_ID })],
   transports: {
+    // Mainnet transports
     [arbitrum.id]: http(getRPCUrl("arbitrum")),
     [avalanche.id]: http(getRPCUrl("avalanche")),
     [polygon.id]: http(getRPCUrl("polygon")),
@@ -50,6 +61,11 @@ const config = createConfig({
     [aurora.id]: http(getRPCUrl("aurora")),
     [celo.id]: http(getRPCUrl("celo")),
     [cronos.id]: http(getRPCUrl("cronos")),
+    // Testnet transports – використовуйте ті ж функції getRPCUrl, передаючи назву тестової мережі
+    [arbitrumSepolia.id]: http(getRPCUrl("arbitrumSepolia")),
+    [polygonAmoy.id]: http(getRPCUrl("polygonAmoy")),
+    [optimismSepolia.id]: http(getRPCUrl("optimismSepolia")),
+    [baseSepolia.id]: http(getRPCUrl("baseSepolia")),
   },
 });
 

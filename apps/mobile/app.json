@@ -12,6 +12,11 @@
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": ["**/*"],
+    "runtimeVersion": "1.0.0",
+    "updates": {
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/<YOUR_PROJECT_ID>"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.evolve.dating",
