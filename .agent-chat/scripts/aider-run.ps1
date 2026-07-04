@@ -69,10 +69,21 @@ Write-Host ""
 
 $argsList = @("--model", "ollama/$Model")
 
+# Додати файли, розширюючи можливі glob‑шаблони
 if ($Files) {
     foreach ($f in ($Files -split "\s+")) {
+        # Спробувати прямий шлях
         $fp = Join-Path $ProjectRoot $f
-        if (Test-Path $fp) { $argsList += @("--file", $fp) }
+        if (Test-Path $fp) {
+            $argsList += @("--file", $fp)
+        } else {
+            # Якщо шлях не існує – спробувати розширити glob‑шаблон
+            # Get-ChildItem підтримує -Include, тому шукаємо рекурсивно
+            $resolved = Get-ChildItem -Path $ProjectRoot -Recurse -Include $f -File -ErrorAction SilentlyContinue
+            foreach ($r in $resolved) {
+                $argsList += @("--file", $r.FullName)
+            }
+        }
     }
 }
 
