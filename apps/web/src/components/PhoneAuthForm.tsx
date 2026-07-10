@@ -13,6 +13,12 @@ export default function PhoneAuthForm({ onBack }: PhoneAuthFormProps) {
   const { requestPhoneOtp, verifyPhoneOtp, phoneOtpSent, loading } =
     useAppState();
 
+  const getPhoneErrorMessage = (type: "send" | "verify") => {
+    return type === "send"
+      ? t("auth.phone.error.sendFailed")
+      : t("auth.phone.error.verifyFailed");
+  };
+
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
@@ -23,13 +29,13 @@ export default function PhoneAuthForm({ onBack }: PhoneAuthFormProps) {
     e.preventDefault();
     setError("");
     if (!phone.trim()) {
-      setError("Please enter a phone number");
+      setError(t("auth.phone.validation.phoneRequired"));
       return;
     }
     try {
       await requestPhoneOtp(phone);
-    } catch (err: any) {
-      setError(err.message || "Failed to send code");
+    } catch (error: unknown) {
+      setError(getPhoneErrorMessage("send"));
     }
   };
 
@@ -37,13 +43,13 @@ export default function PhoneAuthForm({ onBack }: PhoneAuthFormProps) {
     e.preventDefault();
     setError("");
     if (otp.length !== 6) {
-      setError("Please enter a valid 6-digit code");
+      setError(t("auth.phone.validation.invalidOtp"));
       return;
     }
     try {
       await verifyPhoneOtp(phone, otp);
-    } catch (err: any) {
-      setError(err.message || "Verification failed");
+    } catch (error: unknown) {
+      setError(getPhoneErrorMessage("verify"));
     }
   };
 
@@ -54,7 +60,7 @@ export default function PhoneAuthForm({ onBack }: PhoneAuthFormProps) {
           onClick={onBack}
           className="text-blue-400 hover:text-blue-300 text-sm mr-4"
         >
-          ← Back
+          ← {t("common.back")}
         </button>
         <h2 className="text-2xl font-bold text-white">
           {t("auth.phone.title")}
