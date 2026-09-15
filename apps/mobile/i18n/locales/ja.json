@@ -80,5 +80,129 @@
     "select": "Select Country",
     "title": "Choose your country",
     "description": "Select your country to match with people nearby"
+  },
+  "dashboard": {
+    "mode2": {
+      "title": "Pregnancy Bond",
+      "subtitle": "Family matching with paternity confirmation",
+      "status": {
+        "active": "Active",
+        "awaitingPaternity": "Awaiting Paternity",
+        "resolved": "Resolved"
+      },
+      "step0": {
+        "title": "Step 0: Financial Deposit",
+        "description": "コミットメントの保証としてEvolveFundに最低15 EVOLVEを入金してください",
+        "balanceLabel": "Your Balance",
+        "fundReady": "Fund Ready",
+        "fundRequired": "EvolveFundへの最低15 EVOLVEの入金が必要です",
+        "walletBalance": "EVOLVEウォレット残高",
+        "fundTitle": "EvolveFundデポジット",
+        "locked": "ボンドによりロック中",
+        "unlocked": "ロック解除済み",
+        "daysRemaining": "残り{{days}}日",
+        "noDeposit": "デポジットなし",
+        "depositPrompt": "ファンドにEVOLVEを入金（最低15）",
+        "amountPlaceholder": "金額（例: 20）",
+        "approving": "承認中...",
+        "depositing": "入金中...",
+        "approveAction": "EVOLVEを承認",
+        "depositAction": "ファンドに入金",
+        "lockHint": "最低30日間ロック。ボンド作成に必要です。"
+      },
+      "step1": {
+        "title": "Step 1: Act Confirmation",
+        "description": "Both partners confirm sexual act",
+        "selfLabel": "Your Confirmation",
+        "partnerLabel": "Partner Confirmation",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "confirmSex": "Confirm Act",
+        "alreadyConfirmed": "Already Confirmed",
+        "partnerConfirmSex": "Confirm Partner",
+        "partnerAlreadyConfirmed": "Partner Already Confirmed",
+        "womanPartner": "パートナー（女性）",
+        "manPartner": "パートナー（男性）"
+      },
+      "step2": {
+        "title": "Step 2: Waiting Timer",
+        "description": "妊娠期間が終了すると、ボンドは自動的に解決されます。",
+        "ready": "Ready to Start",
+        "timerInfo": "Timer started. Waiting for pregnancy test results.",
+        "waitingForConfirmations": "Waiting for confirmations from both partners"
+      },
+      "step3": {
+        "title": "Step 3: Result",
+        "description": "Paternity determination and deposit distribution",
+        "pregnancyCheckbox": "妊娠を報告",
+        "resolvedPregnant": "Pregnancy confirmed. Deposit distributed per contract.",
+        "resolvedNotPregnant": "Pregnancy not confirmed. Deposit returned to partners.",
+        "awaitingResolution": "Waiting for pregnancy test results",
+        "canReport": "妊娠を報告できます",
+        "notYet": "妊娠報告は確認から14日後に利用可能です",
+        "reportToVerify": "妊娠を報告して父性確認を開始します。",
+        "waitingWindow": "妊娠報告ウィンドウの開始を待っています...",
+        "waitingWoman": "女性が妊娠を報告するのを待っています...",
+        "paternityInProgress": "父性確認を実行中です。管理者が結果を提出します。",
+        "awaitingResult": "管理者からの父性検査結果を待っています..."
+      },
+      "createBond": {
+        "partnerPlaceholder": "パートナーアドレス (0x...)"
+      },
+      "error": {
+        "rejected": "ユーザーによってトランザクションが拒否されました。",
+        "failed": "トランザクションエラー: {{message}}"
+      }
+    },
+    "mode3": {
+      "title": "Cryptic Choice",
+      "subtitle": "Anonymous matching with 48-hour window",
+      "create": {
+        "title": "Create Session",
+        "description": "Start a new partner search session",
+        "button": "Create Session",
+        "hint": "After creating a session, you have 48 hours to add participants and confirm acts"
+      },
+      "timer": {
+        "active": "Timer: {{timer}}",
+        "inactive": "Session Inactive"
+      },
+      "participants": {
+        "title": "Participants",
+        "empty": "No participants",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "confirmedButton": "Confirmed",
+        "confirmButton": "Confirm"
+      },
+      "available": {
+        "title": "Available Profiles",
+        "empty": "No available profiles",
+        "profileHint": "Add to session",
+        "addButton": "Add"
+      },
+      "profileBorder": {
+        "title": "Your Profile",
+        "description": "When session is active, your profile will have a green border",
+        "noProfile": "No Profile"
+      },
+      "joinButton": "セッションに参加",
+      "waitingForParticipants": "セッションはアクティブです — 参加者を待っています",
+      "confirmButton": "参加を確認",
+      "fundNotice": "参加にはEvolveFundへの最低15 EVOLVEの入金が必要です。",
+      "resolved": {
+        "title": "セッション解決済み",
+        "fatherLabel": "選ばれた父:",
+        "rewardInfo": "選ばれなかった参加者: ステークの90%は女性へ、10%は選ばれた父へ。",
+        "noFather": "父は選ばれませんでした。ステークは参加者に返還されました。"
+      },
+      "error": {
+        "rejected": "ユーザーによってトランザクションが拒否されました。",
+        "failed": "トランザクションエラー: {{message}}"
+      }
+    }
+  },
+  "common": {
+    "loading": "読み込み中..."
   }
 }

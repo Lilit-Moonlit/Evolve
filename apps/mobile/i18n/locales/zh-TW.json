@@ -80,5 +80,129 @@
     "select": "Select Country",
     "title": "Choose your country",
     "description": "Select your country to match with people nearby"
+  },
+  "dashboard": {
+    "mode2": {
+      "title": "Pregnancy Bond",
+      "subtitle": "Family matching with paternity confirmation",
+      "status": {
+        "active": "Active",
+        "awaitingPaternity": "Awaiting Paternity",
+        "resolved": "Resolved"
+      },
+      "step0": {
+        "title": "Step 0: Financial Deposit",
+        "description": "请在 EvolveFund 存入至少 15 EVOLVE 作为承诺担保",
+        "balanceLabel": "Your Balance",
+        "fundReady": "Fund Ready",
+        "fundRequired": "需要在 EvolveFund 存入最少 15 EVOLVE",
+        "walletBalance": "EVOLVE 钱包余额",
+        "fundTitle": "EvolveFund 存款",
+        "locked": "已被绑定锁定",
+        "unlocked": "已解锁",
+        "daysRemaining": "剩余{{days}}天",
+        "noDeposit": "无存款",
+        "depositPrompt": "向基金存入 EVOLVE（最低 15）",
+        "amountPlaceholder": "金额（如 20）",
+        "approving": "批准中...",
+        "depositing": "存款中...",
+        "approveAction": "批准 EVOLVE",
+        "depositAction": "存入基金",
+        "lockHint": "最短锁定 30 天。创建绑定需要。"
+      },
+      "step1": {
+        "title": "Step 1: Act Confirmation",
+        "description": "Both partners confirm sexual act",
+        "selfLabel": "Your Confirmation",
+        "partnerLabel": "Partner Confirmation",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "confirmSex": "Confirm Act",
+        "alreadyConfirmed": "Already Confirmed",
+        "partnerConfirmSex": "Confirm Partner",
+        "partnerAlreadyConfirmed": "Partner Already Confirmed",
+        "womanPartner": "伴侣（女性）",
+        "manPartner": "伴侣（男性）"
+      },
+      "step2": {
+        "title": "Step 2: Waiting Timer",
+        "description": "妊娠期结束时，绑定会自动解除。",
+        "ready": "Ready to Start",
+        "timerInfo": "Timer started. Waiting for pregnancy test results.",
+        "waitingForConfirmations": "Waiting for confirmations from both partners"
+      },
+      "step3": {
+        "title": "Step 3: Result",
+        "description": "Paternity determination and deposit distribution",
+        "pregnancyCheckbox": "报告怀孕",
+        "resolvedPregnant": "Pregnancy confirmed. Deposit distributed per contract.",
+        "resolvedNotPregnant": "Pregnancy not confirmed. Deposit returned to partners.",
+        "awaitingResolution": "Waiting for pregnancy test results",
+        "canReport": "您现在可以报告怀孕",
+        "notYet": "确认 14 天后可报告怀孕",
+        "reportToVerify": "报告怀孕以启动亲子鉴定。",
+        "waitingWindow": "正在等待怀孕报告窗口开启...",
+        "waitingWoman": "正在等待女性报告怀孕...",
+        "paternityInProgress": "亲子鉴定进行中。管理员将提交结果。",
+        "awaitingResult": "正在等待管理员的亲子鉴定结果..."
+      },
+      "createBond": {
+        "partnerPlaceholder": "伴侣地址（0x...）"
+      },
+      "error": {
+        "rejected": "用户拒绝了交易。",
+        "failed": "交易错误：{{message}}"
+      }
+    },
+    "mode3": {
+      "title": "Cryptic Choice",
+      "subtitle": "Anonymous matching with 48-hour window",
+      "create": {
+        "title": "Create Session",
+        "description": "Start a new partner search session",
+        "button": "Create Session",
+        "hint": "After creating a session, you have 48 hours to add participants and confirm acts"
+      },
+      "timer": {
+        "active": "Timer: {{timer}}",
+        "inactive": "Session Inactive"
+      },
+      "participants": {
+        "title": "Participants",
+        "empty": "No participants",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "confirmedButton": "Confirmed",
+        "confirmButton": "Confirm"
+      },
+      "available": {
+        "title": "Available Profiles",
+        "empty": "No available profiles",
+        "profileHint": "Add to session",
+        "addButton": "Add"
+      },
+      "profileBorder": {
+        "title": "Your Profile",
+        "description": "When session is active, your profile will have a green border",
+        "noProfile": "No Profile"
+      },
+      "joinButton": "加入会话",
+      "waitingForParticipants": "您的会话处于活动状态 — 等待参与者",
+      "confirmButton": "确认参与",
+      "fundNotice": "参与需要至少在 EvolveFund 存入 15 EVOLVE。",
+      "resolved": {
+        "title": "会话已解决",
+        "fatherLabel": "选定的父亲：",
+        "rewardInfo": "未被选中的参与者：90% 的押金归女方，10% 归选定的父亲。",
+        "noFather": "未选择父亲。押金已退还给参与者。"
+      },
+      "error": {
+        "rejected": "用户拒绝了交易。",
+        "failed": "交易错误：{{message}}"
+      }
+    }
+  },
+  "common": {
+    "loading": "加载中..."
   }
 }

@@ -80,5 +80,129 @@
     "select": "Select Country",
     "title": "Choose your country",
     "description": "Select your country to match with people nearby"
+  },
+  "dashboard": {
+    "mode2": {
+      "title": "Pregnancy Bond",
+      "subtitle": "Family matching with paternity confirmation",
+      "status": {
+        "active": "Active",
+        "awaitingPaternity": "Awaiting Paternity",
+        "resolved": "Resolved"
+      },
+      "step0": {
+        "title": "Step 0: Financial Deposit",
+        "description": "Hãy gửi ít nhất 15 EVOLVE vào EvolveFund như cam kết bảo đảm",
+        "balanceLabel": "Your Balance",
+        "fundReady": "Fund Ready",
+        "fundRequired": "Cần gửi tối thiểu 15 EVOLVE vào EvolveFund",
+        "walletBalance": "Số dư ví EVOLVE",
+        "fundTitle": "Tiền gửi EvolveFund",
+        "locked": "Bị khóa bởi liên kết",
+        "unlocked": "Đã mở khóa",
+        "daysRemaining": "Còn {{days}} ngày",
+        "noDeposit": "Không có tiền gửi",
+        "depositPrompt": "Gửi EVOLVE vào Quỹ (tối thiểu 15)",
+        "amountPlaceholder": "Số tiền (ví dụ: 20)",
+        "approving": "Đang phê duyệt...",
+        "depositing": "Đang gửi...",
+        "approveAction": "Phê duyệt EVOLVE",
+        "depositAction": "Gửi vào Quỹ",
+        "lockHint": "Khóa tối thiểu 30 ngày. Cần để tạo liên kết."
+      },
+      "step1": {
+        "title": "Step 1: Act Confirmation",
+        "description": "Both partners confirm sexual act",
+        "selfLabel": "Your Confirmation",
+        "partnerLabel": "Partner Confirmation",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "confirmSex": "Confirm Act",
+        "alreadyConfirmed": "Already Confirmed",
+        "partnerConfirmSex": "Confirm Partner",
+        "partnerAlreadyConfirmed": "Partner Already Confirmed",
+        "womanPartner": "Đối tác (nữ)",
+        "manPartner": "Đối tác (nam)"
+      },
+      "step2": {
+        "title": "Step 2: Waiting Timer",
+        "description": "Liên kết tự động được giải quyết khi kết thúc giai đoạn mang thai.",
+        "ready": "Ready to Start",
+        "timerInfo": "Timer started. Waiting for pregnancy test results.",
+        "waitingForConfirmations": "Waiting for confirmations from both partners"
+      },
+      "step3": {
+        "title": "Step 3: Result",
+        "description": "Paternity determination and deposit distribution",
+        "pregnancyCheckbox": "Báo cáo mang thai",
+        "resolvedPregnant": "Pregnancy confirmed. Deposit distributed per contract.",
+        "resolvedNotPregnant": "Pregnancy not confirmed. Deposit returned to partners.",
+        "awaitingResolution": "Waiting for pregnancy test results",
+        "canReport": "Bạn có thể báo cáo việc mang thai ngay bây giờ",
+        "notYet": "Báo cáo mang thai có sẵn sau 14 ngày kể từ khi xác nhận",
+        "reportToVerify": "Báo cáo việc mang thai để bắt đầu xác minh quan hệ cha con.",
+        "waitingWindow": "Đang chờ cửa sổ báo cáo mang thai mở...",
+        "waitingWoman": "Đang chờ người phụ nữ báo cáo việc mang thai...",
+        "paternityInProgress": "Đang xác minh quan hệ cha con. Quản trị viên sẽ gửi kết quả.",
+        "awaitingResult": "Đang chờ kết quả xét nghiệm quan hệ cha con từ quản trị viên..."
+      },
+      "createBond": {
+        "partnerPlaceholder": "Địa chỉ đối tác (0x...)"
+      },
+      "error": {
+        "rejected": "Giao dịch bị người dùng từ chối.",
+        "failed": "Lỗi giao dịch: {{message}}"
+      }
+    },
+    "mode3": {
+      "title": "Cryptic Choice",
+      "subtitle": "Anonymous matching with 48-hour window",
+      "create": {
+        "title": "Create Session",
+        "description": "Start a new partner search session",
+        "button": "Create Session",
+        "hint": "After creating a session, you have 48 hours to add participants and confirm acts"
+      },
+      "timer": {
+        "active": "Timer: {{timer}}",
+        "inactive": "Session Inactive"
+      },
+      "participants": {
+        "title": "Participants",
+        "empty": "No participants",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "confirmedButton": "Confirmed",
+        "confirmButton": "Confirm"
+      },
+      "available": {
+        "title": "Available Profiles",
+        "empty": "No available profiles",
+        "profileHint": "Add to session",
+        "addButton": "Add"
+      },
+      "profileBorder": {
+        "title": "Your Profile",
+        "description": "When session is active, your profile will have a green border",
+        "noProfile": "No Profile"
+      },
+      "joinButton": "Tham gia phiên",
+      "waitingForParticipants": "Phiên của bạn đang hoạt động — đang chờ người tham gia",
+      "confirmButton": "Xác nhận tham gia",
+      "fundNotice": "Bạn cần gửi tối thiểu 15 EVOLVE vào EvolveFund để tham gia.",
+      "resolved": {
+        "title": "Phiên đã giải quyết",
+        "fatherLabel": "Người cha được chọn:",
+        "rewardInfo": "Người tham gia không được chọn: 90% phần đặt cọc cho người phụ nữ, 10% cho người cha được chọn.",
+        "noFather": "Không ai được chọn làm cha. Phần đặt cọc đã trả lại cho người tham gia."
+      },
+      "error": {
+        "rejected": "Giao dịch bị người dùng từ chối.",
+        "failed": "Lỗi giao dịch: {{message}}"
+      }
+    }
+  },
+  "common": {
+    "loading": "Đang tải..."
   }
 }

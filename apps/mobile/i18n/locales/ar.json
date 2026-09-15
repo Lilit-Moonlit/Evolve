@@ -80,5 +80,129 @@
     "select": "Select Country",
     "title": "Choose your country",
     "description": "Select your country to match with people nearby"
+  },
+  "dashboard": {
+    "mode2": {
+      "title": "Pregnancy Bond",
+      "subtitle": "Family matching with paternity confirmation",
+      "status": {
+        "active": "Active",
+        "awaitingPaternity": "Awaiting Paternity",
+        "resolved": "Resolved"
+      },
+      "step0": {
+        "title": "Step 0: Financial Deposit",
+        "description": "أودِع 15 EVOLVE على الأقل في EvolveFund كضمان للالتزام",
+        "balanceLabel": "Your Balance",
+        "fundReady": "Fund Ready",
+        "fundRequired": "مطلوب إيداع 15 EVOLVE على الأقل في EvolveFund",
+        "walletBalance": "رصيد محفظة EVOLVE",
+        "fundTitle": "إيداع EvolveFund",
+        "locked": "مقفل بواسطة الارتباط",
+        "unlocked": "مفتوح",
+        "daysRemaining": "{{days}} يوم متبقي",
+        "noDeposit": "لا يوجد إيداع",
+        "depositPrompt": "أودِع EVOLVE في الصندوق (الحد الأدنى 15)",
+        "amountPlaceholder": "المبلغ (مثال: 20)",
+        "approving": "جارٍ الموافقة...",
+        "depositing": "جارٍ الإيداع...",
+        "approveAction": "الموافقة على EVOLVE",
+        "depositAction": "الإيداع في الصندوق",
+        "lockHint": "قفل أدنى 30 يومًا. مطلوب لإنشاء الارتباطات."
+      },
+      "step1": {
+        "title": "Step 1: Act Confirmation",
+        "description": "Both partners confirm sexual act",
+        "selfLabel": "Your Confirmation",
+        "partnerLabel": "Partner Confirmation",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "confirmSex": "Confirm Act",
+        "alreadyConfirmed": "Already Confirmed",
+        "partnerConfirmSex": "Confirm Partner",
+        "partnerAlreadyConfirmed": "Partner Already Confirmed",
+        "womanPartner": "الشريك (امرأة)",
+        "manPartner": "الشريك (رجل)"
+      },
+      "step2": {
+        "title": "Step 2: Waiting Timer",
+        "description": "يتم حل الارتباط تلقائيًا عند انتهاء فترة الحمل.",
+        "ready": "Ready to Start",
+        "timerInfo": "Timer started. Waiting for pregnancy test results.",
+        "waitingForConfirmations": "Waiting for confirmations from both partners"
+      },
+      "step3": {
+        "title": "Step 3: Result",
+        "description": "Paternity determination and deposit distribution",
+        "pregnancyCheckbox": "الإبلاغ عن الحمل",
+        "resolvedPregnant": "Pregnancy confirmed. Deposit distributed per contract.",
+        "resolvedNotPregnant": "Pregnancy not confirmed. Deposit returned to partners.",
+        "awaitingResolution": "Waiting for pregnancy test results",
+        "canReport": "يمكنك الآن الإبلاغ عن الحمل",
+        "notYet": "الإبلاغ عن الحمل متاح بعد 14 يومًا من التأكيد",
+        "reportToVerify": "أبلغ عن الحمل لبدء التحقق من الأبوة.",
+        "waitingWindow": "بانتظار فتح نافذة الإبلاغ عن الحمل...",
+        "waitingWoman": "بانتظار أن تُبلغ المرأة عن الحمل...",
+        "paternityInProgress": "التحقق من الأبوة قيد التنفيذ. سيقدم المسؤول النتيجة.",
+        "awaitingResult": "بانتظار نتيجة اختبار الأبوة من المسؤول..."
+      },
+      "createBond": {
+        "partnerPlaceholder": "عنوان الشريك (0x...)"
+      },
+      "error": {
+        "rejected": "رُفضت المعاملة من قبل المستخدم.",
+        "failed": "خطأ في المعاملة: {{message}}"
+      }
+    },
+    "mode3": {
+      "title": "Cryptic Choice",
+      "subtitle": "Anonymous matching with 48-hour window",
+      "create": {
+        "title": "Create Session",
+        "description": "Start a new partner search session",
+        "button": "Create Session",
+        "hint": "After creating a session, you have 48 hours to add participants and confirm acts"
+      },
+      "timer": {
+        "active": "Timer: {{timer}}",
+        "inactive": "Session Inactive"
+      },
+      "participants": {
+        "title": "Participants",
+        "empty": "No participants",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "confirmedButton": "Confirmed",
+        "confirmButton": "Confirm"
+      },
+      "available": {
+        "title": "Available Profiles",
+        "empty": "No available profiles",
+        "profileHint": "Add to session",
+        "addButton": "Add"
+      },
+      "profileBorder": {
+        "title": "Your Profile",
+        "description": "When session is active, your profile will have a green border",
+        "noProfile": "No Profile"
+      },
+      "joinButton": "الانضمام إلى الجلسة",
+      "waitingForParticipants": "جلستك نشطة — بانتظار المشاركين",
+      "confirmButton": "تأكيد المشاركة",
+      "fundNotice": "تحتاج إلى إيداع 15 EVOLVE على الأقل في EvolveFund للمشاركة.",
+      "resolved": {
+        "title": "تم حل الجلسة",
+        "fatherLabel": "الأب المختار:",
+        "rewardInfo": "المشاركون غير المختارين: 90% من الحصة للمرأة، 10% للأب المختار.",
+        "noFather": "لم يتم اختيار أب. أُعيدت الحصص إلى المشاركين."
+      },
+      "error": {
+        "rejected": "رُفضت المعاملة من قبل المستخدم.",
+        "failed": "خطأ في المعاملة: {{message}}"
+      }
+    }
+  },
+  "common": {
+    "loading": "جارٍ التحميل..."
   }
 }

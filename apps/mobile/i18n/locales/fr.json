@@ -85,5 +85,129 @@
     "select": "Sélectionner le pays",
     "title": "Choisissez votre pays",
     "description": "Sélectionnez votre pays pour matcher avec des personnes à proximité"
+  },
+  "dashboard": {
+    "mode2": {
+      "title": "Pregnancy Bond",
+      "subtitle": "Family matching with paternity confirmation",
+      "status": {
+        "active": "Active",
+        "awaitingPaternity": "Awaiting Paternity",
+        "resolved": "Resolved"
+      },
+      "step0": {
+        "title": "Step 0: Financial Deposit",
+        "description": "Déposez au moins 15 EVOLVE dans EvolveFund comme garantie d'engagement",
+        "balanceLabel": "Your Balance",
+        "fundReady": "Fund Ready",
+        "fundRequired": "Dépôt minimum de 15 EVOLVE dans EvolveFund requis",
+        "walletBalance": "Solde du portefeuille EVOLVE",
+        "fundTitle": "Dépôt EvolveFund",
+        "locked": "Verrouillé par le lien",
+        "unlocked": "Déverrouillé",
+        "daysRemaining": "{{days}} j restants",
+        "noDeposit": "Aucun dépôt",
+        "depositPrompt": "Déposer des EVOLVE dans le Fonds (min 15)",
+        "amountPlaceholder": "Montant (p. ex. 20)",
+        "approving": "Approbation...",
+        "depositing": "Dépôt en cours...",
+        "approveAction": "Approuver EVOLVE",
+        "depositAction": "Déposer dans le Fonds",
+        "lockHint": "Blocage minimum de 30 jours. Requis pour créer des liens."
+      },
+      "step1": {
+        "title": "Step 1: Act Confirmation",
+        "description": "Both partners confirm sexual act",
+        "selfLabel": "Your Confirmation",
+        "partnerLabel": "Partner Confirmation",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "confirmSex": "Confirm Act",
+        "alreadyConfirmed": "Already Confirmed",
+        "partnerConfirmSex": "Confirm Partner",
+        "partnerAlreadyConfirmed": "Partner Already Confirmed",
+        "womanPartner": "Partenaire (femme)",
+        "manPartner": "Partenaire (homme)"
+      },
+      "step2": {
+        "title": "Step 2: Waiting Timer",
+        "description": "Le lien se résout automatiquement à la fin de la période de grossesse.",
+        "ready": "Ready to Start",
+        "timerInfo": "Timer started. Waiting for pregnancy test results.",
+        "waitingForConfirmations": "Waiting for confirmations from both partners"
+      },
+      "step3": {
+        "title": "Step 3: Result",
+        "description": "Paternity determination and deposit distribution",
+        "pregnancyCheckbox": "Signaler une grossesse",
+        "resolvedPregnant": "Pregnancy confirmed. Deposit distributed per contract.",
+        "resolvedNotPregnant": "Pregnancy not confirmed. Deposit returned to partners.",
+        "awaitingResolution": "Waiting for pregnancy test results",
+        "canReport": "Vous pouvez maintenant signaler une grossesse",
+        "notYet": "Le signalement de grossesse est disponible après 14 jours à compter de la confirmation",
+        "reportToVerify": "Signalez la grossesse pour lancer la vérification de paternité.",
+        "waitingWindow": "En attente de l'ouverture de la fenêtre de signalement...",
+        "waitingWoman": "En attente que la femme signale une grossesse...",
+        "paternityInProgress": "Vérification de paternité en cours. L'administrateur soumettra le résultat.",
+        "awaitingResult": "En attente du résultat du test de paternité de l'administrateur..."
+      },
+      "createBond": {
+        "partnerPlaceholder": "Adresse du partenaire (0x...)"
+      },
+      "error": {
+        "rejected": "Transaction rejetée par l'utilisateur.",
+        "failed": "Erreur de transaction : {{message}}"
+      }
+    },
+    "mode3": {
+      "title": "Cryptic Choice",
+      "subtitle": "Anonymous matching with 48-hour window",
+      "create": {
+        "title": "Create Session",
+        "description": "Start a new partner search session",
+        "button": "Create Session",
+        "hint": "After creating a session, you have 48 hours to add participants and confirm acts"
+      },
+      "timer": {
+        "active": "Timer: {{timer}}",
+        "inactive": "Session Inactive"
+      },
+      "participants": {
+        "title": "Participants",
+        "empty": "No participants",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "confirmedButton": "Confirmed",
+        "confirmButton": "Confirm"
+      },
+      "available": {
+        "title": "Available Profiles",
+        "empty": "No available profiles",
+        "profileHint": "Add to session",
+        "addButton": "Add"
+      },
+      "profileBorder": {
+        "title": "Your Profile",
+        "description": "When session is active, your profile will have a green border",
+        "noProfile": "No Profile"
+      },
+      "joinButton": "Rejoindre la session",
+      "waitingForParticipants": "Votre session est active — en attente de participants",
+      "confirmButton": "Confirmer la participation",
+      "fundNotice": "Vous devez avoir au moins 15 EVOLVE déposés dans EvolveFund pour participer.",
+      "resolved": {
+        "title": "Session résolue",
+        "fatherLabel": "Père choisi :",
+        "rewardInfo": "Participants non sélectionnés : 90 % de la mise à la femme, 10 % au père choisi.",
+        "noFather": "Aucun père choisi. Mises restituées aux participants."
+      },
+      "error": {
+        "rejected": "Transaction rejetée par l'utilisateur.",
+        "failed": "Erreur de transaction : {{message}}"
+      }
+    }
+  },
+  "common": {
+    "loading": "Chargement..."
   }
 }

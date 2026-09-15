@@ -28,56 +28,6 @@
 
 ---
 
-## 3. Agent Chat Coordination
-
-**File location**: `.agent-chat/` (peer-to-peer, no privileged agents)
-
-### Protocol
-
-1. **Before starting a task**: check `.agent-chat/messages/` for incoming messages addressed to you (`to: YOUR_NAME` or `to: all`)
-2. **Before editing files**: update your `status/YOUR_NAME.md` → set `lock_files:` to the files you're editing
-3. **When done**: update `status/YOUR_NAME.md` → `status: done` or `status: idle`, clear `lock_files:`
-4. **To communicate with another agent**: create a `.md` file in `messages/` with `from:/to:/status:` frontmatter
-5. **After reading a message**: change `status: unread` → `status: read`
-
-### Availability (handover support)
-
-Agents can become unavailable (model limits, timeouts, etc.). When this happens, another agent MUST take over.
-
-- `availability: online` — working normally
-- `availability: limited` — slow, handover recommended for urgent tasks
-- `availability: offline` — cannot continue, task MUST be reassigned
-
-When going `offline`, agent MUST write `to: all` with:
-
-- What was done
-- What remains
-- Files touched
-- Any context needed
-
-When seeing an offline agent with unfinished work → take it over, write `to: all` that you're picking it up.
-
-### Status values
-
-- `idle` — free, ready for next task
-- `working` — executing a task
-- `blocked` — need help / waiting for another agent
-- `done` — task complete, awaiting next
-
-### Agent aliases
-
-| Alias         | Role                         |
-| ------------- | ---------------------------- |
-| `opencode`    | Frontend, Config, Infra      |
-| `antigravity` | Audit, QA, Code Review       |
-| `devin`       | Mobile, Profile, Camera, STD |
-| `cline`       | Settings, Wallet, Language   |
-| `aider`       | Backup (local Ollama)        |
-
-Full details in `.agent-chat/README.md`. Per-agent prompts in `.agent-chat/prompts/`.
-
----
-
 ---
 
 ## 4. Localization
@@ -106,13 +56,13 @@ Full details in `.agent-chat/README.md`. Per-agent prompts in `.agent-chat/promp
 
 ### Known Issues
 
-| File              | Line | Status          | Description                                              | Resolution                                                                                                               |
-| ----------------- | ---- | --------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `db.ts`           | 270  | ✅ Ignored      | Pre-existing type error (Prisma `any` cast)              | Not our code; do not touch                                                                                               |
-| `apiServer.ts`    | 87   | ✅ Working      | OTP send/verify stubs — logs to console only             | Replace with real SMS provider                                                                                           |
-| Web build timeout | —    | ✅ Fixed        | `vite build` exceeded 120s timeout                       | CI timeout → 30min + `--max-old-space-size=4096`                                                                         |
-| ESLint config     | —    | ⚠️ Pre-existing | `.eslintrc.json` empty, packages missing config          | Not our code; needs migration to flat config                                                                             |
-| Mobile web render | —    | ✅ Fixed        | `useState` null — dual React instance (18.2.0 vs 18.3.1) | Removed nested `react` from `apps/mobile/node_modules`; aligned versions to 18.3.1; removed `ssr:true` from wagmi config |
+| File              | Line | Status          | Description                                                                                                 | Resolution                                                                                                                                                                                                  |
+| ----------------- | ---- | --------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `db.ts`           | 270  | ✅ Ignored      | Pre-existing type error (Prisma `any` cast)                                                                 | Not our code; do not touch                                                                                                                                                                                  |
+| Web build timeout | —    | ✅ Fixed        | `vite build` exceeded 120s timeout                                                                          | CI timeout → 30min + `--max-old-space-size=4096`                                                                                                                                                            |
+| ESLint config     | —    | ⚠️ Pre-existing | `.eslintrc.json` empty, packages missing config                                                             | Not our code; needs migration to flat config                                                                                                                                                                |
+| Mobile web render | —    | ✅ Fixed        | `useState` null — dual React instance (18.2.0 vs 18.3.1)                                                    | Removed nested `react` from `apps/mobile/node_modules`; aligned versions to 18.3.1; removed `ssr:true` from wagmi config                                                                                    |
+| Ignition deploy   | —    | ✅ Fixed        | UTF-8 BOM in `ignition-parameters.json` blocked ALL deploys (IGN725); params used pre-0.15 top-level format | Removed BOM, switched to module-scoped params (ignition 0.15 has no `$global`), fixed Governance (1 ctor arg) + EvolveFund/BondManager `m.useModule` wiring; `npm run deploy:local` deploys all 9 contracts |
 
 ---
 
@@ -131,28 +81,28 @@ C:\CFC\
 │   ├── matching/     # Algorithms, filters, ranking
 │   ├── p2p/          # libp2p v3 + Nostr networking
 │   ├── storage/      # IPFS, Arweave, Lit Protocol
-│   └── ui/           # React components (web-only)
 └── docs/             # Architecture, tokenomics, PRD
 ```
 
 ### Auth Flow
 
 ```
-AuthLanding → Email | Phone | Wallet
-                ↓         ↓        ↓
-         EmailForm  PhoneAuth  SIWE
-                ↓         ↓        ↓
-                ProtectedRoute
-                      ↓
-              Mode Selected? ──No──→ ProfileSettings
-                      ↓
-                   Home
+AuthLanding → Wallet (SIWE) | DNA Recovery
+              ↓                    ↓
+         ConnectWallet         DNARecovery
+              ↓                    ↓
+              ProtectedRoute
+                    ↓
+             Mode Selected? ──No──→ ProfileSettings
+                    ↓
+                 Home
 ```
 
 ### Key Design Decisions
 
 - Auth is **decoupled** from mode selection
-- Phone auth uses **API stubs** (no real OTP backend yet)
+- **Phone/email auth removed** — only SIWE (wallet) and DNA-based account recovery
+- DNA recovery: user enters email + DNA test text → parsed client-side → hash compared against on-chain DNAVerification record → session issued on match
 - Mode selection stored in `localStorage` under `evolve_auth_mode`
 - `ProtectedRoute` extended (not broken) to handle all auth flows
 - **Web3 Architecture (New)**: The project uses Arbitrum/Polygon (L2) for cheap and fast transactions. Account Abstraction (ERC-4337) is used for Gasless (sponsored) transactions and easy Smart Wallet onboarding. However, **MetaMask/SIWE login MUST be retained** as a hardcore escape hatch for true censorship resistance.
@@ -214,41 +164,60 @@ AuthLanding → Email | Phone | Wallet
 
 ### Earning EVOLVE
 
-| Action               | Reward     |
-| -------------------- | ---------- |
-| Profile verification | 100 EVOLVE |
-| Match confirmation   | 50 EVOLVE  |
-| Daily active use     | 10 EVOLVE  |
+Єдиний спосіб заробити — **економіка emoji-подарунків**. Немає нагород за верифікацію, матчі чи щоденну активність.
 
 ### Spending EVOLVE
 
-| Action                    | Cost          |
-| ------------------------- | ------------- |
-| Emoji gift (Rose, Cactus) | 1 EVOLVE each |
+| Дія                       | Ціна          | Контракт                     |
+| ------------------------- | ------------- | ---------------------------- |
+| Emoji gift (Rose, Cactus) | 1 EVOLVE      | `Evolve2Earn.buyEmojiGift()` |
+| EvolveFund deposit (чол.) | мін 15 EVOLVE | `EvolveFund.deposit()`       |
+
+### Стейкінг → EvolveFund (замість EvolveStaking)
+
+**EvolveStaking видалено.** Чоловіки використовують `EvolveFund` (депозит, блокування 30+ днів). Жінки тримають токени на балансі гаманця (вільне зняття/переведення).
+
+- **Чоловіки**: депозит у EvolveFund (мін 15 EVOLVE, мін 30 днів) → впливає на Governance як стейк
+- **Жінки**: токени на балансі → впливає на Governance як баланс (можна зняти будь-коли, рейтинг впаде)
+
+### Governance — вага голосу
+
+**Жінки:**
+
+1. Баланс гаманця (30%)
+2. Рекурсивна репутація — 8 голосів, глибина 3 (30%)
+3. % народжених дітей відносно всіх жінок (40%)
+
+**Чоловіки:**
+
+1. EvolveFund баланс (30%)
+2. Рекурсивна репутація — 8 голосів, глибина 3 (30%)
+3. % батьківства відносно всіх чоловіків (40%)
 
 ### Economic Flywheel
 
 ```
-User Activity → Earn EVOLVE → Buy Gifts → Revenue to Owners → Incentive to Hold
-     ↓                                                              ↑
-  Reputation ←── Voting ←── EVOLVE staked in Mode 2/3 ←─────────────┘
+User Activity → Earn EVOLVE via gifts → Revenue to Owners → Incentive to Hold
+     ↓                                                         ↑
+  Reputation ←── Voting ←── EvolveFund deposit ←───────────────┘
 ```
 
 ---
 
 ## 8. Smart Contracts
 
-| Contract                   | Purpose                                                                   |
-| -------------------------- | ------------------------------------------------------------------------- |
-| `EVOLVE.sol`               | ERC-20 token                                                              |
-| `ProfileNFT.sol`           | ERC-721 profiles                                                          |
-| `TrustScore.sol`           | Base score (50) + reputation                                              |
-| `Voting.sol`               | 8 votes max, recursive weight (depth 3)                                   |
-| `Evolve2Earn.sol`          | Rewards + emoji gifts                                                     |
-| `Governance.sol`           | 4-factor vote weight (recursive 40%, STD 10%, DNA 10%, Staked EVOLVE 40%) |
-| `BondManager.sol`          | Mode 2 (pregnancy-bond) + Mode 3 (cryptic-choice)                         |
-| `EvolveStaking.sol`        | Token staking (min 100 EVOLVE, 30 days)                                   |
-| `VerificationRegistry.sol` | STD + DNA verification                                                    |
+| Contract                   | Purpose                                                               |
+| -------------------------- | --------------------------------------------------------------------- |
+| `EVOLVE.sol`               | ERC-20 token                                                          |
+| `ProfileNFT.sol`           | ERC-721 profiles                                                      |
+| `TrustScore.sol`           | Base score (1) + reputation                                           |
+| `Voting.sol`               | 8 votes max, recursive weight (depth 3)                               |
+| `Evolve2Earn.sol`          | Rewards + emoji gifts                                                 |
+| `Governance.sol`           | 3-factor vote weight (recursive 30%, children 40%, Staked EVOLVE 30%) |
+| `BondManager.sol`          | Mode 2 (pregnancy-bond) + Mode 3 (cryptic-choice) + children tracking |
+| `EvolveFund.sol`           | Male token deposit (min 15 EVOLVE, 30 days lock)                      |
+| `VerificationRegistry.sol` | STD + DNA verification (queries DNAVerification on-chain)             |
+| `DNAVerification.sol`      | On-chain DNA verification (STR markers, haplogroup, revoke)           |
 
 ---
 
@@ -314,7 +283,7 @@ All 70 tests must pass. If you change parsing logic, add tests for new edge case
 ### User Onboarding
 
 ```
-User → Evolve2Earn.verify() → mints ProfileNFT → initializes TrustScore (50)
+User → Evolve2Earn.verify() → mints ProfileNFT → initializes TrustScore (1)
      → receives EVOLVE tokens (verification reward)
 ```
 
@@ -341,7 +310,7 @@ User A → Evolve2Earn.buyEmojiGift(id) → 1 EVOLVE spent
 User A votes for User B
   → Voting.sol: weight = 1 + Σ(calculateWeight(voter)) [depth ≤ 3]
   → TrustScore.sol: totalScore = baseScore + reputationScore (capped 100)
-  → Governance.sol: voteWeight = (recursiveWeight × 40% + STD × 10% + DNA × 10% + Staked EVOLVE × 40%). Free balance on wallet gives NO weight.
+  → Governance.sol: voteWeight = (recursiveWeight × 30% + children × 40% + Staked EVOLVE × 30%). Free balance on wallet gives NO weight for men; women use wallet balance.
 ```
 
 ### Mode 2: Pregnancy Bond
@@ -451,8 +420,8 @@ npx prettier --write AGENTS.md
 
 ## 14. Security Requirements
 
-- **OTP backend**: implemented in `apps/web/src/lib/phoneAuth.ts` + `otp-store.ts`
-- **Rate-limiting**: 30 req/min global, 5 req/10min per phone for OTP
+- **DNA recovery**: implemented in `apps/web/src/lib/dna-recovery.ts` (client) + `apiServer.ts` POST `/api/auth/dna-recover` (server)
+- **Rate-limiting**: 30 req/min global
 - **Session management**: in-memory (dev); use Redis in production
 - **Secrets**: never commit API keys, `.env` files, or private keys
 - **STD compatibility**: anonymous — individual pathogen status never shown to other users
@@ -515,43 +484,225 @@ npx prettier --write AGENTS.md
 
 ---
 
-_Last updated: 2026-06-22_
-_This constitution is version‑controlled. All agents must follow it._
-_See RULES_PROTOCOL.md for how to propose and apply rule changes._
+## 16. DNA Account Recovery
 
-The project will be deployed on **11** EVM‑compatible networks to maximize reach, liquidity and resilience.
+> **Feature**: Account recovery via on-chain DNA verification (no phone/email needed).
 
-| Network        | Why we use it?                                 | Popular DEX / Infrastructure         | Bridge support to EVM (main)      |
-| -------------- | ---------------------------------------------- | ------------------------------------ | --------------------------------- |
-| **Arbitrum**   | Low‑fee L2, close to Ethereum security         | Uniswap V3, SushiSwap, 1inch         | Arbitrum Bridge, Hop, Connext     |
-| **Avalanche**  | Very low gas, high throughput                  | Trader Joe, Pangolin, SushiSwap      | Avalanche Bridge, Hop, Multichain |
-| **Polygon**    | Widest adoption among L2s, cheap tx            | QuickSwap, SushiSwap, Aave           | Polygon Bridge, Hop, Connext      |
-| **Optimism**   | Fast finality, same dev experience as Arbitrum | Uniswap V3, Velodrome, Sushiswap     | Optimism Gateway, Hop, Connext    |
-| **zkSync Era** | Near‑zero fees, zk‑Rollup security             | zkSync Swap, SyncSwap, 1inch         | zkSync Bridge, Hop (planned)      |
-| **Base**       | Strong backing by Coinbase, growing DeFi       | Base Uniswap V3, Aerodrome, BaseSwap | Base Bridge, Hop, Connext         |
-| **BNB Chain**  | Massive Asian user base, high TVL              | PancakeSwap, Biswap, ApeSwap         | BNB Bridge, Multichain, cBridge   |
-| **Fantom**     | Sub‑second blocks, low cost                    | SpiritSwap, SpookySwap, Curve‑Fantom | Fantom Bridge, Multichain         |
-| **Aurora**     | Access to NEAR ecosystem, fast finality        | Ref Finance, Trisolaris              | Aurora Bridge, Wormhole           |
-| **Celo**       | Mobile‑first, phone‑number addresses           | Ubeswap, Moola, CeloSwap             | Celo Bridge, Multichain           |
-| **Cronos**     | Integration with Crypto.com ecosystem          | CronaSwap, VVS Finance               | Cronos Bridge, Multichain         |
-
-**Benefits of this multi‑chain approach**
-
-- **User choice** – users can pick the cheapest or fastest network for each action.
-- **Liquidity aggregation** – pools on many DEXes increase depth and reduce slippage.
-- **Resilience** – if one chain experiences congestion or downtime, traffic can be shifted to another.
-- **Broader market exposure** – tapping into distinct regional user bases (BNB Chain in Asia, Celo for mobile‑first markets, etc.).
-
-**Implementation notes**
-
-1. Add network configurations to `hardhat.config.ts` (RPC URLs, chain IDs).
-2. Deploy `EVOLVE` ERC‑20 on each network using the same source code; verify on respective explorers.
-3. Use a **bridge‑agnostic token wrapper** (e.g., LayerZero OFT or Hop Bridge) to enable seamless cross‑chain transfers.
-4. Extend the front‑end `src/lib/networks.ts` to expose the new networks and DEX router addresses.
-5. Write integration tests for each network (use testnets: Arbitrum Sepolia, Avalanche Fuji, Polygon Mumbai, Optimism Goerli, zkSync Era Testnet, Base Sepolia, BNB Chain Testnet, Fantom Testnet, Aurora Testnet, Celo Alfajores, Cronos Testnet).
+- **Files**: `apps/web/src/lib/dna-recovery.ts` (API client), `apps/web/src/components/DNARecovery.tsx` (UI)
+- **Server endpoint**: `apps/web/src/lib/apiServer.ts` — `POST /api/auth/dna-recover`
+- **Integration**: `AuthLanding.tsx` (recovery link button), `ProtectedRoute.tsx` (dna-recovery view + onSelectDnaRecovery prop)
+- **Flow**: User enters email → pastes DNA test result → client parses with `parseDNATest()` + `generateDNAHash()` → hash sent to server → server looks up user by email → fetches on-chain DNA profile via `getDNAProfile()` → compares bytes32 hash → on match issues session cookie
+- **i18n keys**: `dnaRecovery.*`, `auth.landing.dnaRecovery`, `auth.landing.questionRecovery` (button label), `auth.landing.securityTitle`, `auth.landing.securityDescription` (landing security notice), `common.or` — present in all 33 locales (added via `scripts/add-security-notice-locales.mjs`)
+- **Privacy**: individual pathogen status never shown; only anonymous compatibility result
 
 ---
 
-_Last updated: 2026-06-22_
+## 17. Search Modes (Filters) + VerificationModal
+
+> **Feature**: Search modes (normal / pregnancy-bond / cryptic-choice) as radio filters on Home; VerificationModal explains verification requirements per mode.
+
+- **Files**: `apps/web/src/store/AppContext.tsx` (`searchMode`/`setSearchMode`, localStorage key `evolve_search_mode`), `apps/web/src/components/VerificationModal.tsx`, `apps/web/src/pages/Home.tsx` (radio filter + "i" info button), `apps/web/src/pages/ProfileSettings.tsx` (mode selector section removed — modes now selected on Home)
+- **Mode colors**: normal `#3b82f6` (blue), pregnancy-bond `#4338ca` (indigo), cryptic-choice `#0f172a` (dark navy)
+- **Tests**: `apps/web/src/components/__tests__/VerificationModal.test.tsx` (4), `apps/web/src/pages/__tests__/HomeFilters.test.tsx` (4)
+- **NEVER CHANGE WITHOUT RUNNING TESTS**:
+  ```bash
+  cd apps/web && npx vitest run src/components/__tests__/VerificationModal.test.tsx src/pages/__tests__/HomeFilters.test.tsx
+  ```
+- **i18n keys**: `verificationModal.*` — present in all 33 locales
+- **Verification requirements**: women — STD test only; men — STD + DNA + EvolveFund deposit ≥ 15 EVOLVE
+- **Privacy logic preserved**: `canSeeProfile` unchanged; `authMode` still used for privacy levels (Level 1/2/3) in ProfileSettings
+
+---
+
+## 18. Photo Blur + Onboarding Wizard
+
+> **Feature**: On registration, users set age (can hide), languages, bio, photo (can blur). Interested users can request a 15-second or permanent photo view; the photo owner can proactively "offer" a view to a chosen user without a request. Photo viewing is **free** (no EVOLVE).
+
+- **Files**: `apps/web/src/lib/photo-access.ts` (pure grant logic), `apps/web/src/lib/photo-access.test.ts`, `apps/web/src/lib/languages.ts` (language list, imported by LanguageSelector), `apps/web/src/lib/image.ts` (`fileToDataUrl(file, maxSize=900)`), `apps/web/src/components/OnboardingWizard.tsx` (4 steps: age→languages→bio→photo), `apps/web/src/components/PhotoView.tsx` (blur/timer component), `apps/web/src/App.tsx` (`OnboardingGate` inside AppInner under AppStateProvider)
+- **Pages**: `Home.tsx` (PhotoView in cards), `UserProfile.tsx` (photo request + age hidden + language chips), `Profile.tsx` ("My profile info" edit + "Photo access" grants with revoke), `Chat.tsx` (photo panel: request / approve 15s|permanent / deny / offer / revoked)
+- **Data model**: photo stored as **base64/data URL** (downscaled to 900px JPEG 0.85, ~100–300KB); grants stored on the photo OWNER's profile in `photoGrants: Record<viewerUserId, {kind: "temporary"|"permanent", grantedAt, expiresAt?}>`; temporary access = **15 seconds** (`TEMP_PHOTO_VIEW_MS = 15_000`)
+- **Chat messages**: request/approval/offer flow via chat messages (STD/DNA pattern) — `requestType: "PHOTO"`, `photoGrantKind`, `photoAction`
+- **Registration**: all new signups (SIWE) get `onboardingComplete: false`; legacy seed users — `true`
+- **Tests**: `apps/web/src/lib/photo-access.test.ts` (14 tests, PASS), `apps/web/src/pages/__tests__/UserProfile.test.tsx` (3 tests, PASS)
+- **NEVER CHANGE WITHOUT RUNNING TESTS**:
+  ```bash
+  cd apps/web && npx vitest run src/lib/photo-access.test.ts src/pages/__tests__/UserProfile.test.tsx
+  ```
+- **i18n keys**: `onboarding.*`, `photo.*`, `chat.photo*`, `userProfile.ageHidden`, `profile.edit.*`, `profile.photoGrants.*` — present in all 33 locales (via `scripts/i18n-photo-insert.mjs`)
+
+---
+
+## 19. UI Reorganization (Profiles, Communications, Settings)
+
+> **Feature**: Home filters reorganized (tags/interests moved to the bottom of the extended grid, new "Skin color" filter), "Messages" renamed to "Communications" (left: messages, right: "Proposals" voting panel weighted by user reputation), and "Settings" moved into Profile tabs (separate nav item & `/profile/settings` route removed).
+
+### Skin Color
+
+- **Values**: `fair` / `light` / `medium` / `tan` / `dark` / `deep`
+- **Files**: `apps/web/src/pages/Home.tsx` (options array `skinColorOptions`, `SelectFilter`, filtering in `filteredProfiles`), `apps/web/src/pages/Profile.tsx` (editor select + `SKIN_COLOR_OPTIONS` + save), `apps/web/src/store/AppContext.tsx` (`skinColor` added to `SearchDetails`, `FilterState`, and `persistProfile` merge)
+- **i18n keys**: `filters.skinColor`, `filters.skinColors.{fair,light,medium,tan,dark,deep}` — all 33 locales (via `scripts/add-skincolor-locales.mjs`)
+
+### Communications + Proposals
+
+- **Files**: `apps/web/src/components/Layout.tsx` (nav label now `navigation.communications`), `apps/web/src/pages/Chat.tsx` (right-hand `ProposalsPanel` column), `apps/web/src/components/ProposalsPanel.tsx` (in-app proposal board)
+- **ProposalsPanel**: create proposal (title+desc), vote yes/no, **vote weight = `myProfile.reputationScore`**, tally shown per-proposal and globally. **Deliberately non-blockchain**: state persists to `sessionStorage` (`evolve_proposals_v1`), seeded with 2 defaults.
+- **i18n keys**: `communications.*` (`proposalsTitle`, `createProposal`, `votesFor`, `votesAgainst`, `voteWeightHint`, `youVotedWeight`, etc.) — all 33 locales (via `scripts/add-skincolor-locales.mjs`)
+
+### Settings → Profile tabs
+
+- **Files**: `apps/web/src/pages/Profile.tsx` (new `settings` tab in the `activeTab` union + tab bar; embeds Privacy toggle, Mode Dashboard, DNA Recovery, `SmartAccountInfo`, `PaymasterDeposit`), `apps/web/src/App.tsx` (removed `profile/settings` route + `ProfileSettings` import)
+- **i18n keys**: `profile.tabs.settings`, `navigation.communications` — all 33 locales (via `scripts/add-skincolor-locales.mjs`)
+- **Note**: `ProfileSettings.tsx` page still exists but is no longer routed directly; its content is embedded in the Profile "Settings" tab.
+
+### Nav menu (after change)
+
+`Home · Communications · (mode2/mode3 if active) · Profile · Connect/Logout/🌐`
+
+---
+
+## 20. Gender + "Who Are You Looking For" Filter
+
+> **Feature**: Each profile declares its own `gender` and `lookingFor` (who it seeks). The Home page has a "Looking for" filter that surfaces profiles whose `lookingFor` equals the selected option. Stores in the existing `searchDetails` JSON (no new DB migration).
+
+### Data model
+
+- **`gender`**: `"male" | "female" | "other"` (mirrors `packages/core/src/types.ts`)
+- **`lookingFor`**: single-select `"man" | "woman" | "couple_man_woman" | "couple_woman_woman" | "couple_man_man"`
+- Both live in `profile.searchDetails` (JSON string in `schema.prisma searchDetails`) — round-trips through `db.ts` without schema change
+
+### Files
+
+- `apps/web/src/lib/looking-for.ts` — **pure helpers**: `matchesLookingFor(profileLookingFor, filterValue)` + `LOOKING_FOR_OPTIONS` constant (unit-testable)
+- `apps/web/src/lib/__tests__/looking-for.test.ts` — 5 tests (PASS)
+- `apps/web/src/store/AppContext.tsx` — `gender?`/`lookingFor?` in `SearchDetails` (~99-115), `lookingFor?` in `FilterState` (~120)
+- `apps/web/src/pages/Home.tsx` — `SelectFilter` "Looking for" (~606-616), filter `if (!matchesLookingFor(sd.lookingFor, filters.lookingFor)) return false;` (~242)
+- `apps/web/src/pages/Profile.tsx` — `editGender`/`editLookingFor` state, `GENDER_OPTIONS`/`LOOKING_FOR_OPTIONS`, two editor selects + save into `searchDetails`
+- `apps/web/src/components/OnboardingWizard.tsx` — added `"gender"` step (between age and languages): gender buttons + lookingFor select; included in `finish`/`skip` payload
+- `apps/web/src/lib/db.ts` — 8 seed profiles get `searchDetails: { gender, lookingFor }`
+- `apps/web/scripts/add-gender-locales.mjs` — deterministic i18n adder (natural Tier 1 translations, English fallback), idempotent deep-merge; run → `ALL 33 LOCALES VALID`
+
+### Filter semantics
+
+- Filter unset/empty → keep every profile
+- Filter set → keep only profiles whose `searchDetails.lookingFor` equals the selected value
+- Existing male/female rules (VerificationModal requirements, Mode2/3, EvolveFund) are **untouched** — `gender` here is a new profile preference field, independent of the man/woman verification rules
+
+### i18n keys
+
+`filters.gender`, `filters.genders.{male,female,other}`, `filters.lookingFor`, `filters.lookingForOptions.{man,woman,couple_man_woman,couple_woman_woman,couple_man_man}`, `onboarding.gender.{title,label,lookingForLabel,lookingForOptions.*}` — all 33 locales (via `scripts/add-gender-locales.mjs`).
+
+### NEVER CHANGE WITHOUT RUNNING TESTS
+
+```bash
+cd apps/web && npx vitest run src/lib/__tests__/looking-for.test.ts --pool=threads
+```
+
+---
+
+## 21. Safety Mode (Public Facade)
+
+> **Feature**: `VITE_PRODUCT_MODE` env switch. In `safety` mode the app is an **STD-compatibility + lab-integration public facade**: users see their STD status, manage a public profile link, request/approve compatibility checks with anonymous verdicts, and labs operate a partner dashboard. Dating, conception, Governance, DAO, and wallet features are hidden.
+
+### Mode control
+
+- **`apps/web/src/lib/config.ts`**: `PRODUCT_MODE = import.meta.env?.VITE_PRODUCT_MODE` (default `"safety"`); `isSafetyMode()` / `isFullMode()` helpers. Full (dating) mode is dev-only; public builds default to safety.
+- **Routing (App.tsx)**: index → `isSafetyMode() ? <SafetyDashboard/> : <Home/>`; `/p/:username` public profile (inside Layout, OUTSIDE ProtectedRoute); `/scan` protected (inside Layout); `/lab-dashboard` partner dashboard (outside Layout + ProtectedRoute); dating pages gated by `!isSafetyMode() &&`.
+- **Nav (Layout.tsx)**: safety mode shows Home / Check (`/scan`) / Profile only; chat, mode2, mode3 entries hidden.
+
+### Pages
+
+- **`SafetyDashboard.tsx`** — STD status (`myProfile.stdUploaded`), public link management, incoming/outgoing compatibility checks with approve/deny, patient QR (`LabPatientQR`).
+- **`PublicProfile.tsx`** — `/p/:username` minimal card (photo, name, username) + person QR (`evolve://person/<userId>`) + Check button (if authenticated, non-owner).
+- **`Scan.tsx`** — scans `evolve://person/<id>` QR (`html5-qrcode`, element id `evolve-scan-reader`), sends check request.
+- **`LabDashboard.tsx`** — partner session (email+password via `partner_session` cookie): scan patient QR (`evolve://lab-patient/<userId>`, element id `lab-dash-qr-reader`), begin visit, confirm identity (`matched`/`none`), attach STD report, list visits.
+
+### Backend
+
+- **AUTH**: lab partners are `{{ kind: "partner", partnerId, userId: "" }}` sessions (cookie `partner_session`); user routes reject `kind === "partner"` with 401.
+- **Schema**: `Partner` (lab accounts, `apiKey`), `CompatibilityCheck` (requester/target/status/verdict/expiresAt), `Profile.username` + `publicLinkEnabled`.
+- **Key endpoints** (`apiServer.ts`):
+  - `POST /api/partner/register|login|logout`, `GET /api/partner/me`
+  - `POST /api/public-link/update`, `GET /api/public-link/me`
+  - `GET /api/public/profile/:username` (public card: no STD data, no profile details)
+  - `GET /api/checks/pending|inbox`, `POST /api/checks/request`, `POST /api/checks/:id/respond`
+  - `GET /api/lab/account/scan?userId=`, `POST /api/lab/account/begin`, `GET /api/lab/account/visits`, `POST /api/lab/account/visit/:id/face|report`
+- **Checks logic** (`apps/web/src/lib/checks.ts` + test, 19 PASS): 1 pending per pair, self-check forbidden, 7-day TTL; server-side anonymous verdicts — `none`→safe, `same_strain`→compatible, `potential_risk`→caution, `high_risk`→risk; missing STD text → `incomplete`. Individual pathogen status NEVER exposed.
+- **db.ts**: partner CRUD, public links, checks, lab visits + fallback lazily initializes missing collections in `fallback-db.json` (no seed needed).
+
+### Localization
+
+- i18n namespaces: `safety.*`, `publicProfile.*`, `labDashboard.*`, `scan.*`, `navigation.check` — all 33 locales (via `scripts/add-safety-locales.mjs`). Note: `labPortal.scan.*` (LabPortal, deep key) and top-level `scan.*` (Scan page) coexist — different nesting levels, no conflict.
+
+### NEVER CHANGE WITHOUT RUNNING TESTS
+
+```bash
+cd apps/web && npx vitest run src/lib/checks.test.ts
+cd apps/web && npx tsc --noEmit   # ignore db.ts:270
+```
+
+---
+
+## 24. Session State
+
+> **Перше, що читає кожен агент при старті нової сесії.** Цей трекер показує що вже зроблено, що ні, і хто що робив. Після завершення задачі — оновлюй статус.
+
+| #   | Task                                                                  | Status                                                                                                          | Files                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Done by     |
+| --- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| 1   | EvolveFund.sol + BondManager.sol                                      | ✅ **Done**                                                                                                     | `packages/contracts/src/EvolveFund.sol`, `BondManager.sol`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | opencode    |
+| 2   | Rating System (3-component)                                           | ⚠️ **Done** (tests not verified — broken tsconfig.json)                                                         | `packages/core/src/rating.ts`, `__tests__/rating.test.ts`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | antigravity |
+| 3   | Emoji Gifts UI + STD Profile                                          | ✅ **Done**                                                                                                     | `apps/web/src/components/EmojiGift.tsx`, `pages/Profile.tsx`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | opencode    |
+| 4   | Mode2/Mode3 UI                                                        | ⚠️ **Done** (routing added, ProfileSettings not updated)                                                        | `apps/web/src/components/Mode2Dashboard.tsx`, `Mode3Dashboard.tsx`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | copilot     |
+| 5   | TOKENOMICS.md + DNA Verification                                      | ⚠️ **Done** (DNA is mock — needs real impl)                                                                     | `docs/TOKENOMICS.md`, `apps/web/src/lib/dna-verification.ts`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | zed         |
+| 6   | Зачаття/Посткопуляція web integration                                 | ✅ **Done** (171 tests, tsc GREEN)                                                                              | `apps/web/src/components/Mode2Dashboard.tsx`, `Mode3Dashboard.tsx`, `apps/web/src/lib/abi/EvolveFundABI.ts`, `EVOLVEABI.ts`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | sisyphus    |
+| 7   | ERC-4337 Account Abstraction                                          | ✅ **Done** (7 new tests, 171 total, tsc GREEN)                                                                 | `packages/contracts/src/SmartAccountFactory.sol`, `Paymaster.sol`, `ignition/modules/SmartAccountFactory.js`, `Paymaster.js`, `test/SmartAccountFactory.test.js`, `Paymaster.test.js`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | sisyphus    |
+| 8   | Full QA Audit (Tasks 1-5)                                             | 📋 **Planned**                                                                                                  | `apps/web/QA-REPORT.md`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | antigravity |
+| 9   | Mobile Mode2/Mode3 Screens                                            | ✅ **Done** (mobile tsc clean — no new errors in mode2/mode3, 33 locales valid, no hardcoded strings)           | `apps/mobile/app/mode2.tsx` (992 lines), `mode3.tsx` (612 lines), `apps/mobile/scripts/add-mobile-dashboard-locales.mjs` (incremental i18n adder: new keys + FORCE overrides for stale 15 ETH / 20-day values, natural Tier-1, ALL 33 LOCALES VALID)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | sisyphus    |
+| 10  | Network Infrastructure + Settings                                     | ✅ **Done** (18 networks, helper functions)                                                                     | `apps/web/src/lib/networks.ts`, `NetworkSelector.tsx`, `ChainSelector.tsx`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | sisyphus    |
+| 11  | DNA Account Recovery                                                  | ✅ **Done** (tsc GREEN, build GREEN)                                                                            | `dna-recovery.ts`, `DNARecovery.tsx`, `apiServer.ts` POST /api/auth/dna-recover                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | opencode    |
+| 12  | Search Modes + VerificationModal                                      | ✅ **Done** (8 tests PASS, 33 locales)                                                                          | `AppContext.tsx`, `VerificationModal.tsx`, `Home.tsx`, `ProfileSettings.tsx`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | opencode    |
+| 13  | TrustScore base 50→1                                                  | ✅ **Done** (hardhat 141 passing)                                                                               | `packages/contracts/src/TrustScore.sol`, tests                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | opencode    |
+| 14  | DNA WIP (Upload/utils/Profile)                                        | ✅ **Fixed** (tsc clean, build GREEN)                                                                           | `DNAUpload.tsx` (нативний input), `dnaUtils.ts` (markers), `Profile.tsx`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | opencode    |
+| 15  | DNA Verification (on-chain)                                           | ✅ **Done** (164 tests, deploy GREEN)                                                                           | `DNAVerification.sol`, `VerificationRegistry.sol` (DNA integration), `ignition/modules/DNAVerification.js`, `test/DNAVerification.test.js` (11)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | opencode    |
+| 16  | Monorepo JIT + Dead Package Audit                                     | ✅ **Done** (795 tests GREEN, build GREEN)                                                                      | `packages/ui` **DELETED** (dead, 0 imports), matching/core/p2p/storage JIT-ready, `docs/monorepo-dead-packages.md`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | antigravity |
+| 17  | Tooling Unification (eslint/prettier/turbo)                           | ✅ **Done** (web build 2m26s, all tsc clean)                                                                    | root `overrides: {viem: 2.55.11}`, `vite-env.d.ts`, `core/browser.ts` export-type, p2p `@libp2p/upnp-nat`, `.eslintrc.json` (530B)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | opencode    |
+| 18  | Photo Blur + Onboarding Wizard                                        | ✅ **Done** (17 tests PASS, 33 locales, build GREEN)                                                            | `photo-access.ts`+test, `OnboardingWizard.tsx`, `PhotoView.tsx`, `languages.ts`, `image.ts`, `db.ts`, `apiServer.ts`, `AppContext.tsx`, `Home.tsx`, `UserProfile.tsx`, `Profile.tsx`, `Chat.tsx`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | opencode    |
+| 19  | Sepolia Testnet Deploy (9 contracts)                                  | ✅ **Done** (all 9 deployed + wired, tsc GREEN)                                                                 | `script/deploy-sepolia.mjs`, `hardhat.config.js` (dotenv + sepolia network), `apps/web/src/lib/addresses.ts` (Sepolia addresses)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | opencode    |
+| 20  | Prod Server + Faucet + Email OTP Fixes                                | ✅ **Done** (E2E OTP green, tsc clean, 133 tests, build GREEN)                                                  | `apps/web/src/server/prod-server.ts`, `src/lib/apiServer.ts`, `src/lib/kv.ts`, `src/lib/adminChain.ts`, `prisma/schema.prisma` (+5 Profile cols), `src/lib/db.ts`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | sisyphus    |
+| 21  | UI Reorg: Skin Color + Communications/Proposals + Settings-in-Profile | ✅ **Done** (tsc clean, build GREEN, 70 std + 13 integration tests PASS, 33 locales)                            | `Home.tsx` (skinColor filter, tags→bottom), `Profile.tsx` (skinColor editor + Settings tab), `AppContext.tsx` (skinColor), `Layout.tsx` (communications label, settings nav removed), `Chat.tsx` + `ProposalsPanel.tsx`, `App.tsx` (settings route removed), `ProtectedRoute.tsx` (question-recovery wired), `scripts/add-skincolor-locales.mjs`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | sisyphus    |
+| 22  | Gender + "Looking For" Filter                                         | ✅ **Done** (tsc clean, build GREEN, 5 looking-for tests PASS, 33 locales)                                      | `Home.tsx` (lookingFor filter + SelectFilter), `Profile.tsx` (gender/lookingFor editor), `OnboardingWizard.tsx` (gender step), `AppContext.tsx` (SearchDetails.gender/lookingFor + FilterState.lookingFor), `lib/looking-for.ts`+test, `lib/db.ts` (8 seed profiles), `scripts/add-gender-locales.mjs`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | sisyphus    |
+| 23  | Lab Testing (DAO) + UI Recovery                                       | ✅ **Done** (tsc clean, 105 tests PASS incl. lab-report 10 + lab-preference 9, 33 locales valid)                | `lib/lab-report.ts`+test, `lib/lab-preference.ts`+test, `scripts/add-lab-locales.mjs`, `apiServer.ts` (/api/lab/email, pending, accept, report), `db.ts` (labReports + 3 methods + seed variety), `AppContext.tsx` (testingPreference in SearchDetails/FilterState/ProfilePatch/filters + RECOVERED SearchDetails/FilterState/face/liveness interfaces), `Home.tsx` (testingPreference filter + RECOVERED skinColor/lookingFor filters), `Profile.tsx` (gender/lookingFor/skinColor/testingPreference editors + Lab panel), `docs/lab-testing.md` (deferred LabRegistry/TestCertification + mail adapter)                                                                                                                                                                                                                                                                                 | sisyphus    |
+| 24  | Lab Partner E2E (QR + Face Match + Public Portal)                     | ✅ **Done** (tsc clean, 181 tests PASS / 17 files, 33+33 locales valid, prettier clean)                         | `LabPatientQR.tsx` (QR payload `evolve://lab-patient/<userId>`, `qrcode` pkg, ecLevel M), `LabPortal.tsx` (public route `/lab-portal` — OUTSIDE Layout/ProtectedRoute; register→scan→verify→report wizard, `html5-qrcode` scanner, API key in sessionStorage `evolve_lab_api_key`, report blocked until `matched`), `App.tsx` (route), `apiServer.ts` (`/api/lab/partner/register                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | verify      | report`; local `cosineSimilarity`+`FACE_SIMILARITY_THRESHOLD = 0.75`— do NOT import`face-verification.ts`in Node, it has top-level`await import("@mediapipe/tasks-vision")`), `db.ts`(LabPartner dedup ~983,`getProfileByUserId`~716,`createLabReport`+`faceMatchStatus`/`labPartnerName`, `PROFILE_JSON_COLUMNS`+=`faceEmbedding`~525, module-level`generateApiKey`), `schema.prisma` (`LabPartner`100-106,`LabReport.faceMatchStatus/labPartnerName`115-116,`Profile.faceEmbedding`29),`AppContext.tsx` (`faceEmbedding`in`ProfilePatch`~197),`Profile.tsx`(QR block + face-match badge`profile.lab.faceVerified`/`faceNotVerified`), `scripts/add-lab-partner-locales.mjs` | sisyphus |
+| 25  | Help Icons (?/!) Integration                                          | ✅ **Done** (tsc clean, `add-help-locales.mjs` rewritten → ALL 33 LOCALES VALID)                                | `InfoProposalIcons.tsx`, `lib/help-dictionary.ts`, `Mode2Dashboard.tsx` (`mode2.dashboard` term), `Mode3Dashboard.tsx` (`mode3.dashboard` term), `ProposalsPanel.tsx` (`chat.proposals` term), `Profile.tsx` (3× `profile.sections.modeSelector/profileEdit/lab`), `Home.tsx` (existing integration), `scripts/add-help-locales.mjs` (rewritten: real locale dir via `__dirname`/`fileURLToPath`, nested-object deep-merge — flat string keys broke i18next dot-notation, `zh-TW→zh` Tier-1 inheritance, 18 required keys validated)                                                                                                                                                                                                                                                                                                                                                      | sisyphus    |
+| 26  | Mode 3 Rewards Upgrade (father 2× +1 EVOLVE/participant)              | ✅ **Done** (tsc clean, build GREEN, 33 locales valid, prettier clean)                                          | `addresses.ts` (Evolve2Earn `0xc6268549F24A2658C8c6222242aBd56534b1c3e6` ← RedeployMode3Rewards 2026-09-05, BondManager `0x650FC8033286112Fc0369Da9A1337D856FF7795f`; old `0x0bbEee8…` left as legacy p2p escrow vault — 1M EVOLVE), `Mode2Dashboard.tsx` (19 hardcoded strings → `t()` incl. `minDeposit`), `Mode3Dashboard.tsx` (6 hardcoded strings → `t()`), `scripts/add-dashboard-locales.mjs` (rewritten as INCREMENTAL adder — new `dashboard.mode2.*` keys ONLY, natural Tier-1 translations, ALL 33 LOCALES VALID)                                                                                                                                                                                                                                                                                                                                                              | sisyphus    |
+| 27  | Safety Mode (Public Facade)                                           | ✅ **Done** (tsc EXIT 0, 200 tests PASS / 18 files, safety build GREEN 1m49s, 33 locales valid, prettier clean) | `apps/web/src/lib/config.ts` (PRODUCT_MODE / isSafetyMode, default "safety"), `pages/SafetyDashboard.tsx` (STD status stdUploaded + public link + checks + QR), `pages/PublicProfile.tsx` (`/p/:username`, QR `evolve://person/<id>`, Check), `pages/Scan.tsx` (QR scan, id `evolve-scan-reader`), `pages/LabDashboard.tsx` (partner session auth + scan id `lab-dash-qr-reader` + visit + face + report), `App.tsx` (safety routes), `Layout.tsx` (safety nav), `lib/checks.ts`+test (19 PASS), `lib/apiServer.ts` (partner-auth / public-link / checks / lab-account / public-profile), `lib/db.ts` (partner CRUD, public links, checks, lab visits + fallback lazy init), `prisma/schema.prisma` (Partner, CompatibilityCheck, Profile.username/publicLinkEnabled), `scripts/add-safety-locales.mjs` (safety.* / publicProfile.* / labDashboard.* / scan.* / navigation.check → 33/33) | sisyphus    |
+
+### Deployed Addresses — Ethereum Sepolia (2026-08-21, Mode3-rewards redeploy 2026-09-05)
+
+| Contract             | Address                                      |
+| -------------------- | -------------------------------------------- |
+| EVOLVE               | `0x17b7D47a7A2fEe2999d2DEbb4b29379Cf7481d7d` |
+| ProfileNFT           | `0x1A58b3e3f2698a7449D2EB4daf7d09849015d277` |
+| DNAVerification      | `0x2d6d770F7e5a8C10dC2B103B4f3Cb0e046Db649f` |
+| VerificationRegistry | `0x42E919C0f3218FE89AFB34B9f04d71d2cB02A189` |
+| TrustScore           | `0x0Cb18aa859f4A625aD3e8dE5958E577dfD9FEeB9` |
+| Evolve2Earn          | `0xc6268549F24A2658C8c6222242aBd56534b1c3e6` |
+| EvolveFund           | `0x016F6D873ed4B366098f9BE5C042ef583DC66DeE` |
+| Governance           | `0x8f95C852114e0C01B3D722EA9653F5b3e4460000` |
+| BondManager          | `0x650FC8033286112Fc0369Da9A1337D856FF7795f` |
+
+Post-deploy wiring: `EvolveFund.setBondManager()`, `VerificationRegistry.setDNAVerification()`, `TrustScore.setVotingContract()`, `EVOLVE.mint(Evolve2Earn, 100M)` (2026-09-05: 99M → new Evolve2Earn reward pool, 1M stays in legacy `0x0bbEee8…` p2p escrow vault).
+
+Explorer: https://sepolia.etherscan.io (✅ verified — `ETHERSCAN_API_KEY` in `.env`)
+
+### Agent Instructions for New Session
+
+1. **Прочитай AGENTS.md повністю** — особливо секції 2 (Code Rules), 6 (Package Integration), 12-17 (бізнес-логіка)
+2. **Перевір Session State (секція 24)** — що вже зроблено, що ні
+3. **Візьми Pending задачу** — онови статус на `🔄 In Progress`
+4. **Після завершення** — онови статус на `✅ Done` + дату + своє ім'я
+
+---
+
+_Last updated: 2026-09-13_
 _This constitution is version‑controlled. All agents must follow it._
 _See RULES_PROTOCOL.md for how to propose and apply rule changes._
