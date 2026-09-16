@@ -1,5 +1,5 @@
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -8,37 +8,53 @@ generator client {
 }
 
 model User {
-  id               String     @id @default(uuid())
-  ethAddress       String?    @unique
-  email            String?    @unique
-  phoneNumber      String?    @unique
-  passwordHash     String?
-  createdAt        DateTime   @default(now())
-  updatedAt        DateTime   @updatedAt
-  profile          Profile?
-  sentMessages     Message[]  @relation("SentMessages")
-  receivedMessages Message[]  @relation("ReceivedMessages")
-  documents        Document[]
-  matches          Match[]    @relation("UserMatches")
-  matchedBy        Match[]    @relation("MatchedUserMatches")
+  id                  String     @id @default(uuid())
+  ethAddress          String?    @unique
+  email               String?    @unique
+  passwordHash        String?
+  securityQuestion    String?
+  securityAnswerHash  String?
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+  profile             Profile?
+  sentMessages        Message[]  @relation("SentMessages")
+  receivedMessages    Message[]  @relation("ReceivedMessages")
+  documents           Document[]
+  matches             Match[]    @relation("UserMatches")
+  matchedBy           Match[]    @relation("MatchedUserMatches")
 }
 
 model Profile {
+  // Face embedding for photo verification (1404-dim normalized vector, stored as JSON array)
+  faceEmbedding    String?  // JSON string of number[] or null
   id                String   @id @default(uuid())
   userId            String   @unique
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   name              String
   age               Int
   bio               String
-  interests         String[]
+  interests         String
   imageUrl          String?
   verifiedStd       Boolean  @default(false)
   verifiedDna       Boolean  @default(false)
   reputationScore   Float    @default(0.0)
-  voters            Json?    // Array of voter: { name: String, weight: Float, relation: String }
-  dnaProfile        Json?    // STRProfile mapping
+  voters            String    // Array of voter: { name: String, weight: Float, relation: String }
+  dnaProfile        String    // STRProfile mapping
   stdTestResult     String?
-  accessPermissions Json?    // State of access permissions
+  accessPermissions String    // State of access permissions
+  ageHidden         Boolean  @default(false)
+  languages         String   @default("[]") // JSON array of language codes
+  photoBlurred      Boolean  @default(false)
+  photoGrants       String   @default("{}") // JSON map: viewerUserId -> grant
+  onboardingComplete Boolean @default(false)
+  faceVerified      Boolean  @default(false)
+  faceHash          String?  // SHA-256 hash of face embedding (1404-dim normalized vector)
+  lastLivenessCheck DateTime? // Timestamp of last successful liveness check
+  // Searchable profile fields (JSON string, mirrors fallback shape)
+  searchDetails     String   @default("{}") // JSON object: height, weight, eyeColor, hairColor, bodyType, education, maritalStatus, children, smoking, drinking, religion, zodiac, country, city
+  // Public "safe-sex check" link (evolve.eth/<username>)
+  username          String?  @unique
+  publicLinkEnabled Boolean  @default(false)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 }
@@ -77,9 +93,68 @@ model Document {
   type           String   // "STD" | "DNA"
   uploadDate     String
   isRedacted     Boolean  @default(false)
-  redactedFields String[]
+  redactedFields String
   status         String   @default("encrypted") // "encrypted" | "decrypted"
   resultText     String
-  dnaProfile     Json?    // Optional STRProfile Json
+  dnaProfile     String    // Optional STRProfile Json
   createdAt      DateTime @default(now())
+}
+
+model LabPartner {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  apiKey    String   @unique
+  createdAt DateTime @default(now())
+}
+
+// Partner organization account (lab, dating site, etc.). Labs have their own
+// in-app account with email+password — no crypto wallet needed for staff.
+model Partner {
+  id           String   @id @default(uuid())
+  type         String   @default("lab") // "lab" | "dating_site" | ...
+  name         String
+  email        String   @unique
+  passwordHash String
+  apiKey       String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Person-to-person anonymous safe-sex compatibility check.
+// Both sides see ONLY the verdict (never individual pathogen status).
+model CompatibilityCheck {
+  id          String   @id @default(uuid())
+  requesterId String   // user who initiated the check
+  targetId    String   // user whose consent is required
+  status      String   @default("pending") // pending | approved | denied | expired
+  verdict     String?  // "safe" | "compatible" | "caution" | "risk"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  expiresAt   DateTime // pending checks auto-expire (TTL 7 days)
+
+  @@index([targetId, status])
+  @@index([requesterId, status])
+}
+
+model LabReport {
+  id            String   @id @default(uuid())
+  userId        String
+  source        String   // "email" | "manual" | "api" | "pdf"
+  rawText       String
+  parsed        String   // JSON string of StdTestParseResult
+  status        String   // "pending" | "accepted" | "rejected"
+  faceMatchStatus String @default("none")  // "matched" | "unmatched" | "none"
+  labPartnerName String?  // Optional lab partner name
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Nonce {
+  id        String   @id @default(uuid())
+  nonce     String   @unique
+  address   String
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
 }
