@@ -659,6 +659,42 @@ cd apps/web && npx tsc --noEmit   # ignore db.ts:270
 
 ---
 
+## 23. Ban Resistance
+
+> **Constitutional rule set**: EVOLVE is designed to survive platform bans, geo-blocking, store removal, domain seizure, and infrastructure takedowns. All agents MUST preserve the properties below; never remove or weaken them "for convenience".
+
+### Core Principles
+
+1. **Self-custodial auth is the escape hatch**: SIWE (MetaMask) login MUST be retained — never replaced by email/phone-only auth. DNA recovery + seed-phrase recovery provide account access without KYC, phone, or email dependency.
+2. **P2P-first messaging**: chat MUST work over libp2p (gossipsub) + Nostr without the central API server. The HTTP fallback is a convenience, never a hard dependency.
+3. **Decentralized storage is the source of truth for user content**: IPFS / Arweave first; server-side copies are mirrors, not the only copy.
+4. **Multi-network, multi-RPC**: keep all 11 EVM-network configs (`hardhat.config.ts` + `src/lib/networks.ts`); never hardcode a single RPC/chain as the only path.
+5. **No absolute domain dependency**: public builds must work from any domain/IP — no hardcoded absolute URLs to a single host in application code (env-driven).
+6. **Anonymous-by-default health data**: individual STD/DNA status is NEVER centralized in a form that identifies a user to a third party; only anonymous verdicts (safe/compatible/caution/risk) are shared.
+7. **Safety Mode is a survival strategy**: the public facade (`VITE_PRODUCT_MODE=safety`) must keep working even if dating/conception features are banned in a store or jurisdiction. Never break it while adding dating features.
+8. **No KYC gate**: login, recovery, and core usage must not require government ID, phone number, or email as a mandatory condition.
+
+### Guardrails for agents
+
+- Do NOT delete SIWE/self-custodial wallet flows when adding social/email login — extend, don't replace.
+- Do NOT move chat exclusively to a central HTTP API.
+- Do NOT centralize user content to a single VPS; keep IPFS/Arweave upload paths.
+- Do NOT introduce a single-chain dependency (e.g., "works only on Arbitrum").
+- Do NOT hardcode a production domain in code that prevents running the app from a mirror.
+- If a change weakens one of these guardrails, propose a counter-measure in the same PR.
+
+### Related files
+
+- `apps/web/src/lib/config.ts` — `PRODUCT_MODE` / `isSafetyMode()` / `isFullMode()`
+- `apps/web/src/pages/SafetyDashboard.tsx` — public facade dashboard
+- `apps/web/src/pages/PublicProfile.tsx`, `Scan.tsx`, `LabDashboard.tsx` — safety-mode pages
+- `apps/web/src/lib/networks.ts` — 18-network config
+- `apps/web/src/lib/dna-recovery.ts` — recovery without phone/email
+- `packages/p2p/` — libp2p v3 + Nostr messaging
+- `packages/storage/` — IPFS / Arweave / Lit
+
+---
+
 ## 24. Session State
 
 > **Перше, що читає кожен агент при старті нової сесії.** Цей трекер показує що вже зроблено, що ні, і хто що робив. Після завершення задачі — оновлюй статус.
@@ -693,6 +729,7 @@ cd apps/web && npx tsc --noEmit   # ignore db.ts:270
 | 26  | Mode 3 Rewards Upgrade (father 2× +1 EVOLVE/participant)              | ✅ **Done** (tsc clean, build GREEN, 33 locales valid, prettier clean)                                          | `addresses.ts` (Evolve2Earn `0xc6268549F24A2658C8c6222242aBd56534b1c3e6` ← RedeployMode3Rewards 2026-09-05, BondManager `0x650FC8033286112Fc0369Da9A1337D856FF7795f`; old `0x0bbEee8…` left as legacy p2p escrow vault — 1M EVOLVE), `Mode2Dashboard.tsx` (19 hardcoded strings → `t()` incl. `minDeposit`), `Mode3Dashboard.tsx` (6 hardcoded strings → `t()`), `scripts/add-dashboard-locales.mjs` (rewritten as INCREMENTAL adder — new `dashboard.mode2.*` keys ONLY, natural Tier-1 translations, ALL 33 LOCALES VALID)                                                                                                                                                                                                                                                                                                                                                              | sisyphus                                                                                                                       |
 | 27  | Safety Mode (Public Facade)                                           | ✅ **Done** (tsc EXIT 0, 200 tests PASS / 18 files, safety build GREEN 1m49s, 33 locales valid, prettier clean) | `apps/web/src/lib/config.ts` (PRODUCT_MODE / isSafetyMode, default "safety"), `pages/SafetyDashboard.tsx` (STD status stdUploaded + public link + checks + QR), `pages/PublicProfile.tsx` (`/p/:username`, QR `evolve://person/<id>`, Check), `pages/Scan.tsx` (QR scan, id `evolve-scan-reader`), `pages/LabDashboard.tsx` (partner session auth + scan id `lab-dash-qr-reader` + visit + face + report), `App.tsx` (safety routes), `Layout.tsx` (safety nav), `lib/checks.ts`+test (19 PASS), `lib/apiServer.ts` (partner-auth / public-link / checks / lab-account / public-profile), `lib/db.ts` (partner CRUD, public links, checks, lab visits + fallback lazy init), `prisma/schema.prisma` (Partner, CompatibilityCheck, Profile.username/publicLinkEnabled), `scripts/add-safety-locales.mjs` (safety.* / publicProfile.* / labDashboard.* / scan.* / navigation.check → 33/33) | sisyphus                                                                                                                       |
 | 28  | PDF Lab Report Extraction (pdf-text)                                  | ✅ **Done** (9 tests PASS, tsc EXIT 0, 92 total with std-parser, prettier clean)                                | `lib/pdf-text.ts` (server-only `extractPdfText(data, loaders?)` DI: loadPdfParse/loadTesseract lazy, OCR fallback eng+ukr+rus, `MIN_PDF_TEXT_CHARS=100`, never throws), `__tests__/pdf-text.test.ts` (9 PASS), `apiServer.ts` (POST /api/lab/report accepts `pdfBase64` → extract → parseStdTestResult → createLabReport `source: "email"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "pdf"`, 422 if no text), `prisma/schema.prisma`(source comment + "pdf"),`package.json` (pdf-parse ^2.4.5, tesseract.js ^7.0.0) | sisyphus                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| 29  | Fix: N+1 `/api/messages` → 429 + lab cookie auth                      | ✅ **Done** (tsc EXIT 0, 222 tests PASS / 19 files, build GREEN, browser-verified 0× 429)                       | **N+1 fix**: `db.ts` (+`getConversationPeers(userId)` — фолбек читає `data.messages` з fallback-db), `apiServer.ts` (+`GET /api/messages/peers` — один легкий запит для списку співрозмовників), `AppContext.tsx` (`refreshData` більше НЕ робить per-profile цикл `/api/messages`; `ProfileData.hasChat`, `loadChatHistory(profileId)` — ліниве завантаження переписки), `Chat.tsx` (фільтр `hasChat \|\| chatHistory.length`, lazy-load при виборі профілю). **Cookie auth fix**: `apiServer.ts` ~358 — lab-ендпоінти тепер читають `cookies["siwe_session"] \|\| cookies["email_session"] \|\| cookies["partner_session"]` (раніше лише siwe → реєстрація/сканер ламались для email/partner юзерів)                                                                                                                                                                                    | sisyphus                                                                                                                       |
 
 ### Deployed Addresses — Ethereum Sepolia (2026-08-21, Mode3-rewards redeploy 2026-09-05)
 
@@ -721,6 +758,6 @@ Explorer: https://sepolia.etherscan.io (✅ verified — `ETHERSCAN_API_KEY` in 
 
 ---
 
-_Last updated: 2026-09-15_
+_Last updated: 2026-09-19_
 _This constitution is version‑controlled. All agents must follow it._
 _See RULES_PROTOCOL.md for how to propose and apply rule changes._

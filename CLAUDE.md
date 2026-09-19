@@ -23,6 +23,17 @@
 - Mobile: Expo + React Native (`apps/mobile`)
 - Auth is decoupled from mode selection
 
+## Ban Resistance (see AGENTS.md §23)
+
+- SIWE/MetaMask login is the escape hatch — never replace with email/phone-only auth, extend it
+- Chat must work P2P-first (libp2p + Nostr); HTTP fallback is a convenience, not a dependency
+- User content: IPFS/Arweave first; server copies are mirrors
+- Keep multi-network configs; no single RPC/chain dependency
+- No hardcoded production domain — builds must run from any domain/IP (env-driven)
+- Individual STD/DNA status is never centralized — only anonymous verdicts
+- Safety Mode (`VITE_PRODUCT_MODE=safety`) must keep working; never break it while adding dating features
+- No mandatory KYC/phone/email gate for login, recovery, or core usage
+
 ## Test Commands
 
 ```bash
