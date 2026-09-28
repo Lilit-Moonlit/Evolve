@@ -41,6 +41,10 @@ model Profile {
   voters            String    // Array of voter: { name: String, weight: Float, relation: String }
   dnaProfile        String    // STRProfile mapping
   stdTestResult     String?
+  // Parsed STD result (JSON string of StdTestParseResult) — "fast-search
+  // format" persisted at every ingest point so /api/profiles returns it
+  // ready-made instead of re-parsing rawText client-side per profile.
+  parsedStd         String?
   accessPermissions String    // State of access permissions
   ageHidden         Boolean  @default(false)
   languages         String   @default("[]") // JSON array of language codes
@@ -54,8 +58,9 @@ model Profile {
   searchDetails     String   @default("{}") // JSON object: height, weight, eyeColor, hairColor, bodyType, education, maritalStatus, children, smoking, drinking, religion, zodiac, country, city
   // Public "safe-sex check" link (evolve.eth/<username>)
   username          String?  @unique
-  publicLinkEnabled Boolean  @default(false)
-  createdAt         DateTime @default(now())
+  publicLinkEnabled    Boolean  @default(false)
+  registrationRewarded Boolean  @default(false)
+  createdAt            DateTime @default(now())
   updatedAt         DateTime @updatedAt
 }
 
@@ -104,8 +109,9 @@ model LabPartner {
   id        String   @id @default(uuid())
   name      String
   email     String   @unique
-  apiKey    String   @unique
-  createdAt DateTime @default(now())
+  apiKey        String   @unique
+  walletAddress String?
+  createdAt     DateTime @default(now())
 }
 
 // Partner organization account (lab, dating site, etc.). Labs have their own
@@ -157,4 +163,34 @@ model Nonce {
   expiresAt DateTime
   used      Boolean  @default(false)
   createdAt DateTime @default(now())
+}
+
+// Companion-mode patient record (cross-device). The `id` is the patient's
+// client-generated `companion_user_id` — NOT a server uuid — so a lab scanning
+// a QR on a different device can fetch the same record. Photos are stored as
+// base64 data URLs (downscaled on the client), matching the dating Profile flow.
+model CompanionPatient {
+  id               String   @id
+  name             String?
+  photo            String? // base64 data URL of the main profile photo
+  additionalPhotos String? // JSON array of base64 data URLs
+  location         String?
+  stdCompatible    Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+// Companion-mode laboratory directory (searchable by country + city). The `id`
+// is the lab's client-generated `lab_id` so its own dashboard keeps working
+// from the same device while other users discover the lab from anywhere.
+model CompanionLab {
+  id          String   @id
+  name        String
+  description String?
+  address     String?
+  phone       String?
+  country     String?
+  city        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
