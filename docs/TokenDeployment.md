@@ -192,7 +192,7 @@ npx hardhat run script/verify.ts --network <network-name>
 3. Add EVOLVE token address
 4. Add native token (ETH)
 5. Set fee tier to 0.3%
-6. Add liquidity (recommended: 1M EVOLVE + 1 ETH)
+6. Add liquidity (from the 1.2B Liquidity & partnerships allocation)
 
 ### Trader Joe (Avalanche)
 
@@ -200,21 +200,21 @@ npx hardhat run script/verify.ts --network <network-name>
 2. Add EVOLVE token address
 3. Add AVAX
 4. Set fee tier to 0.3%
-5. Add liquidity (recommended: 1M EVOLVE + 10 AVAX)
+5. Add liquidity (from the 1.2B Liquidity & partnerships allocation)
 
 ### QuickSwap (Polygon)
 
 1. Visit [QuickSwap](https://quickswap.exchange)
 2. Add EVOLVE token address
 3. Add MATIC
-4. Add liquidity (recommended: 1M EVOLVE + 100 MATIC)
+4. Add liquidity (from the 1.2B Liquidity & partnerships allocation)
 
 ### PancakeSwap (BSC)
 
 1. Visit [PancakeSwap](https://pancakeswap.finance)
 2. Add EVOLVE token address
 3. Add BNB
-4. Add liquidity (recommended: 1M EVOLVE + 5 BNB)
+4. Add liquidity (from the 1.2B Liquidity & partnerships allocation)
 
 ## GitHub Actions Deployment
 
@@ -246,8 +246,8 @@ Trigger the workflow manually or push to main branch.
 - **Name**: EVOLVE
 - **Symbol**: EVOLVE
 - **Decimals**: 18
-- **Max Supply**: 100,000,000 EVOLVE
-- **Features**: Burnable, Pausable, Access Control
+- **Max Supply**: 8,000,000,000 EVOLVE
+- **Features**: Burnable, Access Control, TimelockController (48h) admin
 
 ## Contracts
 
@@ -257,7 +257,7 @@ ERC-20 token with:
 
 - Minting controls via MINTER_ROLE
 - Burnable functionality
-- Pausable transfers
+- Monotonic totalMinted issuance capped at 8B (MINTER_ROLE = timelock + RewardMinter)
 - Access control for admin functions
 
 ### ProfileNFT.sol

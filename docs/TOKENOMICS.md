@@ -5,28 +5,20 @@
 | Property       | Value                            |
 | -------------- | -------------------------------- |
 | **Contract**   | `EVOLVE.sol` (ERC-20)            |
-| **Max Supply** | 100,000,000 EVOLVE               |
+| **Max Supply** | 8,000,000,000 EVOLVE             |
 | **Decimals**   | 18                               |
 | **Network**    | EVM-compatible (Solidity 0.8.24) |
 
 ## Earning EVOLVE
 
-Users earn EVOLVE through on-chain activity:
-
-| Action               | Reward     | Contract                         |
-| -------------------- | ---------- | -------------------------------- |
-| Profile verification | 100 EVOLVE | `Evolve2Earn.verifyProfile()`    |
-| Match confirmation   | 50 EVOLVE  | `Evolve2Earn.claimMatchReward()` |
-| Daily active use     | 10 EVOLVE  | `Evolve2Earn.claimDailyReward()` |
-
-Initial supply: 1,000,000 EVOLVE minted to `Evolve2Earn` contract at deploy for rewards.
+The only way to earn EVOLVE is through the **Emoji Gift Economy** (see below). There is no daily reward, match reward, or verification reward.
 
 ## Spending EVOLVE
 
-| Action                          | Cost     | Contract                     |
-| ------------------------------- | -------- | ---------------------------- |
-| Emoji gift (Rose, Cactus, etc.) | 1 EVOLVE | `Evolve2Earn.buyEmojiGift()` |
-| Premium features                | TBD      | Future                       |
+| Action                    | Cost          | Contract                     |
+| ------------------------- | ------------- | ---------------------------- |
+| Emoji gift (Rose, Cactus) | 1 EVOLVE      | `Evolve2Earn.buyEmojiGift()` |
+| EvolveFund deposit        | min 15 EVOLVE | `EvolveFund.deposit()`       |
 
 ## Emoji Gift Economy
 
@@ -50,44 +42,59 @@ When a user buys an emoji gift for 1 EVOLVE, that 1 EVOLVE is distributed propor
 
 Gifts are transferable via `transferEmojiGift(id, newOwner)`. Ownership and future revenue rights transfer.
 
-## Reputation ↔ Token Connection
+## Staking → EvolveFund
 
-| Action         | Reputation Effect                                      |
-| -------------- | ------------------------------------------------------ |
-| Receive a vote | +1 receivedVote → `getReputationScore()` maps to 0–100 |
-| Base score     | Set by owner (admin), range 0–100                      |
-| Total score    | `baseScore + reputationScore` (capped at 100)          |
-| Vote limit     | 8 votes per user (max)                                 |
+**EvolveStaking has been removed.** Men use `EvolveFund` (deposit, 30+ day lock). Women hold tokens on their wallet balance (free withdrawal/transfer).
 
-Higher reputation → better profile visibility (future feature).
+- **Men**: deposit into EvolveFund (min 15 EVOLVE, min 30 days) → affects Governance as staked weight
+- **Women**: tokens on wallet balance → affects Governance as balance (can withdraw anytime, rating will drop)
 
 ## Governance
 
 EVOLVE holders govern via `Governance.sol`:
 
+### Vote Weight — 3 Components
+
+**Women:**
+
+1. Wallet balance (30%) — 1 point per 100 EVOLVE, capped at 100
+2. Recursive reputation (30%) — 8 votes, depth 3
+3. % children born relative to all mothers (40%)
+
+**Men:**
+
+1. EvolveFund balance (30%) — 1 point per 100 EVOLVE, capped at 100
+2. Recursive reputation (30%) — 8 votes, depth 3
+3. % fathered children relative to all fathers (40%)
+
+### Proposal Lifecycle
+
 1. **Proposal creation**: any user creates a proposal with description and calldata
-2. **Voting period**: tokens determine voting weight (1 EVOLVE = 1 vote)
-3. **Execution**: approved proposals execute after timelock
+2. **Voting period**: 7 days, quorum 40%
+3. **Timelock**: 2 days after voting ends
+4. **Execution**: approved proposals execute after timelock
 
 ## Supply Distribution (Proposed)
 
-| Allocation               | % of Max | Amount     |
-| ------------------------ | -------- | ---------- |
-| Evolve2Earn rewards pool | 30%      | 30M EVOLVE |
-| Team & operations        | 20%      | 20M EVOLVE |
-| Community & marketing    | 20%      | 20M EVOLVE |
-| Liquidity & partnerships | 15%      | 15M EVOLVE |
-| Governance treasury      | 10%      | 10M EVOLVE |
-| Advisors                 | 5%       | 5M EVOLVE  |
+| Allocation               | % of Max | Amount      |
+| ------------------------ | -------- | ----------- |
+| Evolve2Earn rewards pool | 30%      | 2.4B EVOLVE |
+| Team & operations        | 20%      | 1.6B EVOLVE |
+| Community & marketing    | 20%      | 1.6B EVOLVE |
+| Liquidity & partnerships | 15%      | 1.2B EVOLVE |
+| Governance treasury      | 10%      | 800M EVOLVE |
+| Advisors                 | 5%       | 400M EVOLVE |
 
-_Current implementation: initial 1M minted to Evolve2Earn. Full distribution requires upgrade or governance vote._
+**Pre-mint 5.6B + on-demand headroom 2.4B.** The 8B supply splits into **pre-mint 5.6B** (Team 1.6B + Community 1.6B + Liquidity 1.2B + Governance 800M + Advisors 400M) and **on-demand headroom 2.4B** (Evolve2Earn seed 400M + ~2B reserve for RewardMinter rewards/faucet), so mintReward/mintFaucet always have headroom under the 8B cap. Pre-mint 5.6B is governance policy, not a code invariant — the 48h TimelockController holds MINTER_ROLE and can technically mint into headroom.
+
+_Historical Sepolia testnet deployment (2026-09-05) minted to the legacy reward pool and escrow vault; superseded by the 8B model above. No daily/match/verification rewards — emoji gift economy only._
 
 ## Economic Model
 
 ```
-User Activity → Earn EVOLVE → Buy Gifts → Revenue to Owners → Incentive to Hold
+User Activity → Earn EVOLVE via gifts → Revenue to Owners → Incentive to Hold
      ↓                                                         ↑
-  Reputation ◄──────── Voting ◄──────── EVOLVE stake ◄──────────┘
+  Reputation ←── Voting ←── EvolveFund deposit ←───────────────┘
 ```
 
 The flywheel: active users earn EVOLVE → spend on gifts → gift owners earn passive EVOLVE → incentive to stay active and earn more → higher engagement → more EVOLVE demand.
