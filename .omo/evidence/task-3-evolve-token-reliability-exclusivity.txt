@@ -1,0 +1,58 @@
+Task 3 — RewardMinter (evolve-token-reliability-exclusivity)
+Date: 2026-09-28
+Executor: sisyphus-junior (opencode)
+
+DELIVERABLES
+- packages/contracts/src/RewardMinter.sol (new)
+- packages/contracts/test/RewardMinter.test.js (new, 16 tests)
+- packages/contracts/ignition/modules/RewardMinter.js (new)
+- packages/contracts/ignition/modules/index.js (Phase 6.5 registration + return object)
+- packages/contracts/ignition-parameters.json (+RewardMinterModule)
+- packages/contracts/ignition-parameters.local.json (+RewardMinterModule)
+
+COMMANDS + RESULTS (exact)
+
+1) npm run compile                                  [C:\CFC\packages\contracts]
+   > npx hardhat compile
+   Compiled 1 Solidity file successfully (evm target: cancun).
+
+2) npx hardhat test test/RewardMinter.test.js       [C:\CFC\packages\contracts]
+   16 passing (3s)
+   (initial run had 1 failing ABI-probe test — prefix filter caught the
+   `minter()` public getter; fixed filter to exclude getters, re-run: 16 passing)
+
+3) npx hardhat test (full suite)                    [C:\CFC\packages\contracts]
+   199 passing (16s)   [183 pre-existing + 16 new, 0 failing]
+
+4) npm run deploy:local                             [C:\CFC\packages\contracts]
+   [ DeployAllModule ] successfully deployed 🚀
+   RewardMinterModule#RewardMinter - 0x9A676e781A523b5d0C0e43731313A708CB607508
+   (all 14 futures deployed incl. TimelockController; process exited cleanly,
+   no exit-hang this run)
+
+5) npx prettier --write test/RewardMinter.test.js ignition/modules/RewardMinter.js ignition/modules/index.js
+   test/RewardMinter.test.js 113ms (reformatted; RewardMinter.js / index.js unchanged)
+   Re-ran test file after prettier: 16 passing (1s)
+
+ADVERSARIAL PROBES
+a) stale artifacts — fresh `npm run compile` BEFORE test runs; all 16 RewardMinter
+   tests exercise the regenerated ABI (incl. explicit ABI fragment probe asserting
+   mint* functions == exactly [mintFaucet(address), mintReward(address)]).
+b) dirty worktree — baseline `git status --porcelain` captured before work (repo
+   has extensive pre-existing modifications, none mine). Post-work diff for this
+   task = exactly the 6 deliverables + compile artifacts (untracked, not committed)
+   + this evidence file + learnings.md. Commit stages only the deliverables.
+c) misleading success output — counts reported verbatim from mocha output:
+   16 passing (targeted), 199 passing (full suite), deploy "successfully deployed".
+d) flaky rate-limit tests — all time manipulation via evm_increaseTime + evm_mine
+   (deterministic, no real sleeps); snapIntoWindow() pins the chain 60s past a
+   daily-window boundary so no test can straddle a rollover by accident.
+
+NOTES / DEVIATIONS
+- initialMinter in ignition-parameters.local.json = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+  (TRUE hardhat#0, same address the local file already uses for owner/proposer/executor).
+  The task text quoted "0xf39Fd6e3aadF3F35Ff3Cac0863f680494F2056a8" — not a valid
+  hardhat#0 address; treated as typo per the task's own "mirror the local file" rule.
+- MINTER_ROLE on EVOLVE is NOT granted to RewardMinter in index.js — production grant
+  goes through a 48h timelock proposal (post-deploy ops), per plan. Tests grant directly.
+- packages/contracts/README.md untouched (owned by Task 5 this wave).
