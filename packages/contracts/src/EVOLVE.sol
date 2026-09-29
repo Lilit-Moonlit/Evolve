@@ -2,6 +2,7 @@
 pragma solidity ^0.8.24;
 
 import { OFT } from "@layerzerolabs/oft-evm/contracts/OFT.sol";
+import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 import { ERC20Burnable } from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
 
@@ -20,7 +21,8 @@ contract EVOLVE is OFT, ERC20Burnable, AccessControl {
         uint256 maxSupply,
         address lzEndpoint
     )
-        OFT("EVOLVE", "EVOLVE", lzEndpoint, address(0))
+        OFT("EVOLVE", "EVOLVE", lzEndpoint, initialOwner)
+        Ownable(initialOwner)
         AccessControl()
     {
         MAX_SUPPLY = maxSupply > 0 ? maxSupply : 8_000_000_000 * 10**18;
