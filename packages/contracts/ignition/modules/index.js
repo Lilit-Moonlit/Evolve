@@ -1,6 +1,7 @@
 ﻿import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
 import { ZeroHash, id } from "ethers";
 
+import LiquidityLockerModule from "./LiquidityLocker.js";
 import EvolveModule from "./EVOLVE.js";
 import ProfileNFTModule from "./ProfileNFT.js";
 import TrustScoreModule from "./TrustScore.js";
@@ -71,6 +72,9 @@ const DeployAllModule = buildModule("DeployAllModule", (m) => {
   // for the opt-in deploy-time mint switch and the README for the production
   // pre-mint procedure).
   const { vestingWallet } = m.useModule(VestingWalletModule);
+
+  // Phase 7: Liquidity Locker
+  const { liquidityLocker } = m.useModule(LiquidityLockerModule);
 
   // Wire fund → bondManager
   m.call(evolveFund, "setBondManager", [bondManager]);
