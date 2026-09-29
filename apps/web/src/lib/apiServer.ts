@@ -10,6 +10,7 @@ import {
   FAUCET_AMOUNT_TOKENS,
   isAdminConfigured,
   mintEvolve,
+  mintEvolveAmount,
   relayDnaRevoke,
   relayDnaVerify,
 } from "./adminChain";
@@ -17,6 +18,7 @@ import { checkStdCompatibility, parseStdTestResult } from "./std-parser";
 import { generateLabEmail, parseUserIdFromLabEmail } from "./lab-report";
 import { CHECK_TTL_MS, canonicalUsername, riskLevelToVerdict, validateUsername } from "./checks";
 import { extractPdfText } from "./pdf-text";
+import { grantRegistrationReward } from "./registration-reward";
 
 // --- WebSocket Chat Server ---
 interface WsClient {
@@ -53,15 +55,21 @@ export function setupWebSocketServer(server: any) {
     let userId: string | null = null;
     let username: string | null = null;
     let channelId: string | null = null;
+    let targetUserId: string | null = null;
 
-    ws.on("message", (data: Buffer) => {
+    ws.on("message", async (data: Buffer) => {
       try {
         const msg = JSON.parse(data.toString());
 
         if (msg.type === "join") {
           userId = msg.userId;
           username = msg.username || "Anonymous";
-          channelId = createChannelId(msg.userId, msg.targetUserId);
+          targetUserId = msg.targetUserId;
+          if (!userId || !targetUserId || userId === targetUserId) {
+            ws.close(1008, "Invalid chat participants");
+            return;
+          }
+          channelId = createChannelId(userId, targetUserId);
 
           if (!wsClients.has(channelId)) {
             wsClients.set(channelId, []);
@@ -69,6 +77,20 @@ export function setupWebSocketServer(server: any) {
           wsClients.get(channelId)!.push({ ws, userId: userId!, username: username! });
 
           ws.send(JSON.stringify({ type: "joined", channelId }));
+          const history = await dbService.getMessages(userId, targetUserId);
+          ws.send(
+            JSON.stringify({
+              type: "history",
+              messages: history.map((message: any) => ({
+                type: "message",
+                id: message.id,
+                senderId: message.senderId,
+                senderName: message.senderName || "",
+                text: message.text,
+                timestamp: message.timestamp || message.time || message.createdAt,
+              })),
+            }),
+          );
           broadcastToChannel(
             channelId,
             {
@@ -80,21 +102,23 @@ export function setupWebSocketServer(server: any) {
           );
         }
 
-        if (msg.type === "message" && channelId && userId) {
+        if (msg.type === "message" && channelId && userId && targetUserId) {
+          const text = typeof msg.text === "string" ? msg.text.trim() : "";
+          if (!text) return;
           const chatMsg = {
             type: "message",
             id: Date.now().toString(),
             senderId: userId,
             senderName: username,
-            text: msg.text,
+            text,
             timestamp: new Date().toISOString(),
           };
 
           // Persist to database
           dbService.createMessage({
             senderId: userId,
-            receiverId: msg.targetUserId,
-            text: msg.text,
+            receiverId: targetUserId,
+            text,
             time: new Date().toISOString(),
             isRequest: false,
           });
@@ -355,7 +379,8 @@ export async function handleApiRequest(
 
   try {
     const cookies = parseCookies(req);
-    let sessionId = cookies["siwe_session"] || cookies["email_session"];
+    let sessionId =
+      cookies["siwe_session"] || cookies["email_session"] || cookies["partner_session"];
 
     // Support Session ID in Authorization header as well
     const authHeader = req.headers.authorization;
@@ -556,7 +581,10 @@ export async function handleApiRequest(
         Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
       sessions[newSessionId] = { userId: user!.id, email };
 
-      res.setHeader("Set-Cookie", `email_session=${newSessionId}; Path=/; HttpOnly; SameSite=Lax`);
+      res.setHeader(
+        "Set-Cookie",
+        `email_session=${newSessionId}; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000`,
+      );
       res.statusCode = 200;
       res.end(JSON.stringify({ success: true, user, sessionId: newSessionId }));
       return true;
@@ -604,7 +632,10 @@ export async function handleApiRequest(
         Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
       sessions[newSessionId] = { userId: user.id, email };
 
-      res.setHeader("Set-Cookie", `email_session=${newSessionId}; Path=/; HttpOnly; SameSite=Lax`);
+      res.setHeader(
+        "Set-Cookie",
+        `email_session=${newSessionId}; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000`,
+      );
       res.statusCode = 200;
       res.end(JSON.stringify({ success: true, user, sessionId: newSessionId }));
       return true;
@@ -638,7 +669,10 @@ export async function handleApiRequest(
         Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
       sessions[newSessionId] = { userId: user.id, email };
 
-      res.setHeader("Set-Cookie", `email_session=${newSessionId}; Path=/; HttpOnly; SameSite=Lax`);
+      res.setHeader(
+        "Set-Cookie",
+        `email_session=${newSessionId}; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000`,
+      );
       res.statusCode = 200;
       res.end(JSON.stringify({ success: true, user, sessionId: newSessionId }));
       return true;
@@ -882,6 +916,12 @@ export async function handleApiRequest(
         return true;
       }
       const body = await getJsonBody(req);
+      // Persist the parsed STD result ("fast-search format") whenever a raw
+      // stdTestResult arrives, so /api/profiles serves it ready-made and the
+      // client no longer re-parses raw text per profile on every load.
+      if (typeof body.stdTestResult === "string" && body.stdTestResult.trim() !== "") {
+        body.parsedStd = parseStdTestResult(body.stdTestResult);
+      }
       const profile = await dbService.upsertProfile(session.userId, body);
       res.statusCode = 200;
       res.end(JSON.stringify(profile));
@@ -1151,6 +1191,22 @@ export async function handleApiRequest(
 
     // --- 5. MESSAGES ENDPOINTS ---
 
+    // GET /api/messages/peers — distinct conversation partner IDs for a user.
+    // Single lightweight call replacing the per-profile `/api/messages` N+1
+    // (which previously caused rate-limit 429 spam on profile load).
+    if (pathname === "/api/messages/peers" && req.method === "GET") {
+      const { userId } = parsedUrl.query;
+      if (!userId) {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "userId is required" }));
+        return true;
+      }
+      const peers = await dbService.getConversationPeers(userId as string);
+      res.statusCode = 200;
+      res.end(JSON.stringify(peers));
+      return true;
+    }
+
     // GET /api/messages
     if (pathname === "/api/messages" && req.method === "GET") {
       const { senderId, receiverId } = parsedUrl.query;
@@ -1313,6 +1369,7 @@ export async function handleApiRequest(
         await dbService.upsertProfile(session.userId, {
           verifiedStd: true,
           stdTestResult: report.rawText || undefined,
+          parsedStd: parseStdTestResult(report.rawText || ""),
         });
         res.statusCode = 200;
         res.end(JSON.stringify({ ok: true, status: "accepted" }));
@@ -1388,17 +1445,43 @@ export async function handleApiRequest(
     // It only gets {matched, similarity} back from /verify and may attach a
     // report to a userId it successfully face-matched.
 
+    // POST /api/lab/partner/wallet — { apiKey, walletAddress }
+    if (pathname === "/api/lab/partner/wallet" && req.method === "POST") {
+      const body = await getJsonBody(req);
+      const apiKey = typeof body.apiKey === "string" ? body.apiKey.trim() : "";
+      const walletAddress = typeof body.walletAddress === "string" ? body.walletAddress.trim() : "";
+      const lab = await dbService.getLabPartnerByApiKey(apiKey);
+      if (!lab) {
+        res.statusCode = 401;
+        res.end(JSON.stringify({ error: "Invalid API key" }));
+        return true;
+      }
+      if (!/^0x[0-9a-fA-F]{40}$/.test(walletAddress)) {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "Invalid wallet address" }));
+        return true;
+      }
+      await dbService.setLabPartnerWallet(lab.id, walletAddress);
+      res.statusCode = 200;
+      res.end(JSON.stringify({ ok: true }));
+      return true;
+    }
+
     // POST /api/lab/partner/register — create a lab partner, returns its API key
     if (pathname === "/api/lab/partner/register" && req.method === "POST") {
       const body = await getJsonBody(req);
       const name = typeof body.name === "string" ? body.name.trim() : "";
       const email = typeof body.email === "string" ? body.email.trim() : "";
+      const walletAddress = typeof body.walletAddress === "string" ? body.walletAddress.trim() : "";
       if (!name || !email) {
         res.statusCode = 400;
         res.end(JSON.stringify({ error: "name and email are required" }));
         return true;
       }
       const lab = await dbService.createLabPartner(name, email);
+      if (/^0x[0-9a-fA-F]{40}$/.test(walletAddress)) {
+        await dbService.setLabPartnerWallet(lab.id, walletAddress);
+      }
       res.statusCode = 200;
       res.end(JSON.stringify({ ok: true, id: lab.id, name: lab.name, apiKey: lab.apiKey }));
       return true;
@@ -1482,6 +1565,30 @@ export async function handleApiRequest(
         faceMatchStatus,
         labPartnerName: lab.name,
       });
+      // Product decision: the lab already verified the patient (API key +
+      // face-match), so the parsed result attaches to the profile IMMEDIATELY
+      // (verifiedStd) instead of waiting for a user-side accept step.
+      await dbService.upsertProfile(userId, {
+        verifiedStd: true,
+        stdTestResult: rawText,
+        parsedStd: parsed,
+      });
+
+      // Registration reward
+      try {
+        const rewardRes = await grantRegistrationReward(
+          { userId, labWallet: lab.walletAddress ?? null },
+          {
+            getUserById: dbService.getUserById,
+            claimRegistrationReward: dbService.claimRegistrationReward,
+            mintEvolveAmount,
+          },
+        );
+        console.log("[lab-report] registration reward:", JSON.stringify(rewardRes));
+      } catch (rewardErr) {
+        console.error("[lab-report] registration reward failed:", rewardErr);
+      }
+
       res.statusCode = 200;
       res.end(JSON.stringify({ ok: true, reportId: report.id }));
       return true;
@@ -1837,7 +1944,7 @@ export async function handleApiRequest(
 
         res.setHeader(
           "Set-Cookie",
-          `siwe_session=${newSessionId}; Path=/; HttpOnly; SameSite=Lax; Max-Age=86400`,
+          `siwe_session=${newSessionId}; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000`,
         );
         res.statusCode = 200;
         res.end(
@@ -1953,7 +2060,7 @@ export async function handleApiRequest(
 
         res.setHeader(
           "Set-Cookie",
-          `email_session=${newSessionId}; Path=/; HttpOnly; SameSite=Lax; Max-Age=86400`,
+          `email_session=${newSessionId}; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000`,
         );
         res.statusCode = 200;
         res.end(
@@ -1971,6 +2078,92 @@ export async function handleApiRequest(
         res.statusCode = 500;
         res.end(JSON.stringify({ error: "Recovery failed" }));
       }
+      return true;
+    }
+
+    // --- COMPANION MODE PATIENTS (cross-device) ---
+    // Companion-mode patients register with a client-generated id (no SIWE).
+    // The lab fetches the same record from any device by that id, and Search
+    // lists every registered patient. No auth required — access is by id alone,
+    // mirroring how a physical QR code is the bearer credential.
+
+    // GET /api/companion/patients — list all registered patients.
+    if (pathname === "/api/companion/patients" && req.method === "GET") {
+      const patients = await dbService.listCompanionPatients();
+      res.statusCode = 200;
+      res.end(JSON.stringify({ patients }));
+      return true;
+    }
+
+    // POST /api/companion/patients — register/upsert a patient profile.
+    if (pathname === "/api/companion/patients" && req.method === "POST") {
+      const body = await getJsonBody(req);
+      const id = String(body.id || "").trim();
+      if (!id) {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "Patient id is required" }));
+        return true;
+      }
+      const patient = await dbService.upsertCompanionPatient({
+        id,
+        name: body.name ?? null,
+        photo: body.photo ?? null,
+        additionalPhotos: Array.isArray(body.additionalPhotos) ? body.additionalPhotos : null,
+        location: body.location ?? null,
+        stdCompatible: Boolean(body.stdCompatible),
+      });
+      res.statusCode = 200;
+      res.end(JSON.stringify({ success: true, patient }));
+      return true;
+    }
+
+    // GET /api/companion/patients/:id — fetch a single patient by QR id.
+    const companionPatientMatch = pathname.match(/^\/api\/companion\/patients\/([^/]+)$/);
+    if (companionPatientMatch && req.method === "GET") {
+      const id = decodeURIComponent(companionPatientMatch[1]);
+      const patient = await dbService.getCompanionPatient(id);
+      if (!patient) {
+        res.statusCode = 404;
+        res.end(JSON.stringify({ error: "Patient not found" }));
+        return true;
+      }
+      res.statusCode = 200;
+      res.end(JSON.stringify({ patient }));
+      return true;
+    }
+
+    // GET /api/companion/labs?country=&city= — searchable lab directory.
+    if (pathname === "/api/companion/labs" && req.method === "GET") {
+      const labs = await dbService.listCompanionLabs(
+        (parsedUrl.query.country as string) || undefined,
+        (parsedUrl.query.city as string) || undefined,
+      );
+      res.statusCode = 200;
+      res.end(JSON.stringify({ labs }));
+      return true;
+    }
+
+    // POST /api/companion/labs — register/update a lab in the directory.
+    if (pathname === "/api/companion/labs" && req.method === "POST") {
+      const body = await getJsonBody(req);
+      const id = String(body.id || "").trim();
+      const name = String(body.name || "").trim();
+      if (!id || !name) {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "Lab id and name are required" }));
+        return true;
+      }
+      const lab = await dbService.upsertCompanionLab({
+        id,
+        name,
+        description: body.description ?? null,
+        address: body.address ?? null,
+        phone: body.phone ?? null,
+        country: body.country ?? null,
+        city: body.city ?? null,
+      });
+      res.statusCode = 200;
+      res.end(JSON.stringify({ success: true, lab }));
       return true;
     }
 
