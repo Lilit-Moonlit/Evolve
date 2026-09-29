@@ -24,6 +24,7 @@ export const CONTRACTS = {
   VERIFICATION_REGISTRY: "0x42E919C0f3218FE89AFB34B9f04d71d2cB02A189",
   DNA_VERIFICATION: "0x2d6d770F7e5a8C10dC2B103B4f3Cb0e046Db649f",
   // RewardMinter — placeholder; real address lands after redeploy (Task 16)
+  // TODO(deploy): populated after redeploy
   REWARD_MINTER: "0x0000000000000000000000000000000000000000",
 } as const;
 

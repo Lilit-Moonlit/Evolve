@@ -268,7 +268,13 @@ ERC-721 NFT for:
 - Soulbound (non-transferable)
 - Metadata URI management
 
-## Troubleshooting
+## DEX Listing & LP Lock Runbook
+
+a) LP lock step using `LiquidityLocker` (lock LP tokens until the configured `unlockTime`; owner-only withdraw after).
+b) DEX checklist: no transfer tax, no blacklist/whitelist, no anti-whale, no proxy — standard ERC-20 + LayerZero OFT.
+c) Verify source on every explorer with `ETHERSCAN_API_KEY`.
+d) External contract audit required before launch.
+
 
 ### Deployment Fails
 
