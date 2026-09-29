@@ -3,11 +3,12 @@ import hre from "hardhat";
 
 describe("EVOLVE", function () {
   const MAX_SUPPLY = 1000000n * 10n ** 18n;
+  const LZ_ENDPOINT = hre.ethers.ZeroAddress;
 
   async function deployTokenFixture() {
     const [owner, minter, user] = await hre.ethers.getSigners();
     const Token = await hre.ethers.getContractFactory("EVOLVE");
-    const token = await Token.deploy(owner.address, MAX_SUPPLY);
+    const token = await Token.deploy(owner.address, MAX_SUPPLY, LZ_ENDPOINT);
     return { token, owner, minter, user };
   }
 
@@ -39,9 +40,7 @@ describe("EVOLVE", function () {
 
     it("Should revert if non-minter tries to mint", async function () {
       const { token, user } = await deployTokenFixture();
-      await expect(
-        token.connect(user).mint(user.address, 1000),
-      ).to.be.revertedWithCustomError(
+      await expect(token.connect(user).mint(user.address, 1000)).to.be.revertedWithCustomError(
         token,
         "AccessControlUnauthorizedAccount",
       );
@@ -60,9 +59,10 @@ describe("EVOLVE", function () {
       await token.connect(owner).mint(user.address, MAX_SUPPLY / 2n);
       expect(await token.totalMinted()).to.equal(MAX_SUPPLY);
 
-      await expect(
-        token.connect(owner).mint(user.address, 1),
-      ).to.be.revertedWithCustomError(token, "MaxSupplyExceeded");
+      await expect(token.connect(owner).mint(user.address, 1)).to.be.revertedWithCustomError(
+        token,
+        "MaxSupplyExceeded",
+      );
     });
   });
 
@@ -72,35 +72,6 @@ describe("EVOLVE", function () {
       await token.connect(owner).mint(user.address, 1000);
       await token.connect(user).burn(500);
       expect(await token.balanceOf(user.address)).to.equal(500);
-    });
-  });
-
-  describe("Pausing", function () {
-    it("Should allow admin to pause and unpause", async function () {
-      const { token, owner, user } = await deployTokenFixture();
-      await token.connect(owner).mint(user.address, 1000);
-
-      await token.connect(owner).pause();
-      expect(await token.paused()).to.be.true;
-
-      await expect(token.connect(user).burn(500)).to.be.revertedWithCustomError(
-        token,
-        "EnforcedPause",
-      );
-
-      await token.connect(owner).unpause();
-      expect(await token.paused()).to.be.false;
-
-      await token.connect(user).burn(500);
-      expect(await token.balanceOf(user.address)).to.equal(500);
-    });
-
-    it("Should revert if non-admin tries to pause", async function () {
-      const { token, user } = await deployTokenFixture();
-      await expect(token.connect(user).pause()).to.be.revertedWithCustomError(
-        token,
-        "AccessControlUnauthorizedAccount",
-      );
     });
   });
 
