@@ -1,9 +1,8 @@
 import { expect } from "chai";
 import hre from "hardhat";
+import { deployLzEndpointMock } from "./helpers/lz-endpoint.js";
 
 const { ethers } = hre;
-
-const LZ_ENDPOINT = ethers.ZeroAddress;
 
 describe("EvolvePaymaster", function () {
   let evolve, paymaster, owner, user1;
@@ -13,7 +12,12 @@ describe("EvolvePaymaster", function () {
     [owner, user1] = await ethers.getSigners();
 
     const EVOLVE = await ethers.getContractFactory("EVOLVE");
-    evolve = await EVOLVE.deploy(owner.address, ethers.parseEther("100000000"), LZ_ENDPOINT);
+    const lzEndpoint = await deployLzEndpointMock(owner);
+    evolve = await EVOLVE.deploy(
+      owner.address,
+      ethers.parseEther("100000000"),
+      await lzEndpoint.getAddress(),
+    );
 
     const Paymaster = await ethers.getContractFactory("EvolvePaymaster");
     paymaster = await Paymaster.deploy(

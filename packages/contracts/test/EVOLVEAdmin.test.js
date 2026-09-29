@@ -1,10 +1,10 @@
 import { expect } from "chai";
 import hre from "hardhat";
+import { deployLzEndpointMock } from "./helpers/lz-endpoint.js";
 
 const { ethers } = hre;
 
 const MAX_SUPPLY = 1_000_000n * 10n ** 18n;
-const LZ_ENDPOINT = ethers.ZeroAddress;
 const TIMELOCK_DELAY = 48n * 60n * 60n; // 48 hours, in seconds
 const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 const ZERO_HASH = "0x" + "0".repeat(64);
@@ -14,7 +14,8 @@ describe("EVOLVE timelock administration", function () {
     const [deployer, proposer, executor, user, outsider] = await ethers.getSigners();
 
     const Token = await ethers.getContractFactory("EVOLVE");
-    const token = await Token.deploy(deployer.address, MAX_SUPPLY, LZ_ENDPOINT);
+    const lzEndpoint = await deployLzEndpointMock(deployer);
+    const token = await Token.deploy(deployer.address, MAX_SUPPLY, await lzEndpoint.getAddress());
 
     const Timelock = await ethers.getContractFactory("TimelockController");
     const timelock = await Timelock.deploy(

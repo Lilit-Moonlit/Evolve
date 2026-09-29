@@ -1,14 +1,15 @@
 import { expect } from "chai";
 import hre from "hardhat";
+import { deployLzEndpointMock } from "./helpers/lz-endpoint.js";
 
 describe("EVOLVE", function () {
   const MAX_SUPPLY = 1000000n * 10n ** 18n;
-  const LZ_ENDPOINT = hre.ethers.ZeroAddress;
 
   async function deployTokenFixture() {
     const [owner, minter, user] = await hre.ethers.getSigners();
+    const lzEndpoint = await deployLzEndpointMock(owner);
     const Token = await hre.ethers.getContractFactory("EVOLVE");
-    const token = await Token.deploy(owner.address, MAX_SUPPLY, LZ_ENDPOINT);
+    const token = await Token.deploy(owner.address, MAX_SUPPLY, await lzEndpoint.getAddress());
     return { token, owner, minter, user };
   }
 

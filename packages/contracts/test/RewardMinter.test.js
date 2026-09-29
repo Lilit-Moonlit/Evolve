@@ -1,9 +1,8 @@
 import { expect } from "chai";
 import hre from "hardhat";
+import { deployLzEndpointMock } from "./helpers/lz-endpoint.js";
 
 const { ethers } = hre;
-
-const LZ_ENDPOINT = ethers.ZeroAddress;
 
 const ONE_EVOLVE = 1n * 10n ** 18n;
 const FIFTY_EVOLVE = 50n * 10n ** 18n;
@@ -20,7 +19,8 @@ describe("RewardMinter", function () {
 
     // 0 maxSupply → EVOLVE falls back to the 8B default (no cap interference).
     const Token = await ethers.getContractFactory("EVOLVE");
-    const token = await Token.deploy(deployer.address, 0, LZ_ENDPOINT);
+    const lzEndpoint = await deployLzEndpointMock(deployer);
+    const token = await Token.deploy(deployer.address, 0, await lzEndpoint.getAddress());
 
     // Mirror production wiring: RewardMinter admin = timelock; in tests the
     // dedicated `admin` signer stands in for it. MINTER_ROLE is granted
@@ -291,7 +291,8 @@ describe("RewardMinter", function () {
 
       // Cap so tight that exactly one mintReward fits.
       const Token = await ethers.getContractFactory("EVOLVE");
-      const token = await Token.deploy(deployer.address, ONE_EVOLVE, LZ_ENDPOINT);
+      const lzEndpoint = await deployLzEndpointMock(deployer);
+      const token = await Token.deploy(deployer.address, ONE_EVOLVE, await lzEndpoint.getAddress());
 
       const RewardMinter = await ethers.getContractFactory("RewardMinter");
       const rewardMinter = await RewardMinter.deploy(

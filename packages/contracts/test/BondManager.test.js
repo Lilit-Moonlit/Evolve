@@ -1,9 +1,9 @@
 import { expect } from "chai";
 import hre from "hardhat";
+import { deployLzEndpointMock } from "./helpers/lz-endpoint.js";
 
 describe("BondManager", function () {
   this.timeout(180000);
-  const LZ_ENDPOINT = hre.ethers.ZeroAddress;
   let cfc, registry, evolveFund, bondManager, evolve2Earn, owner, woman, man, father, joiner;
   const MIN_STAKE = hre.ethers.parseEther("100");
   const MIN_DURATION = 120 * 24 * 60 * 60; // 120 days (enough for all time checks)
@@ -24,7 +24,12 @@ describe("BondManager", function () {
     [owner, woman, man, father, joiner] = await hre.ethers.getSigners();
 
     const EVOLVE = await hre.ethers.getContractFactory("EVOLVE");
-    cfc = await EVOLVE.deploy(owner.address, hre.ethers.parseEther("8000000000"), LZ_ENDPOINT);
+    const lzEndpoint = await deployLzEndpointMock(owner);
+    cfc = await EVOLVE.deploy(
+      owner.address,
+      hre.ethers.parseEther("8000000000"),
+      await lzEndpoint.getAddress(),
+    );
 
     const Registry = await hre.ethers.getContractFactory("VerificationRegistry");
     registry = await Registry.deploy(owner.address);

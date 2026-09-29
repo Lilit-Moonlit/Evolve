@@ -1,3 +1,4 @@
+import "dotenv/config";
 import "@nomicfoundation/hardhat-toolbox";
 
 /** @type import('hardhat/config').HardhatUserConfig */
@@ -6,12 +7,28 @@ const config = {
     version: "0.8.24",
     settings: {
       evmVersion: "cancun",
+      viaIR: true,
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
     },
   },
   paths: {
     sources: "./src",
   },
   networks: {
+    // In-process hardhat network. The LayerZero EndpointV2Mock test double
+    // (~26KB bytecode) exceeds the EIP-170 deploy size limit — allow it for tests.
+    hardhat: {
+      allowUnlimitedContractSize: true,
+    },
+    // Ethereum Sepolia
+    "ethereum-sepolia": {
+      url: process.env.ETHEREUM_SEPOLIA_RPC || "https://ethereum-sepolia-rpc.publicnode.com",
+      chainId: 11155111,
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+    },
     // Arbitrum networks
     arbitrum: {
       url: process.env.ARBITRUM_RPC_URL || "https://arb1.arbitrum.io/rpc",
@@ -19,30 +36,20 @@ const config = {
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
     "arbitrum-sepolia": {
-      url:
-        process.env.ARBITRUM_SEPOLIA_RPC ||
-        "https://sepolia-rollup.arbitrum.io/rpc",
+      url: process.env.ARBITRUM_SEPOLIA_RPC || "https://sepolia-rollup.arbitrum.io/rpc",
       chainId: 421614,
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
     // Avalanche networks
     avalanche: {
-      url:
-        process.env.AVALANCHE_RPC_URL ||
-        "https://api.avax.network/ext/bc/C/rpc",
+      url: process.env.AVALANCHE_RPC_URL || "https://api.avax.network/ext/bc/C/rpc",
       chainId: 43114,
-      accounts: process.env.AVAX_PRIVATE_KEY
-        ? [process.env.AVAX_PRIVATE_KEY]
-        : [],
+      accounts: process.env.AVAX_PRIVATE_KEY ? [process.env.AVAX_PRIVATE_KEY] : [],
     },
     "avalanche-fuji": {
-      url:
-        process.env.AVALANCHE_FUJI_RPC ||
-        "https://api.avax-test.network/ext/bc/C/rpc",
+      url: process.env.AVALANCHE_FUJI_RPC || "https://api.avax-test.network/ext/bc/C/rpc",
       chainId: 43113,
-      accounts: process.env.AVAX_PRIVATE_KEY
-        ? [process.env.AVAX_PRIVATE_KEY]
-        : [],
+      accounts: process.env.AVAX_PRIVATE_KEY ? [process.env.AVAX_PRIVATE_KEY] : [],
     },
     // Polygon networks
     polygon: {
@@ -51,8 +58,7 @@ const config = {
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
     "polygon-amoy": {
-      url:
-        process.env.POLYGON_AMOY_RPC || "https://rpc-amoy.polygon.technology",
+      url: process.env.POLYGON_AMOY_RPC || "https://rpc-amoy.polygon.technology",
       chainId: 80002,
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
@@ -96,9 +102,7 @@ const config = {
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
     "bsc-testnet": {
-      url:
-        process.env.BSC_TESTNET_RPC ||
-        "https://data-seed-prebsc-1-s1.binance.org:8545",
+      url: process.env.BSC_TESTNET_RPC || "https://data-seed-prebsc-1-s1.binance.org:8545",
       chainId: 97,
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
@@ -109,8 +113,7 @@ const config = {
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
     "fantom-testnet": {
-      url:
-        process.env.FANTOM_TESTNET_RPC || "https://rpc.testnet.fantom.network",
+      url: process.env.FANTOM_TESTNET_RPC || "https://rpc.testnet.fantom.network",
       chainId: 4002,
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
@@ -149,16 +152,7 @@ const config = {
     },
   },
   etherscan: {
-    apiKey: {
-      arbitrumOne: process.env.ARBISCAN_API_KEY || "",
-      avalanche: process.env.SNOWTRACE_API_KEY || "",
-      polygon: process.env.POLYGONSCAN_API_KEY || "",
-      optimisticEthereum: process.env.OPTIMISM_API_KEY || "",
-      bsc: process.env.BSCSCAN_API_KEY || "",
-      fantom: process.env.FTMSCAN_API_KEY || "",
-      celo: process.env.CELOSCAN_API_KEY || "",
-      base: process.env.BASESCAN_API_KEY || "",
-    },
+    apiKey: process.env.ETHERSCAN_API_KEY || "",
     customChains: [
       {
         network: "arbitrum-sepolia",

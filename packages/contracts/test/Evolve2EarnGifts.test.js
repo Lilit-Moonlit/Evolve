@@ -1,13 +1,18 @@
 import { expect } from "chai";
 import hre from "hardhat";
+import { deployLzEndpointMock } from "./helpers/lz-endpoint.js";
 
 describe("Evolve2Earn Emoji Gifts (Roses and Cacti)", function () {
-  const LZ_ENDPOINT = hre.ethers.ZeroAddress;
   async function deployFixture() {
     const [owner, user1, user2, user3, user4] = await hre.ethers.getSigners();
 
     const Token = await hre.ethers.getContractFactory("EVOLVE");
-    const token = await Token.deploy(owner.address, 10000000n * 10n ** 18n, LZ_ENDPOINT);
+    const lzEndpoint = await deployLzEndpointMock(owner);
+    const token = await Token.deploy(
+      owner.address,
+      10000000n * 10n ** 18n,
+      await lzEndpoint.getAddress(),
+    );
 
     const Evolve2Earn = await hre.ethers.getContractFactory("Evolve2Earn");
     const evolve2Earn = await Evolve2Earn.deploy(owner.address, await token.getAddress());

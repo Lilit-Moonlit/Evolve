@@ -1,9 +1,9 @@
 import { expect } from "chai";
 import hre from "hardhat";
+import { deployLzEndpointMock } from "./helpers/lz-endpoint.js";
 
 describe("Governance", function () {
   this.timeout(180000);
-  const LZ_ENDPOINT = hre.ethers.ZeroAddress;
 
   async function deployFixture() {
     const [owner, voter1, voter2, voter3, others] = await hre.ethers.getSigners();
@@ -15,10 +15,11 @@ describe("Governance", function () {
     const BondManagerFactory = await hre.ethers.getContractFactory("BondManager");
     const Evolve2EarnFactory = await hre.ethers.getContractFactory("Evolve2Earn");
 
+    const lzEndpoint = await deployLzEndpointMock(owner);
     const evolveToken = await EVOLVE.deploy(
       owner.address,
       hre.ethers.parseEther("1000000"),
-      LZ_ENDPOINT,
+      await lzEndpoint.getAddress(),
     );
     const voting = await Voting.deploy(owner.address);
     const registry = await Registry.deploy(owner.address);
