@@ -2,44 +2,61 @@ import { expect } from "chai";
 import hre from "hardhat";
 
 describe("Governance", function () {
+  this.timeout(180000);
+  const LZ_ENDPOINT = hre.ethers.ZeroAddress;
+
   async function deployFixture() {
-    const [owner, voter1, voter2, voter3, others] =
-      await hre.ethers.getSigners();
+    const [owner, voter1, voter2, voter3, others] = await hre.ethers.getSigners();
     const Governance = await hre.ethers.getContractFactory("Governance");
     const Voting = await hre.ethers.getContractFactory("Voting");
     const EVOLVE = await hre.ethers.getContractFactory("EVOLVE");
-    const Registry = await hre.ethers.getContractFactory(
-      "VerificationRegistry",
-    );
-    const EvolveStakingFactory =
-      await hre.ethers.getContractFactory("EvolveStaking");
+    const Registry = await hre.ethers.getContractFactory("VerificationRegistry");
+    const EvolveFundFactory = await hre.ethers.getContractFactory("EvolveFund");
+    const BondManagerFactory = await hre.ethers.getContractFactory("BondManager");
+    const Evolve2EarnFactory = await hre.ethers.getContractFactory("Evolve2Earn");
 
     const evolveToken = await EVOLVE.deploy(
       owner.address,
       hre.ethers.parseEther("1000000"),
+      LZ_ENDPOINT,
     );
     const voting = await Voting.deploy(owner.address);
     const registry = await Registry.deploy(owner.address);
     const governance = await Governance.deploy(owner.address);
-    const staking = await EvolveStakingFactory.deploy(
-      evolveToken.target,
+    const evolveFund = await EvolveFundFactory.deploy(evolveToken.target, owner.address);
+    const evolve2Earn = await Evolve2EarnFactory.deploy(owner.address, evolveToken.target);
+    const bondManager = await BondManagerFactory.deploy(
+      evolveFund.target,
       registry.target,
+      evolve2Earn.target,
       owner.address,
     );
 
+    await evolveFund.setBondManager(bondManager.target);
+    await evolve2Earn.setBondManager(bondManager.target);
+
     await governance.setContracts(
       voting.target,
-      registry.target,
       evolveToken.target,
-      staking.target,
+      evolveFund.target,
+      bondManager.target,
     );
+
+    const signers = await hre.ethers.getSigners();
+    for (let i = 0; i < signers.length; i++) {
+      const gender = i % 2 === 0 ? 1 : 2; // Alternating Male(1)/Female(2)
+      await governance.setGender(signers[i].address, gender);
+      await voting.setGender(signers[i].address, gender);
+    }
 
     return {
       governance,
       voting,
       registry,
       evolveToken,
-      staking,
+      evolveFund,
+      evolve2Earn,
+      bondManager,
       owner,
       voter1,
       voter2,
@@ -51,9 +68,7 @@ describe("Governance", function () {
   describe("Proposal creation", function () {
     it("Should create a proposal with no quorum yet", async function () {
       const { governance, owner } = await deployFixture();
-      const tx = await governance
-        .connect(owner)
-        .createProposal("Test proposal");
+      const tx = await governance.connect(owner).createProposal("Test proposal");
       await expect(tx).to.emit(governance, "ProposalCreated");
 
       const proposal = await governance.getProposal(0);
@@ -63,11 +78,10 @@ describe("Governance", function () {
       expect(proposal.quorumWeight).to.equal(0);
     });
 
-    it("Should revert if non-owner creates proposal", async function () {
+    it("Should allow anyone to create proposal", async function () {
       const { governance, voter1 } = await deployFixture();
-      await expect(
-        governance.connect(voter1).createProposal("Test"),
-      ).to.be.revertedWithCustomError(governance, "OwnableUnauthorizedAccount");
+      const tx = await governance.connect(voter1).createProposal("Test from voter1");
+      await expect(tx).to.emit(governance, "ProposalCreated");
     });
   });
 
@@ -77,89 +91,65 @@ describe("Governance", function () {
       // Set up voting graph: owner votes for voter1
       await ctx.voting.connect(ctx.owner).vote(ctx.voter1.address);
       // voter1: 1 incoming vote → recursiveWeight = 2
-      // (2 * 4000 + 0 + 0 + 0) / 100 = 80
+      // (2 * 3000 + 0 + 0) / 100 = 60
       return ctx;
     }
 
     it("Should calculate vote weight with no verification data", async function () {
       const ctx = await setupWeightFixture();
-      const weight = await ctx.governance.calculateVoteWeight(
-        ctx.voter1.address,
-      );
-      expect(weight).to.equal(80n);
+      const weight = await ctx.governance.calculateVoteWeight(ctx.voter1.address);
+      expect(weight).to.equal(60n);
     });
 
     it("Should calculate vote weight with STD verification", async function () {
       const ctx = await setupWeightFixture();
       await ctx.registry.setStd(ctx.voter1.address, true);
-      // (2*4000 + 1*1000 + 0*1000 + 0*4000) / 100 = 90
-      const weight = await ctx.governance.calculateVoteWeight(
-        ctx.voter1.address,
-      );
-      expect(weight).to.equal(90n);
+      // (2*3000 + 0 + 0) / 100 = 60
+      const weight = await ctx.governance.calculateVoteWeight(ctx.voter1.address);
+      expect(weight).to.equal(60n);
     });
 
     it("Should include staked EVOLVE weight only if staked", async function () {
-      const ctx = await setupWeightFixture();
-      // voter1 needs to be verified to stake
-      await ctx.registry.setBoth(ctx.voter1.address, true, true);
-      // Stake 500 EVOLVE for voter1
-      await ctx.evolveToken.mint(
-        ctx.voter1.address,
-        hre.ethers.parseEther("500"),
-      );
+      const ctx = await deployFixture();
+      // voter2 is Male (index 2, even) — weight uses EvolveFund.getStake()
+      await ctx.voting.connect(ctx.voter1).vote(ctx.voter2.address);
+      await ctx.registry.setBoth(ctx.voter2.address, true, true);
+      // Stake 500 EVOLVE for voter2 in EvolveFund
+      await ctx.evolveToken.mint(ctx.voter2.address, hre.ethers.parseEther("500"));
       await ctx.evolveToken
-        .connect(ctx.voter1)
-        .approve(ctx.staking.target, hre.ethers.parseEther("500"));
-      await ctx.staking
-        .connect(ctx.voter1)
-        .stake(hre.ethers.parseEther("500"), 30 * 24 * 60 * 60);
+        .connect(ctx.voter2)
+        .approve(ctx.evolveFund.target, hre.ethers.parseEther("500"));
+      await ctx.evolveFund
+        .connect(ctx.voter2)
+        .deposit(hre.ethers.parseEther("500"), 30 * 24 * 60 * 60, 0);
 
-      // stakedWeight = 5 (500/100), but no verification in old test...
-      // With new logic: staking implies verification, so weight = (2*4000 + 1*1000 + 1*1000 + 5*4000) / 100 = 300
-      const weight = await ctx.governance.calculateVoteWeight(
-        ctx.voter1.address,
-      );
-      expect(weight).to.equal(300n);
+      // voter2: recursiveWeight=2, tokenWeight=5 (staked 500/100), children=0
+      // (2*3000 + 5*3000) / 100 = 210
+      const weight = await ctx.governance.calculateVoteWeight(ctx.voter2.address);
+      expect(weight).to.equal(210n);
     });
 
     it("Should give zero EVOLVE weight if no staking", async function () {
-      const ctx = await setupWeightFixture();
-      // voter1 has no stake, just holds tokens freely
-      await ctx.evolveToken.mint(
-        ctx.voter1.address,
-        hre.ethers.parseEther("500"),
-      );
-      // Without staking, evolveWeight = 0
-      // (2*4000 + 0 + 0 + 0) / 100 = 80
-      const weight = await ctx.governance.calculateVoteWeight(
-        ctx.voter1.address,
-      );
-      expect(weight).to.equal(80n);
+      const ctx = await deployFixture();
+      // voter2 is Male (index 2, even) — weight uses EvolveFund.getStake()
+      await ctx.voting.connect(ctx.voter1).vote(ctx.voter2.address);
+      // voter2 has no stake — tokenWeight = 0
+      // (2*3000) / 100 = 60
+      const weight = await ctx.governance.calculateVoteWeight(ctx.voter2.address);
+      expect(weight).to.equal(60n);
     });
   });
 
   describe("Voting with weight", function () {
     it("Should record weight on vote", async function () {
-      const {
-        governance,
-        owner,
-        voter1,
-        voting,
-        registry,
-        evolveToken,
-        staking,
-      } = await deployFixture();
+      const { governance, owner, voter1, voting, registry, evolveToken, evolveFund } =
+        await deployFixture();
       await governance.connect(owner).createProposal("Test proposal");
       await voting.connect(owner).vote(voter1.address);
       await registry.setBoth(voter1.address, true, true);
       await evolveToken.mint(voter1.address, hre.ethers.parseEther("500"));
-      await evolveToken
-        .connect(voter1)
-        .approve(staking.target, hre.ethers.parseEther("500"));
-      await staking
-        .connect(voter1)
-        .stake(hre.ethers.parseEther("500"), 30 * 24 * 60 * 60);
+      await evolveToken.connect(voter1).approve(evolveFund.target, hre.ethers.parseEther("500"));
+      await evolveFund.connect(voter1).deposit(hre.ethers.parseEther("500"), 30 * 24 * 60 * 60, 0);
 
       const tx = await governance.connect(voter1).vote(0, true);
       await expect(tx).to.emit(governance, "VoteCast");
@@ -173,9 +163,10 @@ describe("Governance", function () {
       await governance.connect(owner).createProposal("Test proposal");
       await governance.connect(voter1).vote(0, true);
 
-      await expect(
-        governance.connect(voter1).vote(0, false),
-      ).to.be.revertedWithCustomError(governance, "AlreadyVoted");
+      await expect(governance.connect(voter1).vote(0, false)).to.be.revertedWithCustomError(
+        governance,
+        "AlreadyVoted",
+      );
     });
 
     it("Should revert if voting period ended", async function () {
@@ -185,26 +176,23 @@ describe("Governance", function () {
       await hre.network.provider.send("evm_increaseTime", [604801]);
       await hre.network.provider.send("evm_mine");
 
-      await expect(
-        governance.connect(voter1).vote(0, true),
-      ).to.be.revertedWithCustomError(governance, "VotingEnded");
+      await expect(governance.connect(voter1).vote(0, true)).to.be.revertedWithCustomError(
+        governance,
+        "VotingEnded",
+      );
     });
   });
 
   describe("Queue and execution", function () {
     it("Should queue proposal after voting passes", async function () {
-      const { governance, owner, voting, registry, evolveToken } =
-        await deployFixture();
+      const { governance, owner, voting, registry, evolveToken } = await deployFixture();
       const signers = await hre.ethers.getSigners();
       await governance.connect(owner).createProposal("Test proposal");
 
       // Give everyone STD + DNA + some EVOLVE so they have non-zero weight
       for (let i = 1; i < signers.length; i++) {
         await registry.setBoth(signers[i].address, true, true);
-        await evolveToken.mint(
-          signers[i].address,
-          hre.ethers.parseEther("100"),
-        );
+        await evolveToken.mint(signers[i].address, hre.ethers.parseEther("100"));
         // Give them votes in the graph too
         if (i < signers.length - 1) {
           await voting.connect(signers[i]).vote(signers[i + 1].address);
@@ -226,17 +214,13 @@ describe("Governance", function () {
     });
 
     it("Should execute proposal after timelock", async function () {
-      const { governance, owner, voting, registry, evolveToken } =
-        await deployFixture();
+      const { governance, owner, voting, registry, evolveToken } = await deployFixture();
       const signers = await hre.ethers.getSigners();
       await governance.connect(owner).createProposal("Test proposal");
 
       for (let i = 1; i < signers.length; i++) {
         await registry.setBoth(signers[i].address, true, true);
-        await evolveToken.mint(
-          signers[i].address,
-          hre.ethers.parseEther("100"),
-        );
+        await evolveToken.mint(signers[i].address, hre.ethers.parseEther("100"));
         if (i < signers.length - 1) {
           await voting.connect(signers[i]).vote(signers[i + 1].address);
         }
@@ -262,17 +246,13 @@ describe("Governance", function () {
     });
 
     it("Should revert if timelock not expired", async function () {
-      const { governance, owner, voting, registry, evolveToken } =
-        await deployFixture();
+      const { governance, owner, voting, registry, evolveToken } = await deployFixture();
       const signers = await hre.ethers.getSigners();
       await governance.connect(owner).createProposal("Test proposal");
 
       for (let i = 1; i < signers.length; i++) {
         await registry.setBoth(signers[i].address, true, true);
-        await evolveToken.mint(
-          signers[i].address,
-          hre.ethers.parseEther("100"),
-        );
+        await evolveToken.mint(signers[i].address, hre.ethers.parseEther("100"));
         if (i < signers.length - 1) {
           await voting.connect(signers[i]).vote(signers[i + 1].address);
         }
@@ -287,9 +267,10 @@ describe("Governance", function () {
 
       await governance.connect(owner).queueProposal(0);
 
-      await expect(
-        governance.connect(owner).executeProposal(0),
-      ).to.be.revertedWithCustomError(governance, "TimelockNotExpired");
+      await expect(governance.connect(owner).executeProposal(0)).to.be.revertedWithCustomError(
+        governance,
+        "TimelockNotExpired",
+      );
     });
 
     it("Should revert if not enough votes to meet quorum", async function () {
@@ -308,8 +289,7 @@ describe("Governance", function () {
       await hre.network.provider.send("evm_increaseTime", [604801]);
       await hre.network.provider.send("evm_mine");
 
-      await expect(governance.connect(owner).queueProposal(0)).to.not.be
-        .reverted;
+      await expect(governance.connect(owner).queueProposal(0)).to.not.be.reverted;
     });
 
     it("Should revert if not enough voters", async function () {
@@ -320,9 +300,10 @@ describe("Governance", function () {
       await hre.network.provider.send("evm_increaseTime", [604801]);
       await hre.network.provider.send("evm_mine");
 
-      await expect(
-        governance.connect(owner).queueProposal(0),
-      ).to.be.revertedWithCustomError(governance, "InsufficientVoters");
+      await expect(governance.connect(owner).queueProposal(0)).to.be.revertedWithCustomError(
+        governance,
+        "InsufficientVoters",
+      );
     });
   });
 

@@ -3,6 +3,8 @@ import hre from "hardhat";
 
 const { ethers } = hre;
 
+const LZ_ENDPOINT = ethers.ZeroAddress;
+
 const ONE_EVOLVE = 1n * 10n ** 18n;
 const FIFTY_EVOLVE = 50n * 10n ** 18n;
 const DAY = 86_400;
@@ -18,7 +20,7 @@ describe("RewardMinter", function () {
 
     // 0 maxSupply → EVOLVE falls back to the 8B default (no cap interference).
     const Token = await ethers.getContractFactory("EVOLVE");
-    const token = await Token.deploy(deployer.address, 0);
+    const token = await Token.deploy(deployer.address, 0, LZ_ENDPOINT);
 
     // Mirror production wiring: RewardMinter admin = timelock; in tests the
     // dedicated `admin` signer stands in for it. MINTER_ROLE is granted
@@ -289,7 +291,7 @@ describe("RewardMinter", function () {
 
       // Cap so tight that exactly one mintReward fits.
       const Token = await ethers.getContractFactory("EVOLVE");
-      const token = await Token.deploy(deployer.address, ONE_EVOLVE);
+      const token = await Token.deploy(deployer.address, ONE_EVOLVE, LZ_ENDPOINT);
 
       const RewardMinter = await ethers.getContractFactory("RewardMinter");
       const rewardMinter = await RewardMinter.deploy(
