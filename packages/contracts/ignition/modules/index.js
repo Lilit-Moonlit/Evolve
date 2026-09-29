@@ -13,6 +13,7 @@ import DNAVerificationModule from "./DNAVerification.js";
 import SmartAccountFactoryModule from "./SmartAccountFactory.js";
 import TimelockControllerModule from "./TimelockController.js";
 import RewardMinterModule from "./RewardMinter.js";
+import VestingWalletModule from "./VestingWallet.js";
 
 const DeployAllModule = buildModule("DeployAllModule", (m) => {
   // Phase 1: Core contracts
@@ -64,6 +65,13 @@ const DeployAllModule = buildModule("DeployAllModule", (m) => {
   // the grant itself is timelock-gated.
   const { rewardMinter } = m.useModule(RewardMinterModule);
 
+  // Phase 6.7: Team vesting wallet — cliff 12m / linear 36m over the 1.6B
+  // EVOLVE team allocation. The wallet holds NO MINTER_ROLE: the allocation
+  // flows in via a 48h timelock-approved EVOLVE.mint (see VestingWallet.js
+  // for the opt-in deploy-time mint switch and the README for the production
+  // pre-mint procedure).
+  const { vestingWallet } = m.useModule(VestingWalletModule);
+
   // Wire fund → bondManager
   m.call(evolveFund, "setBondManager", [bondManager]);
 
@@ -100,6 +108,7 @@ const DeployAllModule = buildModule("DeployAllModule", (m) => {
     paymaster,
     timelock,
     rewardMinter,
+    vestingWallet,
   };
 });
 
