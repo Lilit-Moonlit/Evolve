@@ -1,6 +1,8 @@
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
-const { time } = require("@nomicfoundation/hardhat-network-helpers");
+import { expect } from "chai";
+import hre from "hardhat";
+const { ethers } = hre;
+import { time } from "@nomicfoundation/hardhat-network-helpers";
+import { deployLzEndpointMock } from "./helpers/lz-endpoint.js";
 
 describe("LiquidityLocker", function () {
   let locker;
@@ -10,18 +12,16 @@ describe("LiquidityLocker", function () {
   let unlockTime;
 
   beforeEach(async function () {
-    [owner, otherAccount] = await ethers.getSigners();
+    [owner, otherAccount] = await hre.ethers.getSigners();
 
     // Deploy mock ERC20 (using EVOLVE as mock)
-    const EVOLVE = await ethers.getContractFactory("EVOLVE");
+    const EVOLVE = await hre.ethers.getContractFactory("EVOLVE");
     // Mock constructor: (owner, maxSupply, lzEndpoint)
-    // We need a mock lzEndpoint.
-    const { deployLzEndpointMock } = require("./helpers/lz-endpoint.js");
-    const lzEndpoint = await deployLzEndpointMock();
-    lpToken = await EVOLVE.deploy(owner.address, 0, lzEndpoint.address);
+    const lzEndpoint = await deployLzEndpointMock(owner);
+    lpToken = await EVOLVE.deploy(owner.address, 0, await lzEndpoint.getAddress());
 
     unlockTime = (await time.latest()) + 86400; // 1 day from now
-    const LiquidityLocker = await ethers.getContractFactory("LiquidityLocker");
+    const LiquidityLocker = await hre.ethers.getContractFactory("LiquidityLocker");
     locker = await LiquidityLocker.deploy(owner.address, unlockTime);
   });
 
