@@ -10,13 +10,9 @@
     }
   },
   "files": [
-    "src",
-    "dist"
+    "src"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "clean": "rimraf dist",
-    "prepublishOnly": "npm run clean && npm run build",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit",
     "test": "vitest run",
@@ -33,9 +29,11 @@
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
-    "@vitest/coverage-v8": "^4.1.8",
-    "rimraf": "^3.0.2",
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@typescript-eslint/parser": "^7.13.0",
+    "@vitest/coverage-v8": "^4.1.10",
+    "eslint": "^8.57.0",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.10"
   }
 }

@@ -1,8 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppState } from "../store/AppContext";
 import { ProfileData } from "../store/AppContext";
 import { getCompatibilityLabel } from "../lib/std-parser";
+import PhotoView from "../components/PhotoView";
+import ProposalsPanel from "../components/ProposalsPanel";
+import LivenessChallenge from "../components/LivenessChallenge";
+import { TEMP_PHOTO_VIEW_MS } from "../lib/photo-access";
+import { useWebSocket, WsMessage } from "../lib/useWebSocket";
+import { getNextLivenessDelayMs, type LivenessCheckResult } from "../lib/face-verification";
 
 type Tab = "messages" | "discover";
 
@@ -11,16 +17,14 @@ const levelOrder = { normal: 1, "pregnancy-bond": 2, "cryptic-choice": 3 };
 function canSeeProfile(viewerMode: string, target: ProfileData): boolean {
   if (!target.hideProfileFromLowerLevels) return true;
   const viewerLevel = levelOrder[viewerMode as keyof typeof levelOrder] || 1;
-  const targetLevel =
-    levelOrder[target.authMode as keyof typeof levelOrder] || 1;
+  const targetLevel = levelOrder[target.authMode as keyof typeof levelOrder] || 1;
   return viewerLevel >= targetLevel;
 }
 
 function canSeeContent(viewerMode: string, target: ProfileData): boolean {
   if (!target.hideProfileFromLowerLevels) return true;
   const viewerLevel = levelOrder[viewerMode as keyof typeof levelOrder] || 1;
-  const targetLevel =
-    levelOrder[target.authMode as keyof typeof levelOrder] || 1;
+  const targetLevel = levelOrder[target.authMode as keyof typeof levelOrder] || 1;
   if (viewerLevel >= targetLevel) return true;
   return false;
 }
@@ -35,30 +39,152 @@ export default function Chat() {
     denyAccess,
     authMode,
     checkCompatibility,
+    myProfile,
+    requestPhotoAccess,
+    approvePhotoAccess,
+    denyPhotoAccess,
+    offerPhotoAccess,
+    revokePhotoAccess,
+    canViewTheirPhoto,
+    myPhotoGrantFor,
+    loadChatHistory,
   } = useAppState();
-  const [selectedProfileId, setSelectedProfileId] = useState<string | null>(
-    null,
-  );
+  const [selectedProfileId, setSelectedProfileId] = useState<string | null>(null);
   const [messageText, setMessageText] = useState("");
   const [activeTab, setActiveTab] = useState<Tab>("messages");
   const chatEndRef = useRef<HTMLDivElement>(null);
+  /** Local reveal of a counterpart's photo from an offer/approval message. */
+  const [localReveal, setLocalReveal] = useState<{
+    profileId: string;
+    until: number;
+  } | null>(null);
+
+  // Liveness challenge state
+  const [showLivenessChallenge, setShowLivenessChallenge] = useState(false);
+  const [livenessChallengeActive, setLivenessChallengeActive] = useState(false);
+  const livenessTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const selectedProfile = profiles.find((p) => p.id === selectedProfileId);
+
+  // WebSocket for real-time chat
+  const [typing, setTyping] = useState<{ userId: string; username: string } | null>(null);
+  const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleWsMessage = useCallback(
+    (msg: WsMessage) => {
+      if (selectedProfileId && msg.senderId !== myProfile.id) {
+        addMessage(selectedProfileId, msg.text, "them");
+      }
+    },
+    [selectedProfileId, myProfile.id, addMessage],
+  );
+
+  const handleWsTyping = useCallback((userId: string, username: string) => {
+    setTyping({ userId, username });
+    if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+    typingTimeoutRef.current = setTimeout(() => setTyping(null), 3000);
+  }, []);
+
+  const { isConnected, sendTyping } = useWebSocket({
+    userId: myProfile.id,
+    targetUserId: selectedProfileId || "",
+    username: myProfile.name,
+    onMessage: handleWsMessage,
+    onTyping: handleWsTyping,
+  });
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [selectedProfile?.chatHistory]);
 
-  const matchedProfiles = profiles.filter((p) => p.chatHistory.length > 0);
+  // Lazy-load the selected conversation's history (avoids the per-profile
+  // N+1 firehose in refreshData that previously caused rate-limit 429 spam).
+  useEffect(() => {
+    if (!selectedProfileId) return;
+    const profile = profiles.find((p) => p.id === selectedProfileId);
+    if (profile && profile.chatHistory.length === 0) {
+      loadChatHistory(selectedProfileId);
+    }
+  }, [selectedProfileId, profiles, loadChatHistory]);
+
+  // Liveness challenge timer: schedules random challenges during active chat
+  useEffect(() => {
+    if (!selectedProfileId || !myProfile.faceVerified) return;
+
+    const scheduleNextChallenge = () => {
+      const delay = getNextLivenessDelayMs();
+      livenessTimerRef.current = setTimeout(() => {
+        if (selectedProfileId && !livenessChallengeActive) {
+          setShowLivenessChallenge(true);
+        }
+      }, delay);
+    };
+
+    scheduleNextChallenge();
+
+    return () => {
+      if (livenessTimerRef.current) {
+        clearTimeout(livenessTimerRef.current);
+      }
+    };
+  }, [selectedProfileId, myProfile.faceVerified, livenessChallengeActive]);
+
+  const handleLivenessComplete = useCallback(
+    async (result: LivenessCheckResult) => {
+      if (!selectedProfileId) return;
+
+      // Send system message about liveness check
+      const statusText = result.confirmed
+        ? t("chat.liveness.systemMessageSuccess")
+        : t("chat.liveness.systemMessageFailed");
+
+      await addMessage(selectedProfileId, statusText, "me", false, "LIVENESS");
+
+      // Update last liveness check timestamp
+      if (result.confirmed) {
+        await import("../store/AppContext").then(({ useAppState }) => {
+          // The profile update is handled via persistProfile in the parent
+        });
+      }
+
+      setShowLivenessChallenge(false);
+      setLivenessChallengeActive(false);
+
+      // Schedule next challenge
+      if (result.confirmed) {
+        const delay = getNextLivenessDelayMs();
+        livenessTimerRef.current = setTimeout(() => {
+          setShowLivenessChallenge(true);
+        }, delay);
+      }
+    },
+    [selectedProfileId, addMessage, t],
+  );
+
+  const handleLivenessDismiss = useCallback(() => {
+    setShowLivenessChallenge(false);
+    // Reschedule for later
+    const delay = getNextLivenessDelayMs();
+    livenessTimerRef.current = setTimeout(() => {
+      setShowLivenessChallenge(true);
+    }, delay);
+  }, []);
+
+  const matchedProfiles = profiles.filter((p) => p.hasChat || p.chatHistory.length > 0);
   const allProfiles = profiles;
 
-  const visibleProfiles =
-    activeTab === "messages" ? matchedProfiles : allProfiles;
+  const visibleProfiles = activeTab === "messages" ? matchedProfiles : allProfiles;
 
   const handleSend = async () => {
     if (!messageText.trim() || !selectedProfileId) return;
+    // Persist via existing store (WebSocket broadcasts to channel automatically)
     await addMessage(selectedProfileId, messageText);
     setMessageText("");
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMessageText(e.target.value);
+    sendTyping();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -81,9 +207,23 @@ export default function Chat() {
   };
 
   const permissions = selectedProfile?.accessPermissions;
-  const showContent = selectedProfile
-    ? canSeeContent(authMode, selectedProfile)
-    : true;
+  const showContent = selectedProfile ? canSeeContent(authMode, selectedProfile) : true;
+
+  // --- Photo access flow ---
+  const theirPhotoHidden =
+    Boolean(selectedProfile?.photoBlurred) && !canViewTheirPhoto(selectedProfile as ProfileData);
+  const myGrant = selectedProfile ? myPhotoGrantFor(selectedProfile.id) : undefined;
+
+  const photoMessages = selectedProfile?.chatHistory.filter((m) => m.requestType === "PHOTO") || [];
+  const myPendingPhotoRequest = photoMessages.some(
+    (m) => m.sender === "me" && m.isRequest && m.requestStatus === "pending",
+  );
+  const theirPendingPhotoRequest = photoMessages.some(
+    (m) => m.sender === "them" && m.isRequest && m.requestStatus === "pending",
+  );
+  const incomingOffer = [...photoMessages]
+    .reverse()
+    .find((m) => m.sender === "them" && (m.photoAction === "offer" || m.photoAction === "approve"));
 
   return (
     <div className="flex h-[calc(100vh-12rem)] w-full max-w-6xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
@@ -109,7 +249,7 @@ export default function Chat() {
                 : "text-gray-500 hover:text-gray-700"
             }`}
           >
-            {t("navigation.swipe")}
+            {t("navigation.home")}
           </button>
         </div>
 
@@ -117,9 +257,7 @@ export default function Chat() {
         <div className="flex-1 overflow-y-auto">
           {visibleProfiles.length === 0 && (
             <p className="p-4 text-sm text-gray-400 text-center">
-              {activeTab === "messages"
-                ? t("chat.noMatches")
-                : t("home.filters.noProfiles")}
+              {activeTab === "messages" ? t("chat.noMatches") : t("home.filters.noProfiles")}
             </p>
           )}
           {visibleProfiles.map((profile) => {
@@ -137,7 +275,11 @@ export default function Chat() {
                     <img
                       src={profile.imageUrl}
                       alt={profile.name}
-                      className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+                      className={`w-10 h-10 rounded-full object-cover flex-shrink-0 ${
+                        profile.photoBlurred && !canViewTheirPhoto(profile)
+                          ? "photo-blurred-sm"
+                          : ""
+                      }`}
                     />
                   ) : (
                     <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm flex-shrink-0">
@@ -163,30 +305,29 @@ export default function Chat() {
                         </span>
                       </div>
                     )}
-                    {profile.parsedStd &&
-                      profile.parsedStd.pathogens.length > 0 && (
-                        <div className="mt-1">
-                          {(() => {
-                            const compat = checkCompatibility(profile);
-                            const label = getCompatibilityLabel(compat);
-                            return (
-                              <span
-                                className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
-                                  label.color === "green"
-                                    ? "bg-green-100 text-green-800"
-                                    : label.color === "blue"
-                                      ? "bg-blue-100 text-blue-800"
-                                      : label.color === "yellow"
-                                        ? "bg-yellow-100 text-yellow-800"
-                                        : "bg-red-100 text-red-800"
-                                }`}
-                              >
-                                {label.icon} {label.label}
-                              </span>
-                            );
-                          })()}
-                        </div>
-                      )}
+                    {profile.parsedStd && profile.parsedStd.pathogens.length > 0 && (
+                      <div className="mt-1">
+                        {(() => {
+                          const compat = checkCompatibility(profile);
+                          const label = getCompatibilityLabel(compat);
+                          return (
+                            <span
+                              className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
+                                label.color === "green"
+                                  ? "bg-green-100 text-green-800"
+                                  : label.color === "blue"
+                                    ? "bg-blue-100 text-blue-800"
+                                    : label.color === "yellow"
+                                      ? "bg-yellow-100 text-yellow-800"
+                                      : "bg-red-100 text-red-800"
+                              }`}
+                            >
+                              {label.icon} {label.label}
+                            </span>
+                          );
+                        })()}
+                      </div>
+                    )}
                   </div>
                 </div>
               </button>
@@ -205,12 +346,15 @@ export default function Chat() {
           <>
             {/* Header */}
             <div className="p-4 border-b border-gray-200 flex items-center gap-3">
-              {selectedProfile.imageUrl &&
-              canSeeProfile(authMode, selectedProfile) ? (
+              {selectedProfile.imageUrl && canSeeProfile(authMode, selectedProfile) ? (
                 <img
                   src={selectedProfile.imageUrl}
                   alt={selectedProfile.name}
-                  className="w-10 h-10 rounded-full object-cover"
+                  className={`w-10 h-10 rounded-full object-cover ${
+                    selectedProfile.photoBlurred && !canViewTheirPhoto(selectedProfile)
+                      ? "photo-blurred-sm"
+                      : ""
+                  }`}
                 />
               ) : (
                 <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
@@ -219,9 +363,7 @@ export default function Chat() {
               )}
               <div>
                 <div className="font-semibold text-gray-900">
-                  {canSeeProfile(authMode, selectedProfile)
-                    ? selectedProfile.name
-                    : "•••"}
+                  {canSeeProfile(authMode, selectedProfile) ? selectedProfile.name : "•••"}
                 </div>
                 <div className="text-xs text-gray-500">
                   {selectedProfile.verifiedStd && selectedProfile.verifiedDna
@@ -268,6 +410,14 @@ export default function Chat() {
                   </div>
                 ))
               )}
+              {/* Liveness Challenge */}
+              {showLivenessChallenge && selectedProfileId && myProfile.faceVerified && (
+                <LivenessChallenge
+                  profileId={selectedProfileId}
+                  onComplete={handleLivenessComplete}
+                  onDismiss={handleLivenessDismiss}
+                />
+              )}
               <div ref={chatEndRef} />
             </div>
 
@@ -277,9 +427,7 @@ export default function Chat() {
                 <div className="flex items-center gap-4 text-sm text-gray-600">
                   <span>
                     {t("profile.reputation.score")}:{" "}
-                    <strong className="text-gray-900">
-                      {selectedProfile.reputationScore}
-                    </strong>
+                    <strong className="text-gray-900">{selectedProfile.reputationScore}</strong>
                   </span>
                   {selectedProfile.interests.length > 0 && (
                     <span className="truncate">
@@ -309,42 +457,171 @@ export default function Chat() {
                     🧬 {t("chat.requestDna")}
                   </button>
                 )}
-                {permissions.stdRequested &&
-                  !permissions.myStdApprovedToThem && (
-                    <>
-                      <button
-                        onClick={() => handleApprove("STD")}
-                        className="text-xs px-3 py-1.5 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors"
-                      >
-                        ✅ {t("chat.approveStd")}
-                      </button>
-                      <button
-                        onClick={() => handleDeny("STD")}
-                        className="text-xs px-3 py-1.5 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition-colors"
-                      >
-                        ❌ {t("chat.denyStd")}
-                      </button>
-                    </>
-                  )}
-                {permissions.dnaRequested &&
-                  !permissions.myDnaApprovedToThem && (
-                    <>
-                      <button
-                        onClick={() => handleApprove("DNA")}
-                        className="text-xs px-3 py-1.5 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors"
-                      >
-                        ✅ {t("chat.approveDna")}
-                      </button>
-                      <button
-                        onClick={() => handleDeny("DNA")}
-                        className="text-xs px-3 py-1.5 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition-colors"
-                      >
-                        ❌ {t("chat.denyDna")}
-                      </button>
-                    </>
-                  )}
+                {permissions.stdRequested && !permissions.myStdApprovedToThem && (
+                  <>
+                    <button
+                      onClick={() => handleApprove("STD")}
+                      className="text-xs px-3 py-1.5 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors"
+                    >
+                      ✅ {t("chat.approveStd")}
+                    </button>
+                    <button
+                      onClick={() => handleDeny("STD")}
+                      className="text-xs px-3 py-1.5 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition-colors"
+                    >
+                      ❌ {t("chat.denyStd")}
+                    </button>
+                  </>
+                )}
+                {permissions.dnaRequested && !permissions.myDnaApprovedToThem && (
+                  <>
+                    <button
+                      onClick={() => handleApprove("DNA")}
+                      className="text-xs px-3 py-1.5 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors"
+                    >
+                      ✅ {t("chat.approveDna")}
+                    </button>
+                    <button
+                      onClick={() => handleDeny("DNA")}
+                      className="text-xs px-3 py-1.5 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition-colors"
+                    >
+                      ❌ {t("chat.denyDna")}
+                    </button>
+                  </>
+                )}
               </div>
             )}
+
+            {/* Photo access flow */}
+            {selectedProfile &&
+              showContent &&
+              (theirPhotoHidden ||
+                theirPendingPhotoRequest ||
+                myProfile.photoBlurred ||
+                myGrant ||
+                incomingOffer) && (
+                <div className="px-4 py-2 border-t border-gray-100 bg-gray-50 flex flex-wrap gap-2 items-center">
+                  {theirPhotoHidden && !myPendingPhotoRequest && !theirPendingPhotoRequest && (
+                    <button
+                      onClick={() => requestPhotoAccess(selectedProfile.id, t)}
+                      className="text-xs px-3 py-1.5 bg-amber-50 text-amber-700 rounded-lg hover:bg-amber-100 transition-colors"
+                    >
+                      🔒 {t("photo.request")}
+                    </button>
+                  )}
+
+                  {theirPendingPhotoRequest && (
+                    <>
+                      <span className="text-xs text-gray-500">{t("photo.pendingRequest")}</span>
+                      <button
+                        onClick={() => approvePhotoAccess(selectedProfile.id, "temporary", t)}
+                        className="text-xs px-3 py-1.5 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors"
+                      >
+                        ✅ {t("photo.approveTemporary")}
+                      </button>
+                      <button
+                        onClick={() => approvePhotoAccess(selectedProfile.id, "permanent", t)}
+                        className="text-xs px-3 py-1.5 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors"
+                      >
+                        ✅ {t("photo.approvePermanent")}
+                      </button>
+                      <button
+                        onClick={() => denyPhotoAccess(selectedProfile.id, t)}
+                        className="text-xs px-3 py-1.5 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition-colors"
+                      >
+                        ❌ {t("photo.deny")}
+                      </button>
+                    </>
+                  )}
+
+                  {myProfile.photoBlurred && !myGrant && (
+                    <>
+                      <span className="text-xs text-gray-500">{t("photo.offerTitle")}</span>
+                      <button
+                        onClick={() => offerPhotoAccess(selectedProfile.id, "temporary", t)}
+                        className="text-xs px-3 py-1.5 bg-sky-50 text-sky-700 rounded-lg hover:bg-sky-100 transition-colors"
+                      >
+                        {t("photo.offerTemporary")}
+                      </button>
+                      <button
+                        onClick={() => offerPhotoAccess(selectedProfile.id, "permanent", t)}
+                        className="text-xs px-3 py-1.5 bg-sky-50 text-sky-700 rounded-lg hover:bg-sky-100 transition-colors"
+                      >
+                        {t("photo.offerPermanent")}
+                      </button>
+                    </>
+                  )}
+
+                  {myGrant?.kind === "permanent" && (
+                    <button
+                      onClick={() => revokePhotoAccess(selectedProfile.id, t)}
+                      className="text-xs px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors"
+                    >
+                      {t("photo.revoke")}
+                    </button>
+                  )}
+
+                  {incomingOffer &&
+                    !canViewTheirPhoto(selectedProfile) &&
+                    localReveal?.profileId !== selectedProfile.id && (
+                      <button
+                        onClick={() =>
+                          setLocalReveal({
+                            profileId: selectedProfile.id,
+                            until:
+                              incomingOffer.photoGrantKind === "temporary"
+                                ? Date.now() + TEMP_PHOTO_VIEW_MS
+                                : 0,
+                          })
+                        }
+                        className="text-xs px-3 py-1.5 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors"
+                      >
+                        👁 {t("photo.viewOffer")}
+                      </button>
+                    )}
+
+                  {localReveal?.profileId === selectedProfile.id && (
+                    <button
+                      onClick={() => setLocalReveal(null)}
+                      className="text-xs px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors"
+                    >
+                      ✕ {t("photo.hide")}
+                    </button>
+                  )}
+                </div>
+              )}
+
+            {/* Revealed photo (from offer/approval) */}
+            {localReveal?.profileId === selectedProfile?.id && (
+              <div className="px-4 py-3 border-t border-gray-100 bg-gray-50">
+                <PhotoView
+                  imageUrl={selectedProfile.imageUrl}
+                  alt={selectedProfile.name}
+                  blurred={selectedProfile.photoBlurred || false}
+                  visible
+                  temporaryUntil={localReveal.until || undefined}
+                  onTemporaryExpired={() => setLocalReveal(null)}
+                  className="w-full h-56 rounded-xl"
+                />
+              </div>
+            )}
+
+            {/* Typing indicator */}
+            {typing && (
+              <div className="px-4 py-1 text-xs text-gray-400 italic">
+                {typing.username} {t("chat.typing", { defaultValue: "is typing..." })}
+              </div>
+            )}
+
+            {/* Connection status */}
+            <div className="px-4 py-1 text-xs">
+              <span
+                className={`inline-block w-2 h-2 rounded-full mr-1 ${isConnected ? "bg-green-400" : "bg-red-400"}`}
+              />
+              {isConnected
+                ? t("chat.connected", { defaultValue: "Connected" })
+                : t("chat.disconnected", { defaultValue: "Reconnecting..." })}
+            </div>
 
             {/* Input */}
             {showContent && (
@@ -353,7 +630,7 @@ export default function Chat() {
                   <input
                     type="text"
                     value={messageText}
-                    onChange={(e) => setMessageText(e.target.value)}
+                    onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
                     placeholder={t("chat.inputPlaceholder")}
                     className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
@@ -371,6 +648,11 @@ export default function Chat() {
           </>
         )}
       </main>
+
+      {/* Proposals panel (right column, part of Communications) */}
+      <aside className="w-80 border-l border-gray-200 bg-white flex flex-col overflow-hidden">
+        <ProposalsPanel />
+      </aside>
     </div>
   );
 }

@@ -16,13 +16,10 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
-    "ignoreDeprecations": "5.0",
+    "ignoreDeprecations": "6.0",
     "paths": {
       "@/*": ["./src/*"],
-      "@core/*": ["../../packages/core/src/*"],
-      "@storage/*": ["../../packages/storage/src/*"],
-      "@p2p/*": ["../../packages/p2p/src/*"],
-      "@evolve/ui": ["../../packages/ui/src"]
+      "@evolve/config": ["../../packages/config/src"]
     },
     "types": ["vitest/globals"]
   },

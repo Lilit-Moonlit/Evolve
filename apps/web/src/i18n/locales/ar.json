@@ -5,30 +5,48 @@
     "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
   },
   "navigation": {
-    "swipe": "اسحب",
     "messages": "الرسائل",
     "profile": "الملف الشخصي",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "mode2": "لوحة التحكم",
+    "mode3": "لوحة التحكم",
+    "home": "الرئيسية",
+    "communications": "التواصل",
+    "check": "فحص",
+    "downloadApp": "تحميل التطبيق"
   },
   "home": {
     "hero": {
       "title": "اعثر على شريكك",
       "subtitle": "Swipe through profiles and connect with interesting people."
     },
+    "trustScore": "تصنيف الثقة",
     "filters": {
       "verifiedStd": "Only with verified STD",
       "verifiedDna": "Only with verified DNA",
-      "noProfiles": "No profiles matching the selected filters."
+      "noProfiles": "No profiles matching the selected filters.",
+      "locationUnavailable": "الموقع غير متاح. يُظهر الفلتر جميع الملفات الشخصية.",
+      "showFilters": "إظهار المرشحات",
+      "hideFilters": "إخفاء المرشحات",
+      "modeNormal": "Get acquainted",
+      "modePregnancyBond": "Conception",
+      "modeCrypticChoice": "Polyandric conception"
     },
     "profile": {
       "newMatch": "New Match",
       "noMoreProfiles": "No more profiles for now! Check back later."
+    },
+    "dashboardCta": {
+      "mode2": "فتح لوحة التحكم الإنجابية",
+      "mode3": "فتح لوحة التحكم ما بعد التلقيح"
     }
   },
   "profile": {
     "tabs": {
       "profile": "Profile",
-      "reputation": "Reputation"
+      "reputation": "Reputation",
+      "settings": "الإعدادات",
+      "medical": "Medical card"
     },
     "myProfile": {
       "title": "My Profile",
@@ -68,6 +86,66 @@
       "title": "المحفظة",
       "address": "العنوان",
       "balance": "الرصيد"
+    },
+    "edit": {
+      "title": "معلوماتي",
+      "photoAlt": "صورتي",
+      "changePhoto": "تغيير الصورة",
+      "uploadPhoto": "رفع صورة",
+      "blurPhoto": "تعتيم صورتي",
+      "age": "العمر",
+      "hideAge": "إخفاء عمري",
+      "languages": "اللغات التي أتحدثها",
+      "bio": "عنّي",
+      "save": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ…",
+      "saved": "تم حفظ الملف الشخصي",
+      "testingPreference": "طريقة الاختبار"
+    },
+    "photoGrants": {
+      "title": "الوصول إلى الصورة",
+      "description": "المستخدمون الذين منحتهم وصولاً لصورتك:",
+      "permanent": "وصول دائم",
+      "temporary": "وصول مؤقت",
+      "revoke": "إلغاء"
+    },
+    "lab": {
+      "title": "اختبار المختبر",
+      "yourEmail": "عنوان البريد الإلكتروني",
+      "emailHint": "أدخل البريد الإلكتروني الذي استخدمته للتحقق من الحمض النووي",
+      "pendingTitle": "التحقق من الحمض النووي قيد الانتظار",
+      "accept": "قبول",
+      "reject": "رفض",
+      "noPending": "لا يوجد تحقق قيد الانتظار",
+      "reportAccepted": "التقرير مقبول",
+      "reportFailed": "Failed to process the report",
+      "emailError": "Email unavailable",
+      "loading": "Loading…",
+      "patientQrTitle": "رمز QR للتحقق في الموقع",
+      "patientQrHint": "اعرض هذا الرمز على المختبر الشريك. يحتوي على معرفك فقط — بدون صورة أو بيانات ملف شخصي.",
+      "patientQrAria": "رمز QR للمريض للتحقق في المختبر",
+      "patientQrError": "تعذر إنشاء رمز QR.",
+      "faceVerified": "تم التحقق من الوجه",
+      "faceNotVerified": "لم يتم التحقق من الوجه"
+    },
+    "medical": {
+      "title": "My medical card",
+      "subtitle": "Your patient card with a QR code for in-person lab visits",
+      "labTitle": "Laboratory",
+      "labSubtitle": "Run a lab? Register it to scan patient QR codes and add results"
+    },
+    "qr": {
+      "title": "رمز الاستجابة السريعة الخاص بك",
+      "hint": "أظهر رمز الاستجابة السريعة هذا لموظف المختبر لتأكيد صورتك وإضافة نتيجة اختبار الأمراض المنقولة جنسياً إلى حسابك — أو أظهره لمستخدم آخر للتحقق من التوافق."
+    },
+    "searchGoals": {
+      "title": "ماذا ومن تبحث",
+      "hint": "تعمل هذه العلامات مع البحث: سيجدك المستخدمون الذين يتطابق بحثهم مع ما حددته هنا."
+    },
+    "canTravel": {
+      "countriesTitle": "الدول التي يمكنني السفر إليها",
+      "selectAll": "تحديد الكل",
+      "loadingCountries": "جارٍ تحميل قائمة الدول…"
     }
   },
   "chat": {
@@ -87,7 +165,32 @@
     "approveStd": "الموافقة على وصول IST",
     "approveDna": "الموافقة على وصول DNA",
     "denyStd": "رفض وصول IST",
-    "denyDna": "رفض وصول DNA"
+    "denyDna": "رفض وصول DNA",
+    "requestPhoto": "يطلب عرض صورتك",
+    "photoApprovedPermanent": "تم منح وصول دائم للصورة",
+    "photoApprovedTemporary": "تم منح وصول للصورة لمدة 15 ثانية",
+    "photoDenied": "تم رفض طلب الصورة",
+    "photoOfferPermanent": "يعرض وصولاً دائماً لصورته",
+    "photoOfferTemporary": "يعرض مشاهدة الصورة لمدة 15 ثانية",
+    "photoRevoked": "تم إلغاء الوصول إلى الصورة",
+    "liveness": {
+      "title": "Identity check",
+      "description": "To prove you're the real person behind this profile, complete a quick face check.",
+      "lookStraight": "Look straight at the camera",
+      "startCapture": "Start check",
+      "getReady": "Get ready...",
+      "processing": "Analyzing face...",
+      "skip": "Later",
+      "success": "✓ Identity confirmed",
+      "failed": "✗ Identity check failed",
+      "lastCheck": "Verified at {{time}}",
+      "cameraError": "Could not access camera. Please allow camera access and try again.",
+      "noStoredFace": "You have not completed face verification yet. Complete it in your profile settings.",
+      "noFaceDetected": "No face detected. Please look directly at the camera.",
+      "verificationError": "Face verification failed. Please try again.",
+      "systemMessageSuccess": "🛡️ Identity check passed",
+      "systemMessageFailed": "⚠️ Identity check failed"
+    }
   },
   "language": {
     "select": "Select Language",
@@ -101,7 +204,17 @@
   },
   "settings": {
     "currentMode": "الوضع الحالي",
-    "autoSaved": "يتم حفظ اختيارك تلقائيًا. لا حاجة لإعادة التحميل."
+    "autoSaved": "يتم حفظ اختيارك تلقائيًا. لا حاجة لإعادة التحميل.",
+    "modeDashboard": {
+      "title": "لوحة التحكم الوضعية",
+      "description": "إدارة إعدادات وضعك النشط والأنشطة على السلسلة",
+      "mode2Label": "الإنجاب",
+      "mode2Description": "وضع الإنجاب — مشاركون موثقون، روابط على السلسلة",
+      "mode3Label": "ما بعد التلقيح",
+      "mode3Description": "وضع ما بعد التلقيح — جلسات مجهولة الهوية، حل على السلسلة",
+      "openMode2": "فتح لوحة التحكم الإنجابية",
+      "openMode3": "فتح لوحة التحكم ما بعد التلقيح"
+    }
   },
   "auth": {
     "loading": "Loading secure session...",
@@ -109,7 +222,11 @@
       "title": "Evolve — مواعدة لا مركزية",
       "email": "📧 تسجيل الدخول بالبريد الإلكتروني",
       "phone": "📱 تسجيل الدخول بالهاتف",
-      "wallet": "💳 تسجيل الدخول بالمحفظة"
+      "wallet": "💳 تسجيل الدخول بالمحفظة",
+      "dnaRecovery": "🧬 استرداد الحساب عبر اختبار الحمض النووي",
+      "securityTitle": "تظل بياناتك خاصة",
+      "securityDescription": "يتم تشفير الملفات الشخصية وتخزينها على شبكات لامركزية — لا تتم مشاركة معلوماتك الشخصية أبدًا دون موافقتك.",
+      "questionRecovery": "🔐 استعادة الحساب عبر سؤال الأمان"
     },
     "phone": {
       "title": "تسجيل الدخول بالهاتف",
@@ -166,6 +283,50 @@
         "description": "Anonymous matching, requires wallet",
         "authType": "Ethereum wallet required"
       }
+    },
+    "recovery": {
+      "title": "Social Recovery",
+      "description": "أضف البريد الإلكتروني أو الهاتف كحراس استعادة للمحفظة",
+      "email": {
+        "label": "حارس البريد الإلكتروني",
+        "placeholder": "أدخل بريدك الإلكتروني",
+        "add": "إضافة بريد إلكتروني",
+        "added": "تمت إضافة حارس البريد الإلكتروني",
+        "remove": "حذف",
+        "removed": "تم حذف حارس البريد الإلكتروني"
+      },
+      "phone": {
+        "label": "حارس الهاتف",
+        "placeholder": "أدخل رقم هاتفك",
+        "add": "إضافة هاتف",
+        "added": "تمت إضافة حارس الهاتف",
+        "remove": "حذف",
+        "removed": "تم حذف حارس الهاتف"
+      }
+    },
+    "emailAuth": {
+      "loginTitle": "Sign in with email",
+      "registerTitle": "Create account",
+      "modeLogin": "Sign in",
+      "modeRegister": "Register",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "confirmLabel": "Confirm password",
+      "loginButton": "Sign in",
+      "registerButton": "Create account",
+      "errorRequired": "Email and password are required",
+      "errorPasswordsDiffer": "Passwords do not match",
+      "errorExists": "This email is already registered",
+      "errorCredentials": "Invalid email or password",
+      "errorFailed": "Something went wrong. Try again",
+      "questionTitle": "Create your secret question",
+      "questionHint": "Invent the question and answer yourself — any language, any symbols. It is your passwordless login method.",
+      "questionLabel": "Your question",
+      "questionPlaceholder": "e.g. What was the name of my first pet?",
+      "answerLabel": "Your answer",
+      "answerPlaceholder": "Your answer",
+      "questionSave": "Save and continue",
+      "errorQuestionRequired": "Question and answer are required"
     }
   },
   "network": {
@@ -181,5 +342,818 @@
     "aurora": "Aurora",
     "celo": "Celo",
     "cronos": "Cronos"
+  },
+  "userProfile": {
+    "notFound": "المستخدم غير موجود",
+    "backToHome": "العودة إلى الرئيسية",
+    "back": "رجوع",
+    "verifiedStd": "تم التحقق من STD",
+    "accessTitle": "الوصول إلى البيانات الطبية",
+    "accessDescription": "اطلب الإذن لعرض نتائج STD أو DNA لهذا المستخدم.",
+    "requestStd": "طلب STD",
+    "requestDna": "طلب DNA",
+    "openProfile": "فتح ملف {{name}}",
+    "ageHidden": "العمر مخفي"
+  },
+  "onboarding": {
+    "title": "أكمل ملفك الشخصي",
+    "subtitle": "أخبر الآخرين قليلاً عن نفسك",
+    "age": {
+      "title": "عمرك",
+      "label": "العمر",
+      "hide": "إخفاء عمري",
+      "hideHint": "لن يظهر عمرك للمستخدمين الآخرين"
+    },
+    "languages": {
+      "title": "اللغات",
+      "hint": "اختر اللغات التي تتحدثها"
+    },
+    "bio": {
+      "title": "عنّي",
+      "label": "عنّي",
+      "placeholder": "اكتب قليلاً عن نفسك وهواياتك وما تبحث عنه..."
+    },
+    "photo": {
+      "title": "صورتك",
+      "upload": "رفع صورة",
+      "change": "تغيير الصورة",
+      "preview": "معاينة الصورة",
+      "blur": "تعتيم صورتي",
+      "blurHint": "لن يرى الآخرون سوى معاينة ضبابية حتى تمنح الوصول",
+      "invalidType": "يرجى اختيار ملف صورة",
+      "readError": "تعذر قراءة الصورة. جرّب ملفاً آخر."
+    },
+    "back": "رجوع",
+    "next": "التالي",
+    "skip": "تخطي",
+    "saving": "جارٍ الحفظ…",
+    "finish": "إنهاء",
+    "gender": {
+      "title": "About you",
+      "label": "I identify as",
+      "lookingForLabel": "Who are you looking for?",
+      "lookingForOptions": {
+        "man": "A man",
+        "woman": "A woman",
+        "couple_man_woman": "A couple (man + woman)",
+        "couple_woman_woman": "A couple (woman + woman)",
+        "couple_man_man": "A couple (man + man)"
+      }
+    },
+    "kind": {
+      "title": "من أنت"
+    }
+  },
+  "photo": {
+    "request": "طلب عرض الصورة",
+    "tempView": "ظاهرة لمدة {{seconds}} ثانية",
+    "accessPermanent": "لديك وصول دائم لهذه الصورة",
+    "accessTemporary": "لديك وصول مؤقت لهذه الصورة",
+    "accessNone": "صورة ضبابية — اطلب الوصول للعرض",
+    "pendingRequest": "طلب عرض الصورة قيد الانتظار:",
+    "approveTemporary": "الموافقة 15 ثانية",
+    "approvePermanent": "الموافقة بشكل دائم",
+    "deny": "رفض",
+    "offerTitle": "عرض صورتي:",
+    "offerTemporary": "عرض 15 ثانية",
+    "offerPermanent": "عرض بشكل دائم",
+    "revoke": "إلغاء الوصول",
+    "viewOffer": "عرض الصورة",
+    "hide": "إخفاء الصورة",
+    "faceVerify": "Face verification",
+    "faceVerifyHint": "Verify your photo is real. Your photo will be checked against a live selfie.",
+    "verifyFace": "Verify with selfie",
+    "verifying": "Verifying face...",
+    "faceVerified": "Face verified successfully ✓",
+    "noFaceDetected": "No face detected in the photo. Please upload a clear photo of your face.",
+    "faceMismatch": "Face mismatch detected ({{similarity}}% similar). The photo does not match your live selfie.",
+    "verificationError": "Face verification failed. Please try again."
+  },
+  "common": {
+    "or": "أو",
+    "back": "رجوع",
+    "loading": "جارٍ التحميل...",
+    "confirm": "تأكيد",
+    "skip": "تخطي الآن"
+  },
+  "dnaRecovery": {
+    "title": "استرداد الحساب عبر اختبار الحمض النووي (DNA)",
+    "description": "تحقق من هويتك باستخدام ملف DNA المسجل. أدخل البريد الإلكتروني المرتبط بحسابك والصق نتيجة اختبار الحمض النووي.",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "you@example.com",
+    "next": "التالي",
+    "emailEntered": "البريد الإلكتروني",
+    "dnaLabel": "نتيجة اختبار الحمض النووي",
+    "dnaPlaceholder": "الصق نص نتيجة اختبار الحمض النووي هنا…",
+    "recover": "استرداد الحساب",
+    "recovering": "جاري التحقق من DNA…",
+    "error": {
+      "emailRequired": "يرجى إدخال بريدك الإلكتروني",
+      "dnaRequired": "يرجى لصق نتيجة اختبار الحمض النووي",
+      "failed": "فشل التحقق من DNA. تحقق من المدخلات وحاول مرة أخرى.",
+      "network": "خطأ في الشبكة. يرجى المحاولة مرة أخرى."
+    }
+  },
+  "filters": {
+    "ageRange": "الفئة العمرية",
+    "min": "الحد الأدنى",
+    "max": "الحد الأقصى",
+    "heightRange": "الطول (سم)",
+    "weightRange": "الوزن (كجم)",
+    "country": "البلد",
+    "city": "المدينة",
+    "languages": "اللغات",
+    "any": "أي",
+    "yes": "نعم",
+    "no": "لا",
+    "eyeColor": "لون العينين",
+    "hairColor": "لون الشعر",
+    "bodyType": "بنية الجسم",
+    "education": "التعليم",
+    "maritalStatus": "الحالة الاجتماعية",
+    "religion": "الدين",
+    "zodiac": "الأبراج",
+    "children": "أطفال",
+    "smoking": "تدخين",
+    "drinking": "كحول",
+    "eyeColors": {
+      "brown": "Brown",
+      "blue": "Blue",
+      "green": "Green",
+      "hazel": "Hazel",
+      "gray": "Gray",
+      "black": "Black"
+    },
+    "hairColors": {
+      "black": "Black",
+      "brown": "Brown",
+      "blonde": "Blonde",
+      "red": "Red",
+      "gray": "Gray",
+      "white": "White",
+      "bald": "Bald"
+    },
+    "bodyTypes": {
+      "slim": "Slim",
+      "athletic": "Athletic",
+      "average": "Average",
+      "curvy": "Curvy",
+      "muscular": "Muscular",
+      "large": "Large"
+    },
+    "educationLevels": {
+      "highSchool": "High school",
+      "associate": "Associate degree",
+      "bachelor": "Bachelor's",
+      "master": "Master's",
+      "doctorate": "Doctorate",
+      "other": "Other"
+    },
+    "maritalStatuses": {
+      "single": "Single",
+      "divorced": "Divorced",
+      "widowed": "Widowed",
+      "separated": "Separated",
+      "married": "Married"
+    },
+    "religions": {
+      "christianity": "Christianity",
+      "islam": "Islam",
+      "judaism": "Judaism",
+      "hinduism": "Hinduism",
+      "buddhism": "Buddhism",
+      "atheist": "Atheist",
+      "agnostic": "Agnostic",
+      "spiritual": "Spiritual",
+      "other": "Other"
+    },
+    "zodiacs": {
+      "aries": "Aries",
+      "taurus": "Taurus",
+      "gemini": "Gemini",
+      "cancer": "Cancer",
+      "leo": "Leo",
+      "virgo": "Virgo",
+      "libra": "Libra",
+      "scorpio": "Scorpio",
+      "sagittarius": "Sagittarius",
+      "capricorn": "Capricorn",
+      "aquarius": "Aquarius",
+      "pisces": "Pisces"
+    },
+    "skinColor": "لون البشرة",
+    "skinColors": {
+      "fair": "فاتح جدا",
+      "light": "فاتح",
+      "medium": "متوسط",
+      "tan": "أسمر",
+      "dark": "داكن",
+      "deep": "داكن جدا"
+    },
+    "gender": "الجنس",
+    "genders": {
+      "male": "ذكر",
+      "female": "أنثى",
+      "other": "أخرى"
+    },
+    "lookingFor": "أبحث عن",
+    "lookingForOptions": {
+      "man": "رجل",
+      "woman": "امرأة",
+      "couple_man_woman": "زوجان (رجل + امرأة)",
+      "couple_woman_woman": "زوجان (امرأة + امرأة)",
+      "couple_man_man": "زوجان (رجل + رجل)"
+    },
+    "testingPreference": "طريقة الاختبار",
+    "testingPreferences": {
+      "lab": "في المختبر",
+      "portable": "جهاز محمول",
+      "both": "الخياران معًا",
+      "none": "لا يهم"
+    },
+    "searchTarget": "Search for",
+    "searchTargets": {
+      "man": "Man",
+      "woman": "Woman",
+      "laboratory": "Laboratory"
+    },
+    "stdCompatible": "STD compatible",
+    "noLabs": "No laboratories found",
+    "whatSearch": "ما الذي تبحث عنه",
+    "whoSearch": "من تبحث عنه",
+    "stdTests": "إجراء اختبارات الأمراض المنقولة جنسياً",
+    "canTravel": "يمكنني السفر إلى بلدك",
+    "canTravelOnly": "يمكنه السفر إلى بلدي"
+  },
+  "questionRecovery": {
+    "title": "استعادة الحساب بسؤال الأمان",
+    "description": "استعد حسابك بالإجابة على سؤال الأمان الذي حددته أثناء التسجيل.",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "you@example.com",
+    "next": "التالي",
+    "nextLoading": "جارٍ البحث…",
+    "emailEntered": "الاستعادة لـ",
+    "questionLabel": "سؤال الأمان",
+    "answerLabel": "إجابتك",
+    "answerPlaceholder": "اكتب إجابتك",
+    "recover": "استعادة الحساب",
+    "recovering": "جارٍ التحقق…",
+    "error": {
+      "emailRequired": "يرجى إدخال بريدك الإلكتروني.",
+      "lookupFailed": "لم يتم العثور على حساب بهذا البريد الإلكتروني.",
+      "network": "خطأ في الشبكة. حاول مرة أخرى.",
+      "answerRequired": "يرجى إدخال إجابتك.",
+      "failed": "إجابة غير صحيحة. حاول مرة أخرى.",
+      "noQuestion": "لا يوجد سؤال أمان محدد لهذا الحساب."
+    }
+  },
+  "communications": {
+    "proposalsTitle": "المقترحات",
+    "proposalsSubtitle": "مبادرات المجتمع — يتم وزن الأصوات حسب السمعة",
+    "proposalTitlePlaceholder": "عنوان المقترح",
+    "proposalDescPlaceholder": "وصف مختصر (اختياري)",
+    "createProposal": "إنشاء مقترح",
+    "votesFor": "مع",
+    "votesAgainst": "ضد",
+    "voteWeightHint": "وزن صوتك: {{weight}} (السمعة)",
+    "noProposals": "لا توجد مقترحات بعد. أنشئ الأول!",
+    "yes": "نعم",
+    "no": "لا",
+    "youVotedWeight": "لقد صوّت — الوزن {{weight}}",
+    "proposalPlatformFilter": {
+      "all": "الكل",
+      "github": "GitHub",
+      "codeberg": "Codeberg",
+      "gitlab": "GitLab",
+      "inApp": "داخل التطبيق"
+    },
+    "proposalStatus": {
+      "open": "مفتوح",
+      "closed": "مغلق",
+      "merged": "مدمج"
+    },
+    "proposalViewOn": "عرض على {{platform}}"
+  },
+  "catfish": {
+    "riskLow": "Low risk",
+    "riskModerate": "Moderate risk",
+    "riskHigh": "High risk",
+    "photoPhotographAge": "Photo appears very old (possible stolen photo)",
+    "profileAgeNew": "Profile is very new",
+    "missingVerification": "Missing profile verification",
+    "timingSuspicious": "Suspicious message timing (possible bot)",
+    "scamSuspicious": "Suspicious content detected",
+    "timing": "Message timing",
+    "scam": "Suspicious content",
+    "flagged": "Profile flagged for review"
+  },
+  "labPortal": {
+    "title": "بوابة المختبر",
+    "subtitle": "مساحة عمل المختبر الشريك. تحقق من هوية المريض وأرفق نتيجة التحليل.",
+    "apiKey": "مفتاح API للمختبر",
+    "newPatient": "مريض جديد",
+    "register": {
+      "name": "اسم المختبر",
+      "namePlaceholder": "مثال: Sunrise Diagnostics",
+      "email": "البريد الإلكتروني للتواصل",
+      "submit": "تسجيل المختبر",
+      "required": "يرجى إدخال اسم المختبر والبريد الإلكتروني للتواصل.",
+      "failed": "تعذر تسجيل المختبر. حاول مرة أخرى.",
+      "savedKey": "تم تسجيل المختبر. تم حفظ مفتاح API على هذا الجهاز."
+    },
+    "scan": {
+      "title": "امسح رمز QR الخاص بالمريض",
+      "hint": "اطلب من المريض فتح Evolve ← الملف الشخصي ← الفحوصات وإظهار رمز QR.",
+      "start": "تشغيل الكاميرا",
+      "stop": "إيقاف الكاميرا",
+      "startFailed": "تعذر تشغيل الكاميرا. اسمح بالوصول إلى الكاميرا وحاول مرة أخرى.",
+      "noPermission": "تم حظر الوصول إلى الكاميرا. اسمح بالوصول إلى الكاميرا في المتصفح (أيقونة القفل في شريط العنوان) ثم حاول مرة أخرى.",
+      "noCamera": "لم يتم العثور على كاميرا على هذا الجهاز."
+    },
+    "verify": {
+      "title": "تحقق من هوية المريض",
+      "patientId": "معرف المريض",
+      "takePhoto": "التقاط صورة للمريض",
+      "photoAlt": "صورة المريض للتحقق",
+      "checking": "جارٍ التحقق…",
+      "confirm": "مطابقة الوجوه",
+      "noFace": "لم يتم اكتشاف وجه في الصورة. يرجى التقاط صورة أخرى.",
+      "photoError": "تعذر معالجة الصورة. حاول مرة أخرى.",
+      "failed": "فشل التحقق. حاول مرة أخرى.",
+      "matched": "تم تأكيد الهوية — الوجوه متطابقة.",
+      "unmatched": "لم يتم تأكيد الهوية — الوجوه غير متطابقة.",
+      "similarity": "التشابه"
+    },
+    "report": {
+      "title": "إرفاق نتيجة التحليل",
+      "hint": "الصق نص النتيجة الخام. سيتم تحليله تلقائيًا.",
+      "placeholder": "الصق نص النتيجة هنا…",
+      "submit": "إرسال النتيجة",
+      "submitting": "جارٍ الإرسال…",
+      "success": "تم إرسال النتيجة. ستظهر في التقارير المعلقة للمريض.",
+      "failed": "تعذر إرسال النتيجة. حاول مرة أخرى."
+    }
+  },
+  "help": {
+    "aria": {
+      "info": "تلميح معلومات",
+      "suggest": "اقتراح تحسين"
+    },
+    "unknownTerm": "مصطلح غير معروف",
+    "home": {
+      "filters": {
+        "skinColor": {
+          "title": "التصفية حسب لون البشرة المعلن",
+          "body": "اختر درجة لون لتضييق نتائج المطابقة"
+        },
+        "lookingFor": {
+          "title": "التصفية حسب من تبحث عنه",
+          "body": "اختر تفضيل العلاقة لتحسين النتائج"
+        },
+        "testingPreference": {
+          "title": "التصفية حسب حالة فحص الأمراض المنقولة",
+          "body": "إظهار الملفات ذات النتائج الموثقة فقط"
+        },
+        "gender": {
+          "title": "التصفية حسب الجنس المعلن",
+          "body": "تضييق النتائج بناءً على الجنس"
+        }
+      }
+    },
+    "chat": {
+      "proposals": {
+        "title": "لوحة التصويت على المقترحات",
+        "body": "عرض والتصويت على اقتراحات المجتمع"
+      }
+    },
+    "mode2": {
+      "dashboard": {
+        "title": "وضع رابطة الحمل",
+        "body": "إدارة ميزات الحمل والترابط"
+      }
+    },
+    "mode3": {
+      "dashboard": {
+        "title": "وضع الاختيار الغامض",
+        "body": "عملية اختيار الأب بشكل مجهول"
+      }
+    },
+    "profile": {
+      "sections": {
+        "lab": {
+          "title": "نتائج المختبر",
+          "body": "عرض حالة فحص الأمراض المنقولة الموثقة"
+        },
+        "modeSelector": {
+          "title": "محدد الوضع",
+          "body": "التبديل بين أوضاع البحث"
+        },
+        "profileEdit": {
+          "title": "تحرير الملف الشخصي",
+          "body": "تحرير معلومات ملفك الشخصي"
+        }
+      }
+    }
+  },
+  "suggestions": {
+    "title": "اقتراح تحسين",
+    "placeholder": "صف اقتراحك…",
+    "cancel": "إلغاء",
+    "submit": "إرسال",
+    "submitting": "جارٍ الإرسال…",
+    "saved": "تم حفظ الاقتراح",
+    "defaultTitle": "اقتراح جديد حول {{term}}"
+  },
+  "proposals": {
+    "sourceLabel": "المصدر: {{source}}"
+  },
+  "dashboard": {
+    "mode2": {
+      "title": "لوحة ارتباط الحمل",
+      "subtitle": "أدر ارتباط الحمل وتابع المسار من التأكيد إلى إثبات الأبوة",
+      "status": {
+        "active": "نشط",
+        "awaitingPaternity": "بانتظار الأبوة",
+        "resolved": "تم الحل"
+      },
+      "step0": {
+        "title": "هل أنت الأم أم الأب؟",
+        "description": "اختر دورك لبدء ارتباط الحمل. يحتاج الطرفان إلى إيداع في EvolveFund.",
+        "fundReady": "تم اكتشاف إيداع EvolveFund",
+        "fundRequired": "مطلوب إيداع 15 EVOLVE على الأقل في EvolveFund",
+        "walletBalance": "رصيد محفظة EVOLVE",
+        "fundTitle": "إيداع EvolveFund",
+        "locked": "مقفل بواسطة الارتباط",
+        "unlocked": "مفتوح",
+        "daysRemaining": "{{days}} يوم متبقي",
+        "noDeposit": "لا يوجد إيداع",
+        "depositPrompt": "أودِع EVOLVE في الصندوق (الحد الأدنى 15)",
+        "amountPlaceholder": "المبلغ (مثال: 20)",
+        "minDeposit": "الحد الأدنى للإيداع هو 15 EVOLVE",
+        "approving": "جارٍ الموافقة...",
+        "depositing": "جارٍ الإيداع...",
+        "approveAction": "الموافقة على EVOLVE",
+        "depositAction": "الإيداع في الصندوق",
+        "lockHint": "قفل أدنى 30 يومًا. مطلوب لإنشاء الارتباطات."
+      },
+      "step1": {
+        "title": "تأكيد الارتباط",
+        "description": "يجب على الطرفين تأكيد الارتباط بملفاتهم الموثقة.",
+        "selfLabel": "أنت",
+        "partnerLabel": "الشريك",
+        "confirmed": "تم التأكيد",
+        "pending": "قيد الانتظار",
+        "alreadyConfirmed": "تم التأكيد مسبقًا",
+        "confirmSex": "تأكيد دوري",
+        "partnerAlreadyConfirmed": "أكد الشريك مسبقًا",
+        "partnerConfirmSex": "تأكيد الشريك",
+        "womanPartner": "الشريك (امرأة)",
+        "manPartner": "الشريك (رجل)",
+        "alreadyConfirmedTitle": "تم التأكيد مسبقًا"
+      },
+      "step2": {
+        "title": "تم إنشاء الارتباط",
+        "description": "بمجرد تأكيد الطرفين، يُقفل الإيداع طوال مدة الارتباط.",
+        "timerInfo": "يُحل الارتباط تلقائيًا عند انتهاء فترة الحمل.",
+        "ready": "جاهز",
+        "waitingForConfirmations": "بانتظار التأكيدات..."
+      },
+      "step3": {
+        "title": "الحمل والأبوة",
+        "description": "أبلغ عن الحمل؛ بعد نتيجة الأبوة يُفتح الإيداع أو يُنقل.",
+        "pregnancyCheckbox": "الإبلاغ عن الحمل",
+        "resolvedPregnant": "تم حل الارتباط — الحمل مؤكد",
+        "resolvedNotPregnant": "تم حل الارتباط — لا يوجد حمل",
+        "canReport": "يمكنك الآن الإبلاغ عن الحمل",
+        "notYet": "الإبلاغ عن الحمل متاح بعد 14 يومًا من التأكيد",
+        "reportToVerify": "أبلغ عن الحمل لبدء التحقق من الأبوة.",
+        "waitingWindow": "بانتظار فتح نافذة الإبلاغ عن الحمل...",
+        "waitingWoman": "بانتظار أن تُبلغ المرأة عن الحمل...",
+        "paternityInProgress": "التحقق من الأبوة قيد التنفيذ. سيقدم المسؤول النتيجة.",
+        "awaitingResult": "بانتظار نتيجة اختبار الأبوة من المسؤول..."
+      },
+      "createBond": {
+        "partnerPlaceholder": "عنوان الشريك (0x...)",
+        "fundedRequired": "أودِع 15 EVOLVE على الأقل أولاً",
+        "partnerRequired": "أدخل عنوان الشريك"
+      },
+      "error": {
+        "rejected": "رُفضت المعاملة من قبل المستخدم.",
+        "failed": "خطأ في المعاملة: {{message}}"
+      }
+    },
+    "mode3": {
+      "title": "لوحة ما بعد التلقيح",
+      "subtitle": "شغّل جلسة ما بعد التلقيح. تنشئ المرأة الجلسة وينضم الرجال إليها.",
+      "create": {
+        "title": "الجلسة",
+        "description": "أنشئ جلسة كامرأة، أو انضم إلى جلسة مفتوحة كرجل.",
+        "button": "إنشاء جلسة",
+        "hint": "تستمر الجلسة 48 ساعة. بعد الانضمام، أكد مشاركتك وانتظر اختيار المرأة."
+      },
+      "timer": {
+        "active": "الوقت المتبقي: {{timer}}",
+        "inactive": "لا توجد جلسة نشطة"
+      },
+      "participants": {
+        "title": "المشاركون",
+        "empty": "لا يوجد مشاركون بعد",
+        "confirmed": "تم التأكيد"
+      },
+      "available": {
+        "title": "الملفات المتاحة",
+        "empty": "لا توجد ملفات متاحة",
+        "profileHint": "رجل متاح",
+        "addButton": "دعوة"
+      },
+      "profileBorder": {
+        "title": "ملفك الشخصي",
+        "description": "ملفك الموثق هو ما يراه المشاركون الآخرون.",
+        "noProfile": "لا يوجد ملف"
+      },
+      "joinButton": "الانضمام إلى الجلسة",
+      "waitingForParticipants": "جلستك نشطة — بانتظار المشاركين",
+      "confirmButton": "تأكيد المشاركة",
+      "fundNotice": "تحتاج إلى إيداع 15 EVOLVE على الأقل في EvolveFund للمشاركة.",
+      "resolved": {
+        "title": "تم حل الجلسة",
+        "fatherLabel": "الأب المختار:",
+        "rewardInfo": "يحصل الأب المختار على ضعف إيداعه في EvolveFund + 1 EVOLVE عن كل رجل مشارك. المشاركون غير المختارين: 90% من الإيداع للمرأة، و10% للأب المختار.",
+        "noFather": "لم يتم اختيار أب. أُعيدت الإيداعات إلى المشاركين."
+      },
+      "error": {
+        "rejected": "رُفضت المعاملة من قبل المستخدم.",
+        "failed": "خطأ في المعاملة: {{message}}"
+      }
+    }
+  },
+  "safety": {
+    "title": "مركز الأمان",
+    "subtitle": "حالة الفحوصات، رابط الصفحة العامة وفحوصات التوافق",
+    "stdStatus": {
+      "title": "حالة الفحوصات",
+      "verified": "تم رفع نتيجة الفحص",
+      "notVerified": "لا توجد نتيجة بعد",
+      "hint": "ارفع آخر نتيجة فحص للمشاركة في فحوصات التوافق. لا تظهر مسببات الأمراض الفردية أبدًا للمستخدمين الآخرين."
+    },
+    "publicLink": {
+      "title": "صفحة عامة",
+      "hint": "رابط قصير لصفحتك يعرض صورتك فقط. يمكن للزوار إرسال طلب فحص توافق.",
+      "usernameLabel": "عنوان الصفحة",
+      "usernamePlaceholder": "مثال: olena",
+      "enable": "تفعيل الصفحة العامة",
+      "disable": "تعطيل الصفحة العامة",
+      "enabled": "الصفحة العامة نشطة",
+      "disabled": "الصفحة العامة معطلة",
+      "copy": "نسخ الرابط",
+      "copied": "تم النسخ!",
+      "taken": "هذا العنوان مستخدم بالفعل",
+      "invalid": "استخدم أحرفًا صغيرة وأرقامًا ونقاطًا وشرطات سفلية",
+      "saved": "تم حفظ الإعدادات"
+    },
+    "checks": {
+      "title": "فحوصات التوافق",
+      "incoming": "الطلبات الواردة",
+      "outgoing": "الطلبات المرسلة",
+      "empty": "لا توجد طلبات بعد",
+      "from": "طلب من",
+      "approve": "موافقة",
+      "deny": "رفض",
+      "awaiting": "بانتظار الرد"
+    },
+    "verdict": {
+      "title": "النتيجة",
+      "safe": "آمن",
+      "compatible": "متوافق",
+      "caution": "حذر",
+      "risk": "تم اكتشاف خطر",
+      "incomplete": "بيانات غير كافية"
+    },
+    "qr": {
+      "title": "رمز QR للمختبر",
+      "hint": "أظهر هذا الرمز لمختبر شريك لربط نتائج فحصك."
+    }
+  },
+  "publicProfile": {
+    "title": "صفحة عامة",
+    "check": "فحص التوافق",
+    "requested": "تم إرسال طلب الفحص!",
+    "loading": "جارٍ التحميل…",
+    "notFound": "الملف الشخصي غير موجود أو غير عام",
+    "loginRequired": "يرجى تسجيل الدخول لإرسال طلب فحص",
+    "self": "هذه صفحتك الخاصة"
+  },
+  "labDashboard": {
+    "title": "لوحة تحكم المختبر",
+    "login": "تسجيل الدخول",
+    "register": "تسجيل المختبر",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "labName": "اسم المختبر",
+    "submit": "متابعة",
+    "createAccount": "إنشاء حساب",
+    "haveAccount": "لديك حساب بالفعل؟",
+    "noAccount": "ليس لديك حساب بعد؟",
+    "loggedInAs": "مسجل الدخول باسم",
+    "logout": "تسجيل الخروج",
+    "scanTitle": "مسح رمز المريض",
+    "scanHint": "اطلب من المريض فتح Evolve → مركز الأمان وإظهار رمز QR.",
+    "start": "تشغيل الكاميرا",
+    "stop": "إيقاف الكاميرا",
+    "beginVisit": "بدء الزيارة",
+    "faceTitle": "التحقق من هوية المريض",
+    "matched": "تم تأكيد الهوية — الوجوه متطابقة.",
+    "unmatched": "لم يتم تأكيد الهوية — الوجوه غير متطابقة.",
+    "checking": "جارٍ التحقق…",
+    "noFace": "لم يتم اكتشاف وجه في الصورة. التقط صورة أخرى.",
+    "reportTitle": "إرفاق نتائج الفحص",
+    "reportPlaceholder": "الصق نص النتيجة…",
+    "reportSubmit": "حفظ النتائج",
+    "reportSuccess": "تم حفظ النتائج",
+    "reportFailed": "فشل حفظ النتائج",
+    "visits": "الزيارات",
+    "noVisits": "لا توجد زيارات بعد",
+    "patient": "المريض",
+    "status": "الحالة",
+    "date": "التاريخ",
+    "visitStatus": {
+      "none": "لم تبدأ",
+      "sample_received": "تم استلام العينة",
+      "pending": "النتائج بانتظار المراجعة",
+      "accepted": "تم قبول النتائج"
+    }
+  },
+  "scan": {
+    "title": "مسح رمز QR",
+    "hint": "امسح رمز QR من صفحة شخص آخر لإرسال طلب فحص توافق.",
+    "start": "تشغيل الكاميرا",
+    "stop": "إيقاف الكاميرا",
+    "scanning": "جارٍ المسح…",
+    "requested": "تم إرسال طلب الفحص!",
+    "error": "فشل المسح",
+    "invalidCode": "هذا ليس رابط Evolve صالحًا",
+    "self": "لا يمكنك إرسال طلب إلى نفسك",
+    "pendingExists": "يوجد طلب لهذا المستخدم بالفعل"
+  },
+  "companion": {
+    "title": "وضع المرافق",
+    "intro": "تساعدك هذه الأداة على تقييم أمان الشريك المحتمل.",
+    "startButton": "ابدأ",
+    "uploadPrompt": "حمّل اختبار STD الخاص بك",
+    "uploadButton": "إرسال",
+    "result": {
+      "title": "نتيجة التوافق",
+      "safe": "آمن",
+      "risk": "خطير",
+      "description": "استنادًا إلى الاختبار المحمّل..."
+    },
+    "languageSelect": "اختر اللغة",
+    "regionSelect": "اختر المنطقة",
+    "roleSelect": "اختر الدور",
+    "continueButton": "متابعة",
+    "role": {
+      "user": "مستخدم",
+      "userHint": "أريد تقييم شريكي",
+      "lab": "مختبر",
+      "labHint": "أعمل في مختبر"
+    },
+    "userAuth": {
+      "title": "تسجيل دخول المستخدم",
+      "welcomeBack": "مرحباً بعودتك! أدخل تفاصيل تسجيل الدخول.",
+      "welcomeNew": "مرحباً! سجل للبدء.",
+      "loginButton": "تسجيل الدخول",
+      "registerButton": "التسجيل"
+    },
+    "labAuth": {
+      "title": "تسجيل دخول المختبر",
+      "welcomeBack": "مرحباً بعودتك! أدخل تفاصيل تسجيل الدخول.",
+      "welcomeNew": "مرحباً! سجل مختبرك للبدء.",
+      "loginButton": "تسجيل الدخول",
+      "registerButton": "تسجيل المختبر"
+    },
+    "profile": {
+      "title": "ملفي الشخصي",
+      "uploadPhoto": "تحميل الصورة",
+      "qrCode": "رمز QR الخاص بي",
+      "qrHint": "أظهر هذا الرمز للتحقق الشخصي",
+      "shareLink": "مشاركة الرابط",
+      "shareHint": "أرسل هذا الرابط للتحقق مع شخص آخر",
+      "copyLink": "نسخ الرابط",
+      "linkCopied": "تم نسخ الرابط",
+      "additionalPhotos": "صور إضافية",
+      "addMorePhotos": "إضافة المزيد من الصور",
+      "location": "الموقع",
+      "locationOptional": "الموقع (اختياري)",
+      "noLocation": "عدم إظهار الموقع",
+      "stdCompatible": "متوافق مع STD",
+      "searchUsers": "البحث عن المستخدمين",
+      "chat": "دردشة",
+      "noUsers": "لم يتم العثور على مستخدمين"
+    },
+    "chat": {
+      "inputPlaceholder": "اكتب رسالة...",
+      "send": "إرسال",
+      "userStatus": {
+        "new": "جديد",
+        "pending": "في انتظار النتائج",
+        "previous": "اتصل سابقاً"
+      }
+    },
+    "verify": {
+      "title": "التحقق من الشريك",
+      "partnerPhoto": "صورة الشريك",
+      "checkButton": "التحقق",
+      "uploadYourTest": "تحميل اختبارك",
+      "compatible": "النتائج متوافقة",
+      "notCompatible": "النتائج غير متوافقة",
+      "error": "خطأ في التحقق"
+    },
+    "lab": {
+      "register": "تسجيل المختبر",
+      "login": "تسجيل الدخول كمختبر",
+      "dashboard": "لوحة تحكم المختبر",
+      "profile": "ملف المختبر",
+      "description": "وصف المختبر",
+      "address": "العنوان",
+      "phone": "الهاتف",
+      "contact": "اتصال",
+      "patients": "المرضى",
+      "showPending": "إظهار المعلقة فقط",
+      "patientName": "اسم المريض",
+      "patientId": "معرف المريض",
+      "addResult": "إضافة نتيجة",
+      "takePhoto": "التقاط صورة",
+      "scanQR": "مسح QR",
+      "scanHint": "أدخل معرف المريض من رمز QR أو امسح بالكاميرا",
+      "enterUserId": "أدخل معرف المريض",
+      "scanButton": "مسح",
+      "scanError": "الرجاء إدخال معرف المريض",
+      "patientNotFound": "المريض غير موجود",
+      "verifyPatient": "التحقق من المريض",
+      "mainPhoto": "الصورة الرئيسية",
+      "verifyPhotos": "التحقق من الصور",
+      "match": "يتطابق",
+      "uncertain": "غير متأكد",
+      "confirmPatient": "تأكيد المريض",
+      "backToDashboard": "العودة إلى لوحة التحكم",
+      "testInfo": "معلومات الاختبار",
+      "testInfoPlaceholder": "أدخل نوع الاختبار أو رقم العينة",
+      "testInfoHint": "هذه المعلومات ستساعد في تحديد المريض واختباره",
+      "resultPhoto": "صورة النتيجة",
+      "resultDate": "تاريخ النتيجة",
+      "resultNotes": "ملاحظات",
+      "resultNotesPlaceholder": "أضف ملاحظات إلى النتيجة (اختياري)",
+      "saveResult": "حفظ النتيجة",
+      "verifyAllPhotos": "يرجى تقييم كل صورة قبل التأكيد.",
+      "noPatients": "لم يتم العثور على مرضى",
+      "nameLabel": "Laboratory name",
+      "namePlaceholder": "Enter laboratory name",
+      "descriptionPlaceholder": "Describe your laboratory",
+      "addressPlaceholder": "Enter address",
+      "phonePlaceholder": "Enter phone number",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter email",
+      "registerButton": "Register"
+    }
+  },
+  "pwa": {
+    "installTitle": "تثبيت Evolve",
+    "installHint": "ثبّت التطبيق للحصول على تجربة أسرع",
+    "iosHint": "اضغط على «مشاركة» ثم «إضافة إلى الشاشة الرئيسية»",
+    "install": "تثبيت",
+    "dismiss": "إغلاق"
+  },
+  "profileKind": {
+    "title": "من أنت",
+    "woman": "امرأة",
+    "man": "رجل",
+    "couple_man_woman": "زوجان (رجل+امرأة)",
+    "couple_man_man": "زوجان (رجل+رجل)",
+    "couple_woman_woman": "زوجان (امرأة+امرأة)",
+    "laboratory": "مختبر"
+  },
+  "kindModal": {
+    "description": "اختر من تكون — هذا مطلوب لكي يعمل البحث بشكل صحيح",
+    "confirm": "تأكيد"
+  },
+  "dex": {
+    "title": "تبديل EVOLVE",
+    "subtitle": "بدّل الرموز عبر DEX على Arbitrum أو Avalanche.",
+    "chain": "الشبكة",
+    "from": "من",
+    "to": "إلى",
+    "amount": "الكمية",
+    "slippage": "الانزلاق السعري",
+    "getQuote": "الحصول على السعر",
+    "swap": "تبديل",
+    "swapping": "جارٍ التبديل…",
+    "bestRate": "أفضل سعر",
+    "estimatedOutput": "ستتلقى",
+    "insufficientBalance": "الرصيد غير كافٍ",
+    "notAvailable": "غير متاح على هذه الشبكة بعد",
+    "quoteError": "تعذّر الحصول على السعر",
+    "swapSuccess": "تم إرسال التبديل",
+    "swapFailed": "فشل التبديل",
+    "proxyNotConfigured": "خدمة التبديل غير مهيأة"
   }
 }

@@ -107,3 +107,15 @@ export const ONE_HOUR = 60 * ONE_MINUTE;
 export const ONE_DAY = 24 * ONE_HOUR;
 export const ONE_WEEK = 7 * ONE_DAY;
 export const ONE_MONTH = 30 * ONE_DAY;
+
+// Local storage keys (shared across apps)
+export const LOCAL_STORAGE_KEYS = {
+  AUTH_MODE: "evolve_auth_mode",
+  SEARCH_MODE: "evolve_search_mode",
+  RECOVERY_GUARDIANS: "evolve_recovery_guardians",
+  EMOJI_OWNERS: "evolve_emoji_owners",
+  TOTAL_GIFTS: "evolve_total_gifts",
+  LANGUAGE: "evolve-language",
+  COUNTRY: "evolve-country",
+  SETUP_COMPLETE: "evolve-setup-complete",
+} as const;

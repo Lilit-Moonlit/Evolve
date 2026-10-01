@@ -8,44 +8,26 @@
       "distribution": "internal"
     },
     "preview": {
+      "distribution": "internal",
       "android": {
-        "buildType": "apk",
-        "gradleCommand": ":app:assembleRelease",
-        "signingConfig": {
-          "keystorePath": "./android/keystore.jks",
-          "keystorePassword": "$KEYSTORE_PASSWORD",
-          "keyAlias": "my-key-alias",
-          "keyPassword": "$KEY_PASSWORD"
-        }
+        "buildType": "apk"
       },
       "ios": {
-        "simulator": false,
-        "buildConfiguration": "Release",
-        "exportMethod": "app-store",
-        "enterpriseProvisioning": false,
-        "teamId": "$APPLE_TEAM_ID",
-        "provisioningProfilePath": "./ios/Evolve_Provisioning_Profile.mobileprovision"
+        "simulator": false
       }
     },
     "production": {
+      "credentialsSource": "remote",
       "android": {
-        "buildType": "apk",
-        "gradleCommand": ":app:assembleRelease",
-        "signingConfig": {
-          "keystorePath": "./android/keystore.jks",
-          "keystorePassword": "$KEYSTORE_PASSWORD",
-          "keyAlias": "my-key-alias",
-          "keyPassword": "$KEY_PASSWORD"
-        }
+        "buildType": "app-bundle"
       },
       "ios": {
         "simulator": false,
-        "buildConfiguration": "Release",
-        "exportMethod": "app-store",
-        "enterpriseProvisioning": false,
-        "teamId": "$APPLE_TEAM_ID",
-        "provisioningProfilePath": "./ios/Evolve_Provisioning_Profile.mobileprovision"
+        "buildConfiguration": "Release"
       }
     }
+  },
+  "submit": {
+    "production": {}
   }
 }

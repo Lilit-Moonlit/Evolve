@@ -1,5 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import { LOCAL_STORAGE_KEYS } from "@evolve/core/browser";
 
 import en from "./locales/en.json";
 import de from "./locales/de.json";
@@ -10,6 +11,7 @@ import pt from "./locales/pt.json";
 import nl from "./locales/nl.json";
 import pl from "./locales/pl.json";
 import uk from "./locales/uk.json";
+import ru from "./locales/ru.json";
 import sv from "./locales/sv.json";
 import nb from "./locales/nb.json";
 import da from "./locales/da.json";
@@ -45,6 +47,7 @@ const resources = {
   nl: { translation: nl },
   pl: { translation: pl },
   uk: { translation: uk },
+  ru: { translation: ru },
   sv: { translation: sv },
   nb: { translation: nb },
   da: { translation: da },
@@ -72,13 +75,10 @@ const resources = {
 };
 
 // Get saved language from localStorage or use browser language
-const savedLanguage = localStorage.getItem("evolve-language");
+const savedLanguage = localStorage.getItem(LOCAL_STORAGE_KEYS.LANGUAGE);
 const browserLanguage = navigator.language.split("-")[0];
 const defaultLanguage =
-  savedLanguage ||
-  (resources[browserLanguage as keyof typeof resources]
-    ? browserLanguage
-    : "en");
+  savedLanguage || (resources[browserLanguage as keyof typeof resources] ? browserLanguage : "en");
 
 i18n.use(initReactI18next).init({
   resources,

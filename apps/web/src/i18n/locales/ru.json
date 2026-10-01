@@ -1,0 +1,1042 @@
+{
+  "app": {
+    "name": "Evolve",
+    "tagline": "Decentralized Dating built on Web3 & P2P",
+    "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
+  },
+  "navigation": {
+    "messages": "Messages",
+    "profile": "Profile",
+    "settings": "Settings",
+    "mode2": "Dashboard",
+    "mode3": "Dashboard",
+    "home": "Home",
+    "communications": "Communications",
+    "check": "Check",
+    "downloadApp": "Скачать приложение"
+  },
+  "home": {
+    "hero": {
+      "title": "Find Your Match",
+      "subtitle": "Swipe through profiles and connect with interesting people."
+    },
+    "trustScore": "Trust Score",
+    "filters": {
+      "verifiedStd": "Only with verified STD",
+      "verifiedDna": "Only with verified DNA",
+      "noProfiles": "No profiles matching the selected filters.",
+      "locationUnavailable": "Location is unavailable. The filter shows all profiles.",
+      "showFilters": "Show filters",
+      "hideFilters": "Hide filters",
+      "modeNormal": "Get acquainted",
+      "modePregnancyBond": "Conception",
+      "modeCrypticChoice": "Polyandric conception"
+    },
+    "profile": {
+      "newMatch": "New Match",
+      "noMoreProfiles": "No more profiles for now! Check back later."
+    },
+    "dashboardCta": {
+      "mode2": "Open Pregnancy Bond Dashboard",
+      "mode3": "Open Cryptic Choice Dashboard"
+    }
+  },
+  "profile": {
+    "tabs": {
+      "profile": "Profile",
+      "reputation": "Reputation",
+      "settings": "Settings",
+      "medical": "Medical card"
+    },
+    "myProfile": {
+      "title": "My Profile",
+      "verifiedUser": "Verified User"
+    },
+    "status": {
+      "stdStatus": "STD Status",
+      "dnaStatus": "DNA Status",
+      "uploaded": "✓ Uploaded",
+      "notUploaded": "✗ Not Uploaded",
+      "verified": "Verified"
+    },
+    "upload": {
+      "title": "Upload Health Tests",
+      "stdTest": "STD Test",
+      "dnaTest": "DNA Test",
+      "redactFields": "Redact sensitive fields before uploading:",
+      "fullName": "Full Name",
+      "address": "Address",
+      "phoneNumber": "Phone Number",
+      "patientId": "Patient ID",
+      "encryptUpload": "Encrypt & Upload PDF",
+      "uploadSuccess": "Document uploaded and encrypted successfully!"
+    },
+    "documents": {
+      "title": "My Documents",
+      "noDocuments": "No documents uploaded yet."
+    },
+    "wallet": {
+      "title": "Wallet",
+      "address": "Address",
+      "balance": "Balance"
+    },
+    "reputation": {
+      "title": "Reputation Score",
+      "score": "Score",
+      "description": "Your reputation is based on the trust weights of people who have vouched for you.",
+      "votersTitle": "Voters & Trust Network",
+      "weight": "Weight:"
+    },
+    "edit": {
+      "title": "My profile info",
+      "photoAlt": "My photo",
+      "changePhoto": "Change photo",
+      "uploadPhoto": "Upload photo",
+      "blurPhoto": "Blur my photo",
+      "age": "Age",
+      "hideAge": "Hide my age",
+      "languages": "Languages I speak",
+      "bio": "About me",
+      "save": "Save changes",
+      "saving": "Saving…",
+      "saved": "Profile saved",
+      "testingPreference": "Testing preference"
+    },
+    "photoGrants": {
+      "title": "Photo access",
+      "description": "Users you granted photo access to:",
+      "permanent": "Permanent access",
+      "temporary": "Temporary access",
+      "revoke": "Revoke"
+    },
+    "lab": {
+      "title": "Lab testing",
+      "yourEmail": "Your email address",
+      "emailHint": "Enter the email you used for DNA verification",
+      "pendingTitle": "Pending DNA verification",
+      "accept": "Accept",
+      "reject": "Reject",
+      "noPending": "No pending DNA verification",
+      "reportAccepted": "Report accepted",
+      "reportFailed": "Failed to process the report",
+      "emailError": "Email unavailable",
+      "loading": "Loading…",
+      "patientQrTitle": "QR for on-site verification",
+      "patientQrHint": "Show this code to a partner laboratory. It encodes only your ID — no photo or profile data.",
+      "patientQrAria": "Patient QR code for on-site lab verification",
+      "patientQrError": "Could not generate the QR code.",
+      "faceVerified": "Face verified",
+      "faceNotVerified": "Face not verified"
+    },
+    "medical": {
+      "title": "My medical card",
+      "subtitle": "Your patient card with a QR code for in-person lab visits",
+      "labTitle": "Laboratory",
+      "labSubtitle": "Run a lab? Register it to scan patient QR codes and add results"
+    },
+    "qr": {
+      "title": "Ваш QR-код",
+      "hint": "Предоставьте этот QR-код сотруднику лаборатории для подтверждения фото и добавления результата ИППП-теста в аккаунт — или покажите его другому пользователю для проверки ИППП-совместимости."
+    },
+    "searchGoals": {
+      "title": "Что и кого вы ищете",
+      "hint": "Эти отметки работают с поиском: вас найдут пользователи, у которых в поиске указано то же самое, что вы отметили здесь."
+    },
+    "canTravel": {
+      "countriesTitle": "Страны, в которые я могу приехать",
+      "selectAll": "Отметить все",
+      "loadingCountries": "Загрузка списка стран…"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Connect with your matches",
+    "requestAccess": "Requested access to your {{testType}} test.",
+    "approvedRequest": "I have approved your request! You can now view my decrypted {{testType}} test.",
+    "approvedResponse": "I approved your request to view my {{testType}} test.",
+    "declinedResponse": "I declined your request to view my {{testType}} test.",
+    "selectChat": "Select a match to start chatting",
+    "noMatches": "No matches",
+    "inputPlaceholder": "Введите сообщение...",
+    "send": "Отправить",
+    "userStatus": {
+      "new": "Новый",
+      "pending": "Ожидание результатов",
+      "previous": "Ранее связывались"
+    },
+    "pendingVerification": "Verification pending",
+    "requestStd": "Request STD Test",
+    "requestDna": "Request DNA Test",
+    "approveStd": "Approve STD Access",
+    "approveDna": "Approve DNA Access",
+    "denyStd": "Deny STD Access",
+    "denyDna": "Deny DNA Access",
+    "hiddenProfile": "Hidden profile",
+    "hiddenContent": "This profile is hidden by the user. Rating is still visible.",
+    "requestPhoto": "Requests to view your photo",
+    "photoApprovedPermanent": "Photo access granted permanently",
+    "photoApprovedTemporary": "Photo access granted for 15 seconds",
+    "photoDenied": "Photo access request declined",
+    "photoOfferPermanent": "Offers permanent photo access",
+    "photoOfferTemporary": "Offers a 15-second photo view",
+    "photoRevoked": "Photo access revoked",
+    "liveness": {
+      "title": "Identity check",
+      "description": "To prove you're the real person behind this profile, complete a quick face check.",
+      "lookStraight": "Look straight at the camera",
+      "startCapture": "Start check",
+      "getReady": "Get ready...",
+      "processing": "Analyzing face...",
+      "skip": "Later",
+      "success": "✓ Identity confirmed",
+      "failed": "✗ Identity check failed",
+      "lastCheck": "Verified at {{time}}",
+      "cameraError": "Could not access camera. Please allow camera access and try again.",
+      "noStoredFace": "You have not completed face verification yet. Complete it in your profile settings.",
+      "noFaceDetected": "No face detected. Please look directly at the camera.",
+      "verificationError": "Face verification failed. Please try again.",
+      "systemMessageSuccess": "🛡️ Identity check passed",
+      "systemMessageFailed": "⚠️ Identity check failed"
+    }
+  },
+  "language": {
+    "select": "Select Language",
+    "title": "Choose your language",
+    "description": "Select your preferred language to continue"
+  },
+  "country": {
+    "select": "Select Country",
+    "title": "Choose your country",
+    "description": "Select your country to match with people nearby"
+  },
+  "settings": {
+    "currentMode": "Current mode",
+    "autoSaved": "Your selection is saved automatically. No reload needed.",
+    "hideProfileFromLowerLevels": "Hide profile from lower levels (content & photos)",
+    "privacy": "Privacy",
+    "modeDashboard": {
+      "title": "Mode Dashboard",
+      "description": "Manage your active mode settings and on-chain activity",
+      "mode2Label": "Pregnancy Bond",
+      "mode2Description": "Pregnancy Bond mode – verified participants, on-chain bonds",
+      "mode3Label": "Cryptic Choice",
+      "mode3Description": "Cryptic Choice mode – anonymous sessions, on-chain resolution",
+      "openMode2": "Open Pregnancy Bond Dashboard",
+      "openMode3": "Open Cryptic Choice Dashboard"
+    }
+  },
+  "auth": {
+    "loading": "Loading secure session...",
+    "landing": {
+      "title": "Evolve — Decentralized Dating",
+      "email": "📧 Sign in with Email",
+      "phone": "📱 Sign in with Phone",
+      "wallet": "💳 Sign in with Wallet",
+      "dnaRecovery": "🧬 Recover account via DNA test",
+      "securityTitle": "Your data stays private",
+      "securityDescription": "Profiles are encrypted and stored on decentralized networks — your personal information is never shared without your consent.",
+      "questionRecovery": "🔐 Recover account via security question"
+    },
+    "connectWallet": {
+      "title": "Connect Your Wallet",
+      "description": "Welcome to Evolve! Connect your Ethereum wallet using RainbowKit to access your encrypted medical profile."
+    },
+    "signIn": {
+      "title": "Sign In with Ethereum",
+      "description": "Please sign the secure cryptographic message to verify ownership of your wallet and load your private data.",
+      "button": "Sign-In with Ethereum"
+    },
+    "logout": "Logout",
+    "email": {
+      "title": "Sign in with Email",
+      "description": "Enter your email and password to continue",
+      "email": "Email",
+      "password": "Password",
+      "login": "Sign In",
+      "register": "Create Account",
+      "switchToRegister": "Don't have an account? Register",
+      "switchToLogin": "Already have an account? Sign In"
+    },
+    "phone": {
+      "title": "Sign in with Phone",
+      "description": "Enter your phone number to receive a verification code",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+380...",
+      "getCode": "Get Code",
+      "otp": "Verification Code",
+      "otpPlaceholder": "Enter 6-digit code",
+      "verify": "Verify & Sign In",
+      "resendCode": "Resend Code",
+      "otpSent": "A 6-digit code has been sent to {{phone}}"
+    },
+    "modeSelector": {
+      "title": "Choose Your Dating Mode",
+      "description": "Select how you want to use Evolve",
+      "normal": {
+        "label": "Dating",
+        "description": "Standard dating with email login",
+        "authType": "Email or phone login"
+      },
+      "pregnancyBond": {
+        "label": "Conception",
+        "description": "Family-focused matching, requires wallet",
+        "authType": "Ethereum wallet required"
+      },
+      "crypticChoice": {
+        "label": "Postcopulation",
+        "description": "Anonymous matching, requires wallet",
+        "authType": "Ethereum wallet required"
+      }
+    },
+    "noMode": {
+      "title": "Choose Your Dating Mode",
+      "description": "Please select a mode before browsing profiles",
+      "button": "Go to Settings"
+    },
+    "recovery": {
+      "title": "Social Recovery",
+      "description": "Add email or phone as recovery guardians to restore wallet access",
+      "email": {
+        "label": "Email Guardian",
+        "placeholder": "Enter your email",
+        "add": "Add Email",
+        "added": "Email guardian added",
+        "remove": "Remove",
+        "removed": "Email guardian removed"
+      },
+      "phone": {
+        "label": "Phone Guardian",
+        "placeholder": "Enter your phone",
+        "add": "Add Phone",
+        "added": "Phone guardian added",
+        "remove": "Remove",
+        "removed": "Phone guardian removed"
+      }
+    },
+    "emailAuth": {
+      "loginTitle": "Sign in with email",
+      "registerTitle": "Create account",
+      "modeLogin": "Sign in",
+      "modeRegister": "Register",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "confirmLabel": "Confirm password",
+      "loginButton": "Sign in",
+      "registerButton": "Create account",
+      "errorRequired": "Email and password are required",
+      "errorPasswordsDiffer": "Passwords do not match",
+      "errorExists": "This email is already registered",
+      "errorCredentials": "Invalid email or password",
+      "errorFailed": "Something went wrong. Try again",
+      "questionTitle": "Create your secret question",
+      "questionHint": "Invent the question and answer yourself — any language, any symbols. It is your passwordless login method.",
+      "questionLabel": "Your question",
+      "questionPlaceholder": "e.g. What was the name of my first pet?",
+      "answerLabel": "Your answer",
+      "answerPlaceholder": "Your answer",
+      "questionSave": "Save and continue",
+      "errorQuestionRequired": "Question and answer are required"
+    }
+  },
+  "network": {
+    "avalanche": "Avalanche",
+    "traderJoe": "Trader Joe",
+    "layerZeroBridge": "LayerZero Bridge",
+    "polygon": "Polygon",
+    "optimism": "Optimism",
+    "zksync": "zkSync Era",
+    "base": "Base",
+    "bsc": "BNB Chain",
+    "fantom": "Fantom",
+    "aurora": "Aurora",
+    "celo": "Celo",
+    "cronos": "Cronos"
+  },
+  "userProfile": {
+    "notFound": "User not found",
+    "backToHome": "Back to Home",
+    "back": "Back",
+    "verifiedStd": "STD verified",
+    "accessTitle": "Access to medical data",
+    "accessDescription": "Request permission to view this user's STD or DNA results.",
+    "requestStd": "Request STD",
+    "requestDna": "Request DNA",
+    "openProfile": "Open {{name}}'s profile",
+    "ageHidden": "age hidden"
+  },
+  "onboarding": {
+    "title": "Complete your profile",
+    "subtitle": "Tell others a little about yourself",
+    "age": {
+      "title": "Your age",
+      "label": "Age",
+      "hide": "Hide my age",
+      "hideHint": "Your age will not be shown to other users"
+    },
+    "languages": {
+      "title": "Languages",
+      "hint": "Select the languages you speak"
+    },
+    "bio": {
+      "title": "About me",
+      "label": "About me",
+      "placeholder": "Tell a little about yourself, hobbies, what you are looking for..."
+    },
+    "photo": {
+      "title": "Your photo",
+      "upload": "Upload photo",
+      "change": "Change photo",
+      "preview": "Photo preview",
+      "blur": "Blur my photo",
+      "blurHint": "Others will only see a blurred preview until you grant access",
+      "invalidType": "Please choose an image file",
+      "readError": "Could not read the image. Try another file."
+    },
+    "back": "Back",
+    "next": "Next",
+    "skip": "Skip for now",
+    "saving": "Saving…",
+    "finish": "Finish",
+    "gender": {
+      "title": "About you",
+      "label": "I identify as",
+      "lookingForLabel": "Who are you looking for?",
+      "lookingForOptions": {
+        "man": "A man",
+        "woman": "A woman",
+        "couple_man_woman": "A couple (man + woman)",
+        "couple_woman_woman": "A couple (woman + woman)",
+        "couple_man_man": "A couple (man + man)"
+      }
+    },
+    "kind": {
+      "title": "Кто вы"
+    }
+  },
+  "photo": {
+    "request": "Request photo view",
+    "tempView": "Visible for {{seconds}} s",
+    "accessPermanent": "You have permanent access to this photo",
+    "accessTemporary": "You have temporary access to this photo",
+    "accessNone": "Blurred photo — request access to view",
+    "pendingRequest": "Photo view request pending:",
+    "approveTemporary": "Approve 15 s",
+    "approvePermanent": "Approve permanently",
+    "deny": "Deny",
+    "offerTitle": "Offer my photo:",
+    "offerTemporary": "Offer 15 s",
+    "offerPermanent": "Offer permanently",
+    "revoke": "Revoke access",
+    "viewOffer": "View photo",
+    "hide": "Hide photo",
+    "faceVerify": "Face verification",
+    "faceVerifyHint": "Verify your photo is real. Your photo will be checked against a live selfie.",
+    "verifyFace": "Verify with selfie",
+    "verifying": "Verifying face...",
+    "faceVerified": "Face verified successfully ✓",
+    "noFaceDetected": "No face detected in the photo. Please upload a clear photo of your face.",
+    "faceMismatch": "Face mismatch detected ({{similarity}}% similar). The photo does not match your live selfie.",
+    "verificationError": "Face verification failed. Please try again."
+  },
+  "common": {
+    "or": "or",
+    "back": "Back",
+    "loading": "Loading...",
+    "confirm": "Подтвердить",
+    "skip": "Пропустить"
+  },
+  "dnaRecovery": {
+    "title": "Recover Account via DNA Test",
+    "description": "Verify your identity using your registered DNA profile. Enter the email linked to your account and paste your DNA test result.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "next": "Next",
+    "emailEntered": "Email",
+    "dnaLabel": "DNA test result",
+    "dnaPlaceholder": "Paste your DNA test result text here…",
+    "recover": "Recover Account",
+    "recovering": "Verifying DNA…",
+    "error": {
+      "emailRequired": "Please enter your email address",
+      "dnaRequired": "Please paste your DNA test result",
+      "failed": "DNA verification failed. Please check your input and try again.",
+      "network": "Network error. Please try again."
+    }
+  },
+  "filters": {
+    "ageRange": "Age range",
+    "min": "Min",
+    "max": "Max",
+    "heightRange": "Height (cm)",
+    "weightRange": "Weight (kg)",
+    "country": "Country",
+    "city": "City",
+    "languages": "Languages",
+    "any": "Any",
+    "yes": "Yes",
+    "no": "No",
+    "eyeColor": "Eye color",
+    "hairColor": "Hair color",
+    "bodyType": "Body type",
+    "education": "Education",
+    "maritalStatus": "Marital status",
+    "religion": "Religion",
+    "zodiac": "Zodiac",
+    "children": "Children",
+    "smoking": "Smoking",
+    "drinking": "Drinking",
+    "eyeColors": {
+      "brown": "Brown",
+      "blue": "Blue",
+      "green": "Green",
+      "hazel": "Hazel",
+      "gray": "Gray",
+      "black": "Black"
+    },
+    "hairColors": {
+      "black": "Black",
+      "brown": "Brown",
+      "blonde": "Blonde",
+      "red": "Red",
+      "gray": "Gray",
+      "white": "White",
+      "bald": "Bald"
+    },
+    "bodyTypes": {
+      "slim": "Slim",
+      "athletic": "Athletic",
+      "average": "Average",
+      "curvy": "Curvy",
+      "muscular": "Muscular",
+      "large": "Large"
+    },
+    "educationLevels": {
+      "highSchool": "High school",
+      "associate": "Associate degree",
+      "bachelor": "Bachelor's",
+      "master": "Master's",
+      "doctorate": "Doctorate",
+      "other": "Other"
+    },
+    "maritalStatuses": {
+      "single": "Single",
+      "divorced": "Divorced",
+      "widowed": "Widowed",
+      "separated": "Separated",
+      "married": "Married"
+    },
+    "religions": {
+      "christianity": "Christianity",
+      "islam": "Islam",
+      "judaism": "Judaism",
+      "hinduism": "Hinduism",
+      "buddhism": "Buddhism",
+      "atheist": "Atheist",
+      "agnostic": "Agnostic",
+      "spiritual": "Spiritual",
+      "other": "Other"
+    },
+    "zodiacs": {
+      "aries": "Aries",
+      "taurus": "Taurus",
+      "gemini": "Gemini",
+      "cancer": "Cancer",
+      "leo": "Leo",
+      "virgo": "Virgo",
+      "libra": "Libra",
+      "scorpio": "Scorpio",
+      "sagittarius": "Sagittarius",
+      "capricorn": "Capricorn",
+      "aquarius": "Aquarius",
+      "pisces": "Pisces"
+    },
+    "skinColor": "Skin color",
+    "skinColors": {
+      "fair": "Fair",
+      "light": "Light",
+      "medium": "Medium",
+      "tan": "Tan",
+      "dark": "Dark",
+      "deep": "Deep"
+    },
+    "gender": "Gender",
+    "genders": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "lookingFor": "Looking for",
+    "lookingForOptions": {
+      "man": "A man",
+      "woman": "A woman",
+      "couple_man_woman": "A couple (man + woman)",
+      "couple_woman_woman": "A couple (woman + woman)",
+      "couple_man_man": "A couple (man + man)"
+    },
+    "testingPreference": "Testing preference",
+    "testingPreferences": {
+      "lab": "Lab testing",
+      "portable": "Portable tester",
+      "both": "Both options",
+      "none": "Doesn't care"
+    },
+    "searchTarget": "Search for",
+    "searchTargets": {
+      "man": "Man",
+      "woman": "Woman",
+      "laboratory": "Laboratory"
+    },
+    "stdCompatible": "STD compatible",
+    "noLabs": "No laboratories found",
+    "whatSearch": "Что ищете",
+    "whoSearch": "Кого ищете",
+    "stdTests": "Сдать ИППП тесты",
+    "canTravel": "Могу приехать в вашу страну",
+    "canTravelOnly": "Может приехать в мою страну"
+  },
+  "questionRecovery": {
+    "title": "Security question recovery",
+    "description": "Recover your account by answering the security question you set during registration.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "next": "Next",
+    "nextLoading": "Looking up…",
+    "emailEntered": "Recovering for",
+    "questionLabel": "Security question",
+    "answerLabel": "Your answer",
+    "answerPlaceholder": "Type your answer",
+    "recover": "Recover account",
+    "recovering": "Verifying…",
+    "error": {
+      "emailRequired": "Please enter your email.",
+      "lookupFailed": "No account found with that email.",
+      "network": "Network error. Please try again.",
+      "answerRequired": "Please enter your answer.",
+      "failed": "Incorrect answer. Please try again.",
+      "noQuestion": "No security question is set for this account."
+    }
+  },
+  "communications": {
+    "proposalsTitle": "Proposals",
+    "proposalsSubtitle": "Community initiatives — votes are weighted by reputation",
+    "proposalTitlePlaceholder": "Proposal title",
+    "proposalDescPlaceholder": "Short description (optional)",
+    "createProposal": "Create proposal",
+    "votesFor": "For",
+    "votesAgainst": "Against",
+    "voteWeightHint": "Your vote weight: {{weight}} (reputation)",
+    "noProposals": "No proposals yet. Create the first one!",
+    "yes": "Yes",
+    "no": "No",
+    "youVotedWeight": "You voted — weight {{weight}}",
+    "proposalPlatformFilter": {
+      "all": "Все",
+      "github": "GitHub",
+      "codeberg": "Codeberg",
+      "gitlab": "GitLab",
+      "inApp": "В приложении"
+    },
+    "proposalStatus": {
+      "open": "Открыто",
+      "closed": "Закрыто",
+      "merged": "Слито"
+    },
+    "proposalViewOn": "Открыть на {{platform}}"
+  },
+  "catfish": {
+    "riskLow": "Low risk",
+    "riskModerate": "Moderate risk",
+    "riskHigh": "High risk",
+    "photoPhotographAge": "Photo appears very old (possible stolen photo)",
+    "profileAgeNew": "Profile is very new",
+    "missingVerification": "Missing profile verification",
+    "timingSuspicious": "Suspicious message timing (possible bot)",
+    "scamSuspicious": "Suspicious content detected",
+    "timing": "Message timing",
+    "scam": "Suspicious content",
+    "flagged": "Profile flagged for review"
+  },
+  "labPortal": {
+    "title": "Lab Portal",
+    "subtitle": "Partner laboratory workspace. Verify a patient and attach a test result.",
+    "apiKey": "Lab API key",
+    "newPatient": "New patient",
+    "register": {
+      "name": "Laboratory name",
+      "namePlaceholder": "e.g. Sunrise Diagnostics",
+      "email": "Contact email",
+      "submit": "Register laboratory",
+      "required": "Please enter both the laboratory name and a contact email.",
+      "failed": "Could not register the laboratory. Please try again.",
+      "savedKey": "Laboratory registered. Your API key is saved on this device."
+    },
+    "scan": {
+      "title": "Scan the patient QR code",
+      "hint": "Ask the patient to open Evolve → Profile → Lab testing and show the QR code.",
+      "start": "Start camera",
+      "stop": "Stop camera",
+      "startFailed": "Could not start the camera. Please allow camera access and try again.",
+      "noPermission": "Camera access is blocked. Allow the camera in your browser (padlock icon in the address bar) and try again.",
+      "noCamera": "No camera was found on this device."
+    },
+    "verify": {
+      "title": "Verify the patient's identity",
+      "patientId": "Patient ID",
+      "takePhoto": "Take a photo of the patient",
+      "photoAlt": "Patient photo for verification",
+      "checking": "Checking…",
+      "confirm": "Match faces",
+      "noFace": "No face detected in the photo. Please take another photo.",
+      "photoError": "Could not process the photo. Please try again.",
+      "failed": "Verification failed. Please try again.",
+      "matched": "Identity confirmed — faces match.",
+      "unmatched": "Identity NOT confirmed — faces do not match.",
+      "similarity": "Similarity"
+    },
+    "report": {
+      "title": "Attach the test result",
+      "hint": "Paste the raw test result text. It is parsed automatically.",
+      "placeholder": "Paste the test result text here…",
+      "submit": "Submit result",
+      "submitting": "Submitting…",
+      "success": "Result submitted. It will appear in the patient's pending reports.",
+      "failed": "Could not submit the result. Please try again."
+    }
+  },
+  "help": {
+    "aria": {
+      "info": "Info tooltip",
+      "suggest": "Suggest improvement"
+    },
+    "unknownTerm": "Unknown help term",
+    "home": {
+      "filters": {
+        "skinColor": {
+          "title": "Filter by skin color declared in profiles",
+          "body": "Choose a skin tone to narrow matching results"
+        },
+        "lookingFor": {
+          "title": "Filter by who you are looking for",
+          "body": "Select relationship preference to refine matches"
+        },
+        "testingPreference": {
+          "title": "Filter by STD testing status",
+          "body": "Show only profiles with verified STD test results"
+        },
+        "gender": {
+          "title": "Filter by gender declared in profile",
+          "body": "Narrow matches based on gender information"
+        }
+      }
+    },
+    "chat": {
+      "proposals": {
+        "title": "Proposal voting board",
+        "body": "View and vote on community suggestions"
+      }
+    },
+    "mode2": {
+      "dashboard": {
+        "title": "Pregnancy bond mode",
+        "body": "Manage pregnancy-related features and bonding"
+      }
+    },
+    "mode3": {
+      "dashboard": {
+        "title": "Cryptic choice mode",
+        "body": "Anonymous selection process for father"
+      }
+    },
+    "profile": {
+      "sections": {
+        "lab": {
+          "title": "Lab test results",
+          "body": "View verified STD testing status"
+        },
+        "modeSelector": {
+          "title": "Mode selector",
+          "body": "Switch between search modes"
+        },
+        "profileEdit": {
+          "title": "Profile editing",
+          "body": "Edit your profile information"
+        }
+      }
+    }
+  },
+  "suggestions": {
+    "title": "Suggest an improvement",
+    "placeholder": "Describe your suggestion...",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "submitting": "Submitting...",
+    "saved": "Suggestion saved",
+    "defaultTitle": "New suggestion about {{term}}"
+  },
+  "proposals": {
+    "sourceLabel": "Source: {{source}}"
+  },
+  "dashboard": {
+    "mode2": {
+      "title": "Pregnancy Bond Dashboard",
+      "subtitle": "Manage your pregnancy bond and track your journey from confirmation to paternity",
+      "status": {
+        "active": "Active",
+        "awaitingPaternity": "Awaiting paternity",
+        "resolved": "Resolved"
+      },
+      "step0": {
+        "title": "Are you the mother or the father?",
+        "description": "Choose your role to start a pregnancy bond. Both sides need an EvolveFund deposit.",
+        "fundReady": "EvolveFund deposit detected",
+        "fundRequired": "A deposit of at least 15 EVOLVE in EvolveFund is required",
+        "walletBalance": "EVOLVE Wallet Balance",
+        "fundTitle": "EvolveFund Deposit",
+        "locked": "Locked by Bond",
+        "unlocked": "Unlocked",
+        "daysRemaining": "{{days}}d remaining",
+        "noDeposit": "No deposit",
+        "depositPrompt": "Deposit EVOLVE to Fund (min 15)",
+        "amountPlaceholder": "Amount (e.g. 20)",
+        "minDeposit": "Minimum deposit is 15 EVOLVE",
+        "approving": "Approving...",
+        "depositing": "Depositing...",
+        "approveAction": "Approve EVOLVE",
+        "depositAction": "Deposit to Fund",
+        "lockHint": "30-day minimum lock. Required to create bonds."
+      },
+      "step1": {
+        "title": "Confirm the bond",
+        "description": "Both sides must confirm the bond with their verified profiles.",
+        "selfLabel": "You",
+        "partnerLabel": "Partner",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "alreadyConfirmed": "Already confirmed",
+        "confirmSex": "Confirm my role",
+        "partnerAlreadyConfirmed": "Partner has already confirmed",
+        "partnerConfirmSex": "Confirm partner",
+        "womanPartner": "Woman partner",
+        "manPartner": "Man partner",
+        "alreadyConfirmedTitle": "Already confirmed"
+      },
+      "step2": {
+        "title": "Bond created",
+        "description": "Once both sides confirm, the stake is locked for the duration of the bond.",
+        "timerInfo": "The bond resolves automatically when the pregnancy period ends.",
+        "ready": "Ready",
+        "waitingForConfirmations": "Waiting for confirmations..."
+      },
+      "step3": {
+        "title": "Pregnancy & paternity",
+        "description": "Report pregnancy and after the paternity result the stake is either unlocked or transferred.",
+        "pregnancyCheckbox": "Report pregnancy",
+        "resolvedPregnant": "Bond resolved — pregnancy confirmed",
+        "resolvedNotPregnant": "Bond resolved — no pregnancy",
+        "canReport": "You can now report pregnancy",
+        "notYet": "Pregnancy report available after 14 days from confirmation",
+        "reportToVerify": "Report pregnancy to initiate paternity verification.",
+        "waitingWindow": "Waiting for pregnancy report window to open...",
+        "waitingWoman": "Waiting for the woman to report pregnancy...",
+        "paternityInProgress": "Paternity verification in progress. Admin will submit result.",
+        "awaitingResult": "Awaiting paternity test result from administrator..."
+      },
+      "createBond": {
+        "partnerPlaceholder": "Partner address (0x...)",
+        "fundedRequired": "Deposit at least 15 EVOLVE first",
+        "partnerRequired": "Enter a partner address"
+      },
+      "error": {
+        "rejected": "Transaction rejected by user.",
+        "failed": "Transaction error: {{message}}"
+      }
+    },
+    "mode3": {
+      "title": "Cryptic Choice Dashboard",
+      "subtitle": "Run a post-copulation session. The woman creates the session, men join it.",
+      "create": {
+        "title": "Session",
+        "description": "Create a session as the woman, or join an open session as a man.",
+        "button": "Create session",
+        "hint": "A session lasts 48 hours. After joining, confirm your participation and wait for the woman's choice."
+      },
+      "timer": {
+        "active": "Time remaining: {{timer}}",
+        "inactive": "No active session"
+      },
+      "participants": {
+        "title": "Participants",
+        "empty": "No participants yet",
+        "confirmed": "Confirmed"
+      },
+      "available": {
+        "title": "Available profiles",
+        "empty": "No available profiles",
+        "profileHint": "Available man",
+        "addButton": "Invite"
+      },
+      "profileBorder": {
+        "title": "Your profile",
+        "description": "Your verified profile is what other participants see.",
+        "noProfile": "No profile"
+      },
+      "joinButton": "Join session",
+      "waitingForParticipants": "Your session is active — waiting for participants"
+    }
+  },
+  "companion": {
+    "title": "Режим компаньона",
+    "intro": "Этот инструмент помогает оценить безопасность потенциального партнёра.",
+    "startButton": "Начать",
+    "uploadPrompt": "Загрузите ваш STD-тест",
+    "uploadButton": "Отправить",
+    "result": {
+      "title": "Результат совместимости",
+      "safe": "Безопасно",
+      "risk": "Риск",
+      "description": "На основании загруженного теста..."
+    },
+    "languageSelect": "Выберите язык",
+    "regionSelect": "Выберите регион",
+    "roleSelect": "Выберите роль",
+    "continueButton": "Продолжить",
+    "role": {
+      "user": "Пользователь",
+      "userHint": "Я хочу оценить своего партнера",
+      "lab": "Лаборатория",
+      "labHint": "Я работаю в лаборатории"
+    },
+    "userAuth": {
+      "title": "Вход пользователя",
+      "welcomeBack": "Добро пожаловать! Введите данные для входа.",
+      "welcomeNew": "Добро пожаловать! Зарегистрируйтесь, чтобы начать.",
+      "loginButton": "Войти",
+      "registerButton": "Зарегистрироваться"
+    },
+    "labAuth": {
+      "title": "Вход лаборатории",
+      "welcomeBack": "Добро пожаловать! Введите данные для входа.",
+      "welcomeNew": "Добро пожаловать! Зарегистрируйте лабораторию, чтобы начать.",
+      "loginButton": "Войти",
+      "registerButton": "Зарегистрировать лабораторию"
+    },
+    "profile": {
+      "title": "Мой профиль",
+      "uploadPhoto": "Загрузить фото",
+      "qrCode": "Мой QR-код",
+      "qrHint": "Покажите этот QR-код для личной верификации",
+      "shareHint": "Отправьте эту ссылку для верификации с другим человеком",
+      "copyLink": "Копировать ссылку",
+      "linkCopied": "Ссылка скопирована",
+      "additionalPhotos": "Дополнительные фото",
+      "addMorePhotos": "Добавить еще фото",
+      "location": "Локация",
+      "locationOptional": "Локация (опционально)",
+      "noLocation": "Не показывать локацию",
+      "stdCompatible": "ИПСШ совместимы",
+      "searchUsers": "Поиск пользователей",
+      "chat": "Чат",
+      "noUsers": "Пользователи не найдены"
+    },
+    "chat": {
+      "inputPlaceholder": "Напишите сообщение...",
+      "send": "Отправить"
+    },
+    "verify": {
+      "title": "Верификация партнёра",
+      "partnerPhoto": "Фото партнёра",
+      "checkButton": "Проверить",
+      "uploadYourTest": "Загрузить свой тест",
+      "compatible": "Результаты совместимы",
+      "notCompatible": "Результаты не совместимы",
+      "error": "Ошибка верификации"
+    },
+    "lab": {
+      "register": "Зарегистрировать лабораторию",
+      "login": "Войти как лаборатория",
+      "dashboard": "Панель лаборатории",
+      "profile": "Профиль лаборатории",
+      "description": "Описание лаборатории",
+      "address": "Адрес",
+      "phone": "Телефон",
+      "contact": "Написать",
+      "patients": "Пациенты",
+      "showPending": "Только ожидающие",
+      "patientName": "Имя пациента",
+      "patientId": "ID пациента",
+      "addResult": "Добавить результат",
+      "takePhoto": "Сделать фото",
+      "scanQR": "Сканировать QR",
+      "scanHint": "Введите ID пациента из QR кода или отсканируйте камерой",
+      "enterUserId": "Введите ID пациента",
+      "scanButton": "Сканировать",
+      "scanError": "Пожалуйста, введите ID пациента",
+      "patientNotFound": "Пациент не найден",
+      "verifyPatient": "Верификация пациента",
+      "mainPhoto": "Главное фото",
+      "verifyPhotos": "Верифицировать фото",
+      "match": "Совпадает",
+      "uncertain": "Не уверен",
+      "confirmPatient": "Подтвердить пациента",
+      "backToDashboard": "Вернуться в кабинет",
+      "testInfo": "Информация о тесте",
+      "testInfoPlaceholder": "Введите тип теста или номер образца",
+      "testInfoHint": "Эта информация поможет идентифицировать пациента и его тест",
+      "resultPhoto": "Фото результата",
+      "resultDate": "Дата результата",
+      "resultNotes": "Заметки",
+      "resultNotesPlaceholder": "Добавьте заметки к результату (опционально)",
+      "saveResult": "Сохранить результат",
+      "verifyAllPhotos": "Пожалуйста, оцените каждое фото перед подтверждением.",
+      "noPatients": "Пациенты не найдены",
+      "nameLabel": "Laboratory name",
+      "namePlaceholder": "Enter laboratory name",
+      "descriptionPlaceholder": "Describe your laboratory",
+      "addressPlaceholder": "Enter address",
+      "phonePlaceholder": "Enter phone number",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter email",
+      "registerButton": "Register"
+    }
+  },
+  "pwa": {
+    "installTitle": "Установить Evolve",
+    "installHint": "Установите приложение на устройство для более быстрой работы",
+    "iosHint": "Нажмите «Поделиться», затем «На экран домой»",
+    "install": "Установить",
+    "dismiss": "Закрыть"
+  },
+  "profileKind": {
+    "title": "Кто вы",
+    "woman": "Женщина",
+    "man": "Мужчина",
+    "couple_man_woman": "Пара (М+Ж)",
+    "couple_man_man": "Пара (М+М)",
+    "couple_woman_woman": "Пара (Ж+Ж)",
+    "laboratory": "Лаборатория"
+  },
+  "kindModal": {
+    "description": "Выберите, кем вы являетесь — это необходимо для корректной работы поиска",
+    "confirm": "Подтвердить"
+  },
+  "dex": {
+    "title": "Обмен EVOLVE",
+    "subtitle": "Обменивайте токены через DEX на Arbitrum или Avalanche.",
+    "chain": "Сеть",
+    "from": "Отдаёте",
+    "to": "Получаете",
+    "amount": "Количество",
+    "slippage": "Проскальзывание",
+    "getQuote": "Получить курс",
+    "swap": "Обменять",
+    "swapping": "Обмен…",
+    "bestRate": "Лучший курс",
+    "estimatedOutput": "Вы получите",
+    "insufficientBalance": "Недостаточно средств",
+    "notAvailable": "Пока недоступно в этой сети",
+    "quoteError": "Не удалось получить курс",
+    "swapSuccess": "Обмен отправлен",
+    "swapFailed": "Обмен не удался",
+    "proxyNotConfigured": "Сервис обмена не настроен"
+  }
+}

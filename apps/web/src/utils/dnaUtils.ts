@@ -3,9 +3,8 @@ import { STRProfile } from "../store/AppContext";
 export interface DNAComparisonResult {
   locusMatches: {
     locus: string;
-    profile1: [number, number];
-    profile2: [number, number];
-    sharedAlleles: number[];
+    profile1: number;
+    profile2: number;
     isMatch: boolean;
   }[];
   matchPercentage: number;
@@ -16,24 +15,24 @@ export const compareDNA = (
   profile1: STRProfile,
   profile2: STRProfile,
 ): DNAComparisonResult => {
-  const loci = Object.keys(profile1);
+  const markers1 = profile1.markers ?? {};
+  const markers2 = profile2.markers ?? {};
+  const loci = Object.keys(markers1);
   const locusMatches: DNAComparisonResult["locusMatches"] = [];
   let totalMatches = 0;
 
   loci.forEach((locus) => {
-    const alleles1 = profile1[locus];
-    const alleles2 = profile2[locus];
+    const allele1 = markers1[locus];
+    const allele2 = markers2[locus];
 
-    if (alleles2) {
-      const shared = alleles1.filter((allele) => alleles2.includes(allele));
-      const isMatch = shared.length > 0;
+    if (allele2 !== undefined) {
+      const isMatch = allele1 === allele2;
       if (isMatch) totalMatches++;
 
       locusMatches.push({
         locus,
-        profile1: alleles1,
-        profile2: alleles2,
-        sharedAlleles: shared,
+        profile1: allele1,
+        profile2: allele2,
         isMatch,
       });
     }

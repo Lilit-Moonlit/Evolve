@@ -19,6 +19,12 @@ import { generateLabEmail, parseUserIdFromLabEmail } from "./lab-report";
 import { CHECK_TTL_MS, canonicalUsername, riskLevelToVerdict, validateUsername } from "./checks";
 import { extractPdfText } from "./pdf-text";
 import { grantRegistrationReward } from "./registration-reward";
+import {
+  buildQuoteParams,
+  parseQuoteResponse,
+  parseSwapResponse,
+  type QuoteParams,
+} from "./dex-integration";
 
 // --- WebSocket Chat Server ---
 interface WsClient {
@@ -332,6 +338,66 @@ function getJsonBody(req: IncomingMessage): Promise<any> {
       reject(err);
     });
   });
+}
+
+// --- 1inch DEX proxy ---
+// The API key and upstream URL live ONLY in this server file; the browser
+// never sees either. The client cannot choose the host/path — only the
+// chainId (42161 | 43114, enforced by buildQuoteParams) and swap params.
+const ONEINCH_API_BASE = "https://api.1inch.com/swap/v6.1";
+
+// Forwards validated params to 1inch and writes the parsed result to `res`.
+// Every failure mode (missing key, network error, non-Ok upstream,
+// unparseable body) answers and returns true — never throws.
+async function proxyOneinch(
+  res: ServerResponse,
+  params: QuoteParams,
+  action: "quote" | "swap",
+): Promise<boolean> {
+  const apiKey = process.env.ONEINCH_API_KEY;
+  if (!apiKey) {
+    res.statusCode = 503;
+    res.end(JSON.stringify({ error: "DEX proxy not configured" }));
+    return true;
+  }
+
+  const query = new URLSearchParams({
+    src: params.src,
+    dst: params.dst,
+    amount: params.amount,
+    from: params.from,
+    slippage: String(params.slippage ?? 1),
+  });
+
+  let upstream: Response;
+  try {
+    upstream = await fetch(`${ONEINCH_API_BASE}/${params.chainId}/${action}?${query}`, {
+      headers: { Authorization: `Bearer ${apiKey}` },
+    });
+  } catch (e) {
+    console.error(`[dex] 1inch ${action} request failed:`, e);
+    res.statusCode = 502;
+    res.end(JSON.stringify({ error: "upstream error" }));
+    return true;
+  }
+
+  if (!upstream.ok) {
+    res.statusCode = 502;
+    res.end(JSON.stringify({ error: "upstream error" }));
+    return true;
+  }
+
+  const json: unknown = await upstream.json();
+  const parsed = action === "quote" ? parseQuoteResponse(json) : parseSwapResponse(json);
+  if (!parsed.ok) {
+    res.statusCode = 502;
+    res.end(JSON.stringify({ error: "upstream error" }));
+    return true;
+  }
+
+  res.statusCode = 200;
+  res.end(JSON.stringify(parsed.value));
+  return true;
 }
 
 // Helper to parse cookies
@@ -1900,9 +1966,10 @@ export async function handleApiRequest(
           const verified = (profile as any)[2];
           const rawHash = (profile as any)[0] as `0x${string}`;
           if (verified && rawHash && rawHash !== "0x".padEnd(66, "0")) {
-            // Convert bytes32 to hex string (strip 0x and leading zeros,
-            // matching generateDNAHash output)
-            onChainDnaHash = parseInt(rawHash, 16).toString(16);
+            // Client sends lowercase 0x + 64 hex chars (SHA-256 bytes32
+            // commitment from generateDNAHash) — compare as-is, do NOT
+            // re-derive the hash server-side.
+            onChainDnaHash = rawHash.toLowerCase();
           }
         } catch (chainErr) {
           console.error("[dna-recover] On-chain read failed:", chainErr);
@@ -1926,8 +1993,8 @@ export async function handleApiRequest(
           return true;
         }
 
-        // Compare hashes
-        if (onChainDnaHash.toLowerCase() !== dnaHash.toLowerCase().trim()) {
+        // Compare hashes (both sides are lowercase 0x + 64 hex)
+        if (onChainDnaHash !== dnaHash.toLowerCase().trim()) {
           res.statusCode = 403;
           res.end(
             JSON.stringify({
@@ -2165,6 +2232,28 @@ export async function handleApiRequest(
       res.statusCode = 200;
       res.end(JSON.stringify({ success: true, lab }));
       return true;
+    }
+
+    // POST /api/dex/quote — proxy a 1inch quote so the API key stays server-side.
+    if (pathname === "/api/dex/quote" && req.method === "POST") {
+      const validated = buildQuoteParams(await getJsonBody(req));
+      if (!validated.ok) {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "invalid input" }));
+        return true;
+      }
+      return proxyOneinch(res, validated.value, "quote");
+    }
+
+    // POST /api/dex/swap — proxy a 1inch swap transaction build.
+    if (pathname === "/api/dex/swap" && req.method === "POST") {
+      const validated = buildQuoteParams(await getJsonBody(req));
+      if (!validated.ok) {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "invalid input" }));
+        return true;
+      }
+      return proxyOneinch(res, validated.value, "swap");
     }
 
     res.statusCode = 404;

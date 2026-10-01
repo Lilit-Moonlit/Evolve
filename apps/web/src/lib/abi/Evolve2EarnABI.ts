@@ -1,0 +1,70 @@
+export const Evolve2EarnABI = [
+  {
+    type: "function",
+    name: "buyEmojiGift",
+    inputs: [{ name: "emojiId", type: "bytes32" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "getGiftOwners",
+    inputs: [],
+    outputs: [{ name: "", type: "address[]" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "getOwnerMarketShare",
+    inputs: [{ name: "owner", type: "address" }],
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "totalGifts",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "ownerGiftCount",
+    inputs: [{ name: "", type: "address" }],
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "emojiOwner",
+    inputs: [{ name: "", type: "bytes32" }],
+    outputs: [{ name: "", type: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "EMOJI_GIFT_PRICE",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "event",
+    name: "EmojiGiftBought",
+    inputs: [
+      { name: "emojiId", type: "bytes32", indexed: true },
+      { name: "owner", type: "address", indexed: true },
+      { name: "price", type: "uint256", indexed: false },
+    ],
+  },
+  {
+    type: "event",
+    name: "EmojiRevenueDistributed",
+    inputs: [
+      { name: "buyer", type: "address", indexed: true },
+      { name: "totalAmount", type: "uint256", indexed: false },
+      { name: "recipients", type: "address[]", indexed: false },
+      { name: "amounts", type: "uint256[]", indexed: false },
+    ],
+  },
+] as const;

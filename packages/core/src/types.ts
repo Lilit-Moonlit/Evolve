@@ -153,3 +153,6 @@ export interface P2PMessage {
   to: string;
   timestamp: number;
 }
+
+// Relationship/search modes (shared across web + mobile)
+export type EvolveMode = "normal" | "pregnancy-bond" | "cryptic-choice";

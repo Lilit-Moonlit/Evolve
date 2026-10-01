@@ -36,6 +36,25 @@ export default function Home() {
           <Text style={styles.loadingText}>{t("home.filters.noProfiles")}</Text>
         )}
 
+        <View style={styles.modeNavigation}>
+          <TouchableOpacity
+            style={[styles.modeCard, { backgroundColor: "#4338ca" }]}
+            onPress={() => router.push("/mode2")}
+          >
+            <Text style={styles.modeIcon}>🤰</Text>
+            <Text style={styles.modeLabel}>Mode 2</Text>
+            <Text style={styles.modeDescription}>Pregnancy Bond</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.modeCard, { backgroundColor: "#0f172a" }]}
+            onPress={() => router.push("/mode3")}
+          >
+            <Text style={styles.modeIcon}>🎭</Text>
+            <Text style={styles.modeLabel}>Mode 3</Text>
+            <Text style={styles.modeDescription}>Cryptic Choice</Text>
+          </TouchableOpacity>
+        </View>
+
         <View style={styles.actions}>
           <TouchableOpacity style={styles.passButton}>
             <Text style={styles.buttonText}>✕</Text>
@@ -102,6 +121,32 @@ const styles = StyleSheet.create({
   loadingText: {
     fontSize: 16,
     color: "#999",
+  },
+  modeNavigation: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 16,
+    marginBottom: 24,
+  },
+  modeCard: {
+    width: 150,
+    padding: 16,
+    borderRadius: 16,
+    alignItems: "center",
+  },
+  modeIcon: {
+    fontSize: 32,
+    marginBottom: 8,
+  },
+  modeLabel: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#fff",
+    marginBottom: 4,
+  },
+  modeDescription: {
+    fontSize: 12,
+    color: "#d1d5db",
   },
   actions: {
     flexDirection: "row",

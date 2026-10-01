@@ -100,6 +100,21 @@ export default function Settings() {
             style={styles.modeSelector}
           />
           <Text style={styles.autoSaved}>{t("settings.autoSaved")}</Text>
+          
+          <View style={styles.modeLinks}>
+            <TouchableOpacity
+              style={styles.modeLinkButton}
+              onPress={() => router.push("/mode2")}
+            >
+              <Text style={styles.modeLinkText}>Mode 2: Pregnancy Bond</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.modeLinkButton}
+              onPress={() => router.push("/mode3")}
+            >
+              <Text style={styles.modeLinkText}>Mode 3: Cryptic Choice</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={styles.section}>
@@ -266,6 +281,23 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#999",
     textAlign: "center",
+  },
+  modeLinks: {
+    marginTop: 16,
+    gap: 8,
+  },
+  modeLinkButton: {
+    backgroundColor: "#f5f5f5",
+    padding: 12,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#e5e5e5",
+  },
+  modeLinkText: {
+    fontSize: 14,
+    color: "#007AFF",
+    textAlign: "center",
+    fontWeight: "500",
   },
   settingItem: {
     flexDirection: "row",

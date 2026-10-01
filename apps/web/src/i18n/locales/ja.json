@@ -5,30 +5,48 @@
     "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
   },
   "navigation": {
-    "swipe": "スワイプ",
     "messages": "メッセージ",
     "profile": "プロフィール",
-    "settings": "設定"
+    "settings": "設定",
+    "mode2": "ダッシュボード",
+    "mode3": "ダッシュボード",
+    "home": "ホーム",
+    "communications": "コミュニケーション",
+    "check": "チェック",
+    "downloadApp": "アプリをダウンロード"
   },
   "home": {
     "hero": {
       "title": "マッチを見つけよう",
       "subtitle": "プロフィールをスワイプして、素敵な人とつながりましょう。"
     },
+    "trustScore": "信頼スコア",
     "filters": {
       "verifiedStd": "STD検証済みのみ",
       "verifiedDna": "DNA検証済みのみ",
-      "noProfiles": "選択したフィルターに一致するプロフィールがありません。"
+      "noProfiles": "選択したフィルターに一致するプロフィールがありません。",
+      "locationUnavailable": "位置情報が利用できません。フィルターはすべてのプロフィールを表示します。",
+      "showFilters": "フィルターを表示",
+      "hideFilters": "フィルターを非表示",
+      "modeNormal": "Get acquainted",
+      "modePregnancyBond": "Conception",
+      "modeCrypticChoice": "Polyandric conception"
     },
     "profile": {
       "newMatch": "新しいマッチ",
       "noMoreProfiles": "今はプロフィールがありません！後でまた確認してください。"
+    },
+    "dashboardCta": {
+      "mode2": "コンセプションダッシュボードを開く",
+      "mode3": "ポストコピュレーションダッシュボードを開く"
     }
   },
   "profile": {
     "tabs": {
       "profile": "プロフィール",
-      "reputation": "評判"
+      "reputation": "評判",
+      "settings": "設定",
+      "medical": "Medical card"
     },
     "myProfile": {
       "title": "マイプロフィール",
@@ -68,6 +86,66 @@
       "title": "ウォレット",
       "address": "アドレス",
       "balance": "残高"
+    },
+    "edit": {
+      "title": "プロフィール情報",
+      "photoAlt": "私の写真",
+      "changePhoto": "写真を変更",
+      "uploadPhoto": "写真をアップロード",
+      "blurPhoto": "写真をぼかす",
+      "age": "年齢",
+      "hideAge": "年齢を非表示にする",
+      "languages": "話せる言語",
+      "bio": "自己紹介",
+      "save": "変更を保存",
+      "saving": "保存中…",
+      "saved": "プロフィールを保存しました",
+      "testingPreference": "検査方法"
+    },
+    "photoGrants": {
+      "title": "写真アクセス",
+      "description": "写真アクセスを許可したユーザー:",
+      "permanent": "永続的アクセス",
+      "temporary": "一時的アクセス",
+      "revoke": "取り消す"
+    },
+    "lab": {
+      "title": "ラボ検査",
+      "yourEmail": "メールアドレス",
+      "emailHint": "DNA認証に使用したメールアドレスを入力してください",
+      "pendingTitle": "DNA認証確認中",
+      "accept": "承認",
+      "reject": "拒否",
+      "noPending": "保留中のDNA認証はありません",
+      "reportAccepted": "レポートが承認されました",
+      "reportFailed": "Failed to process the report",
+      "emailError": "Email unavailable",
+      "loading": "Loading…",
+      "patientQrTitle": "来店時確認用QR",
+      "patientQrHint": "このコードを提携ラボに提示してください。IDのみを含み、写真やプロフィール情報は含まれません。",
+      "patientQrAria": "ラボでの本人確認用患者QRコード",
+      "patientQrError": "QRコードを生成できませんでした。",
+      "faceVerified": "顔認証済み",
+      "faceNotVerified": "顔認証なし"
+    },
+    "medical": {
+      "title": "My medical card",
+      "subtitle": "Your patient card with a QR code for in-person lab visits",
+      "labTitle": "Laboratory",
+      "labSubtitle": "Run a lab? Register it to scan patient QR codes and add results"
+    },
+    "qr": {
+      "title": "QRコード",
+      "hint": "このQRコードを検査機関のスタッフに見せて写真を認証し、STD検査結果をアカウントに追加してください。または、他のユーザーに見せてSTD適合性を確認してください。"
+    },
+    "searchGoals": {
+      "title": "何を探しているか",
+      "hint": "これらのマークは検索機能と連動しています。あなたがここでマークしたものと検索条件が一致するユーザーがあなたを見つけます。"
+    },
+    "canTravel": {
+      "countriesTitle": "渡航できる国",
+      "selectAll": "すべて選択",
+      "loadingCountries": "国リストを読み込み中…"
     }
   },
   "chat": {
@@ -87,7 +165,32 @@
     "approveStd": "STDアクセスを承認",
     "approveDna": "DNAアクセスを承認",
     "denyStd": "STDアクセスを拒否",
-    "denyDna": "DNAアクセスを拒否"
+    "denyDna": "DNAアクセスを拒否",
+    "requestPhoto": "あなたの写真の閲覧をリクエストしています",
+    "photoApprovedPermanent": "写真への永続的アクセスが許可されました",
+    "photoApprovedTemporary": "写真へのアクセスが15秒許可されました",
+    "photoDenied": "写真リクエストが拒否されました",
+    "photoOfferPermanent": "写真への永続的アクセスを提供しています",
+    "photoOfferTemporary": "15秒の写真閲覧を提供しています",
+    "photoRevoked": "写真へのアクセスが取り消されました",
+    "liveness": {
+      "title": "Identity check",
+      "description": "To prove you're the real person behind this profile, complete a quick face check.",
+      "lookStraight": "Look straight at the camera",
+      "startCapture": "Start check",
+      "getReady": "Get ready...",
+      "processing": "Analyzing face...",
+      "skip": "Later",
+      "success": "✓ Identity confirmed",
+      "failed": "✗ Identity check failed",
+      "lastCheck": "Verified at {{time}}",
+      "cameraError": "Could not access camera. Please allow camera access and try again.",
+      "noStoredFace": "You have not completed face verification yet. Complete it in your profile settings.",
+      "noFaceDetected": "No face detected. Please look directly at the camera.",
+      "verificationError": "Face verification failed. Please try again.",
+      "systemMessageSuccess": "🛡️ Identity check passed",
+      "systemMessageFailed": "⚠️ Identity check failed"
+    }
   },
   "language": {
     "select": "言語を選択",
@@ -101,7 +204,17 @@
   },
   "settings": {
     "currentMode": "現在のモード",
-    "autoSaved": "選択は自動的に保存されます。リロードは不要です。"
+    "autoSaved": "選択は自動的に保存されます。リロードは不要です。",
+    "modeDashboard": {
+      "title": "モードダッシュボード",
+      "description": "アクティブなモード設定とオンチェーンアクティビティを管理",
+      "mode2Label": "コンセプション",
+      "mode2Description": "コンセプションモード — 検証済み参加者、オンチェーンボンド",
+      "mode3Label": "ポストコピュレーション",
+      "mode3Description": "ポストコピュレーションモード — 匿名セッション、オンチェーン解決",
+      "openMode2": "コンセプションダッシュボードを開く",
+      "openMode3": "ポストコピュレーションダッシュボードを開く"
+    }
   },
   "auth": {
     "loading": "セキュアセッションを読み込み中...",
@@ -109,7 +222,11 @@
       "title": "Evolve — 分散型出会い",
       "email": "📧 メールでサインイン",
       "phone": "📱 電話でサインイン",
-      "wallet": "💳 ウォレットでサインイン"
+      "wallet": "💳 ウォレットでサインイン",
+      "dnaRecovery": "🧬 DNAテストでアカウントを復元",
+      "securityTitle": "あなたのデータは非公開のままです",
+      "securityDescription": "プロフィールは暗号化され、分散ネットワークに保存されます。あなたの個人情報が、あなたの同意なしに共有されることはありません。",
+      "questionRecovery": "🔐 秘密の質問でアカウントを回復"
     },
     "phone": {
       "title": "電話でサインイン",
@@ -166,6 +283,50 @@
         "description": "匿名マッチング、ウォレット必須",
         "authType": "Ethereumウォレットが必要"
       }
+    },
+    "recovery": {
+      "title": "Social Recovery",
+      "description": "メールまたは電話をウォレットのリカバリーガーディアンとして追加",
+      "email": {
+        "label": "メールガーディアン",
+        "placeholder": "メールアドレスを入力",
+        "add": "メールを追加",
+        "added": "メールガーディアンが追加されました",
+        "remove": "削除",
+        "removed": "メールガーディアンが削除されました"
+      },
+      "phone": {
+        "label": "電話ガーディアン",
+        "placeholder": "電話番号を入力",
+        "add": "電話を追加",
+        "added": "電話ガーディアンが追加されました",
+        "remove": "削除",
+        "removed": "電話ガーディアンが削除されました"
+      }
+    },
+    "emailAuth": {
+      "loginTitle": "Sign in with email",
+      "registerTitle": "Create account",
+      "modeLogin": "Sign in",
+      "modeRegister": "Register",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "confirmLabel": "Confirm password",
+      "loginButton": "Sign in",
+      "registerButton": "Create account",
+      "errorRequired": "Email and password are required",
+      "errorPasswordsDiffer": "Passwords do not match",
+      "errorExists": "This email is already registered",
+      "errorCredentials": "Invalid email or password",
+      "errorFailed": "Something went wrong. Try again",
+      "questionTitle": "Create your secret question",
+      "questionHint": "Invent the question and answer yourself — any language, any symbols. It is your passwordless login method.",
+      "questionLabel": "Your question",
+      "questionPlaceholder": "e.g. What was the name of my first pet?",
+      "answerLabel": "Your answer",
+      "answerPlaceholder": "Your answer",
+      "questionSave": "Save and continue",
+      "errorQuestionRequired": "Question and answer are required"
     }
   },
   "network": {
@@ -181,5 +342,812 @@
     "aurora": "Aurora",
     "celo": "Celo",
     "cronos": "Cronos"
+  },
+  "userProfile": {
+    "notFound": "ユーザーが見つかりません",
+    "backToHome": "ホームに戻る",
+    "back": "戻る",
+    "verifiedStd": "STD確認済み",
+    "accessTitle": "医療データへのアクセス",
+    "accessDescription": "このユーザーのSTDまたはDNAの結果を表示する許可をリクエストします。",
+    "requestStd": "STDをリクエスト",
+    "requestDna": "DNAをリクエスト",
+    "openProfile": "{{name}}のプロフィールを開く",
+    "ageHidden": "年齢非表示"
+  },
+  "onboarding": {
+    "title": "プロフィールを完成させましょう",
+    "subtitle": "あなたのことを少し教えてください",
+    "age": {
+      "title": "年齢",
+      "label": "年齢",
+      "hide": "年齢を非表示にする",
+      "hideHint": "年齢は他のユーザーに表示されません"
+    },
+    "languages": {
+      "title": "言語",
+      "hint": "話せる言語を選択してください"
+    },
+    "bio": {
+      "title": "自己紹介",
+      "label": "自己紹介",
+      "placeholder": "あなたのこと、趣味、探しているものを書いてください..."
+    },
+    "photo": {
+      "title": "あなたの写真",
+      "upload": "写真をアップロード",
+      "change": "写真を変更",
+      "preview": "写真プレビュー",
+      "blur": "写真をぼかす",
+      "blurHint": "アクセスを許可するまで、他のユーザーにはぼかしたプレビューのみ表示されます",
+      "invalidType": "画像ファイルを選択してください",
+      "readError": "画像を読み込めませんでした。別のファイルを試してください。"
+    },
+    "back": "戻る",
+    "next": "次へ",
+    "skip": "スキップ",
+    "saving": "保存中…",
+    "finish": "完了",
+    "gender": {
+      "title": "About you",
+      "label": "I identify as",
+      "lookingForLabel": "Who are you looking for?",
+      "lookingForOptions": {
+        "man": "A man",
+        "woman": "A woman",
+        "couple_man_woman": "A couple (man + woman)",
+        "couple_woman_woman": "A couple (woman + woman)",
+        "couple_man_man": "A couple (man + man)"
+      }
+    },
+    "kind": {
+      "title": "あなたについて"
+    }
+  },
+  "photo": {
+    "request": "写真の閲覧をリクエスト",
+    "tempView": "{{seconds}} 秒間表示",
+    "accessPermanent": "この写真への永続的なアクセス権があります",
+    "accessTemporary": "この写真への一時的なアクセス権があります",
+    "accessNone": "ぼかし写真 — アクセスをリクエストしてください",
+    "pendingRequest": "写真閲覧リクエスト:",
+    "approveTemporary": "15秒許可",
+    "approvePermanent": "永久に許可",
+    "deny": "拒否",
+    "offerTitle": "私の写真を提供:",
+    "offerTemporary": "15秒提供",
+    "offerPermanent": "永久に提供",
+    "revoke": "アクセスを取り消す",
+    "viewOffer": "写真を見る",
+    "hide": "写真を隠す",
+    "faceVerify": "Face verification",
+    "faceVerifyHint": "Verify your photo is real. Your photo will be checked against a live selfie.",
+    "verifyFace": "Verify with selfie",
+    "verifying": "Verifying face...",
+    "faceVerified": "Face verified successfully ✓",
+    "noFaceDetected": "No face detected in the photo. Please upload a clear photo of your face.",
+    "faceMismatch": "Face mismatch detected ({{similarity}}% similar). The photo does not match your live selfie.",
+    "verificationError": "Face verification failed. Please try again."
+  },
+  "common": {
+    "or": "または",
+    "back": "戻る",
+    "loading": "読み込み中...",
+    "confirm": "確認",
+    "skip": "スキップ"
+  },
+  "dnaRecovery": {
+    "title": "DNAテストでアカウントを復元",
+    "description": "登録されたDNAプロファイルを使用して本人確認を行います。アカウントに関連付けられたメールアドレスを入力し、DNAテストの結果を貼り付けてください。",
+    "emailLabel": "メールアドレス",
+    "emailPlaceholder": "you@example.com",
+    "next": "次へ",
+    "emailEntered": "メール",
+    "dnaLabel": "DNAテスト結果",
+    "dnaPlaceholder": "DNAテストの結果テキストをここに貼り付けてください…",
+    "recover": "アカウントを復元",
+    "recovering": "DNA検証中…",
+    "error": {
+      "emailRequired": "メールアドレスを入力してください",
+      "dnaRequired": "DNAテストの結果を貼り付けてください",
+      "failed": "DNA検証に失敗しました。入力内容を確認して再試行してください。",
+      "network": "ネットワークエラー。再試行してください。"
+    }
+  },
+  "filters": {
+    "ageRange": "年齢層",
+    "min": "最小",
+    "max": "最大",
+    "heightRange": "身長(cm)",
+    "weightRange": "体重(kg)",
+    "country": "国",
+    "city": "都市",
+    "languages": "言語",
+    "any": "指定なし",
+    "yes": "はい",
+    "no": "いいえ",
+    "eyeColor": "目の色",
+    "hairColor": "髪の色",
+    "bodyType": "体型",
+    "education": "学歴",
+    "maritalStatus": "婚姻状況",
+    "religion": "宗教",
+    "zodiac": "星座",
+    "children": "子供",
+    "smoking": "喫煙",
+    "drinking": "飲酒",
+    "eyeColors": {
+      "brown": "Brown",
+      "blue": "Blue",
+      "green": "Green",
+      "hazel": "Hazel",
+      "gray": "Gray",
+      "black": "Black"
+    },
+    "hairColors": {
+      "black": "Black",
+      "brown": "Brown",
+      "blonde": "Blonde",
+      "red": "Red",
+      "gray": "Gray",
+      "white": "White",
+      "bald": "Bald"
+    },
+    "bodyTypes": {
+      "slim": "Slim",
+      "athletic": "Athletic",
+      "average": "Average",
+      "curvy": "Curvy",
+      "muscular": "Muscular",
+      "large": "Large"
+    },
+    "educationLevels": {
+      "highSchool": "High school",
+      "associate": "Associate degree",
+      "bachelor": "Bachelor's",
+      "master": "Master's",
+      "doctorate": "Doctorate",
+      "other": "Other"
+    },
+    "maritalStatuses": {
+      "single": "Single",
+      "divorced": "Divorced",
+      "widowed": "Widowed",
+      "separated": "Separated",
+      "married": "Married"
+    },
+    "religions": {
+      "christianity": "Christianity",
+      "islam": "Islam",
+      "judaism": "Judaism",
+      "hinduism": "Hinduism",
+      "buddhism": "Buddhism",
+      "atheist": "Atheist",
+      "agnostic": "Agnostic",
+      "spiritual": "Spiritual",
+      "other": "Other"
+    },
+    "zodiacs": {
+      "aries": "Aries",
+      "taurus": "Taurus",
+      "gemini": "Gemini",
+      "cancer": "Cancer",
+      "leo": "Leo",
+      "virgo": "Virgo",
+      "libra": "Libra",
+      "scorpio": "Scorpio",
+      "sagittarius": "Sagittarius",
+      "capricorn": "Capricorn",
+      "aquarius": "Aquarius",
+      "pisces": "Pisces"
+    },
+    "skinColor": "肌の色",
+    "skinColors": {
+      "fair": "明るい",
+      "light": "白い",
+      "medium": "中程度",
+      "tan": "日焼けした",
+      "dark": "濃い",
+      "deep": "とても濃い"
+    },
+    "gender": "性別",
+    "genders": {
+      "male": "男性",
+      "female": "女性",
+      "other": "その他"
+    },
+    "lookingFor": "探している相手",
+    "lookingForOptions": {
+      "man": "男性",
+      "woman": "女性",
+      "couple_man_woman": "カップル（男性＋女性）",
+      "couple_woman_woman": "カップル（女性＋女性）",
+      "couple_man_man": "カップル（男性＋男性）"
+    },
+    "testingPreference": "検査方法",
+    "testingPreferences": {
+      "lab": "ラボで",
+      "portable": "携帯型テスター",
+      "both": "両方のオプション",
+      "none": "どちらでも"
+    },
+    "searchTarget": "Search for",
+    "searchTargets": {
+      "man": "Man",
+      "woman": "Woman",
+      "laboratory": "Laboratory"
+    },
+    "stdCompatible": "STD compatible",
+    "noLabs": "No laboratories found",
+    "whatSearch": "何をお探しですか",
+    "whoSearch": "どなたをお探しですか",
+    "stdTests": "性感染症の検査を受ける",
+    "canTravel": "あなたの国に伺えます",
+    "canTravelOnly": "私の国に来られる方"
+  },
+  "questionRecovery": {
+    "title": "秘密の質問によるアカウント回復",
+    "description": "登録時に設定した秘密の質問に答えてアカウントを回復します。",
+    "emailLabel": "メールアドレス",
+    "emailPlaceholder": "you@example.com",
+    "next": "次へ",
+    "nextLoading": "検索中…",
+    "emailEntered": "回復対象",
+    "questionLabel": "秘密の質問",
+    "answerLabel": "あなたの回答",
+    "answerPlaceholder": "回答を入力",
+    "recover": "アカウントを回復",
+    "recovering": "確認中…",
+    "error": {
+      "emailRequired": "メールアドレスを入力してください。",
+      "lookupFailed": "そのメールアドレスのアカウントが見つかりません。",
+      "network": "ネットワークエラーです。もう一度お試しください。",
+      "answerRequired": "回答を入力してください。",
+      "failed": "回答が正しくありません。もう一度お試しください。",
+      "noQuestion": "このアカウントには秘密の質問が設定されていません。"
+    }
+  },
+  "communications": {
+    "proposalsTitle": "提案",
+    "proposalsSubtitle": "コミュニティの取り組み — 投票は評価で重み付けされます",
+    "proposalTitlePlaceholder": "提案タイトル",
+    "proposalDescPlaceholder": "簡単な説明（任意）",
+    "createProposal": "提案を作成",
+    "votesFor": "賛成",
+    "votesAgainst": "反対",
+    "voteWeightHint": "あなたの投票の重み: {{weight}}（評価）",
+    "noProposals": "まだ提案はありません。最初の提案を作成しましょう!",
+    "yes": "はい",
+    "no": "いいえ",
+    "youVotedWeight": "投票しました — 重み {{weight}}",
+    "proposalPlatformFilter": {
+      "all": "すべて",
+      "github": "GitHub",
+      "codeberg": "Codeberg",
+      "gitlab": "GitLab",
+      "inApp": "アプリ内"
+    },
+    "proposalStatus": {
+      "open": "オープン",
+      "closed": "クローズ",
+      "merged": "マージ済み"
+    },
+    "proposalViewOn": "{{platform}}で表示"
+  },
+  "catfish": {
+    "riskLow": "Low risk",
+    "riskModerate": "Moderate risk",
+    "riskHigh": "High risk",
+    "photoPhotographAge": "Photo appears very old (possible stolen photo)",
+    "profileAgeNew": "Profile is very new",
+    "missingVerification": "Missing profile verification",
+    "timingSuspicious": "Suspicious message timing (possible bot)",
+    "scamSuspicious": "Suspicious content detected",
+    "timing": "Message timing",
+    "scam": "Suspicious content",
+    "flagged": "Profile flagged for review"
+  },
+  "labPortal": {
+    "title": "検査ラボポータル",
+    "subtitle": "提携ラボ用ワークスペース。患者の本人確認と検査結果の添付を行います。",
+    "apiKey": "ラボAPIキー",
+    "newPatient": "新しい患者",
+    "register": {
+      "name": "ラボ名",
+      "namePlaceholder": "例: Sunrise Diagnostics",
+      "email": "連絡先メール",
+      "submit": "ラボを登録",
+      "required": "ラボ名と連絡先メールを入力してください。",
+      "failed": "ラボを登録できませんでした。もう一度お試しください。",
+      "savedKey": "ラボを登録しました。APIキーはこのデバイスに保存されています。"
+    },
+    "scan": {
+      "title": "患者のQRコードをスキャン",
+      "hint": "患者にEvolve → プロフィール → 検査を開いてQRコードを見せてもらいます。",
+      "start": "カメラを起動",
+      "stop": "カメラを停止",
+      "startFailed": "カメラを起動できませんでした。カメラへのアクセスを許可して再度お試しください。",
+      "noPermission": "カメラへのアクセスがブロックされています。ブラウザ（アドレスバーの鍵アイコン）でカメラを許可して再度お試しください。",
+      "noCamera": "このデバイスにカメラが見つかりません。"
+    },
+    "verify": {
+      "title": "患者の本人確認",
+      "patientId": "患者ID",
+      "takePhoto": "患者の写真を撮影",
+      "photoAlt": "本人確認用の患者写真",
+      "checking": "確認中…",
+      "confirm": "顔を照合",
+      "noFace": "写真に顔が検出されませんでした。別の写真を撮ってください。",
+      "photoError": "写真を処理できませんでした。もう一度お試しください。",
+      "failed": "本人確認に失敗しました。もう一度お試しください。",
+      "matched": "本人確認が完了しました — 顔は一致しています。",
+      "unmatched": "本人確認ができませんでした — 顔が一致しません。",
+      "similarity": "類似度"
+    },
+    "report": {
+      "title": "検査結果を添付",
+      "hint": "検査結果のテキストを貼り付けます。自動で解析されます。",
+      "placeholder": "ここに結果テキストを貼り付け…",
+      "submit": "結果を送信",
+      "submitting": "送信中…",
+      "success": "結果を送信しました。患者の保留中レポートに表示されます。",
+      "failed": "結果を送信できませんでした。もう一度お試しください。"
+    }
+  },
+  "help": {
+    "aria": {
+      "info": "情報ツールチップ",
+      "suggest": "改善を提案"
+    },
+    "unknownTerm": "不明な用語",
+    "home": {
+      "filters": {
+        "skinColor": {
+          "title": "プロフィールの肌の色で絞り込み",
+          "body": "肌のトーンを選んでマッチング結果を絞り込みます"
+        },
+        "lookingFor": {
+          "title": "探している相手で絞り込み",
+          "body": "関係性の希望を選んでマッチを絞り込みます"
+        },
+        "testingPreference": {
+          "title": "STD検査ステータスで絞り込み",
+          "body": "検証済みのSTD検査結果を持つプロフィールのみ表示"
+        },
+        "gender": {
+          "title": "プロフィールの性別で絞り込み",
+          "body": "性別情報に基づいてマッチを絞り込みます"
+        }
+      }
+    },
+    "chat": {
+      "proposals": {
+        "title": "提案投票ボード",
+        "body": "コミュニティの提案を表示して投票"
+      }
+    },
+    "mode2": {
+      "dashboard": {
+        "title": "妊娠ボンドモード",
+        "body": "妊娠関連機能とボンドを管理"
+      }
+    },
+    "mode3": {
+      "dashboard": {
+        "title": "クリプティックチョイスモード",
+        "body": "父親の匿名選択プロセス"
+      }
+    },
+    "profile": {
+      "sections": {
+        "lab": {
+          "title": "検査結果",
+          "body": "検証済みSTD検査ステータスを表示"
+        },
+        "modeSelector": {
+          "title": "モードセレクター",
+          "body": "検索モードを切り替え"
+        },
+        "profileEdit": {
+          "title": "プロフィール編集",
+          "body": "プロフィール情報を編集"
+        }
+      }
+    }
+  },
+  "suggestions": {
+    "title": "改善を提案",
+    "placeholder": "提案内容を記入…",
+    "cancel": "キャンセル",
+    "submit": "送信",
+    "submitting": "送信中…",
+    "saved": "提案を保存しました",
+    "defaultTitle": "{{term}}に関する新しい提案"
+  },
+  "proposals": {
+    "sourceLabel": "ソース: {{source}}"
+  },
+  "dashboard": {
+    "mode2": {
+      "title": "妊娠ボンドダッシュボード",
+      "subtitle": "妊娠ボンドを管理し、確認から父性確認までの過程を追跡します",
+      "status": {
+        "active": "有効",
+        "awaitingPaternity": "父性確認待ち",
+        "resolved": "解決済み"
+      },
+      "step0": {
+        "title": "あなたは母親ですか、父親ですか？",
+        "description": "役割を選んで妊娠ボンドを開始します。両者にEvolveFundへの入金が必要です。",
+        "fundReady": "EvolveFundへの入金を確認しました",
+        "fundRequired": "EvolveFundに最低15 EVOLVEの入金が必要です",
+        "walletBalance": "EVOLVEウォレット残高",
+        "fundTitle": "EvolveFundデポジット",
+        "locked": "ボンドによりロック中",
+        "unlocked": "ロック解除済み",
+        "daysRemaining": "残り{{days}}日",
+        "noDeposit": "デポジットなし",
+        "depositPrompt": "ファンドにEVOLVEを入金（最低15）",
+        "amountPlaceholder": "金額（例: 20）",
+        "minDeposit": "最低入金額は15 EVOLVEです",
+        "approving": "承認中...",
+        "depositing": "入金中...",
+        "approveAction": "EVOLVEを承認",
+        "depositAction": "ファンドに入金",
+        "lockHint": "最低30日間ロック。ボンド作成に必要です。"
+      },
+      "step1": {
+        "title": "ボンドを確認",
+        "description": "両者が検証済みプロフィールでボンドを確認する必要があります。",
+        "selfLabel": "あなた",
+        "partnerLabel": "パートナー",
+        "confirmed": "確認済み",
+        "pending": "保留中",
+        "alreadyConfirmed": "確認済みです",
+        "confirmSex": "自分の役割を確認",
+        "partnerAlreadyConfirmed": "パートナーがすでに確認しました",
+        "partnerConfirmSex": "パートナーを確認",
+        "womanPartner": "パートナー（女性）",
+        "manPartner": "パートナー（男性）",
+        "alreadyConfirmedTitle": "確認済み"
+      },
+      "step2": {
+        "title": "ボンド作成済み",
+        "description": "両者が確認すると、ボンド期間中デポジットがロックされます。",
+        "timerInfo": "妊娠期間が終了するとボンドは自動的に解決されます。",
+        "ready": "準備完了",
+        "waitingForConfirmations": "確認を待っています..."
+      },
+      "step3": {
+        "title": "妊娠と父性",
+        "description": "妊娠を報告し、父性確認の結果後、デポジットが解除または移転されます。",
+        "pregnancyCheckbox": "妊娠を報告",
+        "resolvedPregnant": "ボンド解決 — 妊娠確認済み",
+        "resolvedNotPregnant": "ボンド解決 — 妊娠なし",
+        "canReport": "妊娠を報告できます",
+        "notYet": "妊娠報告は確認から14日後に利用可能です",
+        "reportToVerify": "妊娠を報告して父性確認を開始します。",
+        "waitingWindow": "妊娠報告ウィンドウの開始を待っています...",
+        "waitingWoman": "女性が妊娠を報告するのを待っています...",
+        "paternityInProgress": "父性確認を実行中です。管理者が結果を提出します。",
+        "awaitingResult": "管理者からの父性検査結果を待っています..."
+      },
+      "createBond": {
+        "partnerPlaceholder": "パートナーアドレス (0x...)",
+        "fundedRequired": "まず最低15 EVOLVEを入金してください",
+        "partnerRequired": "パートナーアドレスを入力してください"
+      },
+      "error": {
+        "rejected": "ユーザーによってトランザクションが拒否されました。",
+        "failed": "トランザクションエラー: {{message}}"
+      }
+    },
+    "mode3": {
+      "title": "ポストコピュレーションダッシュボード",
+      "subtitle": "ポストコピュレーションセッションを実行します。女性がセッションを作成し、男性が参加します。",
+      "create": {
+        "title": "セッション",
+        "description": "女性としてセッションを作成するか、男性として開かれたセッションに参加します。",
+        "button": "セッションを作成",
+        "hint": "セッションは48時間続きます。参加後、参加を確認し、女性の選択を待ちます。"
+      },
+      "timer": {
+        "active": "残り時間: {{timer}}",
+        "inactive": "アクティブなセッションはありません"
+      },
+      "participants": {
+        "title": "参加者",
+        "empty": "まだ参加者はいません",
+        "confirmed": "確認済み"
+      },
+      "available": {
+        "title": "利用可能なプロフィール",
+        "empty": "利用可能なプロフィールがありません",
+        "profileHint": "利用可能な男性",
+        "addButton": "招待"
+      },
+      "profileBorder": {
+        "title": "あなたのプロフィール",
+        "description": "検証済みのプロフィールが他の参加者に見えます。",
+        "noProfile": "プロフィールなし"
+      },
+      "joinButton": "セッションに参加",
+      "waitingForParticipants": "セッションはアクティブです — 参加者を待っています",
+      "confirmButton": "参加を確認",
+      "fundNotice": "参加するにはEvolveFundに最低15 EVOLVEの入金が必要です。",
+      "resolved": {
+        "title": "セッション解決",
+        "fatherLabel": "選ばれた父親:",
+        "rewardInfo": "選ばれた父親はEvolveFund入金の2倍 + 参加男性1人につき1 EVOLVEを受け取ります。選ばれなかった参加者: 入金の90%は女性へ、10%は選ばれた父親へ。",
+        "noFather": "父親は選ばれませんでした。入金は参加者に返還されました。"
+      },
+      "error": {
+        "rejected": "ユーザーによってトランザクションが拒否されました。",
+        "failed": "トランザクションエラー: {{message}}"
+      }
+    }
+  },
+  "safety": {
+    "title": "セーフティセンター",
+    "subtitle": "性病検査ステータス、公開ページリンク、互換性チェック",
+    "stdStatus": {
+      "title": "性病検査ステータス",
+      "verified": "検査結果をアップロード済み",
+      "notVerified": "検査結果がまだありません",
+      "hint": "互換性チェックに参加するには、最新の性病検査結果をアップロードしてください。個別の病原体が他のユーザーに表示されることはありません。"
+    },
+    "publicLink": {
+      "title": "公開ページ",
+      "hint": "自分の写真だけを表示する短いリンクです。訪問者は互換性チェックのリクエストを送信できます。",
+      "usernameLabel": "ページアドレス",
+      "usernamePlaceholder": "例: olena",
+      "enable": "公開ページを有効化",
+      "disable": "公開ページを無効化",
+      "enabled": "公開ページは有効です",
+      "disabled": "公開ページは無効です",
+      "copy": "リンクをコピー",
+      "copied": "コピーしました！",
+      "taken": "このアドレスは既に使用されています",
+      "invalid": "小文字、数字、ドット、アンダースコアを使用してください",
+      "saved": "設定を保存しました"
+    },
+    "checks": {
+      "title": "互換性チェック",
+      "incoming": "受信リクエスト",
+      "outgoing": "送信リクエスト",
+      "empty": "まだリクエストはありません",
+      "from": "リクエスト元",
+      "approve": "承認",
+      "deny": "拒否",
+      "awaiting": "返答待ち"
+    },
+    "verdict": {
+      "title": "判定",
+      "safe": "安全",
+      "compatible": "互換性あり",
+      "caution": "注意",
+      "risk": "リスクを検出",
+      "incomplete": "データ不足"
+    },
+    "qr": {
+      "title": "検査機関向けQRコード",
+      "hint": "提携検査機関でこのコードを見せて、検査結果をリンクしてください。"
+    }
+  },
+  "publicProfile": {
+    "title": "公開ページ",
+    "check": "互換性をチェック",
+    "requested": "チェックリクエストを送信しました！",
+    "loading": "読み込み中…",
+    "notFound": "プロフィールが見つからないか、公開されていません",
+    "loginRequired": "チェックリクエストを送信するにはログインしてください",
+    "self": "これはあなた自身のページです"
+  },
+  "labDashboard": {
+    "title": "検査機関ダッシュボード",
+    "login": "ログイン",
+    "register": "検査機関を登録",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "labName": "検査機関名",
+    "submit": "続行",
+    "createAccount": "アカウント作成",
+    "haveAccount": "アカウントをお持ちですか？",
+    "noAccount": "アカウントがありませんか？",
+    "loggedInAs": "ログイン中:",
+    "logout": "ログアウト",
+    "scanTitle": "患者QRをスキャン",
+    "scanHint": "患者にEvolve → セーフティセンターを開いてQRコードを見せるようお願いしてください。",
+    "start": "カメラを起動",
+    "stop": "カメラを停止",
+    "beginVisit": "訪問を開始",
+    "faceTitle": "患者の本人確認",
+    "matched": "本人確認済み — 顔が一致します。",
+    "unmatched": "本人確認ができませんでした — 顔が一致しません。",
+    "checking": "確認中…",
+    "noFace": "写真に顔が検出されませんでした。別の写真を撮ってください。",
+    "reportTitle": "検査結果を添付",
+    "reportPlaceholder": "結果テキストを貼り付け…",
+    "reportSubmit": "結果を保存",
+    "reportSuccess": "結果を保存しました",
+    "reportFailed": "結果の保存に失敗しました",
+    "visits": "訪問",
+    "noVisits": "まだ訪問はありません",
+    "patient": "患者",
+    "status": "ステータス",
+    "date": "日付",
+    "visitStatus": {
+      "none": "未開始",
+      "sample_received": "サンプル受領",
+      "pending": "結果確認待ち",
+      "accepted": "結果が承認済み"
+    }
+  },
+  "scan": {
+    "title": "QRコードをスキャン",
+    "hint": "別の人のページのQRコードをスキャンして、互換性チェックのリクエストを送信します。",
+    "start": "カメラを起動",
+    "stop": "カメラを停止",
+    "scanning": "スキャン中…",
+    "requested": "チェックリクエストを送信しました！",
+    "error": "スキャンに失敗しました",
+    "invalidCode": "有効なEvolveリンクではありません",
+    "self": "自分自身にリクエストを送信することはできません",
+    "pendingExists": "このユーザーへのリクエストは既に存在します"
+  },
+  "companion": {
+    "title": "コンパニオンモード",
+    "intro": "このツールは、潜在的なパートナーの安全性を評価するのに役立ちます。",
+    "startButton": "開始",
+    "uploadPrompt": "STDテストをアップロード",
+    "uploadButton": "送信",
+    "result": {
+      "title": "互換性結果",
+      "safe": "安全",
+      "risk": "リスク",
+      "description": "アップロードされたテストに基づく..."
+    },
+    "languageSelect": "Select language",
+    "regionSelect": "Select region",
+    "roleSelect": "Select role",
+    "continueButton": "Continue",
+    "role": {
+      "user": "User",
+      "userHint": "I want to evaluate my partner",
+      "lab": "Laboratory",
+      "labHint": "I work in a laboratory"
+    },
+    "userAuth": {
+      "title": "User Login",
+      "welcomeBack": "Welcome back! Enter your login details.",
+      "welcomeNew": "Welcome! Register to get started.",
+      "loginButton": "Login",
+      "registerButton": "Register"
+    },
+    "labAuth": {
+      "title": "Laboratory Login",
+      "welcomeBack": "Welcome back! Enter your login details.",
+      "welcomeNew": "Welcome! Register your laboratory to get started.",
+      "loginButton": "Login",
+      "registerButton": "Register Laboratory"
+    },
+    "profile": {
+      "title": "マイプロフィール",
+      "uploadPhoto": "写真をアップロード",
+      "qrCode": "マイQRコード",
+      "qrHint": "対面認証用にこのQRコードを表示",
+      "shareHint": "このリンクを送信して他の人と認証",
+      "copyLink": "リンクをコピー",
+      "linkCopied": "リンクをコピーしました",
+      "additionalPhotos": "追加の写真",
+      "addMorePhotos": "さらに写真を追加",
+      "location": "場所",
+      "locationOptional": "場所（オプション）",
+      "noLocation": "場所を表示しない",
+      "stdCompatible": "STD互換",
+      "searchUsers": "ユーザー検索",
+      "chat": "チャット",
+      "noUsers": "ユーザーが見つかりません"
+    },
+    "chat": {
+      "inputPlaceholder": "メッセージを入力...",
+      "send": "送信"
+    },
+    "verify": {
+      "title": "パートナー認証",
+      "partnerPhoto": "パートナーの写真",
+      "checkButton": "認証",
+      "uploadYourTest": "自分のテストをアップロード",
+      "compatible": "結果は互換性があります",
+      "notCompatible": "結果は互換性がありません",
+      "error": "認証エラー"
+    },
+    "lab": {
+      "register": "研究所を登録",
+      "login": "研究所としてログイン",
+      "dashboard": "研究所ダッシュボード",
+      "profile": "研究所プロフィール",
+      "description": "研究所の説明",
+      "address": "住所",
+      "phone": "電話",
+      "contact": "連絡",
+      "patients": "Patients",
+      "showPending": "Show only pending",
+      "patientName": "Patient name",
+      "patientId": "Patient ID",
+      "addResult": "Add result",
+      "takePhoto": "Take photo",
+      "scanQR": "Scan QR",
+      "scanHint": "Enter patient ID from QR code or scan with camera",
+      "enterUserId": "Enter patient ID",
+      "scanButton": "Scan",
+      "scanError": "Please enter patient ID",
+      "patientNotFound": "Patient not found",
+      "verifyPatient": "Verify Patient",
+      "mainPhoto": "Main photo",
+      "verifyPhotos": "Verify photos",
+      "match": "Match",
+      "uncertain": "Uncertain",
+      "confirmPatient": "Confirm patient",
+      "backToDashboard": "Back to dashboard",
+      "testInfo": "Test information",
+      "testInfoPlaceholder": "Enter test type or sample number",
+      "testInfoHint": "This information will help identify the patient and their test",
+      "resultPhoto": "Result photo",
+      "resultDate": "Result date",
+      "resultNotes": "Notes",
+      "resultNotesPlaceholder": "Add notes to the result (optional)",
+      "saveResult": "Save result",
+      "verifyAllPhotos": "確認する前に各写真を評価してください。",
+      "noPatients": "患者が見つかりません",
+      "nameLabel": "Laboratory name",
+      "namePlaceholder": "Enter laboratory name",
+      "descriptionPlaceholder": "Describe your laboratory",
+      "addressPlaceholder": "Enter address",
+      "phonePlaceholder": "Enter phone number",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter email",
+      "registerButton": "Register"
+    }
+  },
+  "pwa": {
+    "installTitle": "Evolveをインストール",
+    "installHint": "より速い体験のためにアプリをインストールしてください",
+    "iosHint": "「共有」→「ホーム画面に追加」をタップ",
+    "install": "インストール",
+    "dismiss": "閉じる"
+  },
+  "profileKind": {
+    "title": "あなたについて",
+    "woman": "女性",
+    "man": "男性",
+    "couple_man_woman": "カップル（男+女）",
+    "couple_man_man": "カップル（男+男）",
+    "couple_woman_woman": "カップル（女+女）",
+    "laboratory": "検査機関"
+  },
+  "kindModal": {
+    "description": "あなたが誰かを選択してください。検索を正しく機能させるために必要です",
+    "confirm": "確認する"
+  },
+  "dex": {
+    "title": "EVOLVEをスワップ",
+    "subtitle": "ArbitrumまたはAvalancheのDEXでトークンをスワップします。",
+    "chain": "ネットワーク",
+    "from": "支払い",
+    "to": "受取",
+    "amount": "数量",
+    "slippage": "スリッページ",
+    "getQuote": "レートを取得",
+    "swap": "スワップ",
+    "swapping": "スワップ中…",
+    "bestRate": "最良レート",
+    "estimatedOutput": "受け取る数量",
+    "insufficientBalance": "残高が不足しています",
+    "notAvailable": "このネットワークではまだ利用できません",
+    "quoteError": "レートを取得できませんでした",
+    "swapSuccess": "スワップを送信しました",
+    "swapFailed": "スワップに失敗しました",
+    "proxyNotConfigured": "スワップサービスが設定されていません"
   }
 }

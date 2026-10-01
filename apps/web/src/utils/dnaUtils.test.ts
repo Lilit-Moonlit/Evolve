@@ -4,21 +4,15 @@ import { STRProfile } from "../store/AppContext";
 
 describe("compareDNA", () => {
   const profileA: STRProfile = {
-    D3S1358: [15, 18],
-    vWA: [16, 17],
-    FGA: [21, 24],
+    markers: { D3S1358: 15, vWA: 16, FGA: 21 },
   };
 
   const profileB: STRProfile = {
-    D3S1358: [15, 16],
-    vWA: [17, 18],
-    FGA: [22, 23],
+    markers: { D3S1358: 15, vWA: 16, FGA: 22 },
   };
 
   const profileNoMatch: STRProfile = {
-    D3S1358: [10, 11],
-    vWA: [12, 13],
-    FGA: [14, 15],
+    markers: { D3S1358: 10, vWA: 12, FGA: 14 },
   };
 
   it("should return 100% match for identical profiles", () => {
@@ -39,7 +33,7 @@ describe("compareDNA", () => {
   });
 
   it("should handle empty profiles", () => {
-    const result = compareDNA({}, {});
+    const result = compareDNA({ markers: {} }, { markers: {} });
     expect(result.matchPercentage).toBe(0);
   });
 });

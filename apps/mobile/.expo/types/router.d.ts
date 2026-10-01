@@ -20,6 +20,8 @@ declare module "expo-router" {
         | `/documents`
         | `/home`
         | `/language-selector`
+        | `/mode2`
+        | `/mode3`
         | `/onboarding`
         | `/profile`
         | `/settings`

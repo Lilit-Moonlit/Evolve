@@ -1,0 +1,250 @@
+﻿
+> evolve-web@0.0.0 build
+> prisma generate && tsc && vite build
+
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+
+Γ£ö Generated Prisma Client (v5.22.0) to .\node_modules\@prisma\client in 282ms
+
+Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+
+Tip: Want to react to database changes in your app as they happen? Discover how with Pulse: https://pris.ly/tip-1-pulse
+
+FORCE_FALLBACK=1. Using JSON fallback database.
+node.exe : [vite:react-babel] We recommend switching to `@vitejs/plugin-react-oxc` for improved performance. More infor
+mation at https://vite.dev/rolldown
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([vite:react-bab...te.dev/rolldown:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+../../node_modules/@base-org/account/node_modules/ox/_esm/core/Address.js (6:21): A comment
+
+"/*#__PURE__*/"
+
+in "../../node_modules/@base-org/account/node_modules/ox/_esm/core/Address.js" contains an annotation that Rollup canno
+t interpret due to the position of the comment. The comment will be removed to avoid issues.
+../../node_modules/@base-org/account/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "../../node_modules/@base-org/account/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot
+ interpret due to the position of the comment. The comment will be removed to avoid issues.
+../../node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Address.js (6:21): A comment
+
+"/*#__PURE__*/"
+
+in "../../node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Address.js" contains an annotation that Rollup ca
+nnot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../../node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "../../node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup can
+not interpret due to the position of the comment. The comment will be removed to avoid issues.
+../../node_modules/ox/_esm/core/Base64.js (6:27): A comment
+
+"/*#__PURE__*/"
+
+in "../../node_modules/ox/_esm/core/Base64.js" contains an annotation that Rollup cannot interpret due to the position 
+of the comment. The comment will be removed to avoid issues.
+../../node_modules/@base-org/account/node_modules/ox/_esm/core/internal/cursor.js (2:21): A comment
+
+"/*#__PURE__*/"
+
+in "../../node_modules/@base-org/account/node_modules/ox/_esm/core/internal/cursor.js" contains an annotation that Roll
+up cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../../node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/internal/cursor.js (2:21): A comment
+
+"/*#__PURE__*/"
+
+in "../../node_modules/@coinbase/wallet-sdk/node_modules/ox/_esm/core/internal/cursor.js" contains an annotation that R
+ollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+[32mΓ£ô[39m 4490 modules transformed.
+rendering chunks...
+[1m[33m[plugin:vite:reporter][39m[22m [33m[plugin vite:reporter] 
+(!) C:/CFC/apps/web/src/store/AppContext.tsx is dynamically imported by C:/CFC/apps/web/src/pages/Chat.tsx but also sta
+tically imported by C:/CFC/apps/web/src/App.tsx, C:/CFC/apps/web/src/components/EmailAuth.tsx, C:/CFC/apps/web/src/comp
+onents/Layout.tsx, C:/CFC/apps/web/src/components/LivenessChallenge.tsx, C:/CFC/apps/web/src/components/Mode2Dashboard.
+tsx, C:/CFC/apps/web/src/components/Mode3Dashboard.tsx, C:/CFC/apps/web/src/components/OnboardingWizard.tsx, C:/CFC/app
+s/web/src/components/ProposalsPanel.tsx, C:/CFC/apps/web/src/components/ProtectedRoute.tsx, C:/CFC/apps/web/src/pages/C
+hat.tsx, C:/CFC/apps/web/src/pages/Home.tsx, C:/CFC/apps/web/src/pages/Profile.tsx, C:/CFC/apps/web/src/pages/PublicPro
+file.tsx, C:/CFC/apps/web/src/pages/SafetyDashboard.tsx, C:/CFC/apps/web/src/pages/UserProfile.tsx, dynamic import will
+ not move module into another chunk.
+[39m
+computing gzip size...
+[2mdist/[22m[32mindex.html                                       [39m[1m[2m    1.61 kB[22m[1m[22m[2m Γöé gzip:     0.70 kB[22m
+[2mdist/[22m[35massets/index-DzbfZ7fG.css                        [39m[1m[2m   78.80 kB[22m[1m[22m[2m Γöé gzip:    13.79 kB[22m
+[2mdist/[22m[36massets/cursor-Dg8rSliP.js                        [39m[1m[2m    0.33 kB[22m[1m[22m[2m Γöé gzip:     0.27 kB[22m[2m Γöé map:      0.48 kB[22m
+[2mdist/[22m[36massets/chevron-left-D9jD_FY5.js                  [39m[1m[2m    0.48 kB[22m[1m[22m[2m Γöé gzip:     0.33 kB[22m[2m Γöé map:      0.68 kB[22m
+[2mdist/[22m[36massets/chevron-top-D_gnRweb.js                   [39m[1m[2m    0.48 kB[22m[1m[22m[2m Γöé gzip:     0.33 kB[22m[2m Γöé map:      0.67 kB[22m
+[2mdist/[22m[36massets/external-link-3eMHW6Tc.js                 [39m[1m[2m    0.48 kB[22m[1m[22m[2m Γöé gzip:     0.33 kB[22m[2m Γöé map:      0.68 kB[22m
+[2mdist/[22m[36massets/chevron-right-OVve3hiH.js                 [39m[1m[2m    0.48 kB[22m[1m[22m[2m Γöé gzip:     0.32 kB[22m[2m Γöé map:      0.68 kB[22m
+[2mdist/[22m[36massets/chevron-bottom-CX4gz6GP.js                [39m[1m[2m    0.48 kB[22m[1m[22m[2m Γöé gzip:     0.33 kB[22m[2m Γöé map:      0.69 kB[22m
+[2mdist/[22m[36massets/arrow-top-B6ciNq_g.js                     [39m[1m[2m    0.49 kB[22m[1m[22m[2m Γöé gzip:     0.33 kB[22m[2m Γöé map:      0.68 kB[22m
+[2mdist/[22m[36massets/arrow-left-DcYsHysA.js                    [39m[1m[2m    0.49 kB[22m[1m[22m[2m Γöé gzip:     0.33 kB[22m[2m Γöé map:      0.69 kB[22m
+[2mdist/[22m[36massets/arrow-bottom-CCQS4eHc.js                  [39m[1m[2m    0.49 kB[22m[1m[22m[2m Γöé gzip:     0.33 kB[22m[2m Γöé map:      0.69 kB[22m
+[2mdist/[22m[36massets/arrow-right-FTaXUZEN.js                   [39m[1m[2m    0.49 kB[22m[1m[22m[2m Γöé gzip:     0.34 kB[22m[2m Γöé map:      0.69 kB[22m
+[2mdist/[22m[36massets/off-CkALySWN.js                           [39m[1m[2m    0.50 kB[22m[1m[22m[2m Γöé gzip:     0.34 kB[22m[2m Γöé map:      0.68 kB[22m
+[2mdist/[22m[36massets/search-Cny2DMxD.js                        [39m[1m[2m    0.51 kB[22m[1m[22m[2m Γöé gzip:     0.34 kB[22m[2m Γöé map:      0.69 kB[22m
+[2mdist/[22m[36massets/close-BmxWRC8D.js                         [39m[1m[2m    0.51 kB[22m[1m[22m[2m Γöé gzip:     0.34 kB[22m[2m Γöé map:      0.69 kB[22m
+[2mdist/[22m[36massets/filters-BSmMfKGT.js                       [39m[1m[2m    0.52 kB[22m[1m[22m[2m Γöé gzip:     0.32 kB[22m[2m Γöé map:      0.71 kB[22m
+[2mdist/[22m[36massets/all-wallets-o5aOrM1l.js                   [39m[1m[2m    0.53 kB[22m[1m[22m[2m Γöé gzip:     0.31 kB[22m[2m Γöé map:      0.71 kB[22m
+[2mdist/[22m[36massets/info-circle-t33U8ABS.js                   [39m[1m[2m    0.55 kB[22m[1m[22m[2m Γöé gzip:     0.34 kB[22m[2m Γöé map:      0.78 kB[22m
+[2mdist/[22m[36massets/celo-GEP4TUHG-CenIBYLU.js                 [39m[1m[2m    0.56 kB[22m[1m[22m[2m Γöé gzip:     0.36 kB[22m[2m Γöé map:      0.86 kB[22m
+[2mdist/[22m[36massets/more-C5x8bG7e.js                          [39m[1m[2m    0.56 kB[22m[1m[22m[2m Γöé gzip:     0.35 kB[22m[2m Γöé map:      0.76 kB[22m
+[2mdist/[22m[36massets/refresh-CDLQehu-.js                       [39m[1m[2m    0.56 kB[22m[1m[22m[2m Γöé gzip:     0.37 kB[22m[2m Γöé map:      0.75 kB[22m
+[2mdist/[22m[36massets/Windows-PPTHQER6-BlyV2p7Y.js              [39m[1m[2m    0.58 kB[22m[1m[22m[2m Γöé gzip:     0.34 kB[22m[2m Γöé map:      0.87 kB[22m
+[2mdist/[22m[36massets/warning-circle-DKmJ6UcM.js                [39m[1m[2m    0.58 kB[22m[1m[22m[2m Γöé gzip:     0.36 kB[22m[2m Γöé map:      0.82 kB[22m
+[2mdist/[22m[36massets/coinPlaceholder-CbOW9TWU.js               [39m[1m[2m    0.59 kB[22m[1m[22m[2m Γöé gzip:     0.40 kB[22m[2m Γöé map:      0.80 kB[22m
+[2mdist/[22m[36massets/compass-C5EYFJC_.js                       [39m[1m[2m    0.60 kB[22m[1m[22m[2m Γöé gzip:     0.39 kB[22m[2m Γöé map:      0.78 kB[22m
+[2mdist/[22m[36massets/swapVertical-fZxJtObI.js                  [39m[1m[2m    0.63 kB[22m[1m[22m[2m Γöé gzip:     0.39 kB[22m[2m Γöé map:      0.83 kB[22m
+[2mdist/[22m[36massets/swapHorizontal-COsrVahm.js                [39m[1m[2m    0.63 kB[22m[1m[22m[2m Γöé gzip:     0.38 kB[22m[2m Γöé map:      0.84 kB[22m
+[2mdist/[22m[36massets/x-BQ6w_6wy.js                             [39m[1m[2m    0.64 kB[22m[1m[22m[2m Γöé gzip:     0.43 kB[22m[2m Γöé map:      0.84 kB[22m
+[2mdist/[22m[36massets/zetachain-TLDS5IPW-Udhyw16T.js            [39m[1m[2m    0.65 kB[22m[1m[22m[2m Γöé gzip:     0.43 kB[22m[2m Γöé map:      0.98 kB[22m
+[2mdist/[22m[36massets/base-OAXLRA4F-CoYTVIiL.js                 [39m[1m[2m    0.66 kB[22m[1m[22m[2m Γöé gzip:     0.38 kB[22m[2m Γöé map:      0.95 kB[22m
+[2mdist/[22m[36massets/twitterIcon-BeDzX9UX.js                   [39m[1m[2m    0.66 kB[22m[1m[22m[2m Γöé gzip:     0.43 kB[22m[2m Γöé map:      0.84 kB[22m
+[2mdist/[22m[36massets/cursor-transparent-DtVG8nAw.js            [39m[1m[2m    0.67 kB[22m[1m[22m[2m Γöé gzip:     0.41 kB[22m[2m Γöé map:      0.92 kB[22m
+[2mdist/[22m[36massets/mobile-s_ttvOP5.js                        [39m[1m[2m    0.67 kB[22m[1m[22m[2m Γöé gzip:     0.37 kB[22m[2m Γöé map:      0.86 kB[22m
+[2mdist/[22m[36massets/checkmark-bold-BC7i0xBN.js                [39m[1m[2m    0.73 kB[22m[1m[22m[2m Γöé gzip:     0.48 kB[22m[2m Γöé map:      0.94 kB[22m
+[2mdist/[22m[36massets/hyperevm-VKPAA4SA-CHwraEsx.js             [39m[1m[2m    0.78 kB[22m[1m[22m[2m Γöé gzip:     0.47 kB[22m[2m Γöé map:      1.10 kB[22m
+[2mdist/[22m[36massets/etherscan-Dymayhbf.js                     [39m[1m[2m    0.78 kB[22m[1m[22m[2m Γöé gzip:     0.50 kB[22m[2m Γöé map:      0.95 kB[22m
+[2mdist/[22m[36massets/checkmark-BD98eRY5.js                     [39m[1m[2m    0.78 kB[22m[1m[22m[2m Γöé gzip:     0.52 kB[22m[2m Γöé map:      1.00 kB[22m
+[2mdist/[22m[36massets/optimism-HAF2GUT7-ec6Nqxs9.js             [39m[1m[2m    0.78 kB[22m[1m[22m[2m Γöé gzip:     0.44 kB[22m[2m Γöé map:      1.10 kB[22m
+[2mdist/[22m[36massets/monad-4KWC6TSS-DVXSkpiz.js                [39m[1m[2m    0.79 kB[22m[1m[22m[2m Γöé gzip:     0.45 kB[22m[2m Γöé map:      1.09 kB[22m
+[2mdist/[22m[36massets/help-circle-B1E-egbB.js                   [39m[1m[2m    0.79 kB[22m[1m[22m[2m Γöé gzip:     0.48 kB[22m[2m Γöé map:      1.02 kB[22m
+[2mdist/[22m[36massets/wallet-DSCyRIus.js                        [39m[1m[2m    0.79 kB[22m[1m[22m[2m Γöé gzip:     0.47 kB[22m[2m Γöé map:      0.98 kB[22m
+[2mdist/[22m[36massets/plus-eQcWrNV8.js                          [39m[1m[2m    0.84 kB[22m[1m[22m[2m Γöé gzip:     0.47 kB[22m[2m Γöé map:      1.05 kB[22m
+[2mdist/[22m[36massets/add-CbBtcyfe.js                           [39m[1m[2m    0.84 kB[22m[1m[22m[2m Γöé gzip:     0.47 kB[22m[2m Γöé map:      1.07 kB[22m
+[2mdist/[22m[36massets/verify-filled-qYMY8eRP.js                 [39m[1m[2m    0.85 kB[22m[1m[22m[2m Γöé gzip:     0.52 kB[22m[2m Γöé map:      1.05 kB[22m
+[2mdist/[22m[36massets/google-oujuqkqT.js                        [39m[1m[2m    0.89 kB[22m[1m[22m[2m Γöé gzip:     0.50 kB[22m[2m Γöé map:      1.15 kB[22m
+[2mdist/[22m[36massets/clock-BOuch6GV.js                         [39m[1m[2m    0.91 kB[22m[1m[22m[2m Γöé gzip:     0.52 kB[22m[2m Γöé map:      1.10 kB[22m
+[2mdist/[22m[36massets/flow-5FQJFCTK-CUie2reO.js                 [39m[1m[2m    0.92 kB[22m[1m[22m[2m Γöé gzip:     0.43 kB[22m[2m Γöé map:      1.21 kB[22m
+[2mdist/[22m[36massets/three-dots-DAY8G8XK.js                    [39m[1m[2m    0.92 kB[22m[1m[22m[2m Γöé gzip:     0.46 kB[22m[2m Γöé map:      1.10 kB[22m
+[2mdist/[22m[36massets/base-QS6CYWIN-CsjdbWCf.js                 [39m[1m[2m    0.95 kB[22m[1m[22m[2m Γöé gzip:     0.45 kB[22m[2m Γöé map:      1.24 kB[22m
+[2mdist/[22m[36massets/disconnect-CWxgvkZB.js                    [39m[1m[2m    0.97 kB[22m[1m[22m[2m Γöé gzip:     0.55 kB[22m[2m Γöé map:      1.16 kB[22m
+[2mdist/[22m[36massets/twitch-BhZFxY6g.js                        [39m[1m[2m    0.97 kB[22m[1m[22m[2m Γöé gzip:     0.55 kB[22m[2m Γöé map:      1.26 kB[22m
+[2mdist/[22m[36massets/bank-zRzatJag.js                          [39m[1m[2m    1.01 kB[22m[1m[22m[2m Γöé gzip:     0.57 kB[22m[2m Γöé map:      1.24 kB[22m
+[2mdist/[22m[36massets/apple-KaRNrkJb.js                         [39m[1m[2m    1.03 kB[22m[1m[22m[2m Γöé gzip:     0.58 kB[22m[2m Γöé map:      1.31 kB[22m
+[2mdist/[22m[36massets/unichain-C5BWO2ZY-BfguYsnu.js             [39m[1m[2m    1.04 kB[22m[1m[22m[2m Γöé gzip:     0.51 kB[22m[2m Γöé map:      1.36 kB[22m
+[2mdist/[22m[36massets/superposition-HG6MMR2Y-bRkgatRO.js        [39m[1m[2m    1.05 kB[22m[1m[22m[2m Γöé gzip:     0.61 kB[22m[2m Γöé map:      1.39 kB[22m
+[2mdist/[22m[36massets/play-store-CdMdI9qS.js                    [39m[1m[2m    1.08 kB[22m[1m[22m[2m Γöé gzip:     0.57 kB[22m[2m Γöé map:      1.47 kB[22m
+[2mdist/[22m[36massets/farcaster-D2mZ3syu.js                     [39m[1m[2m    1.09 kB[22m[1m[22m[2m Γöé gzip:     0.58 kB[22m[2m Γöé map:      1.33 kB[22m
+[2mdist/[22m[36massets/linea-QRMVQ5DY-DuI3vv0d.js                [39m[1m[2m    1.10 kB[22m[1m[22m[2m Γöé gzip:     0.51 kB[22m[2m Γöé map:      1.40 kB[22m
+[2mdist/[22m[36massets/zksync-DH7HK5U4-Dt4usFw6.js               [39m[1m[2m    1.17 kB[22m[1m[22m[2m Γöé gzip:     0.54 kB[22m[2m Γöé map:      1.47 kB[22m
+[2mdist/[22m[36massets/github-DnSWfFfI.js                        [39m[1m[2m    1.20 kB[22m[1m[22m[2m Γöé gzip:     0.65 kB[22m[2m Γöé map:      1.49 kB[22m
+[2mdist/[22m[36massets/arrow-bottom-circle-TLqx57_z.js           [39m[1m[2m    1.22 kB[22m[1m[22m[2m Γöé gzip:     0.59 kB[22m[2m Γöé map:      1.46 kB[22m
+[2mdist/[22m[36massets/swapHorizontalBold-C_VLOdQd.js            [39m[1m[2m    1.25 kB[22m[1m[22m[2m Γöé gzip:     0.67 kB[22m[2m Γöé map:      1.47 kB[22m
+[2mdist/[22m[36massets/app-store-NCa3kLMY.js                     [39m[1m[2m    1.27 kB[22m[1m[22m[2m Γöé gzip:     0.73 kB[22m[2m Γöé map:      1.55 kB[22m
+[2mdist/[22m[36massets/mail-D-qZ_5QM.js                          [39m[1m[2m    1.28 kB[22m[1m[22m[2m Γöé gzip:     0.70 kB[22m[2m Γöé map:      1.45 kB[22m
+[2mdist/[22m[36massets/facebook-DerI9hRi.js                      [39m[1m[2m    1.31 kB[22m[1m[22m[2m Γöé gzip:     0.69 kB[22m[2m Γöé map:      1.66 kB[22m
+[2mdist/[22m[36massets/avalanche-KOMJD3XY-Dsn_JPR4.js            [39m[1m[2m    1.32 kB[22m[1m[22m[2m Γöé gzip:     0.72 kB[22m[2m Γöé map:      1.65 kB[22m
+[2mdist/[22m[36massets/desktop-Brm2lK_I.js                       [39m[1m[2m    1.35 kB[22m[1m[22m[2m Γöé gzip:     0.69 kB[22m[2m Γöé map:      1.54 kB[22m
+[2mdist/[22m[36massets/wallet-placeholder-D2SKylu4.js            [39m[1m[2m    1.35 kB[22m[1m[22m[2m Γöé gzip:     0.64 kB[22m[2m Γöé map:      1.61 kB[22m
+[2mdist/[22m[36massets/xdc-KJ3TDBYO-DNV6zchh.js                  [39m[1m[2m    1.36 kB[22m[1m[22m[2m Γöé gzip:     0.65 kB[22m[2m Γöé map:      1.65 kB[22m
+[2mdist/[22m[36massets/discord-B9QbuVKK.js                       [39m[1m[2m    1.38 kB[22m[1m[22m[2m Γöé gzip:     0.70 kB[22m[2m Γöé map:      1.65 kB[22m
+[2mdist/[22m[36massets/swapHorizontalMedium-Dns35xnX.js          [39m[1m[2m    1.39 kB[22m[1m[22m[2m Γöé gzip:     0.72 kB[22m[2m Γöé map:      1.68 kB[22m
+[2mdist/[22m[36massets/ethereum-RGGVA4PY-SWGOlkuk.js             [39m[1m[2m    1.43 kB[22m[1m[22m[2m Γöé gzip:     0.50 kB[22m[2m Γöé map:      1.75 kB[22m
+[2mdist/[22m[36massets/recycle-horizontal-2S4uWOzP.js            [39m[1m[2m    1.43 kB[22m[1m[22m[2m Γöé gzip:     0.76 kB[22m[2m Γöé map:      1.65 kB[22m
+[2mdist/[22m[36massets/ink-FZMYZWHG-62p-5IK5.js                  [39m[1m[2m    1.43 kB[22m[1m[22m[2m Γöé gzip:     0.66 kB[22m[2m Γöé map:      1.72 kB[22m
+[2mdist/[22m[36massets/extension-CMWk_ZTa.js                     [39m[1m[2m    1.51 kB[22m[1m[22m[2m Γöé gzip:     0.75 kB[22m[2m Γöé map:      1.70 kB[22m
+[2mdist/[22m[36massets/apechain-SX5YFU6N-q5qBv-mp.js             [39m[1m[2m    1.51 kB[22m[1m[22m[2m Γöé gzip:     0.69 kB[22m[2m Γöé map:      1.83 kB[22m
+[2mdist/[22m[36massets/telegram-BYbyiGmU.js                      [39m[1m[2m    1.53 kB[22m[1m[22m[2m Γöé gzip:     0.89 kB[22m[2m Γöé map:      1.81 kB[22m
+[2mdist/[22m[36massets/kaia-65D2U3PU-JmuLQ4gC.js                 [39m[1m[2m    1.53 kB[22m[1m[22m[2m Γöé gzip:     0.72 kB[22m[2m Γöé map:      1.83 kB[22m
+[2mdist/[22m[36massets/degen-FQQ4XGHB-CeHTs88l.js                [39m[1m[2m    1.54 kB[22m[1m[22m[2m Γöé gzip:     0.77 kB[22m[2m Γöé map:      1.84 kB[22m
+[2mdist/[22m[36massets/verify-5D9rP90b.js                        [39m[1m[2m    1.55 kB[22m[1m[22m[2m Γöé gzip:     0.76 kB[22m[2m Γöé map:      1.73 kB[22m
+[2mdist/[22m[36massets/swapHorizontalRoundedBold-BOEa-wjd.js     [39m[1m[2m    1.55 kB[22m[1m[22m[2m Γöé gzip:     0.82 kB[22m[2m Γöé map:      1.80 kB[22m
+[2mdist/[22m[36massets/cronos-HJPAQTAE-BEOvlOC4.js               [39m[1m[2m    1.57 kB[22m[1m[22m[2m Γöé gzip:     0.67 kB[22m[2m Γöé map:      1.88 kB[22m
+[2mdist/[22m[36massets/polygon-WW6ZI7PM-DXlmm4L1.js              [39m[1m[2m    1.58 kB[22m[1m[22m[2m Γöé gzip:     0.68 kB[22m[2m Γöé map:      1.90 kB[22m
+[2mdist/[22m[36massets/qr-code-sA4JXnwl.js                       [39m[1m[2m    1.59 kB[22m[1m[22m[2m Γöé gzip:     0.58 kB[22m[2m Γöé map:      1.76 kB[22m
+[2mdist/[22m[36massets/gravity-J5YQHTYH-Bj6B0uod.js              [39m[1m[2m    1.59 kB[22m[1m[22m[2m Γöé gzip:     0.79 kB[22m[2m Γöé map:      1.90 kB[22m
+[2mdist/[22m[36massets/bsc-N647EYR2-B2nLKXWV.js                  [39m[1m[2m    1.64 kB[22m[1m[22m[2m Γöé gzip:     0.66 kB[22m[2m Γöé map:      1.93 kB[22m
+[2mdist/[22m[36massets/browser-wlSkLhxP.js                       [39m[1m[2m    1.65 kB[22m[1m[22m[2m Γöé gzip:     0.83 kB[22m[2m Γöé map:      1.89 kB[22m
+[2mdist/[22m[36massets/blast-V555OVXZ-BbhJh1tj.js                [39m[1m[2m    1.72 kB[22m[1m[22m[2m Γöé gzip:     0.78 kB[22m[2m Γöé map:      2.02 kB[22m
+[2mdist/[22m[36massets/network-placeholder-poRvIY8c.js           [39m[1m[2m    1.74 kB[22m[1m[22m[2m Γöé gzip:     0.78 kB[22m[2m Γöé map:      2.01 kB[22m
+[2mdist/[22m[36massets/Chrome-65Q5P54Y-DR9MQEVr.js               [39m[1m[2m    1.78 kB[22m[1m[22m[2m Γöé gzip:     0.63 kB[22m[2m Γöé map:      2.06 kB[22m
+[2mdist/[22m[36massets/id-DHWUOfpG.js                            [39m[1m[2m    1.82 kB[22m[1m[22m[2m Γöé gzip:     0.86 kB[22m[2m Γöé map:      2.02 kB[22m
+[2mdist/[22m[36massets/nftPlaceholder-DbtxiFeM.js                [39m[1m[2m    1.83 kB[22m[1m[22m[2m Γöé gzip:     0.92 kB[22m[2m Γöé map:      2.04 kB[22m
+[2mdist/[22m[36massets/gnosis-37ZC4RBL-B137OtHZ.js               [39m[1m[2m    1.85 kB[22m[1m[22m[2m Γöé gzip:     0.77 kB[22m[2m Γöé map:      2.16 kB[22m
+[2mdist/[22m[36massets/safeWallet-5MNKTR5Z-D-5imDLD.js           [39m[1m[2m    1.88 kB[22m[1m[22m[2m Γöé gzip:     0.77 kB[22m[2m Γöé map:      2.20 kB[22m
+[2mdist/[22m[36massets/walletConnectWallet-YHWKVTDY-D3lyiczV.js  [39m[1m[2m    1.94 kB[22m[1m[22m[2m Γöé gzip:     0.77 kB[22m[2m Γöé map:      2.32 kB[22m
+[2mdist/[22m[36massets/Opera-KQZLSACL-Cwv5MDFy.js                [39m[1m[2m    2.15 kB[22m[1m[22m[2m Γöé gzip:     0.81 kB[22m[2m Γöé map:      2.43 kB[22m
+[2mdist/[22m[36massets/metaMaskWallet-EI6MED72-D5HFOsnz.js       [39m[1m[2m    2.26 kB[22m[1m[22m[2m Γöé gzip:     0.95 kB[22m[2m Γöé map:      2.61 kB[22m
+[2mdist/[22m[36massets/info-CAIfVqK0.js                          [39m[1m[2m    2.33 kB[22m[1m[22m[2m Γöé gzip:     1.20 kB[22m[2m Γöé map:      2.48 kB[22m
+[2mdist/[22m[36massets/send-27Dy3mbx.js                          [39m[1m[2m    2.50 kB[22m[1m[22m[2m Γöé gzip:     1.33 kB[22m[2m Γöé map:      2.73 kB[22m
+[2mdist/[22m[36massets/exclamation-triangle-CZSlC8oh.js          [39m[1m[2m    2.51 kB[22m[1m[22m[2m Γöé gzip:     1.19 kB[22m[2m Γöé map:      2.71 kB[22m
+[2mdist/[22m[36massets/arbitrum-WURIBY6W-CqVkHBr5.js             [39m[1m[2m    2.65 kB[22m[1m[22m[2m Γöé gzip:     0.91 kB[22m[2m Γöé map:      2.96 kB[22m
+[2mdist/[22m[36massets/card-BJ5SXOJ2.js                          [39m[1m[2m    2.66 kB[22m[1m[22m[2m Γöé gzip:     1.22 kB[22m[2m Γöé map:      2.89 kB[22m
+[2mdist/[22m[36massets/chrome-store-BGwwQSCM.js                  [39m[1m[2m    2.67 kB[22m[1m[22m[2m Γöé gzip:     1.06 kB[22m[2m Γöé map:      3.32 kB[22m
+[2mdist/[22m[36massets/reown-logo-B_zMY2Lg.js                    [39m[1m[2m    2.68 kB[22m[1m[22m[2m Γöé gzip:     1.13 kB[22m[2m Γöé map:      2.94 kB[22m
+[2mdist/[22m[36massets/scroll-5OBGQVOV-DJFECiai.js               [39m[1m[2m    2.69 kB[22m[1m[22m[2m Γöé gzip:     1.07 kB[22m[2m Γöé map:      2.99 kB[22m
+[2mdist/[22m[36massets/ronin-EMCPYXZT-N-QBHZdV.js                [39m[1m[2m    2.72 kB[22m[1m[22m[2m Γöé gzip:     1.26 kB[22m[2m Γöé map:      3.02 kB[22m
+[2mdist/[22m[36massets/zora-FYL5H3IO-iB4wygST.js                 [39m[1m[2m    2.73 kB[22m[1m[22m[2m Γöé gzip:     0.64 kB[22m[2m Γöé map:      3.03 kB[22m
+[2mdist/[22m[36massets/lightbulb-BSZ8Ogzo.js                     [39m[1m[2m    2.79 kB[22m[1m[22m[2m Γöé gzip:     1.27 kB[22m[2m Γöé map:      2.95 kB[22m
+[2mdist/[22m[36massets/refresh-S4T5V5GX-CwqIaaxK.js              [39m[1m[2m    3.06 kB[22m[1m[22m[2m Γöé gzip:     1.00 kB[22m[2m Γöé map:      3.35 kB[22m
+[2mdist/[22m[36massets/ccip-BQDx2GvE.js                          [39m[1m[2m    3.08 kB[22m[1m[22m[2m Γöé gzip:     1.42 kB[22m[2m Γöé map:     11.39 kB[22m
+[2mdist/[22m[36massets/manta-SI27YFEJ-CpVOKa06.js                [39m[1m[2m    3.25 kB[22m[1m[22m[2m Γöé gzip:     1.38 kB[22m[2m Γöé map:      3.55 kB[22m
+[2mdist/[22m[36massets/image-CNa_FzA0.js                         [39m[1m[2m    3.57 kB[22m[1m[22m[2m Γöé gzip:     1.57 kB[22m[2m Γöé map:      3.73 kB[22m
+[2mdist/[22m[36massets/connect-UA7M4XW6-IY3X6Bmr.js              [39m[1m[2m    3.60 kB[22m[1m[22m[2m Γöé gzip:     1.13 kB[22m[2m Γöé map:      3.89 kB[22m
+[2mdist/[22m[36massets/berachain-NJECWIVC-DumxnFvf.js            [39m[1m[2m    3.83 kB[22m[1m[22m[2m Γöé gzip:     1.31 kB[22m[2m Γöé map:      4.15 kB[22m
+[2mdist/[22m[36massets/copy-T4Egh-D5.js                          [39m[1m[2m    3.89 kB[22m[1m[22m[2m Γöé gzip:     1.53 kB[22m[2m Γöé map:      4.12 kB[22m
+[2mdist/[22m[36massets/walletconnect-BPLMHoJV.js                 [39m[1m[2m    4.14 kB[22m[1m[22m[2m Γöé gzip:     1.72 kB[22m[2m Γöé map:      4.67 kB[22m
+[2mdist/[22m[36massets/hardhat-TX56IT5N-CV1FY-wE.js              [39m[1m[2m    4.25 kB[22m[1m[22m[2m Γöé gzip:     1.41 kB[22m[2m Γöé map:      4.57 kB[22m
+[2mdist/[22m[36massets/Brave-BRAKJXDS-mq-Xo37j.js                [39m[1m[2m    4.31 kB[22m[1m[22m[2m Γöé gzip:     1.54 kB[22m[2m Γöé map:      4.59 kB[22m
+[2mdist/[22m[36massets/create-FASO7PVG-D_rvSpre.js               [39m[1m[2m    4.38 kB[22m[1m[22m[2m Γöé gzip:     1.14 kB[22m[2m Γöé map:      4.66 kB[22m
+[2mdist/[22m[36massets/scan-4UYSQ56Q-CjMz6-XC.js                 [39m[1m[2m    4.64 kB[22m[1m[22m[2m Γöé gzip:     1.21 kB[22m[2m Γöé map:      4.91 kB[22m
+[2mdist/[22m[36massets/rainbowWallet-O26YNBMX-DUhYus-9.js        [39m[1m[2m    5.18 kB[22m[1m[22m[2m Γöé gzip:     1.01 kB[22m[2m Γöé map:      5.52 kB[22m
+[2mdist/[22m[36massets/mantle-CKIUT334-DR2WgqzU.js               [39m[1m[2m    5.32 kB[22m[1m[22m[2m Γöé gzip:     2.32 kB[22m[2m Γöé map:      5.63 kB[22m
+[2mdist/[22m[36massets/sign-A7IJEUT5-CGsRnPrd.js                 [39m[1m[2m    5.60 kB[22m[1m[22m[2m Γöé gzip:     4.27 kB[22m[2m Γöé map:      5.87 kB[22m
+[2mdist/[22m[36massets/Edge-XSPUTORV-DEoZslQE.js                 [39m[1m[2m    5.87 kB[22m[1m[22m[2m Γöé gzip:     1.39 kB[22m[2m Γöé map:      6.14 kB[22m
+[2mdist/[22m[36massets/index-B9yhYqBG.js                         [39m[1m[2m    5.96 kB[22m[1m[22m[2m Γöé gzip:     2.19 kB[22m[2m Γöé map:     19.25 kB[22m
+[2mdist/[22m[36massets/events-Vg01BsXA.js                        [39m[1m[2m    6.18 kB[22m[1m[22m[2m Γöé gzip:     2.16 kB[22m[2m Γöé map:     23.73 kB[22m
+[2mdist/[22m[36massets/Arc-VDBY7LNS-BChRXCXW.js                  [39m[1m[2m    6.67 kB[22m[1m[22m[2m Γöé gzip:     1.68 kB[22m[2m Γöé map:      6.94 kB[22m
+[2mdist/[22m[36massets/Browser-76IHF3Y2-BMhRaC5Z.js              [39m[1m[2m   11.88 kB[22m[1m[22m[2m Γöé gzip:     2.23 kB[22m[2m Γöé map:     12.17 kB[22m
+[2mdist/[22m[36massets/login-UP3DZBGS-Db_wM5oQ.js                [39m[1m[2m   12.05 kB[22m[1m[22m[2m Γöé gzip:     3.03 kB[22m[2m Γöé map:     12.33 kB[22m
+[2mdist/[22m[36massets/Safari-ZPL37GXR-C4Ggg6rz.js               [39m[1m[2m   13.80 kB[22m[1m[22m[2m Γöé gzip:     3.81 kB[22m[2m Γöé map:     14.09 kB[22m
+[2mdist/[22m[36massets/Firefox-AAHGJQIP-Bp_Hm04m.js              [39m[1m[2m   15.24 kB[22m[1m[22m[2m Γöé gzip:     3.45 kB[22m[2m Γöé map:     15.53 kB[22m
+[2mdist/[22m[36massets/sanko-RHQYXGM5-OX010CbN.js                [39m[1m[2m   21.98 kB[22m[1m[22m[2m Γöé gzip:    16.50 kB[22m[2m Γöé map:     22.28 kB[22m
+[2mdist/[22m[36massets/assets-Q6ZU7ZJ5-P8HioiAD.js               [39m[1m[2m   23.67 kB[22m[1m[22m[2m Γöé gzip:     4.16 kB[22m[2m Γöé map:     23.96 kB[22m
+[2mdist/[22m[36massets/index-x_jQvcOU.js                         [39m[1m[2m   26.40 kB[22m[1m[22m[2m Γöé gzip:     7.54 kB[22m[2m Γöé map:     94.24 kB[22m
+[2mdist/[22m[36massets/zh_CN-4XK5YJPR-Bt6Yz5Ek.js                [39m[1m[2m   38.07 kB[22m[1m[22m[2m Γöé gzip:     5.82 kB[22m[2m Γöé map:    102.08 kB[22m
+[2mdist/[22m[36massets/zh_TW-CNCRXH6Z-BNelatfN.js                [39m[1m[2m   38.46 kB[22m[1m[22m[2m Γöé gzip:     5.51 kB[22m[2m Γöé map:    101.42 kB[22m
+[2mdist/[22m[36massets/zh_HK-N4YN2WSI-Cvzl1V16.js                [39m[1m[2m   38.70 kB[22m[1m[22m[2m Γöé gzip:     5.57 kB[22m[2m Γöé map:    103.52 kB[22m
+[2mdist/[22m[36massets/w3m-modal--IoGengg.js                     [39m[1m[2m   40.17 kB[22m[1m[22m[2m Γöé gzip:     9.46 kB[22m[2m Γöé map:     98.58 kB[22m
+[2mdist/[22m[36massets/ko_KR-FR54RFUG-upinSHjQ.js                [39m[1m[2m   43.94 kB[22m[1m[22m[2m Γöé gzip:     6.58 kB[22m[2m Γöé map:    122.47 kB[22m
+[2mdist/[22m[36massets/ja_JP-ZRMWJV3I-DXbifiMm.js                [39m[1m[2m   44.44 kB[22m[1m[22m[2m Γöé gzip:     6.68 kB[22m[2m Γöé map:    146.25 kB[22m
+[2mdist/[22m[36massets/Macos-MW4AE7LN-Vvm8Drw3.js                [39m[1m[2m   49.73 kB[22m[1m[22m[2m Γöé gzip:    35.88 kB[22m[2m Γöé map:     50.01 kB[22m
+[2mdist/[22m[36massets/ar_AR-LIPSOZP5-BQrIDibT.js                [39m[1m[2m   52.26 kB[22m[1m[22m[2m Γöé gzip:     6.25 kB[22m[2m Γöé map:    179.93 kB[22m
+[2mdist/[22m[36massets/th_TH-4YB4VSB2-BUipNP-V.js                [39m[1m[2m   56.23 kB[22m[1m[22m[2m Γöé gzip:     7.73 kB[22m[2m Γöé map:    219.06 kB[22m
+[2mdist/[22m[36massets/index-DVw_Nxx_.js                         [39m[1m[2m   56.30 kB[22m[1m[22m[2m Γöé gzip:    15.69 kB[22m[2m Γöé map:    112.06 kB[22m
+[2mdist/[22m[36massets/vi_VN-5EVRZKLY-x078672g.js                [39m[1m[2m   58.61 kB[22m[1m[22m[2m Γöé gzip:     5.52 kB[22m[2m Γöé map:    107.93 kB[22m
+[2mdist/[22m[36massets/tr_TR-5FKHPPIO-D5jTpIm9.js                [39m[1m[2m   59.58 kB[22m[1m[22m[2m Γöé gzip:     5.80 kB[22m[2m Γöé map:     92.57 kB[22m
+[2mdist/[22m[36massets/id_ID-SBYANJ7G-Cjpa4ay6.js                [39m[1m[2m   60.09 kB[22m[1m[22m[2m Γöé gzip:     5.55 kB[22m[2m Γöé map:     74.29 kB[22m
+[2mdist/[22m[36massets/hi_IN-WBVD5XYI-D73g2UFs.js                [39m[1m[2m   60.52 kB[22m[1m[22m[2m Γöé gzip:     8.17 kB[22m[2m Γöé map:    224.18 kB[22m
+[2mdist/[22m[36massets/pt_BR-JQFQ3P4L-DOHfdcA2.js                [39m[1m[2m   60.73 kB[22m[1m[22m[2m Γöé gzip:     5.34 kB[22m[2m Γöé map:     77.27 kB[22m
+[2mdist/[22m[36massets/ms_MY-EZSGYYYQ-4cPLK-3L.js                [39m[1m[2m   60.94 kB[22m[1m[22m[2m Γöé gzip:     5.20 kB[22m[2m Γöé map:     75.14 kB[22m
+[2mdist/[22m[36massets/es_419-7LMPU7G4-DH7rM0yQ.js               [39m[1m[2m   61.03 kB[22m[1m[22m[2m Γöé gzip:     5.72 kB[22m[2m Γöé map:     77.77 kB[22m
+[2mdist/[22m[36massets/uk_UA-ZD4IBC52-DgnQrpzl.js                [39m[1m[2m   61.70 kB[22m[1m[22m[2m Γöé gzip:     6.42 kB[22m[2m Γöé map:    238.54 kB[22m
+[2mdist/[22m[36massets/ru_RU-Z42UEJBP-Cvb2oWxQ.js                [39m[1m[2m   62.47 kB[22m[1m[22m[2m Γöé gzip:     7.06 kB[22m[2m Γöé map:    244.45 kB[22m
+[2mdist/[22m[36massets/fr_FR-VBJP3ZLL-B-_ocunw.js                [39m[1m[2m   66.58 kB[22m[1m[22m[2m Γöé gzip:     5.65 kB[22m[2m Γöé map:     83.02 kB[22m
+[2mdist/[22m[36massets/de_DE-YE3KOFHU-BRt5ztUe.js                [39m[1m[2m   66.66 kB[22m[1m[22m[2m Γöé gzip:     5.63 kB[22m[2m Γöé map:     81.63 kB[22m
+[2mdist/[22m[36massets/Linux-OO4TNCLJ-B0aw93n9.js                [39m[1m[2m   91.19 kB[22m[1m[22m[2m Γöé gzip:    14.94 kB[22m[2m Γöé map:     91.46 kB[22m
+[2mdist/[22m[36massets/basic-Qs9yTA88.js                         [39m[1m[2m  118.57 kB[22m[1m[22m[2m Γöé gzip:    22.63 kB[22m[2m Γöé map:    308.85 kB[22m
+[2mdist/[22m[36massets/vision_bundle-Bye7tbco.js                 [39m[1m[2m  154.97 kB[22m[1m[22m[2m Γöé gzip:    46.30 kB[22m[2m Γöé map:    397.88 kB[22m
+[2mdist/[22m[36massets/index-DJCy1MbZ.js                         [39m[1m[2m  345.07 kB[22m[1m[22m[2m Γöé gzip:   130.83 kB[22m[2m Γöé map:  1,216.67 kB[22m
+[2mdist/[22m[36massets/index.es-D2SHknhD.js                      [39m[1m[2m  394.38 kB[22m[1m[22m[2m Γöé gzip:   113.19 kB[22m[2m Γöé map:    983.82 kB[22m
+[2mdist/[22m[36massets/core-D7ix1B7d.js                          [39m[1m[33m  511.01 kB[39m[22m[2m Γöé gzip:   141.53 kB[22m[2m Γöé map:  1,432.63 kB[22m
+[2mdist/[22m[36massets/metamask-sdk-DTbizhLD.js                  [39m[1m[33m  556.58 kB[39m[22m[2m Γöé gzip:   170.27 kB[22m[2m Γöé map:  1,396.69 kB[22m
+[2mdist/[22m[36massets/index-BxREpRmt.js                         [39m[1m[33m3,287.15 kB[39m[22m[2m Γöé gzip:   935.69 kB[22m[2m Γöé map: 10,544.82 kB[22m
+[2mdist/[22m[36massets/index-CxDnQJL9.js                         [39m[1m[33m8,112.39 kB[39m[22m[2m Γöé gzip: 2,202.60 kB[22m[2m Γöé map:      5.75 kB[22m
+[33m
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-m
+anualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[32mΓ£ô built in 58.75s[39m

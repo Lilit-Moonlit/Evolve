@@ -16,7 +16,7 @@ import { useSignMessage, useConnect } from "wagmi";
 import { useAccount } from "wagmi";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-type AuthView = "landing" | "email" | "phone" | "otp" | "wallet";
+type AuthView = "landing" | "email" | "wallet";
 
 export default function AuthScreen() {
   const { t } = useTranslation();
@@ -24,8 +24,6 @@ export default function AuthScreen() {
   const {
     loginWithEmail,
     registerWithEmail,
-    requestPhoneOtp,
-    verifyPhoneOtp,
     signInWithEthereum,
     verifyWallet,
   } = useAuth();
@@ -38,9 +36,6 @@ export default function AuthScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [otp, setOtp] = useState("");
-  const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [signedIn, setSignedIn] = useState(false);
@@ -66,33 +61,6 @@ export default function AuthScreen() {
     }
   };
 
-  const handleRequestOtp = async () => {
-    setError("");
-    setLoading(true);
-    try {
-      await requestPhoneOtp(phoneNumber);
-      setOtpSent(true);
-      setView("otp");
-    } catch {
-      setError(t("auth.phone.error.sendFailed"));
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleVerifyOtp = async () => {
-    setError("");
-    setLoading(true);
-    try {
-      await verifyPhoneOtp(phoneNumber, otp);
-      router.replace("/home");
-    } catch {
-      setError(t("auth.phone.error.verifyFailed"));
-    } finally {
-      setLoading(false);
-    }
-  };
-
   if (view === "landing") {
     return (
       <View style={styles.container}>
@@ -105,13 +73,6 @@ export default function AuthScreen() {
             onPress={() => setView("email")}
           >
             <Text style={styles.authButtonText}>{t("auth.landing.email")}</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.authButton}
-            onPress={() => setView("phone")}
-          >
-            <Text style={styles.authButtonText}>{t("auth.landing.phone")}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -181,93 +142,6 @@ export default function AuthScreen() {
                 ? t("auth.email.switchToLogin")
                 : t("auth.email.switchToRegister")}
             </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
-
-  if (view === "phone") {
-    return (
-      <View style={styles.container}>
-        <View style={styles.content}>
-          <TouchableOpacity onPress={() => setView("landing")}>
-            <Text style={styles.backText}>{t("common.back")}</Text>
-          </TouchableOpacity>
-
-          <Text style={styles.formTitle}>{t("auth.phone.title")}</Text>
-          <Text style={styles.formDescription}>
-            {t("auth.phone.description")}
-          </Text>
-
-          {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
-          <TextInput
-            style={styles.input}
-            placeholder={t("auth.phone.phonePlaceholder")}
-            value={phoneNumber}
-            onChangeText={setPhoneNumber}
-            keyboardType="phone-pad"
-          />
-
-          <TouchableOpacity
-            style={styles.submitButton}
-            onPress={handleRequestOtp}
-            disabled={loading}
-          >
-            {loading ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <Text style={styles.submitButtonText}>
-                {t("auth.phone.getCode")}
-              </Text>
-            )}
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
-
-  if (view === "otp") {
-    return (
-      <View style={styles.container}>
-        <View style={styles.content}>
-          <TouchableOpacity onPress={() => setView("phone")}>
-            <Text style={styles.backText}>{t("common.back")}</Text>
-          </TouchableOpacity>
-
-          <Text style={styles.formTitle}>{t("auth.phone.title")}</Text>
-          <Text style={styles.formDescription}>
-            {t("auth.phone.otpSent", { phone: phoneNumber })}
-          </Text>
-
-          {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
-          <TextInput
-            style={styles.input}
-            placeholder={t("auth.phone.otpPlaceholder")}
-            value={otp}
-            onChangeText={setOtp}
-            keyboardType="number-pad"
-            maxLength={6}
-          />
-
-          <TouchableOpacity
-            style={styles.submitButton}
-            onPress={handleVerifyOtp}
-            disabled={loading}
-          >
-            {loading ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <Text style={styles.submitButtonText}>
-                {t("auth.phone.verify")}
-              </Text>
-            )}
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={handleRequestOtp}>
-            <Text style={styles.switchText}>{t("auth.phone.resendCode")}</Text>
           </TouchableOpacity>
         </View>
       </View>

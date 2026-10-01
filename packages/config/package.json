@@ -1,0 +1,18 @@
+{
+  "name": "@evolve/config",
+  "version": "0.1.0",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    }
+  },
+  "files": [
+    "src"
+  ],
+  "license": "MIT",
+  "private": false,
+  "dependencies": {}
+}

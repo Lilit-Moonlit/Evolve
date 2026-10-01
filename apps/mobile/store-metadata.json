@@ -4,12 +4,12 @@
     "uk": "Evolve"
   },
   "description": {
-    "en": "Decentralized dating with on-chain reputation. Find your match on the blockchain.",
-    "uk": "Децентралізований дейтинг з репутацією в блокчейні. Знайдіть свою пару в блокчейні."
+    "en": "Decentralized dating with on-chain reputation and private STD-compatibility matching. Verify your identity, connect anonymously, and find your match on the blockchain.",
+    "uk": "Децентралізований дейтинг з репутацією в блокчейні та приватною перевіркою сумісності за ІПСШ. Підтверджуйте особистість, спілкуйтеся анонімно та знаходьте свою пару в блокчейні."
   },
   "shortDescription": {
-    "en": "Decentralized dating app",
-    "uk": "Децентралізований додаток для знайомств"
+    "en": "Decentralized dating with on-chain reputation",
+    "uk": "Децентралізований додаток для знайомств з репутацією в блокчейні"
   },
   "keywords": [
     "dating",
@@ -17,11 +17,13 @@
     "decentralized",
     "web3",
     "crypto",
-    "social"
+    "social",
+    "anonymous",
+    "privacy"
   ],
   "category": "Social",
   "screenshots": [],
-  "privacyPolicyUrl": "",
+  "privacyPolicyUrl": "https://evolve.dating/privacy",
   "supportEmail": "support@evolve.dating",
   "websiteUrl": "https://evolve.dating"
 }

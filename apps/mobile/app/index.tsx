@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../store/AuthContext";
 import { useAccount, useBalance, useSendTransaction } from "wagmi";
 import { CONTRACT_ADDRESSES } from "../lib/addresses";
+import { useFeatureFlags } from "../src/config/useFeatureFlags";
+import CompanionScreen from "../src/screens/CompanionScreen";
 
 export default function Index() {
   const router = useRouter();
@@ -23,9 +25,7 @@ export default function Index() {
   });
 
   // Стан транзакції (placeholder – реальна логіка буде залежати від вашого UI)
-  const [txStatus, setTxStatus] = useState<"idle" | "pending" | "success" | "failed">(
-    "idle"
-  );
+  const [txStatus, setTxStatus] = useState<"idle" | "pending" | "success" | "failed">("idle");
 
   // Приклад відправки транзакції (можна викликати з UI)
   const { sendTransaction, isLoading: txSending } = useSendTransaction({

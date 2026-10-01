@@ -6,9 +6,10 @@
   "license": "UNLICENSED",
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx",
-    "test": "vitest run src/ --config ../../vitest.config.ts"
+    "test": "vitest run src/"
   },
   "dependencies": {
+    "@libp2p/upnp-nat": "^4.0.21",
     "@noble/secp256k1": "^2.0.0",
     "@types/ws": "^8.5.10",
     "cbor-x": "^1.5.8",
@@ -26,10 +27,10 @@
   "devDependencies": {
     "@types/events": "^3.0.0",
     "@types/node": "^20.11.16",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
-    "eslint": "^8.56.0",
-    "typescript": "^5.3.3",
-    "vitest": "^1.2.2"
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@typescript-eslint/parser": "^7.13.0",
+    "eslint": "^8.57.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
   }
 }

@@ -37,8 +37,6 @@ export {
 
 // Export browser-safe auth helpers (not Express middleware)
 export {
-  AuthContext,
-  AuthToken,
   generateAuthToken,
   verifyAuthToken,
   isAuthenticated,
@@ -53,10 +51,11 @@ export {
   validateWalletAddress,
 } from "./middleware/auth";
 
+export type { AuthContext, AuthToken, NonceProvider } from "./middleware/auth";
+
 // Export browser-safe logger (Logger class only, not Express middleware)
 export {
   LogLevel,
-  LogEntry,
   Logger,
   logger,
   logExecutionTime,
@@ -64,3 +63,5 @@ export {
   logErrorWithContext,
   createContextLogger,
 } from "./middleware/logger";
+
+export type { LogEntry } from "./middleware/logger";

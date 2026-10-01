@@ -13,17 +13,25 @@ const mockWalletClient = {
   account: { address: FAKE_ADMIN },
 } as any;
 
-vi.mock("viem", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("viem")>();
-  return {
-    ...actual,
-    createPublicClient: vi.fn(() => mockPublicClient),
-    createWalletClient: vi.fn(() => mockWalletClient),
-  };
-});
+// NOTE: no `importOriginal` here on purpose — loading the real `viem` (and the
+// unmocked `viem/chains` below) through vite's transform used to make the first
+// `await import("../adminChain")` take >5s under full-suite CPU contention,
+// timing out test (a) and leaking its dangling continuation into test (b)
+// (second module instance → double `mockWriteContract` call).
+// adminChain only uses these three exports; the mocked clients ignore the
+// transport, so `http` can be a stub.
+vi.mock("viem", () => ({
+  createPublicClient: vi.fn(() => mockPublicClient),
+  createWalletClient: vi.fn(() => mockWalletClient),
+  http: vi.fn(),
+}));
 
 vi.mock("viem/accounts", () => ({
   privateKeyToAccount: vi.fn(() => ({ address: FAKE_ADMIN })),
+}));
+
+vi.mock("viem/chains", () => ({
+  sepolia: { id: 11155111, name: "Sepolia" },
 }));
 
 describe("adminChain", () => {

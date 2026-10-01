@@ -5,30 +5,48 @@
     "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
   },
   "navigation": {
-    "swipe": "Vuốt",
     "messages": "Tin nhắn",
     "profile": "Hồ sơ",
-    "settings": "Cài đặt"
+    "settings": "Cài đặt",
+    "mode2": "Bảng điều khiển",
+    "mode3": "Bảng điều khiển",
+    "home": "Trang chủ",
+    "communications": "Giao tiếp",
+    "check": "Kiểm tra",
+    "downloadApp": "Tải ứng dụng"
   },
   "home": {
     "hero": {
       "title": "Tìm match của bạn",
       "subtitle": "Vuốt qua các hồ sơ và kết nối với những người thú vị."
     },
+    "trustScore": "Điểm tin cậy",
     "filters": {
       "verifiedStd": "Chỉ người có STD đã xác minh",
       "verifiedDna": "Chỉ người có DNA đã xác minh",
-      "noProfiles": "Không có hồ sơ nào khớp với bộ lọc đã chọn."
+      "noProfiles": "Không có hồ sơ nào khớp với bộ lọc đã chọn.",
+      "locationUnavailable": "Vị trí không khả dụng. Bộ lọc hiển thị tất cả hồ sơ.",
+      "showFilters": "Hiện bộ lọc",
+      "hideFilters": "Ẩn bộ lọc",
+      "modeNormal": "Get acquainted",
+      "modePregnancyBond": "Conception",
+      "modeCrypticChoice": "Polyandric conception"
     },
     "profile": {
       "newMatch": "Match mới",
       "noMoreProfiles": "Hiện tại không còn hồ sơ nào khác! Hãy quay lại sau."
+    },
+    "dashboardCta": {
+      "mode2": "Mở bảng điều khiển Thụ thai",
+      "mode3": "Mở bảng điều khiển Sau giao hợp"
     }
   },
   "profile": {
     "tabs": {
       "profile": "Hồ sơ",
-      "reputation": "Uy tín"
+      "reputation": "Uy tín",
+      "settings": "Cài đặt",
+      "medical": "Medical card"
     },
     "myProfile": {
       "title": "Hồ sơ của tôi",
@@ -68,6 +86,66 @@
       "title": "Ví",
       "address": "Địa chỉ",
       "balance": "Số dư"
+    },
+    "edit": {
+      "title": "Thông tin của tôi",
+      "photoAlt": "Ảnh của tôi",
+      "changePhoto": "Đổi ảnh",
+      "uploadPhoto": "Tải ảnh lên",
+      "blurPhoto": "Làm mờ ảnh của tôi",
+      "age": "Tuổi",
+      "hideAge": "Ẩn tuổi của tôi",
+      "languages": "Ngôn ngữ tôi nói",
+      "bio": "Giới thiệu",
+      "save": "Lưu thay đổi",
+      "saving": "Đang lưu…",
+      "saved": "Đã lưu hồ sơ",
+      "testingPreference": "Phương pháp kiểm tra"
+    },
+    "photoGrants": {
+      "title": "Quyền xem ảnh",
+      "description": "Người dùng được cấp quyền xem ảnh:",
+      "permanent": "Vĩnh viễn",
+      "temporary": "Tạm thời",
+      "revoke": "Thu hồi"
+    },
+    "lab": {
+      "title": "Kiểm tra tại phòng thí nghiệm",
+      "yourEmail": "Địa chỉ email của bạn",
+      "emailHint": "Nhập email bạn đã dùng để xác minh DNA",
+      "pendingTitle": "Xác minh DNA đang chờ xử lý",
+      "accept": "Chấp nhận",
+      "reject": "Từ chối",
+      "noPending": "Không có xác minh DNA đang chờ xử lý",
+      "reportAccepted": "Báo cáo đã được chấp nhận",
+      "reportFailed": "Failed to process the report",
+      "emailError": "Email unavailable",
+      "loading": "Loading…",
+      "patientQrTitle": "Mã QR xác minh tại chỗ",
+      "patientQrHint": "Hiển thị mã này cho phòng xét nghiệm đối tác. Mã chỉ chứa ID của bạn — không có ảnh hay dữ liệu hồ sơ.",
+      "patientQrAria": "Mã QR bệnh nhân để xác minh tại phòng xét nghiệm",
+      "patientQrError": "Không thể tạo mã QR.",
+      "faceVerified": "Đã xác minh khuôn mặt",
+      "faceNotVerified": "Chưa xác minh khuôn mặt"
+    },
+    "medical": {
+      "title": "My medical card",
+      "subtitle": "Your patient card with a QR code for in-person lab visits",
+      "labTitle": "Laboratory",
+      "labSubtitle": "Run a lab? Register it to scan patient QR codes and add results"
+    },
+    "qr": {
+      "title": "Mã QR của bạn",
+      "hint": "Đưa mã QR này cho nhân viên phòng xét nghiệm để xác nhận ảnh của bạn và thêm kết quả xét nghiệm STD vào tài khoản — hoặc đưa cho người dùng khác để kiểm tra tính tương thích STD."
+    },
+    "searchGoals": {
+      "title": "Bạn đang tìm kiếm gì",
+      "hint": "Các dấu hiệu này hoạt động với tìm kiếm: những người dùng có tìm kiếm khớp với những gì bạn đã đánh dấu ở đây sẽ tìm thấy bạn."
+    },
+    "canTravel": {
+      "countriesTitle": "Các quốc gia tôi có thể đến",
+      "selectAll": "Chọn tất cả",
+      "loadingCountries": "Đang tải danh sách quốc gia…"
     }
   },
   "chat": {
@@ -89,7 +167,32 @@
     "denyStd": "Từ chối quyền truy cập IST",
     "denyDna": "Từ chối quyền truy cập DNA",
     "hiddenProfile": "Hồ sơ ẩn",
-    "hiddenContent": "Hồ sơ này được ẩn bởi người dùng. Điểm uy tín vẫn hiển thị."
+    "hiddenContent": "Hồ sơ này được ẩn bởi người dùng. Điểm uy tín vẫn hiển thị.",
+    "requestPhoto": "Yêu cầu xem ảnh của bạn",
+    "photoApprovedPermanent": "Đã cấp quyền xem ảnh vĩnh viễn",
+    "photoApprovedTemporary": "Đã cấp quyền xem ảnh trong 15 giây",
+    "photoDenied": "Yêu cầu xem ảnh đã bị từ chối",
+    "photoOfferPermanent": "Đề nghị cấp quyền xem ảnh vĩnh viễn",
+    "photoOfferTemporary": "Đề nghị xem ảnh trong 15 giây",
+    "photoRevoked": "Đã thu hồi quyền xem ảnh",
+    "liveness": {
+      "title": "Identity check",
+      "description": "To prove you're the real person behind this profile, complete a quick face check.",
+      "lookStraight": "Look straight at the camera",
+      "startCapture": "Start check",
+      "getReady": "Get ready...",
+      "processing": "Analyzing face...",
+      "skip": "Later",
+      "success": "✓ Identity confirmed",
+      "failed": "✗ Identity check failed",
+      "lastCheck": "Verified at {{time}}",
+      "cameraError": "Could not access camera. Please allow camera access and try again.",
+      "noStoredFace": "You have not completed face verification yet. Complete it in your profile settings.",
+      "noFaceDetected": "No face detected. Please look directly at the camera.",
+      "verificationError": "Face verification failed. Please try again.",
+      "systemMessageSuccess": "🛡️ Identity check passed",
+      "systemMessageFailed": "⚠️ Identity check failed"
+    }
   },
   "language": {
     "select": "Chọn ngôn ngữ",
@@ -105,7 +208,17 @@
     "currentMode": "Chế độ hiện tại",
     "autoSaved": "Lựa chọn của bạn được lưu tự động. Không cần tải lại.",
     "hideProfileFromLowerLevels": "Ẩn hồ sơ khỏi các cấp thấp hơn (nội dung và ảnh)",
-    "privacy": "Quyền riêng tư"
+    "privacy": "Quyền riêng tư",
+    "modeDashboard": {
+      "title": "Bảng điều khiển chế độ",
+      "description": "Quản lý cài đặt chế độ hoạt động và hoạt động trên chuỗi",
+      "mode2Label": "Thụ thai",
+      "mode2Description": "Chế độ Thụ thai — người tham gia đã xác minh, liên kết trên chuỗi",
+      "mode3Label": "Sau giao hợp",
+      "mode3Description": "Chế độ Sau giao hợp — phiên ẩn danh, giải quyết trên chuỗi",
+      "openMode2": "Mở bảng điều khiển Thụ thai",
+      "openMode3": "Mở bảng điều khiển Sau giao hợp"
+    }
   },
   "auth": {
     "loading": "Đang tải phiên bảo mật...",
@@ -113,7 +226,11 @@
       "title": "Evolve — Hẹn hò phi tập trung",
       "email": "📧 Đăng nhập bằng Email",
       "phone": "📱 Đăng nhập bằng Điện thoại",
-      "wallet": "💳 Đăng nhập bằng Ví"
+      "wallet": "💳 Đăng nhập bằng Ví",
+      "dnaRecovery": "🧬 Khôi phục tài khoản qua xét nghiệm DNA",
+      "securityTitle": "Dữ liệu của bạn luôn được bảo mật",
+      "securityDescription": "Hồ sơ được mã hóa và lưu trữ trên các mạng phi tập trung — thông tin cá nhân của bạn không bao giờ bị chia sẻ mà không có sự đồng ý.",
+      "questionRecovery": "🔐 Khôi phục tài khoản bằng câu hỏi bảo mật"
     },
     "phone": {
       "title": "Đăng nhập bằng Điện thoại",
@@ -170,6 +287,50 @@
         "description": "Ghép đôi ẩn danh, yêu cầu ví",
         "authType": "Yêu cầu ví Ethereum"
       }
+    },
+    "recovery": {
+      "title": "Social Recovery",
+      "description": "Thêm email hoặc số điện thoại làm người bảo khôi phục cho ví của bạn",
+      "email": {
+        "label": "Người bảo hộ email",
+        "placeholder": "Nhập email của bạn",
+        "add": "Thêm email",
+        "added": "Người bảo hộ email đã được thêm",
+        "remove": "Xóa",
+        "removed": "Người bảo hộ email đã bị xóa"
+      },
+      "phone": {
+        "label": "Người bảo hộ điện thoại",
+        "placeholder": "Nhập số điện thoại của bạn",
+        "add": "Thêm điện thoại",
+        "added": "Người bảo hộ điện thoại đã được thêm",
+        "remove": "Xóa",
+        "removed": "Người bảo hộ điện thoại đã bị xóa"
+      }
+    },
+    "emailAuth": {
+      "loginTitle": "Sign in with email",
+      "registerTitle": "Create account",
+      "modeLogin": "Sign in",
+      "modeRegister": "Register",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "confirmLabel": "Confirm password",
+      "loginButton": "Sign in",
+      "registerButton": "Create account",
+      "errorRequired": "Email and password are required",
+      "errorPasswordsDiffer": "Passwords do not match",
+      "errorExists": "This email is already registered",
+      "errorCredentials": "Invalid email or password",
+      "errorFailed": "Something went wrong. Try again",
+      "questionTitle": "Create your secret question",
+      "questionHint": "Invent the question and answer yourself — any language, any symbols. It is your passwordless login method.",
+      "questionLabel": "Your question",
+      "questionPlaceholder": "e.g. What was the name of my first pet?",
+      "answerLabel": "Your answer",
+      "answerPlaceholder": "Your answer",
+      "questionSave": "Save and continue",
+      "errorQuestionRequired": "Question and answer are required"
     }
   },
   "network": {
@@ -185,5 +346,818 @@
     "aurora": "Aurora",
     "celo": "Celo",
     "cronos": "Cronos"
+  },
+  "userProfile": {
+    "notFound": "Không tìm thấy người dùng",
+    "backToHome": "Về trang chủ",
+    "back": "Quay lại",
+    "verifiedStd": "STD đã xác minh",
+    "accessTitle": "Truy cập dữ liệu y tế",
+    "accessDescription": "Yêu cầu quyền xem kết quả STD hoặc DNA của người dùng này.",
+    "requestStd": "Yêu cầu STD",
+    "requestDna": "Yêu cầu DNA",
+    "openProfile": "Mở hồ sơ của {{name}}",
+    "ageHidden": "đã ẩn tuổi"
+  },
+  "onboarding": {
+    "title": "Hoàn thiện hồ sơ của bạn",
+    "subtitle": "Chia sẻ một chút về bản thân",
+    "age": {
+      "title": "Tuổi của bạn",
+      "label": "Tuổi",
+      "hide": "Ẩn tuổi của tôi",
+      "hideHint": "Tuổi của bạn sẽ không hiển thị với người khác"
+    },
+    "languages": {
+      "title": "Ngôn ngữ",
+      "hint": "Chọn ngôn ngữ bạn nói"
+    },
+    "bio": {
+      "title": "Giới thiệu",
+      "label": "Giới thiệu",
+      "placeholder": "Viết một chút về bạn, sở thích, điều bạn đang tìm kiếm..."
+    },
+    "photo": {
+      "title": "Ảnh của bạn",
+      "upload": "Tải ảnh lên",
+      "change": "Đổi ảnh",
+      "preview": "Xem trước ảnh",
+      "blur": "Làm mờ ảnh của tôi",
+      "blurHint": "Người khác chỉ thấy ảnh mờ cho đến khi bạn cấp quyền",
+      "invalidType": "Vui lòng chọn tệp hình ảnh",
+      "readError": "Không đọc được ảnh. Hãy thử tệp khác."
+    },
+    "back": "Quay lại",
+    "next": "Tiếp theo",
+    "skip": "Bỏ qua",
+    "saving": "Đang lưu…",
+    "finish": "Hoàn tất",
+    "gender": {
+      "title": "About you",
+      "label": "I identify as",
+      "lookingForLabel": "Who are you looking for?",
+      "lookingForOptions": {
+        "man": "A man",
+        "woman": "A woman",
+        "couple_man_woman": "A couple (man + woman)",
+        "couple_woman_woman": "A couple (woman + woman)",
+        "couple_man_man": "A couple (man + man)"
+      }
+    },
+    "kind": {
+      "title": "Bạn là ai"
+    }
+  },
+  "photo": {
+    "request": "Yêu cầu xem ảnh",
+    "tempView": "Hiển thị {{seconds}} giây",
+    "accessPermanent": "Bạn có quyền xem ảnh này vĩnh viễn",
+    "accessTemporary": "Bạn có quyền xem ảnh này tạm thời",
+    "accessNone": "Ảnh bị làm mờ — yêu cầu quyền xem",
+    "pendingRequest": "Yêu cầu xem ảnh đang chờ:",
+    "approveTemporary": "Chấp nhận 15 giây",
+    "approvePermanent": "Chấp nhận vĩnh viễn",
+    "deny": "Từ chối",
+    "offerTitle": "Đề nghị ảnh của tôi:",
+    "offerTemporary": "Đề nghị 15 giây",
+    "offerPermanent": "Đề nghị vĩnh viễn",
+    "revoke": "Thu hồi quyền",
+    "viewOffer": "Xem ảnh",
+    "hide": "Ẩn ảnh",
+    "faceVerify": "Face verification",
+    "faceVerifyHint": "Verify your photo is real. Your photo will be checked against a live selfie.",
+    "verifyFace": "Verify with selfie",
+    "verifying": "Verifying face...",
+    "faceVerified": "Face verified successfully ✓",
+    "noFaceDetected": "No face detected in the photo. Please upload a clear photo of your face.",
+    "faceMismatch": "Face mismatch detected ({{similarity}}% similar). The photo does not match your live selfie.",
+    "verificationError": "Face verification failed. Please try again."
+  },
+  "common": {
+    "or": "hoặc",
+    "back": "Quay lại",
+    "loading": "Đang tải...",
+    "confirm": "Xác nhận",
+    "skip": "Bỏ qua bây giờ"
+  },
+  "dnaRecovery": {
+    "title": "Khôi phục tài khoản qua xét nghiệm DNA",
+    "description": "Xác minh danh tính bằng hồ sơ DNA đã đăng ký. Nhập email liên kết với tài khoản và dán kết quả xét nghiệm DNA.",
+    "emailLabel": "Địa chỉ email",
+    "emailPlaceholder": "you@example.com",
+    "next": "Tiếp theo",
+    "emailEntered": "Email",
+    "dnaLabel": "Kết quả xét nghiệm DNA",
+    "dnaPlaceholder": "Dán văn bản kết quả xét nghiệm DNA của bạn vào đây…",
+    "recover": "Khôi phục tài khoản",
+    "recovering": "Đang xác minh DNA…",
+    "error": {
+      "emailRequired": "Vui lòng nhập địa chỉ email",
+      "dnaRequired": "Vui lòng dán kết quả xét nghiệm DNA",
+      "failed": "Xác minh DNA thất bại. Vui lòng kiểm tra và thử lại.",
+      "network": "Lỗi mạng. Vui lòng thử lại."
+    }
+  },
+  "filters": {
+    "ageRange": "Khoảng tuổi",
+    "min": "Tối thiểu",
+    "max": "Tối đa",
+    "heightRange": "Chiều cao (cm)",
+    "weightRange": "Cân nặng (kg)",
+    "country": "Quốc gia",
+    "city": "Thành phố",
+    "languages": "Ngôn ngữ",
+    "any": "Bất kỳ",
+    "yes": "Có",
+    "no": "Không",
+    "eyeColor": "Màu mắt",
+    "hairColor": "Màu tóc",
+    "bodyType": "Vóc dáng",
+    "education": "Học vấn",
+    "maritalStatus": "Tình trạng hôn nhân",
+    "religion": "Tôn giáo",
+    "zodiac": "Cung hoàng đạo",
+    "children": "Con cái",
+    "smoking": "Hút thuốc",
+    "drinking": "Rượu bia",
+    "eyeColors": {
+      "brown": "Brown",
+      "blue": "Blue",
+      "green": "Green",
+      "hazel": "Hazel",
+      "gray": "Gray",
+      "black": "Black"
+    },
+    "hairColors": {
+      "black": "Black",
+      "brown": "Brown",
+      "blonde": "Blonde",
+      "red": "Red",
+      "gray": "Gray",
+      "white": "White",
+      "bald": "Bald"
+    },
+    "bodyTypes": {
+      "slim": "Slim",
+      "athletic": "Athletic",
+      "average": "Average",
+      "curvy": "Curvy",
+      "muscular": "Muscular",
+      "large": "Large"
+    },
+    "educationLevels": {
+      "highSchool": "High school",
+      "associate": "Associate degree",
+      "bachelor": "Bachelor's",
+      "master": "Master's",
+      "doctorate": "Doctorate",
+      "other": "Other"
+    },
+    "maritalStatuses": {
+      "single": "Single",
+      "divorced": "Divorced",
+      "widowed": "Widowed",
+      "separated": "Separated",
+      "married": "Married"
+    },
+    "religions": {
+      "christianity": "Christianity",
+      "islam": "Islam",
+      "judaism": "Judaism",
+      "hinduism": "Hinduism",
+      "buddhism": "Buddhism",
+      "atheist": "Atheist",
+      "agnostic": "Agnostic",
+      "spiritual": "Spiritual",
+      "other": "Other"
+    },
+    "zodiacs": {
+      "aries": "Aries",
+      "taurus": "Taurus",
+      "gemini": "Gemini",
+      "cancer": "Cancer",
+      "leo": "Leo",
+      "virgo": "Virgo",
+      "libra": "Libra",
+      "scorpio": "Scorpio",
+      "sagittarius": "Sagittarius",
+      "capricorn": "Capricorn",
+      "aquarius": "Aquarius",
+      "pisces": "Pisces"
+    },
+    "skinColor": "Màu da",
+    "skinColors": {
+      "fair": "Rất sáng",
+      "light": "Sáng",
+      "medium": "Trung bình",
+      "tan": "Rám nắng",
+      "dark": "Tối",
+      "deep": "Rất tối"
+    },
+    "gender": "Giới tính",
+    "genders": {
+      "male": "Nam",
+      "female": "Nữ",
+      "other": "Khác"
+    },
+    "lookingFor": "Đang tìm kiếm",
+    "lookingForOptions": {
+      "man": "Một người nam",
+      "woman": "Một người nữ",
+      "couple_man_woman": "Một cặp đôi (nam + nữ)",
+      "couple_woman_woman": "Một cặp đôi (nữ + nữ)",
+      "couple_man_man": "Một cặp đôi (nam + nam)"
+    },
+    "testingPreference": "Phương pháp kiểm tra",
+    "testingPreferences": {
+      "lab": "Tại phòng thí nghiệm",
+      "portable": "Máy kiểm tra di động",
+      "both": "Cả hai phương án",
+      "none": "Không quan trọng"
+    },
+    "searchTarget": "Search for",
+    "searchTargets": {
+      "man": "Man",
+      "woman": "Woman",
+      "laboratory": "Laboratory"
+    },
+    "stdCompatible": "STD compatible",
+    "noLabs": "No laboratories found",
+    "whatSearch": "Bạn tìm gì",
+    "whoSearch": "Bạn tìm ai",
+    "stdTests": "Xét nghiệm bệnh lây qua đường tình dục",
+    "canTravel": "Tôi có thể đến quốc gia của bạn",
+    "canTravelOnly": "Có thể đến quốc gia của tôi"
+  },
+  "questionRecovery": {
+    "title": "Khôi phục bằng câu hỏi bảo mật",
+    "description": "Khôi phục tài khoản bằng cách trả lời câu hỏi bảo mật bạn đã đặt khi đăng ký.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "next": "Tiếp tục",
+    "nextLoading": "Đang tìm…",
+    "emailEntered": "Đang khôi phục cho",
+    "questionLabel": "Câu hỏi bảo mật",
+    "answerLabel": "Câu trả lời của bạn",
+    "answerPlaceholder": "Nhập câu trả lời",
+    "recover": "Khôi phục tài khoản",
+    "recovering": "Đang xác minh…",
+    "error": {
+      "emailRequired": "Vui lòng nhập email của bạn.",
+      "lookupFailed": "Không tìm thấy tài khoản với email đó.",
+      "network": "Lỗi mạng. Vui lòng thử lại.",
+      "answerRequired": "Vui lòng nhập câu trả lời.",
+      "failed": "Câu trả lời không đúng. Vui lòng thử lại.",
+      "noQuestion": "Chưa đặt câu hỏi bảo mật cho tài khoản này."
+    }
+  },
+  "communications": {
+    "proposalsTitle": "Đề xuất",
+    "proposalsSubtitle": "Sáng kiến cộng đồng — phiếu được tính theo uy tín",
+    "proposalTitlePlaceholder": "Tiêu đề đề xuất",
+    "proposalDescPlaceholder": "Mô tả ngắn (tùy chọn)",
+    "createProposal": "Tạo đề xuất",
+    "votesFor": "Đồng ý",
+    "votesAgainst": "Phản đối",
+    "voteWeightHint": "Trọng số phiếu của bạn: {{weight}} (uy tín)",
+    "noProposals": "Chưa có đề xuất nào. Hãy tạo đề xuất đầu tiên!",
+    "yes": "Có",
+    "no": "Không",
+    "youVotedWeight": "Bạn đã bỏ phiếu — trọng số {{weight}}",
+    "proposalPlatformFilter": {
+      "all": "Tất cả",
+      "github": "GitHub",
+      "codeberg": "Codeberg",
+      "gitlab": "GitLab",
+      "inApp": "Trong ứng dụng"
+    },
+    "proposalStatus": {
+      "open": "Đang mở",
+      "closed": "Đã đóng",
+      "merged": "Đã hợp nhất"
+    },
+    "proposalViewOn": "Xem trên {{platform}}"
+  },
+  "catfish": {
+    "riskLow": "Low risk",
+    "riskModerate": "Moderate risk",
+    "riskHigh": "High risk",
+    "photoPhotographAge": "Photo appears very old (possible stolen photo)",
+    "profileAgeNew": "Profile is very new",
+    "missingVerification": "Missing profile verification",
+    "timingSuspicious": "Suspicious message timing (possible bot)",
+    "scamSuspicious": "Suspicious content detected",
+    "timing": "Message timing",
+    "scam": "Suspicious content",
+    "flagged": "Profile flagged for review"
+  },
+  "labPortal": {
+    "title": "Cổng phòng xét nghiệm",
+    "subtitle": "Không gian làm việc của phòng xét nghiệm đối tác. Xác minh danh tính bệnh nhân và đính kèm kết quả xét nghiệm.",
+    "apiKey": "Khóa API phòng xét nghiệm",
+    "newPatient": "Bệnh nhân mới",
+    "register": {
+      "name": "Tên phòng xét nghiệm",
+      "namePlaceholder": "vd: Sunrise Diagnostics",
+      "email": "Email liên hệ",
+      "submit": "Đăng ký phòng xét nghiệm",
+      "required": "Vui lòng nhập tên phòng xét nghiệm và email liên hệ.",
+      "failed": "Không thể đăng ký phòng xét nghiệm. Vui lòng thử lại.",
+      "savedKey": "Đã đăng ký. Khóa API của bạn được lưu trên thiết bị này."
+    },
+    "scan": {
+      "title": "Quét mã QR của bệnh nhân",
+      "hint": "Yêu cầu bệnh nhân mở Evolve → Hồ sơ → Xét nghiệm và hiển thị mã QR.",
+      "start": "Bật camera",
+      "stop": "Tắt camera",
+      "startFailed": "Không thể bật camera. Vui lòng cho phép truy cập camera và thử lại.",
+      "noPermission": "Quyền truy cập camera bị chặn. Vui lòng cho phép camera trong trình duyệt (biểu tượng ổ khóa trên thanh địa chỉ) rồi thử lại.",
+      "noCamera": "Không tìm thấy camera trên thiết bị này."
+    },
+    "verify": {
+      "title": "Xác minh danh tính bệnh nhân",
+      "patientId": "ID bệnh nhân",
+      "takePhoto": "Chụp ảnh bệnh nhân",
+      "photoAlt": "Ảnh bệnh nhân để xác minh",
+      "checking": "Đang kiểm tra…",
+      "confirm": "So khớp khuôn mặt",
+      "noFace": "Không phát hiện khuôn mặt trong ảnh. Vui lòng chụp ảnh khác.",
+      "photoError": "Không thể xử lý ảnh. Vui lòng thử lại.",
+      "failed": "Xác minh thất bại. Vui lòng thử lại.",
+      "matched": "Đã xác nhận danh tính — khuôn mặt khớp.",
+      "unmatched": "Chưa xác nhận danh tính — khuôn mặt không khớp.",
+      "similarity": "Độ tương đồng"
+    },
+    "report": {
+      "title": "Đính kèm kết quả xét nghiệm",
+      "hint": "Dán văn bản kết quả thô. Nó sẽ được phân tích tự động.",
+      "placeholder": "Dán văn bản kết quả vào đây…",
+      "submit": "Gửi kết quả",
+      "submitting": "Đang gửi…",
+      "success": "Đã gửi kết quả. Nó sẽ xuất hiện trong báo cáo chờ xử lý của bệnh nhân.",
+      "failed": "Không thể gửi kết quả. Vui lòng thử lại."
+    }
+  },
+  "help": {
+    "aria": {
+      "info": "Chú giải thông tin",
+      "suggest": "Đề xuất cải tiến"
+    },
+    "unknownTerm": "Thuật ngữ không xác định",
+    "home": {
+      "filters": {
+        "skinColor": {
+          "title": "Lọc theo màu da khai báo",
+          "body": "Chọn tông màu để thu hẹp kết quả"
+        },
+        "lookingFor": {
+          "title": "Lọc theo người bạn đang tìm",
+          "body": "Chọn sở thích quan hệ để tinh chỉnh kết quả"
+        },
+        "testingPreference": {
+          "title": "Lọc theo trạng thái xét nghiệm STD",
+          "body": "Chỉ hiện hồ sơ có kết quả STD đã xác minh"
+        },
+        "gender": {
+          "title": "Lọc theo giới tính khai báo",
+          "body": "Thu hẹp kết quả dựa trên giới tính"
+        }
+      }
+    },
+    "chat": {
+      "proposals": {
+        "title": "Bảng bỏ phiếu đề xuất",
+        "body": "Xem và bỏ phiếu cho đề xuất cộng đồng"
+      }
+    },
+    "mode2": {
+      "dashboard": {
+        "title": "Chế độ liên kết thai kỳ",
+        "body": "Quản lý tính năng thai kỳ và liên kết"
+      }
+    },
+    "mode3": {
+      "dashboard": {
+        "title": "Chế độ lựa chọn ẩn danh",
+        "body": "Quy trình chọn cha ẩn danh"
+      }
+    },
+    "profile": {
+      "sections": {
+        "lab": {
+          "title": "Kết quả xét nghiệm",
+          "body": "Xem trạng thái STD đã xác minh"
+        },
+        "modeSelector": {
+          "title": "Bộ chọn chế độ",
+          "body": "Chuyển đổi giữa các chế độ tìm kiếm"
+        },
+        "profileEdit": {
+          "title": "Chỉnh sửa hồ sơ",
+          "body": "Chỉnh sửa thông tin hồ sơ của bạn"
+        }
+      }
+    }
+  },
+  "suggestions": {
+    "title": "Đề xuất cải tiến",
+    "placeholder": "Mô tả đề xuất của bạn…",
+    "cancel": "Hủy",
+    "submit": "Gửi",
+    "submitting": "Đang gửi…",
+    "saved": "Đã lưu đề xuất",
+    "defaultTitle": "Đề xuất mới về {{term}}"
+  },
+  "proposals": {
+    "sourceLabel": "Nguồn: {{source}}"
+  },
+  "dashboard": {
+    "mode2": {
+      "title": "Bảng điều khiển Thụ thai",
+      "subtitle": "Quản lý liên kết thai kỳ và theo dõi hành trình từ xác nhận đến xác định cha",
+      "status": {
+        "active": "Hoạt động",
+        "awaitingPaternity": "Chờ xác định cha",
+        "resolved": "Đã giải quyết"
+      },
+      "step0": {
+        "title": "Bạn là mẹ hay cha?",
+        "description": "Chọn vai trò của bạn để bắt đầu liên kết. Cả hai bên cần có tiền gửi EvolveFund.",
+        "fundReady": "Đã phát hiện tiền gửi EvolveFund",
+        "fundRequired": "Cần gửi ít nhất 15 EVOLVE vào EvolveFund",
+        "walletBalance": "Số dư ví EVOLVE",
+        "fundTitle": "Tiền gửi EvolveFund",
+        "locked": "Bị khóa bởi liên kết",
+        "unlocked": "Đã mở khóa",
+        "daysRemaining": "Còn {{days}} ngày",
+        "noDeposit": "Không có tiền gửi",
+        "depositPrompt": "Gửi EVOLVE vào Quỹ (tối thiểu 15)",
+        "amountPlaceholder": "Số tiền (ví dụ: 20)",
+        "minDeposit": "Số tiền gửi tối thiểu là 15 EVOLVE",
+        "approving": "Đang phê duyệt...",
+        "depositing": "Đang gửi...",
+        "approveAction": "Phê duyệt EVOLVE",
+        "depositAction": "Gửi vào Quỹ",
+        "lockHint": "Khóa tối thiểu 30 ngày. Cần để tạo liên kết."
+      },
+      "step1": {
+        "title": "Xác nhận liên kết",
+        "description": "Cả hai bên phải xác nhận liên kết bằng hồ sơ đã xác minh.",
+        "selfLabel": "Bạn",
+        "partnerLabel": "Đối tác",
+        "confirmed": "Đã xác nhận",
+        "pending": "Đang chờ",
+        "alreadyConfirmed": "Đã xác nhận",
+        "confirmSex": "Xác nhận vai trò của tôi",
+        "partnerAlreadyConfirmed": "Đối tác đã xác nhận",
+        "partnerConfirmSex": "Xác nhận đối tác",
+        "womanPartner": "Đối tác (nữ)",
+        "manPartner": "Đối tác (nam)",
+        "alreadyConfirmedTitle": "Đã xác nhận"
+      },
+      "step2": {
+        "title": "Liên kết đã tạo",
+        "description": "Khi cả hai bên xác nhận, tiền gửi bị khóa trong suốt thời gian liên kết.",
+        "timerInfo": "Liên kết tự động giải quyết khi kết thúc thời kỳ mang thai.",
+        "ready": "Sẵn sàng",
+        "waitingForConfirmations": "Đang chờ xác nhận..."
+      },
+      "step3": {
+        "title": "Mang thai và xác định cha",
+        "description": "Báo cáo việc mang thai; sau kết quả xác định cha, tiền gửi được mở khóa hoặc chuyển.",
+        "pregnancyCheckbox": "Báo cáo mang thai",
+        "resolvedPregnant": "Đã giải quyết liên kết — xác nhận mang thai",
+        "resolvedNotPregnant": "Đã giải quyết liên kết — không mang thai",
+        "canReport": "Bạn có thể báo cáo việc mang thai ngay bây giờ",
+        "notYet": "Báo cáo mang thai có sẵn sau 14 ngày kể từ khi xác nhận",
+        "reportToVerify": "Báo cáo việc mang thai để bắt đầu xác minh quan hệ cha con.",
+        "waitingWindow": "Đang chờ cửa sổ báo cáo mang thai mở...",
+        "waitingWoman": "Đang chờ người phụ nữ báo cáo việc mang thai...",
+        "paternityInProgress": "Đang xác minh quan hệ cha con. Quản trị viên sẽ gửi kết quả.",
+        "awaitingResult": "Đang chờ kết quả xét nghiệm quan hệ cha con từ quản trị viên..."
+      },
+      "createBond": {
+        "partnerPlaceholder": "Địa chỉ đối tác (0x...)",
+        "fundedRequired": "Trước tiên hãy gửi ít nhất 15 EVOLVE",
+        "partnerRequired": "Nhập địa chỉ đối tác"
+      },
+      "error": {
+        "rejected": "Giao dịch bị người dùng từ chối.",
+        "failed": "Lỗi giao dịch: {{message}}"
+      }
+    },
+    "mode3": {
+      "title": "Bảng điều khiển Sau giao hợp",
+      "subtitle": "Chạy phiên sau giao hợp. Phụ nữ tạo phiên, nam giới tham gia.",
+      "create": {
+        "title": "Phiên",
+        "description": "Tạo phiên với tư cách phụ nữ, hoặc tham gia phiên mở với tư cách nam giới.",
+        "button": "Tạo phiên",
+        "hint": "Phiên kéo dài 48 giờ. Sau khi tham gia, xác nhận sự tham gia của bạn và chờ lựa chọn của phụ nữ."
+      },
+      "timer": {
+        "active": "Thời gian còn lại: {{timer}}",
+        "inactive": "Không có phiên hoạt động"
+      },
+      "participants": {
+        "title": "Người tham gia",
+        "empty": "Chưa có người tham gia",
+        "confirmed": "Đã xác nhận"
+      },
+      "available": {
+        "title": "Hồ sơ khả dụng",
+        "empty": "Không có hồ sơ khả dụng",
+        "profileHint": "Nam giới khả dụng",
+        "addButton": "Mời"
+      },
+      "profileBorder": {
+        "title": "Hồ sơ của bạn",
+        "description": "Hồ sơ đã xác minh của bạn là thứ những người tham gia khác nhìn thấy.",
+        "noProfile": "Không có hồ sơ"
+      },
+      "joinButton": "Tham gia phiên",
+      "waitingForParticipants": "Phiên của bạn đang hoạt động — đang chờ người tham gia",
+      "confirmButton": "Xác nhận tham gia",
+      "fundNotice": "Bạn cần gửi ít nhất 15 EVOLVE vào EvolveFund để tham gia.",
+      "resolved": {
+        "title": "Phiên đã giải quyết",
+        "fatherLabel": "Cha được chọn:",
+        "rewardInfo": "Người cha được chọn nhận gấp đôi tiền gửi EvolveFund + 1 EVOLVE cho mỗi người đàn ông tham gia. Những người không được chọn: 90% tiền gửi cho phụ nữ, 10% cho người cha được chọn.",
+        "noFather": "Không có cha nào được chọn. Tiền gửi đã trả lại cho người tham gia."
+      },
+      "error": {
+        "rejected": "Giao dịch bị người dùng từ chối.",
+        "failed": "Lỗi giao dịch: {{message}}"
+      }
+    }
+  },
+  "safety": {
+    "title": "Trung tâm an toàn",
+    "subtitle": "Trạng thái xét nghiệm, liên kết trang công khai và kiểm tra tương thích",
+    "stdStatus": {
+      "title": "Trạng thái xét nghiệm",
+      "verified": "Đã tải lên kết quả xét nghiệm",
+      "notVerified": "Chưa có kết quả",
+      "hint": "Tải lên kết quả xét nghiệm mới nhất để tham gia kiểm tra tương thích. Các mầm bệnh riêng lẻ không bao giờ hiển thị cho người dùng khác."
+    },
+    "publicLink": {
+      "title": "Trang công khai",
+      "hint": "Liên kết ngắn đến trang của bạn chỉ hiển thị ảnh của bạn. Khách truy cập có thể gửi yêu cầu kiểm tra tương thích.",
+      "usernameLabel": "Địa chỉ trang",
+      "usernamePlaceholder": "ví dụ: olena",
+      "enable": "Bật trang công khai",
+      "disable": "Tắt trang công khai",
+      "enabled": "Trang công khai đang hoạt động",
+      "disabled": "Trang công khai đã tắt",
+      "copy": "Sao chép liên kết",
+      "copied": "Đã sao chép!",
+      "taken": "Địa chỉ này đã được sử dụng",
+      "invalid": "Dùng chữ thường, số, dấu chấm và gạch dưới",
+      "saved": "Đã lưu cài đặt"
+    },
+    "checks": {
+      "title": "Kiểm tra tương thích",
+      "incoming": "Yêu cầu đến",
+      "outgoing": "Yêu cầu đã gửi",
+      "empty": "Chưa có yêu cầu nào",
+      "from": "Yêu cầu từ",
+      "approve": "Chấp thuận",
+      "deny": "Từ chối",
+      "awaiting": "Đang chờ phản hồi"
+    },
+    "verdict": {
+      "title": "Kết luận",
+      "safe": "An toàn",
+      "compatible": "Tương thích",
+      "caution": "Thận trọng",
+      "risk": "Phát hiện rủi ro",
+      "incomplete": "Không đủ dữ liệu"
+    },
+    "qr": {
+      "title": "Mã QR cho phòng xét nghiệm",
+      "hint": "Hiện mã này tại phòng xét nghiệm đối tác để liên kết kết quả xét nghiệm của bạn."
+    }
+  },
+  "publicProfile": {
+    "title": "Trang công khai",
+    "check": "Kiểm tra tương thích",
+    "requested": "Đã gửi yêu cầu kiểm tra!",
+    "loading": "Đang tải…",
+    "notFound": "Không tìm thấy hồ sơ hoặc hồ sơ không công khai",
+    "loginRequired": "Vui lòng đăng nhập để gửi yêu cầu kiểm tra",
+    "self": "Đây là trang của chính bạn"
+  },
+  "labDashboard": {
+    "title": "Bảng điều khiển phòng xét nghiệm",
+    "login": "Đăng nhập",
+    "register": "Đăng ký phòng xét nghiệm",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "labName": "Tên phòng xét nghiệm",
+    "submit": "Tiếp tục",
+    "createAccount": "Tạo tài khoản",
+    "haveAccount": "Đã có tài khoản?",
+    "noAccount": "Chưa có tài khoản?",
+    "loggedInAs": "Đã đăng nhập với tư cách",
+    "logout": "Đăng xuất",
+    "scanTitle": "Quét mã QR bệnh nhân",
+    "scanHint": "Yêu cầu bệnh nhân mở Evolve → Trung tâm an toàn và hiển thị mã QR.",
+    "start": "Bật camera",
+    "stop": "Tắt camera",
+    "beginVisit": "Bắt đầu lượt khám",
+    "faceTitle": "Xác minh danh tính bệnh nhân",
+    "matched": "Đã xác nhận danh tính — khuôn mặt khớp.",
+    "unmatched": "KHÔNG xác nhận danh tính — khuôn mặt không khớp.",
+    "checking": "Đang kiểm tra…",
+    "noFace": "Không phát hiện khuôn mặt trong ảnh. Chụp ảnh khác.",
+    "reportTitle": "Đính kèm kết quả xét nghiệm",
+    "reportPlaceholder": "Dán văn bản kết quả…",
+    "reportSubmit": "Lưu kết quả",
+    "reportSuccess": "Đã lưu kết quả",
+    "reportFailed": "Không lưu được kết quả",
+    "visits": "Lượt khám",
+    "noVisits": "Chưa có lượt khám nào",
+    "patient": "Bệnh nhân",
+    "status": "Trạng thái",
+    "date": "Ngày",
+    "visitStatus": {
+      "none": "Chưa bắt đầu",
+      "sample_received": "Đã nhận mẫu",
+      "pending": "Kết quả đang chờ xét duyệt",
+      "accepted": "Kết quả đã được chấp nhận"
+    }
+  },
+  "scan": {
+    "title": "Quét mã QR",
+    "hint": "Quét mã QR từ trang của người khác để gửi yêu cầu kiểm tra tương thích.",
+    "start": "Bật camera",
+    "stop": "Tắt camera",
+    "scanning": "Đang quét…",
+    "requested": "Đã gửi yêu cầu kiểm tra!",
+    "error": "Quét thất bại",
+    "invalidCode": "Đây không phải liên kết Evolve hợp lệ",
+    "self": "Bạn không thể gửi yêu cầu cho chính mình",
+    "pendingExists": "Đã có yêu cầu gửi đến người dùng này"
+  },
+  "companion": {
+    "title": "Chế độ Đồng hành",
+    "intro": "Công cụ này giúp bạn đánh giá độ an toàn của đối tác tiềm năng.",
+    "startButton": "Bắt đầu",
+    "uploadPrompt": "Tải lên xét nghiệm STD của bạn",
+    "uploadButton": "Gửi",
+    "result": {
+      "title": "Kết quả tương thích",
+      "safe": "An toàn",
+      "risk": "Có rủi ro",
+      "description": "Dựa trên xét nghiệm đã tải lên..."
+    },
+    "languageSelect": "Chọn ngôn ngữ",
+    "regionSelect": "Chọn khu vực",
+    "roleSelect": "Chọn vai trò",
+    "continueButton": "Tiếp tục",
+    "role": {
+      "user": "Người dùng",
+      "userHint": "Tôi muốn đánh giá đối tác của mình",
+      "lab": "Phòng thí nghiệm",
+      "labHint": "Tôi làm việc trong phòng thí nghiệm"
+    },
+    "userAuth": {
+      "title": "Đăng nhập người dùng",
+      "welcomeBack": "Chào mừng trở lại! Nhập thông tin đăng nhập của bạn.",
+      "welcomeNew": "Chào mừng! Đăng ký để bắt đầu.",
+      "loginButton": "Đăng nhập",
+      "registerButton": "Đăng ký"
+    },
+    "labAuth": {
+      "title": "Đăng nhập phòng thí nghiệm",
+      "welcomeBack": "Chào mừng trở lại! Nhập thông tin đăng nhập của bạn.",
+      "welcomeNew": "Chào mừng! Đăng ký phòng thí nghiệm của bạn để bắt đầu.",
+      "loginButton": "Đăng nhập",
+      "registerButton": "Đăng ký phòng thí nghiệm"
+    },
+    "profile": {
+      "title": "Hồ sơ của tôi",
+      "uploadPhoto": "Tải lên ảnh",
+      "qrCode": "Mã QR của tôi",
+      "qrHint": "Hiển thị mã QR này để xác minh trực tiếp",
+      "shareLink": "Chia sẻ liên kết",
+      "shareHint": "Gửi liên kết này để xác minh với người khác",
+      "copyLink": "Sao chép liên kết",
+      "linkCopied": "Đã sao chép liên kết",
+      "additionalPhotos": "Ảnh bổ sung",
+      "addMorePhotos": "Thêm nhiều ảnh hơn",
+      "location": "Vị trí",
+      "locationOptional": "Vị trí (tùy chọn)",
+      "noLocation": "Không hiển thị vị trí",
+      "stdCompatible": "Tương thích STD",
+      "searchUsers": "Tìm kiếm người dùng",
+      "chat": "Trò chuyện",
+      "noUsers": "Không tìm thấy người dùng"
+    },
+    "chat": {
+      "inputPlaceholder": "Nhập tin nhắn...",
+      "send": "Gửi",
+      "userStatus": {
+        "new": "Mới",
+        "pending": "Đang chờ kết quả",
+        "previous": "Đã liên hệ trước đây"
+      }
+    },
+    "verify": {
+      "title": "Xác minh đối tác",
+      "partnerPhoto": "Ảnh đối tác",
+      "checkButton": "Xác minh",
+      "uploadYourTest": "Tải lên xét nghiệm của bạn",
+      "compatible": "Kết quả tương thích",
+      "notCompatible": "Kết quả không tương thích",
+      "error": "Lỗi xác minh"
+    },
+    "lab": {
+      "register": "Đăng ký phòng thí nghiệm",
+      "login": "Đăng nhập với tư cách phòng thí nghiệm",
+      "dashboard": "Bảng điều khiển phòng thí nghiệm",
+      "profile": "Hồ sơ phòng thí nghiệm",
+      "description": "Mô tả phòng thí nghiệm",
+      "address": "Địa chỉ",
+      "phone": "Điện thoại",
+      "contact": "Liên hệ",
+      "patients": "Bệnh nhân",
+      "showPending": "Chỉ hiển thị đang chờ",
+      "patientName": "Tên bệnh nhân",
+      "patientId": "ID bệnh nhân",
+      "addResult": "Thêm kết quả",
+      "takePhoto": "Chụp ảnh",
+      "scanQR": "Quét QR",
+      "scanHint": "Nhập ID bệnh nhân từ mã QR hoặc quét bằng camera",
+      "enterUserId": "Nhập ID bệnh nhân",
+      "scanButton": "Quét",
+      "scanError": "Vui lòng nhập ID bệnh nhân",
+      "patientNotFound": "Không tìm thấy bệnh nhân",
+      "verifyPatient": "Xác minh bệnh nhân",
+      "mainPhoto": "Ảnh chính",
+      "verifyPhotos": "Xác minh ảnh",
+      "match": "Khớp",
+      "uncertain": "Không chắc chắn",
+      "confirmPatient": "Xác nhận bệnh nhân",
+      "backToDashboard": "Quay lại bảng điều khiển",
+      "testInfo": "Thông tin xét nghiệm",
+      "testInfoPlaceholder": "Nhập loại xét nghiệm hoặc số mẫu",
+      "testInfoHint": "Thông tin này sẽ giúp xác định bệnh nhân và xét nghiệm của họ",
+      "resultPhoto": "Ảnh kết quả",
+      "resultDate": "Ngày kết quả",
+      "resultNotes": "Ghi chú",
+      "resultNotesPlaceholder": "Thêm ghi chú vào kết quả (tùy chọn)",
+      "saveResult": "Lưu kết quả",
+      "verifyAllPhotos": "Vui lòng đánh giá từng ảnh trước khi xác nhận.",
+      "noPatients": "Không tìm thấy bệnh nhân",
+      "nameLabel": "Laboratory name",
+      "namePlaceholder": "Enter laboratory name",
+      "descriptionPlaceholder": "Describe your laboratory",
+      "addressPlaceholder": "Enter address",
+      "phonePlaceholder": "Enter phone number",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter email",
+      "registerButton": "Register"
+    }
+  },
+  "pwa": {
+    "installTitle": "Cài đặt Evolve",
+    "installHint": "Cài ứng dụng để có trải nghiệm nhanh hơn",
+    "iosHint": "Chạm «Chia sẻ», rồi «Thêm vào màn hình chính»",
+    "install": "Cài đặt",
+    "dismiss": "Đóng"
+  },
+  "profileKind": {
+    "title": "Bạn là ai",
+    "woman": "Phụ nữ",
+    "man": "Đàn ông",
+    "couple_man_woman": "Cặp đôi (Nam+Nữ)",
+    "couple_man_man": "Cặp đôi (Nam+Nam)",
+    "couple_woman_woman": "Cặp đôi (Nữ+Nữ)",
+    "laboratory": "Phòng xét nghiệm"
+  },
+  "kindModal": {
+    "description": "Hãy chọn bạn là ai — điều này cần thiết để tìm kiếm hoạt động chính xác",
+    "confirm": "Xác nhận"
+  },
+  "dex": {
+    "title": "Hoán đổi EVOLVE",
+    "subtitle": "Hoán đổi token qua DEX trên Arbitrum hoặc Avalanche.",
+    "chain": "Mạng",
+    "from": "Từ",
+    "to": "Đến",
+    "amount": "Số lượng",
+    "slippage": "Độ trượt giá",
+    "getQuote": "Nhận báo giá",
+    "swap": "Hoán đổi",
+    "swapping": "Đang hoán đổi…",
+    "bestRate": "Tỷ giá tốt nhất",
+    "estimatedOutput": "Bạn nhận được",
+    "insufficientBalance": "Số dư không đủ",
+    "notAvailable": "Chưa khả dụng trên mạng này",
+    "quoteError": "Không thể lấy báo giá",
+    "swapSuccess": "Đã gửi lệnh hoán đổi",
+    "swapFailed": "Hoán đổi thất bại",
+    "proxyNotConfigured": "Dịch vụ hoán đổi chưa được cấu hình"
   }
 }

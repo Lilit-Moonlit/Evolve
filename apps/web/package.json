@@ -19,11 +19,13 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@evolve/config": "*",
     "@evolve/core": "*",
     "@mediapipe/tasks-vision": "^1.0.1",
     "@prisma/client": "^5.14.0",
     "@rainbow-me/rainbowkit": "^2.1.0",
     "@tanstack/react-query": "^5.35.0",
+    "country-state-city": "^3.2.1",
     "ethers": "^6.12.1",
     "html5-qrcode": "^2.3.8",
     "i18next": "^26.3.1",

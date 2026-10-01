@@ -1,0 +1,77 @@
+{
+  "generatedAt": "2026-10-01T07:51:30.501Z",
+  "proposals": [
+    {
+      "id": "github-41",
+      "title": "Add multi-network governance weight snapshot",
+      "description": "Snapshot the 3-factor vote weight (recursive 30% / children 40% / staked 30%) per block so historical dashboards can render past governance states.",
+      "createdAt": 1786698720000,
+      "source": "github",
+      "votes": {},
+      "platform": "github",
+      "platformIssueId": 41,
+      "platformUrl": "https://github.com/Lilit-Moonlit/Evolve/issues/41",
+      "status": "open"
+    },
+    {
+      "id": "github-37",
+      "title": "Emoji gift revenue split audit",
+      "description": "Publish a monthly report of the perpetual proportional revenue split among gift owners (no burn, no expiry — dilution by design).",
+      "createdAt": 1783007100000,
+      "source": "github",
+      "votes": {},
+      "platform": "github",
+      "platformIssueId": 37,
+      "platformUrl": "https://github.com/Lilit-Moonlit/Evolve/issues/37",
+      "status": "closed"
+    },
+    {
+      "id": "codeberg-12",
+      "title": "Mirror EVOLVE token metadata to Codeberg Pages",
+      "description": "Serve the static tokenomics docs from Codeberg Pages so every forge mirror stays self-contained (ban-resistance).",
+      "createdAt": 1787041800000,
+      "source": "codeberg",
+      "votes": {},
+      "platform": "codeberg",
+      "platformIssueId": 12,
+      "platformUrl": "https://codeberg.org/evolve/evolve/issues/12",
+      "status": "open"
+    },
+    {
+      "id": "codeberg-9",
+      "title": "Gitea webhook receiver spec",
+      "description": "Define the webhook payload contract for issue events, kept compatible with the shared GitHub/Gitea issue shape.",
+      "createdAt": 1782388800000,
+      "source": "codeberg",
+      "votes": {},
+      "platform": "codeberg",
+      "platformIssueId": 9,
+      "platformUrl": "https://codeberg.org/evolve/evolve/issues/9",
+      "status": "closed"
+    },
+    {
+      "id": "gitlab-7",
+      "title": "Zero-downtime proposals manifest deploy",
+      "description": "Serve proposals.json from IPFS gateways with fallback to the pinned copy committed in the repo — no central server in the loop.",
+      "createdAt": 1787396700000,
+      "source": "gitlab",
+      "votes": {},
+      "platform": "gitlab",
+      "platformIssueId": 7,
+      "platformUrl": "https://gitlab.com/evolve-project/evolve/-/issues/7",
+      "status": "open"
+    },
+    {
+      "id": "gitlab-5",
+      "title": "GitLab CI mirror pipeline",
+      "description": "Cross-compile the proposals manifest between forges so each mirror can regenerate it independently.",
+      "createdAt": 1783700400000,
+      "source": "gitlab",
+      "votes": {},
+      "platform": "gitlab",
+      "platformIssueId": 5,
+      "platformUrl": "https://gitlab.com/evolve-project/evolve/-/issues/5",
+      "status": "closed"
+    }
+  ]
+}

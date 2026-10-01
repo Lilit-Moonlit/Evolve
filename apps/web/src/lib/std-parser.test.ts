@@ -633,3 +633,172 @@ describe("Integration: parse → compatibility", () => {
     expect(r.riskLevel).toBe("high_risk");
   });
 });
+
+// ============================================================
+// Real-world lab formats (Quest, Invitro, Synevo, Dila)
+// ============================================================
+describe("Real-world lab formats", () => {
+  it("parses a Quest-style English panel (8 pathogens)", () => {
+    const r = parseStdTestResult(
+      [
+        "HIV 1/2 ANTIGEN/ANTIBODY, FOURTH GENERATION W/RFL",
+        "HIV AG/AB, 4TH GEN NON-REACTIVE",
+        "CHLAMYDIA TRACHOMATIS RNA, TMA, UROGENITAL NOT DETECTED",
+        "NEISSERIA GONORRHOEAE RNA, TMA, UROGENITAL NOT DETECTED",
+        "TREPONEMA PALLIDUM AB, TOTAL, SERUM NOT DETECTED",
+        "HSV 1 IGG, TYPE SPECIFIC AB    54.50 H  HIGH",
+        "HSV 2 IGG, TYPE SPECIFIC AB    <0.90",
+        "HEPATITIS B SURFACE ANTIGEN, SERUM NON-REACTIVE",
+        "HEPATITIS C ANTIBODY, SERUM NON-REACTIVE",
+      ].join("\n"),
+    );
+    expect(r.pathogens).toHaveLength(8);
+    expect(r.hasPositive).toBe(true);
+    expect(r.positiveList).toContain("HSV-1 (Herpes Simplex 1)");
+
+    const byId = (id: string) =>
+      r.pathogens.find((p) => p.pathogenId === id);
+
+    expect(byId("hiv")?.status).toBe("negative");
+    expect(byId("chlamydia")?.status).toBe("negative");
+    expect(byId("gonorrhea")?.status).toBe("negative");
+    expect(byId("syphilis")?.status).toBe("negative");
+    expect(byId("hsv1")?.status).toBe("positive");
+    expect(byId("hsv2")?.status).toBe("negative");
+    expect(byId("hepatitis_b")?.status).toBe("negative");
+    expect(byId("hepatitis_c")?.status).toBe("negative");
+  });
+
+  it("upgrades unknown HIV to negative via later mention (unknown→known)", () => {
+    const r = parseStdTestResult(
+      "HIV 1/2 ANTIGEN/ANTIBODY, FOURTH GENERATION W/RFL\nHIV AG/AB, 4TH GEN NON-REACTIVE",
+    );
+    expect(r.pathogens).toHaveLength(1);
+    expect(r.pathogens[0].pathogenId).toBe("hiv");
+    expect(r.pathogens[0].status).toBe("negative");
+  });
+
+  it("detects Quest HSV-1 HIGH as positive and HSV-2 <0.90 as negative", () => {
+    const r = parseStdTestResult(
+      "HSV 1 IGG, TYPE SPECIFIC AB    54.50 H  HIGH\nHSV 2 IGG, TYPE SPECIFIC AB    <0.90",
+    );
+    const hsv1 = r.pathogens.find((p) => p.pathogenId === "hsv1");
+    const hsv2 = r.pathogens.find((p) => p.pathogenId === "hsv2");
+    expect(hsv1?.status).toBe("positive");
+    expect(hsv2?.status).toBe("negative");
+    expect(r.hasPositive).toBe(true);
+  });
+
+  it("parses an Invitro-style Russian panel", () => {
+    const r = parseStdTestResult(
+      [
+        "Chlamydia trachomatis, ДНК: НЕ ОБНАРУЖ.",
+        "Neisseria gonorrhoeae, ДНК: НЕ ОБНАРУЖ.",
+        "Herpes simplex virus I, ДНК: НЕ ОБНАРУЖ.",
+        "Herpes simplex virus II, ДНК: ОБНАРУЖ.",
+        "anti-Chlamydia trachomatis IgM: отрицат.",
+      ].join("\n"),
+    );
+    expect(r.pathogens.find((p) => p.pathogenId === "chlamydia")?.status).toBe(
+      "negative",
+    );
+    expect(r.pathogens.find((p) => p.pathogenId === "gonorrhea")?.status).toBe(
+      "negative",
+    );
+    expect(r.pathogens.find((p) => p.pathogenId === "hsv1")?.status).toBe(
+      "negative",
+    );
+    expect(r.pathogens.find((p) => p.pathogenId === "hsv2")?.status).toBe(
+      "positive",
+    );
+    expect(r.hasPositive).toBe(true);
+    expect(r.positiveList).toContain("HSV-2 (Herpes Simplex 2)");
+  });
+
+  it("does not confuse HSV-1 and HSV-2 in Roman-numeral forms", () => {
+    const a = parseStdTestResult("Herpes simplex virus II, ДНК: ОБНАРУЖ.");
+    expect(a.pathogens).toHaveLength(1);
+    expect(a.pathogens[0].pathogenId).toBe("hsv2");
+    expect(a.pathogens[0].status).toBe("positive");
+
+    const b = parseStdTestResult("Herpes simplex virus I, ДНК: НЕ ОБНАРУЖ.");
+    expect(b.pathogens).toHaveLength(1);
+    expect(b.pathogens[0].pathogenId).toBe("hsv1");
+    expect(b.pathogens[0].status).toBe("negative");
+  });
+
+  it("uses the Synevo-style 'Результат:' fallback line", () => {
+    const r = parseStdTestResult(
+      [
+        "Chlamydia trachomatis, ДНК, количественное определение ПЦР",
+        "Результат: не виявлено",
+        "Gonorrhea (Neisseria gonorrhoeae), ДНК, количественное определение",
+        "Результат: негативный результат",
+        "Вірус гепатиту B, HBsAg, количественный тест",
+        "Результат: не виявлено",
+      ].join("\n"),
+    );
+    expect(r.pathogens.find((p) => p.pathogenId === "chlamydia")?.status).toBe(
+      "negative",
+    );
+    expect(r.pathogens.find((p) => p.pathogenId === "gonorrhea")?.status).toBe(
+      "negative",
+    );
+    expect(r.pathogens.find((p) => p.pathogenId === "hepatitis_b")?.status).toBe(
+      "negative",
+    );
+    expect(r.hasPositive).toBe(false);
+  });
+
+  it("handles the Dila typo 'Neisseria gonorhoeae'", () => {
+    const r = parseStdTestResult("Neisseria gonorhoeae: виявлено");
+    expect(r.pathogens).toHaveLength(1);
+    expect(r.pathogens[0].pathogenId).toBe("gonorrhea");
+    expect(r.pathogens[0].status).toBe("positive");
+  });
+
+  it("detects HBsAg as Hepatitis B", () => {
+    const r = parseStdTestResult("HBsAg: positive");
+    expect(r.pathogens).toHaveLength(1);
+    expect(r.pathogens[0].pathogenId).toBe("hepatitis_b");
+    expect(r.pathogens[0].status).toBe("positive");
+  });
+
+  it("detects RPR as Syphilis", () => {
+    const r = parseStdTestResult("RPR: negative");
+    expect(r.pathogens).toHaveLength(1);
+    expect(r.pathogens[0].pathogenId).toBe("syphilis");
+    expect(r.pathogens[0].status).toBe("negative");
+  });
+
+  it("detects Treponema pallidum as Syphilis", () => {
+    const r = parseStdTestResult("Treponema pallidum: detected");
+    expect(r.pathogens).toHaveLength(1);
+    expect(r.pathogens[0].pathogenId).toBe("syphilis");
+    expect(r.pathogens[0].status).toBe("positive");
+  });
+
+  it("detects Anti-HCV as Hepatitis C", () => {
+    const r = parseStdTestResult("Anti-HCV: negative");
+    expect(r.pathogens).toHaveLength(1);
+    expect(r.pathogens[0].pathogenId).toBe("hepatitis_c");
+    expect(r.pathogens[0].status).toBe("negative");
+  });
+
+  it("matches status keywords ending with '.'/'!'/'?' (boundary chars)", () => {
+    const neg = parseStdTestResult("Hepatitis C: clear.");
+    expect(neg.pathogens[0]?.status).toBe("negative");
+
+    const pos = parseStdTestResult("Hepatitis C: found.");
+    expect(pos.pathogens[0]?.status).toBe("positive");
+  });
+
+  it("recognizes 'All results are negative.' as all-negative", () => {
+    const r = parseStdTestResult(
+      "HIV: not detected\nChlamydia trachomatis: not detected\nAll results are negative.",
+    );
+    expect(r.isAllNegative).toBe(true);
+    expect(r.hasPositive).toBe(false);
+    expect(r.pathogens.every((p) => p.status === "negative")).toBe(true);
+  });
+});

@@ -1,0 +1,103 @@
+
+> evolve-web@0.0.0 dev
+> vite
+
+FORCE_FALLBACK=1. Using JSON fallback database.
+
+  [32m[1mVITE[22m v5.4.21[39m  [2mready in [0m[1m122496[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m3000[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://10.30.0.43:[1m3000[22m/[39m
+[2m22:13:12[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/WelcomeScreen.tsx, /src/index.css[22m
+[2m22:13:12[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/WelcomeScreen.tsx, /src/index.css[22m
+[2m22:13:26[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/UserAuthScreen.tsx, /src/index.css[22m
+[2m22:13:27[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/UserAuthScreen.tsx, /src/index.css[22m
+[2m22:13:29[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/LabAuthScreen.tsx, /src/index.css[22m
+[2m22:13:44[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/WelcomeScreen.tsx, /src/index.css[22m
+[2m22:13:46[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/WelcomeScreen.tsx, /src/index.css[22m
+[2m22:14:01[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/Search.tsx, /src/index.css[22m
+[2m22:14:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/LabVerifyPatient.tsx, /src/index.css[22m
+[2m22:14:28[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/LabVerifyPatient.tsx, /src/index.css[22m
+[2m22:14:36[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/LabVerifyPatient.tsx, /src/index.css[22m
+[2m22:14:50[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/LabVerifyPatient.tsx, /src/index.css[22m
+[2m22:14:59[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/LabVerifyPatient.tsx, /src/index.css[22m
+[2m22:15:08[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/LabVerifyPatient.tsx, /src/index.css[22m
+[2m22:15:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/LabVerifyPatient.tsx, /src/index.css[22m
+[2m22:15:29[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/Profile.tsx, /src/index.css[22m
+[2m22:15:40[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/LabDashboard.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:16:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m22:17:24[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/routes/__tests__/CompanionRoutes.test.tsx[22m
+[2m22:18:21[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/Search.tsx, /src/index.css[22m
+[2m10:27:08[22m [36m[1m[vite][22m[39m [32msrc/lib/db.ts changed, restarting server...[39m
+FORCE_FALLBACK=1. Using JSON fallback database.
+[2m10:27:08[22m [36m[1m[vite][22m[39m server restarted.
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m3000[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://10.10.100.227:[1m3000[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://172.25.240.1:[1m3000[22m/[39m
+[2m10:27:45[22m [36m[1m[vite][22m[39m [32msrc/lib/db.ts changed, restarting server...[39m
+FORCE_FALLBACK=1. Using JSON fallback database.
+[2m10:27:45[22m [36m[1m[vite][22m[39m server restarted.
+[2m10:27:59[22m [36m[1m[vite][22m[39m [32msrc/lib/db.ts changed, restarting server...[39m
+FORCE_FALLBACK=1. Using JSON fallback database.
+[2m10:27:59[22m [36m[1m[vite][22m[39m server restarted.
+[2m10:28:10[22m [36m[1m[vite][22m[39m [32msrc/lib/db.ts changed, restarting server...[39m
+FORCE_FALLBACK=1. Using JSON fallback database.
+[2m10:28:10[22m [36m[1m[vite][22m[39m server restarted.
+[2m10:28:34[22m [36m[1m[vite][22m[39m [32msrc/lib/apiServer.ts changed, restarting server...[39m
+FORCE_FALLBACK=1. Using JSON fallback database.
+[2m10:28:34[22m [36m[1m[vite][22m[39m server restarted.
+[2m12:40:45[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/LabAuthScreen.tsx, /src/index.css[22m
+[2m12:40:46[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/index.css, /src/routes/CompanionRoutes.tsx[22m
+[2m12:41:22[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/LabProfile.tsx, /src/index.css[22m
+[2m12:41:54[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/LabProfile.tsx, /src/index.css[22m
+[2m12:43:18[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Companion/LabDashboard.tsx, /src/index.css[22m
+[2m12:44:36[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/routes/CompanionRoutes.tsx, /src/index.css[22m
+[2m12:45:44[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m12:46:47[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m12:47:17[22m [36m[1m[vite][22m[39m [32m.env changed, restarting server...[39m
+FORCE_FALLBACK=1. Using JSON fallback database.
+[2m12:47:17[22m [36m[1m[vite][22m[39m server restarted.

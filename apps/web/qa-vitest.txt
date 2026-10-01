@@ -1,0 +1,63 @@
+FORCE_FALLBACK=1. Using JSON fallback database.
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.10 [39m[90mC:/CFC/apps/web[39m
+
+[90mstdout[2m | src/lib/__tests__/admin-chain.test.ts[2m > [22m[2madminChain[2m > [22m[2m(b) mintEvolveAmount routes to RewardMinter.mintReward with the to-address
+[22m[39m[adminChain] Admin relay configured for 0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa on chain 11155111
+
+[90mstdout[2m | src/lib/__tests__/admin-chain.test.ts[2m > [22m[2madminChain[2m > [22m[2m(c) mintEvolve routes to mintFaucet
+[22m[39m[adminChain] Admin relay configured for 0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa on chain 11155111
+
+[90mstdout[2m | src/lib/__tests__/admin-chain.test.ts[2m > [22m[2madminChain[2m > [22m[2m(e) env CHAIN_ID and ADMIN_RPC_URL override the defaults
+[22m[39m[adminChain] Admin relay configured for 0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa on chain 11155111
+
+ [32m✓[39m src/lib/__tests__/admin-chain.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 1105[2mms[22m[39m
+     [33m[2m✓[22m[39m (a) mintEvolveAmount without ADMIN_PRIVATE_KEY throws [33m 1090[2mms[22m[39m
+ [32m✓[39m src/components/__tests__/VerificationModal.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[33m 305[2mms[22m[39m
+ [32m✓[39m src/components/Companion/__tests__/Entry.test.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 308[2mms[22m[39m
+     [33m[2m✓[22m[39m renders title, description and navigates on start click [32m 300[2mms[22m[39m
+ [32m✓[39m src/components/Companion/__tests__/UploadTest.test.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 318[2mms[22m[39m
+     [33m[2m✓[22m[39m renders upload form and navigates to result on submit [33m 309[2mms[22m[39m
+ [32m✓[39m src/pages/__tests__/UserProfile.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 502[2mms[22m[39m
+   [33m[2m✓[22m[39m renders other user profile details [33m 379[2mms[22m[39m
+ [32m✓[39m src/pages/Chat.test.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 486[2mms[22m[39m
+   [33m[2m✓[22m[39m renders Chat component placeholder [33m 470[2mms[22m[39m
+ [32m✓[39m src/pages/__tests__/HomeFilters.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[33m 4613[2mms[22m[39m
+     [33m[2m✓[22m[39m defaults to normal mode and persists to evolve_search_mode on change [33m 4018[2mms[22m[39m
+ [32m✓[39m src/__tests__/integration.test.tsx [2m([22m[2m13 tests[22m[2m)[22m[33m 4969[2mms[22m[39m
+     [33m[2m✓[22m[39m updates Home when wallet connects via SIWE [33m 4138[2mms[22m[39m
+ [32m✓[39m src/lib/std-parser.test.ts [2m([22m[2m83 tests[22m[2m)[22m[32m 119[2mms[22m[39m
+[90mstdout[2m | src/lib/__tests__/db-registration-reward.test.ts
+[22m[39mFORCE_FALLBACK=1. Using JSON fallback database.
+
+ [32m✓[39m src/lib/__tests__/db-registration-reward.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 213[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/pdf-text.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 77[2mms[22m[39m
+ [32m✓[39m src/components/Companion/__tests__/Result.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 152[2mms[22m[39m
+ [32m✓[39m src/lib/dna-parser.test.ts [2m([22m[2m21 tests[22m[2m)[22m[32m 50[2mms[22m[39m
+ [32m✓[39m src/lib/photo-access.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/lab-report.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+ [32m✓[39m src/routes/__tests__/CompanionRoutes.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[33m 431[2mms[22m[39m
+     [33m[2m✓[22m[39m renders the welcome screen with role selection and starts the user flow [33m 350[2mms[22m[39m
+ [32m✓[39m src/pages/Home.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 167[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/lab-preference.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 25[2mms[22m[39m
+ [32m✓[39m src/pages/Profile.test.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 534[2mms[22m[39m
+   [33m[2m✓[22m[39m renders Profile page with profile info [33m 524[2mms[22m[39m
+ [32m✓[39m src/lib/behavioral-analysis.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 23[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/looking-for.test.ts [2m([22m[2m20 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+ [32m✓[39m src/components/Companion/lib/__tests__/companion-storage.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 23[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/locations.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m src/lib/bridge.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 27[2mms[22m[39m
+ [32m✓[39m src/lib/dna-verification.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m src/components/Companion/lib/__tests__/lab-qr.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/registration-reward.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/profile-kind.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m src/utils/dnaUtils.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m src/components/Companion/lib/__tests__/verify-patient.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/can-travel.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/checks.test.ts [2m([22m[2m19 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m32 passed[39m[22m[90m (32)[39m
+[2m      Tests [22m [1m[32m303 passed[39m[22m[90m (303)[39m
+[2m   Start at [22m 18:23:56
+[2m   Duration [22m 37.92s[2m (transform 7.34s, setup 28.53s, import 91.31s, tests 14.64s, environment 97.34s)[22m
+

@@ -1,41 +1,17 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppState } from "../store/AppContext";
 import { useNavigate } from "react-router-dom";
-
-const modes = [
-  {
-    id: "normal" as const,
-    icon: "💜",
-    labelKey: "auth.modeSelector.normal.label",
-    descKey: "auth.modeSelector.normal.description",
-  },
-  {
-    id: "pregnancy-bond" as const,
-    icon: "🤰",
-    labelKey: "auth.modeSelector.pregnancyBond.label",
-    descKey: "auth.modeSelector.pregnancyBond.description",
-  },
-  {
-    id: "cryptic-choice" as const,
-    icon: "🎭",
-    labelKey: "auth.modeSelector.crypticChoice.label",
-    descKey: "auth.modeSelector.crypticChoice.description",
-  },
-];
+import SmartAccountInfo from "../components/SmartAccountInfo";
+import PaymasterDeposit from "../components/PaymasterDeposit";
 
 export default function ProfileSettings() {
   const { t } = useTranslation();
-  const { authMode, setAuthMode, myProfile, toggleHideProfile } = useAppState();
+  const { authMode, myProfile, toggleHideProfile } = useAppState();
   const navigate = useNavigate();
 
-  const handleModeChange = (
-    mode: "normal" | "pregnancy-bond" | "cryptic-choice",
-  ) => {
-    setAuthMode(mode);
-  };
-
   return (
-    <div className="max-w-2xl mx-auto p-6 space-y-8">
+    <div className="max-w-full sm:max-w-2xl mx-auto p-4 sm:p-6 space-y-8">
       <div className="flex items-center gap-4">
         <button
           onClick={() => navigate("/profile")}
@@ -47,57 +23,6 @@ export default function ProfileSettings() {
           {t("navigation.settings")}
         </h1>
       </div>
-
-      <section className="bg-slate-800 border border-slate-700 rounded-2xl p-8 shadow-xl">
-        <h2 className="text-2xl font-bold text-white text-center mb-2">
-          {t("auth.modeSelector.title")}
-        </h2>
-        <p className="text-gray-400 text-center mb-8">
-          {t("auth.modeSelector.description")}
-        </p>
-
-        {authMode && (
-          <div className="text-center mb-6">
-            <span className="text-sm text-gray-400">
-              {t("settings.currentMode")}:{" "}
-              <span className="text-blue-400 font-semibold">
-                {t(modes.find((m) => m.id === authMode)?.labelKey || "")}
-              </span>
-            </span>
-          </div>
-        )}
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {modes.map((mode) => (
-            <button
-              key={mode.id}
-              onClick={() => handleModeChange(mode.id)}
-              className={`flex flex-col items-center p-6 border rounded-xl transition-all transform hover:scale-[1.02] text-left min-h-[180px] ${
-                authMode === mode.id
-                  ? "bg-blue-600 border-blue-500 text-white"
-                  : "bg-slate-700 hover:bg-slate-600 border-slate-600 hover:border-blue-500 text-white"
-              }`}
-            >
-              <span className="text-4xl mb-4">{mode.icon}</span>
-              <h3 className="text-xl font-bold mb-2">{t(mode.labelKey)}</h3>
-              <p
-                className={`text-xs text-center ${authMode === mode.id ? "text-white/80" : "text-gray-400"}`}
-              >
-                {t(mode.descKey)}
-              </p>
-              {authMode === mode.id && (
-                <span className="mt-3 w-6 h-6 rounded-full bg-white flex items-center justify-center text-sm font-bold text-blue-600">
-                  ✓
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
-
-        <p className="text-gray-500 text-xs text-center mt-6">
-          {t("settings.autoSaved")}
-        </p>
-      </section>
 
       {/* Privacy section */}
       <section className="bg-slate-800 border border-slate-700 rounded-2xl p-8 shadow-xl">
@@ -139,6 +64,71 @@ export default function ProfileSettings() {
         <p className="text-gray-500 text-xs text-center mt-6">
           {t("settings.autoSaved")}
         </p>
+      </section>
+
+      {/* Mode Dashboard section */}
+      {authMode !== "normal" && (
+        <section className="bg-slate-800 border border-slate-700 rounded-2xl p-8 shadow-xl">
+          <h2 className="text-2xl font-bold text-white text-center mb-2">
+            {t("settings.modeDashboard.title")}
+          </h2>
+          <p className="text-gray-400 text-center mb-8">
+            {t("settings.modeDashboard.description")}
+          </p>
+          <div className="flex items-center justify-between p-4 bg-slate-700 rounded-xl mb-4">
+            <div>
+              <p className="text-white font-medium">
+                {authMode === "pregnancy-bond"
+                  ? t("settings.modeDashboard.mode2Label")
+                  : t("settings.modeDashboard.mode3Label")}
+              </p>
+              <p className="text-gray-400 text-sm mt-1">
+                {authMode === "pregnancy-bond"
+                  ? t("settings.modeDashboard.mode2Description")
+                  : t("settings.modeDashboard.mode3Description")}
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => navigate(authMode === "pregnancy-bond" ? "/mode2" : "/mode3")}
+            className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition-all transform hover:scale-[1.02]"
+          >
+            {authMode === "pregnancy-bond"
+              ? t("settings.modeDashboard.openMode2")
+              : t("settings.modeDashboard.openMode3")}
+          </button>
+        </section>
+      )}
+
+      {/* DNA Recovery section */}
+      <section className="bg-slate-800 border border-slate-700 rounded-2xl p-8 shadow-xl">
+        <h2 className="text-2xl font-bold text-white text-center mb-2">
+          {t("settings.dnaRecovery.title")}
+        </h2>
+        <p className="text-gray-400 text-center mb-4">
+          {t("settings.dnaRecovery.description")}
+        </p>
+        {myProfile?.isDnaVerified ? (
+          <div className="text-center py-4">
+            <span className="text-green-400 text-lg">✅</span>
+            <p className="text-green-300 mt-2">{t("settings.dnaRecovery.active")}</p>
+          </div>
+        ) : (
+          <div className="text-center py-4">
+            <span className="text-yellow-400 text-lg">⚠️</span>
+            <p className="text-yellow-300 mt-2">{t("settings.dnaRecovery.notVerified")}</p>
+          </div>
+        )}
+      </section>
+
+      {/* Smart Account section */}
+      <section className="bg-slate-800 border border-slate-700 rounded-2xl p-8 shadow-xl">
+        <SmartAccountInfo />
+      </section>
+
+      {/* Paymaster section */}
+      <section className="bg-slate-800 border border-slate-700 rounded-2xl p-8 shadow-xl">
+        <PaymasterDeposit />
       </section>
     </div>
   );

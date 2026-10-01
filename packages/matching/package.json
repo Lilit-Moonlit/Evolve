@@ -18,7 +18,9 @@
   },
   "devDependencies": {
     "typescript": "^6.0.3",
-    "vitest": "^2.0.0",
-    "@vitest/coverage-v8": "^2.0.0"
+    "vitest": "^4.1.10",
+    "@vitest/coverage-v8": "^4.1.10",
+    "eslint": "^8.57.0",
+    "rollup": "^4.0.0"
   }
 }

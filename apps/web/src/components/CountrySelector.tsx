@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { LOCAL_STORAGE_KEYS } from "@evolve/core/browser";
 
 // Countries with STD testing and ENFSI/CODIS DNA testing capabilities
 const countries = [
@@ -52,30 +53,50 @@ interface CountrySelectorProps {
   onCountryChange?: (country: string, language: string) => void;
   showLabel?: boolean;
   className?: string;
+  selectClassName?: string;
+  value?: string;
 }
 
 const CountrySelector: React.FC<CountrySelectorProps> = ({
   onCountryChange,
   showLabel = true,
   className = "",
+  selectClassName,
+  value,
 }) => {
   const { i18n, t } = useTranslation();
+  const [currentCountry, setCurrentCountry] = React.useState<string>(
+    () => value ?? localStorage.getItem(LOCAL_STORAGE_KEYS.COUNTRY) ?? "",
+  );
+
+  React.useEffect(() => {
+    if (value !== undefined) {
+      setCurrentCountry(value);
+    }
+  }, [value]);
 
   const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const countryCode = e.target.value;
+    setCurrentCountry(countryCode);
     const country = countries.find((c) => c.code === countryCode);
     if (country) {
       // Auto-switch language based on country
       i18n.changeLanguage(country.language);
-      localStorage.setItem("evolve-language", country.language);
-      localStorage.setItem("evolve-country", countryCode);
+      localStorage.setItem(LOCAL_STORAGE_KEYS.LANGUAGE, country.language);
+      localStorage.setItem(LOCAL_STORAGE_KEYS.COUNTRY, countryCode);
       if (onCountryChange) {
         onCountryChange(countryCode, country.language);
+      }
+    } else {
+      localStorage.removeItem(LOCAL_STORAGE_KEYS.COUNTRY);
+      if (onCountryChange) {
+        onCountryChange("", "");
       }
     }
   };
 
-  const savedCountry = localStorage.getItem("evolve-country");
+  const defaultSelectClass =
+    "p-2 border border-slate-600 rounded-md bg-slate-900 text-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500";
 
   return (
     <div className={`country-selector ${className}`}>
@@ -85,9 +106,9 @@ const CountrySelector: React.FC<CountrySelectorProps> = ({
         </label>
       )}
       <select
-        value={savedCountry || ""}
+        value={currentCountry}
         onChange={handleCountryChange}
-        className="p-2 border border-slate-600 rounded-md bg-slate-900 text-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        className={selectClassName || defaultSelectClass}
       >
         <option value="">{t("country.select")}</option>
         {countries.map((country) => (

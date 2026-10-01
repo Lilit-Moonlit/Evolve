@@ -1,8 +1,21 @@
+// Copyright (c) 2024 Evolve Protocol
+// SPDX-License-Identifier: MIT
+
 /**
  * Authentication middleware for Evolve
  */
 
 import { AuthenticationError, AuthorizationError } from "./errorHandler";
+import { SiweMessage } from "siwe";
+import { verifyMessage } from "ethers"; // Use specific import for better typing
+/**
+ * Nonce provider interface — inject implementation from apps/web at call site.
+ * packages/core must NOT depend on apps/web.
+ */
+export interface NonceProvider {
+  getNonce(nonce: string): Promise<{ expires: number } | null>;
+  markNonceUsed(nonce: string): Promise<void>;
+}
 
 export interface AuthContext {
   userId: string;
@@ -196,11 +209,38 @@ export async function verifyWalletSignature(
   address: string,
   message: string,
   signature: string,
-): Promise<boolean> {
-  // In a real implementation, this would use ethers.js or web3.js
-  // to recover the address from the signature
-  // For now, this is a placeholder
-  return true;
+  nonceProvider?: NonceProvider,
+): Promise<{ valid: boolean; address?: string; error?: string }> {
+  try {
+    // Parse the SIWE message
+    const siweMessage = new SiweMessage(message);
+    // Verify the signature using ethers.js
+    const recoveredAddress = verifyMessage(siweMessage.prepareMessage(), signature);
+    // Verify the message domain matches current host
+    if (siweMessage.domain !== window.location.host) {
+      return { valid: false, error: "Message domain does not match current site" };
+    }
+    // Normalize addresses for comparison
+    const normalizedRecovered = recoveredAddress.toLowerCase();
+    const normalizedProvided = address.toLowerCase();
+    if (normalizedRecovered !== normalizedProvided) {
+      return { valid: false, error: "Signature does not match the provided address" };
+    }
+    // Verify the nonce is valid and not expired (if nonceProvider injected)
+    if (nonceProvider) {
+      const nonce = siweMessage.nonce;
+      const nonceRecord = await nonceProvider.getNonce(nonce);
+      if (!nonceRecord || nonceRecord.expires < Date.now()) {
+        return { valid: false, error: "Nonce is invalid or expired" };
+      }
+      // Mark nonce as used
+      await nonceProvider.markNonceUsed(nonce);
+    }
+    return { valid: true, address: recoveredAddress };
+  } catch (error) {
+    console.error('SIWE verification failed:', error);
+    return { valid: false, error: error instanceof Error ? error.message : 'Verification failed' };
+  }
 }
 
 /**

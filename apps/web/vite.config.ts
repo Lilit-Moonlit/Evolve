@@ -1,8 +1,7 @@
-/// <reference types="vitest" />
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import { handleApiRequest } from "./src/lib/apiServer";
+import { handleApiRequest, setupWebSocketServer } from "./src/lib/apiServer";
 
 export default defineConfig({
   plugins: [
@@ -10,6 +9,11 @@ export default defineConfig({
     {
       name: "api-server",
       configureServer(server: any) {
+        // Setup WebSocket server on the same HTTP server
+        if (server.httpServer) {
+          setupWebSocketServer(server.httpServer);
+        }
+
         server.middlewares.use(async (req: any, res: any, next: any) => {
           const handled = await handleApiRequest(req, res);
           if (!handled) {
@@ -27,10 +31,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "@core": path.resolve(__dirname, "../../packages/core/src"),
-      "@storage": path.resolve(__dirname, "../../packages/storage/src"),
-      "@p2p": path.resolve(__dirname, "../../packages/p2p/src"),
-      "@evolve/ui": path.resolve(__dirname, "../../packages/ui/src"),
+      "@evolve/config": path.resolve(__dirname, "../../packages/config/src"),
     },
   },
   server: {
@@ -40,5 +41,13 @@ export default defineConfig({
   build: {
     outDir: "dist",
     sourcemap: true,
+    rollupOptions: {
+      onwarn(warning, warn) {
+        if (warning.code === "MODULE_NOT_FOUND") {
+          return;
+        }
+        warn(warning);
+      },
+    },
   },
 });

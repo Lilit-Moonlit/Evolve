@@ -16,11 +16,14 @@ export const PATHOGENS = {
       "hiv-1/2",
       "hiv-2",
       "hiv 1/2",
+      "hiv ag/ab",
       "віл",
       "віл-1",
       "віл-1/2",
+      "антитіла до віл 1/2",
       "вич",
       "вич-1",
+      "антитела к вич",
       "vihs",
       "vihs-1",
       "вирус иммунодефицита человека",
@@ -29,7 +32,19 @@ export const PATHOGENS = {
   SYPHILIS: {
     id: "syphilis",
     name: "Syphilis",
-    aliases: ["syphilis", "syph", "сифіліс", "сиф", "сифилис", "lues"],
+    aliases: [
+      "syphilis",
+      "syph",
+      "сифіліс",
+      "сиф",
+      "сифилис",
+      "lues",
+      "treponema pallidum",
+      "t. pallidum",
+      "rpr",
+      "tp-pa",
+      "tpha",
+    ],
   },
   CHLAMYDIA: {
     id: "chlamydia",
@@ -42,6 +57,8 @@ export const PATHOGENS = {
       "хламидиоз",
       "хламидии",
       "chlamydia trachomatis",
+      "c. trachomatis",
+      "c.trachomatis",
     ],
   },
   GONORRHEA: {
@@ -52,9 +69,10 @@ export const PATHOGENS = {
       "gonorrhoea",
       "gon",
       "гонорея",
-      "гонорея",
-      "гонорея",
       "neisseria gonorrhoeae",
+      "n. gonorrhoeae",
+      "n.gonorrhoeae",
+      "neisseria gonorhoeae",
     ],
   },
   HSV1: {
@@ -71,6 +89,10 @@ export const PATHOGENS = {
       "герпес типу 1",
       "простой герпес 1",
       "oral herpes",
+      "hsv 1",
+      "hsv 1 igg",
+      "herpes simplex virus i,",
+      "herpes simplex virus 1,",
     ],
   },
   HSV2: {
@@ -87,6 +109,10 @@ export const PATHOGENS = {
       "герпес типу 2",
       "простой герпес 2",
       "genital herpes",
+      "hsv 2",
+      "hsv 2 igg",
+      "herpes simplex virus ii,",
+      "herpes simplex virus 2,",
     ],
   },
   HEPATITIS_B: {
@@ -100,6 +126,9 @@ export const PATHOGENS = {
       "гепатит в",
       "гепатит b",
       "вірус гепатиту б",
+      "вірус гепатиту b",
+      "hbsag",
+      "hepatitis b surface antigen",
     ],
   },
   HEPATITIS_C: {
@@ -112,6 +141,10 @@ export const PATHOGENS = {
       "гепатит с",
       "гепатит c",
       "вірус гепатиту с",
+      "anti-hcv",
+      "anti hcv",
+      "hepatitis c antibody",
+      "hcv antibody",
     ],
   },
 } as const;
@@ -148,6 +181,10 @@ const POSITIVE_KEYWORDS = [
   "положительно",
   "реактивный",
   "обнаружен",
+  "обнаружено",
+  "обнаружены",
+  "обнаруж.",
+  "high",
   "+",
   "++",
   "+++",
@@ -161,13 +198,21 @@ const NEGATIVE_KEYWORDS = [
   "clear",
   "негативний",
   "негативно",
+  "негативный",
   "не реактивний",
   "не виявлено",
   "відсутній",
+  "від'ємний",
   "отрицательный",
   "отрицательно",
+  "отрицат.",
   "не обнаружен",
+  "не обнаруж",
+  "не обнар",
+  "не найден",
   "отсутствует",
+  "not found",
+  "<0",
   "-",
   "norm",
   "normal",
@@ -186,7 +231,7 @@ function containsKeyword(text: string, keyword: string): boolean {
     // Word-boundary match for longer alphabetic keywords
     const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const regex = new RegExp(
-      `(^|[\\s,;:()\\-])${escaped}([\\s,;:()\\-]|$)`,
+      `(^|[\\s,;:()\\-.!?])${escaped}([\\s,;:()\\-.!?]|$)`,
       "i",
     );
     return regex.test(text);
@@ -286,12 +331,8 @@ export function parseStdTestResult(rawText: string): StdTestParseResult {
 
   const mentions = findPathogenMentions(rawText);
   const pathogens: PathogenResult[] = [];
-  const seen = new Set<PathogenId>();
 
   for (const mention of mentions) {
-    if (seen.has(mention.pathogenId)) continue;
-    seen.add(mention.pathogenId);
-
     // Find the colon after the pathogen name — status always follows ":"
     const colonIndex = rawText.indexOf(":", mention.endIndex);
     const contextStart =
@@ -306,7 +347,34 @@ export function parseStdTestResult(rawText: string): StdTestParseResult {
         : Math.min(rawText.length, contextStart + 50);
     const context = rawText.substring(contextStart, contextEnd);
 
-    const status = detectStatus(context);
+    let status = detectStatus(context);
+
+    // Synevo fallback: unknown status, result on its own "Результат:" line
+    if (status === "unknown" && nextNewline !== -1) {
+      const nextLineEnd = rawText.indexOf("\n", nextNewline + 1);
+      const nextLine = rawText.substring(
+        nextNewline + 1,
+        nextLineEnd !== -1 ? nextLineEnd : rawText.length,
+      );
+      const resultMatch = nextLine.match(
+        /^\s*(результат|result|результаты|results)\s*:\s*(.+)$/i,
+      );
+      if (resultMatch) {
+        status = detectStatus(resultMatch[2]);
+      }
+    }
+
+    const existing = pathogens.find(
+      (p) => p.pathogenId === mention.pathogenId,
+    );
+    if (existing) {
+      // Upgrade unknown → known when a later mention carries a real status
+      if (existing.status === "unknown" && status !== "unknown") {
+        existing.status = status;
+      }
+      continue;
+    }
+
     const pathogen = Object.values(PATHOGENS).find(
       (p) => p.id === mention.pathogenId,
     );
@@ -329,6 +397,10 @@ export function parseStdTestResult(rawText: string): StdTestParseResult {
     "all negative",
     "все негативні",
     "все отрицательные",
+    "all results are negative",
+    "all tests negative",
+    "всі результати негативні",
+    "все результаты отрицательные",
   ];
 
   const isAllNegative = allNegativePatterns.some((pattern) =>

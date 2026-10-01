@@ -7,8 +7,6 @@ interface User {
   id: string;
   ethAddress?: string;
   email?: string;
-  phoneNumber?: string;
-  datingMode?: string;
 }
 
 interface AuthContextType {
@@ -17,8 +15,6 @@ interface AuthContextType {
   isAuthenticated: boolean;
   loginWithEmail: (email: string, password: string) => Promise<void>;
   registerWithEmail: (email: string, password: string) => Promise<void>;
-  requestPhoneOtp: (phoneNumber: string) => Promise<void>;
-  verifyPhoneOtp: (phoneNumber: string, otp: string) => Promise<void>;
   connectWallet: () => Promise<void>;
   signInWithEthereum: (address: string) => Promise<void>;
   verifyWallet: (
@@ -60,7 +56,7 @@ async function apiFetch(path: string, init?: RequestInit) {
   const setCookie = res.headers.get("set-cookie");
   if (setCookie) {
     const match = setCookie.match(
-      /(?:siwe_session|email_session|phone_session)=([^;]+)/,
+      /(?:siwe_session|email_session)=([^;]+)/,
     );
     if (match) {
       await AsyncStorage.setItem("evolve_session_id", match[1]);
@@ -115,7 +111,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const endpoints = [
         "/auth/siwe/session",
         "/auth/email/session",
-        "/auth/phone/session",
       ];
 
       for (const endpoint of endpoints) {
@@ -127,7 +122,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
               id: data.user.id,
               ethAddress: data.session.ethAddress,
               email: data.session.email,
-              phoneNumber: data.session.phoneNumber,
             });
             setLoading(false);
             return;
@@ -171,40 +165,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser({ id: data.user.id, email: data.user.email });
       } else {
         throw new Error(data.error || "Registration failed");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const requestPhoneOtp = async (phoneNumber: string) => {
-    setLoading(true);
-    try {
-      const res = await apiFetch("/auth/phone/request-otp", {
-        method: "POST",
-        body: JSON.stringify({ phoneNumber }),
-      });
-      const data = await res.json();
-      if (!data.success) {
-        throw new Error(data.error || "Failed to send OTP");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const verifyPhoneOtp = async (phoneNumber: string, otp: string) => {
-    setLoading(true);
-    try {
-      const res = await apiFetch("/auth/phone/verify-otp", {
-        method: "POST",
-        body: JSON.stringify({ phoneNumber, otp }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setUser({ id: data.user.id, phoneNumber: data.user.phoneNumber });
-      } else {
-        throw new Error(data.error || "OTP verification failed");
       }
     } finally {
       setLoading(false);
@@ -256,8 +216,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       if (user?.email) {
         await apiFetch("/auth/email/logout", { method: "POST" });
-      } else if (user?.phoneNumber) {
-        await apiFetch("/auth/phone/logout", { method: "POST" });
       } else {
         await apiFetch("/auth/siwe/logout", { method: "POST" });
       }
@@ -274,8 +232,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isAuthenticated,
         loginWithEmail,
         registerWithEmail,
-        requestPhoneOtp,
-        verifyPhoneOtp,
         connectWallet,
         signInWithEthereum,
         verifyWallet,

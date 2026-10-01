@@ -9,3 +9,6 @@ export * from "./utils";
 
 // Export all middleware
 export * from "./middleware";
+
+// Export rating module
+export * from "./rating";

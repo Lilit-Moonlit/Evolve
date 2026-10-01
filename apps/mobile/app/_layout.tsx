@@ -20,6 +20,8 @@ export default function RootLayout() {
             <Stack.Screen name="chat" options={{ title: "Chat" }} />
             <Stack.Screen name="profile" options={{ title: "Profile" }} />
             <Stack.Screen name="settings" options={{ title: "Settings" }} />
+            <Stack.Screen name="mode2" options={{ title: "Mode 2" }} />
+            <Stack.Screen name="mode3" options={{ title: "Mode 3" }} />
           </Stack>
         </AppProvider>
       </AuthProvider>

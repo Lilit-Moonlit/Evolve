@@ -1,0 +1,25 @@
+[33m(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:33:25). Use `import.meta.dirname` instead
+  - import "./src/lib/apiServer" without a file extension (vite.config.ts:4:56). Add the file extension
+  - import "./db" without a file extension (src/lib/apiServer.ts:3:27). Add the file extension
+  - import "./kv" without a file extension (src/lib/apiServer.ts:8:20). Add the file extension
+  - import "./adminChain" without a file extension (src/lib/apiServer.ts:16:8). Add the file extension
+  - import "./std-parser" without a file extension (src/lib/apiServer.ts:17:59). Add the file extension
+  - import "./lab-report" without a file extension (src/lib/apiServer.ts:18:59). Add the file extension
+  - import "./checks" without a file extension (src/lib/apiServer.ts:19:87). Add the file extension
+  - import "./pdf-text" without a file extension (src/lib/apiServer.ts:20:32). Add the file extension
+  - import "./registration-reward" without a file extension (src/lib/apiServer.ts:21:41). Add the file extension
+  - import "./abi/DNAVerificationABI" without a file extension (src/lib/apiServer.ts:1883:55). Add the file extension
+  - import "./addresses" without a file extension (src/lib/apiServer.ts:1884:46). Add the file extension
+  - import "./std-parser" without a file extension (src/lib/lab-report.ts:5:61). Add the file extension
+  - import "./std-parser" without a file extension (src/lib/checks.ts:1:45). Add the file extension
+  - import "./addresses" without a file extension (src/lib/adminChain.ts:22:27). Add the file extension
+  - import "./networks" without a file extension (src/lib/adminChain.ts:23:28). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.[39m
+[2m13:51:47[22m [33m[1m[vite][22m[39m [33mwarning: `esbuild` option was specified by "vite:react-babel" plugin. This option is deprecated, please use `oxc` instead.[39m
+`optimizeDeps.rollupOptions` / `ssr.optimizeDeps.rollupOptions` is deprecated. Use `optimizeDeps.rolldownOptions` instead. Note that this option may be set by a plugin. Set VITE_DEPRECATION_TRACE=1 to see where it is called.
+[33mBoth esbuild and oxc options were set. oxc options will be used and esbuild options will be ignored.[39m The following esbuild options were set: `{ jsx: 'automatic', jsxImportSource: undefined }`
+[vite:react-babel] We recommend switching to `@vitejs/plugin-react-oxc` for improved performance. More information at https://vite.dev/rolldown
+close timed out after 10000ms
+Tests closed successfully but something prevents Vite server from exiting
+You can try to identify the cause by enabling "hanging-process" reporter. See https://vitest.dev/guide/reporters.html#hanging-process-reporter

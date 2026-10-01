@@ -5,30 +5,48 @@
     "copyright": "© 2026 Evolve - Decentralized Dating built on Web3 & P2P"
   },
   "navigation": {
-    "swipe": "滑動",
     "messages": "訊息",
     "profile": "個人資料",
-    "settings": "設定"
+    "settings": "設定",
+    "mode2": "儀表板",
+    "mode3": "儀表板",
+    "home": "主頁",
+    "communications": "Communications",
+    "check": "Check",
+    "downloadApp": "下載應用程式"
   },
   "home": {
     "hero": {
       "title": "找到你的配對",
       "subtitle": "Swipe through profiles and connect with interesting people."
     },
+    "trustScore": "Trust Score",
     "filters": {
       "verifiedStd": "Only with verified STD",
       "verifiedDna": "Only with verified DNA",
-      "noProfiles": "No profiles matching the selected filters."
+      "noProfiles": "No profiles matching the selected filters.",
+      "locationUnavailable": "Location is unavailable. The filter shows all profiles.",
+      "showFilters": "Show filters",
+      "hideFilters": "Hide filters",
+      "modeNormal": "Get acquainted",
+      "modePregnancyBond": "Conception",
+      "modeCrypticChoice": "Polyandric conception"
     },
     "profile": {
       "newMatch": "New Match",
       "noMoreProfiles": "No more profiles for now! Check back later."
+    },
+    "dashboardCta": {
+      "mode2": "打開受孕儀表板",
+      "mode3": "打開後交配儀表板"
     }
   },
   "profile": {
     "tabs": {
       "profile": "Profile",
-      "reputation": "Reputation"
+      "reputation": "Reputation",
+      "settings": "Settings",
+      "medical": "Medical card"
     },
     "myProfile": {
       "title": "My Profile",
@@ -68,6 +86,66 @@
       "title": "錢包",
       "address": "地址",
       "balance": "餘額"
+    },
+    "edit": {
+      "title": "我的資訊",
+      "photoAlt": "我的照片",
+      "changePhoto": "更換照片",
+      "uploadPhoto": "上傳照片",
+      "blurPhoto": "模糊我的照片",
+      "age": "年齡",
+      "hideAge": "隱藏我的年齡",
+      "languages": "我會說的語言",
+      "bio": "關於我",
+      "save": "儲存變更",
+      "saving": "儲存中…",
+      "saved": "個人資料已儲存",
+      "testingPreference": "Testing preference"
+    },
+    "photoGrants": {
+      "title": "照片權限",
+      "description": "已授予照片查看權限的用戶：",
+      "permanent": "永久權限",
+      "temporary": "臨時權限",
+      "revoke": "撤銷"
+    },
+    "lab": {
+      "title": "Lab testing",
+      "yourEmail": "Your email address",
+      "emailHint": "Enter the email you used for DNA verification",
+      "pendingTitle": "Pending DNA verification",
+      "accept": "Accept",
+      "reject": "Reject",
+      "noPending": "No pending DNA verification",
+      "reportAccepted": "Report accepted",
+      "reportFailed": "Failed to process the report",
+      "emailError": "Email unavailable",
+      "loading": "Loading…",
+      "patientQrTitle": "QR for on-site verification",
+      "patientQrHint": "Show this code to a partner laboratory. It encodes only your ID — no photo or profile data.",
+      "patientQrAria": "Patient QR code for on-site lab verification",
+      "patientQrError": "Could not generate the QR code.",
+      "faceVerified": "Face verified",
+      "faceNotVerified": "Face not verified"
+    },
+    "medical": {
+      "title": "My medical card",
+      "subtitle": "Your patient card with a QR code for in-person lab visits",
+      "labTitle": "Laboratory",
+      "labSubtitle": "Run a lab? Register it to scan patient QR codes and add results"
+    },
+    "qr": {
+      "title": "Your QR code",
+      "hint": "Show this QR code to a laboratory worker to confirm your photo and add the STD test result to your account — or show it to another user to check STD compatibility."
+    },
+    "searchGoals": {
+      "title": "What and who you are looking for",
+      "hint": "These marks work with search: users whose search matches what you marked here will find you."
+    },
+    "canTravel": {
+      "countriesTitle": "Countries I can travel to",
+      "selectAll": "Select all",
+      "loadingCountries": "Loading countries…"
     }
   },
   "chat": {
@@ -87,7 +165,32 @@
     "approveStd": "批准STD存取",
     "approveDna": "批准DNA存取",
     "denyStd": "拒絕STD存取",
-    "denyDna": "拒絕DNA存取"
+    "denyDna": "拒絕DNA存取",
+    "requestPhoto": "請求查看你的照片",
+    "photoApprovedPermanent": "已授予照片永久查看權限",
+    "photoApprovedTemporary": "已授予照片 15 秒查看權限",
+    "photoDenied": "照片請求已拒絕",
+    "photoOfferPermanent": "提供永久查看照片權限",
+    "photoOfferTemporary": "提供 15 秒照片查看",
+    "photoRevoked": "照片查看權限已撤銷",
+    "liveness": {
+      "title": "Identity check",
+      "description": "To prove you're the real person behind this profile, complete a quick face check.",
+      "lookStraight": "Look straight at the camera",
+      "startCapture": "Start check",
+      "getReady": "Get ready...",
+      "processing": "Analyzing face...",
+      "skip": "Later",
+      "success": "✓ Identity confirmed",
+      "failed": "✗ Identity check failed",
+      "lastCheck": "Verified at {{time}}",
+      "cameraError": "Could not access camera. Please allow camera access and try again.",
+      "noStoredFace": "You have not completed face verification yet. Complete it in your profile settings.",
+      "noFaceDetected": "No face detected. Please look directly at the camera.",
+      "verificationError": "Face verification failed. Please try again.",
+      "systemMessageSuccess": "🛡️ Identity check passed",
+      "systemMessageFailed": "⚠️ Identity check failed"
+    }
   },
   "language": {
     "select": "Select Language",
@@ -101,7 +204,17 @@
   },
   "settings": {
     "currentMode": "目前模式",
-    "autoSaved": "您的選擇會自動儲存。無需重新載入。"
+    "autoSaved": "您的選擇會自動儲存。無需重新載入。",
+    "modeDashboard": {
+      "title": "模式儀表板",
+      "description": "管理您的活躍模式設定和鏈上活動",
+      "mode2Label": "受孕",
+      "mode2Description": "受孕模式 — 驗證參與者，鏈上綁定",
+      "mode3Label": "後交配",
+      "mode3Description": "後交配模式 — 匿名會話，鏈上解決",
+      "openMode2": "打開受孕儀表板",
+      "openMode3": "打開後交配儀表板"
+    }
   },
   "auth": {
     "loading": "Loading secure session...",
@@ -109,7 +222,11 @@
       "title": "Evolve — 去中心化約會",
       "email": "📧 使用電子郵件登入",
       "phone": "📱 使用手機登入",
-      "wallet": "💳 使用錢包登入"
+      "wallet": "💳 使用錢包登入",
+      "dnaRecovery": "🧬 Recover account via DNA test",
+      "securityTitle": "Your data stays private",
+      "securityDescription": "Profiles are encrypted and stored on decentralized networks — your personal information is never shared without your consent.",
+      "questionRecovery": "🔐 Recover account via security question"
     },
     "phone": {
       "title": "使用手機登入",
@@ -166,6 +283,50 @@
         "description": "匿名配對，需要錢包",
         "authType": "需要以太坊錢包"
       }
+    },
+    "recovery": {
+      "title": "Social Recovery",
+      "description": "添加电子邮件或电话作为钱包恢复监护人",
+      "email": {
+        "label": "电子邮件监护人",
+        "placeholder": "输入您的电子邮件",
+        "add": "添加电子邮件",
+        "added": "电子邮件监护人已添加",
+        "remove": "删除",
+        "removed": "电子邮件监护人已删除"
+      },
+      "phone": {
+        "label": "电话监护人",
+        "placeholder": "输入您的电话号码",
+        "add": "添加电话",
+        "added": "电话监护人已添加",
+        "remove": "删除",
+        "removed": "电话监护人已删除"
+      }
+    },
+    "emailAuth": {
+      "loginTitle": "Sign in with email",
+      "registerTitle": "Create account",
+      "modeLogin": "Sign in",
+      "modeRegister": "Register",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "confirmLabel": "Confirm password",
+      "loginButton": "Sign in",
+      "registerButton": "Create account",
+      "errorRequired": "Email and password are required",
+      "errorPasswordsDiffer": "Passwords do not match",
+      "errorExists": "This email is already registered",
+      "errorCredentials": "Invalid email or password",
+      "errorFailed": "Something went wrong. Try again",
+      "questionTitle": "Create your secret question",
+      "questionHint": "Invent the question and answer yourself — any language, any symbols. It is your passwordless login method.",
+      "questionLabel": "Your question",
+      "questionPlaceholder": "e.g. What was the name of my first pet?",
+      "answerLabel": "Your answer",
+      "answerPlaceholder": "Your answer",
+      "questionSave": "Save and continue",
+      "errorQuestionRequired": "Question and answer are required"
     }
   },
   "network": {
@@ -181,5 +342,813 @@
     "aurora": "Aurora",
     "celo": "Celo",
     "cronos": "Cronos"
+  },
+  "userProfile": {
+    "notFound": "找不到使用者",
+    "backToHome": "回到首頁",
+    "back": "返回",
+    "verifiedStd": "STD 已驗證",
+    "accessTitle": "醫療資料存取",
+    "accessDescription": "請求查看此使用者的 STD 或 DNA 結果的權限。",
+    "requestStd": "請求 STD",
+    "requestDna": "請求 DNA",
+    "openProfile": "開啟 {{name}} 的個人資料",
+    "ageHidden": "年齡已隱藏"
+  },
+  "onboarding": {
+    "title": "完善你的個人資料",
+    "subtitle": "向他人簡單介紹你自己",
+    "age": {
+      "title": "你的年齡",
+      "label": "年齡",
+      "hide": "隱藏我的年齡",
+      "hideHint": "其他用戶將看不到你的年齡"
+    },
+    "languages": {
+      "title": "語言",
+      "hint": "選擇你會說的語言"
+    },
+    "bio": {
+      "title": "關於我",
+      "label": "關於我",
+      "placeholder": "寫一些關於你自己、興趣愛好、你在尋找什麼..."
+    },
+    "photo": {
+      "title": "你的照片",
+      "upload": "上傳照片",
+      "change": "更換照片",
+      "preview": "照片預覽",
+      "blur": "模糊我的照片",
+      "blurHint": "在你授予權限前，其他人只能看到模糊預覽",
+      "invalidType": "請選擇圖片檔案",
+      "readError": "無法讀取圖片，請嘗試其他檔案。"
+    },
+    "back": "返回",
+    "next": "下一步",
+    "skip": "跳過",
+    "saving": "儲存中…",
+    "finish": "完成",
+    "gender": {
+      "title": "About you",
+      "label": "I identify as",
+      "lookingForLabel": "Who are you looking for?",
+      "lookingForOptions": {
+        "man": "A man",
+        "woman": "A woman",
+        "couple_man_woman": "A couple (man + woman)",
+        "couple_woman_woman": "A couple (woman + woman)",
+        "couple_man_man": "A couple (man + man)"
+      }
+    },
+    "kind": {
+      "title": "Who you are"
+    }
+  },
+  "photo": {
+    "request": "請求查看照片",
+    "tempView": "顯示 {{seconds}} 秒",
+    "accessPermanent": "你擁有這張照片的永久查看權限",
+    "accessTemporary": "你擁有這張照片的臨時查看權限",
+    "accessNone": "照片已模糊 — 請請求權限以查看",
+    "pendingRequest": "照片查看請求待處理：",
+    "approveTemporary": "批准 15 秒",
+    "approvePermanent": "永久批准",
+    "deny": "拒絕",
+    "offerTitle": "提供我的照片：",
+    "offerTemporary": "提供 15 秒",
+    "offerPermanent": "永久提供",
+    "revoke": "撤銷權限",
+    "viewOffer": "查看照片",
+    "hide": "隱藏照片",
+    "faceVerify": "Face verification",
+    "faceVerifyHint": "Verify your photo is real. Your photo will be checked against a live selfie.",
+    "verifyFace": "Verify with selfie",
+    "verifying": "Verifying face...",
+    "faceVerified": "Face verified successfully ✓",
+    "noFaceDetected": "No face detected in the photo. Please upload a clear photo of your face.",
+    "faceMismatch": "Face mismatch detected ({{similarity}}% similar). The photo does not match your live selfie.",
+    "verificationError": "Face verification failed. Please try again."
+  },
+  "common": {
+    "or": "or",
+    "back": "Back",
+    "loading": "加载中...",
+    "confirm": "確認",
+    "skip": "暫時跳過"
+  },
+  "dnaRecovery": {
+    "title": "Recover Account via DNA Test",
+    "description": "Verify your identity using your registered DNA profile. Enter the email linked to your account and paste your DNA test result.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "next": "Next",
+    "emailEntered": "Email",
+    "dnaLabel": "DNA test result",
+    "dnaPlaceholder": "Paste your DNA test result text here…",
+    "recover": "Recover Account",
+    "recovering": "Verifying DNA…",
+    "error": {
+      "emailRequired": "Please enter your email address",
+      "dnaRequired": "Please paste your DNA test result",
+      "failed": "DNA verification failed. Please check your input and try again.",
+      "network": "Network error. Please try again."
+    }
+  },
+  "filters": {
+    "ageRange": "Age range",
+    "min": "Min",
+    "max": "Max",
+    "heightRange": "Height (cm)",
+    "weightRange": "Weight (kg)",
+    "country": "Country",
+    "city": "City",
+    "languages": "Languages",
+    "any": "Any",
+    "yes": "Yes",
+    "no": "No",
+    "eyeColor": "Eye color",
+    "hairColor": "Hair color",
+    "bodyType": "Body type",
+    "education": "Education",
+    "maritalStatus": "Marital status",
+    "religion": "Religion",
+    "zodiac": "Zodiac",
+    "children": "Children",
+    "smoking": "Smoking",
+    "drinking": "Drinking",
+    "eyeColors": {
+      "brown": "Brown",
+      "blue": "Blue",
+      "green": "Green",
+      "hazel": "Hazel",
+      "gray": "Gray",
+      "black": "Black"
+    },
+    "hairColors": {
+      "black": "Black",
+      "brown": "Brown",
+      "blonde": "Blonde",
+      "red": "Red",
+      "gray": "Gray",
+      "white": "White",
+      "bald": "Bald"
+    },
+    "bodyTypes": {
+      "slim": "Slim",
+      "athletic": "Athletic",
+      "average": "Average",
+      "curvy": "Curvy",
+      "muscular": "Muscular",
+      "large": "Large"
+    },
+    "educationLevels": {
+      "highSchool": "High school",
+      "associate": "Associate degree",
+      "bachelor": "Bachelor's",
+      "master": "Master's",
+      "doctorate": "Doctorate",
+      "other": "Other"
+    },
+    "maritalStatuses": {
+      "single": "Single",
+      "divorced": "Divorced",
+      "widowed": "Widowed",
+      "separated": "Separated",
+      "married": "Married"
+    },
+    "religions": {
+      "christianity": "Christianity",
+      "islam": "Islam",
+      "judaism": "Judaism",
+      "hinduism": "Hinduism",
+      "buddhism": "Buddhism",
+      "atheist": "Atheist",
+      "agnostic": "Agnostic",
+      "spiritual": "Spiritual",
+      "other": "Other"
+    },
+    "zodiacs": {
+      "aries": "Aries",
+      "taurus": "Taurus",
+      "gemini": "Gemini",
+      "cancer": "Cancer",
+      "leo": "Leo",
+      "virgo": "Virgo",
+      "libra": "Libra",
+      "scorpio": "Scorpio",
+      "sagittarius": "Sagittarius",
+      "capricorn": "Capricorn",
+      "aquarius": "Aquarius",
+      "pisces": "Pisces"
+    },
+    "skinColor": "Skin color",
+    "skinColors": {
+      "fair": "Fair",
+      "light": "Light",
+      "medium": "Medium",
+      "tan": "Tan",
+      "dark": "Dark",
+      "deep": "Deep"
+    },
+    "gender": "Gender",
+    "genders": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "lookingFor": "Looking for",
+    "lookingForOptions": {
+      "man": "A man",
+      "woman": "A woman",
+      "couple_man_woman": "A couple (man + woman)",
+      "couple_woman_woman": "A couple (woman + woman)",
+      "couple_man_man": "A couple (man + man)"
+    },
+    "testingPreference": "Testing preference",
+    "testingPreferences": {
+      "lab": "Lab testing",
+      "portable": "Portable tester",
+      "both": "Both options",
+      "none": "Doesn't care"
+    },
+    "searchTarget": "Search for",
+    "searchTargets": {
+      "man": "Man",
+      "woman": "Woman",
+      "laboratory": "Laboratory"
+    },
+    "stdCompatible": "STD compatible",
+    "noLabs": "No laboratories found",
+    "whatSearch": "What are you looking for",
+    "whoSearch": "Who are you looking for",
+    "stdTests": "Take STD tests",
+    "canTravel": "I can travel to your country",
+    "canTravelOnly": "Can travel to my country"
+  },
+  "questionRecovery": {
+    "title": "Security question recovery",
+    "description": "Recover your account by answering the security question you set during registration.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "next": "Next",
+    "nextLoading": "Looking up…",
+    "emailEntered": "Recovering for",
+    "questionLabel": "Security question",
+    "answerLabel": "Your answer",
+    "answerPlaceholder": "Type your answer",
+    "recover": "Recover account",
+    "recovering": "Verifying…",
+    "error": {
+      "emailRequired": "Please enter your email.",
+      "lookupFailed": "No account found with that email.",
+      "network": "Network error. Please try again.",
+      "answerRequired": "Please enter your answer.",
+      "failed": "Incorrect answer. Please try again.",
+      "noQuestion": "No security question is set for this account."
+    }
+  },
+  "communications": {
+    "proposalsTitle": "Proposals",
+    "proposalsSubtitle": "Community initiatives — votes are weighted by reputation",
+    "proposalTitlePlaceholder": "Proposal title",
+    "proposalDescPlaceholder": "Short description (optional)",
+    "createProposal": "Create proposal",
+    "votesFor": "For",
+    "votesAgainst": "Against",
+    "voteWeightHint": "Your vote weight: {{weight}} (reputation)",
+    "noProposals": "No proposals yet. Create the first one!",
+    "yes": "Yes",
+    "no": "No",
+    "youVotedWeight": "You voted — weight {{weight}}",
+    "proposalPlatformFilter": {
+      "all": "全部",
+      "github": "GitHub",
+      "codeberg": "Codeberg",
+      "gitlab": "GitLab",
+      "inApp": "应用内"
+    },
+    "proposalStatus": {
+      "open": "开启",
+      "closed": "关闭",
+      "merged": "已合并"
+    },
+    "proposalViewOn": "在{{platform}}上查看"
+  },
+  "catfish": {
+    "riskLow": "Low risk",
+    "riskModerate": "Moderate risk",
+    "riskHigh": "High risk",
+    "photoPhotographAge": "Photo appears very old (possible stolen photo)",
+    "profileAgeNew": "Profile is very new",
+    "missingVerification": "Missing profile verification",
+    "timingSuspicious": "Suspicious message timing (possible bot)",
+    "scamSuspicious": "Suspicious content detected",
+    "timing": "Message timing",
+    "scam": "Suspicious content",
+    "flagged": "Profile flagged for review"
+  },
+  "labPortal": {
+    "title": "Lab Portal",
+    "subtitle": "Partner laboratory workspace. Verify a patient and attach a test result.",
+    "apiKey": "Lab API key",
+    "newPatient": "New patient",
+    "register": {
+      "name": "Laboratory name",
+      "namePlaceholder": "e.g. Sunrise Diagnostics",
+      "email": "Contact email",
+      "submit": "Register laboratory",
+      "required": "Please enter both the laboratory name and a contact email.",
+      "failed": "Could not register the laboratory. Please try again.",
+      "savedKey": "Laboratory registered. Your API key is saved on this device."
+    },
+    "scan": {
+      "title": "Scan the patient QR code",
+      "hint": "Ask the patient to open Evolve → Profile → Lab testing and show the QR code.",
+      "start": "Start camera",
+      "stop": "Stop camera",
+      "startFailed": "Could not start the camera. Please allow camera access and try again.",
+      "noPermission": "Camera access is blocked. Allow the camera in your browser (padlock icon in the address bar) and try again.",
+      "noCamera": "No camera was found on this device."
+    },
+    "verify": {
+      "title": "Verify the patient's identity",
+      "patientId": "Patient ID",
+      "takePhoto": "Take a photo of the patient",
+      "photoAlt": "Patient photo for verification",
+      "checking": "Checking…",
+      "confirm": "Match faces",
+      "noFace": "No face detected in the photo. Please take another photo.",
+      "photoError": "Could not process the photo. Please try again.",
+      "failed": "Verification failed. Please try again.",
+      "matched": "Identity confirmed — faces match.",
+      "unmatched": "Identity NOT confirmed — faces do not match.",
+      "similarity": "Similarity"
+    },
+    "report": {
+      "title": "Attach the test result",
+      "hint": "Paste the raw test result text. It is parsed automatically.",
+      "placeholder": "Paste the test result text here…",
+      "submit": "Submit result",
+      "submitting": "Submitting…",
+      "success": "Result submitted. It will appear in the patient's pending reports.",
+      "failed": "Could not submit the result. Please try again."
+    }
+  },
+  "help": {
+    "aria": {
+      "info": "信息提示",
+      "suggest": "建议改进"
+    },
+    "unknownTerm": "未知术语",
+    "home": {
+      "filters": {
+        "skinColor": {
+          "title": "按资料中的肤色筛选",
+          "body": "选择肤色以缩小匹配结果"
+        },
+        "lookingFor": {
+          "title": "按寻找对象筛选",
+          "body": "选择关系偏好以优化匹配"
+        },
+        "testingPreference": {
+          "title": "按STD检测状态筛选",
+          "body": "仅显示已验证STD检测结果的资料"
+        },
+        "gender": {
+          "title": "按资料中的性别筛选",
+          "body": "根据性别信息缩小匹配范围"
+        }
+      }
+    },
+    "chat": {
+      "proposals": {
+        "title": "提案投票板",
+        "body": "查看并投票社区建议"
+      }
+    },
+    "mode2": {
+      "dashboard": {
+        "title": "孕期绑定模式",
+        "body": "管理孕期相关功能与绑定"
+      }
+    },
+    "mode3": {
+      "dashboard": {
+        "title": "隐晦选择模式",
+        "body": "匿名选择父亲的过程"
+      }
+    },
+    "profile": {
+      "sections": {
+        "lab": {
+          "title": "检测结果",
+          "body": "查看已验证的STD检测状态"
+        },
+        "modeSelector": {
+          "title": "模式选择器",
+          "body": "在搜索模式间切换"
+        },
+        "profileEdit": {
+          "title": "资料编辑",
+          "body": "编辑您的资料信息"
+        }
+      }
+    }
+  },
+  "suggestions": {
+    "title": "建议改进",
+    "placeholder": "描述您的建议…",
+    "cancel": "取消",
+    "submit": "提交",
+    "submitting": "提交中…",
+    "saved": "建议已保存",
+    "defaultTitle": "关于{{term}}的新建议"
+  },
+  "proposals": {
+    "sourceLabel": "来源：{{source}}"
+  },
+  "dashboard": {
+    "mode2": {
+      "title": "孕期绑定仪表板",
+      "subtitle": "管理您的孕期绑定，并跟踪从确认到亲子鉴定的过程",
+      "status": {
+        "active": "进行中",
+        "awaitingPaternity": "等待亲子鉴定",
+        "resolved": "已解决"
+      },
+      "step0": {
+        "title": "您是母亲还是父亲？",
+        "description": "选择您的角色以开始孕期绑定。双方都需要在EvolveFund中存入资金。",
+        "fundReady": "检测到EvolveFund存款",
+        "fundRequired": "需要在EvolveFund中存入至少15个EVOLVE",
+        "walletBalance": "EVOLVE 钱包余额",
+        "fundTitle": "EvolveFund 存款",
+        "locked": "已被绑定锁定",
+        "unlocked": "已解锁",
+        "daysRemaining": "剩余{{days}}天",
+        "noDeposit": "无存款",
+        "depositPrompt": "向基金存入 EVOLVE（最低 15）",
+        "amountPlaceholder": "金额（如 20）",
+        "minDeposit": "最低存款为 15 EVOLVE",
+        "approving": "批准中...",
+        "depositing": "存款中...",
+        "approveAction": "批准 EVOLVE",
+        "depositAction": "存入基金",
+        "lockHint": "最短锁定 30 天。创建绑定需要。"
+      },
+      "step1": {
+        "title": "确认绑定",
+        "description": "双方必须使用经过验证的资料确认绑定。",
+        "selfLabel": "您",
+        "partnerLabel": "伴侣",
+        "confirmed": "已确认",
+        "pending": "待处理",
+        "alreadyConfirmed": "已确认",
+        "confirmSex": "确认我的角色",
+        "partnerAlreadyConfirmed": "伴侣已确认",
+        "partnerConfirmSex": "确认伴侣",
+        "womanPartner": "伴侣（女性）",
+        "manPartner": "伴侣（男性）",
+        "alreadyConfirmedTitle": "已确认"
+      },
+      "step2": {
+        "title": "绑定已创建",
+        "description": "双方确认后，存款将在绑定期间被锁定。",
+        "timerInfo": "怀孕期结束时，绑定将自动解决。",
+        "ready": "就绪",
+        "waitingForConfirmations": "等待确认..."
+      },
+      "step3": {
+        "title": "怀孕与亲子鉴定",
+        "description": "报告怀孕；亲子鉴定结果后，存款将被解锁或转移。",
+        "pregnancyCheckbox": "报告怀孕",
+        "resolvedPregnant": "绑定已解决 — 怀孕已确认",
+        "resolvedNotPregnant": "绑定已解决 — 未怀孕",
+        "canReport": "您现在可以报告怀孕",
+        "notYet": "确认 14 天后可报告怀孕",
+        "reportToVerify": "报告怀孕以启动亲子鉴定。",
+        "waitingWindow": "正在等待怀孕报告窗口开启...",
+        "waitingWoman": "正在等待女性报告怀孕...",
+        "paternityInProgress": "亲子鉴定进行中。管理员将提交结果。",
+        "awaitingResult": "正在等待管理员的亲子鉴定结果..."
+      },
+      "createBond": {
+        "partnerPlaceholder": "伴侣地址（0x...）",
+        "fundedRequired": "请先存入至少 15 EVOLVE",
+        "partnerRequired": "输入伴侣地址"
+      },
+      "error": {
+        "rejected": "用户拒绝了交易。",
+        "failed": "交易错误：{{message}}"
+      }
+    },
+    "mode3": {
+      "title": "隐晦选择仪表板",
+      "subtitle": "运行交配后会话。女性创建会话，男性加入。",
+      "create": {
+        "title": "会话",
+        "description": "以女性身份创建会话，或以男性身份加入开放的会话。",
+        "button": "创建会话",
+        "hint": "会话持续48小时。加入后，确认您的参与并等待女性的选择。"
+      },
+      "timer": {
+        "active": "剩余时间：{{timer}}",
+        "inactive": "无活动会话"
+      },
+      "participants": {
+        "title": "参与者",
+        "empty": "暂无参与者",
+        "confirmed": "已确认"
+      },
+      "available": {
+        "title": "可用资料",
+        "empty": "没有可用的资料",
+        "profileHint": "可用的男性",
+        "addButton": "邀请"
+      },
+      "profileBorder": {
+        "title": "您的资料",
+        "description": "您的已验证资料是其他参与者所看到的。",
+        "noProfile": "无资料"
+      },
+      "joinButton": "加入会话",
+      "waitingForParticipants": "您的会话正在进行 — 等待参与者",
+      "confirmButton": "确认参与",
+      "fundNotice": "您需要在EvolveFund中存入至少15个EVOLVE才能参与。",
+      "resolved": {
+        "title": "会话已解决",
+        "fatherLabel": "选定的父亲：",
+        "rewardInfo": "选定的父亲将获得其EvolveFund存款的2倍 + 每位参与男性1个EVOLVE。未被选中的参与者：90%的存款归女性，10%归选定的父亲。",
+        "noFather": "未选定父亲。存款已退还给参与者。"
+      },
+      "error": {
+        "rejected": "用户拒绝了交易。",
+        "failed": "交易错误：{{message}}"
+      }
+    }
+  },
+  "safety": {
+    "title": "Safety center",
+    "subtitle": "STD status, public page link and compatibility checks",
+    "stdStatus": {
+      "title": "STD status",
+      "verified": "Test result uploaded",
+      "notVerified": "No test result yet",
+      "hint": "Upload your latest STD test result to take part in compatibility checks. Individual pathogens are never shown to other users."
+    },
+    "publicLink": {
+      "title": "Public page",
+      "hint": "A short link to your page with only your photo. Visitors can send you a compatibility check request.",
+      "usernameLabel": "Page address",
+      "usernamePlaceholder": "e.g. olena",
+      "enable": "Enable public page",
+      "disable": "Disable public page",
+      "enabled": "Public page is active",
+      "disabled": "Public page is off",
+      "copy": "Copy link",
+      "copied": "Copied!",
+      "taken": "This address is already taken",
+      "invalid": "Use lowercase letters, digits, dots and underscores",
+      "saved": "Settings saved"
+    },
+    "checks": {
+      "title": "Compatibility checks",
+      "incoming": "Incoming requests",
+      "outgoing": "Sent requests",
+      "empty": "No requests yet",
+      "from": "Request from",
+      "approve": "Approve",
+      "deny": "Deny",
+      "awaiting": "Awaiting a reply"
+    },
+    "verdict": {
+      "title": "Verdict",
+      "safe": "Safe",
+      "compatible": "Compatible",
+      "caution": "Caution",
+      "risk": "Risk detected",
+      "incomplete": "Not enough data"
+    },
+    "qr": {
+      "title": "QR code for the laboratory",
+      "hint": "Show this code at a partner laboratory to link your test results."
+    }
+  },
+  "publicProfile": {
+    "title": "Public page",
+    "check": "Check compatibility",
+    "requested": "Check request sent!",
+    "loading": "Loading…",
+    "notFound": "Profile not found or not public",
+    "loginRequired": "Please sign in to send a check request",
+    "self": "This is your own page"
+  },
+  "labDashboard": {
+    "title": "Laboratory dashboard",
+    "login": "Sign in",
+    "register": "Register laboratory",
+    "email": "Email",
+    "password": "Password",
+    "labName": "Laboratory name",
+    "submit": "Continue",
+    "createAccount": "Create account",
+    "haveAccount": "Already have an account?",
+    "noAccount": "No account yet?",
+    "loggedInAs": "Signed in as",
+    "logout": "Log out",
+    "scanTitle": "Scan patient QR",
+    "scanHint": "Ask the patient to open Evolve → Safety center and show the QR code.",
+    "start": "Start camera",
+    "stop": "Stop camera",
+    "beginVisit": "Begin visit",
+    "faceTitle": "Verify patient identity",
+    "matched": "Identity confirmed — faces match.",
+    "unmatched": "Identity NOT confirmed — faces do not match.",
+    "checking": "Checking…",
+    "noFace": "No face detected in the photo. Take another photo.",
+    "reportTitle": "Attach test results",
+    "reportPlaceholder": "Paste the test result text…",
+    "reportSubmit": "Save results",
+    "reportSuccess": "Results saved",
+    "reportFailed": "Failed to save results",
+    "visits": "Visits",
+    "noVisits": "No visits yet",
+    "patient": "Patient",
+    "status": "Status",
+    "date": "Date",
+    "visitStatus": {
+      "none": "Not started",
+      "sample_received": "Sample received",
+      "pending": "Results pending review",
+      "accepted": "Results accepted"
+    }
+  },
+  "scan": {
+    "title": "Scan a QR code",
+    "hint": "Scan the QR code from another person's page to send a compatibility check request.",
+    "start": "Start camera",
+    "stop": "Stop camera",
+    "scanning": "Scanning…",
+    "requested": "Check request sent!",
+    "error": "Scanning failed",
+    "invalidCode": "This QR code is not a valid Evolve link",
+    "self": "You cannot request a check against yourself",
+    "pendingExists": "A check request to this user already exists"
+  },
+  "companion": {
+    "title": "伴侶模式",
+    "intro": "此工具幫助您評估潛在伴侶的安全性。",
+    "startButton": "開始",
+    "uploadPrompt": "上傳您的 STD 檢測報告",
+    "uploadButton": "提交",
+    "result": {
+      "title": "相容性結果",
+      "safe": "安全",
+      "risk": "風險",
+      "description": "基於上傳的檢測報告..."
+    },
+    "languageSelect": "Select language",
+    "regionSelect": "Select region",
+    "roleSelect": "Select role",
+    "continueButton": "Continue",
+    "role": {
+      "user": "User",
+      "userHint": "I want to evaluate my partner",
+      "lab": "Laboratory",
+      "labHint": "I work in a laboratory"
+    },
+    "userAuth": {
+      "title": "User Login",
+      "welcomeBack": "Welcome back! Enter your login details.",
+      "welcomeNew": "Welcome! Register to get started.",
+      "loginButton": "Login",
+      "registerButton": "Register"
+    },
+    "labAuth": {
+      "title": "Laboratory Login",
+      "welcomeBack": "Welcome back! Enter your login details.",
+      "welcomeNew": "Welcome! Register your laboratory to get started.",
+      "loginButton": "Login",
+      "registerButton": "Register Laboratory"
+    },
+    "profile": {
+      "title": "我的個人資料",
+      "uploadPhoto": "上傳照片",
+      "qrCode": "我的 QR 碼",
+      "qrHint": "顯示此 QR 碼進行當面驗證",
+      "shareLink": "分享連結",
+      "shareHint": "發送此連結以與他人驗證",
+      "copyLink": "複製連結",
+      "linkCopied": "連結已複製",
+      "additionalPhotos": "額外照片",
+      "addMorePhotos": "添加更多照片",
+      "location": "位置",
+      "locationOptional": "位置（可選）",
+      "noLocation": "不顯示位置",
+      "stdCompatible": "STD 相容",
+      "searchUsers": "搜尋用戶",
+      "chat": "聊天",
+      "noUsers": "未找到使用者"
+    },
+    "chat": {
+      "inputPlaceholder": "輸入訊息...",
+      "send": "發送"
+    },
+    "verify": {
+      "title": "伴侶驗證",
+      "partnerPhoto": "伴侶照片",
+      "checkButton": "驗證",
+      "uploadYourTest": "上傳您的測試",
+      "compatible": "結果相容",
+      "notCompatible": "結果不相容",
+      "error": "驗證錯誤"
+    },
+    "lab": {
+      "register": "註冊實驗室",
+      "login": "以實驗室身份登入",
+      "dashboard": "實驗室儀表板",
+      "profile": "實驗室資料",
+      "description": "實驗室描述",
+      "address": "地址",
+      "phone": "電話",
+      "contact": "聯絡",
+      "patients": "患者",
+      "showPending": "僅顯示待處理結果",
+      "patientName": "患者姓名",
+      "patientId": "患者 ID",
+      "addResult": "新增結果",
+      "takePhoto": "拍照",
+      "scanQR": "掃描 QR",
+      "scanHint": "從 QR 代碼輸入患者 ID 或使用相機掃描",
+      "enterUserId": "輸入患者 ID",
+      "scanButton": "掃描",
+      "scanError": "請輸入患者 ID",
+      "patientNotFound": "找不到患者",
+      "verifyPatient": "驗證患者",
+      "mainPhoto": "主要照片",
+      "verifyPhotos": "驗證照片",
+      "match": "符合",
+      "uncertain": "不確定",
+      "confirmPatient": "Confirm patient",
+      "backToDashboard": "Back to dashboard",
+      "testInfo": "Test information",
+      "testInfoPlaceholder": "Enter test type or sample number",
+      "testInfoHint": "This information will help identify the patient and their test",
+      "resultPhoto": "Result photo",
+      "resultDate": "Result date",
+      "resultNotes": "Notes",
+      "resultNotesPlaceholder": "Add notes to the result (optional)",
+      "saveResult": "Save result",
+      "verifyAllPhotos": "請在確認前評估每張照片。",
+      "noPatients": "未找到患者",
+      "nameLabel": "Laboratory name",
+      "namePlaceholder": "Enter laboratory name",
+      "descriptionPlaceholder": "Describe your laboratory",
+      "addressPlaceholder": "Enter address",
+      "phonePlaceholder": "Enter phone number",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter email",
+      "registerButton": "Register"
+    }
+  },
+  "pwa": {
+    "installTitle": "安裝 Evolve",
+    "installHint": "安裝應用程式以獲得更快的體驗",
+    "iosHint": "點擊「分享」，然後「加入主畫面」",
+    "install": "安裝",
+    "dismiss": "關閉"
+  },
+  "profileKind": {
+    "title": "Who you are",
+    "woman": "Woman",
+    "man": "Man",
+    "couple_man_woman": "Couple (M+F)",
+    "couple_man_man": "Couple (M+M)",
+    "couple_woman_woman": "Couple (F+F)",
+    "laboratory": "Laboratory"
+  },
+  "kindModal": {
+    "description": "請選擇您的身份——搜尋功能需要此資訊才能正確運作",
+    "confirm": "確認"
+  },
+  "dex": {
+    "title": "兑换 EVOLVE",
+    "subtitle": "通过 Arbitrum 或 Avalanche 上的 DEX 兑换代币。",
+    "chain": "网络",
+    "from": "从",
+    "to": "到",
+    "amount": "数量",
+    "slippage": "滑点",
+    "getQuote": "获取报价",
+    "swap": "兑换",
+    "swapping": "兑换中…",
+    "bestRate": "最优汇率",
+    "estimatedOutput": "您将收到",
+    "insufficientBalance": "余额不足",
+    "notAvailable": "该网络暂不支持",
+    "quoteError": "无法获取报价",
+    "swapSuccess": "兑换已提交",
+    "swapFailed": "兑换失败",
+    "proxyNotConfigured": "兑换服务未配置"
   }
 }
