@@ -9,14 +9,17 @@
     "noEmit": true,
     "strict": true,
     "esModuleInterop": true,
+    "jsx": "react-jsx",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "types": ["node", "vitest/globals"],
     "paths": {
       "@evolve/core": ["./packages/core/src"],
       "@evolve/storage": ["./packages/storage/src"],
       "@evolve/p2p": ["./packages/p2p/src"],
       "@evolve/ui": ["./packages/ui/src"],
-      "@evolve/matching": ["./packages/matching/src"]
+      "@evolve/matching": ["./packages/matching/src"],
+    "@evolve/config": ["./packages/config/src"]
     }
   },
   "include": [
@@ -26,7 +29,8 @@
     "packages/p2p/src/**/*",
     "packages/storage/src/**/*",
     "packages/ui/src/**/*",
-    "packages/matching/src/**/*"
+    "packages/matching/src/**/*",
+    "packages/config/src/**/*"
   ],
   "exclude": [
     "node_modules",

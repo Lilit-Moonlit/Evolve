@@ -1,0 +1,24 @@
+[
+  {
+    "number": 12,
+    "title": "Mirror EVOLVE token metadata to Codeberg Pages",
+    "body": "Serve the static tokenomics docs from Codeberg Pages so every forge mirror stays self-contained (ban-resistance).",
+    "state": "open",
+    "created_at": "2026-08-18T08:30:00Z",
+    "updated_at": "2026-08-18T09:00:00Z",
+    "html_url": "https://codeberg.org/evolve/evolve/issues/12",
+    "labels": [{ "name": "docs" }, { "name": "ban-resistance" }],
+    "user": { "login": "carol" }
+  },
+  {
+    "number": 9,
+    "title": "Gitea webhook receiver spec",
+    "body": "Define the webhook payload contract for issue events, kept compatible with the shared GitHub/Gitea issue shape.",
+    "state": "closed",
+    "created_at": "2026-06-25T12:00:00Z",
+    "updated_at": "2026-06-30T14:10:00Z",
+    "html_url": "https://codeberg.org/evolve/evolve/issues/9",
+    "labels": [],
+    "user": { "login": "dave" }
+  }
+]

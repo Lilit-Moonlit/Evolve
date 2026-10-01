@@ -12,7 +12,7 @@
       "outputs": []
     },
     "test": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^type-check"],
       "outputs": []
     },
     "test:watch": {
@@ -20,7 +20,7 @@
       "persistent": true
     },
     "test:coverage": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^type-check"],
       "outputs": ["coverage/**"]
     },
     "clean": {

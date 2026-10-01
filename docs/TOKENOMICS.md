@@ -11,7 +11,11 @@
 
 ## Earning EVOLVE
 
-The only way to earn EVOLVE is through the **Emoji Gift Economy** (see below). There is no daily reward, match reward, or verification reward.
+The primary way to earn EVOLVE is through the **Emoji Gift Economy** (see below).
+
+There is a narrowly-scoped exception for verification rewards: 1 EVOLVE is minted to the verified user and 1 EVOLVE to the confirming laboratory upon STD/DNA test verification. These rewards are minted via `RewardMinter.mintReward()` (packages/contracts/src/RewardMinter.sol, `REWARD_AMOUNT = 1e18`), invoked from `apps/web/src/lib/registration-reward.ts` (`grantRegistrationReward`, `REWARD_WEI = 1e18`). A separate rate-limited test faucet `mintFaucet()` (`FAUCET_AMOUNT = 50e18`) exists for onboarding.
+
+There are no daily, match, or general activity rewards.
 
 ## Spending EVOLVE
 
@@ -74,20 +78,24 @@ EVOLVE holders govern via `Governance.sol`:
 3. **Timelock**: 2 days after voting ends
 4. **Execution**: approved proposals execute after timelock
 
-## Supply Distribution (Proposed)
+## Supply Distribution
 
-| Allocation               | % of Max | Amount      |
-| ------------------------ | -------- | ----------- |
-| Evolve2Earn rewards pool | 30%      | 2.4B EVOLVE |
-| Team & operations        | 20%      | 1.6B EVOLVE |
-| Community & marketing    | 20%      | 1.6B EVOLVE |
-| Liquidity & partnerships | 15%      | 1.2B EVOLVE |
-| Governance treasury      | 10%      | 800M EVOLVE |
-| Advisors                 | 5%       | 400M EVOLVE |
+| Bucket             | %         | EVOLVE        | wei                    |
+| :----------------- | :-------- | :------------ | :--------------------- |
+| Founder            | 1.0000%   | 80,000,000    | 80_000_000e18 = 8.0e25 |
+| Developers         | 1.0000%   | 80,000,000    | 8.0e25                 |
+| Community treasury | 90.0000%  | 7,200,000,000 | 7.2e27                 |
+| Reserve            | 8.0000%   | 640,000,000   | 6.4e26                 |
+| **Total**          | 100.0000% | 8,000,000,000 | 8.0e27                 |
 
-**Pre-mint 5.6B + on-demand headroom 2.4B.** The 8B supply splits into **pre-mint 5.6B** (Team 1.6B + Community 1.6B + Liquidity 1.2B + Governance 800M + Advisors 400M) and **on-demand headroom 2.4B** (Evolve2Earn seed 400M + ~2B reserve for RewardMinter rewards/faucet), so mintReward/mintFaucet always have headroom under the 8B cap. Pre-mint 5.6B is governance policy, not a code invariant — the 48h TimelockController holds MINTER_ROLE and can technically mint into headroom.
+DEX liquidity is a **named sub-bucket** of the Community treasury: 1,000,000 EVOLVE per DEX. Assuming 5 DEXes, this totals 5,000,000 EVOLVE (0.0625% of total supply). The Community treasury remainder after DEX liquidity is 7,195,000,000 EVOLVE.
 
 _Historical Sepolia testnet deployment (2026-09-05) minted to the legacy reward pool and escrow vault; superseded by the 8B model above. No daily/match/verification rewards — emoji gift economy only._
+
+> **Downstream deltas (NOT changed in this phase):**
+> (i) `VestingWalletCliff.sol` and `ignition/modules/VestingWallet.js` hardcode `TEAM_ALLOCATION = 1.6B` with a 12-month cliff and 36-month linear vesting. This is now stale and must later become two separate allocations: Founder (80M) and Developers (80M).
+> (ii) The old 30/20/20/15/10/5 pre-mint 5.6B narrative is superseded by this new distribution.
+> (iii) `LiquidityLocker` and DEX liquidity will now be funded from the Community treasury sub-bucket and will be reviewed in a later phase.
 
 ## Economic Model
 

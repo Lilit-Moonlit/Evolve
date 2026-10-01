@@ -72,7 +72,7 @@
 ### User Onboarding
 
 ```
-User â†’ Evolve2Earn.verify() â†’ mints ProfileNFT â†’ initializes TrustScore (50)
+User â†’ Evolve2Earn.verify() â†’ mints ProfileNFT â†’ initializes TrustScore (1)
      â†’ receives EVOLVE tokens (verification reward)
 ```
 
@@ -118,6 +118,8 @@ TrustScore â”€â”€â”€â–º Voting (getReputationScore â†’ g
     â””â”€â”€â”€â”€â–º Evolve2Earn (verification gates)
 
 Governance â”€â”€â”€â–º EVOLVE (token-weighted voting)
+
+VerificationRegistry â”€â”€â”€â–º DNAVerification (on-chain DNA status)
 ```
 
 ## Key Design Decisions

@@ -18,9 +18,19 @@
     "clean": "turbo run clean && rimraf node_modules/.cache",
     "format": "prettier --write \"**/*.{ts,tsx,md,sol}\"",
     "prepare": "husky install",
-    "generate:files": "node scripts/generate-files.js"
+    "generate:files": "node scripts/generate-files.js",
+    "sync-proposals": "tsx scripts/sync-proposals.mjs"
   },
   "devDependencies": {
+    "@chainsafe/libp2p-gossipsub": "^14.1.2",
+    "@libp2p/bootstrap": "^12.0.26",
+    "@libp2p/identify": "^4.1.9",
+    "@libp2p/kad-dht": "^16.3.4",
+    "@libp2p/mplex": "^12.0.26",
+    "@libp2p/noise": "^1.0.1",
+    "@libp2p/ping": "^3.1.8",
+    "@libp2p/websockets": "^10.1.16",
+    "@libp2p/webtransport": "^6.0.31",
     "husky": "^9.0.0",
     "lint-staged": "^15.0.0",
     "prettier": "latest",
@@ -30,6 +40,10 @@
     "*.{js,ts,tsx,md}": "prettier --write"
   },
   "dependencies": {
+    "@openzeppelin/contracts": "^5.6.1",
     "@react-native-async-storage/async-storage": "^1.23.1"
+  },
+  "overrides": {
+    "viem": "2.55.11"
   }
 }

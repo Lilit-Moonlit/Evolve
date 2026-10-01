@@ -160,3 +160,74 @@ npm run lint output:
 - QA report → ✅ DONE (see QA-REPORT.md)
 - Docs updated → ✅ DONE
 - Lint → ❌ FAIL (pre-existing ESLint config issue — see Lint (Cline) section)
+
+---
+
+## Sisyphus — Lab Partner E2E + Help Icons (2026-09-05)
+
+### Scope
+
+1. `db.ts` cleanup (LabPartner method dedup, `faceEmbedding` in JSON columns, module-level `generateApiKey`, `getProfileByUserId`, `createLabReport` extended)
+2. Lab Partner end-to-end: QR (`LabPatientQR.tsx`) → public portal (`LabPortal.tsx` at `/lab-portal`) → face match → lab report
+3. Help Icons (?/!) integration (`InfoProposalIcons` + `help-dictionary`)
+4. Final verification of all checks
+
+### Locales
+
+| Check                     | Result |
+| ------------------------- | ------ |
+| `add-lab-partner-locales.mjs` | ✅ `ALL 33 LOCALES VALID` |
+| `add-help-locales.mjs` (rewritten) | ✅ `ALL 33 LOCALES VALID` |
+
+### Test Suite
+
+| Suite                        | Tests  | Passed | Failed | Status  |
+| ---------------------------- | ------ | ------ | ------ | ------- |
+| std-parser                   | 70     | 70     | 0      | ✅ PASS |
+| photo-access                 | 14     | 14     | 0      | ✅ PASS |
+| lab-report                   | 10     | 10     | 0      | ✅ PASS |
+| lab-preference               | 9      | 9      | 0      | ✅ PASS |
+| looking-for                  | 5      | 5      | 0      | ✅ PASS |
+| dna-* / other suites         | 73     | 73     | 0      | ✅ PASS |
+| **Total (17 files)**         | **181**| **181**| **0**  | **100% PASS** |
+
+### Static Checks
+
+| Check                   | Status |
+| ----------------------- | ------ |
+| `npx tsc --noEmit`      | ✅ CLEAN |
+| `npx prettier --write` (14 changed files) | ✅ CLEAN |
+| Prisma generate         | ✅ OK |
+
+### Notes
+
+- `face-verification.ts` has top-level `await import("@mediapipe/tasks-vision")` → **must not** be imported in Node server; `apiServer.ts` uses its own local `cosineSimilarity` + `FACE_SIMILARITY_THRESHOLD = 0.75`.
+- Lab never receives profile name/photo — only `{matched, similarity}` + `reportId`; QR encodes only `userId` (`evolve://lab-patient/<userId>`).
+- Lint still ❌ FAILs — pre-existing ESLint config issue (documented in AGENTS.md Known Issues).
+
+---
+
+## Sisyphus — Lab Portal Camera Fix (2026-09-12)
+
+### Bug
+
+Camera on `/lab-portal` could never start. `handleStartScan` called `setScanning(true)` and then synchronously constructed `new Html5Qrcode("lab-qr-reader")` — but the `#lab-qr-reader` div only mounts after React re-renders (scanning === true), so `Html5Qrcode`'s constructor threw `HTML Element with id=lab-qr-reader not found`. The user only ever saw the generic "Could not start the camera" error. "New patient" seemed broken because `resetSession` did not stop the scanner nor reset `scanning`.
+
+### Fix (`apps/web/src/pages/LabPortal.tsx`)
+
+- Scanner now starts in a `useEffect([scanning])` — after the div is mounted.
+- `handleStartScan` only sets state; extracted shared `stopScanner()`.
+- `resetSession` now stops the scanner and clears `scanning` → "New patient" works.
+- Camera fallback: `environment` → `user` facingMode (laptop webcams).
+- Distinct error messages: `labPortal.scan.noPermission` (NotAllowedError), `labPortal.scan.noCamera` (NotFoundError), generic `startFailed` otherwise — added to all 33 locales via `add-lab-partner-locales.mjs`.
+
+### Verification (Playwright, real browser)
+
+| Check | Result |
+| ----- | ------ |
+| Camera start → video element created (no `element not found`) | ✅ |
+| Stop camera → back to "Start camera", clean state | ✅ |
+| "New patient" → resets scanner + state | ✅ |
+| Locales script | ✅ `ALL 33 LOCALES VALID` |
+| `npx tsc --noEmit` | ✅ clean |
+| `prettier --write` (LabPortal.tsx, locales script) | ✅ unchanged |

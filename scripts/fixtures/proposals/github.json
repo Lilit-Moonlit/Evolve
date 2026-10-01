@@ -1,0 +1,49 @@
+[
+  {
+    "number": 41,
+    "title": "Add multi-network governance weight snapshot",
+    "body": "Snapshot the 3-factor vote weight (recursive 30% / children 40% / staked 30%) per block so historical dashboards can render past governance states.",
+    "state": "open",
+    "created_at": "2026-08-14T09:12:00Z",
+    "updated_at": "2026-08-15T10:00:00Z",
+    "html_url": "https://github.com/Lilit-Moonlit/Evolve/issues/41",
+    "labels": [{ "name": "governance" }, { "name": "enhancement" }],
+    "user": { "login": "alice-dev" }
+  },
+  {
+    "number": 42,
+    "title": "Bump viem to 2.55.11",
+    "body": "Dependency bump — must be filtered out of the proposals manifest because it is a pull request, not an issue.",
+    "state": "open",
+    "created_at": "2026-08-20T10:00:00Z",
+    "updated_at": "2026-08-20T10:05:00Z",
+    "html_url": "https://github.com/Lilit-Moonlit/Evolve/pull/42",
+    "pull_request": {
+      "url": "https://api.github.com/repos/Lilit-Moonlit/Evolve/pulls/42",
+      "html_url": "https://github.com/Lilit-Moonlit/Evolve/pull/42"
+    },
+    "labels": [{ "name": "dependencies" }],
+    "user": { "login": "dependabot[bot]" }
+  },
+  {
+    "number": 37,
+    "title": "Emoji gift revenue split audit",
+    "body": "Publish a monthly report of the perpetual proportional revenue split among gift owners (no burn, no expiry — dilution by design).",
+    "state": "closed",
+    "created_at": "2026-07-02T15:45:00Z",
+    "updated_at": "2026-07-05T08:20:00Z",
+    "html_url": "https://github.com/Lilit-Moonlit/Evolve/issues/37",
+    "labels": [],
+    "user": { "login": "bob-researcher" }
+  },
+  {
+    "number": 44,
+    "title": null,
+    "body": "Malformed item without a title — the shared normalizer must drop it (returns null).",
+    "state": "open",
+    "created_at": "2026-08-22T18:30:00Z",
+    "html_url": "https://github.com/Lilit-Moonlit/Evolve/issues/44",
+    "labels": [],
+    "user": { "login": "ghost" }
+  }
+]

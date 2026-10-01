@@ -9,4 +9,18 @@ out/
 cache/
 *.log
 .aider*
+.slim/deepwork/
+
+# Agent / scratch artifacts — never commit
+.omo/
+.agent-chat/
+.playwright-mcp/
+.opencode/
+.agents/prompts/
+.ignore
+QA-REPORT-NEW-FEATURES.md
+git-*.txt
+test.txt
+/CFC/
+/public/
 
