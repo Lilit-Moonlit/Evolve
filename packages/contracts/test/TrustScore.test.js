@@ -14,7 +14,7 @@ describe("TrustScore", function () {
       const { trustScore, owner, user1 } = await deployFixture();
       await trustScore.connect(owner).initializeScore(user1.address);
 
-      expect(await trustScore.getScore(user1.address)).to.equal(50);
+      expect(await trustScore.getScore(user1.address)).to.equal(1);
       expect(await trustScore.hasScore(user1.address)).to.be.true;
     });
 
@@ -53,7 +53,7 @@ describe("TrustScore", function () {
       await trustScore
         .connect(owner)
         .initializeScores([user1.address, user2.address]);
-      expect(await trustScore.getScore(user1.address)).to.equal(50);
+      expect(await trustScore.getScore(user1.address)).to.equal(1);
       expect(await trustScore.hasScore(user2.address)).to.be.true;
     });
 
@@ -91,6 +91,37 @@ describe("TrustScore", function () {
 
       await expect(
         trustScore.connect(owner).updateScore(user1.address, 101),
+      ).to.be.revertedWithCustomError(trustScore, "ScoreOutOfBounds");
+    });
+
+    it("Should update to max score (100)", async function () {
+      const { trustScore, owner, user1 } = await deployFixture();
+      await trustScore.connect(owner).initializeScore(user1.address);
+
+      await hre.network.provider.send("evm_increaseTime", [86401]);
+      await hre.network.provider.send("evm_mine");
+
+      await trustScore.connect(owner).updateScore(user1.address, 100);
+      expect(await trustScore.getScore(user1.address)).to.equal(100);
+    });
+
+    it("Should update to minimum score (1)", async function () {
+      const { trustScore, owner, user1 } = await deployFixture();
+      await trustScore.connect(owner).initializeScore(user1.address);
+
+      await hre.network.provider.send("evm_increaseTime", [86401]);
+      await hre.network.provider.send("evm_mine");
+
+      await trustScore.connect(owner).updateScore(user1.address, 1);
+      expect(await trustScore.getScore(user1.address)).to.equal(1);
+    });
+
+    it("Should revert if score below minimum (0)", async function () {
+      const { trustScore, owner, user1 } = await deployFixture();
+      await trustScore.connect(owner).initializeScore(user1.address);
+
+      await expect(
+        trustScore.connect(owner).updateScore(user1.address, 0),
       ).to.be.revertedWithCustomError(trustScore, "ScoreOutOfBounds");
     });
 
@@ -159,8 +190,8 @@ describe("TrustScore", function () {
 
       const scores = await trustScore.getScores([user1.address, user2.address]);
       expect(scores.length).to.equal(2);
-      expect(scores[0]).to.equal(50);
-      expect(scores[1]).to.equal(50);
+      expect(scores[0]).to.equal(1);
+      expect(scores[1]).to.equal(1);
     });
   });
 
@@ -181,12 +212,18 @@ describe("TrustScore", function () {
       await trustScore.connect(owner).initializeScore(user1.address);
       await trustScore.connect(owner).initializeScore(user2.address);
 
+      // Set genders: Male=1, Female=2
+      await voting.setGender(owner.address, 1);
+      await voting.setGender(user1.address, 1);
+      await voting.setGender(user2.address, 2);
+      await voting.setGender(user3.address, 1);
+
       return { trustScore, voting, owner, user1, user2, user3 };
     }
 
     it("Should return base score when no votes exist", async function () {
       const { trustScore, user1 } = await integrationFixture();
-      expect(await trustScore.getTotalScore(user1.address)).to.equal(50);
+      expect(await trustScore.getTotalScore(user1.address)).to.equal(1);
     });
 
     it("Should combine base + reputation score", async function () {
@@ -194,7 +231,7 @@ describe("TrustScore", function () {
 
       await voting.connect(user1).vote(user2.address);
 
-      expect(await trustScore.getTotalScore(user2.address)).to.equal(62);
+      expect(await trustScore.getTotalScore(user2.address)).to.equal(13);
     });
 
     it("Should not exceed MAX_SCORE", async function () {

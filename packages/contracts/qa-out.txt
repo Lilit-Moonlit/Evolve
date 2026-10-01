@@ -1,0 +1,340 @@
+
+
+  BondManager
+    Mode 2 - Pregnancy Bond
+      √ Should create mode 2 bond (woman triggers) (62ms)
+      √ Should confirm bond by man then woman
+      √ Should lock man's stake on double confirm
+      √ Should report pregnancy after delay
+      √ Should revert early pregnancy report (67ms)
+      √ Should submit paternity result and unlock stake
+    Mode 3 - Cryptic Choice
+      √ Should create mode 3 session (woman triggers)
+      √ Should allow man to join session
+      √ Should confirm session and lock stake
+      √ Should resolve session after period + 14 days
+      √ Should pay father 2x deposit + 1 EVOLVE per other participant (72ms)
+      √ Should pay father +1 EVOLVE for multiple participants (58ms)
+
+  DNAVerification
+    √ Should set and read a DNA profile
+    √ Should mark user as DNA verified
+    √ Should return false for users without a DNA profile
+    √ Should only allow verifiers to verify DNA
+    √ Should allow owner to act as verifier
+    √ Should only allow owner to add/remove verifiers
+    √ Should emit VerifierAdded and VerifierRemoved (45ms)
+    √ Should revoke DNA verification (43ms)
+    √ Should only allow owner to revoke DNA
+    √ Should revert when paused
+
+  EVOLVE
+    Deployment
+      √ Should set the right name, symbol and max supply (151ms)
+      √ Should grant DEFAULT_ADMIN_ROLE and MINTER_ROLE to owner (118ms)
+    Minting
+      √ Should allow minter to mint (81ms)
+      √ Should revert if non-minter tries to mint (100ms)
+      √ Should revert if minting exceeds max supply (152ms)
+      √ Should allow multiple mints up to max supply (134ms)
+    Burning
+      √ Should allow user to burn their tokens (104ms)
+    AccessControl
+      √ Should allow admin to grant minter role (119ms)
+      √ Should allow admin to revoke minter role (95ms)
+
+  Evolve2Earn
+    Verification
+      √ Should verify a user without distributing reward (166ms)
+      √ Should revert if already verified (204ms)
+    Pausing
+      √ Should allow admin to pause and unpause (207ms)
+      √ Should revert if non-admin tries to pause (231ms)
+
+  Evolve2Earn Emoji Gifts (Roses and Cacti)
+    buyEmojiGift
+      √ Should let a user buy an emoji gift for 1 EVOLVE token (334ms)
+      √ Should revert when emoji is already owned (261ms)
+      √ Should track multiple gifts per owner (246ms)
+      √ Should charge 1 token on first buy with no distribution (250ms)
+    proportional distribution
+      √ Should send full token to the only existing owner when a 2nd gift is bought (215ms)
+      √ Should split 1 token 50:50 when 2 existing owners have equal share (219ms)
+      √ Should split 75:25 when owners have 3:1 ratio (186ms)
+      √ Should not pay buyer any share of their own gift (195ms)
+      √ Should emit EmojiRevenueDistributed with recipients and amounts (263ms)
+      √ Should handle many owners (1M+ gifts) by iterating all (265ms)
+      √ Should handle dust when distribution does not evenly divide (229ms)
+      √ Should allow multiple buys without hitting gas limit (193ms)
+      √ Should revert when buyer has insufficient allowance (206ms)
+      √ Should revert when buyer has insufficient balance (219ms)
+    transferEmojiGift
+      √ Should transfer ownership and update counts (196ms)
+      √ Should revert when caller is not the owner (189ms)
+      √ Should revert on transfer to self (164ms)
+      √ Should revert on transfer to zero address (176ms)
+      √ Should revert on non-existent emoji (182ms)
+      √ Should update market shares after transfer (173ms)
+      √ Should allow multiple sequential transfers (224ms)
+      √ Should keep totalGifts unchanged on transfer (174ms)
+    view helpers
+      √ Should report market share as 0 when no gifts exist (162ms)
+      √ Should report market share of 100% for sole owner (211ms)
+      √ Should report market share proportionally (217ms)
+      √ Should preview the next distribution (186ms)
+      √ Should return empty preview when no gifts exist (163ms)
+      √ Should exclude the buyer from preview (178ms)
+      √ Should list all gift owners (183ms)
+    pausing
+      √ Should block buyEmojiGift when paused (172ms)
+      √ Should block transferEmojiGift when paused (151ms)
+
+  EVOLVE timelock administration
+    Timelock configuration
+      √ Should enforce a 48h min delay and grant proposer/canceller/executor roles to the multisig (127ms)
+    EVOLVE privilege wiring
+      √ Should grant DEFAULT_ADMIN_ROLE and MINTER_ROLE to the timelock only (149ms)
+      √ Should expose no pause/unpause/paused functions in the ABI (159ms)
+    Direct privileged access is blocked
+      √ Should revert when the former deployer grants roles directly (159ms)
+      √ Should revert when the former deployer mints directly (155ms)
+    Timelock-proposed operations
+      √ Should revert when an account without PROPOSER_ROLE schedules (167ms)
+      √ Should revert when scheduling with a delay below 48h (241ms)
+      √ Should revert when executing before the 48h delay elapses (287ms)
+      √ Should revert when an account without EXECUTOR_ROLE executes (261ms)
+      √ Should grant MINTER_ROLE through a 48h-delayed proposal (RewardMinter faucet path) (276ms)
+      √ Should mint pre-allocations through a 48h-delayed proposal (303ms)
+      √ Should let the proposer cancel a scheduled operation (215ms)
+
+  EVOLVE OFT
+    OFT configuration
+      √ sharedDecimals() returns 6 (115ms)
+      √ decimalConversionRate() is 10^12 (18 local - 6 shared) (83ms)
+    Emission counter integrity
+      √ totalMinted is unchanged by transfers and burns (gross emission counter) (131ms)
+      √ burning does NOT free mint capacity (cap is totalMinted-based, not totalSupply-based) (127ms)
+    Bridge-mint isolation
+      √ ABI does not expose credit/debit (internal bridge hooks unreachable externally) (87ms)
+      √ direct low-level calls to the credit hook revert (no fallback) (93ms)
+    Max supply
+      √ default MAX_SUPPLY is 8 billion EVOLVE (8e9 * 1e18) (86ms)
+      √ mint() over the cap reverts MaxSupplyExceeded (100ms)
+    LayerZero bridge (real EndpointV2Mock, A -> B)
+      √ send() burns on chain A and mints on chain B (BurnMint) with constant combined supply (217ms)
+
+  Governance
+    Proposal creation
+      √ Should create a proposal with no quorum yet (479ms)
+      √ Should allow anyone to create proposal (507ms)
+    Vote weight calculation
+      √ Should calculate vote weight with no verification data (455ms)
+      √ Should calculate vote weight with STD verification (476ms)
+      √ Should include staked EVOLVE weight only if staked (413ms)
+      √ Should give zero EVOLVE weight if no staking (430ms)
+    Voting with weight
+      √ Should record weight on vote (519ms)
+      √ Should revert if already voted (450ms)
+      √ Should revert if voting period ended (399ms)
+    Queue and execution
+      √ Should queue proposal after voting passes (818ms)
+      √ Should execute proposal after timelock (804ms)
+      √ Should revert if timelock not expired (752ms)
+      √ Should revert if not enough votes to meet quorum (506ms)
+      √ Should revert if not enough voters (350ms)
+    Voters tracking
+      √ Should track voters (363ms)
+      √ Should return vote counts by weight (389ms)
+
+  LiquidityLocker
+    √ should revert UnlockInPast for a past unlock
+    √ should lock tokens and emit Locked
+    √ should revert withdraw before unlockTime
+    √ should revert non-owner withdraw
+    √ should withdraw after unlockTime
+
+  OFTConfig
+    √ every network has requiredDVNs.length >= 2
+    √ peer matrix is complete and symmetric
+    √ assertDvnMinimum throws when a network is given < 2 DVNs
+
+  EVOLVE OFT Rate Limiter
+    √ reverts if per-tx limit exceeded (198ms)
+    √ reverts if per-window limit exceeded (204ms)
+    √ splitting into small transfers hits window cap (192ms)
+    √ succeeds within limits (173ms)
+
+  OFT Supply Conservation
+    √ 1. Single send burn==mint (158ms)
+    √ 2. >50 EVOLVE round-trip lossless (156ms)
+    √ 3. Combined supply invariant (192ms)
+    √ 4. totalMinted unchanged on both chains (146ms)
+    √ 5. credit hook unreachable (141ms)
+
+  EvolvePaymaster
+    √ should accept ETH deposit
+    √ should accept EVOLVE deposit
+    √ should allow owner to set entry point
+    √ should reject zero amount
+
+  ProfileNFT
+    Deployment
+      √ Should set the right owner and name (43ms)
+    Minting
+      √ Should allow owner to mint and set URI
+      √ Should revert if non-owner tries to mint
+    URI Update
+      √ Should allow owner to update URI (38ms)
+      √ Should revert if non-owner tries to update URI
+    Burning
+      √ Should allow owner to burn
+      √ Should allow token owner to burn
+    Soulbound feature
+      √ Should revert when trying to transfer the NFT
+
+  RewardMinter
+    Deployment
+      √ stores token, limits and the whitelisted minter from the constructor (106ms)
+      √ documents fixed amounts and production default limits as constants (111ms)
+      √ grants DEFAULT_ADMIN_ROLE to the admin (timelock stand-in) and nobody else (128ms)
+    Whitelist enforcement
+      √ reverts when a non-whitelisted account calls mintReward (125ms)
+      √ reverts when a non-whitelisted account calls mintFaucet (106ms)
+      √ exposes no arbitrary-amount mint function in its ABI (146ms)
+    mintReward
+      √ mints exactly 1 EVOLVE and emits RewardMinted (103ms)
+      √ enforces the reward daily limit and reverts DailyLimitExceeded past it (112ms)
+    mintFaucet
+      √ mints exactly 50 EVOLVE and emits FaucetMinted (113ms)
+      √ enforces the faucet daily limit and reverts DailyLimitExceeded past it (104ms)
+    Separate counters
+      √ reward mints never consume the faucet limit (112ms)
+      √ faucet mints never consume the reward limit (106ms)
+    Daily window rollover
+      √ resets both counters in a new daily window (121ms)
+    Minter rotation (timelock path)
+      √ lets the admin rotate the minter; the old key loses access (124ms)
+      √ reverts when a non-admin calls setMinter (113ms)
+    EVOLVE cap propagation
+      √ propagates MaxSupplyExceeded when EVOLVE's cap is reached (99ms)
+
+  SmartAccountFactory
+    √ should create account
+    √ should return deterministic address
+    √ should reject double init
+
+  TrustScore
+    Initialization
+      √ Should initialize score for a user
+      √ Should not overwrite existing score
+    Batch initialization
+      √ Should initialize multiple scores
+      √ Should skip already initialized scores
+      √ Should revert if batch is empty
+      √ Should revert if batch is too large (45ms)
+    Score updates
+      √ Should update score
+      √ Should revert if score exceeds max
+      √ Should update to max score (100)
+      √ Should update to minimum score (1)
+      √ Should revert if score below minimum (0)
+      √ Should revert if non-owner tries to update
+      √ Should revert if score not initialized
+    Batch updates
+      √ Should update multiple scores
+      √ Should skip uninitialized users in batch
+      √ Should revert if batch is empty
+    Batch get scores
+      √ Should return multiple scores (43ms)
+    Voting integration (reputation)
+      √ Should return base score when no votes exist (67ms)
+      √ Should combine base + reputation score (69ms)
+      √ Should not exceed MAX_SCORE (85ms)
+      √ Should revert getTotalScore if user has no base score (81ms)
+      √ Should emit VotingContractSet event (49ms)
+
+  VerificationRegistry
+    √ Should set STD status
+    √ Should set DNA status
+    √ Should set both STD and DNA
+    √ Should only mark verified if both STD and DNA are true
+    √ Should unverify when STD is removed
+    √ Should revert on zero address
+    √ Should only allow owner to set status
+
+  VerificationRegistry DNA integration
+    √ Should only allow owner to set the DNAVerification contract
+    √ Should revert on zero address when setting the DNAVerification contract
+    √ Should set and read the DNAVerification contract
+    √ Should emit DNAVerificationContractSet
+    √ Should set DNA verified status directly (owner-only) (40ms)
+    √ Should only allow owner to set DNA verified status
+    √ Should revert on zero address in setDNAVerified
+    √ Should revert syncDNAVerified before a contract is configured
+    √ Should sync DNA status from the DNAVerification contract
+    √ Should mark fully verified after STD + synced DNA
+
+  VestingWalletCliff
+    Deployment
+      √ stores beneficiary, start, cliff and vesting schedule from the constructor (128ms)
+      √ resolves startTimestamp == 0 to the deployment block timestamp
+      √ rejects a cliff longer than the vesting horizon
+    Before the cliff
+      √ vests and reports nothing releasable before the cliff (124ms)
+      √ reverts ERC20 release before the cliff with BeforeCliff(cliffEnd) (158ms)
+      √ reverts ETH release before the cliff with BeforeCliff(cliffEnd) (136ms)
+    Vesting schedule
+      √ makes exactly 12/36 of the allocation releasable at the cliff (183ms)
+      √ is 2/3 releasable at the 24-month midpoint (linear across the full horizon) (100ms)
+      √ tracks incremental releases across the schedule (117ms)
+      √ releases 100% of the allocation at/after the 36-month horizon (124ms)
+      √ releases ETH to the beneficiary after the horizon, triggered by anyone (146ms)
+      √ sends released tokens to the beneficiary, never to the caller (132ms)
+
+  Voting (8-vote limit)
+    vote
+      √ Should let a user vote for someone (150ms)
+      √ Should allow up to 8 votes per user (178ms)
+      √ Should revert when trying to vote for a 9th person (163ms)
+      √ Should revert if voting for same person twice (102ms)
+      √ Should revert if voting for self (130ms)
+      √ Should revert if voting for zero address (129ms)
+      √ Should track received votes across multiple voters (133ms)
+    retractVote
+      √ Should let a user retract their vote (121ms)
+      √ Should free a slot to vote for someone else (108ms)
+      √ Should let a user retract one vote to vote for a 9th person (169ms)
+      √ Should revert if retracting a vote not given (145ms)
+      √ Should update receivedVotes on retract (132ms)
+    getVotesGiven
+      √ Should return empty array for user with no votes (115ms)
+      √ Should return all targets a user voted for (136ms)
+      √ Should reflect retracted votes (139ms)
+    getRemainingVotes
+      √ Should return MAX_VOTES initially (179ms)
+      √ Should decrease as votes are cast (254ms)
+      √ Should increase on retract (139ms)
+      √ Should return 0 when maxed out (132ms)
+    getReputationScore
+      √ Should return 0 for user with no votes (124ms)
+      √ Should return 12 for 1 vote (100/8 â‰ˆ 12) (137ms)
+      √ Should return 100 for 8 votes (132ms)
+      √ Should decrease on retract (112ms)
+    calculateWeight (no MAX_DEPTH)
+      √ Should return 1 for user with no received votes (self base) (98ms)
+      √ Should return weight for user with direct votes (92ms)
+      √ Should compute recursive weight through depth 2 (91ms)
+      √ Should compute deep 18-level chain within iteration cap (167ms)
+      √ Should compute full recursive weight without depth limit (282ms)
+      √ Should not revert on cycles (2-node) (115ms)
+      √ Should bound 4-node cycles (rectangle) (132ms)
+      √ Should expose MAX_ITERATIONS = 10000 (118ms)
+      √ Should batch calculate weights (112ms)
+    pausing
+      √ Should block vote when paused (96ms)
+      √ Should block retractVote when paused (106ms)
+      √ Should resume after unpause (105ms)
+
+
+  237 passing (41s)
+

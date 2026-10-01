@@ -1,13 +1,13 @@
 ﻿import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
 
-import CFCModule from "./CFC.js";
+import EvolveModule from "./EVOLVE.js";
 
 const Evolve2EarnModule = buildModule("Evolve2EarnModule", (m) => {
   const owner = m.getParameter("owner");
 
-  const { cfcToken } = m.useModule(CFCModule);
+  const { evolveToken } = m.useModule(EvolveModule);
 
-  const evolve2Earn = m.contract("Evolve2Earn", [owner, cfcToken]);
+  const evolve2Earn = m.contract("Evolve2Earn", [owner, evolveToken]);
 
   return { evolve2Earn };
 });

@@ -1,0 +1,12 @@
+
+
+  OFT Supply Conservation
+    √ 1. Single send burn==mint (2248ms)
+    √ 2. >50 EVOLVE round-trip lossless (235ms)
+    √ 3. Combined supply invariant (319ms)
+    √ 4. totalMinted unchanged on both chains (215ms)
+    √ 5. credit hook unreachable (159ms)
+
+
+  5 passing (3s)
+

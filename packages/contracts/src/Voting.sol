@@ -6,7 +6,8 @@ import "@openzeppelin/contracts/utils/Pausable.sol";
 
 contract Voting is Ownable, Pausable {
     uint256 public constant MAX_VOTES = 8;
-    uint256 public constant MAX_DEPTH = 3;
+    // Full recursive depth - no limit (only cycle detection prevents infinite loops)
+    uint256 public constant MAX_ITERATIONS = 10000;
 
     mapping(address => address[]) private _votesGiven;
     mapping(address => mapping(address => uint256)) private _voteIndex;
@@ -18,8 +19,13 @@ contract Voting is Ownable, Pausable {
     mapping(address => uint256) private _weightTimestamp;
     uint256 public constant WEIGHT_CACHE_DURATION = 1 hours;
 
+    // Gender tracking: Men can only vote for Women, Women can only vote for Men
+    enum Gender { Unknown, Male, Female }
+    mapping(address => Gender) public genderOf;
+
     event VoteCast(address indexed voter, address indexed target, uint256 totalVotes);
     event VoteRetracted(address indexed voter, address indexed target, uint256 totalVotes);
+    event GenderSet(address indexed user, Gender gender);
 
     error MaxVotesReached(address voter);
     error AlreadyVotedFor(address target);
@@ -27,14 +33,29 @@ contract Voting is Ownable, Pausable {
     error InvalidTarget();
     error SelfVote();
     error NoVotesToRetract();
+    error SameGenderVote();
+    error UnknownVoterGender();
+    error UnknownTargetGender();
 
     constructor(address initialOwner) Ownable(initialOwner) {}
+
+    function setGender(address user, Gender gender) external onlyOwner {
+        genderOf[user] = gender;
+        emit GenderSet(user, gender);
+    }
 
     function vote(address target) external whenNotPaused {
         if (target == address(0)) revert InvalidTarget();
         if (target == msg.sender) revert SelfVote();
         if (_voteIndex[msg.sender][target] != 0) revert AlreadyVotedFor(target);
         if (voteCount[msg.sender] >= MAX_VOTES) revert MaxVotesReached(msg.sender);
+
+        // Gender restriction: Men vote for Women, Women vote for Men
+        Gender voterGender = genderOf[msg.sender];
+        Gender targetGender = genderOf[target];
+        if (voterGender == Gender.Unknown) revert UnknownVoterGender();
+        if (targetGender == Gender.Unknown) revert UnknownTargetGender();
+        if (voterGender == targetGender) revert SameGenderVote();
 
         _votesGiven[msg.sender].push(target);
         _voteIndex[msg.sender][target] = _votesGiven[msg.sender].length;
@@ -84,9 +105,10 @@ contract Voting is Ownable, Pausable {
     }
 
     function _calculateWeight(address user, uint256 depth, address[] memory visited) private view returns (uint256) {
-        if (depth > MAX_DEPTH) return 1;
+        // Safety limit to prevent stack overflow (effectively unlimited for practical use)
+        if (depth >= MAX_ITERATIONS) return 1;
 
-        // Check for cycle
+        // Check for cycle - this is the ONLY termination condition besides depth limit
         for (uint256 i = 0; i < visited.length; i++) {
             if (visited[i] == user) return 1;
         }
@@ -94,12 +116,14 @@ contract Voting is Ownable, Pausable {
         address[] memory voters = _votersForUser[user];
         uint256 total = 1;
 
+        // Build new visited array with current user
         address[] memory newVisited = new address[](visited.length + 1);
         for (uint256 i = 0; i < visited.length; i++) {
             newVisited[i] = visited[i];
         }
         newVisited[visited.length] = user;
 
+        // Recursively add weight from all voters (full depth, no artificial limit)
         for (uint256 i = 0; i < voters.length; i++) {
             total += _calculateWeight(voters[i], depth + 1, newVisited);
         }

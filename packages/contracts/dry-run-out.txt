@@ -1,0 +1,13 @@
+Running dry-run configuration check...
+arbitrum: 2 required DVNs
+avalanche: 2 required DVNs
+polygon: 2 required DVNs
+optimism: 2 required DVNs
+zksync: 2 required DVNs
+base: 2 required DVNs
+bsc: 2 required DVNs
+fantom: 2 required DVNs
+aurora: 2 required DVNs
+celo: 2 required DVNs
+cronos: 2 required DVNs
+Dry-run successful.

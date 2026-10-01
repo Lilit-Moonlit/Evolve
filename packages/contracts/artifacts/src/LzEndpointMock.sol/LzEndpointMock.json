@@ -1,0 +1,37 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "LzEndpointMock",
+  "sourceName": "src/LzEndpointMock.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "delegate",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_delegate",
+          "type": "address"
+        }
+      ],
+      "name": "setDelegate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080806040523460145760c690816100198239f35b5f80fdfe60808060405260043610156011575f80fd5b5f3560e01c908163c89e4361146070575063ca5eb5e114602f575f80fd5b34606c576020366003190112606c576004356001600160a01b03811690819003606c576bffffffffffffffffffffffff60a01b5f5416175f555f80f35b5f80fd5b34606c575f366003190112606c575f546001600160a01b03168152602090f3fea26469706673582212201367cc70b8afe02ba618b0b509119c81ce099b72d3863871613d42e4daefdf0f64736f6c63430008180033",
+  "deployedBytecode": "0x60808060405260043610156011575f80fd5b5f3560e01c908163c89e4361146070575063ca5eb5e114602f575f80fd5b34606c576020366003190112606c576004356001600160a01b03811690819003606c576bffffffffffffffffffffffff60a01b5f5416175f555f80f35b5f80fd5b34606c575f366003190112606c575f546001600160a01b03168152602090f3fea26469706673582212201367cc70b8afe02ba618b0b509119c81ce099b72d3863871613d42e4daefdf0f64736f6c63430008180033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

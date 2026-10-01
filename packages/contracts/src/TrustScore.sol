@@ -19,7 +19,7 @@ contract TrustScore is Ownable, ReentrancyGuard {
 
     IVoting public votingContract;
 
-    uint256 public constant MIN_SCORE = 0;
+    uint256 public constant MIN_SCORE = 1;
     uint256 public constant MAX_SCORE = 100;
     uint256 public constant UPDATE_COOLDOWN = 1 days;
 
@@ -47,7 +47,7 @@ contract TrustScore is Ownable, ReentrancyGuard {
     function initializeScore(address user) external onlyOwner {
         if (!_scores[user].exists) {
             _scores[user] = ScoreEntry({
-                score: 50,
+                score: 1,
                 lastUpdated: block.timestamp,
                 exists: true
             });
@@ -63,7 +63,7 @@ contract TrustScore is Ownable, ReentrancyGuard {
         for (uint256 i = 0; i < users.length; i++) {
             if (!_scores[users[i]].exists) {
                 _scores[users[i]] = ScoreEntry({
-                    score: 50,
+                    score: 1,
                     lastUpdated: block.timestamp,
                     exists: true
                 });
@@ -76,7 +76,7 @@ contract TrustScore is Ownable, ReentrancyGuard {
 
     function updateScore(address user, uint256 newScore) external onlyOwner nonReentrant {
         if (!_scores[user].exists) revert ScoreNotInitialized();
-        if (newScore > MAX_SCORE) revert ScoreOutOfBounds();
+        if (newScore < MIN_SCORE || newScore > MAX_SCORE) revert ScoreOutOfBounds();
         if (block.timestamp - _scores[user].lastUpdated < UPDATE_COOLDOWN) revert UpdateTooFrequent();
 
         _scores[user].score = newScore;
@@ -93,7 +93,7 @@ contract TrustScore is Ownable, ReentrancyGuard {
         uint256 count = 0;
         for (uint256 i = 0; i < users.length; i++) {
             if (!_scores[users[i]].exists) continue;
-            if (newScores[i] > MAX_SCORE) continue;
+            if (newScores[i] < MIN_SCORE || newScores[i] > MAX_SCORE) continue;
             if (block.timestamp - _scores[users[i]].lastUpdated < UPDATE_COOLDOWN) continue;
 
             _scores[users[i]].score = newScores[i];

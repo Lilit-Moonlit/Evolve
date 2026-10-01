@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "PacketV1Codec",
+  "sourceName": "@layerzerolabs/lz-evm-protocol-v2/contracts/messagelib/libs/PacketV1Codec.sol",
+  "abi": [],
+  "bytecode": "0x6080806040523460175760399081601c823930815050f35b5f80fdfe5f80fdfea26469706673582212205840b1b58ea0776da9b44dbf95683d8be3cc2c71b61a9a2f485960882931210a64736f6c63430008180033",
+  "deployedBytecode": "0x5f80fdfea26469706673582212205840b1b58ea0776da9b44dbf95683d8be3cc2c71b61a9a2f485960882931210a64736f6c63430008180033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

@@ -114,7 +114,7 @@ async function deployToNetwork(networkName: string) {
 
   // Deploy EVOLVE token
   console.log("\nDeploying EVOLVE token...");
-  const maxSupply = ethers.parseEther("100000000"); // 100 million EVOLVE
+  const maxSupply = ethers.parseEther("8000000000"); // 8 billion EVOLVE
 
   const EVOLVE = await ethers.deployContract("EVOLVE", [
     deployer.address,
@@ -137,6 +137,16 @@ async function deployToNetwork(networkName: string) {
   const profileNftAddress = await ProfileNFT.getAddress();
   console.log("ProfileNFT deployed to:", profileNftAddress);
 
+  // Deploy DNAVerification
+  console.log("\nDeploying DNAVerification...");
+  const DNAVerification = await ethers.deployContract("DNAVerification", [
+    deployer.address,
+  ]);
+
+  await DNAVerification.waitForDeployment();
+  const dnaVerificationAddress = await DNAVerification.getAddress();
+  console.log("DNAVerification deployed to:", dnaVerificationAddress);
+
   // Save deployment info
   const deploymentInfo = {
     network: networkName,
@@ -144,6 +154,7 @@ async function deployToNetwork(networkName: string) {
     chainId: network.chainId,
     evolveAddress,
     profileNftAddress,
+    dnaVerificationAddress,
     deployer: deployer.address,
     maxSupply: maxSupply.toString(),
     timestamp: new Date().toISOString(),
