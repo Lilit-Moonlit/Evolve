@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EVOLVE</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <span class="brand">EVOLVE</span>
+        <div class="lang-switch">
+          <label class="visually-hidden" for="language-select" data-i18n="donate.language"></label>
+          <select id="language-select" data-i18n-aria="donate.language"></select>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <h1 data-i18n="donate.title"></h1>
+        <p class="subtitle" data-i18n="donate.subtitle"></p>
+        <p class="notice" data-i18n="donate.noSale"></p>
+      </section>
+
+      <section id="addresses" class="addresses">
+        <h2 data-i18n="donate.addressesTitle"></h2>
+        <div id="addresses-list" class="addresses-list"></div>
+      </section>
+
+      <section id="security" class="security">
+        <p class="security-note" data-i18n="donate.securityNote"></p>
+        <p class="guidelines" data-i18n="donate.guidelines"></p>
+      </section>
+
+      <section id="feedback" class="feedback">
+        <p class="section-lead" data-i18n="donate.leaveNote"></p>
+        <form id="feedback-form" action="https://formspree.io/f/mdekrwqk" method="POST">
+          <input type="hidden" name="_subject" value="EVOLVE donation feedback" />
+          <div class="field">
+            <label for="ff-name" data-i18n="donate.form.name"></label>
+            <input id="ff-name" type="text" name="name" autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="ff-comment" data-i18n="donate.form.comment"></label>
+            <textarea id="ff-comment" name="comment" rows="4"></textarea>
+          </div>
+          <div class="field">
+            <label for="ff-contact" data-i18n="donate.form.contact"></label>
+            <input id="ff-contact" type="text" name="contact" placeholder="Telegram / email / X" />
+          </div>
+          <div class="field">
+            <label for="ff-txid" data-i18n="donate.form.txid"></label>
+            <input id="ff-txid" type="text" name="txid" />
+          </div>
+          <button type="submit" data-i18n="donate.form.submit"></button>
+          <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>
+          <a
+            href="https://github.com/Lilit-Moonlit/Evolve/blob/main/DONATE.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            >DONATE.md</a
+          >
+          ·
+          <a
+            href="https://github.com/Lilit-Moonlit/Evolve/blob/main/DISCLAIMER.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            >DISCLAIMER.md</a
+          >
+        </p>
+        <p data-i18n="donate.seeDisclaimer"></p>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

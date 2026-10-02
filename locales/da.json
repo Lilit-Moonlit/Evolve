@@ -1,0 +1,24 @@
+{
+  "donate": {
+    "title": "Support EVOLVE",
+    "subtitle": "EVOLVE is an open-source, community-driven project. Donations fund development, security reviews, and infrastructure.",
+    "noSale": "There is no token sale. EVOLVE tokens are not for sale. Donations are unconditional, non-refundable gifts: you receive no tokens, no equity, and no financial return. See the disclaimer below.",
+    "addressesTitle": "Donation addresses",
+    "securityNote": "Security: always verify the full address character-by-character against this page (bookmark it). Addresses are never sent by email, DM, or screenshots. Match the network — funds sent on the wrong chain are usually unrecoverable.",
+    "guidelines": "Guidelines: use a dedicated wallet for donations — never your main hot wallet. Prefer Monero or Lightning if you want donor privacy. A small test transaction first is always a good idea.",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "leaveNote": "Leave a note (optional): want us to be able to thank you later? Leave your name, a message, and an optional contact (Telegram / email / X).",
+    "form": {
+      "name": "Name",
+      "comment": "Message",
+      "contact": "Contact (optional)",
+      "txid": "Transaction hash (optional)",
+      "submit": "Send",
+      "success": "Thank you! Your note has been sent.",
+      "error": "Something went wrong. Please try again later."
+    },
+    "language": "Language",
+    "seeDisclaimer": "For full details, see DONATE.md and DISCLAIMER.md in the repository."
+  }
+}

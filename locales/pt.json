@@ -1,0 +1,24 @@
+{
+  "donate": {
+    "title": "Apoie o EVOLVE",
+    "subtitle": "O EVOLVE é um projeto de código aberto conduzido pela comunidade. As doações financiam o desenvolvimento, auditorias de segurança e a infraestrutura.",
+    "noSale": "Não há venda de tokens. Os tokens EVOLVE não estão à venda. As doações são presentes incondicionais e não reembolsáveis: você não recebe tokens, participação nem retorno financeiro. Veja o aviso abaixo.",
+    "addressesTitle": "Endereços para doação",
+    "securityNote": "Segurança: verifique sempre o endereço completo caractere por caractere com esta página (adicione-a aos favoritos). Os endereços nunca são enviados por e-mail, DM ou capturas de tela. Confira a rede — fundos enviados na rede errada normalmente são irrecuperáveis.",
+    "guidelines": "Recomendações: use uma carteira dedicada para doações — nunca sua carteira principal. Para privacidade, prefira Monero ou Lightning. Uma pequena transação de teste antes é sempre uma boa ideia.",
+    "copy": "Copiar",
+    "copied": "Copiado!",
+    "leaveNote": "Deixe uma nota (opcional): quer que possamos agradecer depois? Deixe seu nome, uma mensagem e um contato opcional (Telegram / e-mail / X).",
+    "form": {
+      "name": "Nome",
+      "comment": "Mensagem",
+      "contact": "Contato (opcional)",
+      "txid": "Hash da transação (opcional)",
+      "submit": "Enviar",
+      "success": "Obrigado! Sua nota foi enviada.",
+      "error": "Algo deu errado. Tente novamente mais tarde."
+    },
+    "language": "Idioma",
+    "seeDisclaimer": "Para todos os detalhes, veja DONATE.md e DISCLAIMER.md no repositório."
+  }
+}
