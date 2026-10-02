@@ -45,6 +45,33 @@
 
 ---
 
+## 5. Зеркалювання на Codeberg + GitLab (залив №3, част. 2)
+
+- **Статус:** ⏳ Акаунти Codeberg/GitLab створені користувачем; **порожні репозиторії ще не створені**. GitHub-пуш **виконано** (`feat/mobile-mode2-mode3-i18n`, коміт `60fbfa7`).
+- **Що потрібно від власника:** створити 2 ПОВНІСТЮ порожні репо (без README/license), потім надати URL.
+- **Команди після цього:**
+  ```bash
+  git remote add codeberg https://codeberg.org/<user>/Evolve.git
+  git remote add gitlab  https://gitlab.com/<user>/Evolve.git
+  git push codeberg --all ; git push codeberg --tags
+  git push gitlab  --all  ; git push gitlab  --tags
+  ```
+- **Авторизація:** git credential helper = `manager` (Git Credential Manager). Codeberg/GitLab при першому push можуть вимагати **access token** замість пароля (створити в налаштуваннях акаунта; scope: `write_repository` / `repo`).
+- **Наслідок:** усі 3 платформи матимуть однакові гілки й історію (зеркало). Синхронізація — явним push у кожен remote (не автоматична).
+
+## 6. Передумови ліквідності на Arbitrum/Avalanche (залив №2)
+
+- **Статус:** 🔴 BLOCKED. `networks[42161/43114].deployed === false`; `liquidity-setup.json.tokenAddress` порожній; EVOLVE задеплоєний лише на Sepolia.
+- **Що вже готово:** `hardhat.config.js` має мережі `arbitrum`/`avalanche`; `ignition-parameters.json` існує; `script/deploy-liquidity.mjs` (dry-run) + `script/configure-oft.mjs`.
+- **Що потрібно для розблокування:**
+  1. EVOLVE (OFT) задеплоїти на Arbitrum + Avalanche (потрібен гаманець з ETH/AVAX, `PRIVATE_KEY`, `ARBITRUM_RPC_URL`/`AVALANCHE_RPC_URL`).
+  2. Перевірити/вказати правильний LayerZero EndpointV2 для кожної мережі (канонічний `0x1a44076050125825900e736c501f859c50fE728c`).
+  3. Зовнішній аудит контрактів (hard gate перед mainnet).
+  4. `ONEINCH_API_KEY` (server-side env).
+  5. Заповнити `liquidity-setup.json.tokenAddress` адресами EVOLVE.
+  6. Treasury Safe multisig (proposer/executor для TimelockController).
+- **Виконати:** `npm run deploy:liquidity -- --execute` (після п.1–5).
+
 ## Нагадування для наступних сесій агентів
 
 Перед запуском перевірити цей файл і оновити статуси. Пов'язаний Session State — `AGENTS.md` §24.
