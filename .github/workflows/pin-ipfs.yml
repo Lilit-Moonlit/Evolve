@@ -1,0 +1,60 @@
+# Pins the donation page to IPFS (Pinata) as a single self-contained HTML file.
+#
+# Requires the repository secret PINATA_JWT (Settings -> Secrets and variables ->
+# Actions). When the secret is absent the run is a no-op (prints "skip").
+#
+# The build output is intentionally a SINGLE file: Pinata's free plan rejects
+# CAR uploads, and a single file keeps every locale + the form in one CID.
+name: Pin IPFS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/pin-ipfs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build single-file donation page
+        run: node site/build-ipfs.mjs "$RUNNER_TEMP/index.html"
+
+      - name: Pin to Pinata
+        env:
+          PINATA_JWT: ${{ secrets.PINATA_JWT }}
+        run: |
+          if [ -z "$PINATA_JWT" ]; then
+            echo "skip: PINATA_JWT secret is not set"
+            exit 0
+          fi
+          response=$(curl -sS -X POST "https://uploads.pinata.cloud/v3/files" \
+            -H "Authorization: Bearer $PINATA_JWT" \
+            -F "network=public" \
+            -F "file=@$RUNNER_TEMP/index.html" \
+            -F "name=index.html")
+          echo "$response"
+          cid=$(echo "$response" | grep -o '"cid":"[^"]*"' | head -n1 | cut -d'"' -f4)
+          if [ -z "$cid" ]; then
+            echo "::error::Pinata upload did not return a CID"
+            exit 1
+          fi
+          echo "Pinned donation page to IPFS: ipfs://$cid"
+          {
+            echo "### Donation page pinned to IPFS"
+            echo ""
+            echo "CID: \`$cid\`"
+          } >> "$GITHUB_STEP_SUMMARY"

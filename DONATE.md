@@ -2,6 +2,8 @@
 
 [English](#english) | [Українська](#українська)
 
+**Web page (34 languages):** https://lilit-moonlit.github.io/Evolve/ · https://limitafternoon.codeberg.page/Evolve/
+
 EVOLVE is an open-source, community-driven project. If you find it valuable, you can support its development with a donation. Contributions go toward development, security reviews, and infrastructure.
 
 > **There is no token sale.** EVOLVE tokens are **not for sale**. Donations are **unconditional gifts** and are **non-refundable**. You receive **no tokens, no equity, and no financial return** in exchange. See [`DISCLAIMER.md`](DISCLAIMER.md).

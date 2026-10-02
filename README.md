@@ -126,7 +126,7 @@ Contributions are welcome — code, bug reports, feature suggestions and proposa
 
 ## Support the Project
 
-If you find EVOLVE useful, you can support development with a donation — details in [DONATE.md](DONATE.md).
+If you find EVOLVE useful, you can support development with a donation — details in [DONATE.md](DONATE.md). Prefer a web page? Use the multilingual donation page (34 languages): **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**.
 
 **There is no token sale and there will be none.** EVOLVE tokens cannot be "invested in"; donations are gifts to support open-source development and do not entitle the donor to tokens, equity, returns or any financial claim.
 

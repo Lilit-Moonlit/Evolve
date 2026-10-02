@@ -24,3 +24,6 @@ test.txt
 /CFC/
 /public/
 
+# Donation site build output
+site/build/
+
