@@ -146,6 +146,7 @@ If you find EVOLVE useful, you can support development with a donation — detai
 - [Tokenomics](docs/TOKENOMICS.md) — token model and supply distribution
 - [Roadmap](docs/ROADMAP.md) — milestones and current status
 - [FAQ](docs/FAQ.md) — frequently asked questions
+- [Wallet guide](docs/WALLETS.md) — how to create wallets and get donation addresses
 
 ## License
 
