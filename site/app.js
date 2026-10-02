@@ -95,9 +95,11 @@
     list.textContent = "";
     ADDRESS_ROWS.forEach(function (row) {
       var value = String(state.addresses[row.key] || "");
+      /* Hide networks that have not been filled in yet. */
+      if (!value || value.indexOf("<YOUR_") === 0) return;
 
       var item = document.createElement("div");
-      item.className = "addr-row" + (value.indexOf("<YOUR_") === 0 ? " is-placeholder" : "");
+      item.className = "addr-row";
 
       var network = document.createElement("span");
       network.className = "addr-network";

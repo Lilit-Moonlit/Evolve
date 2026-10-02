@@ -14,25 +14,25 @@ Want us to be able to thank you later? Leave a short note — your name, a messa
 
 > **Security:** always verify the **full address character-by-character** against this file (bookmark this page). Addresses are never sent by email, DM, or screenshots. Match the network — funds sent on the wrong chain are usually unrecoverable.
 
-| Network                 | Address                     |
-| ----------------------- | --------------------------- |
-| Bitcoin (BTC)           | `<YOUR_BTC_BECH32_ADDRESS>` |
-| Bitcoin Lightning       | `<YOUR_LIGHTNING_ADDRESS>`  |
-| Ethereum (ETH / ERC-20) | `<YOUR_EVM_ADDRESS>`        |
-| Arbitrum One            | `<YOUR_EVM_ADDRESS>`        |
-| Optimism                | `<YOUR_EVM_ADDRESS>`        |
-| Base                    | `<YOUR_EVM_ADDRESS>`        |
-| Polygon                 | `<YOUR_EVM_ADDRESS>`        |
-| BNB Smart Chain (BSC)   | `<YOUR_EVM_ADDRESS>`        |
-| Avalanche (C-Chain)     | `<YOUR_EVM_ADDRESS>`        |
-| Solana (SOL / SPL)      | `<YOUR_SOLANA_ADDRESS>`     |
-| TON                     | `<YOUR_TON_ADDRESS>`        |
-| TRON (TRX / USDT-TRC20) | `<YOUR_TRON_ADDRESS>`       |
-| Monero (XMR)            | `<YOUR_XMR_ADDRESS>`        |
-| Litecoin (LTC)          | `<YOUR_LTC_ADDRESS>`        |
-| Dogecoin (DOGE)         | `<YOUR_DOGE_ADDRESS>`       |
+| Network                 | Address                                                                                           |
+| ----------------------- | ------------------------------------------------------------------------------------------------- |
+| Bitcoin (BTC)           | —                                                                                                 |
+| Bitcoin Lightning       | —                                                                                                 |
+| Ethereum (ETH / ERC-20) | `0xe40e68bC9B393bb5e10cb3D86934849899f0Ee80`                                                      |
+| Arbitrum One            | `0xe40e68bC9B393bb5e10cb3D86934849899f0Ee80`                                                      |
+| Optimism                | `0xe40e68bC9B393bb5e10cb3D86934849899f0Ee80`                                                      |
+| Base                    | `0xe40e68bC9B393bb5e10cb3D86934849899f0Ee80`                                                      |
+| Polygon                 | `0xe40e68bC9B393bb5e10cb3D86934849899f0Ee80`                                                      |
+| BNB Smart Chain (BSC)   | `0xe40e68bC9B393bb5e10cb3D86934849899f0Ee80`                                                      |
+| Avalanche (C-Chain)     | `0xe40e68bC9B393bb5e10cb3D86934849899f0Ee80`                                                      |
+| Solana (SOL / SPL)      | —                                                                                                 |
+| TON                     | —                                                                                                 |
+| TRON (TRX / USDT-TRC20) | —                                                                                                 |
+| Monero (XMR)            | `44pkjviQ33DM9uW7fqetEw22ABohcUFaHhUgjftCJppZVVgQGrUvuBWRvTqW9p7CriDqNJpu28Tpz4MQozW5cCrX179kwEq` |
+| Litecoin (LTC)          | —                                                                                                 |
+| Dogecoin (DOGE)         | —                                                                                                 |
 
-`<YOUR_EVM_ADDRESS>` is the same checksummed (EIP-55) address across all EVM chains listed above — only send EVM-chain assets to it.
+The same checksummed (EIP-55) EVM address is used across all EVM chains listed above — only send EVM-chain assets to it. More networks (BTC, Lightning, Solana, TON, TRON, LTC, DOGE) will be added soon.
 
 ## Guidelines
 
