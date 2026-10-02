@@ -1,0 +1,17 @@
+# GitHub "Sponsor" button configuration.
+#
+# GitHub FUNDING.yml has NO native crypto-address field — crypto donations are
+# published in DONATE.md, which is linked via `custom` below.
+#
+# Docs: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+
+custom:
+  - "https://github.com/Lilit-Moonlit/Evolve/blob/main/DONATE.md"
+
+# Optional: add funding-platform usernames (uncomment and fill in).
+# github: [your-github-username]
+# patreon: your-patreon
+# open_collective: your-collective
+# ko_fi: your-kofi
+# liberapay: your-liberapay
+# buy_me_a_coffee: your-buymeacoffee

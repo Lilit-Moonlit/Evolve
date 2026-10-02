@@ -1,0 +1,21 @@
+# Codeberg (Forgejo) "Donate" button configuration.
+#
+# Forgejo reads this natively (path precedence: .forgejo/FUNDING.yml, then
+# .github/FUNDING.yml, then repo root). Crypto addresses are published in
+# DONATE.md and linked via `custom`.
+#
+# NOTE: the Donate button ships in Forgejo v17 (Codeberg is expected to upgrade
+# around 15 Oct 2026). The file is harmless before then.
+#
+# Docs: https://forgejo.org/docs/next/user/repository/funding/
+
+custom:
+  - "https://github.com/Lilit-Moonlit/Evolve/blob/main/DONATE.md"
+
+# Optional: add funding-platform usernames (uncomment and fill in).
+# github: [your-github-username]
+# patreon: your-patreon
+# open_collective: your-collective
+# ko_fi: your-kofi
+# liberapay: your-liberapay
+# buy_me_a_coffee: your-buymeacoffee
