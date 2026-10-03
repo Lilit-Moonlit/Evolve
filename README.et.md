@@ -2,77 +2,98 @@
 
 # EVOLVE
 
-**Tutvumine, eostamine ja tervise verifitseerimine — vaikimisi privaatne, verifitseeritud seal, kus see loeb.**
+**Tutvumine, eostamine ja kontrollitud tervis — vaikimisi privaatne, usaldusväärne seal, kus see loeb.**
 
-EVOLVE on avatud lähtekoodiga detsentraliseeritud platvorm kontrollitavate intiimsete suhete jaoks: tutvumine, eostamine ja anonüümne suguhaiguste/DNA-ga ühilduvus. Logite sisse oma krüptorahakotiga (Sign-In with Ethereum) — ei telefoninumbrit, ei e-posti, ei KYC-d — ja saate oma konto taastada ahelas asuva DNA-sidumise kaudu. Terviseandmed jäävad teie omaks: laboritulemusi sõelutakse automaatselt, üksikute patogeenide staatust **ei näidata kunagi** kellelegi ning sobitamine põhineb ainult anonüümsetel ühilduvushinnangutel (Safe / Compatible / Caution / Risk). Vestlus töötab kaaslasvõrgus libp2p ja Nostri kaudu, mugavuse tagab HTTP-varuvari; rakenduses on lisaks kerge avalik "Safety Mode" fassaad ning eraldiseisev Companion Mode suguhaiguste testitulemuste hindamiseks.
+EVOLVE on avatud lähtekoodiga detsentraliseeritud platvorm inimestele, kes on tüdinud oma telefoninumbri, näo ja kõige intiimsemate terviseandmete andmisest kellegi teise andmebaasi. Logite sisse oma krüptorahakotiga — ei telefoni, ei e-posti, ei KYC-d — ja saate oma konto tagasi plokkahelas oleva DNA-kohustuse kaudu. Terviseandmed jäävad teie omaks: testitulemusi parsitakse automaatselt, üksikute patogeenide olekuid **ei näidata kunagi** kellelegi, ja sobitamine põhineb ainult anonüümsetel ühilduvusotsustel (Safe / Compatible / Caution / Risk). Vestlus töötab võrdõiguslikult (peer-to-peer) libp2p ja Nostri kaudu, mugavuse tagab HTTP-varuvariant.
 
-> **Olek: varajane alfa.** EVOLVE on aktiivse arenduse all ega ole valmis toode.
-> Nutilepingud on juurutatud **ainult Ethereumi Sepolia testivõrgus**.
-> **Põhivõrgu juurutust, DEX-i, likviidsust ja avalikku tokenimüüki ei ole** — ega ole ühtegi neist lubatudki.
-> Funktsioonid võivad igal ajal muutuda või katki minna. Mitte miski siin ei ole finantsnõuanne ega investeerimispakkumine.
+> **Olek — platvorm töötab juba täna; põhivõrk ja DEX on järgmisena.**
+> Tutvumine, eostamine, tervise kontrollimine, laboratooriumivoog, P2P-vestlus, EVOLVE token ja juhtimine — kõik töötavad. Ees ootavad veel: **põhivõrgu juurutamine ja DEX-i likviidsus** ning **planeeritud avalik müük** (vt [EVOLVE token](#evolve-token-ainult-testvõrk)).
+> Nutilepingud on juurutatud **ainult Ethereum Sepolia testvõrgus**. Mitte miski siin ei ole finantsnõuanne ega investeerimispakkumine.
+
+> **Leiate, et EVOLVE on kasulik? Toetage arendust — iga annetus läheb koodi, laboripartnerlustesse, majutusse ja tõlkesse → [DONATE.md](DONATE.md).**
+
+## Pole midagi karta
+
+EVOLVE ehitati küsimuste ümber, mida inimesed tegelikult esitavad, enne kui hakkavad sellisele platvormile usaldama.
+
+| Mure                                          | Mida EVOLVE juba selle vastu teeb                                                                                                                                          |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| "Minu terviseandmed lekivad."                 | Üksikute patogeenide tulemusi **ei näidata kunagi** kellelegi — ainult anonüümne otsus: Safe / Compatible / Caution / Risk.                                                |
+| "Minu fotod satuvad kuhugi."                  | Fotod on vaikimisi hägustatud. Omanik annab **15-sekundilise** või **püsiva** vaatamisõiguse — taotluse peale või oma algatusel. Vaatamine on tasuta.                      |
+| "Peaksin üle andma isikutõendi või telefoni." | Rahakotiga sisselogimine (SIWE). Ei telefoni, ei e-posti, ei KYC-d. Taastamine toimib plokkahelas oleva DNA-kohustuse kaudu.                                               |
+| "Ta valetab, et on terve."                    | Tulemused on **laborikontrollitud** (QR + näokattumine) ja paari testid tehakse **kohtumise ajal endal** — värskeid STD-tulemusi loeb, DNA ei vanane.                      |
+| "Kas keegi võtab mu raha ja kaob?"            | Eostamine toimib tegeliku, ohustatud panusega: mehe tagatis liigub ainult siis, kui isadus on **kinnitatud**; muidu lihtsalt tagastatakse see talle.                       |
+| "Kas token on pump-and-dump?"                 | Täna ei ole ükski müük käimas; kood on avatud (MIT); käibele võtmata reserv plaanitakse lukustada **tühjendamatusse hoidlasse**, millest ei saa välja võtta isegi asutaja. |
+| "Kas platvormi saab sulgeda või keelata?"     | Kõigepealt võrdõiguslik sõnumivahetus, detsentraliseeritud salvestus (IPFS / Arweave), 18 EVM-i võrgukonfiguratsiooni ja ühtegi kõvasti kodeeritud domeeni.                |
 
 ## Mis & miks
 
-Traditsioonilised tutvumisplatvormid paluvad teil oma telefoninumber, e-post, fotod ja intiimsed terviseandmed kesksesse andmebaasi üle anda. EVOLVE lähtub vastupidisest eeldusest: privaatsus vaikimisi, enesehoius (self-custody) ja ühtegi keskset veapunkti pole. Põhiväärtused:
+Traditsioonilised tutvusrakendused paluvad teil vahetada oma telefoninumber, e-post, fotod ja intiimsed terviseandmed keskset andmebaasi vastu — ja seejärel seda andmebaasi igaveseks usaldada. EVOLVE lähtub vastupidisest eeldusest: **privaatsus vaikimisi, enesehoid (self-custody) ja ükski üksik rikkepunkt**.
 
-- **Privaatsus vaikimisi** — terviseandmeid ei paljastata kunagi; ainult anonüümsed hinnangud.
-- **Keelamiskindlus** — P2P-esmajärgu sõnumivahetus, detsentraliseeritud salvestus (IPFS / Arweave), mitme võrgu disain, ei kõvasti kodeeritud domeene.
-- **Enesehoiuline identiteet** — teie rahakott on teie sisselogimine; DNA-põhine taastamine e-posti/telefoni asemel.
+- **Privaatsus vaikimisi** — terviseandmeid ei paljastata kunagi; ainult anonüümsed otsused.
+- **Keelustamiskindlus** — kõigepealt P2P-sõnumid, detsentraliseeritud salvestus, mitme võrgu disain, ei kõvasti kodeeritud domeene.
+- **Enesehoitud identiteet** — teie rahakott on teie sisselogimine; DNA-põhine taastamine e-posti või telefoni asemel.
 - **Ei KYC-tõket** — platvormi kasutamiseks ei nõuta riiklikku isikut tõendavat dokumenti, telefoni ega e-posti.
 
-Kogu põhjendus: [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md) (inglise keeles).
+Loe kogu põhjendust failist [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md).
 
-## Põhifunktsioonid
+## Tervis, mida saab tegelikult usaldada
 
-### Identiteet & privaatsus
+- Laadige STD-test üles toortekstina või PDFina (tekstikihi eraldamine, OCR-varuvariant skannide jaoks).
+- Parser tunneb 8 patogeeni: HIV-1/2, süüfilis, klamüüdia, gonorrea, HSV-1, HSV-2, B-hepatiit, C-hepatiit — inglise, ukraina ja vene aruannete vormingus.
+- **Üksiku patogeeni olekut ei näidata teistele kasutajatele kunagi.** Profiilid näitavad ainult anonüümset otsust: **Safe / Compatible / Caution / Risk**.
+- Plokkahela DNA-kanded (`DNAVerification.sol`) võimaldavad taastamist ja kontrollimist.
 
-- **SIWE rahakotiga sisselogimine** (MetaMask ja teised EVM-rahakotid) — tsensuurikindel päästutee.
-- **DNA-põhine konto taastamine** — teie DNA-testi tulemuse põhjal arvutatakse räsi (SHA-256, ahelas sidutakse `bytes32`-na) ja see saab taastada ligipääsu ilma telefonita või e-postita.
-- **Account Abstraction (ERC-4337)** — nutikontod ja paymaster gaasivabaks kasutuselevõtuks; SIWE jääb alati kättesaadavaks.
+### Partnerlaborid — tõendid, mitte lubadused
 
-### Anonüümne terviseühilduvus
+Sisenege partnerlaborisse ja näidake oma QR-koodi. Labor skaneerib selle, kinnitab teie identiteedi **näokattumisega** (et keegi teine ei saaks teie tulemust kätte) ja manustab STD-aruande — PDF, skann või tekst, isegi halva OCR-iga. Tulemuse allkirjastab päris laboratoorium, mitte teie, nii et teised näevad **kontrollitud fakti** teie sõna asemel. Ja iga kinnitatud kontroll maksab **1 EVOLVE patsiendile ja 1 EVOLVE laborile** — mõlemal poolel on põhjus aus olla. Üksikuid patogeene ei näidata ikkagi kunagi kellelegi.
 
-- Laadige suguhaiguste testitulemused üles tekstina või PDF-ina (tekstikihi eraldamine, skannitud lehtede puhul OCR-varuvari).
-- Parser tunneb ära 8 patogeeni: HIV-1/2, süüfilis, klamüüdia, gonorröa, HSV-1, HSV-2, B-hepatiit, C-hepatiit (inglise-, ukraina- ja venekeelsed aruannete formaadid).
-- **Üksiku patogeeni staatust ei näidata teistele kasutajatele kunagi.** Profiilid näitavad ainult anonüümset hinnangut: **Safe / Compatible / Caution / Risk**.
-- Ahelas olevad DNA-verifitseerimiskirjed (`DNAVerification.sol`) toidavad taastamis- ja verifitseerimisvooge.
+## Kellegi leidmine
 
-### Profiilid, otsing & suhtlus
+- Otsingufiltrid: "Mida te otsite" (tutvumine / eostamine / polüandriline eostamine / STD-testimine), "Keda te otsite" (mehed, naised, paarid), kaskaadsed riik → linn valikud, "saab teie riiki tulla" riigiti loenditega, nahavärv, testimise eelistus, ainult STD-ühilduvad.
+- Tutvumisviisard: vanus (peideldav), keeled, elulookirjeldus, foto.
+- **P2P-vestlus** libp2p (gossipsub) + Nostr kaudu, HTTP-API varuvariandiga.
 
-- Otsingufiltrid: "Mida te otsite" (tutvumine / eostamine / polüandrine eostamine / suguhaiguste testimine), "Keda te otsite" (mehed, naised, paarid), kaskaadsed riik → linn valikud, "saab teie riiki reisida" riigipõhiste loenditega, nahavärv, testimise eelistus, ainult suguhaigustega ühilduvad.
-- Tutvustuse nõustaja: vanus (peidetav), keeled, kirjeldus, foto.
-- **Fotode privaatsus**: fotod on vaikimisi udustatud; omanik annab 15-sekundilisi või püsivaid vaatamisõigusi kas proaktiivselt või taotluse peale. Vaatamine on tasuta.
-- **P2P-vestlus** libp2p (gossipsub) + Nostri kaudu, HTTP-API varuvariga.
+## Eostamine
 
-### Eostamisrežiimid
+Kaks viisi last planeerida, ja mõlemad põhinevad samal ideel: tõelist kavatsust näidatakse tegeliku EVOLVE-panusega — mitte kunagi lubadustega. Mehe pühendumus elab tema EvolveFund-tagatises (alates 15 EVOLVE, lukustatud vähemalt 30 päevaks), ja naine saab määrata oma minimaalse tagatise meestele, kes temani jõuavad.
 
-- **Režiim 2 — Pregnancy Bond**: naine loob sideme, mees paneb EVOLVE'i panuseks (≥ 100 praeguses testivõrgu versioonis), mõlemad kinnitavad; pärast kinnitatud rasedust ja isadust läheb panus naisele.
-- **Režiim 3 — Cryptic Choice**: naine avab 48-tunnise sessiooni, mehed liituvad panustades; tema valib isa — viimase panus tagastatakse, ülejäänutel jagatakse: 90 % temale / 10 % valitud isale.
+**Eostamine.** Naine juhib: ta kutsub konkreetse mehe ja nimetab ta sidemesse. Mehele on vaja aktiivset EvolveFund-tagatist; kui mõlemad kinnitavad, see lukustatakse ja loendamine algab. Rasedusest teatatakse 14 kuni 30 päeva pärast kinnitamist, ja paari STD- ning DNA-testid tehakse kohtumise ajal endal — värskeid STD-tulemusi loeb, DNA ei vanane. Kui isadus on kinnitatud, läheb mehe tagatis naisele; kui seda ei kinnitata, tagatis lihtsalt vabastatakse talle tagasi. Mitte miski ei vaheta omanikku enne, kui faktid on selged.
 
-### Laborid & verifitseerimine
+**Polüandriline eostamine.** Valik kuulub naisele ja jääb privaatseks. Ta avab sessiooni, mis kestab 48 tundi — ilma enda tagatiseta (ainult maine jaoks võib ta selle lisada, kui soovib). Mehed aktiivse tagatisega võivad liituda — kuni 50 — ja kinnitada, mis lukustab nende panuse. Neliteist päeva pärast sessiooni sulgemist valitakse isa. Ta saab oma tagatise tagasi pluss preemia fondist: topelt oma tagatis ja 1 EVOLVE iga teise osaleja kohta. Mittevalitud mehed kaotavad oma panuse — 90 % naisele, 10 % valitud isale. Ta ei riski mitte millegagi ja saab ainult võita; mehed panevad oma panuse õiguse taha, et neid valitaks.
 
-- **Laboripartneri voog**: laborid registreeruvad partneritena, verifitseerivad patsiente QR-koodi ja näotuvastusega ning manustavad suguhaiguste aruandeid (PDF/tekst OCR-eraldamisega).
-- **Companion Mode**: eraldiseisev voog suguhaiguste testitulemuste hindamiseks ilma tutvumisplatvormiga liitumata.
-- **Safety Mode** (`VITE_PRODUCT_MODE=safety`): piiratud avalik fassaad (suguhaiguste olek, avalikud profiililingid, ühilduvuskontrollid), mis jätkab tööd ka siis, kui tutvumis-/eostamisfunktsioone piiratakse mingis jurisdiktsioonis või rakenduspoes.
+## EVOLVE token (ainult testvõrk)
 
-### EVOLVE token (ainult testivõrgus)
+- ERC-20, maksimaalne pakkumine **8,000,000,000 EVOLVE**. Admini toiminguid piirab 48-tunnine `TimelockController`.
+- **Planeeritud pakkumise jaotus** — loodud nii, et peaaegu kogu pakkumine töötaks kasutajate heaks, mitte siseringi heaks:
 
-- ERC-20, maksimaalne kogus 8 000 000 000 EVOLVE, administraatori toimingud 48-tunnise TimelockControlleri taga.
-- **Emojikingu majandus**: kingitus maksab 1 EVOLVE, mis jagatakse proportsionaalselt olemasolevatele kingituste omanikele — püsiv tulumudel hoidjatele; kingitused on ülekantavad.
-- **EvolveFund**: meeste panustamine (vähemalt 15 EVOLVE, 30-päevane lukustus), mis arvestatakse halduskaalu; naised kasutavad oma rahakoti saldot.
-- **Verifitseerimise preemiad**: 1 EVOLVE verifitseeritud kasutajale ja 1 EVOLVE kinnitavale laborile suguhaiguste/DNA-verifitseerimise eest (pluss mahupiiranguga testkraan).
-- Halduse häälte kaal ühendab rekursiivse maine (8 häält, sügavus 3), laste/isaduste osa ning panustatud või hoitud EVOLVE'i.
-- **LayerZero OFT** integratsioon tulevasteks ahelatevahelisteks EVOLVE'i ülekanneteks (sõltuvused olemas; Sepolia tagant pole veel midagi juurutatud).
+| Eesmärk                                            |        EVOLVE |
+| -------------------------------------------------- | ------------: |
+| Asutajad ja meeskond (palk / preemia)              |    25,000,000 |
+| DEX-i reserv (tulevik)                             |     4,000,000 |
+| Avalik müük (planeeritud)                          |     5,000,000 |
+| Preemiate reserv — laborid, patsiendid, emad, isad | 7,966,000,000 |
 
-### Platvorm
+- **Planeeritud avalik müük** — 5,000,000 EVOLVE müüb rakendus hinnaga **$0.8 tükk**, makstava mis tahes rakenduse toetatud tokeniga; tulud rahastavad arendust. _(Planeeritud — veel pole käimas.)_
+- **Usalduseta emissioon (planeeritud)** — ~7,966,000,000 preemiate reserv plaanitakse lukustada tühjendamatusse `RewardVault`-i: see vabaneb ainult järk-järgult labori-, patsiendi-, ema- ja isapreemiatena, ja reeglite muutmine nõuab juhtimishääletust. Isegi asutaja ei saa sealt välja võtta. Disain: [docs/REWARD-VAULT-PLAN.md](docs/REWARD-VAULT-PLAN.md).
+- **Emojikingituste majandus** — kingitus maksab 1 EVOLVE, mis jaotatakse proportsionaalselt olemasolevate kingituste omanike vahel; lõputu tulude mudel, ja kingitused on ülekantavad.
+- **EvolveFund** — meeste staking (vähemalt 15 EVOLVE, 30-päevane lukustus), mis läheb juhtimiskaalu; naised kasutavad oma rahakoti jääki.
+- **Kontrollimise preemiad** — 1 EVOLVE kontrollitud kasutajale ja 1 EVOLVE kinnitavale laborile iga STD-/DNA-kontrolli kohta (pluss mahupiirangutega kraan).
+- **Juhtimine** — hääle kaal ühendab rekursiivse maine (8 häält, sügavus 3), laste/isaduse osa ning stakingus või hoitud EVOLVE-id.
+- **LayerZero OFT** integratsioon tulevasteks mitme ahela EVOLVE ülekanneteks (sõltuvused olemas; Sepoliast kaugemale pole veel midagi juurutatud).
 
-- Veebirakendus (PWA-na paigaldatav) ja Expo/React Native mobiilirakendus.
-- Liidest on tõlgitud **34 keelde**.
-- Mitme võrgu valmisolek: 18 EVM-võrgu konfiguratsiooni (Arbitrum ja Avalanche on kavandatud peamised L2-d — **veel juurutamata**).
+## Toetage projekti
+
+EVOLVE on sõltumatu ja avatud lähtekoodiga. Kui see on teile kasulik, saate toetada arendust annetusega — iga panus läheb koodi, laboripartnerlustesse, majutusse ja tõlkesse.
+
+- **Annetuse üksikasjad (EVM, Monero ja palju muud):** [DONATE.md](DONATE.md)
+- **Mitmekeelne annetamisleht (34 keelt):** **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**
+
+Avalik tokenimüük on tegevuskavas, kuid see **pole** täna käimas. Annetused on kingitused, mis toetavad avatud lähtekoodiga arendust ega anna õigust tokenitele, osalusele, tulule ega kasumile. Annake ainult seda, mida saate endale lubada kaotada.
 
 ## Arhitektuur & tehnoloogiapinu
 
-Monorepo, mida hallatakse npm workspaces + Turborepoga:
+Monorepo, mida hallatakse npm workspaces + Turborepo abil:
 
 ```
 apps/
@@ -88,15 +109,15 @@ packages/
 docs/           # Architecture, tokenomics, roadmap, FAQ
 ```
 
-Tähtsad nutilepingud: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (emojikingitused + preemiad), `Governance.sol`, `BondManager.sol` (režiimid 2 ja 3), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster` ning OpenZeppelini `TimelockController`.
+Põhilised nutilepingud: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (emojikingitused + preemiad), `Governance.sol`, `BondManager.sol` (eostamine ja polüandriline eostamine), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster` ning OpenZeppelini `TimelockController`.
 
-Üksikasjad: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md) (inglise keeles).
+Üksikasjad: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md)
 
 ## Tegevuskava
 
-Töös: veebirakenduse tootmisvalmidus. Kavas: ahelas asuv laboriregister ja testisertifitseerimine, päris e-posti teenusepakkuja adapter laboriaruannete vastuvõtuks, ahelas verifitseeritud kinnitused profiilidel, tokenite sidumise (vesting) uuendus asutajate/arendajate allokatsioonidele, DEX-i likviidsuse varustamine (praegu blokeeritud — nõuab tokenite peamise võrgu juurutusi). Mitme võrgu laienemine (Arbitrum, Avalanche ja teised EVM-ahelad) järgneb pärast testivõrgu kõvendamist.
+Töös: veebirakenduse tootmisvalmidus. Planeeritud: plokkahelas laboriregister ja testide sertifitseerimine, päris e-posti teenusepakkuja adapter laboriaruannete vastuvõtuks, plokkahelas kontrollitud tunnistused profiilidel, **usalduseta RewardVault** juhtimisega piiratud emissiooniga ([disain](docs/REWARD-VAULT-PLAN.md)), **avalik tokenimüük**, tokenite vestingu uuendus asutaja allokeerimise jaoks ning DEX-i likviidsuse tagamine (praegu blokeeritud — see nõuab tokenite juurutusi põhivõrkudes). Mitme võrgu laienemine (Arbitrum, Avalanche ja teised EVM-ahelad) järgneb testvõrgu kõvastumisele.
 
-Täielik loend: [docs/ROADMAP.md](docs/ROADMAP.md) (inglise keeles).
+Täielik loend: [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Alustamine (arendajad)
 
@@ -120,34 +141,29 @@ npm test                # hardhat test suite
 npm run deploy:local    # deploy all contracts to an in-process Hardhat network
 ```
 
-## Panustamine
+## Kaasamine
 
-Panused on teretulnud — kood, veateated, funktsioonisoovitused ja ettepanekud. Enne alustamist lugege [CONTRIBUTING.md](CONTRIBUTING.md) ja meie [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
-
-## Toeta projekti
-
-Kui leiate, et EVOLVE on kasulik, saate arendust toetada annetusega — üksikasjad failis [DONATE.md](DONATE.md). Eelistate veebilehte? Kasutage mitmekeelset annetuslehte (34 keelt): **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**.
-
-**Tokenimüüki ei ole ega tule.** EVOLVE tokenitesse ei saa "investeerida"; annetused on kingitused avatud lähtekoodi arenduse toetamiseks ega anna annetajale õigust tokenitele, omakapitalile, tuludele ega ühelegi finantsnõudele.
+Panused on teretulnud — kood, vearaportid, funktsioonisoovitused ja ettepanekud. Palun lugege enne alustamist [CONTRIBUTING.md](CONTRIBUTING.md) ja meie [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ## Hoidlad (peegeldused)
 
-| Peegel   | URL                                        |
-| -------- | ------------------------------------------ |
-| GitHub   | https://github.com/Lilit-Moonlit/Evolve    |
-| Codeberg | https://codeberg.org/limitafternoon/Evolve |
-| GitLab   | https://gitlab.com/evolve-group3/evolve    |
+| Peegeldus | URL                                        |
+| --------- | ------------------------------------------ |
+| GitHub    | https://github.com/Lilit-Moonlit/Evolve    |
+| Codeberg  | https://codeberg.org/limitafternoon/Evolve |
+| GitLab    | https://gitlab.com/evolve-group3/evolve    |
 
 ## Dokumentatsioon
 
-- [Mis & miks](docs/WHAT-AND-WHY.md) — probleem, visioon, põhiväärtused (inglise keeles)
-- [Kuidas see töötab](docs/HOW-IT-WORKS.md) — kasutajavood samm-sammult (inglise keeles)
-- [Arhitektuur](docs/ARCHITECTURE.md) — monorepo, paketid, andmevood (inglise keeles)
-- [Tokenomics](docs/TOKENOMICS.md) — tokeni mudel ja pakkumise jaotus (inglise keeles)
-- [Tegevuskava](docs/ROADMAP.md) — verstapostid ja praegune olek (inglise keeles)
-- [KKK](docs/FAQ.md) — korduma kippuvad küsimused (inglise keeles)
-- [Rahakoti juhend](docs/WALLETS.md) — kuidas luua rahakotte ja saada annetusaadresse (inglise keeles)
+- [Mis & miks](docs/WHAT-AND-WHY.md) — probleem, visioon, tuumväärtused
+- [Kuidas see töötab](docs/HOW-IT-WORKS.md) — kasutajavood, samm-sammult
+- [Arhitektuur](docs/ARCHITECTURE.md) — monorepo, pakid, andmevood
+- [Tokenomics](docs/TOKENOMICS.md) — tokeni mudel ja pakkumise jaotus
+- [RewardVaulti plaan](docs/REWARD-VAULT-PLAN.md) — usalduseta emissioon (planeeritud)
+- [Tegevuskava](docs/ROADMAP.md) — verstapostid ja praegune seis
+- [KKK](docs/FAQ.md) — korduma kippuvad küsimused
+- [Rahakoti juhend](docs/WALLETS.md) — kuidas luua rahakotte ja saada annetusaadresse
 
 ## Litsents
 
-Litsentseeritud [MIT-litsentsi alusel](LICENSE).
+Litsentseeritud [MIT litsentsi alusel](LICENSE).

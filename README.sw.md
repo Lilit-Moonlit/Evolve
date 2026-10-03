@@ -2,73 +2,94 @@
 
 # EVOLVE
 
-**Kutafuta wapenzi, kupata mimba na uthibitisho wa afya — faragha kwa msingi, imethibitishwa pale ambapo ina umuhimu.**
+**Urafiki, kuzazi na afya iliyothibitishwa — faragha kwa chaguo-msingi, uaminifu pale penye umuhimu.**
 
-EVOLVE ni jukwaa la chanzo wazi (open-source) na la teguzi (decentralized) kwa uhusiano wa karibu unaoweza kuthibitishwa: kutafuta wapenzi, kupata mimba, na uoiano wa STD/DNA usio na majina. Unajiandikisha kwa mkoba wako mwenyewe wa sarafu za kidijitali (Sign-In with Ethereum) — hakuna namba ya simu, hakuna barua pepe, hakuna KYC — nawe unaweza kurejesha akaunti yako kupitia ahadi (commitment) ya DNA iliyowekwa kwenye mnyororo (on-chain). Data za afya zinabaki za kwako: matokeo ya maabara huchambuliwa kiotomatiki, hali za vimelea binafsi **kamwe** hazioneshwi kwa mtu yeyote, na ulinganishaji unategemea tu maamuzi ya uoiano yasiyo na majina (Safe / Compatible / Caution / Risk). Mazungumzo hufanya kwa muundo wa rika-kwa-rika (peer-to-peer) kupitia libp2p na Nostr, ikiwa na njia mbadala ya HTTP kwa urahisi, na programu inakuja na "Safety Mode" ya umma nyepesi pamoja na Hali ya Msaidizi (Companion Mode) inayojitegemea kwa tathmini ya matokeo ya vipimo vya STD.
+EVOLVE ni jukwaa la chanzo-wazi na la ugatuzi lililoundwa kwa watu ambao wachoka kuwasilisha namba yao ya simu, sura yao na taarifa zao nyeti zaidi za kiafya kwenye hifadhidata ya mtu mwingine. Unakingia kwa kutumia mkoba wako mwenyewe wa sarafu — bila simu, bila barua pepe, bila KYC — na unaweza kupata akaunti yako tena kupitia ahadi ya DNA iliyoko kwenye mnyororo. Taarifa zako za kiafya zinabaki zako: matokeo ya vipimo vinachambuliwa kiotomatiki, hali ya kila kiini-cha-magonjwa **haiwahi** kuonyeshwa kwa mtu yeyote, na utafananishaji unategemea tu maamuzi ya utangamanifu yasiyo na majina (Salama / Inafaa / Tahadhari / Hatari). Mazungumzo hufanya kwa muundo wa rika-kwa-rika kupitia libp2p na Nostr, ukiwa na njia mbadala ya HTTP kwa urahisi.
 
-> **Hali: alfa ya hatua ya mwanzo.** EVOLVE ipo katika ukuzaji endelevu na si bidhaa iliyokamilika.
-> Mikataba mahiri imepangwa **kwenye mtandao wa majaribio wa Ethereum Sepolia tu**.
-> **Hakuna upangaji kwenye mainnet, hakuna DEX, hakuna akiba ya mtaji (liquidity), na hakuna mauzo ya umma ya tokeni** — wala hakuna linaloahidiwa.
-> Vipengele vinaweza kubadilika au kuharibika wakati wowote. Hakuna chochote hapa ni ushauri wa kifedha au ofa ya uwekezaji.
+> **Hali — jukwaa linafanya kazi leo; mtandao mkuu na DEX ndiyo hatua inayofuata.**
+> Urafiki, kuzazi, uthibitisho wa afya, mtiririko wa maabara, mazungumzo ya P2P, sarafu ya EVOLVE na utawala vyote vinafanya kazi. Zinazosalia mbele: **utekelezaji kwenye mtandao mkuu na umajini wa DEX**, pamoja na **mauzo ya umma yaliyopangwa** (ona [Sarafu ya EVOLVE](#the-evolve-token-testnet-only)).
+> Mikataba mingi imetekelezwa kwenye **mtandao wa majaribio wa Ethereum Sepolia tu**. Hakuna chochote hapa ambacho ni ushauri wa kifedha au ofa ya uwekezaji.
 
-## Nini na Kwa Nini
+> **EVOLVE inakupa faida? Mkvelope uendelezaji — kila mchango huenda kwa msimbo, ushirikiano wa maabara, upangishaji na utafsiri → [DONATE.md](DONATE.md).**
 
-Majukwaa ya kawaida ya kutafuta wapenzi yanakuomba ukabidhi namba yako ya simu, barua pepe, picha na maelezo ya kina ya afya ya karibu kwenye hifadhidata kuu moja. EVOLVE huanza kutoka dhana ya kinyume: faragha kwa msingi, kujishikilia mwenyewe (self-custody), na hakuna sehemu kuu ya kushindwa. Thamani za msingi:
+## Hakuna la kuogopa
 
-- **Faragha kwa msingi** — data za afya kamwe hazifichuliwi; maamuzi yasiyo na majina tu.
-- **Uvumilivu wa marufuku (ban resistance)** — ujumbe kwa P2P kwanza, hifadhi ya teguzi (IPFS / Arweave), muundo wa mitandao mingi, hakuna kikoa kilichowekwa kwa nguvu kwenye msimbo.
-- **Utambulisho wa kujishikilia** — mkoba wako ndio kuingia kwako; kurejesha kwa DNA badala ya barua pepe/simu.
+EVOLVE iliundwa kuzunguka maswali ambayo watu huuliza kweli kabla ya kuamini jukwaa kama hili.
+
+| Wasiwasi                                         | EVOLVE tayari inachofanya kuhusu hilo                                                                                                                                                       |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| "Taarifa zangu za kiafya zitavuja."              | Matokeo ya kila kiini-cha-magonjwa **hayawahi** kuonyeshwa kwa mtu yeyote — mwamuzi usio na majina tu: Salama / Inafaa / Tahadhari / Hatari.                                                |
+| "Picha zangu zitaishia mahali."                  | Picha huwa zimefungwa kwa chaguo-msingi. Mmiliki hutoa ruhusa ya kutazama kwa **sekunde 15** au **ya kudumu** — kwa ombi au kwa hiari yake. Kutazama ni bure.                               |
+| "Nitakaulazimisha kunamba kitambulisho au simu." | Kuingia kwa mkoba (SIWE). Hakuna simu, hakuna barua pepe, hakuna KYC. Kurejesha akaunti hufanya kwa ahadi ya DNA iliyoko kwenye mnyororo.                                                   |
+| "Yeye anadanganya kuhusu kuwa na afya njema."    | Matokeo yame**thibitishwa na maabara** (QR + ulinganishaji wa uso), na vipimo vya wanandoa huchukuliwa **kwenye mkutano wenyewe** — matokeo ya karibuni ya ITPU ndiyo muhimu, DNA haizeezi. |
+| "Je, mtu atachukua pesa zangu na kutoweka?"      | Kuzazi kunaendeshwa na dhamana halisi yenye hatari: amana ya mwanaume inasogea tu pale ubaba unapo**thibitishwa**; la sivyo inarudishwa kwake tu.                                           |
+| "Je, sarafu hii ni mpango wa kufufua na kuuza?"  | Hakuna mauzo yanayoendelea leo; msimbo ni wazi (MIT); akiba isiyozungukwa imepangwa kufungwa kwenye **ghala lisiloweza kudrainiwa** ambalo hata mwanzilishi hawezi kutoa.                   |
+| "Je, jukwaa linaweza kufungwa au kuzuiwa?"       | Ujumbe wa rika-kwa-rika kwanza, hifadhi iliyogatuliwa (IPFS / Arweave), mipangilio 18 ya mitandao ya EVM, na hakuna kikoa kilichowekwa kwa nguvu kwenye msimbo.                             |
+
+## Nini na Kwa nini
+
+Programu za kawaida za urafiki huuliza ubadilishe namba yako ya simu, barua pepe, picha na maelezo nyeti ya kiafya kwa hifadhidata ya kati — kisha uiamini hiyo hifadhidata milele. EVOLVE huanza kutoka dhana ya kinyume: **faragha kwa chaguo-msingi, umiliki-binafsi, na hakuna hatua moja ya kushindwa**.
+
+- **Faragha kwa chaguo-msingi** — taarifa za kiafya hazifichuliwi kamwe; maamuzi yasiyo na majina tu.
+- **Ustahimilivu wa marufuku** — ujumbe wa P2P kwanza, hifadhi iliyogatuliwa, muundo wa mitandao mingi, hakuna vikoa vilivyowekwa kwa nguvu.
+- **Kitambulisho chenye umiliki-binafsi** — mkoba wako ni kuingia kwako; kurejesha kwa DNA badala ya barua pepe au simu.
 - **Hakuna lango la KYC** — hakuna kitambulisho cha serikali, simu au barua pepe inayohitajika kutumia jukwaa.
 
-Soma sababu kamili katika [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md) (kwa Kiingereza).
+Soma sababu kamili katika [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md).
 
-## Vipengele Muhimu
+## Afya unayoweza kuiamini kwelikweli
 
-### Utambulisho na Faragha
+- Pakia kipimo cha ITPU kama maandishi ghafi au PDF (utoaji wa tabaka-la-maandishi, ukiwa na njia mbadala ya OCR kwa skani).
+- Kichambuzi kinajua viini-cha-magonjwa 8: HIV-1/2, Kaswende, Klamidia, Kisonono, HSV-1, HSV-2, Homa ya Manjano B, Homa ya Manjano C — katika fomati za ripoti za Kiingereza, Kiukreni na Kirusi.
+- **Hali ya kila kiini-cha-magonjwa haiwahi kuonyeshwa kwa watumiaji wengine.** Wasifu huonyesha mwamuzi usio na majina tu: **Salama / Inafaa / Tahadhari / Hatari**.
+- Rekodi za DNA zilizoko kwenye mnyororo (`DNAVerification.sol`) zinawezesha kurejesha na kuthibitisha.
 
-- **Kuingia kwa mkoba kwa SIWE** (MetaMask na mikoba mingine ya EVM) — njia ya kutoroka inayoepuka udhibiti.
-- **Kurejesha akaunti kwa DNA** — matokeo yako ya kipimo cha DNA hufanywa hash (SHA-256, imewekwa kwenye mnyororo kama `bytes32`) nawe inaweza kurejesha ufikiaji bila simu au barua pepe.
-- **Account Abstraction (ERC-4337)** — akaunti mahiri na paymaster kwa kujiunga bila gharama ya gesi; SIWE daima inabaki ipatikane.
+### Maabara washirika — uthibitisho, si ahadi
 
-### Uoiano wa Afya Usio na Majina
+Ingia kwenye maabara shirika na uonyeshe msimbo wako wa QR. Maabara huusoma, inathibitisha utambulisho wako kwa **ulinganishaji wa uso** (ili mtu mwingine asiweze kuchukua matokeo yako) na huambatanisha ripoti ya ITPU — PDF, skani au maandishi, hata yenye OCR mbaya. Matokeo yanasainiwa na maabara halisi, si wewe, hivyo wengine wanaona **ukweli uthibitishwa** badala ya neno lako. Na kila uthibitisho uliothibitishwa hulipa **EVOLVE 1 kwa mgonjwa na EVOLVE 1 kwa maabara** — pande zote mbili zina sababu ya kuwa mwaminifu. Viini-cha-magonjwa bado haiwahi kuonyeshwa kwa mtu yeyote.
 
-- Pakia matokeo ya vipimo vya STD kama maandishi wazi au PDF (utoaji wa tabaka la maandishi kwa OCR kama njia mbadala kwa kurasa zilizoskanwa).
-- Kichanganuzi hutambua vimelea 8: HIV-1/2, Kaswende, Klamidia, Kisonono, HSV-1, HSV-2, Hepatitis B, Hepatitis C (umbizo la ripoti kwa Kiingereza, Kiukreni na Kirusi).
-- **Hali ya kila kimelea kamwe haioneshwi kwa watumiaji wengine.** Wasifu unaonyesha tu uamuzi usio na jina: **Safe / Compatible / Caution / Risk**.
-- Rekodi za uthibitisho wa DNA zilizowekwa kwenye mnyororo (`DNAVerification.sol`) zinawezesha mitiririko ya kurejesha na kuthibitisha.
+## Kutafuta mtu
 
-### Wasifu, Utafutaji na Mawasiliano
+- Vichujio vya utafutaji: "Unatafuta nini" (urafiki / kuzazi / kuzazi ya wake-wawili-au-zaidi / kupima ITPU), "Unatafuta nani" (wanaume, wanawake, wanandoa), uteuzi unaoendelea nchi → mji, "anaweza kusafiri kwenda nchi yako" kwa orodha za kila nchi, rangi ya ngozi, mapendeleo ya kupima, ITPU-tangamanifu-tu.
+- Kizuizi cha utangulizi: umri (unaweza kufichwa), lugha, wasifu wa kibinafsi, picha.
+- **Mazungumzo ya P2P** kupitia libp2p (gossipsub) + Nostr, ukiwa na njia mbadala ya API ya HTTP.
 
-- Vichujio vya utafutaji: "Unatafuta nini" (kutafuta wapenzi / kupata mimba / kupata mimba kwa wanandoa wengi / kupima STD), "Unatafuta nani" (wanaume, wanawake, wanandoa), uteuzi unaoendelea nchi → mji, "anaweza kusafiri kwenda nchi yako" kwa orodha za kila nchi, rangi ya ngozi, mapendeleo ya kupima, wenye uoiano wa STD tu.
-- Kielelezo cha kuanza (onboarding): umri (inaweza kufichwa), lugha, wasifu wa kibinafsi, picha.
-- **Faragha ya picha**: picha zinaonekana kwa ukungu kwa msingi; mmiliki hutoa ruhusa ya kutazama ya sekunde 15 au ya kudumu, kwa hiari yake au kwa ombi. Kutazama ni bure.
-- **Mazungumzo ya P2P** kupitia libp2p (gossipsub) + Nostr, ikiwa na njia mbadala ya HTTP API.
+## Kuzazi
 
-### Hali za Kupata Mimba
+Njia mbili za kupanga mtoto, na zote mbili zinategemea wazo moja: nia halisi inaonyeshwa kwa dhamana halisi ya EVOLVE — kamwe kwa ahadi. Ahadi ya mwanaume inakaa kwenye amana yake ya EvolveFund (kuanzia EVOLVE 15, imefungwa kwa siku 30 au zaidi), na mwanamke anaweza kuweka kiwango chake cha chini cha amana kwa wanaume wanaomfikia.
 
-- **Hali ya 2 — Pregnancy Bond**: mwanamke anaunda bond, mwanaume anaweka EVOLVE kama dhamana (≥ 100 kwenye toleo la sasa la mtandao wa majaribio), wote wanathibitisha; baada ya mimba iliyothibitishwa na ubaba, dhamana inahamishiwa kwa mwanamke.
-- **Hali ya 3 — Cryptic Choice**: mwanamke anafungua kipindi cha saa 24 mbili (saa 48), wanaume wanajiunga kwa kuweka dhamana; yeye anachagua baba — dhamana yake inarudishwa, wengine hugawanywa 90% kwake / 10% kwa baba aliyechaguliwa.
+**Kuzazi.** Mwanamke anayeongoza: anamwalika mwanaume mahususi na kumtaja ndani ya dhamana. Anahitaji amana hai ya EvolveFund; wanapothibitisha wote wawili, inafungwa na hesabu ya nyuma inaanza. Ujauzito unaripotiwa kati ya siku 14 na 30 baada ya uthibitisho, na vipimo vya ITPU na DNA vya wanandoa huchukuliwa kwenye mkutano wenyewe — matokeo ya karibuni ya ITPU ndiyo muhimu, DNA haizeezi. Ubaba unapothibitishwa, amana ya mwanaume inamwenda mwanamke; isipothibitishwa, amana inaachiliwa huru kwake tu. Hakuna kinachobadilishana mikono hadi ukweli utulizwe.
 
-### Maabara na Uthibitisho
+**Kuzazi ya wake-wawili-au-zaidi.** Chaguo ni lake, na linabaki la faragha. Anafungua kipindi kinachodumu kwa saa 48 — bila amana yake mwenyewe (anaweza kuongeza moja kwa sifa tu, kama atapenda). Wanaume wenye amana hai wanaweza kujiunga — hadi 50 — na kuthibitisha, jambo linalofunga dhamana zao. Siku kumi na nne baada ya kipindi kufungwa, baba huchaguliwa. Anapata amana yake tena pamoja na tuzo kutoka kwenye dimba: mara mbili ya amana yake na EVOLVE 1 kwa kila mshiriki mwingine. Wanaume wasiochaguliwa hunyimaswa dhamana zao — 90% kwa mwanamke, 10% kwa baba aliyechaguliwa. Yeye hahatarishi chochote na anaweza kupata tu; wanaume huweka dhamana yao nyuma ya haki ya kuchaguliwa.
 
-- **Mtiririko wa washirika wa maabara**: maabara hujisajili kama washirika, huthibitisha wagonjwa kwa msimbo wa QR na ulinganifu wa uso, na huambatanisha ripoti za STD (PDF/maandishi kwa utoaji wa OCR).
-- **Hali ya Msaidizi (Companion Mode)**: mtiririko unaojitegemea wa kutathmini matokeo ya vipimo vya STD bila kujiunga na jukwaa la kutafuta wapenzi.
-- **Safety Mode** (`VITE_PRODUCT_MODE=safety`): fasadi ya umma iliyo na mipaka (hali ya STD, viungo vya wasifu vya umma, ukaguzi wa uoiano) inayoendelea kufanya kazi hata kama vipengele vya kutafuta wapenzi/kupata mimba vikizuiliwa katika eneo la sheria au duka la programu.
+## Sarafu ya EVOLVE (mtandao wa majaribio tu)
 
-### Tokeni ya EVOLVE (mtandao wa majaribio tu)
+- ERC-20, kikomo cha juu cha usambazaji **EVOLVE 8,000,000,000**. Vitendo vya utawala vinazuiliwa na `TimelockController` ya saa 48.
+- **Mgawanyo uliopangwa wa usambazaji** — umeundwa kuweka karibu usambazaji wote kufanya kazi kwa watumiaji, si kwa wafadhili wa ndani:
 
-- ERC-20, kikomo cha juu zaidi cha usambazaji ni EVOLVE 8,000,000,000, vitendo vya msimamizi vimewekewa TimelockController ya muda wa saa 48.
-- **Uchumi wa zawadi za emoji**: zawadi inagharimu EVOLVE 1, ambayo hugawanywa kwa uwiano kati ya wamiliki wa zawadi waliopo — mfano wa mapato wa milele kwa watumiaji; zawadi zinaweza kuhamishwa.
-- **EvolveFund**: kuweka dhamana kwa wanaume (angalau EVOLVE 15, kufungwa kwa siku 30) kunaingia kwenye uzito wa utawala; wanawake wanatumia salio lao la mkoba.
-- **Tuzo za uthibitisho**: EVOLVE 1 kwa mtumiaji aliyeuthibitishwa na EVOLVE 1 kwa maabara ithibitishayo baada ya uthibitisho wa STD/DNA (pamoja na bomba la majaribio lenye kikomo cha kiwango).
-- Uzito wa kura ya utawala unachanganya sifa ya kurudia-rudia (kura 8, kina 3), uwiano wa watoto/ubaba, na EVOLVE iliyowekwa ama iliyoshikiliwa.
-- **Uunganishaji wa LayerZero OFT** kwa uhamisho wa baadaye wa EVOLVE kwenye minyororo mingi (utegemezi upo; hakuna chochote kimepangwa zaidi ya Sepolia kwa sasa).
+| Kusudi                                                    |        EVOLVE |
+| --------------------------------------------------------- | ------------: |
+| Waanzilishi na timu (mshahara / tuzo)                     |    25,000,000 |
+| Akiba ya DEX (baadaye)                                    |     4,000,000 |
+| Mauzo ya umma (yaliyopangwa)                              |     5,000,000 |
+| Akiba ya tuzo — maabara, wagonjwa, akina mama, akina baba | 7,966,000,000 |
 
-### Jukwaa
+- **Mauzo ya umma yaliyopangwa** — EVOLVE 5,000,000 zinauzwa na programu kwa **$0.8 kila moja**, zinazolipwa kwa sarafu yoyote inayoungwa mkono na programu; mapato hufadhili uendelezaji. _(Yaliyopangwa — hayajaanza.)_
+- **Utoaji usio na udhamini (umiupangwa)** — akiba ya tuzo ya ~7,966,000,000 inapangwa kufungwa kwenye `RewardVault` isiyoweza kudrainiwa: inatoa polepole tu kupitia tuzo za maabara, wagonjwa, akina mama na akina baba, huku mabadiliko ya sheria yakihitaji kura za utawala. Hata mwanzilishi hawezi kuitoa. Muundo: [docs/REWARD-VAULT-PLAN.md](docs/REWARD-VAULT-PLAN.md).
+- **Uchumi wa zawadi za emoji** — zawadi inagharimu EVOLVE 1, inagawanywa kwa uwiano kwa wamiliki wapo wa zawadi; ni mfano wa mapato ya milele, na zawadi zinaweza kuhamishwa.
+- **EvolveFund** — wekaji dhamana la kiume (kiwango cha chini EVOLVE 15, kufungwa siku 30) linalohesabiwa kwenye uzito wa utawala; wanawake hutumia salio lao la mkoba.
+- **Tuzo za uthibitisho** — EVOLVE 1 kwa mtumiaji aliyeuthibitishwa na EVOLVE 1 kwa maabara ithibitishayo kwa kila uthibitisho wa ITPU/DNA (pamoja na bomba la maji lenye kikomo cha matumizi).
+- **Utawala** — uzito wa kura unachanganya sifa ya kurudiarudi (kura 8, kina 3), uwiano wa watoto/ubaba, na EVOLVE zilizowekwa au zinazoshikiliwa.
+- **Unganishaji wa LayerZero OFT** kwa uhamisho wa baadaye wa EVOLVE kwenye minyororo mingi (untegemezi umewekwa; hakuna kilichotekelezwa zaidi ya Sepolia bado).
 
-- Programu ya wavuti (inaweza kusanikishwa kama PWA) na programu ya simu ya Expo/React Native.
-- Kiolesura kimetafsiriwa kwa **lugha 34**.
-- Tayari kwa mitandao mingi: mazingira ya mitandao 18 ya EVM (Arbitrum na Avalanche ndizo L2 kuu zilizopangwa — **bado hazijapangwa**).
+## Mkvelope mradi
+
+EVOLVE ni huru na wa chanzo-wazi. Ikiwa ni ya manufaa kwako, unaweza kuunga mkono uendelezaji kwa mchango — kila mchango huenda kwa msimbo, ushirikiano na maabara, upangishaji na utafsiri.
+
+- **Maelezo ya mchango (EVM, Monero na mengine):** [DONATE.md](DONATE.md)
+- **Ukurasa wa michango wenye lugha nyingi (lugha 34):** **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**
+
+Mauzo ya umma ya sarafu yako kwenye ramani ya njia lakini **hayako** hai leo. Michango ni zawadi zinazounga mkono uendelezaji wa chanzo-wazi na hazitoi madai ya sarafu, hisa, mapato au faida. Tafadhali toa tu unachoweza kumudu kupoteza.
 
 ## Muundo na Seti ya Teknolojia
 
@@ -79,60 +100,54 @@ apps/
   web/          # Vite + React + TypeScript (programu kuu ya wavuti, i18next, Prisma)
   mobile/       # Expo + React Native
 packages/
-  config/       # Bendera za vipengele & usanidi wa mbali unaobadilika
+  config/       # Alama za vipengele & usanidi wa mbali unaobadilika
   contracts/    # Solidity 0.8.24, Hardhat, Ignition, OpenZeppelin, LayerZero
-  core/         # Aina za pamoja, huduma za matumizi, middleware, web3
-  matching/     # Algorithm za ulinganishaji, vichujio, kupanga
-  p2p/          # libp2p (gossipsub) + mtandao wa Nostr
-  storage/      # IPFS, Arweave, Lit Protocol
-docs/           # Muundo, tokenomics, ramani ya njia, FAQ
+  core/         # Aina, huduma, middleware, web3 zinazoshirikiwa
+  matching/     # Algorithms za utafananishaji, vichujio, kupanga
+  p2p/          # mtandao wa libp2p (gossipsub) + Nostr
+  storage/      # IPFS, Arweave, Itifaki ya Lit
+docs/           # Muundo, tokenomics, ramani ya njia, MASWALI
 ```
 
-Mikataba mahiri muhimu: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (zawadi za emoji + tuzo), `Governance.sol`, `BondManager.sol` (Hali 2 na 3), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster`, na `TimelockController` ya OpenZeppelin.
+Mikataba mingi mikuu: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (zawadi za emoji + tuzo), `Governance.sol`, `BondManager.sol` (kuzazi na kuzazi ya wake-wawili-au-zaidi), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster`, na `TimelockController` ya OpenZeppelin.
 
-Maelezo: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md) (kwa Kiingereza).
+Maelezo: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md)
 
 ## Ramani ya Njia
 
-Inaendelea: utayari wa uzalishaji wa programu ya wavuti. Imepangwa: daftari la maabara kwenye mnyororo na uthibitisho wa vipimo, kiunganishi halisi cha mtoa huduma wa barua pepe kwa upokeaji wa ripoti za maabara, uthibitisho thabiti kwenye mnyororo kwenye wasifu, sasisho la vesting ya tokeni kwa mgawanyo wa waanzilishi/watengenezaji, na kuweka akiba ya mtaji ya DEX (kumezuiwa kwa sasa — inahitaji upangaji wa tokeni kwenye mainnet). Upanuzi wa mitandao mingi (Arbitrum, Avalanche na minyororo mingine ya EVM) unafuata baada ya kuimarika kwa mtandao wa majaribio.
+Inaendelea: utayari wa uzalishaji wa programu ya wavuti. Imepangwa: rejista ya maabara kwenye mnyororo na uthibitisho wa vipimo, kibanzi halisi cha mtoa-huduma wa barua pepe kwa kupokea ripoti za maabara, uthibitisho halali kwenye mnyororo kwenye wasifu, **RewardVault isiyokuwa na udhamini** yenye utoaji unaolindwa na utawala ([muundo](docs/REWARD-VAULT-PLAN.md)), **mauzo ya umma ya sarafu**, sasisho la kuweka sarafu akibani kwa mgawanyo wa mwanzilishi, na kutoa umajini wa DEX (kwa sasa kumezuiwa — kunahitaji utekelezaji wa sarafu kwenye mtandao mkuu). Upanuzi wa mitandao mingi (Arbitrum, Avalanche na minyororo mingine ya EVM) hufuata baada ya kuimarisha mtandao wa majaribio.
 
-Orodha kamili: [docs/ROADMAP.md](docs/ROADMAP.md) (kwa Kiingereza).
+Orodha kamili: [docs/ROADMAP.md](docs/ROADMAP.md).
 
-## Kuanza (Watengenezaji)
+## Kuanza (Wasanidi-programu)
 
 Mahitaji: **Node.js 20+** na npm 10.x.
 
 ```bash
-# Nakili na usakinishe workspace zote
+# Clone and install all workspaces
 git clone https://github.com/Lilit-Moonlit/Evolve.git
 cd Evolve
 npm install
 
-# Programu ya wavuti (seva ya dev ya Vite kwenye http://localhost:3000)
+# Web app (Vite dev server on http://localhost:3000)
 cd apps/web
 npm run dev
-npm test                # seti ya vitest
+npm test                # vitest suite
 
-# Mikataba mahiri
+# Smart contracts
 cd packages/contracts
 npm run compile         # hardhat compile
-npm test                # seti ya majaribio ya hardhat
-npm run deploy:local    # weka mikataba yote kwenye mtandao wa Hardhat ndani ya mchakato
+npm test                # hardhat test suite
+npm run deploy:local    # deploy all contracts to an in-process Hardhat network
 ```
 
 ## Kuchangia
 
-Mchango unakaribishwa — msimbo, ripoti za hitilafu, mapendekezo ya vipengele na mapendekezo. Tafadhali soma [CONTRIBUTING.md](CONTRIBUTING.md) na [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) yetu kabla ya kuanza.
+Mchango unakaribishwa — msimbo, ripoti za hitilafu, mapendekezo ya vipengele na mapendekezo. Tafadhali soma [CONTRIBUTING.md](CONTRIBUTING.md) na [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) yako kabla ya kuanza.
 
-## Kuunga Mkono Mradi
+## Hifadhi (Mirrors)
 
-Ukikuta EVOLVE ni muhimu kwako, unaweza kuunga mkono ukuzaji kwa mchango wa fedha — maelezo katika [DONATE.md](DONATE.md). Unapenda ukurasa wa wavuti? Tumia ukurasa wa michango wa lugha nyingi (lugha 34): **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**.
-
-**Hakuna mauzo ya tokeni na hakuna yatakayokuwepo.** Hauwezi "kuwekeza" kwenye tokeni za EVOLVE; michango ni zawadi za kuunga mkono ukuzaji wa chanzo wazi na haimpati mchangiaji haki ya tokeni, hisa, faida au dai lolote la kifedha.
-
-## Hazina (Nakala)
-
-| Nakala   | URL                                        |
+| Mirror   | URL                                        |
 | -------- | ------------------------------------------ |
 | GitHub   | https://github.com/Lilit-Moonlit/Evolve    |
 | Codeberg | https://codeberg.org/limitafternoon/Evolve |
@@ -140,13 +155,14 @@ Ukikuta EVOLVE ni muhimu kwako, unaweza kuunga mkono ukuzaji kwa mchango wa fedh
 
 ## Nyaraka
 
-- [Nini na Kwa Nini](docs/WHAT-AND-WHY.md) — tatizo, dhima, thamani za msingi (kwa Kiingereza)
-- [Inavyofanya Kazi](docs/HOW-IT-WORKS.md) — mitiririko ya mtumiaji, hatua kwa hatua (kwa Kiingereza)
-- [Muundo](docs/ARCHITECTURE.md) — monorepo, furushi, mitiririko ya data (kwa Kiingereza)
-- [Tokenomics](docs/TOKENOMICS.md) — mfano wa tokeni na usambazaji wa akiba (kwa Kiingereza)
-- [Ramani ya Njia](docs/ROADMAP.md) — maeneo muhimu na hali ya sasa (kwa Kiingereza)
-- [Maswali Yanayoulizwa Mara kwa Mara](docs/FAQ.md) — maswali ya kawaida (kwa Kiingereza)
-- [Mwongozo wa Mkoba](docs/WALLETS.md) — jinsi ya kuunda mikoba na kupata anwani za michango (kwa Kiingereza)
+- [Nini na Kwa nini](docs/WHAT-AND-WHY.md) — tatizo, dhana, thamani za msingi
+- [Inafanyaje Kazi](docs/HOW-IT-WORKS.md) — mtiririko wa mtumiaji, hatua kwa hatua
+- [Muundo](docs/ARCHITECTURE.md) — monorepo, furushi, mitiririko ya data
+- [Tokenomics](docs/TOKENOMICS.md) — mfano wa sarafu na mgawanyo wa usambazaji
+- [Mpango wa RewardVault](docs/REWARD-VAULT-PLAN.md) — utoaji usio na udhamini (umiupangwa)
+- [Ramani ya Njia](docs/ROADMAP.md) — hatua kuu na hali ya sasa
+- [MASWALI](docs/FAQ.md) — maswali yanayoulizwa mara kwa mara
+- [Mwongozo wa mkoba](docs/WALLETS.md) — jinsi ya kuunda mikoba na kupata anwani za michango
 
 ## Leseni
 

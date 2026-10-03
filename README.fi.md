@@ -2,77 +2,98 @@
 
 # EVOLVE
 
-**Deittailu, hedelmöitys ja terveystodentaminen — yksityinen oletuksena, todennettu siellä, missä se merkitsee.**
+**Deittailu, hedelmöitys ja varmennettu terveys — yksityinen oletuksena, luottettava siellä, missä sillä on merkitystä.**
 
-EVOLVE on avoimen lähdekoodin hajautettu alusta varmistettuja läheisiä yhteyksiä varten: deittailu, hedelmöitys ja anonyymi sukupuolitauti-/DNA-yhteensopivuus. Kirjaudut sisään omalla kryptolompakollasi (Sign-In with Ethereum) — ei puhelinnumeroa, ei sähköpostia, ei KYC:tä — ja voit palauttaa tilisi ketjuun sidotun DNA-sitoumuksen avulla. Terveystiedot pysyvät sinun: laboratoriotulokset jäsennetään automaattisesti, yksittäisten taudinaiheuttajien statuksia **ei näytetä koskaan** kenellekään, ja yhteensovittaminen perustuu vain anonyymeihin yhteensopivuusarvioihin (Safe / Compatible / Caution / Risk). Chat toimii vertaisverkossa libp2p:n ja Nostrin kautta, ja HTTP-vararatkaisu on olemassa mukavuuden vuoksi; sovelluksessa on lisäksi kevyt julkinen "Safety Mode" -julkisivu sekä itsenäinen Companion Mode sukupuolitautitestien arviointiin.
+EVOLVE on avoimen lähdekoodin hajautettu alusta ihmisille, jotka ovat kylläistyneet luovuttamaan puhelinnumeronsa, kasvonsa ja arkaluontoisimmat terveystietonsa jonkun muun tietokantaan. Kirjaudut sisään omalla kryptolompakollasi — ei puhelinta, ei sähköpostia, ei KYC:tä — ja saat tilisi takaisin lohkoketjuun sidotun DNA-sitoumuksen avulla. Terveystietosi pysyvät omasiasi: testitulokset jäsennetään automaattisesti, yksittäisten taudinaiheuttajien tiloja **ei näytetä koskaan** kenellekään, ja yhteensovittaminen nojaa vain anonyymeihin yhteensopivuustuomioihin (Safe / Compatible / Caution / Risk). Chat toimii vertaisverkossa libp2p:n ja Nostrin välityksellä, HTTP-vararatkaisu on olemassa mukavuuden vuoksi.
 
-> **Tila: varhaisen vaiheen alfa.** EVOLVE on aktiivisen kehityksen alla eikä ole valmis tuote.
-> Älysopimukset on otettu käyttöön **vain Ethereum Sepolia -testiverkossa**.
-> **Ei pääverkon käyttöönottoa, ei DEX:ää, ei likviditeettiä eikä julkista token-myyntiä** — eikä mitään näistä ole luvattu.
-> Ominaisuudet voivat muuttua tai rikkoutua milloin tahansa. Mikään tässä ei ole taloudellinen neuvo tai sijoitustarjous.
+> **Tila — alusta toimii jo tänään; pääverkko ja DEX ovat seuraavaksi.**
+> Deittailu, hedelmöitys, terveysvarmennus, laboratoriovaihe, P2P-chat, EVOLVE-token ja hallinto ovat kaikki käynnissä. Edessä on vielä: **päöverkon käyttöönotto ja DEX-likviditeetti** sekä **suunniteltu julkinen myynti** (katso [EVOLVE-token](#evolve-token-vain-testiverkko)).
+> Älysopimukset on otettu käyttöön **vain Ethereum Sepolia -testiverkossa**. Mikään täällä ei ole sijoitusneuvontaa tai sijoitustarjous.
 
-## Mitä & miksi
+> **Löydätkö EVOLVE:n hyödylliseksi? Tue kehitystä — jokainen lahjoitus menee koodiin, laboratoriokumppanuuksiin, ylläpitoon ja käännöksiin → [DONATE.md](DONATE.md).**
 
-Perinteiset deittailualustat pyytävät sinua luovuttamaan puhelinnumerosi, sähköpostiosoitteesi, kuvasi ja intiimit terveystietosi keskitettyyn tietokantaan. EVOLVE lähtee liikkeelle päinvastaisesta oletuksesta: yksityisyys oletuksena, itsehallinta (self-custody) eikä mitään keskitettyä vikapistettä. Ydinarvot:
+## Ei pelättävää
 
-- **Yksityisyys oletuksena** — terveystietoja ei koskaan paljasteta; vain anonyymejä arvioita.
-- **Kieltämisen kestävyys** — P2P-ensisijainen viestintä, hajautettu tallennus (IPFS / Arweave), moniverkkoinen suunnittelu, ei kovakoodattuja verkkotunnuksia.
-- **Itse hallittava identiteetti** — lompakkosi on kirjautumistunnuksesi; DNA-pohjainen palautus sähköpostin/puhelimen sijaan.
-- **Ei KYC-porttia** — alustan käyttöön ei vaadita viranomaistunnistetta, puhelinta tai sähköpostia.
+EVOLVE rakennettiin niiden kysymysten ympärille, jotka ihmiset todella esittävät ennen kuin alkavat luottaa tällaiseen alustaan.
 
-Koko perustelu: [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md) (englanniksi).
+| Huoli                                                   | Mitä EVOLVE jo tekee asialle                                                                                                                                                      |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| "Terveystietoni vuotavat."                              | Yksittäisiä taudinaiheuttajatuloksia **ei näytetä koskaan** kenellekään — vain anonyymi tuomio: Safe / Compatible / Caution / Risk.                                               |
+| "Kuvasi päätyvät jonnekin."                             | Kuvat ovat oletuksena sumennettuja. Omistaja myöntää **15 sekunnin** tai **pysyvän** katseluoikeuden — pyynnöstä tai omasta aloitteesta. Katselu on ilmaista.                     |
+| "Joudun luovuttamaan henkilötodistuksen tai puhelimen." | Lompakkokirjautuminen (SIWE). Ei puhelinta, ei sähköpostia, ei KYC:tä. Palautus toimii lohkoketjun DNA-sitoumuksen kautta.                                                        |
+| "Hän valehtelee olevansa terve."                        | Tulokset ovat **laboratoriovahvistettuja** (QR + kasvojenvastaavuus), ja parin testit otetaan **itse tapaamisessa** — tuoreet STD-tulokset merkitsevät, DNA ei vanhene.           |
+| "Vieköö joku rahani ja katoaa?"                         | Hedelmöitys toimii todellisella riskipanoksella: miehen talletus liikkuu vasta, kun isyys on **vahvistettu**; muuten se yksinkertaisesti palautetaan hänelle.                     |
+| "Onko token pump-and-dump?"                             | Myyntiä ei ole käynnissä tänään; koodi on avointa (MIT); liikkeeseen laskematon varaus on tarkoitus lukita **tyhjennyskelvottomaan holviin**, josta ei edes perustaja voi nostaa. |
+| "Voiko alustan sammuttaa tai estää?"                    | Vertaisviestintä ensin, hajautettu tallennus (IPFS / Arweave), 18 EVM-verkkomääritystä eikä kovakoodattua verkkotunnusta.                                                         |
 
-## Tärkeimmät ominaisuudet
+## Mikä & miksi
 
-### Identiteetti & yksityisyys
+Perinteiset deittisovellukset pyytävät sinua vaihtamaan puhelinnumerosi, sähköpostiosoitteesi, kuvasi ja arkaluontoiset terveystietosi keskitettyyn tietokantaan — ja luottamaan siihen tietokantaan ikuisesti. EVOLVE lähtee vastakkaisesta lähtökohdasta: **yksityisyys oletuksena, itsehallinta ilman välittäjää ja ei yhtään kriittistä vikapistettä**.
 
-- **SIWE-lompakkokirjautuminen** (MetaMask ja muut EVM-lompakot) — sensuurinkestävä varareitti.
-- **DNA-tilinpalautus** — DNA-testituloksestasi lasketaan tiiviste (SHA-256, sidotaan ketjuun `bytes32`-muodossa), ja se voi palauttaa pääsyn ilman puhelinta tai sähköpostia.
-- **Account Abstraction (ERC-4337)** — älytilit ja paymaster gaasittomaan onboardingiin; SIWE pysyy aina käytettävissä.
+- **Yksityisyys oletuksena** — terveystietoja ei koskaan paljasteta; vain anonyymit tuomiot.
+- **Estokestävyys** — vertaisviestintä ensin, hajautettu tallennus, moniverkkosuunnittelu, ei kovakoodattuja verkkotunnuksia.
+- **Itse hallittava identiteetti** — lompakkosi on kirjautumisesi; DNA-pohjainen palautus sähköpostin tai puhelimen sijaan.
+- **Ei KYC-porttia** — alustan käyttöön ei vaadita viranomaistunnistusta, puhelinta tai sähköpostia.
 
-### Anonyymi terveysyhteensopivuus
+Lue koko perustelu tiedostosta [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md).
 
-- Lataa sukupuolitautitestien tulokset raakatekstinä tai PDF:nä (tekstikerroksen poiminta; skannatuille sivuille OCR-vararatkaisu).
-- Jäsentä tunnistaa 8 taudinaiheuttajaa: HIV-1/2, kuppa, klamydia, tippuri, HSV-1, HSV-2, B-hepatiitti, C-hepatiitti (englannin-, ukrainan- ja venäjänkieliset raporttimuodot).
-- **Yksittäisen taudinaiheuttajan statusta ei koskaan näytetä muille käyttäjille.** Profiileissa näkyy vain anonyymi arvio: **Safe / Compatible / Caution / Risk**.
-- Ketjuun tallennetut DNA-varmennustiedot (`DNAVerification.sol`) mahdollistavat palautus- ja varmennusprosessit.
+## Terveys, johon voi todella luottaa
 
-### Profiilit, haku & viestintä
+- Lataa STD-testi raakatekstinä tai PDF:nä (tekstikerroksen poiminta, OCR-vararatkaisu skannauksille).
+- Jäsennin tuntee 8 taudinaiheuttajaa: HIV-1/2, kuppaa, klamydia, tippuria, HSV-1, HSV-2, B-hepatiitti, C-hepatiitti — englanninkielisissä, ukrainankielisissä ja venäjänkielisissä raporttimuodoissa.
+- **Yksittäisen taudinaiheuttajan tilaa ei koskaan näytetä muille käyttäjille.** Profiilit näyttävät vain anonyymin tuomion: **Safe / Compatible / Caution / Risk**.
+- Lohkoketjun DNA-tietueet (`DNAVerification.sol`) mahdollistavat palautuksen ja varmennuksen.
 
-- Hakusuodattimet: "Mitä etsit" (deittailu / hedelmöitys / polyandrinen hedelmöitys / sukupuolitautitestaus), "Ketä etsit" (miehet, naiset, parit), porrastetut maa → kaupunki -valinnat, "voi saapua maahasi" maa kerrallaan -listoineen, ihonväri, testausmieltymys, vain sukupuolitautiyhteensopivat.
-- Onboarding-velho: ikä (piilotettavissa), kielet, kuvaus, valokuva.
-- **Valokuvien yksityisyys**: valokuvat ovat oletuksena sumennettuja; omistaja myöntää 15 sekunnin tai pysyviä katseluoikeuksia joko omasta aloitteestaan tai pyynnöstä. Katselu on maksutonta.
-- **P2P-chat** libp2p:n (gossipsub) + Nostrin kautta, HTTP-API-varalla.
+### Kumppanilaboratoriot — todisteita, ei lupauksia
 
-### Hedelmöitystilat
+Kävele kumppanilaboratorioon ja näytä QR-koodisi. Laboratorio skannaa sen, vahvistaa henkilöllisyytesi **kasvojenvastaavuudella** (jotta kukaan muu ei voi noutaa tulostasi) ja liittää STD-raportin — PDF, skannaus tai teksti, jopa huonolla OCR:lla. Tuloksen allekirjoittaa oikea laboratorio, et sinä, joten muut näkevät **varmennetun faktan** sanasi sijaan. Ja jokainen vahvistettu varmennus maksaa **1 EVOLVE potilaalle ja 1 EVOLVE laboratoriolle** — molemmilla osapuolilla on syy olla rehellisiä. Yksittäisiä taudinaiheuttajia ei siltikään koskaan näytetä kenellekään.
 
-- **Tila 2 — Pregnancy Bond**: nainen luo bondin, mies panostaa EVOLVEa (≥ 100 nykyisessä testiverkkoversiossa), molemmat vahvistavat; vahvistetun raskauden ja isyyden jälkeen panos siirtyy naiselle.
-- **Tila 3 — Cryptic Choice**: nainen avaa 48 tunnin istunnon, miehet liittyvät panostamalla; hän valitsee isän — tämän panos palautetaan, loput jakavat: 90 % hänelle / 10 % valitulle isälle.
+## Jonkun löytäminen
 
-### Laboratoriot & varmentaminen
+- Hakusuodattimet: "Mitä etsit" (deittailu / hedelmöitys / moniaviohedelmöitys / STD-testaus), "Ketä etsit" (miehet, naiset, parit), porrautuvat maa → kaupunki -valinnat, "voi matkustaa maahasi" maakohtaisine luetteloineen, ihonväri, testausmieltymys, vain STD-yhteensopivat.
+- Perehdytysvelho: ikä (piilotettavissa), kielet, kuvaus, kuva.
+- **P2P-chat** libp2p:n (gossipsub) + Nostrin välityksellä, HTTP-API-vararatkaisun kera.
 
-- **Laboratoriokumppanivirta**: laboratoriot rekisteröityvät kumppaneiksi, varmentavat potilaat QR-koodilla ja kasvontunnistuksella sekä liittävät sukupuolitautiraportteja (PDF/teksti OCR-poiminnalla).
-- **Companion Mode**: itsenäinen virta sukupuolitautitestitulosten arviointiin ilman deittailualustalle liittymistä.
-- **Safety Mode** (`VITE_PRODUCT_MODE=safety`): rajoitettu julkinen julkisivu (sukupuolitauditilanne, julkiset profiililinkit, yhteensopivuustarkistukset), joka jatkaa toimintaansa silloinkin, kun deittailu-/hedelmöitysominaisuudet rajoitetaan jossakin lainkäyttöalueella tai sovelluskaupassa.
+## Hedelmöitys
 
-### EVOLVE-token (vain testiverkossa)
+Kaksi tapaa suunnitella lasta, ja molemmat nojaavat samaan ajatukseen: todellinen tarkoitus osoitetaan todellisella EVOLVE-panoksella — ei koskaan lupauksilla. Miehen sitoumus elää hänen EvolveFund-talletuksessaan (alkaen 15 EVOLVE, lukittuna vähintään 30 päiväksi), ja nainen voi asettaa oman vähimmäistalletuksensa niille miehille, jotka tavoittavat hänet.
 
-- ERC-20, enimmäismäärä 8 000 000 000 EVOLVE, ylläpitotoimet 48 tunnin TimelockControllerin takana.
-- **Emoji-lahjatalous**: lahja maksaa 1 EVOLVE, joka jaetaan suhteellisesti olemassa olevien lahjojen omistajille — pysyvä tulomalli haltijoille; lahjat ovat siirrettävissä.
-- **EvolveFund**: miesten stakkaus (vähintään 15 EVOLVE, 30 päivän lukitus), joka lasketaan mukaan hallinnon äänipainoon; naiset käyttävät lompakkosaldoaan.
-- **Varmennuspalkkiot**: 1 EVOLVE varmennetulle käyttäjälle ja 1 EVOLVE varmentaneelle laboratoriolle sukupuolitauti-/DNA-varmennuksesta (sekä määrärajoitettu testihana).
-- Hallinnon äänipaino yhdistää rekursiivisen maineen (8 ääntä, syvyys 3), lasten/isyyksien osuuden sekä stakatun tai pidetyn EVOLVEn.
-- **LayerZero OFT** -integraatio tulevia moniketjuisia EVOLVE-siirtoja varten (riippuvuudet valmiina; Sepolian ulkopuolella ei vielä mitään käyttöönottoa).
+**Hedelmöitys.** Nainen johtaa: hän kutsuu tietyn miehen ja nimeää tämän sidokseen. Mies tarvitsee aktiivisen EvolveFund-talletuksen; kun molemmat vahvistavat, se lukitaan ja lähtölaskenta alkaa. Raskaudesta ilmoitetaan 14–30 päivää vahvistuksen jälkeen, ja parin STD- ja DNA-testit otetaan itse tapaamisessa — tuoreet STD-tulokset merkitsevät, DNA ei vanhene. Kun isyys on vahvistettu, miehen talletus siirtyy naiselle; jos sitä ei vahvisteta, talletus yksinkertaisesti vapautetaan takaisin hänelle. Mikään ei vaihda omistajaa ennen kuin faktat ovat selvillä.
 
-### Alusta
+**Moniaviohedelmöitys.** Valinta kuuluu hänelle ja pysyy yksityisenä. Hän avaa istunnon, joka kestää 48 tuntia — ilman omaa talletusta (vain maineen vuoksi hän voi lisätä sellaisen, jos haluaa). Aktiivisen talletuksen omaavat miehet voivat liittyä — enintään 50 — ja vahvistaa, mikä lukitsee heidän panoksensa. Neljätoista päivää istunnon päättymisen jälkeen isä valitaan. Hän saa talletuksensa takaisin plus palkinnon poolista: kaksinkertaisen talletuksensa ja 1 EVOLVE jokaiselta muulta osallistujalta. Valitsemattomat miehet menettävät panoksensa — 90 % naiselle, 10 % valitulle isälle. Hän ei riskkaa mitään ja voi vain voittaa; miehet asettavat panoksensa oikeuden taakse tulla valituksi.
 
-- Webbisovellus (PWA-asennettavissa) ja Expo/React Native -mobiilisovellus.
-- Käyttöliittymä käännetty **34 kielelle**.
-- Moniverkkovalmis: 18 EVM-verkon määritystä (Arbitrum ja Avalanche ovat suunnitellut ensisijaiset L2-verkot — **ei vielä otettu käyttöön**).
+## EVOLVE-token (vain testiverkko)
+
+- ERC-20, enimmäistarjonta **8,000,000,000 EVOLVE**. Ylläpitotoimet rajataan 48 tunnin `TimelockController`-lukolla.
+- **Suunniteltu tarjontajako** — suunniteltu panemaan lähes koko tarjonta töihin käyttäjien hyväksi, eikä sisäpiirin:
+
+| Tarkoitus                                            |        EVOLVE |
+| ---------------------------------------------------- | ------------: |
+| Perustajat ja tiimi (palkka / palkinto)              |    25,000,000 |
+| DEX-varaus (tulevaisuus)                             |     4,000,000 |
+| Julkinen myynti (suunniteltu)                        |     5,000,000 |
+| Palkintovaraus — laboratoriot, potilaat, äidit, isät | 7,966,000,000 |
+
+- **Suunniteltu julkinen myynti** — 5,000,000 EVOLVE sovellus myy hintaan **$0.8 kappaleelta**, maksettavana millä tahansa sovelluksen tukemalla tokenilla; tuotot rahoittavat kehitystä. _(Suunniteltu — ei vielä käynnissä.)_
+- **Luottamukseton emissio (suunniteltu)** — noin 7,966,000,000 EVOLVE:n palkintovaraus lukitaan tyhjennyskelvottomaan `RewardVault`-holviin: se vapautuu vain vähitellen laboratorio-, potilas-, äiti- ja isäpalkintoina, ja sääntömuutokset vaativat hallintoäänestyksen. Ei edes perustaja voi nostaa siitä. Suunnitelma: [docs/REWARD-VAULT-PLAN.md](docs/REWARD-VAULT-PLAN.md).
+- **Emojilahjatalous** — lahja maksaa 1 EVOLVE, joka jaetaan suhteellisesti olemassa olevien lahjanomistajien kesken; loputon tulomalli, ja lahjat ovat siirrettäviä.
+- **EvolveFund** — miesten staking (väh. 15 EVOLVE, 30 päivän lukitus), joka lasketaan hallintopainoon; naiset käyttävät lompakkosaldoaan.
+- **Vahvistuspalkinnot** — 1 EVOLVE vahvistetulle käyttäjälle ja 1 EVOLVE vahvistavalle laboratoriolle per STD-/DNA-varmennus (sekä käytön mukaan rajoitettu hana).
+- **Hallinto** — äänipaino yhdistää rekursiivisen maineen (8 ääntä, syvyys 3), lapsi-/isyysosuuden sekä stakatut tai pidetyt EVOLVE:t.
+- **LayerZero OFT** -integraatio tulevaisuuden moniketjuisiin EVOLVE-siirtoihin (riippuvuudet valmiina; Sepolian ulkopuolella ei ole vielä otettu mitään käyttöön).
+
+## Tue projektia
+
+EVOLVE on riippumaton ja avoimen lähdekoodin projekti. Jos se on sinulle hyödyllinen, voit tukea kehitystä lahjoituksella — jokainen panos menee koodiin, laboratoriokumppanuuksiin, ylläpitoon ja käännöksiin.
+
+- **Lahjoitustiedot (EVM, Monero ja muut):** [DONATE.md](DONATE.md)
+- **Monikielinen lahjoitussivu (34 kieltä):** **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**
+
+Julkinen tokenmyynti on tiekartalla, mutta se **ei** ole käynnissä tänään. Lahjoitukset ovat lahjoja, jotka tukevat avoimen lähdekoodin kehitystä eivätkä anna oikeutta tokeneihin, omistusosuuksiin, tuottoihin tai voittoon. Anna vain sitä, minkä sinulla on varaa menettää.
 
 ## Arkkitehtuuri & teknologiapino
 
-Monorepo, jota hallitaan npm workspaces + Turborepo -työkaluilla:
+Monorepo, jota hallitaan npm workspaces- ja Turborepo-työkaluilla:
 
 ```
 apps/
@@ -88,15 +109,15 @@ packages/
 docs/           # Architecture, tokenomics, roadmap, FAQ
 ```
 
-Tärkeimmät älysopimukset: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (emoji-lahjat + palkkiot), `Governance.sol`, `BondManager.sol` (tilat 2 & 3), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster` sekä OpenZeppelinin `TimelockController`.
+Keskeiset älysopimukset: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (emojilahjat + palkinnot), `Governance.sol`, `BondManager.sol` (hedelmöitys ja moniaviohedelmöitys), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster` sekä OpenZeppelinin `TimelockController`.
 
-Yksityiskohdat: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md) (englanniksi).
+Yksityiskohdat: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md)
 
 ## Tiekartta
 
-Työn alla: webbisovelluksen tuotantovalmius. Suunnitteilla: ketjussa toimiva laboratoriorekisteri ja testisertifiointi, oikean sähköpostipalvelun sovitin laboratorioraporttien vastaanottoon, ketjuun varmennetut todistukset profiileissa, token-vestingin päivitys perustajien/kehittäjien allokointeihin, DEX-likviditeetin tarjoaminen (tällä hetkellä estynyt — vaatii tokenien pääverkkokäyttöönotot). Moniverkkolaajennus (Arbitrum, Avalanche ja muut EVM-ketjut) tulee testiverkon kovettamisen jälkeen.
+Työn alla: verkkosovelluksen tuotantovalmius. Suunnitteilla: lohkoketjussa oleva laboratoriorekisteri ja testisentifiointi, oikea sähköpostipalvelun sovitin laboratioraporttien vastaanottoon, lohkoketjuvarmennetut todistukset profiileissa, **luottamukseton RewardVault** hallinnon ohjaamalla emissiolla ([suunnitelma](docs/REWARD-VAULT-PLAN.md)), **julkinen tokenmyynti**, token-vesting-päivitys perustajaosuudelle sekä DEX-likviditeetin tarjoaminen (tällä hetkellä estynyt — se vaatii tokenien käyttöönotot pääverkoissa). Moniverkkolaajennus (Arbitrum, Avalanche ja muut EVM-ketjut) seuraa testiverkon kovettamisen jälkeen.
 
-Täydellinen luettelo: [docs/ROADMAP.md](docs/ROADMAP.md) (englanniksi).
+Koko luettelo: [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Aloittaminen (kehittäjät)
 
@@ -122,15 +143,9 @@ npm run deploy:local    # deploy all contracts to an in-process Hardhat network
 
 ## Osallistuminen
 
-Panos on tervetullut — koodi, virheraportit, ominaisuusehdotukset ja proposalit. Lue ennen aloitusta [CONTRIBUTING.md](CONTRIBUTING.md) ja meidän [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+Panokset ovat tervetulleita — koodi, virheraportit, ominaisuusehdotukset ja esitykset. Lue [CONTRIBUTING.md](CONTRIBUTING.md) ja [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) ennen kuin aloitat.
 
-## Tue projektia
-
-Jos EVOLVE osoittautuu hyödylliseksi, voit tukea kehitystä lahjoituksella — yksityiskohdat tiedostossa [DONATE.md](DONATE.md). Haluatko mieluummin verkkosivun? Käytä monikielistä lahjoitussivua (34 kieltä): **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**.
-
-**Token-myyntiä ei ole eikä sitä tule.** EVOLVE-tokeneihin ei voi "sijoittaa"; lahjoitukset ovat lahjoja avoimen lähdekoodin kehityksen tukemiseksi, eivätkä ne oikeuta lahjoittajia tokeneihin, osuuteen, tuottoihin tai mihinkään taloudelliseen vaatimukseen.
-
-## Repositoriot (peilit)
+## Repot (peilikopiot)
 
 | Peili    | URL                                        |
 | -------- | ------------------------------------------ |
@@ -140,13 +155,14 @@ Jos EVOLVE osoittautuu hyödylliseksi, voit tukea kehitystä lahjoituksella — 
 
 ## Dokumentaatio
 
-- [Mitä & miksi](docs/WHAT-AND-WHY.md) — ongelma, visio, ydinarvot (englanniksi)
-- [Näin se toimii](docs/HOW-IT-WORKS.md) — käyttäjäprosessit vaihe vaiheelta (englanniksi)
-- [Arkkitehtuuri](docs/ARCHITECTURE.md) — monorepo, paketit, tietovirrat (englanniksi)
-- [Tokenomics](docs/TOKENOMICS.md) — token-malli ja tarjonnan jakauma (englanniksi)
-- [Tiekartta](docs/ROADMAP.md) — virstanpylväät ja nykytila (englanniksi)
-- [UKK](docs/FAQ.md) — usein kysytyt kysymykset (englanniksi)
-- [Lompakko-opas](docs/WALLETS.md) — miten luoda lompakkoja ja saada lahjoitusosoitteita (englanniksi)
+- [Mikä & miksi](docs/WHAT-AND-WHY.md) — ongelma, visio, ydinarvot
+- [Miten se toimii](docs/HOW-IT-WORKS.md) — käyttäjävirrat, vaihe vaiheelta
+- [Arkkitehtuuri](docs/ARCHITECTURE.md) — monorepo, paketit, datavirrat
+- [Tokenomics](docs/TOKENOMICS.md) — tokenmalli ja tarjontajako
+- [RewardVault-suunnitelma](docs/REWARD-VAULT-PLAN.md) — luottamukseton emissio (suunniteltu)
+- [Tiekartta](docs/ROADMAP.md) — virstanpylväät ja nykytila
+- [UKK](docs/FAQ.md) — usein kysytyt kysymykset
+- [Lompakko-opas](docs/WALLETS.md) — miten luot lompakoita ja saat lahjoitusosoitteita
 
 ## Lisenssi
 

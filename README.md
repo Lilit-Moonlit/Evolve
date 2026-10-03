@@ -69,7 +69,7 @@ Two ways to plan a child, and both rest on the same idea: real intention is show
 
 | Purpose                                           |        EVOLVE |
 | ------------------------------------------------- | ------------: |
-| Founders and team (salary / reward) | 25,000,000 |
+| Founders and team (salary / reward)               |    25,000,000 |
 | DEX reserve (future)                              |     4,000,000 |
 | Public sale (planned)                             |     5,000,000 |
 | Reward reserve — labs, patients, mothers, fathers | 7,966,000,000 |

@@ -2,73 +2,94 @@
 
 # EVOLVE
 
-**Daten, conceptie en gezondheidsverificatie — standaard privé, geverifieerd waar het telt.**
+**Dating, conceptie en geverifieerde gezondheid — standaard privé, vertrouwen waar het telt.**
 
-EVOLVE is een open-source, gedecentraliseerd platform voor verifieerbare intieme contacten: daten, conceptie en anonieme STD/DNA-compatibiliteit. Je logt in met je eigen cryptowallet (Sign-In with Ethereum) — geen telefoonnummer, geen e-mail, geen KYC — en je kunt je account herstellen via een on-chain DNA-commitment. Gezondheidsgegevens blijven van jou: labresultaten worden automatisch geparseerd, individuele pathogeenstatussen worden **nooit** aan iemand getoond, en matching berust uitsluitend op anonieme compatibiliteitsuitspraken (Safe / Compatible / Caution / Risk). De chat draait peer-to-peer via libp2p en Nostr, met een HTTP-fallback voor het gemak, en de app wordt geleverd met een lichtgewicht openbaar “Safety Mode”-front plus een zelfstandige Companion Mode voor het beoordelen van STD-testresultaten.
+EVOLVE is een open-source, gedecentraliseerd platform voor mensen die het zat zijn om hun telefoonnummer, hun gezicht en hun meest intieme gezondheidsgegevens aan de database van iemand anders te geven. Je logt in met je eigen cryptowallet — geen telefoon, geen e-mail, geen KYC — en je kunt je account terugkrijgen via een on-chain DNA-commitment. Je gezondheidsgegevens blijven van jou: testuitslagen worden automatisch geparseerd, individuele pathogeenstatussen worden **nooit** aan iemand getoond, en matching steunt uitsluitend op anonieme compatibiliteitsuitspraken (Safe / Compatible / Caution / Risk). De chat draait peer-to-peer over libp2p en Nostr, met een HTTP-fallback voor het gemak.
 
-> **Status: vroege alfaversie.** EVOLVE is in actieve ontwikkeling en is geen afgerond product.
-> Smart contracts zijn **alleen op de Ethereum Sepolia-testnet** gedeployd.
-> Er is **geen mainnet-implementatie, geen DEX, geen liquiditeit en geen openbare tokenverkoop** — en niets daarvan wordt beloofd.
-> Functionaliteit kan op elk moment wijzigen of breken. Niets hier is financieel advies of een investeringsaanbod.
+> **Status — het platform werkt vandaag; mainnet en DEX zijn de volgende stap.**
+> Dating, conceptie, gezondheidsverificatie, de laboratoriumflow, P2P-chat, de EVOLVE-token en governance draaien allemaal. Nog vooruit: een **mainnet-implementatie en DEX-liquiditeit**, plus een **geplande publieke verkoop** (zie [De EVOLVE-token](#de-evolve-token-alleen-testnet)).
+> De smart contracts zijn **alleen op de Ethereum Sepolia-testnet** gedeployd. Niets hier is financieel advies of een investeringsaanbod.
+
+> **Vind je EVOLVE nuttig? Steun de ontwikkeling — elke donatie gaat naar code, laboratoriumpartnerschappen, hosting en vertaling → [DONATE.md](DONATE.md).**
+
+## Niets te vrezen
+
+EVOLVE is gebouwd rond de vragen die mensen zich écht stellen voordat ze zo'n platform vertrouwen.
+
+| De zorg                                            | Wat EVOLVE er al aan doet                                                                                                                                                                           |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| «Mijn gezondheidsgegevens lekken uit.»             | Individuele pathogeenresultaten worden **nooit** aan iemand getoond — alleen een anonieme uitspraak: Safe / Compatible / Caution / Risk.                                                            |
+| «Mijn foto's belanden ergens.»                     | Foto's zijn standaard wazig. De eigenaar geeft een weergave van **15 seconden** of **permanent** — op verzoek of uit eigen beweging. Kijken is gratis.                                              |
+| «Ik moet mijn ID of telefoon afgeven.»             | Inloggen met wallet (SIWE). Geen telefoon, geen e-mail, geen KYC. Herstel verloopt via een on-chain DNA-commitment.                                                                                 |
+| «Hij of zij liegt over gezond zijn.»               | Resultaten worden **door een lab gecontroleerd** (QR + gezichtsherkenning), en de tests van het stel worden **bij de ontmoeting zelf** afgenomen — verse soa-resultaten tellen, DNA veroudert niet. |
+| «Neemt iemand mijn geld en verdwijnt?»             | Conceptie draait op een echte, risico dragende inzet: het depot van een man beweegt pas als het vaderschap is **bevestigd**; anders wordt het gewoon aan hem teruggegeven.                          |
+| «Is de token een pump-and-dump?»                   | Vandaag is er geen verkoop actief; de code is open (MIT); de niet in omloop gebrachte reserve moet worden opgesloten in een **niet-ledigbare kluis** waaruit niet eens de oprichter kan opnemen.    |
+| «Kan het platform worden afgesloten of verbannen?» | Peer-to-peer-berichten eerst, gedecentraliseerde opslag (IPFS / Arweave), 18 EVM-netwerkconfiguraties en geen vastgekoppeld domein.                                                                 |
 
 ## Wat & waarom
 
-Traditionele datingplatformen vragen je om je telefoonnummer, e-mail, foto's en intieme gezondheidsgegevens over te dragen aan een centrale database. EVOLVE vertrekt vanuit de tegenovergestelde premisse: privacy standaard, zelfcustodie en geen centraal storingspunt. Kernwaarden:
+Traditionele datingapps vragen je om je telefoonnummer, e-mail, foto's en intieme gezondheidsdetails te ruilen voor een centrale database — en die database daarna eeuwig te vertrouwen. EVOLVE begint vanuit de tegenovergestelde premisse: **standaard privacy, zelfcustodie en geen enkel punt van falen**.
 
-- **Privacy standaard** — gezondheidsgegevens worden nooit blootgesteld; alleen anonieme uitspraken.
-- **Banbestendigheid** — berichtenverkeer P2P-eerst, gedecentraliseerde opslag (IPFS / Arweave), multi-netwerkontwerp, geen hardcoderde domeinen.
-- **Zelfcustodiale identiteit** — je wallet is je login; herstel via DNA in plaats van e-mail/telefoon.
-- **Geen KYC-drempel** — voor het gebruik van het platform zijn geen identiteitsbewijs, telefoon of e-mail vereist.
+- **Standaard privacy** — gezondheidsgegevens worden nooit blootgesteld; alleen anonieme uitspraken.
+- **Banbestendigheid** — P2P-berichten eerst, gedecentraliseerde opslag, multi-netwerkontwerp, geen vastgekoppelde domeinen.
+- **Zelfcustodiale identiteit** — je wallet is je login; herstel via DNA in plaats van e-mail of telefoon.
+- **Geen KYC-drempel** — geen legitimatiebewijs, telefoon of e-mail nodig om het platform te gebruiken.
 
-Lees de volledige onderbouwing in [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md) (in het Engels).
+Lees de volledige onderbouwing in [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md).
 
-## Belangrijkste functies
+## Gezondheid die je echt kunt vertrouwen
 
-### Identiteit & privacy
+- Upload een soa-test als platte tekst of PDF (tekstlaag-extractie, met OCR-fallback voor scans).
+- De parser kent 8 pathogenen: hiv-1/2, syfilis, chlamydia, gonorroe, hsv-1, hsv-2, hepatitis B, hepatitis C — in Engelse, Oekraïense en Russische rapportformaten.
+- **Individuele pathogeenstatus wordt nooit aan andere gebruikers getoond.** Profielen tonen alleen de anonieme uitspraak: **Safe / Compatible / Caution / Risk**.
+- On-chain DNA-registraties (`DNAVerification.sol`) ondersteunen herstel en verificatie.
 
-- **Wallet-login via SIWE** (MetaMask en andere EVM-wallets) — de censuurbestendige nooduitgang.
-- **Accountherstel via DNA** — je DNA-testresultaat wordt gehasht (SHA-256, on-chain vastgelegd als `bytes32`) en kan de toegang herstellen zonder telefoon of e-mail.
-- **Account Abstraction (ERC-4337)** — slimme accounts en een paymaster voor gasloos onboarding; SIWE blijft altijd beschikbaar.
+### Partnerlaboratoria — bewijs, geen beloftes
 
-### Anonieme gezondheidscompatibiliteit
+Stap een partnerlaboratorium binnen en toon je QR-code. Het lab scant hem, bevestigt je identiteit met **gezichtsherkenning** (zodat niemand anders jouw resultaat kan ophalen) en voegt het soa-rapport toe — PDF, scan of tekst, zelfs met slechte OCR. Het resultaat wordt getekend door een echt laboratorium, niet door jou, dus anderen zien een **geverifieerd feit** in plaats van jouw woord. En elke bevestigde verificatie betaalt **1 EVOLVE aan de patiënt en 1 EVOLVE aan het laboratorium** — beide kanten hebben een reden om eerlijk te zijn. Individuele pathogenen worden ook dan nog aan niemand getoond.
 
-- Upload van STD-testresultaten als platte tekst of PDF (tekstlaag-extractie met OCR-fallback voor gescande pagina's).
-- De parser herkent 8 pathogenen: hiv-1/2, syfilis, chlamydia, gonorroe, hsv-1, hsv-2, hepatitis B, hepatitis C (Engelse, Oekraïense en Russische rapportformaten).
-- **De individuele pathogeenstatus wordt nooit aan andere gebruikers getoond.** Profielen tonen alleen een anonieme uitspraak: **Safe / Compatible / Caution / Risk**.
-- On-chain DNA-verificatieregisters (`DNAVerification.sol`) vormen de basis voor herstel- en verificatieflows.
+## Iemand vinden
 
-### Profielen, zoeken & communicatie
-
-- Zoekfilters: “Wat zoek je” (daten / conceptie / polyandrische conceptie / STD-tests), “Wie zoek je” (mannen, vrouwen, stellen), cascaderende land-→-stad-selecties, “kan naar jouw land reizen” met lijsten per land, huidskleur, testvoorkeur, alleen STD-compatibel.
+- Zoekfilters: «Wat zoek je» (daten / conceptie / polyandrische conceptie / soa-tests), «Wie zoek je» (mannen, vrouwen, stellen), trapsgewijze selecties land → stad, «kan naar jouw land reizen» met lijsten per land, huidskleur, testvoorkeur, alleen soa-compatibel.
 - Onboardingwizard: leeftijd (verbergbaar), talen, bio, foto.
-- **Foto-privacy**: foto's zijn standaard wazig; de eigenaar verleent weergaven van 15 seconden of permanent, op verzoek of uit eigen beweging. Bekijken is gratis.
-- **P2P-chat** via libp2p (gossipsub) + Nostr, met een HTTP-API-fallback.
+- **P2P-chat** over libp2p (gossipsub) + Nostr, met een HTTP-API-fallback.
 
-### Conceptiemodi
+## Conceptie
 
-- **Modus 2 — Pregnancy Bond**: een vrouw creëert een bond, een man zet EVOLVE in stake (≥ 100 in de huidige testnet-build), beiden bevestigen; na een bevestigde zwangerschap en vaderschap gaat de stake naar de vrouw.
-- **Modus 3 — Cryptic Choice**: een vrouw opent een sessie van 48 uur, mannen doen mee door te staken; zij kiest de vader — zijn stake wordt teruggegeven, de rest wordt verdeeld: 90% voor haar / 10% voor de gekozen vader.
+Twee manieren om een kind te plannen, en beide rusten op hetzelfde idee: echte intentie toon je met een echte inzet in EVOLVE — nooit met beloftes. De commit van een man leeft in zijn EvolveFund-depot (vanaf 15 EVOLVE, minstens 30 dagen geblokkeerd), en een vrouw kan haar eigen minimumdepot bepalen voor de mannen die haar bereiken.
 
-### Laboratoria & verificatie
+**Conceptie.** De vrouw leidt: ze nodigt een specifieke man uit en noemt hem in een bond. Hij heeft een actief EvolveFund-depot nodig; als beiden bevestigen, wordt het geblokkeerd en start de afloop. De zwangerschap wordt 14 tot 30 dagen na de bevestiging gemeld, en de soa- en DNA-tests van het stel worden bij de ontmoeting zelf afgenomen — verse soa-resultaten tellen, DNA veroudert niet. Zodra het vaderschap is bevestigd, gaat het depot van de man naar de vrouw; wordt het niet bevestigd, dan wordt het depot gewoon aan hem teruggegeven. Er verandert niets van eigenaar tot de feiten vaststaan.
 
-- **Partnerflow voor laboratoria**: laboratoria registreren zich als partner, verifiëren patiënten via QR-code en gezichtsherkenning en voegen STD-rapporten toe (PDF/tekst met OCR-extractie).
-- **Companion Mode**: zelfstandige flow om STD-testresultaten te beoordelen zonder je aan te melden op het datingplatform.
-- **Safety Mode** (`VITE_PRODUCT_MODE=safety`): een beperkt openbaar front (STD-status, openbare profiellinks, compatibiliteitscontroles) dat blijft werken, zelfs als dating-/conceptiefuncties in een jurisdictie of appstore worden beperkt.
+**Polyandrische conceptie.** De keuze is van haar, en blijft privé. Ze opent een sessie van 48 uur — zonder eigen depot (ze mag er een toevoegen alleen voor reputatie, als ze wil). Mannen met een actief depot mogen deelnemen — tot 50 — en bevestigen, waarmee hun inzet wordt geblokkeerd. Veertien dagen na het sluiten van de sessie wordt de vader gekozen. Hij krijgt zijn depot terug plus een beloning uit de pot: het dubbele van zijn depot en 1 EVOLVE voor elke andere deelnemer. De niet-gekozen mannen verliezen hun inzet — 90% naar de vrouw, 10% naar de gekozen vader. Zij riskeert niets en kan alleen maar winnen; de mannen zetten hun inzet in voor het recht om gekozen te worden.
 
-### EVOLVE-token (alleen testnet)
+## De EVOLVE-token (alleen testnet)
 
-- ERC-20, maximale voorraad 8.000.000.000 EVOLVE, adminhandelingen gekoppeld aan een TimelockController van 48 uur.
-- **Emoji-cadeauseconomie**: een cadeau kost 1 EVOLVE, dat evenredig wordt verdeeld onder de bestaande cadeaueigenaren — een perpetueel inkomstenmodel voor houders; cadeaus zijn overdraagbaar.
-- **EvolveFund**: mannasting (min. 15 EVOLVE, 30 dagen vergrendeld) dat meetelt voor het governancegewicht; vrouwen gebruiken hun walletsaldo.
-- **Verificatiebeloningen**: 1 EVOLVE voor de geverifieerde gebruiker en 1 EVOLVE voor het bevestigende laboratorium bij STD/DNA-verificatie (plus een testfaucet met frequentielimiet).
-- Het stemgewicht in governance combineert recursieve reputatie (8 stemmen, diepte 3), het aandeel kinderen/vaderschap en gestakede of gehouden EVOLVE.
-- **LayerZero OFT**-integratie voor toekomstige multichain-overdrachten van EVOLVE (afhankelijkheden aanwezig; nog niets buiten Sepolia gedeployd).
+- ERC-20, maximale voorraad **8,000,000,000 EVOLVE**. Adminhandelingen worden begrensd door een 48-uurs `TimelockController`.
+- **Geplande verdeling van de voorraad** — ontworpen om bijna de hele voorraad voor gebruikers te laten werken, niet voor insiders:
 
-### Platform
+| Doel                                                |        EVOLVE |
+| --------------------------------------------------- | ------------: |
+| Oprichters en team (salaris / beloning)             |    25,000,000 |
+| DEX-reserve (toekomst)                              |     4,000,000 |
+| Publieke verkoop (gepland)                          |     5,000,000 |
+| Beloningsreserve — labs, patiënten, moeders, vaders | 7,966,000,000 |
 
-- Webapp (installeerbaar als PWA) en mobiele app op Expo/React Native.
-- Interface vertaald in **34 talen**.
-- Multi-netwerkklaar: 18 EVM-netwerkconfiguraties (Arbitrum en Avalanche zijn de geplande primaire L2's — **nog niet gedeployd**).
+- **Geplande publieke verkoop** — 5,000,000 EVOLVE verkocht door de app tegen **$0.8 per stuk**, te betalen met elke token die de app ondersteunt; de opbrengst financiert de ontwikkeling. _(Gepland — nog niet live.)_
+- **Trustless-emissie (gepland)** — de beloningsreserve van ~7,966,000,000 moet worden opgesloten in een niet-ledigbare `RewardVault`: alleen geleidelijk vrijgegeven via beloningen voor labs, patiënten, moeders en vaders, met regelwijzigingen die een governance-stemming vereisen. Zelfs de oprichter kan er niet uit opnemen. Ontwerp: [docs/REWARD-VAULT-PLAN.md](docs/REWARD-VAULT-PLAN.md).
+- **Emoji-cadeauseconomie** — een cadeau kost 1 EVOLVE, evenredig verdeeld onder bestaande cadeaueigenaren; een eeuwig verdienmodel, en cadeaus zijn overdraagbaar.
+- **EvolveFund** — mannen-staking (min 15 EVOLVE, 30 dagen blokkade) die meetelt voor governance-gewicht; vrouwen gebruiken hun walletsaldo.
+- **Verificatiebeloningen** — 1 EVOLVE aan de geverifieerde gebruiker en 1 EVOLVE aan het bevestigende lab per soa/DNA-verificatie (plus een faucet met snelheidslimiet).
+- **Governance** — stemgewicht combineert recursieve reputatie (8 stemmen, diepte 3), aandeel kinderen/vaderschap en gestaked of vastgehouden EVOLVE.
+- **LayerZero OFT**-integratie voor toekomstige multichain EVOLVE-overdrachten (afhankelijkheden aanwezig; nog niets gedeployd buiten Sepolia).
+
+## Steun het project
+
+EVOLVE is onafhankelijk en open-source. Als het nuttig voor je is, kun je de ontwikkeling steunen met een donatie — elke bijdrage gaat naar code, laboratoriumpartnerschappen, hosting en vertaling.
+
+- **Donatiedetails (EVM, Monero en meer):** [DONATE.md](DONATE.md)
+- **Meertalige donatiepagina (34 talen):** **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**
+
+Een publieke tokenverkoop staat op de roadmap maar is vandaag **niet** actief. Donaties zijn geschenken die open-source ontwikkeling steunen en geen recht geven op tokens, aandelen, rendement of winst. Geef alleen wat je kunt missen.
 
 ## Architectuur & techstack
 
@@ -76,63 +97,57 @@ Monorepo beheerd met npm workspaces + Turborepo:
 
 ```
 apps/
-  web/          # Vite + React + TypeScript (hoofdwebapp, i18next, Prisma)
+  web/          # Vite + React + TypeScript (main web app, i18next, Prisma)
   mobile/       # Expo + React Native
 packages/
-  config/       # Feature flags & dynamische externe configuratie
+  config/       # Feature flags & dynamic remote configuration
   contracts/    # Solidity 0.8.24, Hardhat, Ignition, OpenZeppelin, LayerZero
-  core/         # Gedeelde types, utilities, middleware, web3
-  matching/     # Matching-algoritmen, filters, ranking
-  p2p/          # libp2p (gossipsub) + Nostr-netwerk
+  core/         # Shared types, utilities, middleware, web3
+  matching/     # Matching algorithms, filters, ranking
+  p2p/          # libp2p (gossipsub) + Nostr networking
   storage/      # IPFS, Arweave, Lit Protocol
-docs/           # Architectuur, tokenomics, roadmap, FAQ
+docs/           # Architecture, tokenomics, roadmap, FAQ
 ```
 
-Belangrijkste smart contracts: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (emoji-cadeaus + beloningen), `Governance.sol`, `BondManager.sol` (modi 2 & 3), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster`, en een OpenZeppelin `TimelockController`.
+Belangrijkste smart contracts: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (emoji-cadeaus + beloningen), `Governance.sol`, `BondManager.sol` (conceptie en polyandrische conceptie), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster`, en een `TimelockController` van OpenZeppelin.
 
-Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md) (in het Engels).
+Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md)
 
 ## Roadmap
 
-In uitvoering: productierijpheid van de webapp. Gepland: on-chain laboratoriumregister en testcertificering, echte e-mailprovider-adapter voor het ontvangen van labrapporten, on-chain geverifieerde attestaties op profielen, update van token-vesting voor founder/ontwikkelaars-allocaties, DEX-liquiditeitsvoorziening (momenteel geblokkeerd — vereist mainnet-implementaties van de token). Multi-netwerkuitbreiding (Arbitrum, Avalanche en andere EVM-chains) volgt na het harden op het testnet.
+In uitvoering: productierijpheid van de webapp. Gepland: een on-chain labregister en testcertificering, een echte mailprovider-adapter voor het ontvangen van labrapporten, on-chain geverifieerde attestaties op profielen, de **trustless RewardVault** met via governance beheerde emissie ([ontwerp](docs/REWARD-VAULT-PLAN.md)), de **publieke tokenverkoop**, een vesting-update voor de oprichtersallocatie en de voorziening van DEX-liquiditeit (nu geblokkeerd — vereist mainnet-tokendeploys). Uitbreiding naar meerdere netwerken (Arbitrum, Avalanche en andere EVM-ketens) volgt na het beproeven op de testnet.
 
-Volledige lijst: [docs/ROADMAP.md](docs/ROADMAP.md) (in het Engels).
+Volledige lijst: [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Aan de slag (ontwikkelaars)
 
 Vereisten: **Node.js 20+** en npm 10.x.
 
 ```bash
-# Kloon en installeer alle workspaces
+# Clone and install all workspaces
 git clone https://github.com/Lilit-Moonlit/Evolve.git
 cd Evolve
 npm install
 
-# Webapp (Vite-devserver op http://localhost:3000)
+# Web app (Vite dev server on http://localhost:3000)
 cd apps/web
 npm run dev
-npm test                # vitest-suite
+npm test                # vitest suite
 
 # Smart contracts
 cd packages/contracts
 npm run compile         # hardhat compile
-npm test                # hardhat-testsuite
-npm run deploy:local    # deploy alle contracts naar een in-process Hardhat-netwerk
+npm test                # hardhat test suite
+npm run deploy:local    # deploy all contracts to an in-process Hardhat network
 ```
 
 ## Bijdragen
 
-Bijdragen zijn welkom — code, bugrapporten, functiesuggesties en voorstellen. Lees vóór je begint [CONTRIBUTING.md](CONTRIBUTING.md) en onze [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
-
-## Het project steunen
-
-Als je EVOLVE nuttig vindt, kun je de ontwikkeling steunen met een donatie — details in [DONATE.md](DONATE.md). Liever een webpagina? Gebruik de meertalige donatiepagina (34 talen): **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**.
-
-**Er is geen tokenverkoop en die zal er nooit komen.** In EVOLVE-tokens kan niet worden “geïnvesteerd”; donaties zijn geschenken ter ondersteuning van open-source-ontwikkeling en geven de donor geen recht op tokens, aandelen, rendement of enige financiële claim.
+Bijdragen zijn welkom — code, bugmeldingen, functiesuggesties en voorstellen. Lees vóór je begint [CONTRIBUTING.md](CONTRIBUTING.md) en onze [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ## Repositories (mirrors)
 
-| Mirror   | URL                                        |
+| Spiegel  | URL                                        |
 | -------- | ------------------------------------------ |
 | GitHub   | https://github.com/Lilit-Moonlit/Evolve    |
 | Codeberg | https://codeberg.org/limitafternoon/Evolve |
@@ -140,14 +155,15 @@ Als je EVOLVE nuttig vindt, kun je de ontwikkeling steunen met een donatie — d
 
 ## Documentatie
 
-- [Wat & waarom](docs/WHAT-AND-WHY.md) — probleem, visie, kernwaarden (Engels)
-- [Hoe het werkt](docs/HOW-IT-WORKS.md) — gebruikersflows, stap voor stap (Engels)
-- [Architectuur](docs/ARCHITECTURE.md) — monorepo, packages, datastromen (Engels)
-- [Tokenomics](docs/TOKENOMICS.md) — tokenmodel en verdeling van de voorraad (Engels)
-- [Roadmap](docs/ROADMAP.md) — mijlpalen en huidige status (Engels)
-- [FAQ](docs/FAQ.md) — veelgestelde vragen (Engels)
-- [Walletgids](docs/WALLETS.md) — wallets aanmaken en donatieadressen krijgen (Engels)
+- [Wat & waarom](docs/WHAT-AND-WHY.md) — probleem, visie, kernwaarden
+- [Hoe het werkt](docs/HOW-IT-WORKS.md) — gebruikersstromen, stap voor stap
+- [Architectuur](docs/ARCHITECTURE.md) — monorepo, packages, datastromen
+- [Tokenomics](docs/TOKENOMICS.md) — tokenmodel en verdeling van de voorraad
+- [RewardVault-plan](docs/REWARD-VAULT-PLAN.md) — trustless emissie (gepland)
+- [Roadmap](docs/ROADMAP.md) — mijlpalen en huidige status
+- [FAQ](docs/FAQ.md) — veelgestelde vragen
+- [Wallet-gids](docs/WALLETS.md) — hoe je wallets aanmaakt en donatieadressen krijgt
 
 ## Licentie
 
-Gelicentieerd onder de [MIT-licentie](LICENSE).
+Uitgebracht onder de [MIT-licentie](LICENSE).

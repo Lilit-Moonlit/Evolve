@@ -2,7 +2,7 @@
   "donate": {
     "title": "Support EVOLVE",
     "subtitle": "EVOLVE is an open-source, community-driven project. Donations fund development, security reviews, and infrastructure.",
-    "noSale": "There is no token sale. EVOLVE tokens are not for sale. Donations are unconditional, non-refundable gifts: you receive no tokens, no equity, and no financial return. See the disclaimer below.",
+    "noSale": "Una vendita pubblica di token è prevista, ma oggi non è ancora attiva. Le donazioni sono regali incondizionati e non rimborsabili: non ricevi token, partecipazioni né rendimenti finanziari. Vedi l'avvertenza qui sotto.",
     "addressesTitle": "Donation addresses",
     "securityNote": "Security: always verify the full address character-by-character against this page (bookmark it). Addresses are never sent by email, DM, or screenshots. Match the network — funds sent on the wrong chain are usually unrecoverable.",
     "guidelines": "Guidelines: use a dedicated wallet for donations — never your main hot wallet. Prefer Monero or Lightning if you want donor privacy. A small test transaction first is always a good idea.",

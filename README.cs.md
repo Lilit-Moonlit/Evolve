@@ -2,75 +2,96 @@
 
 # EVOLVE
 
-**Seznamka, početí a ověření zdraví — soukromí ve výchozím nastavení, ověření tam, kde na tom záleží.**
+**Seznámení, početí a ověřené zdraví — soukromí ve výchozím nastavení, důvěra tam, kde na ní záleží.**
 
-EVOLVE je open-source, decentralizovaná platforma pro ověřitelná intimní spojení: seznamování, početí a anonymní STD/DNA kompatibilitu. Přihlašujete se vlastní kryptopeněženkou (Sign-In with Ethereum) — bez telefonního čísla, bez e-mailu, bez KYC — a přístup k účtu můžete obnovit pomocí on-chain DNA závazku. Zdravotní data zůstávají vaše: výsledky laboratorních testů se parsují automaticky, jednotlivé statusy patogenů se **nikdy** nikomu nezobrazují a párování se spoléhá pouze na anonymní verdikty kompatibility (Safe / Compatible / Caution / Risk). Chat běží peer-to-peer přes libp2p a Nostr (s HTTP fallbackem pro pohodlí) a aplikace obsahuje odlehčenou veřejnou fasádu „Safety Mode“ a samostatný Companion Mode pro vyhodnocení výsledků STD testů.
+EVOLVE je open-source, decentralizovaná platforma pro lidi, kteří mají dost předávání svého telefonního čísla, své tváře a svých nejintimnějších zdravotních dat do databáze někoho jiného. Přihlašujete se vlastní krypto peněženkou — bez telefonu, bez e-mailu, bez KYC — a účet můžete získat zpět díky on-chain závazku DNA. Vaše zdravotní data zůstávají vaše: výsledky testů se zpracovávají automaticky, stavy jednotlivých patogenů se **nikdy** nikomu nezobrazují a párování stojí pouze na anonymních verdiktech kompatibility (Safe / Compatible / Caution / Risk). Chat běží peer-to-peer přes libp2p a Nostr, s HTTP fallbackem pro pohodlí.
 
-> **Stav: raná alfa.** EVOLVE je aktivně vyvíjen a není hotovým produktem.
-> Chytré kontrakty jsou nasazeny **pouze na testovací síti Ethereum Sepolia**.
-> **Není tu žádné nasazení na mainnetu, žádný DEX, žádná likvidita ani veřejný prodej tokenů** — a nic z toho neslibujeme.
-> Funkce se mohou kdykoli změnit nebo rozbít. Nic zde není finančním poradenstvím ani investiční nabídkou.
+> **Status — platforma dnes funguje; mainnet a DEX jsou dalším krokem.**
+> Seznámení, početí, ověřování zdraví, laboratorní flow, P2P chat, token EVOLVE i governance běží. Co nás čeká: **nasazení na mainnet a DEX likvidita**, plus **plánovaný veřejný prodej** (viz [Token EVOLVE](#token-evolve-pouze-testovací-síť)).
+> Smart kontrakty jsou nasazeny **pouze na testovací síti Ethereum Sepolia**. Nic zde není finanční poradenství ani investiční nabídkou.
+
+> **Připadá vám EVOLVE užitečné? Podpořte vývoj — každý dar jde na kód, laboratorní partnerství, hosting a překlady → [DONATE.md](DONATE.md).**
+
+## Není čeho se bát
+
+EVOLVE je postaveno kolem otázek, které si lidé skutečně kladou, než takové platformě důvěřují.
+
+| Obava                                        | Co s tím EVOLVE už dnes dělá                                                                                                                                       |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| „Moje zdravotní data uniknou."               | Výsledky jednotlivých patogenů se **nikdy** nikomu nezobrazují — pouze anonymní verdikt: Safe / Compatible / Caution / Risk.                                       |
+| „Moje fotky někde skončí."                   | Fotky jsou ve výchozím nastavení rozostřené. Vlastník uděluje **15sekundový** nebo **trvalý** náhled — na žádost nebo proaktivně. Prohlížení je zdarma.            |
+| „Budu muset odevzdat doklad nebo telefon."   | Přihlášení peněženkou (SIWE). Žádný telefon, žádný e-mail, žádné KYC. Obnova účtu funguje přes on-chain závazek DNA.                                               |
+| „On nebo ona lže o svém zdraví."             | Výsledky jsou **laboratorně ověřené** (QR + porovnání obličeje) a testy páru se odebírají **při setkání** — na čerstvých STD výsledcích záleží, DNA nestárne.      |
+| „Nevezme mi někdo peníze a nezmizí?"         | Početí běží na skutečném, vystaveném riziku: vklad muže se pohnue jen tehdy, když je otcovství **potvrzeno**; jinak se mu jednoduše vrací.                         |
+| „Není token pump-and-dump?"                  | Dnes žádný prodej neprobíhá; kód je otevřený (MIT); neobíhající rezerva má být uzamčena v **nevyprázdnitelném trezoru**, ze kterého nemůže vybírat ani zakladatel. |
+| „Nedá se platforma vypnout nebo zablokovat?" | Především peer-to-peer komunikace, decentralizované úložiště (IPFS / Arweave), 18 konfigurací EVM sítí a žádná natvrdo zapsaná doména.                             |
 
 ## Co a proč
 
-Tradiční seznamovací platformy po vás chtějí odevzdat telefonní číslo, e-mail, fotky a intimní zdravotní detaily do centrální databáze. EVOLVE vychází z opačného předpokladu: soukromí ve výchozím nastavení, vlastní správa (self-custody) a žádný centrální bod selhání. Klíčové hodnoty:
+Tradiční seznamovací aplikace po vás chtějí vyměnit telefonní číslo, e-mail, fotky a intimní zdravotní detaily za centrální databázi — a pak té databázi věřit navěky. EVOLVE vychází z opačného předpokladu: **soukromí ve výchozím nastavení, sebe-správa (self-custody) a žádný jediný bod selhání**.
 
-- **Soukromí ve výchozím nastavení** — zdravotní data nejsou nikdy odhalena; pouze anonymní verdikty.
-- **Odolnost vůči banům** — prvořadá P2P komunikace, decentralizované úložiště (IPFS / Arweave), vícesíťový návrh, žádné natvrdo zapsané domény.
-- **Self-custody identita** — vaše peněženka je váš login; obnova přes DNA místo e-mailu/telefonu.
-- **Žádná KYC brána** — k používání platformy není vyžadován občanský průkaz, telefon ani e-mail.
+- **Soukromí ve výchozím nastavení** — zdravotní data se nikdy nezveřejňují; pouze anonymní verdikty.
+- **Odolnost vůči banům** — především P2P komunikace, decentralizované úložiště, multi-network design, žádné natvrdo zapsané domény.
+- **Sebe-kustodiální identita** — vaše peněženka je váš login; obnova založená na DNA místo e-mailu nebo telefonu.
+- **Žádná KYC brána** — k používání platformy není potřeba občanský průkaz, telefon ani e-mail.
 
-Celé zdůvodnění: [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md).
+Celé odůvodnění si přečtěte v [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md).
 
-## Klíčové funkce
+## Zdraví, kterému můžete skutečně věřit
 
-### Identita a soukromí
+- Nahrajte STD test jako prostý text nebo PDF (extrakce textové vrstvy, s OCR fallbackem pro skeny).
+- Parser zná 8 patogenů: HIV-1/2, syfilis, chlamydie, kapavka, HSV-1, HSV-2, hepatitida B, hepatitida C — v anglických, ukrajinských a ruských formátech zpráv.
+- **Stav jednotlivých patogenů se nikdy nezobrazuje ostatním uživatelům.** Profily ukazují pouze anonymní verdikt: **Safe / Compatible / Caution / Risk**.
+- On-chain DNA záznamy (`DNAVerification.sol`) pohánějí obnovu a ověřování.
 
-- **Přihlášení peněženkou SIWE** (MetaMask a další EVM peněženky) — cenzuře odolná záchranná cesta.
-- **Obnova účtu přes DNA** — výsledek DNA testu se hašuje (SHA-256, on-chain závazek jako `bytes32`) a může obnovit přístup bez telefonu a e-mailu.
-- **Abstrakce účtu (ERC-4337)** — chytré účty a paymaster pro onboarding bez poplatků za gas; SIWE zůstává vždy k dispozici.
+### Partnerské laboratoře — důkazy, ne sliby
 
-### Anonymní zdravotní kompatibilita
+Vejděte do partnerské laboratoře a ukažte svůj QR kód. Laboratoř ho naskenuje, potvrdí vaši totožnost **porovnáním obličeje** (aby váš výsledek nemohl vyzvednout nikdo jiný) a připojí STD zprávu — PDF, sken nebo text, i s chatrným OCR. Výsledek podepisuje skutečná laboratoř, ne vy, takže ostatní vidí **ověřený fakt** místo vašeho slova. A každé potvrzené ověření platí **1 EVOLVE pacientovi a 1 EVOLVE laboratoři** — obě strany mají důvod být poctivé. Jednotlivé patogeny se stále nikomu nezobrazují.
 
-- Nahrávání výsledků STD testů jako prostý text nebo PDF (extrakce textové vrstvy s OCR fallbackem pro skenované stránky).
-- Parser rozpozná 8 patogenů: HIV-1/2, syfilis, chlamydie, kapavka, HSV-1, HSV-2, hepatitida B, hepatitida C (formáty zpráv v angličtině, ukrajinštině a ruštině).
-- **Jednotlivý status patogenů se nikdy nezobrazuje ostatním uživatelům.** Profily ukazují pouze anonymní verdikt: **Safe / Compatible / Caution / Risk**.
-- On-chain záznamy ověření DNA (`DNAVerification.sol`) pohánějí toky obnovy a ověřování.
+## Hledání někoho
 
-### Profily, vyhledávání a komunikace
+- Vyhledávací filtry: „Co hledáte" (seznámení / početí / polyandrické početí / STD testování), „Koho hledáte" (muži, ženy, páry), kaskádové výběry země → město, „může přijet do vaší země" se seznamy pro jednotlivé země, barva pleti, preference testování, pouze STD-kompatibilní.
+- Průvodce onboardingem: věk (skrytelný), jazyky, bio, fotka.
+- **P2P chat** přes libp2p (gossipsub) + Nostr, s HTTP API fallbackem.
 
-- Vyhledávací filtry: „Co hledáte“ (seznamka / početí / polyandrické početí / STD testování), „Koho hledáte“ (muži, ženy, páry), kaskádové výběry země → město, „může přijet do vaší země“ se seznamy pro jednotlivé země, barva pleti, preference testování, pouze STD-kompatibilní.
-- Průvodce onboardingu: věk (lze skrýt), jazyky, bio, fotka.
-- **Soukromí fotek**: fotky jsou ve výchozím nastavení rozostřené; vlastník uděluje 15sekundová nebo trvalá zobrazení — proaktivně nebo na žádost. Prohlížení je zdarma.
-- **P2P chat** přes libp2p (gossipsub) + Nostr, s fallbackem na HTTP API.
+## Početí
 
-### Režimy početí
+Dvě cesty, jak naplánovat dítě — a obě stojí na stejné myšlence: skutečný úmysl se ukazuje skutečným stakem v EVOLVE, nikdy sliby. Závazek muže žije v jeho EvolveFund vkladu (od 15 EVOLVE, uzamčeném nejméně na 30 dní) a žena si může nastavit vlastní minimální vklad pro muže, kteří se k ní dostanou.
 
-- **Režim 2 — Pregnancy Bond**: žena vytvoří bond, muž stakuje EVOLVE (≥ 100 v aktuálním testnetovém buildu), oba potvrdí; po potvrzeném těhotenství a otcovství přechází stake na ženu.
-- **Režim 3 — Cryptic Choice**: žena otevře 48hodinovou relaci, muži se připojují stakeováním; ona vybere otce — jeho stake se vrací, u ostatních se částka dělí: 90 % jí / 10 % vybranému otci.
+**Početí.** Žena vede: pozve konkrétního muže a pojmenuje ho v bondu. On potřebuje aktivní EvolveFund vklad; když oba potvrdí, zamkne se a odpočet začne. Těhotenství se hlásí mezi 14. a 30. dnem po potvrzení a STD a DNA testy páru se odebírají při samotném setkání — na čerstvých STD výsledcích záleží, DNA nestárne. Jakmile je otcovství potvrzeno, vklad muže přechází na ženu; pokud potvrzeno není, vklad se mu jednoduše vrací. Nic nemění majitele, dokud nejsou fakta rozhodnuta.
 
-### Laboratoře a ověřování
+**Polyandrické početí.** Volba patří jí — a zůstává soukromá. Otevře session, která běží 48 hodin — bez vlastního vkladu (pouze pro reputaci si ho může přidat, chce-li). Muži s aktivním vkladem se mohou připojit — až 50 — a potvrdit, čímž se zamkne jejich stake. Čtrnáct dní po uzavření session je vybrán otec. Dostane svůj vklad zpět plus odměnu z poolu: dvojnásobek svého vkladu a 1 EVOLVE za každého dalšího účastníka. Nevybraní muži ztrácejí svůj stake — 90 % ženě, 10 % vybranému otci. Ona neriskuje nic a může jen získat; muži dávají svůj stake za právo být vybráni.
 
-- **Tok laboratoří-partnerů**: laboratoře se registrují jako partneři, ověřují pacienty přes QR kód a rozpoznávání obličeje a přikládají STD zprávy (PDF/text s OCR extrakcí).
-- **Companion Mode**: samostatný tok pro vyhodnocení výsledků STD testů bez registrace na seznamovací platformě.
-- **Safety Mode** (`VITE_PRODUCT_MODE=safety`): omezená veřejná fasáda (STD status, veřejné odkazy profilů, kontroly kompatibility), která funguje i tehdy, když budou seznamovací funkce nebo funkce početí omezeny v některé jurisdikci nebo app store.
+## Token EVOLVE (pouze testovací síť)
 
-### Token EVOLVE (pouze testnet)
+- ERC-20, maximální nabídka **8,000,000,000 EVOLVE**. Admin akce hlídá 48hodinový `TimelockController`.
+- **Plánované rozdělení nabídky** — navržené tak, aby téměř celá nabídka pracovala pro uživatele, ne pro insidery:
 
-- ERC-20, maximální nabídka 8 000 000 000 EVOLVE, administrativní akce chráněny 48hodinovým TimelockController.
-- **Ekonomika emoji dárků**: dárek stojí 1 EVOLVE, který se dělí poměrně mezi existující vlastníky dárků — perpetuální příjmový model pro držitele; dárky jsou převoditelné.
-- **EvolveFund**: mužský staking (min 15 EVOLVE, 30denní uzamčení), který se počítá do váhy hlasu v governance; ženy používají zůstatek peněženky.
-- **Odměny za ověření**: 1 EVOLVE ověřenému uživateli a 1 EVOLVE potvrzující laboratoři při STD/DNA ověření (plus testovací faucet s limitem).
-- Váha hlasu v governance kombinuje rekurzivní reputaci (8 hlasů, hloubka 3), podíl dětí/otcovství a nastakované nebo držené EVOLVE.
-- Integrace **LayerZero OFT** pro budoucí multichain převody EVOLVE (závislosti jsou připraveny; mimo Sepolii zatím nic nasazeno).
+| Účel                                                   |        EVOLVE |
+| ------------------------------------------------------ | ------------: |
+| Zakladatelé a tým (plat / odměna)                      |    25,000,000 |
+| DEX rezerva (budoucnost)                               |     4,000,000 |
+| Veřejný prodej (plánovaný)                             |     5,000,000 |
+| Odměnová rezerva — laboratoře, pacienti, matky, otcové | 7,966,000,000 |
 
-### Platforma
+- **Plánovaný veřejný prodej** — 5,000,000 EVOLVE prodávaných aplikací za **$0.8 za kus**, platitelných v jakémkoli tokenu, který aplikace podporuje; výtěžek financuje vývoj. _(Plánováno — zatím neběží.)_
+- **Trustless emise (plánovaná)** — rezerva odměn ~7,966,000,000 má být uzamčena v nevyprázdnitelném `RewardVault`: uvolňovaná pouze postupně skrze odměny pro laboratoře, pacienty, matky a otce, přičemž změny pravidel vyžadují hlasování governance. Nemůže z něj vybírat ani zakladatel. Design: [docs/REWARD-VAULT-PLAN.md](docs/REWARD-VAULT-PLAN.md).
+- **Ekonomika emoji dárků** — dárek stojí 1 EVOLVE, dělený proporcionálně mezi stávající vlastníky dárků; věčný model příjmů a dárky jsou přenositelné.
+- **EvolveFund** — mužský staking (min. 15 EVOLVE, 30denní zámek), který se počítá do váhy governance; ženy používají zůstatek peněženky.
+- **Odměny za ověření** — 1 EVOLVE ověřenému uživateli a 1 EVOLVE potvrzující laboratoři za každé STD/DNA ověření (plus faucet s limitem).
+- **Governance** — váha hlasu kombinuje rekurzivní reputaci (8 hlasů, hloubka 3), podíl dětí/otcovství a stakované nebo držené EVOLVE.
+- Integrace **LayerZero OFT** pro budoucí multichain převody EVOLVE (závislosti připraveny; mimo Sepolii zatím nic nasazeno).
 
-- Webová aplikace (instalovatelná jako PWA) a mobilní aplikace Expo/React Native.
-- Rozhraní přeloženo do **34 jazyků**.
-- Vícesíťová připravenost: 18 konfigurací EVM sítí (Arbitrum a Avalanche jsou plánované primární L2 — **ještě nejsou nasazeny**).
+## Podpora projektu
 
-## Architektura a technologický stack
+EVOLVE je nezávislé a open-source. Pokud je pro vás užitečné, můžete podpořit vývoj darem — každý příspěvek jde na kód, laboratorní partnerství, hosting a překlady.
+
+- **Detaily darů (EVM, Monero a další):** [DONATE.md](DONATE.md)
+- **Mnohojazyčná stránka darů (34 jazyků):** **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**
+
+Veřejný prodej tokenů je v plánu, ale dnes **neběží**. Dary jsou dárky podporující open-source vývoj a nedávají žádný nárok na tokeny, podíly, výnosy ani zisk. Prosíme, dávejte jen to, co můžete ztratit.
+
+## Architektura a tech stack
 
 Monorepo spravované přes npm workspaces + Turborepo:
 
@@ -88,13 +109,13 @@ packages/
 docs/           # Architecture, tokenomics, roadmap, FAQ
 ```
 
-Klíčové chytré kontrakty: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (emoji dárky + odměny), `Governance.sol`, `BondManager.sol` (režimy 2 a 3), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster` a OpenZeppelin `TimelockController`.
+Klíčové smart kontrakty: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (emoji dárky + odměny), `Governance.sol`, `BondManager.sol` (početí a polyandrické početí), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster` a OpenZeppelin `TimelockController`.
 
-Podrobnosti: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md)
+Detaily: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md)
 
-## Roadmapa
+## Roadmap
 
-Probíhá: příprava webové aplikace na produkci. Plánováno: on-chain registr laboratoří a certifikace testů, adaptér skutečného poštovního poskytovatele pro příjem laboratorních zpráv, on-chain ověřené atestace v profilech, aktualizace vestingu tokenů pro alokace zakladatelů/vývojářů, zajištění DEX likvidity (momentálně zablokováno — vyžaduje nasazení tokenů na mainnet). Vícesíťová expanze (Arbitrum, Avalanche a další EVM sítě) přijde po zpevnění testnetu.
+V průběhu: produkční připravenost webové aplikace. V plánu: on-chain registr laboratoří a certifikace testů, skutečný adapter poskytovatele pošty pro přijímání laboratorních zpráv, on-chain ověřené atestace v profilech, **trustless RewardVault** s emisí řízenou governance ([design](docs/REWARD-VAULT-PLAN.md)), **veřejný prodej tokenů**, aktualizace vestingu pro alokaci zakladatelů a poskytování DEX likvidity (aktuálně blokováno — vyžaduje nasazení tokenů na mainnetu). Multi-network expanze (Arbitrum, Avalanche a další EVM sítě) následuje po zpevnění testnetu.
 
 Celý seznam: [docs/ROADMAP.md](docs/ROADMAP.md).
 
@@ -122,13 +143,7 @@ npm run deploy:local    # deploy all contracts to an in-process Hardhat network
 
 ## Přispívání
 
-Příspěvky jsou vítány — kód, hlášení chyb, návrhy funkcí a další nápady. Než začnete, přečtěte si [CONTRIBUTING.md](CONTRIBUTING.md) a náš [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
-
-## Podpořte projekt
-
-Pokud vám EVOLVE přijde užitečný, můžete podpořit vývoj darem — detaily v [DONATE.md](DONATE.md). Preferujete webovou stránku? Použijte vícejazyčnou stránku darů (34 jazyků): **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**.
-
-**Žádný prodej tokenů není a nebude.** Do EVOLVE nelze „investovat“; dary jsou dárky na podporu open-source vývoje a nedávají dárci nárok na tokeny, podíly, výnosy ani jakékoli finanční nároky.
+Příspěvky jsou vítány — kód, hlášení chyb, návrhy funkcí a proposal. Než začnete, přečtěte si prosím [CONTRIBUTING.md](CONTRIBUTING.md) a náš [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ## Repozitáře (mirrory)
 
@@ -141,13 +156,14 @@ Pokud vám EVOLVE přijde užitečný, můžete podpořit vývoj darem — detai
 ## Dokumentace
 
 - [Co a proč](docs/WHAT-AND-WHY.md) — problém, vize, klíčové hodnoty
-- [Jak to funguje](docs/HOW-IT-WORKS.md) — uživatelské toky, krok za krokem
+- [Jak to funguje](docs/HOW-IT-WORKS.md) — uživatelské flow, krok za krokem
 - [Architektura](docs/ARCHITECTURE.md) — monorepo, balíčky, toky dat
 - [Tokenomika](docs/TOKENOMICS.md) — model tokenu a rozdělení nabídky
-- [Roadmapa](docs/ROADMAP.md) — milníky a aktuální stav
+- [Plán RewardVault](docs/REWARD-VAULT-PLAN.md) — trustless emise (plánovaná)
+- [Roadmapa](docs/ROADMAP.md) — milníky a aktuální status
 - [FAQ](docs/FAQ.md) — časté dotazy
-- [Průvodce peněženkami](docs/WALLETS.md) — jak si vytvořit peněženky a získat adresy pro dary
+- [Průvodce peněženkami](docs/WALLETS.md) — jak vytvořit peněženky a získat adresy pro dary
 
 ## Licence
 
-Licencováno pod [MIT License](LICENSE).
+Licencováno pod [licencí MIT](LICENSE).

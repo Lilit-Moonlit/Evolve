@@ -2,73 +2,94 @@
 
 # EVOLVE
 
-**Pagnanais na makahanap ng kapareha, pagbubuntis at beripikasyon ng kalusugan — pribado bilang default, beripikado kung saan mahalaga.**
+**Paghahanap ng kapareha, pagpaplano ng pagbubuntis at beripikadong kalusugan — pribado bilang default, pinagkakatiwalaan kung saan mahalaga.**
 
-Ang EVOLVE ay isang open-source at desentralisadong plataporma para sa mababeriipikang malapit na ugnayan: paghahanap ng kapareha, pagbubuntis, at anonimong STD/DNA compatibility. Nagla-log-in ka gamit ang sarili mong crypto wallet (Sign-In with Ethereum) — walang numero ng telepono, walang email, walang KYC — at maaari mong mabawi ang iyong account sa pamamagitan ng on-chain na DNA commitment. Ang data ng kalusugan ay mananatili sa iyo: awtomatikong sinusuri ng sistema ang mga resulta ng laboratoryo, ang indibidwal na status ng bawat pathogen ay **hindi kailanman** ipinapakita kahit kanino, at ang pagtutugma ay nakasalalay lamang sa anonimong verdict ng compatibility (Safe / Compatible / Caution / Risk). Ang chat ay tumatakbo nang peer-to-peer sa ibabaw ng libp2p at Nostr, na may HTTP fallback para sa kaginhawaan, at kasama ng app ang magaan at pampublikong "Safety Mode" facade pati na ang standalone na Companion Mode para sa pagsusuri ng mga STD test.
+Ang EVOLVE ay isang open-source at desentralisadong plataporma para sa mga taong pagod nang ibigay ang kanilang numero ng telepono, ang kanilang mukha at ang pinakapribadong datos ng kanilang kalusugan sa database ng iba. Nagla-log-in ka gamit ang sarili mong crypto wallet — walang telepono, walang email, walang KYC — at maaari mong mabawi ang iyong account sa pamamagitan ng on-chain na DNA commitment. Ang datos ng iyong kalusugan ay nananatili sa iyo: awtomatikong sinusuri ang mga resulta ng test, ang indibidwal na status ng bawat pathogen ay **hindi kailanman** ipinapakita kahit kanino, at ang pagtutugma ay nakasalalay lamang sa anonimong verdict ng compatibility (Safe / Compatible / Caution / Risk). Ang chat ay tumatakbo nang peer-to-peer sa ibabaw ng libp2p at Nostr, na may HTTP fallback para sa kaginhawaan.
 
-> **Status: maagang yugto ng alpha.** Ang EVOLVE ay nasa aktibong pag-develop at hindi pa tapos na produkto.
-> Ang mga smart contract ay naka-deploy **sa Ethereum Sepolia testnet lamang**.
-> **Walang mainnet deployment, walang DEX, walang liquidity, at walang pampublikong pagbebenta ng token** — at walang anumang ipinangako.
-> Ang mga feature ay maaaring magbago o masira anumang oras. Walang anuman dito ang payo pananalapi o alok ng pamumuhunan.
+> **Status — gumagana na ngayon ang plataporma; ang mainnet at DEX ang susunod.**
+> Ang paghahanap ng kapareha, pagbubuntis, beripikasyon ng kalusugan, daloy ng laboratoryo, P2P chat, ang EVOLVE token at governance ay lahat gumagana. Nasa unahan pa: **mainnet deployment at DEX liquidity**, bukod sa **nakaplanong public sale** (tingnan ang [Ang EVOLVE token](#the-evolve-token-testnet-only)).
+> Ang mga smart contract ay naka-deploy **sa Ethereum Sepolia testnet lamang**. Walang anumang nandito na financial advice o alok ng pamumuhunan.
+
+> **Nakatulong ba sa iyo ang EVOLVE? Suportahan ang development — ang bawat donasyon ay pumupunta sa code, partnership sa laboratoryo, hosting at pagsasalin → [DONATE.md](DONATE.md).**
+
+## Walang dapat ikatakot
+
+Ang EVOLVE ay binuo batay sa mga tanong na aktwal na itinatanong ng mga tao bago pagkatiwalaan ang isang plataporma na tulad nito.
+
+| Ang pag-aalala                                  | Ang ginagawa na ng EVOLVE tungkol dito                                                                                                                                                                    |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| "Magleleak ang datos ko ng kalusugan."          | Ang indibidwal na resulta ng bawat pathogen ay **hindi kailanman** ipinapakita kahit kanino — anonimong verdict lamang: Safe / Compatible / Caution / Risk.                                               |
+| "Mapupunta ang mga litrato ko kahit saan."      | Blurred bilang default ang mga litrato. Ang may-ari ay nagbibigay ng **15-segundo** o **permanente** na pagtingin — kapag may humingi o kusang-loob. Libre ang pagtingin.                                 |
+| "Kailangan kong ibigay ang ID o telepono ko."   | Wallet login (SIWE). Walang telepono, walang email, walang KYC. Gumagana ang recovery sa pamamagitan ng on-chain na DNA commitment.                                                                       |
+| "Nagsisinungaling siya na malusog siya."        | Ang mga resulta ay **beripikado ng laboratoryo** (QR + face match), at pinagtatakpan ng magkasintahan ang tests **sa mismong pagkikita** — mahalaga ang kamakailang STD resulta, hindi tumatanda ang DNA. |
+| "Kukuhanin ba ng iba ang pera ko at maglalaho?" | Ang pagbubuntis ay batay sa tunay na stake na may panganib: gagalaw lamang ang deposito ng lalaki kapag **nakumpirma** ang pagiging ama; kung hindi, ipinapabalik lang ito sa kanya.                      |
+| "Ba ito ay pump-and-dump?"                      | Walang live na sale ngayon; bukas ang code (MIT); ang hindi pa paikot-ikot na reserve ay nakaplanong ikandado sa isang **hindi madadrain na vault** na kahit ang founder ay hindi makakuha.               |
+| "Maaari bang isara o ipagbawal ang plataporma?" | Peer-to-peer messaging muna, desentralisadong storage (IPFS / Arweave), 18 na EVM network config, at walang hardcoded na domain.                                                                          |
 
 ## Ano at Bakit
 
-Ang mga tradisyonal na dating platform ay hinihiling na ibigay mo ang iyong numero ng telepono, email, mga litrato at pinakapribadong detalye ng kalusugan sa isang sentral na database. Ang EVOLVE ay nagsisimula sa kabaligtar na premisa: privacy bilang default, self-custody, at walang sentral na punto ng pagkakamali. Mga pangunahing halaga:
+Ang mga tradisyonal na dating app ay hinihiling na ipagpalit mo ang iyong numero ng telepono, email, litrato at pribadong datos ng kalusugan para sa isang sentral na database — at pagkatapos ay pagtiwalaan ang database na iyon magpakailanman. Ang EVOLVE ay nagsisimula sa kabaligtarang premisa: **pribado bilang default, self-custody, at walang iisang punto ng pagkabigo**.
 
-- **Privacy bilang default** — ang data ng kalusugan ay hindi kailanman inilalantad; anonimong verdict lamang.
-- **Paglaban sa pagbabawal (ban resistance)** — P2P-first na pagmemensahe, desentralisadong storage (IPFS / Arweave), multi-network na disenyo, walang hardcoded na domain.
-- **Self-custodial na pagkakakilanlan** — ang iyong wallet ang iyong login; pagbawi gamit ang DNA sa halip na email/telepono.
-- **Walang KYC gate** — walang government ID, telepono o email na kailangan para magamit ang plataporma.
+- **Pribado bilang default** — hindi kailanman inilalantad ang datos ng kalusugan; anonimong verdict lamang.
+- **Pagtutol sa pagbibigay-bawal** — P2P-munang messaging, desentralisadong storage, multi-network na disenyo, walang hardcoded na domain.
+- **Self-custodial na pagkakakilanlan** — ang wallet mo ang login mo; recovery batay sa DNA sa halip na email o telepono.
+- **Walang KYC gate** — walang kinakailangang government ID, telepono o email para gamitin ang plataporma.
 
-Basahin ang buong paliwanag sa [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md) (sa Ingles).
+Basahin ang buong paliwanag sa [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md).
 
-## Pangunahing Mga Feature
+## Kalusugan na maaari mong pagkatiwalaan
 
-### Pagkakakilanlan at Privacy
-
-- **Pag-log-in sa wallet gamit ang SIWE** (MetaMask at iba pang EVM wallet) — ang escape hatch laban sa sensura.
-- **Pagbawi ng account gamit ang DNA** — ang iyong DNA test result ay hinahash (SHA-256, naka-commit on-chain bilang `bytes32`) at maaaring maibalik ang access nang walang telepono o email.
-- **Account Abstraction (ERC-4337)** — mga smart account at paymaster para sa gasless na onboarding; ang SIWE ay laging nananatiling available.
-
-### Anonimong Health Compatibility
-
-- I-upload ang mga STD test result bilang raw text o PDF (pagkuha mula sa text-layer na may OCR fallback para sa mga na-scan na pahina).
-- Kinikilala ng parser ang 8 na pathogen: HIV-1/2, Syphilis, Chlamydia, Gonorrhea, HSV-1, HSV-2, Hepatitis B, Hepatitis C (format ng report sa Ingles, Ukrainian at Russian).
+- I-upload ang STD test bilang raw text o PDF (text-layer extraction, na may OCR fallback para sa mga scan).
+- Kilala ng parser ang 8 na pathogen: HIV-1/2, Syphilis, Chlamydia, Gonorrhea, HSV-1, HSV-2, Hepatitis B, Hepatitis C — sa format ng ulat sa Ingles, Ukrainian at Russian.
 - **Ang indibidwal na status ng pathogen ay hindi kailanman ipinapakita sa ibang user.** Ang mga profile ay nagpapakita lamang ng anonimong verdict: **Safe / Compatible / Caution / Risk**.
-- Ang mga on-chain na DNA verification record (`DNAVerification.sol`) ang nagpapatakbo ng mga flow ng pagbawi at beripikasyon.
+- Ang mga on-chain na DNA record (`DNAVerification.sol`) ang nagpapagana ng recovery at beripikasyon.
 
-### Mga Profile, Paghahanap at Komunikasyon
+### Mga kapatid na laboratoryo — patunay, hindi pangako
 
-- Mga search filter: "Ano ang hinahanap mo" (dating / pagbubuntis / polyandrous na pagbubuntis / STD testing), "Sino ang hinahanap mo" (mga lalaki, mga babae, mga mag-asawa), cascading na pagpili ng bansa → lungsod, "kayang pumarito sa iyong bansa" na may listahan kada bansa, kulay ng balat, kagustuhan sa pagte-test, STD-compatible lamang.
-- Onboarding wizard: edad (maaring itago), mga wika, bio, litrato.
-- **Privacy ng litrato**: ang mga litrato ay blurred bilang default; ang may-ari ay nagbibigay ng 15-segundo o permanenteng pagtingin, kusang-loob o kapag hiningi. Ang pagtingin ay libre.
+Pumasok sa isang partner na laboratoryo at ipakita ang iyong QR code. I-scan ito ng laboratoryo, beripikahin ang iyong pagkakakilanlan gamit ang **face matching** (upang walang ibang makakuha ng iyong resulta) at i-attach ang STD report — PDF, scan o text, kahit mahinang OCR. Ang resulta ay pinipirmahan ng tunay na laboratoryo, hindi mo ikaw, kaya nakikita ng iba ang isang **beripikadong katunayan** sa halip na ang salita mo. At ang bawat kumpirmadong beripikasyon ay nagbabayad ng **1 EVOLVE sa pasyente at 1 EVOLVE sa laboratoryo** — may dahilan ang magkabilang panig na maging tapat. Ang indibidwal na pathogen ay patuloy na hindi ipinapakita kahit kanino.
+
+## Paghahanap ng isang tao
+
+- Mga filter sa paghahanap: "Ano ang hinahanap mo" (dating / pagbubuntis / polyandrous na pagbubuntis / STD testing), "Sino ang hinahanap mo" (mga lalaki, mga babae, mga mag-asawa), cascading na country → city selects, "kayang pumunta sa bansa mo" na may listahan bawat bansa, kulay ng balat, kagustuhan sa testing, STD-compatible-lamang.
+- Onboarding wizard: edad (maaaring itago), mga wika, bio, litrato.
 - **P2P chat** sa ibabaw ng libp2p (gossipsub) + Nostr, na may HTTP API fallback.
 
-### Mga Mode ng Pagbubuntis
+## Pagbubuntis
 
-- **Mode 2 — Pregnancy Bond**: gumagawa ng bond ang isang babae, nagta-stake ng EVOLVE ang lalaki (≥ 100 sa kasalukuyang testnet build), tinutiyak ng dalawa; pagkatapos ng kumpirmadong pagbubuntis at pagiging ama, ang stake ay inililipat sa babae.
-- **Mode 3 — Cryptic Choice**: nagbubukas ang babae ng 48-oras na sesyon, sasali ang mga lalaki sa pamamagitan ng pag-stake; siya ang pumipili ng ama — ang kanyang stake ay ibinabalik, ang iba ay nahahati: 90% sa kanya / 10% sa napiling ama.
+Dalawang paraan ng pagpaplano ng anak, at parehong nakabatay sa iisang ideya: ang tunay na intensyon ay ipinapakita sa tunay na stake sa EVOLVE — hindi kailanman sa pangako. Ang komitment ng lalaki ay nasa kanyang EvolveFund deposito (mula 15 EVOLVE, nakakandado nang hindi bababa sa 30 araw), at ang babae ay maaaring magtakda ng sarili niyang minimum na deposito para sa mga lalaking nakararating sa kanya.
 
-### Mga Laboratoryo at Beripikasyon
+**Pagbubuntis.** Ang babae ang namumuno: iniimbitahan niya ang isang partikular na lalaki at pinangalanan siya sa isang bond. Kailangan niya ng aktibong EvolveFund deposito; kapag nagkumpirma ang dalawa, ito ay nakakandado at nagsisimula na ang countdown. Iniuulat ang pagbubuntis sa pagitan ng 14 at 30 araw pagkatapos ng kumpirmasyon, at ang STD at DNA tests ng magkasintahan ay kinukuha sa mismong pagkikita — mahalaga ang kamakailang STD resulta, hindi tumatanda ang DNA. Kapag nakumpirma ang pagiging ama, ang deposito ng lalaki ay napupunta sa babae; kung hindi nakumpirma, ang deposito ay simple na lamang na ibinabalik sa kanya. Walang nabibigay hanggang sa malutas ang mga katunayan.
 
-- **Partner flow ng mga laboratoryo**: ang mga laboratoryo ay nagre-register bilang partner, nagbe-beripika ng mga pasyente sa pamamagitan ng QR code at face match, at naglalakip ng mga STD report (PDF/text na may OCR extraction).
-- **Companion Mode**: standalone na flow para masuri ang mga STD test result nang hindi sumasali sa dating platform.
-- **Safety Mode** (`VITE_PRODUCT_MODE=safety`): isang limitadong pampublikong facade (STD status, pampublikong link ng profile, mga compatibility check) na patuloy na gumagana kahit na ang mga feature ng dating/pagbubuntis ay paghigpitan sa isang hurisdiksyon o app store.
+**Polyandrous na pagbubuntis.** Sa kanya ang pagpili, at nananatiling pribado. Binubuksan niya ang isang session na tumatakbo nang 48 oras — nang walang sarili niyang deposito (maaari siyang magdagdag lamang para sa reputasyon, kung nais niya). Ang mga lalaking may aktibong deposito ay maaaring sumali — hanggang 50 — at kumpirmahin, na nagkakandado ang kanilang stake. Labing-apat na araw pagkatapos magsara ang session, pinipili ang ama. Nababalik niya ang kanyang deposito bukod sa gantimpala mula sa pool: dalawang beses ng kanyang deposito at 1 EVOLVE para sa bawat ibang kalahok. Ang mga lalaking hindi napili ay nawawalan ng kanilang stake — 90% sa babae, 10% sa napiling ama. Wala siyang inaatasang panganib at maaari lamang siyang makinabang; ang mga lalaki ay inilalagay ang kanilang stake sa likod ng karapatang mapili.
 
-### EVOLVE Token (testnet lamang)
+## Ang EVOLVE token (testnet lamang)
 
-- ERC-20, maximum supply na 8,000,000,000 EVOLVE, ang mga admin action ay naka-gate sa 48-oras na TimelockController.
-- **Ekonomiya ng emoji gift**: ang isang gift ay nagkakahalaga ng 1 EVOLVE, na hinahati nang proporsyonal sa mga kasalukuyang may-ari ng gift — isang perpetual na modelo ng kita para sa mga may-hawak; ang mga gift ay naililipat.
-- **EvolveFund**: pag-stake ng mga lalaki (pinakamababang 15 EVOLVE, 30-araw na lock) na binabatay sa governance weight; ang mga babae ay gumagamit ng kanilang wallet balance.
-- **Mga gantimpala sa beripikasyon**: 1 EVOLVE sa beripikadong user at 1 EVOLVE sa kumpirmadong laboratoryo sa bawat STD/DNA verification (kasama ang rate-limited na test faucet).
-- Ang governance vote weight ay pinagsasama ang recursive reputation (8 boto, depth 3), bahagi sa mga anak/pagiging ama, at staked o hawak na EVOLVE.
-- **LayerZero OFT** integration para sa susunod na multichain na paglilipat ng EVOLVE (nasa lugar na ang mga dependency; wala pang naka-deploy bukod sa Sepolia).
+- ERC-20, pinakamataas na supply na **8,000,000,000 EVOLVE**. Ang mga admin action ay hinihigpitan ng 48-oras na `TimelockController`.
+- **Nakaplanong alokasyon ng supply** — dinisenyo upang gamitin ang halos buong supply para sa mga user, hindi para sa mga insider:
 
-### Plataporma
+| Layunin                                              |        EVOLVE |
+| ---------------------------------------------------- | ------------: |
+| Mga founder at team (sweldo / gantimpala)            |    25,000,000 |
+| DEX reserve (sa hinaharap)                           |     4,000,000 |
+| Public sale (nakaplano)                              |     5,000,000 |
+| Reward reserve — mga laboratoryo, pasyente, ina, ama | 7,966,000,000 |
 
-- Web app (PWA-installable) at Expo/React Native mobile app.
-- Ang interface ay isinalin sa **34 na wika**.
-- Multi-network ready: 18 na configuration ng EVM network (ang Arbitrum at Avalanche ang planadong pangunahing L2 — **hindi pa naka-deploy**).
+- **Nakaplanong public sale** — 5,000,000 EVOLVE na ibinebenta ng app sa **$0.8 bawat isa**, mababayaran sa alinmang token na sinusuportahan ng app; ang kita ay pondo ng development. _(Nakaplano — hindi pa live.)_
+- **Trustless emission (nakaplano)** — ang ~7,966,000,000 reward reserve ay nakaplanong ikandado sa isang hindi madadrain na `RewardVault`: inilalabas lamang nang dahan-dahan sa pamamagitan ng gantimpala sa laboratoryo, pasyente, ina at ama, at ang pagbabago ng mga patakaran ay nangangailangan ng boto ng governance. Kahit ang founder ay hindi makakakuha mula rito. Disenyo: [docs/REWARD-VAULT-PLAN.md](docs/REWARD-VAULT-PLAN.md).
+- **Ekonomiya ng emoji gift** — ang isang gift ay nagkakahalaga ng 1 EVOLVE, hinahati proporsyonal sa mga umiiral na may-ari ng gift; isang permanente na modelo ng kita, at ang mga gift ay transferable.
+- **EvolveFund** — stake ng lalaki (minimum 15 EVOLVE, 30-araw na lock) na binabatay sa timbang ng governance; ang mga babae ay gumagamit ng kanilang wallet balance.
+- **Mga gantimpala sa beripikasyon** — 1 EVOLVE sa beripikadong user at 1 EVOLVE sa kumpirmadong laboratoryo bawat STD/DNA beripikasyon (kasama ang rate-limited na faucet).
+- **Governance** — pinagsasama ang timbang ng boto mula sa recursive na reputasyon (8 boto, depth 3), bahagi ng mga anak/pagiging ama, at na-stake o hawak na EVOLVE.
+- **LayerZero OFT** integration para sa susunod na multichain na paglilipat ng EVOLVE (naka-install na ang mga dependency; wala pang naka-deploy lampas sa Sepolia).
+
+## Suportahan ang proyekto
+
+Ang EVOLVE ay independiyente at open-source. Kung nakatulong ito sa iyo, maaari mong suportahan ang development sa pamamagitan ng donasyon — ang bawat kontribusyon ay pumupunta sa code, partnership sa laboratoryo, hosting at pagsasalin.
+
+- **Mga detalye ng donasyon (EVM, Monero at iba pa):** [DONATE.md](DONATE.md)
+- **Multilingual na pahina ng donasyon (34 na wika):** **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**
+
+Ang public token sale ay nasa roadmap ngunit **hindi** ito live ngayon. Ang mga donasyon ay mga kaloob na sumusuporta sa open-source development at hindi nagbibigay ng karapatan sa token, equity, kita o tubo. Mangyaring magbigay lamang ng kaya mong mawala.
 
 ## Arkitektura at Tech Stack
 
@@ -79,58 +100,52 @@ apps/
   web/          # Vite + React + TypeScript (pangunahing web app, i18next, Prisma)
   mobile/       # Expo + React Native
 packages/
-  config/       # Mga feature flag at dynamic na remote configuration
+  config/       # Feature flags & dynamic na remote configuration
   contracts/    # Solidity 0.8.24, Hardhat, Ignition, OpenZeppelin, LayerZero
-  core/         # Mga shared na uri, utility, middleware, web3
+  core/         # Shared na mga tipo, utility, middleware, web3
   matching/     # Mga algorithm ng pagtutugma, filter, ranking
   p2p/          # libp2p (gossipsub) + Nostr networking
   storage/      # IPFS, Arweave, Lit Protocol
 docs/           # Arkitektura, tokenomics, roadmap, FAQ
 ```
 
-Mga pangunahing smart contract: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (mga emoji gift + gantimpala), `Governance.sol`, `BondManager.sol` (Mode 2 at 3), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster`, at isang OpenZeppelin `TimelockController`.
+Mga pangunahing smart contract: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (mga emoji gift + gantimpala), `Governance.sol`, `BondManager.sol` (pagbubuntis at polyandrous na pagbubuntis), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster`, at isang OpenZeppelin `TimelockController`.
 
-Mga detalye: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md) (sa Ingles).
+Mga detalye: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md)
 
 ## Roadmap
 
-Kasalukuyang isinasagawa: ang production-readiness ng web app. Naka-plan: on-chain na registry ng laboratoryo at sertipikasyon ng test, tunay na mail-provider adapter para sa pagtanggap ng mga report ng laboratoryo, on-chain na beripikadong attestasyon sa mga profile, pag-update ng token vesting para sa alokasyon ng founder/developer, at pag-provision ng DEX liquidity (kasalukuyang naka-block — nangangailangan ng mainnet deployment ng token). Ang pagpapalawak sa maraming network (Arbitrum, Avalanche at iba pang EVM chain) ay susunod pagkatapos ng testnet hardening.
+Kasalukuyan: production-readiness ng web app. Nakaplano: on-chain na registry ng laboratoryo at sertipikasyon ng test, tunay na mail-provider adapter para sa pagtanggap ng ulat ng laboratoryo, on-chain na beripikadong attestation sa mga profile, ang **trustless RewardVault** na may governance-gated na emission ([disenyo](docs/REWARD-VAULT-PLAN.md)), ang **public token sale**, pag-update ng token vesting para sa alokasyon ng founder, at pagbibigay ng DEX liquidity (kasalukuyang naka-block — nangangailangan ng mainnet token deployment). Ang paglawig sa maraming network (Arbitrum, Avalanche at iba pang EVM chain) ay susunod pagkatapos mapalakas ang testnet.
 
-Buong listahan: [docs/ROADMAP.md](docs/ROADMAP.md) (sa Ingles).
+Buong listahan: [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Pagsisimula (Mga Developer)
 
 Mga kinakailangan: **Node.js 20+** at npm 10.x.
 
 ```bash
-# I-clone at i-install ang lahat ng workspace
+# Clone and install all workspaces
 git clone https://github.com/Lilit-Moonlit/Evolve.git
 cd Evolve
 npm install
 
-# Web app (Vite dev server sa http://localhost:3000)
+# Web app (Vite dev server on http://localhost:3000)
 cd apps/web
 npm run dev
 npm test                # vitest suite
 
-# Mga smart contract
+# Smart contracts
 cd packages/contracts
 npm run compile         # hardhat compile
 npm test                # hardhat test suite
-npm run deploy:local    # i-deploy ang lahat ng contract sa in-process na Hardhat network
+npm run deploy:local    # deploy all contracts to an in-process Hardhat network
 ```
 
 ## Pag-ambag
 
-Ang mga kontribusyon ay malugod na tinatanggap — code, mga bug report, mga mungkahing feature at mga proposal. Mangyaring basahin ang [CONTRIBUTING.md](CONTRIBUTING.md) at ang aming [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) bago ka magsimula.
+Ang mga kontribusyon ay malugod na tinatanggap — code, mga ulat ng bug, mga mungkahi sa feature at mga proposal. Mangyaring basahin ang [CONTRIBUTING.md](CONTRIBUTING.md) at ang aming [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) bago ka magsimula.
 
-## Pagsuporta sa Proyekto
-
-Kung nakikita mong kapaki-pakinabang ang EVOLVE, maaari mong suportahan ang pag-develop sa pamamagitan ng donasyon — mga detalye sa [DONATE.md](DONATE.md). Mas gusto mo ba ang web page? Gamitin ang multilingual na pahina ng donasyon (34 na wika): **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**.
-
-**Walang pagbebenta ng token at walang kailanman magiging ganoon.** Hindi maaaring "i-invest" ang mga EVOLVE token; ang mga donasyon ay regalong tumutulong sa open-source development at hindi nagbibigay sa donor ng karapatan sa token, equity, kita o anumang pinansiyal na claim.
-
-## Mga Repository (Mirror)
+## Mga Repository (Mirrors)
 
 | Mirror   | URL                                        |
 | -------- | ------------------------------------------ |
@@ -140,13 +155,14 @@ Kung nakikita mong kapaki-pakinabang ang EVOLVE, maaari mong suportahan ang pag-
 
 ## Dokumentasyon
 
-- [Ano at Bakit](docs/WHAT-AND-WHY.md) — problema, bisyon, mga pangunahing halaga (sa Ingles)
-- [Paano Ito Gumagana](docs/HOW-IT-WORKS.md) — mga user flow, hakbang-hakbang (sa Ingles)
-- [Arkitektura](docs/ARCHITECTURE.md) — monorepo, mga package, daloy ng data (sa Ingles)
-- [Tokenomics](docs/TOKENOMICS.md) — modelo ng token at distribusyon ng supply (sa Ingles)
-- [Roadmap](docs/ROADMAP.md) — mga milestone at kasalukuyang status (sa Ingles)
-- [FAQ](docs/FAQ.md) — mga madalas itanong (sa Ingles)
-- [Gabay sa Wallet](docs/WALLETS.md) — paano gumawa ng mga wallet at kumuha ng mga address ng donasyon (sa Ingles)
+- [Ano at Bakit](docs/WHAT-AND-WHY.md) — problema, bisyon, mga pangunahing halaga
+- [Paano Ito Gumagana](docs/HOW-IT-WORKS.md) — mga daloy ng user, hakbang-hakbang
+- [Arkitektura](docs/ARCHITECTURE.md) — monorepo, mga package, mga daloy ng datos
+- [Tokenomics](docs/TOKENOMICS.md) — modelo ng token at distribusyon ng supply
+- [RewardVault plan](docs/REWARD-VAULT-PLAN.md) — trustless emission (nakaplano)
+- [Roadmap](docs/ROADMAP.md) — mga milestone at kasalukuyang status
+- [FAQ](docs/FAQ.md) — mga madalas itanong
+- [Gabay sa wallet](docs/WALLETS.md) — kung paano gumawa ng mga wallet at kumuha ng mga address ng donasyon
 
 ## Lisensya
 

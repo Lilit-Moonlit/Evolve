@@ -2,77 +2,98 @@
 
 # EVOLVE
 
-**Iepazīšanās, apaugļošanās un veselības verifikācija — privāts pēc noklusējuma, verificēts tur, kur tas ir svarīgi.**
+**Iepazīšanās, ieņemšana un pārbaudīta veselība — privāti pēc noklusējuma, uzticami tur, kur tas ir svarīgi.**
 
-EVOLVE ir atvērtā koda, decentralizēta platforma verificējamiem intīmiem sakariem: iepazīšanās, apaugļošanās un anonīma STS/DNS saderība. Jūs pierakstāties ar savu kripto maku (Sign-In with Ethereum) — bez telefona numura, bez e-pasta, bez KYC — un varat atjaunot savu kontu, izmantojot ķēdē esošu DNS saistījumu. Veselības dati paliek jūsu īpašumā: laboratoriju rezultātus apstrādā automātiski, atsevišķu patogēnu statusus **nekad** nevienam nerāda, un saderības meklēšana balstās tikai uz anonīmiem saderības spriedumiem (Safe / Compatible / Caution / Risk). Sarunas notiek P2P režīmā caur libp2p un Nostr, ērtībai piedāvājot HTTP atbalsta variantu; lietotnē ir arī viegls publiskais "Safety Mode" fasādes režīms un atsevišķs Companion Mode STS testu rezultātu izvērtēšanai.
+EVOLVE ir atvērtā pirmkoda, decentralizēta platforma cilvēkiem, kuriem ir apnicis nodot savu tālruņa numuru, savu seju un savus visintīmākos veselības datus kāda cita datubāzē. Jūs piesakāties ar savu kripto maku — bez tālruņa, bez e-pasta, bez KYC — un varat atgūt savu kontu, izmantojot ķēdē esošu DNS saistību. Jūsu veselības dati paliek jūsu: testu rezultāti tiek apstrādāti automātiski, atsevišķu patogēnu statusi **nekad** netiek parādīti nevienam, un saskaņošana balstās tikai uz anonīmiem saderības spriedumiem (Droši / Saderīgi / Uzmanību / Risks). Tērzēšana darbojas vienādranga režīmā (peer-to-peer) caur libp2p un Nostr, ar HTTP rezerves variantu ērtībai.
 
-> **Statuss: agrīnas stadijas alfa.** EVOLVE tiek aktīvi izstrādāts un nav pabeigts produkts.
-> Viedie līgumi ir izvietoti **tikai Ethereum Sepolia testnetā**.
-> **Nav pamattīkla izvietojuma, nav DEX, nav likviditātes un nav publiskas tokenu pārdošanas** — un nekas no tā nav solīts.
-> Funkcionalitāte jebkurā laikā var mainīties vai salūzt. Nekas šeit nav finanšu padoms vai investīciju piedāvājums.
+> **Statuss — platforma darbojas jau tagad; galvenais tīkls (mainnet) un DEX ir nākamie.**
+> Iepazīšanās, ieņemšana, veselības pārbaude, laboratorijas plūsma, P2P tērzēšana, EVOLVE marķieris un pārvaldība jau darbojas. Priekšā vēl: **galvenā tīkla izvietošana un DEX likviditāte**, kā arī **plānota publiskā pārdošana** (sk. [EVOLVE marķieris](#the-evolve-token-testnet-only)).
+> Viedie līgumi ir izvietoti **tikai Ethereum Sepolia testa tīklā**. Nekas šeit nav finanšu padoms vai ieguldījumu piedāvājums.
 
-## Kas & kāpēc
+> **EVOLVE noder? Atbalstiet izstrādi — katrs ziedojums iet uz kodu, laboratoriju partnerībām, hostingu un tulkojumiem → [DONATE.md](DONATE.md).**
 
-Tradicionālas iepazīšanās platformas prasa nodot savu telefona numuru, e-pastu, fotogrāfijas un intīmos veselības datus centrālai datubāzei. EVOLVE iziet no pretēja priekšnoteikuma: privātums pēc noklusējuma, pašpārvalde (self-custody) un nav centrāla avārijas punkta. Pamata vērtības:
+## Nav no kā baidīties
+
+EVOLVE tika veidots ap jautājumiem, ko cilvēki patiešām uzdod, pirms uzticas šādai platformai.
+
+| Bažas                                    | Ko EVOLVE jau dara lietas labā                                                                                                                                                       |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| "Mani veselības dati noplūdīs."          | Atsevišķu patogēnu rezultāti **nekad** netiek parādīti nevienam — tikai anonīms spriedums: Droši / Saderīgi / Uzmanību / Risks.                                                      |
+| "Mani foto nonāks kaut kur citur."       | Fotoattēli pēc noklusējuma ir aizmigloti. Īpašnieks piešķir **15 sekunžu** vai **pastāvīgu** skatījumu — pēc pieprasījuma vai proaktīvi. Skatīšanās ir bez maksas.                   |
+| "Man būs jānodod ID vai tālrunis."       | Pieteikšanās ar maku (SIWE). Bez tālruņa, bez e-pasta, bez KYC. Atgūšana darbojas, izmantojot ķēdē esošu DNS saistību.                                                               |
+| "Viņš vai viņa melo par veselību."       | Rezultātus **pārbauda laboratorija** (QR + sejas sakritība), un pāra testi tiek veikti **tikšanās laikā** — svarīgi ir svaigi STS rezultāti, DNS nenoveco.                           |
+| "Vai kāds paņems manu naudu un pazudīs?" | Ieņemšana balstās uz reālu, riskam pakļautu likmi: vīrieša depozīts pārvietojas tikai tad, kad paternitāte ir **apstiprināta**; pretējā gadījumā tas vienkārši tiek atgriezts viņam. |
+| "Vai marķieris nav pump-and-dump?"       | Šodien nav aktīvas pārdošanas; kods ir atvērts (MIT); neapgrozībā esošo rezervi plānots ieslēgt **neizsūknējamā glabātavā**, no kuras nevar izņemt pat dibinātājs.                   |
+| "Vai platformu var slēgt vai aizliegt?"  | Pirmkārt vienādranga ziņojumapmaiņa, decentralizēta glabāšana (IPFS / Arweave), 18 EVM tīklu konfigurācijas un bez iekodēta domēna.                                                  |
+
+## Kas un kāpēc
+
+Tradicionālās iepazīšanās lietotnes lūdz jums apmainīt savu tālruņa numuru, e-pastu, fotoattēlus un intīmās veselības detaļas pret centrālu datubāzi — un pēc tam uzticēties šai datubāzei mūžīgi. EVOLVE sāk no pretējā pieņēmuma: **privātums pēc noklusējuma, pašglabāšana (self-custody) un bez viena kļūmes punkta**.
 
 - **Privātums pēc noklusējuma** — veselības dati nekad netiek atklāti; tikai anonīmi spriedumi.
-- **Noturība pret aizliegumiem** — P2P prioritāra ziņapmaiņa, decentralizēta glabāšana (IPFS / Arweave), vairāku tīklu dizains, nekādu stingri ierakstītu domēnu.
-- **Pašpārvaldīta identitāte** — jūsu maks ir jūsu pieteikšanās; DNS balstīta atjaunošana e-pasta/telefona vietā.
-- **Nav KYC šķēršļa** — platformas izmantošanai nav nepieciešama valsts ID, telefons vai e-pasts.
+- **Noturība pret aizliegumiem** — P2P ziņojumapmaiņa vispirms, decentralizēta glabāšana, vairāku tīklu dizains, bez iekodētiem domēniem.
+- **Pašglabāta identitāte** — jūsu maks ir jūsu pieteikšanās; atgūšana, izmantojot DNS, nevis e-pastu vai tālruni.
+- **Bez KYC barjeras** — platformas lietošanai nav nepieciešams valsts ID, tālrunis vai e-pasts.
 
-Lasiet pilno pamatojumu [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md) (angliski).
+Pilns pamatojums: [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md).
 
-## Galvenās funkcijas
+## Veselība, kurai patiešām var uzticēties
 
-### Identitāte un privātums
+- Augšupielādējiet STS testu kā neapstrādātu tekstu vai PDF (teksta slāņa ekstrakcija, ar OCR rezerves variantu skenējumiem).
+- Parsētājs pazīst 8 patogēnus: HIV-1/2, sifiliss, hlamīdijas, gonoreja, HSV-1, HSV-2, B un C hepatīts — angļu, ukraiņu un krievu ziņojumu formātos.
+- **Atsevišķa patogēna statuss nekad netiek parādīts citiem lietotājiem.** Profili vienmēr parāda tikai anonīmo spriedumu: **Droši / Saderīgi / Uzmanību / Risks**.
+- Ķēdē esošie DNS ieraksti (`DNAVerification.sol`) nodrošina atgūšanu un pārbaudi.
 
-- **Pierakstīšanās ar maku caur SIWE** (MetaMask un citas EVM maki) — cenzūras izturīgs ārkārtas ceļš.
-- **Konta atjaunošana ar DNS** — no jūsu DNS testa rezultāta tiek aprēķināts hašs (SHA-256, ķēdē iesniegts kā `bytes32`), un tas var atjaunot piekļuvi bez telefona vai e-pasta.
-- **Account Abstraction (ERC-4337)** — viedie konti un paymaster bezmaksas (gasless) sākšanai; SIWE vienmēr paliek pieejams.
+### Partnerlaboratorijas — pierādījums, nevis solījumi
 
-### Anonīma veselības saderība
+Ienāciet partnerlaboratorijā un parādiet savu QR kodu. Laboratorija to noskenē, apstiprina jūsu identitāti ar **sejas sakritību** (lai neviens cits nevarētu saņemt jūsu rezultātu) un pievieno STS ziņojumu — PDF, skenējumu vai tekstu, pat ar vāju OCR. Rezultātu paraksta īsta laboratorija, nevis jūs, tāpēc citi redz **pārbaudītu faktu**, nevis jūsu vārdus. Un katra apstiprināta pārbaude maksā **1 EVOLVE pacientam un 1 EVOLVE laboratorijai** — abām pusēm ir iemesls būt godīgām. Atsevišķie patogēni joprojām netiek parādīti nevienam.
 
-- Augšupielādējiet STS testu rezultātus kā tekstu vai PDF (tekstslāņa izvilkšana, skenētām lapām OCR atbalsta variants).
-- Parsētājs atpazīst 8 patogēnus: HIV-1/2, sifiliss, hlamīdijas, gonoreja, HSV-1, HSV-2, B hepatīts, C hepatīts (angļu, ukraiņu un krievu atskaišu formāti).
-- **Atsevišķu patogēnu statuss citiem lietotājiem nekad netiek rādīts.** Profili rāda tikai anonīmu spriedumu: **Safe / Compatible / Caution / Risk**.
-- Ķēdē esošie DNS verifikācijas ieraksti (`DNAVerification.sol`) nodrošina atjaunošanas un verifikācijas plūsmas.
+## Kāda atrašana
 
-### Profili, meklēšana un saziņa
+- Meklēšanas filtri: "Ko jūs meklējat" (iepazīšanās / ieņemšana / poliandriska ieņemšana / STS testēšana), "Kuru jūs meklējat" (vīrieši, sievietes, pāri), kaskādes valsts → pilsēta izvēles, "var ierasties jūsu valstī" ar valstu sarakstiem, ādas krāsa, testēšanas izvēle, tikai STS saderīgi.
+- Ievadapmācības vednis: vecums (slēpjams), valodas, bio, fotoattēls.
+- **P2P tērzēšana** caur libp2p (gossipsub) + Nostr, ar HTTP API rezerves variantu.
 
-- Meklēšanas filtri: "Ko jūs meklējat" (iepazīšanās / apaugļošanās / poliandriskā apaugļošanās / STS testēšana), "Kādu jūs meklējat" (vīrieši, sievietes, pāri), kaskādes valsts → pilsēta izvēles, "var ierasties jūsu valstī" ar valstu sarakstiem, ādas krāsa, testēšanas preference, tikai STS saderīgie.
-- Ievadvednis: vecums (noslēpjams), valodas, apraksts, foto.
-- **Foto privātums**: foto pēc noklusējuma ir izpludināti; īpašnieks piešķir 15 sekunžu vai pastāvīgas skatīšanās atļaujas — pats no sevis vai pēc pieprasījuma. Skatīšanās ir bezmaksas.
-- **P2P sarunas** caur libp2p (gossipsub) + Nostr, ar HTTP API atbalsta variantu.
+## Ieņemšana
 
-### Apaugļošanās režīmi
+Divi veidi, kā plānot bērnu, un abi balstās uz vienu ideju: patiesu nodomu parāda ar reālu likmi EVOLVE — nekad ar solījumiem. Vīrieša saistības dzīvo viņa EvolveFund depozītā (no 15 EVOLVE, ieslēgts vismaz uz 30 dienām), un sieviete var noteikt savu minimālo depozītu vīriešiem, kuri nonāk pie viņas.
 
-- **2. režīms — Pregnancy Bond**: sieviete izveido saistījumu, vīrietis ieliek EVOLVE likmē (≥ 100 pašreizējā testneta versijā), abi apstiprina; pēc apstiprinātas grūtniecības un tēvības likme pāriet sievietei.
-- **3. režīms — Cryptic Choice**: sieviete atver 48 stundu sesiju, vīrieši pievienojas liekot likmes; viņa izvēlas tēvu — viņa likme tiek atgriezta, pārējie sadala: 90 % viņai / 10 % izvēlētajam tēvam.
+**Ieņemšana.** Sieviete vada: viņa uzaicina konkrētu vīrieti un nosauc viņu saistībā. Viņam nepieciešams aktīvs EvolveFund depozīts; kad abi apstiprina, tas tiek ieslēgts un sākas atskaitīšana. Grūtniecība tiek paziņota no 14 līdz 30 dienām pēc apstiprināšanas, un pāra STS un DNS testi tiek veikti pašā tikšanās reizē — svarīgi ir svaigi STS rezultāti, DNS nenoveco. Kad paternitāte ir apstiprināta, vīrieša depozīts pāriet sievietei; ja tā nav apstiprināta, depozīts vienkārši tiek atgriezts viņam. Nekas nemaina īpašnieku, kamēr fakti nav noskaidroti.
 
-### Laboratorijas un verifikācija
+**Poliandriska ieņemšana.** Izvēle pieder viņai un paliek privāta. Viņa atver sesiju, kas ilgst 48 stundas — bez sava depozīta (viņa var pievienot vienu tikai reputācijai, ja vēlas). Vīrieši ar aktīvu depozītu var pievienoties — līdz 50 — un apstiprināt, kas ieslēdz viņu likmi. Četrpadsmit dienas pēc sesijas beigām tiek izvēlēts tēvs. Viņš saņem savu depozītu atpakaļ plus atlīdzību no fonda: divkāršu depozītu un 1 EVOLVE par katru citu dalībnieku. Vīrieši, kuri netiek izvēlēti, zaudē savu likmi — 90% sievietei, 10% izvēlētajam tēvam. Viņa neko neriskē un var tikai iegūt; vīrieši liek savu likmi aiz tiesībām tikt izvēlētiem.
 
-- **Laboratoriju partneru plūsma**: laboratorijas reģistrējas kā partneri, verificē pacientus ar QR kodu un sejas atbilstību un pievieno STS atskaites (PDF/teksts ar OCR izvilkšanu).
-- **Companion Mode**: atsevišķa plūsma STS testu rezultātu izvērtēšanai bez pievienošanās iepazīšanās platformai.
-- **Safety Mode** (`VITE_PRODUCT_MODE=safety`): ierobežota publiska fasāde (STS statuss, publiskas profila saites, saderības pārbaudes), kas turpina darboties pat tad, ja iepazīšanās/apaugļošanās funkcijas tiek ierobežotas kādā jurisdikcijā vai lietotņu veikalā.
+## EVOLVE marķieris (tikai testa tīkls)
 
-### EVOLVE tokens (tikai testnetā)
+- ERC-20, maksimālā emisija **8,000,000,000 EVOLVE**. Administratora darbības ir ierobežotas ar 48 stundu `TimelockController`.
+- **Plānotais emisijas sadalījums** — veidots tā, lai gandrīz visa emisija strādātu lietotājiem, nevis iekšējiem cilvēkiem:
 
-- ERC-20, maksimālais daudzums 8 000 000 000 EVOLVE, administratora darbības aizsargā 48 stundu TimelockController.
-- **Emocijzīmju dāvanu ekonomika**: dāvana maksā 1 EVOLVE, kas tiek sadalīts proporcionāli esošajiem dāvanu īpašniekiem — pastāvīgs ienākumu modelis turētājiem; dāvanas ir pārceļamas.
-- **EvolveFund**: vīriešu staking (vismaz 15 EVOLVE, 30 dienu noslēgšana), kas tiek ieskaitīts pārvaldes svarā; sievietes izmanto sava maka atlikumu.
-- **Verifikācijas atalgas**: 1 EVOLVE verificētam lietotājam un 1 EVOLVE apstiprinošai laboratorijai par STS/DNS verifikāciju (plus ierobežota apjoma testkrāns).
-- Pārvaldes balsojuma svars apvieno rekursīvu reputāciju (8 balsis, dziļums 3), bērnu/tēvības daļu un stakingā liktos vai turētos EVOLVE.
-- **LayerZero OFT** integrācija nākamajiem vairāku ķēžu EVOLVE pārvedumiem (atkarības sagatavotas; aiz Sepolijas vēl nekas nav izvietots).
+| Mērķis                                                    |        EVOLVE |
+| --------------------------------------------------------- | ------------: |
+| Dibinātāji un komanda (alga / atlīdzība)                  |    25,000,000 |
+| DEX rezerve (nākotnei)                                    |     4,000,000 |
+| Publiskā pārdošana (plānota)                              |     5,000,000 |
+| Atlīdzības rezerve — laboratorijas, pacienti, mātes, tēvi | 7,966,000,000 |
 
-### Platforma
+- **Plānotā publiskā pārdošana** — 5,000,000 EVOLVE, ko pārdod lietotne par **$0.8 katru**, maksājot jebkurā lietotnes atbalstītā marķierī; ieņēmumi finansē izstrādi. _(Plānota — vēl nav aktīva.)_
+- **Bezuzticības emisija (plānota)** — ~7,966,000,000 atlīdzības rezerve tiks ieslēgta neizsūknējamā `RewardVault`: tā tiek atbrīvota tikai pakāpeniski, izmantojot laboratoriju, pacientu, māšu un tēvu atlīdzības, un noteikumu maiņa prasa pārvaldības balsojumu. Pat dibinātājs to nevar izņemt. Dizains: [docs/REWARD-VAULT-PLAN.md](docs/REWARD-VAULT-PLAN.md).
+- **Emocijzīmju dāvanu ekonomika** — dāvana maksā 1 EVOLVE, kas proporcionāli tiek sadalīts starp esošajiem dāvanu īpašniekiem; mūžīgs ieņēmumu modelis, un dāvanas ir nododamas.
+- **EvolveFund** — vīriešu likme (min 15 EVOLVE, 30 dienu ieslēgums), kas tiek ieskaitīta pārvaldības svarā; sievietes izmanto sava maka atlikumu.
+- **Pārbaudes atlīdzības** — 1 EVOLVE pārbaudītajam lietotājam un 1 EVOLVE apstiprinošajai laboratorijai par katru STS/DNS pārbaudi (plus ierobežota ātruma krāns).
+- **Pārvaldība** — balss svars apvieno rekursīvo reputāciju (8 balsis, dziļums 3), bērnu/tēva daļu un likto vai turēto EVOLVE.
+- **LayerZero OFT** integrācija nākotnes multichain EVOLVE pārskaitījumiem (atkarības ir vietā; aiz Sepolia vēl nekas nav izvietots).
 
-- Tīmekļa lietotne (instalējama kā PWA) un Expo/React Native mobilā lietotne.
-- Saskarne iztulkota **34 valodās**.
-- Gatavība vairākiem tīkliem: 18 EVM tīklu konfigurāciju (Arbitrum un Avalanche ir plānotie primārie L2 — **vēl nav izvietoti**).
+## Atbalstiet projektu
+
+EVOLVE ir neatkarīgs un atvērtā pirmkoda. Ja tas jums noder, varat atbalstīt izstrādi ar ziedojumu — katrs ieguldījums iet uz kodu, laboratoriju partnerībām, hostingu un tulkojumiem.
+
+- **Ziedojumu informācija (EVM, Monero un citi):** [DONATE.md](DONATE.md)
+- **Daudzvalodu ziedojumu lapa (34 valodas):** **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**
+
+Publiskā marķieru pārdošana ir ceļa kartē, bet **šodien** tā nav aktīva. Ziedojumi ir dāvanas, kas atbalsta atvērtā pirmkoda izstrādi, un nedod tiesības uz marķieriem, kapitāldaļām, ienākumiem vai peļņu. Lūdzu, ziedojiet tikai to, ko varat atļauties zaudēt.
 
 ## Arhitektūra un tehnoloģiju steks
 
-Monorepo, ko pārvalda ar npm workspaces + Turborepo:
+Monorepo, kas pārvaldīts ar npm workspaces + Turborepo:
 
 ```
 apps/
@@ -88,17 +109,17 @@ packages/
 docs/           # Architecture, tokenomics, roadmap, FAQ
 ```
 
-Galvenie viedie līgumi: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (emocijzīmju dāvanas + atalgas), `Governance.sol`, `BondManager.sol` (2. un 3. režīms), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster`, kā arī OpenZeppelin `TimelockController`.
+Galvenie viedie līgumi: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (emocijzīmju dāvanas + atlīdzības), `Governance.sol`, `BondManager.sol` (ieņemšana un poliandriska ieņemšana), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster`, un OpenZeppelin `TimelockController`.
 
-Detaļas: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md) (angliski).
+Detaļas: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md)
 
 ## Ceļa karte
 
-Notiek: tīmekļa lietotnes ražošanas gatavība. Plānots: ķēdē esošs laboratoriju reģistrs un testu sertificēšana, īsts pasta pakalpojumu sniedzēja adapters laboratorijas atskaišu saņemšanai, ķēdē verificēti apstiprinājumi profilos, tokenu vestingo atjauninājums dibinātāju/izstrādātāju alokācijām, DEX likviditātes nodrošināšana (pašlaik bloķēta — nepieciešami tokenu izvietojumi pamattīklā). Vairāku tīklu paplašināšanās (Arbitrum, Avalanche un citas EVM ķēdes) sekos pēc testneta nostiprināšanas.
+Darbā: tīmekļa lietotnes gatavība ražošanai. Plānots: ķēdē esošs laboratoriju reģistrs un testu sertifikācija, īsts pasta pakalpojumu adapteris laboratoriju ziņojumu saņemšanai, ķēdē pārbaudītas atestācijas profilos, **bezuzticības RewardVault** ar pārvaldības kontrolētu emisiju ([dizains](docs/REWARD-VAULT-PLAN.md)), **publiskā marķieru pārdošana**, marķieru vestinga atjauninājums dibinātāja sadalījumam un DEX likviditātes nodrošināšana (šobrīd bloķēta — nepieciešamas galvenā tīkla marķieru izvietošanas). Vairāku tīklu paplašināšanās (Arbitrum, Avalanche un citi EVM tīkli) seko pēc testa tīkla nostiprināšanas.
 
-Pilns saraksts: [docs/ROADMAP.md](docs/ROADMAP.md) (angliski).
+Pilns saraksts: [docs/ROADMAP.md](docs/ROADMAP.md).
 
-## Sākšana (izstrādātājiem)
+## Darba sākšana (izstrādātājiem)
 
 Prasības: **Node.js 20+** un npm 10.x.
 
@@ -120,17 +141,11 @@ npm test                # hardhat test suite
 npm run deploy:local    # deploy all contracts to an in-process Hardhat network
 ```
 
-## Piedalīšanās
+## Līdzdalība
 
-Ieguldījumi ir laipni gaidīti — kods, kļūdu ziņojumi, funkcionalitātes priekšlikumi un priekšlikumi. Pirms sākšanas izlasiet [CONTRIBUTING.md](CONTRIBUTING.md) un mūsu [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+Līdzdalība ir apsveicama — kods, kļūdu ziņojumi, funkciju ieteikumi un priekšlikumi. Lūdzu, izlasiet [CONTRIBUTING.md](CONTRIBUTING.md) un mūsu [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), pirms sākat.
 
-## Atbalstiet projektu
-
-Ja EVOLVE šķiet noderīgs, varat atbalstīt izstrādi ar ziedojumu — detaļas [DONATE.md](DONATE.md). Vēlaties tīmekļa lapu? Izmantojiet daudzvalodu ziedojumu lapu (34 valodās): **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**.
-
-**Tokenu pārdošanas nav un nebūs.** EVOLVE tokenos "investēt" nevar; ziedojumi ir dāvanas atvērtā koda izstrādes atbalstam un nesniedz ziedotājam tiesības uz tokeniem, kapitālu, atdevi vai jebkādām finansiālām prasībām.
-
-## Repozitoriji (spoguļi)
+## Krātuves (spoguļi)
 
 | Spogulis | URL                                        |
 | -------- | ------------------------------------------ |
@@ -140,13 +155,14 @@ Ja EVOLVE šķiet noderīgs, varat atbalstīt izstrādi ar ziedojumu — detaļa
 
 ## Dokumentācija
 
-- [Kas & kāpēc](docs/WHAT-AND-WHY.md) — problēma, vīzija, pamata vērtības (angliski)
-- [Kā tas darbojas](docs/HOW-IT-WORKS.md) — lietotāju plūsmas soli pa solim (angliski)
-- [Arhitektūra](docs/ARCHITECTURE.md) — monorepo, pakotnes, datu plūsmas (angliski)
-- [Tokenomika](docs/TOKENOMICS.md) — tokena modelis un piedāvājuma sadale (angliski)
-- [Ceļa karte](docs/ROADMAP.md) — atskaites punkti un pašreizējais statuss (angliski)
-- [BUJ](docs/FAQ.md) — bieži uzdotie jautājumi (angliski)
-- [Maku rokasgrāmata](docs/WALLETS.md) — kā izveidot makus un saņemt ziedojumu adreses (angliski)
+- [Kas un kāpēc](docs/WHAT-AND-WHY.md) — problēma, vīzija, pamatvērtības
+- [Kā tas darbojas](docs/HOW-IT-WORKS.md) — lietotāja plūsmas, soli pa solim
+- [Arhitektūra](docs/ARCHITECTURE.md) — monorepo, pakotnes, datu plūsmas
+- [Tokenomika](docs/TOKENOMICS.md) — marķiera modelis un emisijas sadalījums
+- [RewardVault plāns](docs/REWARD-VAULT-PLAN.md) — bezuzticības emisija (plānota)
+- [Ceļa karte](docs/ROADMAP.md) — atskaites punkti un pašreizējais statuss
+- [BUJ](docs/FAQ.md) — bieži uzdotie jautājumi
+- [Maka ceļvedis](docs/WALLETS.md) — kā izveidot maku un iegūt ziedojumu adreses
 
 ## Licence
 
