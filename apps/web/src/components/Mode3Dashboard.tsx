@@ -212,7 +212,7 @@ export default function Mode3Dashboard() {
             /* No session exists for this user — woman can create */
             <button
               onClick={handleCreateSession}
-              disabled={hasPendingTx || !hasEnoughFund}
+              disabled={hasPendingTx}
               className="rounded-2xl bg-green-500 hover:bg-green-400 px-6 py-3 text-white font-semibold transition disabled:cursor-not-allowed disabled:bg-slate-600"
             >
               {hasPendingTx ? t("common.loading") : t("dashboard.mode3.create.button")}
@@ -253,8 +253,8 @@ export default function Mode3Dashboard() {
           </p>
         </div>
 
-        {/* Fund check notice */}
-        {address && !hasEnoughFund && !session?.resolved && (
+        {/* Fund check notice — only for men who would join/confirm (women don't need a deposit) */}
+        {address && sessionId != null && !isWoman && !hasEnoughFund && !session?.resolved && (
           <div className="mt-4 rounded-3xl border border-amber-500/30 p-4 bg-amber-500/10 text-amber-200 text-sm">
             {t("dashboard.mode3.fundNotice")}
           </div>

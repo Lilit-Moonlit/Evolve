@@ -169,8 +169,8 @@ describe("BondManager", function () {
       await cfc.connect(joiner).approve(evolveFund.target, pcAmount);
       await evolveFund.connect(joiner).deposit(pcAmount, MIN_DURATION, POST_COP);
 
-      // Also give father (man) a Conception stake so _requireActiveFund passes for the woman's createSession
-      // (woman already has Conception from setupVerifiedUser)
+      // Men keep their Conception stakes from setupVerifiedUser — needed for
+      // joinSession's _requireActiveFund check (women do NOT need a fund to createSession)
 
       await bondManager.connect(woman).createSession();
       await bondManager.connect(man).joinSession(0);
@@ -232,6 +232,34 @@ describe("BondManager", function () {
       //  - 501 reward from pool (2*250 + 1)
       const expectedDelta = hre.ethers.parseEther("776");
       expect(fatherBalAfter - fatherBalBefore).to.equal(expectedDelta);
+    });
+
+    it("Should allow woman with NO EvolveFund deposit to create session", async function () {
+      const signers = await hre.ethers.getSigners();
+      const unfundedWoman = signers[5]; // beforeEach funds only woman/man/father/joiner
+
+      // Seed session id 0 first so the new session gets a non-zero id:
+      // activeSession() returning non-zero proves it was set (0 = "no session" default)
+      await bondManager.connect(woman).createSession();
+
+      const tx = await bondManager.connect(unfundedWoman).createSession();
+      await expect(tx).to.emit(bondManager, "SessionCreated");
+
+      expect(await bondManager.activeSession(unfundedWoman.address)).to.equal(1n);
+      const session = await bondManager.getSession(1);
+      expect(session.woman).to.equal(unfundedWoman.address);
+      expect(session.active).to.equal(true);
+      expect(session.resolved).to.equal(false);
+    });
+
+    it("Should revert joinSession for man without active fund", async function () {
+      const signers = await hre.ethers.getSigners();
+      const unfundedMan = signers[6]; // beforeEach funds only woman/man/father/joiner
+
+      await bondManager.connect(woman).createSession();
+      await expect(bondManager.connect(unfundedMan).joinSession(0))
+        .to.be.revertedWithCustomError(bondManager, "NoActiveFund")
+        .withArgs(unfundedMan.address);
     });
   });
 });

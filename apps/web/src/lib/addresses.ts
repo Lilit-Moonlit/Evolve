@@ -8,6 +8,9 @@
  * Mode 3 rewards upgrade: 2026-09-05 via redeploy-mode3-rewards.mjs — Evolve2Earn + BondManager
  *   redeployed (father receives 2x deposit + 1 EVOLVE per participant from the reward pool);
  *   old Evolve2Earn (0x0bbEee8…) left as legacy p2p escrow vault (1M EVOLVE).
+ * BondManager redeploy: 2026-10-03 via redeploy-bondmanager.mjs — a woman no longer needs an
+ *   EvolveFund deposit to create a session (`_requireActiveFund` removed from `createSession`);
+ *   men still need an active fund to join. Wired to EvolveFund + Evolve2Earn.
  * Explorer: https://sepolia.etherscan.io
  */
 
@@ -19,7 +22,7 @@ export const CONTRACTS = {
   VOTING: "0x0Cb18aa859f4A625aD3e8dE5958E577dfD9FEeB9", // Voting is part of TrustScore
   EVOLVE_2_EARN: "0xc6268549F24A2658C8c6222242aBd56534b1c3e6",
   GOVERNANCE: "0x8f95C852114e0C01B3D722EA9653F5b3e4460000",
-  BOND_MANAGER: "0x650FC8033286112Fc0369Da9A1337D856FF7795f",
+  BOND_MANAGER: "0x3b0542d13e8d196A53e01b3C1EBA81dfB4049177",
   EVOLVE_FUND: "0x016F6D873ed4B366098f9BE5C042ef583DC66DeE",
   VERIFICATION_REGISTRY: "0x42E919C0f3218FE89AFB34B9f04d71d2cB02A189",
   DNA_VERIFICATION: "0x2d6d770F7e5a8C10dC2B103B4f3Cb0e046Db649f",

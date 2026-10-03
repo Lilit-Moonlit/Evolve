@@ -35,6 +35,7 @@ These are features and improvements we intend to implement in future phases:
 - **On-chain Verified Result Attestations**: Displaying certified health attestations directly on user profiles from on-chain records.
 - **Token Vesting Wallet Update**: Updating `VestingWalletCliff.sol` to reflect the new Founder and Developer token allocations.
 - **Liquidity Locker Funding**: Funding the `LiquidityLocker` from the Community treasury sub-bucket to provide DEX liquidity.
+- **Trustless RewardVault & Governance-Gated Emission** (_planned — do not rush_): Lock the un-circulated reserve in a non-drainable `RewardVault` (no admin withdraw; releases only via rate-capped reward flows) with `Governance` as the sole timelock proposer, so no admin — including the founder — can dump the reserve. Full design and migration plan: [`docs/REWARD-VAULT-PLAN.md`](REWARD-VAULT-PLAN.md). Prerequisite: bug-free contracts + full end-to-end app testing first.
 
 ## Blocked Milestones
 

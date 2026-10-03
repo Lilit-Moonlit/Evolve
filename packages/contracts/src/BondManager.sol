@@ -337,8 +337,6 @@ contract BondManager is Ownable, ReentrancyGuard {
     // ──────────────────────────────────────────────
 
     function createSession() external returns (uint256) {
-        _requireActiveFund(msg.sender);
-
         uint256 existing = activeSession[msg.sender];
         if (existing != 0 && !_sessions[existing].resolved) revert AlreadyInBond(msg.sender);
 
