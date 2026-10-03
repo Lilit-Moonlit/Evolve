@@ -172,17 +172,25 @@ There is a narrowly-scoped exception for verification rewards: 1 EVOLVE is minte
 
 There are no daily, match, or general activity rewards.
 
+> **PLANNED:** in the trustless model, verification rewards are released from the `RewardVault` reserve instead of minted, and a **public sale (5,000,000 EVOLVE at $0.8, sold by the app)** is planned but not live. See `docs/REWARD-VAULT-PLAN.md`.
+
 ### Supply Distribution
 
-| Bucket             | %         | EVOLVE        | wei                    |
-| :----------------- | :-------- | :------------ | :--------------------- |
-| Founder            | 1.0000%   | 80,000,000    | 80_000_000e18 = 8.0e25 |
-| Developers         | 1.0000%   | 8.0e25        |
-| Community treasury | 90.0000%  | 7,200,000,000 | 7.2e27                 |
-| Reserve            | 8.0000%   | 640,000,000   | 6.4e26                 |
-| **Total**          | 100.0000% | 8,000,000,000 | 8.0e27                 |
+| Bucket                                                      | %          | EVOLVE        |
+| :---------------------------------------------------------- | :--------- | :------------ |
+| Founders and team (salary / reward)                         | 0.3125%    | 25,000,000    |
+| DEX reserve (future)                                        | 0.0500%    | 4,000,000     |
+| Public sale (planned)                                       | 0.0625%    | 5,000,000     |
+| Reward reserve — labs, patients, mothers, fathers (gradual) | 99.5750%   | 7,966,000,000 |
+| **Total**                                                   | 100.0000%  | 8,000,000,000 |
 
-DEX liquidity is a **named sub-bucket** of the Community treasury: 1,000,000 EVOLVE per DEX. Assuming 5 DEXes, this totals 5,000,000 EVOLVE (0.0625% of total supply). The Community treasury remainder after DEX liquidity is 7,195,000,000 EVOLVE.
+Only **34,000,000 EVOLVE (0.425%)** is explicitly allocated; the remaining **7,966,000,000 EVOLVE** is the reward reserve, entering circulation only gradually through lab, patient, mother and father rewards.
+
+**Public sale — PLANNED (not live):** 5,000,000 EVOLVE at **$0.8** each, sold by the app, payable in any token the app supports; proceeds fund development.
+
+**Trustless emission — PLANNED (not implemented):** the ~7,966,000,000 reward reserve is to be locked in a non-drainable `RewardVault` (released only via rewards; rule changes require a governance vote; not even the founder can withdraw). Design: `docs/REWARD-VAULT-PLAN.md`. Today the reserve sits in `Evolve2Earn`, which still exposes an owner drain.
+
+> The earlier 1% founder / 1% developers / 90% treasury / 8% reserve model and all "no token sale ever" statements are SUPERSEDED.
 
 ### Spending EVOLVE
 

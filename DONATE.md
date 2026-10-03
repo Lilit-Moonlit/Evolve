@@ -6,7 +6,7 @@
 
 EVOLVE is an open-source, community-driven project. If you find it valuable, you can support its development with a donation. Contributions go toward development, security reviews, and infrastructure.
 
-> **There is no token sale.** EVOLVE tokens are **not for sale**. Donations are **unconditional gifts** and are **non-refundable**. You receive **no tokens, no equity, and no financial return** in exchange. See [`DISCLAIMER.md`](DISCLAIMER.md).
+> **A public token sale is planned but is NOT live today.** Donations are **unconditional gifts** and are **non-refundable**. You receive **no tokens, no equity, and no financial return** in exchange. See [`DISCLAIMER.md`](DISCLAIMER.md).
 
 ## Leave a note (optional)
 
@@ -48,7 +48,7 @@ The same checksummed (EIP-55) EVM address is used across all EVM chains listed a
 
 EVOLVE — це відкритий проєкт, який розвивається спільнотою. Якщо він вам корисний, ви можете підтримати розробку донатом. Кошти йдуть на розробку, аудит безпеки та інфраструктуру.
 
-> **Продажу токенів немає.** Токени EVOLVE **не продаються**. Донати — це **безумовні подарунки**, вони **не повертаються**. Взамін ви **не отримуєте токенів, частки чи фінансової вигоди**. Див. [`DISCLAIMER.md`](DISCLAIMER.md).
+> **Публічний продаж токенів заплановано, але сьогодні він НЕ запущений.** Донати — це **безумовні подарунки**, вони **не повертаються**. Взамін ви **не отримуєте токенів, частки чи фінансової вигоди**. Див. [`DISCLAIMER.md`](DISCLAIMER.md).
 
 **Залишити нотатку (необов'язково):** хочете, щоб ми могли подякувати вам пізніше? Залиште ім'я, повідомлення та контакт (Telegram / email / X) через форму: **https://formspree.io/f/mdekrwqk**.
 

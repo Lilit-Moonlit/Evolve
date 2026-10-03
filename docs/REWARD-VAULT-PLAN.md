@@ -28,13 +28,13 @@ dumped by any admin — including the founder. Today that guarantee does **not**
 
 | Purpose | EVOLVE | Share |
 | --- | ---: | ---: |
-| Founder (salary / reward) | 8,000,000 | 0.1% |
+| Founders and team (salary / reward) | 25,000,000 | 0.3125% |
 | DEX reserve (future) | 4,000,000 | 0.05% |
 | Public sale (sold by the app, **$0.8 / EVOLVE**, paid in any supported token; proceeds fund development) | 5,000,000 | 0.0625% |
-| **Explicitly allocated** | **17,000,000** | **0.2125%** |
-| Reward reserve — labs, lab patients, mothers, fathers (emitted gradually) | 7,983,000,000 | 99.7875% |
+| **Explicitly allocated** | **34,000,000** | **0.425%** |
+| Reward reserve — labs, lab patients, mothers, fathers (emitted gradually) | 7,966,000,000 | 99.575% |
 
-4. **No developer allocation** (0). Founder = 8M (0.1%).
+4. **Founders and team = 25M (0.3125%); no separate developer allocation.**
 
 ## 3. Target architecture
 
@@ -73,7 +73,7 @@ dumped by any admin — including the founder. Today that guarantee does **not**
 1. Deploy `RewardVault` (admin = Timelock).
 2. Deploy `Evolve2EarnV2` (no `transferToNewPool` / `migrateFromOldPool`; gifts + marketplace only).
 3. Rewrite + deploy `Governance`.
-4. Split 17M: 8M founder vesting · 4M `LiquidityLocker` · 5M `Sale` contract; move **7,983,000,000 → `RewardVault`**.
+4. Split 34M: 25M founders/team vesting · 4M `LiquidityLocker` · 5M `Sale` contract; move **7,966,000,000 → `RewardVault`**.
 5. Neutralize the old `Evolve2Earn` (balance ≈ 0; drain functions gone via V2 redeploy — a deployed
    contract's functions cannot be removed, so it must be replaced).
 6. Roles: deployer renounces; all ownerships → Timelock; Timelock `admin = 0`, proposer = Governance.
@@ -86,7 +86,7 @@ dumped by any admin — including the founder. Today that guarantee does **not**
 - `Governance`: a passed vote schedules a timelock op; a failed vote cannot; `queue`/`execute`
   callable without an owner; `for > against` + quorum enforced.
 - `EVOLVEAdmin`: after migration the deployer holds no roles.
-- Migration: buckets equal 8M / 4M / 5M / 7,983,000,000; old `Evolve2Earn` balance ≈ 0.
+- Migration: buckets equal 25M / 4M / 5M / 7,966,000,000; old `Evolve2Earn` balance ≈ 0.
 
 ## 6. Preconditions (do not skip)
 

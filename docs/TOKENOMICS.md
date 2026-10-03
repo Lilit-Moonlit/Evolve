@@ -80,22 +80,28 @@ EVOLVE holders govern via `Governance.sol`:
 
 ## Supply Distribution
 
-| Bucket             | %         | EVOLVE        | wei                    |
-| :----------------- | :-------- | :------------ | :--------------------- |
-| Founder            | 1.0000%   | 80,000,000    | 80_000_000e18 = 8.0e25 |
-| Developers         | 1.0000%   | 80,000,000    | 8.0e25                 |
-| Community treasury | 90.0000%  | 7,200,000,000 | 7.2e27                 |
-| Reserve            | 8.0000%   | 640,000,000   | 6.4e26                 |
-| **Total**          | 100.0000% | 8,000,000,000 | 8.0e27                 |
+| Bucket                                                       | %          | EVOLVE        |
+| :----------------------------------------------------------- | :--------- | :------------ |
+| Founders and team (salary / reward)                          | 0.3125%    | 25,000,000    |
+| DEX reserve (future)                                         | 0.0500%    | 4,000,000     |
+| Public sale (planned)                                        | 0.0625%    | 5,000,000     |
+| Reward reserve — labs, patients, mothers, fathers (gradual)  | 99.5750%   | 7,966,000,000 |
+| **Total**                                                    | 100.0000%  | 8,000,000,000 |
 
-DEX liquidity is a **named sub-bucket** of the Community treasury: 1,000,000 EVOLVE per DEX. Assuming 5 DEXes, this totals 5,000,000 EVOLVE (0.0625% of total supply). The Community treasury remainder after DEX liquidity is 7,195,000,000 EVOLVE.
+Only **34,000,000 EVOLVE (0.425%)** is explicitly allocated; the remaining **7,966,000,000 EVOLVE** is the reward reserve, meant to enter circulation only gradually through lab, patient, mother and father rewards.
 
-_Historical Sepolia testnet deployment (2026-09-05) minted to the legacy reward pool and escrow vault; superseded by the 8B model above. No daily/match/verification rewards — emoji gift economy only._
+### Public sale — PLANNED (not live)
+
+A public sale of **5,000,000 EVOLVE at $0.8 each** is planned: sold by the app, payable in any token the app supports, with proceeds funding development. It is **not live today**.
+
+### Trustless emission — PLANNED (not implemented)
+
+The ~7,966,000,000 reward reserve is to be locked in a non-drainable **`RewardVault`**: tokens can only be released gradually through lab / patient / mother / father rewards, and changing the rules requires a governance vote. Not even the founder can withdraw it. Full design and migration plan: [`docs/REWARD-VAULT-PLAN.md`](REWARD-VAULT-PLAN.md). Today the reserve sits in `Evolve2Earn`, which still exposes an owner drain — see the plan.
 
 > **Downstream deltas (NOT changed in this phase):**
-> (i) `VestingWalletCliff.sol` and `ignition/modules/VestingWallet.js` hardcode `TEAM_ALLOCATION = 1.6B` with a 12-month cliff and 36-month linear vesting. This is now stale and must later become two separate allocations: Founder (80M) and Developers (80M).
-> (ii) The old 30/20/20/15/10/5 pre-mint 5.6B narrative is superseded by this new distribution.
-> (iii) `LiquidityLocker` and DEX liquidity will now be funded from the Community treasury sub-bucket and will be reviewed in a later phase.
+> (i) `VestingWalletCliff.sol` and `ignition/modules/VestingWallet.js` hardcode `TEAM_ALLOCATION = 1.6B` with a 12-month cliff and 36-month linear vesting. This is stale and must become the Founders-and-team allocation (25,000,000).
+> (ii) The old 30/20/20/15/10/5 pre-mint 5.6B narrative, and the earlier 1% founder / 1% developers / 90% treasury / 8% reserve model, are superseded by the distribution above.
+> (iii) `LiquidityLocker` and DEX liquidity will be funded from the DEX reserve sub-bucket and reviewed in a later phase.
 
 ## Economic Model
 
