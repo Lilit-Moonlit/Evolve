@@ -895,6 +895,8 @@ cd apps/web && npx tsc --noEmit   # ignore db.ts:270
 
 ## 28. DEX Integration (1inch Proxy + DexSwap + LiquidityLocker Provisioning)
 
+> **STATUS: FROZEN (2026-10-04).** No development, no keys, no liquidity provisioning until a separate decision. Code retained.
+
 > **Feature**: One-click EVOLVE swapping via 1inch (aggregated over Uniswap V3 / SushiSwap on Arbitrum, Trader Joe/LFJ / Pangolin on Avalanche) and a dry-run-safe liquidity provisioning script over the existing `LiquidityLocker.sol`. The 1inch API key stays server-side (backend proxy) — the browser only calls relative `/api/dex/quote` / `/api/dex/swap`. **No contract change.**
 
 ### Key files

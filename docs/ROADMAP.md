@@ -40,3 +40,5 @@ These are features and improvements we intend to implement in future phases:
 ## Blocked Milestones
 
 - **DEX Liquidity Provisioning on Arbitrum/Avalanche**: This milestone is currently **blocked**. It requires the EVOLVE token to be deployed on Arbitrum and Avalanche, and a 1inch API key to be configured. These prerequisites are pending separate deployments and configurations.
+
+> **STATUS: FROZEN (2026-10-04).** No development, no keys, no liquidity provisioning until a separate decision. Code retained.

@@ -80,13 +80,15 @@ EVOLVE holders govern via `Governance.sol`:
 
 ## Supply Distribution
 
-| Bucket                                                       | %          | EVOLVE        |
-| :----------------------------------------------------------- | :--------- | :------------ |
-| Founders and team (salary / reward)                          | 0.3125%    | 25,000,000    |
-| DEX reserve (future)                                         | 0.0500%    | 4,000,000     |
-| Public sale (planned)                                        | 0.0625%    | 5,000,000     |
-| Reward reserve — labs, patients, mothers, fathers (gradual)  | 99.5750%   | 7,966,000,000 |
-| **Total**                                                    | 100.0000%  | 8,000,000,000 |
+| Bucket                              | %       | EVOLVE     |
+| :---------------------------------- | :------ | :--------- |
+| Founders and team (salary / reward) | 0.3125% | 25,000,000 |
+| DEX reserve (future)                | 0.0500% | 4,000,000  |
+
+> **STATUS: FROZEN (2026-10-04).** No development, no keys, no liquidity provisioning until a separate decision. Code retained.
+> | Public sale (planned) | 0.0625% | 5,000,000 |
+> | Reward reserve — labs, patients, mothers, fathers (gradual) | 99.5750% | 7,966,000,000 |
+> | **Total** | 100.0000% | 8,000,000,000 |
 
 Only **34,000,000 EVOLVE (0.425%)** is explicitly allocated; the remaining **7,966,000,000 EVOLVE** is the reward reserve, meant to enter circulation only gradually through lab, patient, mother and father rewards.
 
