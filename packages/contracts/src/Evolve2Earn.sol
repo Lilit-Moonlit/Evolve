@@ -23,6 +23,8 @@ contract Evolve2Earn is Ownable, ReentrancyGuard, Pausable {
     address[] public giftOwners;
     mapping(address => bool) private isGiftOwner;
     uint256 public totalGifts;
+    bool public giftStateImported;
+    mapping(address => bool) private _seenImportOwner;
 
     // ──────────────────────────────────────────────
     //  P2P TOKEN MARKETPLACE
@@ -53,6 +55,7 @@ contract Evolve2Earn is Ownable, ReentrancyGuard, Pausable {
     event UserVerified(address indexed user);
     event EmojiGiftBought(bytes32 indexed emojiId, address indexed owner, uint256 price);
     event EmojiGiftTransferred(bytes32 indexed emojiId, address indexed from, address indexed to);
+    event Gifted(address indexed from, address indexed to, uint256 amount);
     event EmojiRevenueDistributed(address indexed buyer, uint256 totalAmount, address[] recipients, uint256[] amounts);
     event OrderCreated(uint256 indexed orderId, address indexed seller, uint256 evolveAmount, address tokenAddress, uint256 tokenAmount, uint256 networkId);
     event OrderFilled(uint256 indexed orderId, address indexed buyer, uint256 evolveAmount, uint256 tokenAmount);
@@ -75,6 +78,11 @@ contract Evolve2Earn is Ownable, ReentrancyGuard, Pausable {
     error InvalidAmount();
     error CannotBuyOwnOrder();
     error NotBondManager();
+    error GiftStateAlreadyImported();
+    error ArrayLengthMismatch();
+    error DuplicateGiftOwner();
+    error InvalidGiftCount();
+    error TotalGiftsMismatch();
 
     address public bondManager;
 
@@ -104,6 +112,15 @@ contract Evolve2Earn is Ownable, ReentrancyGuard, Pausable {
         if (oldPool == address(0)) revert ZeroAddress();
         evolveToken.safeTransferFrom(oldPool, address(this), amount);
     }
+
+    // DUPLICATE: This function was moved to line 469. Keeping only one instance.
+    // function _registerGiftOwner(address owner) internal {
+    //     if (!isGiftOwner[owner] && giftOwners.length >= MAX_GIFT_OWNERS) revert MaxGiftOwnersReached();
+    //     if (!isGiftOwner[owner]) {
+    //         isGiftOwner[owner] = true;
+    //         giftOwners.push(owner);
+    //     }
+    // }
 
     function _addDefaultNetworks() private {
         // Ethereum Mainnet
@@ -152,17 +169,70 @@ contract Evolve2Earn is Ownable, ReentrancyGuard, Pausable {
 
         emojiOwner[emojiId] = msg.sender;
         ownerGiftCount[msg.sender] += 1;
-        if (!isGiftOwner[msg.sender] && giftOwners.length >= MAX_GIFT_OWNERS) revert MaxGiftOwnersReached();
-        if (!isGiftOwner[msg.sender]) {
-            isGiftOwner[msg.sender] = true;
-            giftOwners.push(msg.sender);
-        }
+        _registerGiftOwner(msg.sender);
         totalGifts += 1;
 
         emit EmojiGiftBought(emojiId, msg.sender, EMOJI_GIFT_PRICE);
         if (recipients.length > 0) {
             emit EmojiRevenueDistributed(msg.sender, EMOJI_GIFT_PRICE, recipients, amounts);
         }
+    }
+
+    /// @notice User-to-user emoji gift: the payer spends 1 EVOLVE and the
+    ///         recipient `to` is registered as the gift owner. Revenue-split
+    ///         semantics are identical to buyEmojiGift (split over prior
+    ///         owners, payer excluded); `to == msg.sender` is allowed
+    ///         (anonymous claim path).
+    function giftTo(address to) external nonReentrant whenNotPaused {
+        if (to == address(0)) revert ZeroAddress();
+
+        evolveToken.safeTransferFrom(msg.sender, address(this), EMOJI_GIFT_PRICE);
+
+        address[] memory recipients;
+        uint256[] memory amounts;
+        uint256 currentTotal = totalGifts;
+        if (currentTotal > 0) {
+            (recipients, amounts) = _distributeEmojiRevenue(currentTotal);
+        }
+
+        ownerGiftCount[to] += 1;
+        _registerGiftOwner(to);
+        totalGifts += 1;
+
+        emit Gifted(msg.sender, to, EMOJI_GIFT_PRICE);
+        if (recipients.length > 0) {
+            emit EmojiRevenueDistributed(msg.sender, EMOJI_GIFT_PRICE, recipients, amounts);
+        }
+    }
+
+    /// @notice Owner-only, one-shot migration helper: restores the gift-owner
+    ///         registry (ownerGiftCount, giftOwners, isGiftOwner, totalGifts)
+    ///         from a prior Evolve2Earn instance so existing gift owners keep
+    ///         their perpetual revenue share after a redeploy.
+    function importGiftState(
+        address[] calldata owners,
+        uint256[] calldata counts,
+        uint256 totalGiftsValue
+    ) external onlyOwner {
+        if (giftStateImported) revert GiftStateAlreadyImported();
+        if (owners.length != counts.length) revert ArrayLengthMismatch();
+        if (owners.length > MAX_GIFT_OWNERS) revert MaxGiftOwnersReached();
+
+        uint256 sum = 0;
+        for (uint256 i = 0; i < owners.length; i++) {
+            if (counts[i] == 0) revert InvalidGiftCount();
+            if (_seenImportOwner[owners[i]]) revert DuplicateGiftOwner();
+            _seenImportOwner[owners[i]] = true;
+            sum += counts[i];
+        }
+        if (sum != totalGiftsValue) revert TotalGiftsMismatch();
+
+        for (uint256 i = 0; i < owners.length; i++) {
+            ownerGiftCount[owners[i]] = counts[i];
+            _registerGiftOwner(owners[i]);
+        }
+        totalGifts = totalGiftsValue;
+        giftStateImported = true;
     }
 
     function transferEmojiGift(bytes32 emojiId, address to) external nonReentrant whenNotPaused {
@@ -394,6 +464,15 @@ contract Evolve2Earn is Ownable, ReentrancyGuard, Pausable {
         if (evolveToken.balanceOf(address(this)) < reward) revert InsufficientBalance();
         
         evolveToken.safeTransfer(father, reward);
+    }
+
+    // Internal helper to register a gift owner (used by buyEmojiGift and giftTo)
+    function _registerGiftOwner(address owner) internal {
+        if (!isGiftOwner[owner] && giftOwners.length >= MAX_GIFT_OWNERS) revert MaxGiftOwnersReached();
+        if (!isGiftOwner[owner]) {
+            isGiftOwner[owner] = true;
+            giftOwners.push(owner);
+        }
     }
 
     function _distributeEmojiRevenue(uint256 currentTotal) internal returns (address[] memory recipients, uint256[] memory amounts) {
