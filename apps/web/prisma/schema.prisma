@@ -45,6 +45,7 @@ model Profile {
   // format" persisted at every ingest point so /api/profiles returns it
   // ready-made instead of re-parsing rawText client-side per profile.
   parsedStd         String?
+  roses             String?   // JSON array of RoseRecord (received gifts)
   accessPermissions String    // State of access permissions
   ageHidden         Boolean  @default(false)
   languages         String   @default("[]") // JSON array of language codes

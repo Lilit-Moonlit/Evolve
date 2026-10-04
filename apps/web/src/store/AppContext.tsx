@@ -23,6 +23,7 @@ import {
   type PhotoGrantKind,
   type PhotoGrants,
 } from "../lib/photo-access";
+import type { RoseRecord } from "../lib/private-gift";
 
 export type { STRProfile }; // Exporting for external use
 
@@ -50,12 +51,16 @@ export interface ChatMessage {
   text: string;
   time: string;
   isRequest?: boolean;
-  requestType?: "STD" | "DNA" | "PHOTO" | "LIVENESS";
+  requestType?: "STD" | "DNA" | "PHOTO" | "LIVENESS" | "GIFT";
   requestStatus?: "pending" | "approved" | "declined";
   /** Present on photo approve/offer messages: what kind of access was given. */
   photoGrantKind?: "temporary" | "permanent";
   /** Photo flow action: approve / deny a request, or a proactive offer. */
   photoAction?: "approve" | "deny" | "offer";
+  /** Gift (rose/cactus) message fields. */
+  giftKind?: "rose" | "cactus";
+  giftMode?: "public" | "anon-except-recipient" | "anon";
+  voucherPrivateKey?: string;
 }
 
 export interface ProfileData {
@@ -97,6 +102,10 @@ export interface ProfileData {
   faceHash?: string | null;
   lastLivenessCheck?: string | null;
   searchDetails?: SearchDetails;
+  /** Recipient wallet address (public-mode gifting); joined from User. */
+  ethAddress?: string;
+  /** Received gift records (rose/cactus). */
+  roses?: RoseRecord[];
 }
 
 /**
@@ -459,6 +468,8 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           hideProfileFromLowerLevels: p.hideProfileFromLowerLevels || false,
           location: p.location,
           searchDetails: p.searchDetails || {},
+          ethAddress: p.ethAddress,
+          roses: p.roses || [],
         };
       });
 

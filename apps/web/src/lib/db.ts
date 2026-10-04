@@ -645,6 +645,7 @@ const PROFILE_JSON_COLUMNS = [
   "searchDetails",
   "faceEmbedding",
   "parsedStd",
+  "roses",
 ];
 
 function deserializeProfileRow(profile: any) {
@@ -862,8 +863,20 @@ export const dbService = {
   // --- PROFILES ---
   async getProfiles() {
     return runWithDb(
-      async (p) => (await p.profile.findMany()).map((row) => deserializeProfileRow(row)),
-      () => readFallback().profiles,
+      async (p) =>
+        (await p.profile.findMany({ include: { user: { select: { ethAddress: true } } } })).map(
+          (row: any) => ({
+            ...deserializeProfileRow(row),
+            ethAddress: row.user?.ethAddress ?? undefined,
+          }),
+        ),
+      () => {
+        const data = readFallback();
+        return data.profiles.map((p: any) => ({
+          ...p,
+          ethAddress: data.users.find((u: any) => u.id === p.userId)?.ethAddress ?? undefined,
+        }));
+      },
       "getProfiles",
     );
   },
@@ -900,6 +913,7 @@ export const dbService = {
       searchDetails,
       faceEmbedding,
       parsedStd,
+      roses,
       ...rest
     } = profileData ?? {};
     const updatePatch: Record<string, unknown> = { ...rest };
@@ -928,6 +942,9 @@ export const dbService = {
       // Parsed STD result (StdTestParseResult) stored as a JSON string (or null).
       updatePatch.parsedStd = JSON.stringify(parsedStd ?? null);
     }
+    if (roses !== undefined) {
+      updatePatch.roses = JSON.stringify(roses ?? []);
+    }
     const createData = {
       userId,
       ...rest,
@@ -941,6 +958,7 @@ export const dbService = {
       searchDetails: searchDetails !== undefined ? JSON.stringify(searchDetails ?? {}) : "{}",
       faceEmbedding: faceEmbedding !== undefined ? JSON.stringify(faceEmbedding ?? null) : null,
       parsedStd: parsedStd !== undefined ? JSON.stringify(parsedStd ?? null) : null,
+      roses: roses !== undefined ? JSON.stringify(roses ?? []) : "[]",
     };
     return runWithDb(
       async (p) =>

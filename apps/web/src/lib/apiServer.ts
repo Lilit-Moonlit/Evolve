@@ -15,6 +15,7 @@ import {
   relayDnaVerify,
 } from "./adminChain";
 import { checkStdCompatibility, parseStdTestResult } from "./std-parser";
+import { sanitizeRoseRecord } from "./private-gift";
 import { generateLabEmail, parseUserIdFromLabEmail } from "./lab-report";
 import { CHECK_TTL_MS, canonicalUsername, riskLevelToVerdict, validateUsername } from "./checks";
 import { extractPdfText } from "./pdf-text";
@@ -987,6 +988,10 @@ export async function handleApiRequest(
       // client no longer re-parses raw text per profile on every load.
       if (typeof body.stdTestResult === "string" && body.stdTestResult.trim() !== "") {
         body.parsedStd = parseStdTestResult(body.stdTestResult);
+      }
+      // Defense in depth: strip sender identity that leaked into an "anon" rose.
+      if (Array.isArray(body.roses)) {
+        body.roses = body.roses.map((r: unknown) => sanitizeRoseRecord(r));
       }
       const profile = await dbService.upsertProfile(session.userId, body);
       res.statusCode = 200;
