@@ -791,7 +791,7 @@ cd apps/web && npx tsc --noEmit   # ignore db.ts:270
 | DNAVerification      | `0x2d6d770F7e5a8C10dC2B103B4f3Cb0e046Db649f` |
 | VerificationRegistry | `0x42E919C0f3218FE89AFB34B9f04d71d2cB02A189` |
 | TrustScore           | `0x0Cb18aa859f4A625aD3e8dE5958E577dfD9FEeB9` |
-| Evolve2Earn          | `0xc6268549F24A2658C8c6222242aBd56534b1c3e6` |
+| Evolve2Earn          | `0x585f12427d1133b7c00F6D6fdC0B2b8FF55adEa8` |
 | EvolveFund           | `0x016F6D873ed4B366098f9BE5C042ef583DC66DeE` |
 | Governance           | `0x8f95C852114e0C01B3D722EA9653F5b3e4460000` |
 | BondManager          | `0x650FC8033286112Fc0369Da9A1337D856FF7795f` |

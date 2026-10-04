@@ -49,6 +49,13 @@ export const Evolve2EarnABI = [
     stateMutability: "view",
   },
   {
+    type: "function",
+    name: "giftTo",
+    inputs: [{ name: "to", type: "address" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
     type: "event",
     name: "EmojiGiftBought",
     inputs: [
@@ -65,6 +72,15 @@ export const Evolve2EarnABI = [
       { name: "totalAmount", type: "uint256", indexed: false },
       { name: "recipients", type: "address[]", indexed: false },
       { name: "amounts", type: "uint256[]", indexed: false },
+    ],
+  },
+  {
+    type: "event",
+    name: "Gifted",
+    inputs: [
+      { name: "from", type: "address", indexed: true },
+      { name: "to", type: "address", indexed: true },
+      { name: "amount", type: "uint256", indexed: false },
     ],
   },
 ] as const;
