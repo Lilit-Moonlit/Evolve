@@ -1150,5 +1150,42 @@
     "swapSuccess": "兑换已提交",
     "swapFailed": "兑换失败",
     "proxyNotConfigured": "兑换服务未配置"
+  },
+  "gift": {
+    "title": "發送禮物",
+    "give": "送禮物",
+    "close": "關閉",
+    "kindLabel": "選擇禮物",
+    "kind": {
+      "rose": "玫瑰",
+      "cactus": "仙人掌"
+    },
+    "modeLabel": "誰能看到寄件人",
+    "mode": {
+      "public": "公開 — 所有人都能看到你的名字",
+      "anonExcept": "僅收禮人能看到你的名字",
+      "anon": "完全匿名"
+    },
+    "send": "發送禮物",
+    "approveFirst": "請先授權 EVOLVE",
+    "funding": "正在準備憑證…",
+    "sent": "禮物已送出！",
+    "noAddress": "收禮人沒有錢包地址 — 請選擇匿名模式。",
+    "walletRequired": "請連接錢包以繼續",
+    "error": "出了點問題，請重試。",
+    "chatMessage": "你收到一份禮物！",
+    "claimTitle": "有一份禮物在等你",
+    "claimHint": "領取後，獲贈的 EVOLVE 將轉到你的名下並以你的名義登記禮物。",
+    "claim": "領取",
+    "claiming": "領取中…",
+    "claimed": "已領取禮物",
+    "garden": "禮物花園",
+    "anonymous": "匿名",
+    "from": "來自 {{sender}}",
+    "myRoses": "我的玫瑰",
+    "giftsOwned": "鏈上禮物數",
+    "marketShare": "收益份額",
+    "noRoses": "還沒有禮物",
+    "explainerIntro": "禮物預設私密：你的名字可以公開、僅收禮人可見，或完全匿名 — 由你選擇。"
   }
 }

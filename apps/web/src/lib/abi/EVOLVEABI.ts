@@ -24,6 +24,13 @@ export const EVOLVEABI = [
     type: "function",
   },
   {
+    inputs: ["address", "uint256"],
+    name: "transfer",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "symbol",
     outputs: [{ internalType: "string", name: "", type: "string" }],
@@ -36,7 +43,7 @@ export const EVOLVEABI = [
     outputs: [{ internalType: "uint8", name: "", type: "uint8" }],
     stateMutability: "view",
     type: "function",
-  }
+  },
 ] as const;
 
 // Re-export addresses for convenience

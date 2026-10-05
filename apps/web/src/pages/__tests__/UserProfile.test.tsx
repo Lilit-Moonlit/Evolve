@@ -27,10 +27,16 @@ const mockProfile: ProfileData = {
 
 const mockAppState = {
   profiles: [mockProfile],
-  myProfile: { id: "me" },
+  myProfile: {
+    id: "me",
+    name: "Me",
+    roses: [],
+  },
   requestAccess: vi.fn().mockResolvedValue(undefined),
   requestPhotoAccess: vi.fn().mockResolvedValue(undefined),
   canViewTheirPhoto: vi.fn(() => false),
+  loadChatHistory: vi.fn().mockResolvedValue(undefined),
+  saveProfile: vi.fn().mockResolvedValue(undefined),
   checkCompatibility: vi.fn(() => ({
     safe: true,
     riskLevel: "none" as const,

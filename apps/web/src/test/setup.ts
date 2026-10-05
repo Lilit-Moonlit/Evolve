@@ -32,6 +32,26 @@ vi.mock("wagmi", async () => {
       isError: false,
       isSuccess: false,
     }),
+    // Contract-hook doubles: components using wagmi read/write hooks render
+    // inert outside a WagmiProvider (file-level mocks override for flows).
+    useReadContract: () => ({
+      data: undefined,
+      isLoading: false,
+      isError: false,
+      refetch: vi.fn(),
+    }),
+    useWriteContract: () => ({
+      writeContract: vi.fn(),
+      writeContractAsync: vi.fn(),
+      data: undefined,
+      isPending: false,
+      isError: false,
+    }),
+    useWaitForTransactionReceipt: () => ({
+      isLoading: false,
+      isSuccess: false,
+      isConfirmed: false,
+    }),
   };
 });
 

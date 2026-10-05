@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect, useMemo } from "react";
 import { useAppState, PDFDocument } from "../store/AppContext";
 import { useTranslation } from "react-i18next";
-import { useAccount, useBalance } from "wagmi";
+import { useAccount, useBalance, useReadContract } from "wagmi";
 import { getCompatibilityLabel, StdCompatibilityResult } from "../lib/std-parser";
 import DNAUpload from "../components/DNAUpload";
 import DNAProfile from "../components/DNAProfile";
@@ -18,6 +18,8 @@ import LabPatientQR from "../components/LabPatientQR";
 import InfoProposalIcons from "../components/InfoProposalIcons";
 import CompanionProfile from "../components/Companion/Profile";
 import DexSwap from "../components/DexSwap";
+import { Evolve2EarnABI } from "../lib/abi/Evolve2EarnABI";
+import { CONTRACTS } from "../lib/addresses";
 import {
   chipOptions,
   EYE_COLOR_OPTIONS,
@@ -79,6 +81,23 @@ const Profile: React.FC = () => {
   } = useAppState();
   const { address, isConnected } = useAccount();
   const { data: balance } = useBalance({ address });
+
+  // ─── My roses: on-chain gift ownership (EmojiGift read pattern) ───
+  const EVOLVE_2_EARN_ADDRESS = CONTRACTS.EVOLVE_2_EARN as `0x${string}`;
+  const { data: myGiftCount } = useReadContract({
+    address: EVOLVE_2_EARN_ADDRESS,
+    abi: Evolve2EarnABI,
+    functionName: "ownerGiftCount",
+    args: address ? [address] : undefined,
+    query: { enabled: !!address },
+  });
+  const { data: myMarketShare } = useReadContract({
+    address: EVOLVE_2_EARN_ADDRESS,
+    abi: Evolve2EarnABI,
+    functionName: "getOwnerMarketShare",
+    args: address ? [address] : undefined,
+    query: { enabled: !!address },
+  });
 
   const navigate = useNavigate();
   const [labRegistered, setLabRegistered] = useState(() => !!localStorage.getItem("lab_id"));
@@ -1150,6 +1169,49 @@ const Profile: React.FC = () => {
         )}
 
         <DexSwap />
+
+        {/* My roses — on-chain gift ownership + received gift records. The
+            sender name is visible here for public AND anon-except gifts (the
+            recipient's own view); anonymous gifts stay anonymous. */}
+        <section className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+          <h2 className="text-2xl font-bold mb-4">{t("gift.myRoses")}</h2>
+          <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <span className="text-sm text-gray-600">{t("gift.giftsOwned")}</span>
+              <span className="text-sm font-semibold text-gray-900">
+                {address ? (myGiftCount ? Number(myGiftCount) : 0) : "—"}
+              </span>
+            </div>
+            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <span className="text-sm text-gray-600">{t("gift.marketShare")}</span>
+              <span className="text-sm font-semibold text-gray-900">
+                {address && myMarketShare ? `${(Number(myMarketShare) / 100).toFixed(1)}%` : "—"}
+              </span>
+            </div>
+          </div>
+          {(myProfile.roses ?? []).length === 0 ? (
+            <p className="text-gray-500 text-sm">{t("gift.noRoses")}</p>
+          ) : (
+            <ul className="space-y-2">
+              {(myProfile.roses ?? []).map((rose, idx) => (
+                <li
+                  key={`${rose.receivedAt}-${idx}`}
+                  className="flex items-center justify-between rounded-lg border border-gray-100 p-3"
+                >
+                  <span className="flex items-center gap-2 text-sm text-gray-700">
+                    <span className="text-2xl">{rose.kind === "cactus" ? "🌵" : "🌹"}</span>
+                    {t("gift.from", {
+                      sender: rose.senderName ?? t("gift.anonymous"),
+                    })}
+                  </span>
+                  <span className="text-xs text-gray-400">
+                    {new Date(rose.receivedAt).toLocaleDateString()}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
 
         <section className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
           <h2 className="text-2xl font-bold mb-4">{t("profile.upload.title")}</h2>

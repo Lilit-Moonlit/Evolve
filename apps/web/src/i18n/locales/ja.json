@@ -1149,5 +1149,42 @@
     "swapSuccess": "スワップを送信しました",
     "swapFailed": "スワップに失敗しました",
     "proxyNotConfigured": "スワップサービスが設定されていません"
+  },
+  "gift": {
+    "title": "ギフトを送る",
+    "give": "ギフトを贈る",
+    "close": "閉じる",
+    "kindLabel": "ギフトを選ぶ",
+    "kind": {
+      "rose": "バラ",
+      "cactus": "サボテン"
+    },
+    "modeLabel": "送り主を見られる人",
+    "mode": {
+      "public": "公開 — 全員に名前が見えます",
+      "anonExcept": "受取人だけが名前を見られます",
+      "anon": "完全に匿名"
+    },
+    "send": "ギフトを送る",
+    "approveFirst": "まずEVOLVEを承認してください",
+    "funding": "バウチャーを準備中…",
+    "sent": "ギフトを送りました！",
+    "noAddress": "受取人にウォレットアドレスがありません — 匿名モードを選んでください。",
+    "walletRequired": "続けるにはウォレットを接続してください",
+    "error": "問題が発生しました。もう一度お試しください。",
+    "chatMessage": "ギフトが届きました！",
+    "claimTitle": "ギフトが待っています",
+    "claimHint": "受け取ると、贈られたEVOLVEがあなたに移され、ギフトがあなたの名義で登録されます。",
+    "claim": "受け取る",
+    "claiming": "受け取り中…",
+    "claimed": "受け取ったギフト",
+    "garden": "ギフトガーデン",
+    "anonymous": "匿名",
+    "from": "{{sender}} から",
+    "myRoses": "私のバラ",
+    "giftsOwned": "オンチェーンのギフト数",
+    "marketShare": "収益シェア",
+    "noRoses": "まだギフトがありません",
+    "explainerIntro": "ギフトは既定でプライベートです。名前を公開する、受取人だけに見せる、完全に匿名にする — 自由に選べます。"
   }
 }

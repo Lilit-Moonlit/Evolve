@@ -23,7 +23,8 @@ import {
   type PhotoGrantKind,
   type PhotoGrants,
 } from "../lib/photo-access";
-import type { RoseRecord } from "../lib/private-gift";
+import type { GiftSenderMode, RoseRecord } from "../lib/private-gift";
+import { sanitizeRoseRecord } from "../lib/private-gift";
 
 export type { STRProfile }; // Exporting for external use
 
@@ -204,6 +205,9 @@ export interface ProfilePatch extends SearchDetails {
   faceEmbedding?: number[] | null;
   interests?: string[];
   searchDetails?: SearchDetails;
+  /** Received gift records (rose/cactus). EVERY write passes through
+   * `sanitizeRoseRecord` before reaching the server (pinned call site). */
+  roses?: RoseRecord[];
 }
 
 interface AppContextType {
@@ -232,6 +236,8 @@ interface AppContextType {
     isDnaVerified: boolean;
     faceEmbedding?: number[];
     searchDetails?: SearchDetails;
+    /** Received gift records (rose/cactus). */
+    roses?: RoseRecord[];
   };
   profiles: ProfileData[];
   filters: FilterState;
@@ -248,7 +254,12 @@ interface AppContextType {
     text: string,
     sender?: "me" | "them",
     isRequest?: boolean,
-    requestType?: "STD" | "DNA" | "PHOTO" | "LIVENESS",
+    requestType?: "STD" | "DNA" | "PHOTO" | "LIVENESS" | "GIFT",
+    photoGrantKind?: "temporary" | "permanent",
+    photoAction?: "approve" | "deny" | "offer",
+    giftKind?: "rose" | "cactus",
+    giftMode?: GiftSenderMode,
+    voucherPrivateKey?: string,
   ) => Promise<void>;
   /** Lazy-loads the chat history for one profile (called when a chat opens). */
   loadChatHistory: (profileId: string) => Promise<void>;
@@ -360,6 +371,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     dnaProfile: null as STRProfile | null,
     isDnaVerified: false,
     searchDetails: {} as SearchDetails,
+    roses: [] as RoseRecord[],
   });
 
   const [filters, setFilters] = useState<FilterState>(() => {
@@ -508,6 +520,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           faceVerified: ourProfile.faceVerified || false,
           faceHash: ourProfile.faceHash || null,
           lastLivenessCheck: ourProfile.lastLivenessCheck || null,
+          roses: ourProfile.roses || [],
         }));
 
         // On-chain DNA flag (wallet sessions only): chain truth wins when set.
@@ -917,9 +930,12 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     text: string,
     sender: "me" | "them" = "me",
     isRequest?: boolean,
-    requestType?: "STD" | "DNA" | "PHOTO" | "LIVENESS",
+    requestType?: "STD" | "DNA" | "PHOTO" | "LIVENESS" | "GIFT",
     photoGrantKind?: "temporary" | "permanent",
     photoAction?: "approve" | "deny" | "offer",
+    giftKind?: "rose" | "cactus",
+    giftMode?: GiftSenderMode,
+    voucherPrivateKey?: string,
   ) => {
     if (!myProfile.id) return;
     try {
@@ -940,6 +956,9 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           requestStatus: isRequest ? "pending" : undefined,
           photoGrantKind,
           photoAction,
+          giftKind,
+          giftMode,
+          voucherPrivateKey,
         }),
       });
       const savedMsg = await res.json();
@@ -961,6 +980,9 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
                   requestStatus: isRequest ? "pending" : undefined,
                   photoGrantKind,
                   photoAction,
+                  giftKind,
+                  giftMode,
+                  voucherPrivateKey,
                 },
               ],
             };
@@ -991,6 +1013,9 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         requestStatus: m.requestStatus,
         photoGrantKind: m.photoGrantKind,
         photoAction: m.photoAction,
+        giftKind: m.giftKind,
+        giftMode: m.giftMode,
+        voucherPrivateKey: m.voucherPrivateKey,
       }));
 
       setProfiles((prev) =>
@@ -1083,6 +1108,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       // off the patch and merge them into the nested searchDetails object.
       const {
         searchDetails: nestedSearchDetails,
+        roses,
         height,
         weight,
         skinColor,
@@ -1149,6 +1175,9 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           reputationScore: myProfile.reputationScore,
           voters: myProfile.voters,
           searchDetails: mergedSearchDetails,
+          // Roses writes are ALWAYS sanitized client-side (pinned enforcement
+          // point — the server re-sanitizes in /api/profiles/upsert too).
+          roses: roses !== undefined ? roses.map(sanitizeRoseRecord) : undefined,
         }),
       });
       setMyProfile((prev) => ({
@@ -1165,6 +1194,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         faceHash: patch.faceHash ?? prev.faceHash,
         lastLivenessCheck: patch.lastLivenessCheck ?? prev.lastLivenessCheck,
         searchDetails: mergedSearchDetails,
+        roses: patch.roses !== undefined ? patch.roses.map(sanitizeRoseRecord) : prev.roses,
       }));
     } catch (e) {
       console.error("Failed to save profile", e);

@@ -1150,5 +1150,42 @@
     "swapSuccess": "Tausch übermittelt",
     "swapFailed": "Tausch fehlgeschlagen",
     "proxyNotConfigured": "Tauschdienst ist nicht konfiguriert"
+  },
+  "gift": {
+    "title": "Ein Geschenk senden",
+    "give": "Schenken",
+    "close": "Schließen",
+    "kindLabel": "Geschenk auswählen",
+    "kind": {
+      "rose": "Rose",
+      "cactus": "Kaktus"
+    },
+    "modeLabel": "Wer sieht den Absender",
+    "mode": {
+      "public": "Öffentlich — alle sehen deinen Namen",
+      "anonExcept": "Nur der Empfänger sieht deinen Namen",
+      "anon": "Vollständig anonym"
+    },
+    "send": "Geschenk senden",
+    "approveFirst": "Zuerst EVOLVE freigeben",
+    "funding": "Gutschein wird vorbereitet…",
+    "sent": "Geschenk gesendet!",
+    "noAddress": "Der Empfänger hat keine Wallet-Adresse — wähle einen anonymen Modus.",
+    "walletRequired": "Verbinde deine Wallet, um fortzufahren",
+    "error": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
+    "chatMessage": "Du hast ein Geschenk erhalten!",
+    "claimTitle": "Ein Geschenk wartet auf dich",
+    "claimHint": "Beim Einlösen werden die geschenkten EVOLVE zu dir verschoben und das Geschenk auf deinen Namen registriert.",
+    "claim": "Einlösen",
+    "claiming": "Einlösen…",
+    "claimed": "Eingelöste Geschenke",
+    "garden": "Geschenkergarten",
+    "anonymous": "Anonym",
+    "from": "von {{sender}}",
+    "myRoses": "Meine Rosen",
+    "giftsOwned": "Geschenke on-chain",
+    "marketShare": "Umsatzbeteiligung",
+    "noRoses": "Noch keine Geschenke",
+    "explainerIntro": "Geschenke sind standardmäßig privat: Dein Name kann öffentlich, nur für den Empfänger sichtbar oder vollständig anonym sein — du entscheidest."
   }
 }

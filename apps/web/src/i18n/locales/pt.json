@@ -1158,5 +1158,42 @@
     "swapSuccess": "Troca enviada",
     "swapFailed": "Falha na troca",
     "proxyNotConfigured": "O serviço de troca não está configurado"
+  },
+  "gift": {
+    "title": "Enviar um presente",
+    "give": "Presentear",
+    "close": "Fechar",
+    "kindLabel": "Escolha um presente",
+    "kind": {
+      "rose": "Rosa",
+      "cactus": "Cacto"
+    },
+    "modeLabel": "Quem vê o remetente",
+    "mode": {
+      "public": "Público — todos veem seu nome",
+      "anonExcept": "Apenas quem recebe vê seu nome",
+      "anon": "Totalmente anônimo"
+    },
+    "send": "Enviar presente",
+    "approveFirst": "Primeiro autorize EVOLVE",
+    "funding": "Preparando o voucher…",
+    "sent": "Presente enviado!",
+    "noAddress": "O destinatário não tem endereço de carteira — escolha um modo anônimo.",
+    "walletRequired": "Conecte sua carteira para continuar",
+    "error": "Algo deu errado. Tente novamente.",
+    "chatMessage": "Você recebeu um presente!",
+    "claimTitle": "Um presente espera por você",
+    "claimHint": "Ao resgatar, os EVOLVE presenteados são transferidos para você e o presente é registrado em seu nome.",
+    "claim": "Resgatar",
+    "claiming": "Resgatando…",
+    "claimed": "Presentes resgatados",
+    "garden": "Jardim de presentes",
+    "anonymous": "Anônimo",
+    "from": "de {{sender}}",
+    "myRoses": "Minhas rosas",
+    "giftsOwned": "Presentes on-chain",
+    "marketShare": "Parte da receita",
+    "noRoses": "Ainda não há presentes",
+    "explainerIntro": "Presentes são privados por padrão: seu nome pode ser público, visível apenas para quem recebe ou totalmente anônimo — você escolhe."
   }
 }

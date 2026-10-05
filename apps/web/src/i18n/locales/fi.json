@@ -1150,5 +1150,42 @@
     "swapSuccess": "Swap submitted",
     "swapFailed": "Swap failed",
     "proxyNotConfigured": "Swap service is not configured"
+  },
+  "gift": {
+    "title": "Send a gift",
+    "give": "Give a gift",
+    "close": "Close",
+    "kindLabel": "Choose a gift",
+    "kind": {
+      "rose": "Rose",
+      "cactus": "Cactus"
+    },
+    "modeLabel": "Who can see the sender",
+    "mode": {
+      "public": "Public — everyone sees your name",
+      "anonExcept": "Only the recipient sees your name",
+      "anon": "Fully anonymous"
+    },
+    "send": "Send gift",
+    "approveFirst": "Approve EVOLVE first",
+    "funding": "Preparing the voucher…",
+    "sent": "Gift sent!",
+    "noAddress": "The recipient has no wallet address — choose an anonymous mode instead.",
+    "walletRequired": "Connect your wallet to continue",
+    "error": "Something went wrong. Please try again.",
+    "chatMessage": "You received a gift!",
+    "claimTitle": "A gift is waiting for you",
+    "claimHint": "Claiming moves the gifted EVOLVE to you and registers the gift in your name.",
+    "claim": "Claim",
+    "claiming": "Claiming…",
+    "claimed": "Gifts claimed",
+    "garden": "Gift garden",
+    "anonymous": "Anonymous",
+    "from": "from {{sender}}",
+    "myRoses": "My roses",
+    "giftsOwned": "Gifts owned on-chain",
+    "marketShare": "Revenue share",
+    "noRoses": "No gifts yet",
+    "explainerIntro": "Gifts are private by default: your name can be public, visible only to the recipient, or fully anonymous — your choice."
   }
 }

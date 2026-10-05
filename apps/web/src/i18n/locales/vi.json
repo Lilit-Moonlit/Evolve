@@ -1159,5 +1159,42 @@
     "swapSuccess": "Đã gửi lệnh hoán đổi",
     "swapFailed": "Hoán đổi thất bại",
     "proxyNotConfigured": "Dịch vụ hoán đổi chưa được cấu hình"
+  },
+  "gift": {
+    "title": "Gửi quà",
+    "give": "Tặng quà",
+    "close": "Đóng",
+    "kindLabel": "Chọn một món quà",
+    "kind": {
+      "rose": "Hoa hồng",
+      "cactus": "Xương rồng"
+    },
+    "modeLabel": "Ai nhìn thấy người gửi",
+    "mode": {
+      "public": "Công khai — ai cũng thấy tên bạn",
+      "anonExcept": "Chỉ người nhận thấy tên bạn",
+      "anon": "Hoàn toàn ẩn danh"
+    },
+    "send": "Gửi quà",
+    "approveFirst": "Hãy phê duyệt EVOLVE trước",
+    "funding": "Đang chuẩn bị phiếu quà…",
+    "sent": "Đã gửi quà!",
+    "noAddress": "Người nhận không có địa chỉ ví — hãy chọn chế độ ẩn danh.",
+    "walletRequired": "Kết nối ví để tiếp tục",
+    "error": "Đã xảy ra lỗi. Vui lòng thử lại.",
+    "chatMessage": "Bạn đã nhận được một món quà!",
+    "claimTitle": "Một món quà đang chờ bạn",
+    "claimHint": "Khi nhận, số EVOLVE được tặng sẽ chuyển đến bạn và món quà được đăng ký tên bạn.",
+    "claim": "Nhận",
+    "claiming": "Đang nhận…",
+    "claimed": "Quà đã nhận",
+    "garden": "Vườn quà",
+    "anonymous": "Ẩn danh",
+    "from": "từ {{sender}}",
+    "myRoses": "Hoa hồng của tôi",
+    "giftsOwned": "Số quà on-chain",
+    "marketShare": "Phần doanh thu",
+    "noRoses": "Chưa có quà",
+    "explainerIntro": "Quà tặng mặc định là riêng tư: tên bạn có thể công khai, chỉ người nhận thấy, hoặc hoàn toàn ẩn danh — bạn chọn."
   }
 }

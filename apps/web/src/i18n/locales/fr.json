@@ -1150,5 +1150,42 @@
     "swapSuccess": "Échange envoyé",
     "swapFailed": "Échec de l'échange",
     "proxyNotConfigured": "Le service d'échange n'est pas configuré"
+  },
+  "gift": {
+    "title": "Envoyer un cadeau",
+    "give": "Offrir",
+    "close": "Fermer",
+    "kindLabel": "Choisissez un cadeau",
+    "kind": {
+      "rose": "Rose",
+      "cactus": "Cactus"
+    },
+    "modeLabel": "Qui voit l'expéditeur",
+    "mode": {
+      "public": "Public — tout le monde voit votre nom",
+      "anonExcept": "Seule la personne qui reçoit voit votre nom",
+      "anon": "Totalement anonyme"
+    },
+    "send": "Envoyer le cadeau",
+    "approveFirst": "Autorisez d'abord les EVOLVE",
+    "funding": "Préparation du bon…",
+    "sent": "Cadeau envoyé !",
+    "noAddress": "Le destinataire n'a pas d'adresse de portefeuille — choisissez un mode anonyme.",
+    "walletRequired": "Connectez votre portefeuille pour continuer",
+    "error": "Une erreur est survenue. Veuillez réessayer.",
+    "chatMessage": "Vous avez reçu un cadeau !",
+    "claimTitle": "Un cadeau vous attend",
+    "claimHint": "En le récupérant, les EVOLVE offerts vous sont transférés et le cadeau est enregistré à votre nom.",
+    "claim": "Récupérer",
+    "claiming": "Récupération…",
+    "claimed": "Cadeaux récupérés",
+    "garden": "Jardin des cadeaux",
+    "anonymous": "Anonyme",
+    "from": "de {{sender}}",
+    "myRoses": "Mes roses",
+    "giftsOwned": "Cadeaux on-chain",
+    "marketShare": "Part des revenus",
+    "noRoses": "Pas encore de cadeaux",
+    "explainerIntro": "Les cadeaux sont privés par défaut : votre nom peut être public, visible uniquement du destinataire ou totalement anonyme — à vous de choisir."
   }
 }

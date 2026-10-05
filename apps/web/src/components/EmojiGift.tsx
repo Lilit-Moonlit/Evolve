@@ -16,8 +16,20 @@ interface EmojiGiftMeta {
 }
 
 const GIFT_DEFS: EmojiGiftMeta[] = [
-  { id: "rose", emoji: "🌹", name: "Rose", price: GIFT_TOKEN_COST, bytes32Id: "0x" + "rose".padEnd(64, "0") },
-  { id: "cactus", emoji: "🌵", name: "Cactus", price: GIFT_TOKEN_COST, bytes32Id: "0x" + "cactus".padEnd(64, "0") },
+  {
+    id: "rose",
+    emoji: "🌹",
+    name: "Rose",
+    price: GIFT_TOKEN_COST,
+    bytes32Id: "0x" + "rose".padEnd(64, "0"),
+  },
+  {
+    id: "cactus",
+    emoji: "🌵",
+    name: "Cactus",
+    price: GIFT_TOKEN_COST,
+    bytes32Id: "0x" + "cactus".padEnd(64, "0"),
+  },
 ];
 
 export default function EmojiGift() {
@@ -93,6 +105,9 @@ export default function EmojiGift() {
     <div className="max-w-4xl mx-auto p-6">
       <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
         <h2 className="text-2xl font-bold mb-2">{t("emojiGift.title")}</h2>
+        {/* NEW intro — sender-private gifting explainer (do not rewrite the
+            existing emojiGift.* copy; existing locale values stay intact). */}
+        <p className="mb-2 text-sm text-gray-600">{t("gift.explainerIntro")}</p>
         <p className="text-gray-500 text-sm mb-6">{t("emojiGift.description")}</p>
 
         {address && (
