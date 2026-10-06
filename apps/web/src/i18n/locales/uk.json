@@ -1196,5 +1196,20 @@
     "marketShare": "Частка доходу",
     "noRoses": "Подарунків ще немає",
     "explainerIntro": "Подарунки приватні за замовчуванням: ваше ім'я може бути публічним, видимим лише отримувачу або повністю анонімним — на ваш вибір."
+  },
+  "privacy": {
+    "wallet": {
+      "title": "Приватний гаманець (Railgun)",
+      "shield": "Захистити (Shield) EVOLVE",
+      "unshield": "Розшифрувати (Unshield) EVOLVE",
+      "sendPrivate": "Приватний переказ",
+      "balance": "Приватний баланс",
+      "amount": "Сума (EVOLVE)",
+      "recipient": "Адреса отримувача (ETH)",
+      "recipient0zkPlaceholder": "0zk1q...",
+      "sdkMissing": "Railgun SDK не встановлено",
+      "txSent": "Транзакцію відправлено",
+      "error": "Помилка операції"
+    }
   }
 }

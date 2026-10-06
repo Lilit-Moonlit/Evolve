@@ -1187,5 +1187,20 @@
     "marketShare": "Umsatzbeteiligung",
     "noRoses": "Noch keine Geschenke",
     "explainerIntro": "Geschenke sind standardmäßig privat: Dein Name kann öffentlich, nur für den Empfänger sichtbar oder vollständig anonym sein — du entscheidest."
+  },
+  "privacy": {
+    "wallet": {
+      "title": "Privates Wallet (Railgun)",
+      "shield": "EVOLVE schützen (Shield)",
+      "unshield": "EVOLVE entsperren (Unshield)",
+      "sendPrivate": "Private Überweisung",
+      "balance": "Geschütztes Guthaben",
+      "amount": "Betrag (EVOLVE)",
+      "recipient": "Empfängeradresse (ETH)",
+      "recipient0zkPlaceholder": "0zk1q...",
+      "sdkMissing": "Railgun SDK nicht installiert",
+      "txSent": "Transaktion gesendet",
+      "error": "Vorgang fehlgeschlagen"
+    }
   }
 }

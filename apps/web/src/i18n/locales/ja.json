@@ -1186,5 +1186,20 @@
     "marketShare": "収益シェア",
     "noRoses": "まだギフトがありません",
     "explainerIntro": "ギフトは既定でプライベートです。名前を公開する、受取人だけに見せる、完全に匿名にする — 自由に選べます。"
+  },
+  "privacy": {
+    "wallet": {
+      "title": "プライベートウォレット (Railgun)",
+      "shield": "EVOLVEを保護 (Shield)",
+      "unshield": "EVOLVEの保護を解除 (Unshield)",
+      "sendPrivate": "プライベート送金",
+      "balance": "シールド残高",
+      "amount": "金額 (EVOLVE)",
+      "recipient": "受取人アドレス (ETH)",
+      "recipient0zkPlaceholder": "0zk1q...",
+      "sdkMissing": "Railgun SDKがインストールされていません",
+      "txSent": "トランザクションを送信しました",
+      "error": "操作に失敗しました"
+    }
   }
 }

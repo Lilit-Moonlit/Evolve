@@ -76,7 +76,15 @@ EVOLVE holders govern via `Governance.sol`:
 1. **Proposal creation**: any user creates a proposal with description and calldata
 2. **Voting period**: 7 days, quorum 40%
 3. **Timelock**: 2 days after voting ends
-4. **Execution**: approved proposals execute after timelock
+
+## Two-wallet model (privacy ↔ governance)
+
+EVOLVE separates public stake/governance weights from private shielded holdings:
+
+- **Public stake-wallet (EVM Address)**: Used for `EvolveFund` deposits (men) or public wallet balance (women). This balance directly determines voting weight in `Governance.sol` according to current rules.
+- **Private shielded-wallet (Railgun 0zk Address)**: Shielded EVOLVE held inside Railgun pools is **EXCLUDED** from governance weight calculations. Private transfers, shielded balances, and zero-knowledge transactions do not count towards governance voting power.
+
+For full architectural details of the zero-knowledge integration, see [`docs/RAILGUN-INTEGRATION.md`](RAILGUN-INTEGRATION.md).
 
 ## Supply Distribution
 

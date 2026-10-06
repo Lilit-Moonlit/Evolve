@@ -220,6 +220,8 @@ Only **34,000,000 EVOLVE (0.425%)** is explicitly allocated; the remaining **7,9
 2. Рекурсивна репутація — 8 голосів, глибина 3 (30%)
 3. % батьківства відносно всіх чоловіків (40%)
 
+_Приватні (shielded) токени у Railgun гаманці виключені з розрахунку ваги в Governance (деталі у [Two-wallet model](docs/TOKENOMICS.md#two-wallet-model-privacy--governance))._
+
 ### Economic Flywheel
 
 ```

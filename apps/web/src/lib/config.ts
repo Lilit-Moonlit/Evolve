@@ -24,5 +24,5 @@ export const PRODUCT_MODE: ProductMode = readProductMode();
 /** True when the public safe-sex-only facade is active. */
 export const isSafetyMode = (): boolean => PRODUCT_MODE === "safety";
 
-/** True when the developer-only full feature set is unlocked. */
-export const isFullMode = (): boolean => PRODUCT_MODE === "full";
+/** True when the Railgun private wallet is unlocked (feature flag). */
+export const RAILGUN_ENABLED = import.meta.env?.VITE_RAILGUN_ENABLED === "true";

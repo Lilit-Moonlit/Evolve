@@ -17,8 +17,12 @@ import { useLocations, withLegacyOption } from "../lib/locations";
 import LabPatientQR from "../components/LabPatientQR";
 import InfoProposalIcons from "../components/InfoProposalIcons";
 import CompanionProfile from "../components/Companion/Profile";
+
 import DexSwap from "../components/DexSwap";
 import { Evolve2EarnABI } from "../lib/abi/Evolve2EarnABI";
+import { PrivateWallet } from "../components/PrivateWallet";
+import { RAILGUN_ENABLED } from "../lib/config";
+
 import { CONTRACTS } from "../lib/addresses";
 import {
   chipOptions,
@@ -958,6 +962,10 @@ const Profile: React.FC = () => {
           <p className="text-gray-500 text-sm mb-6">{t("profile.medical.subtitle")}</p>
           <CompanionProfile embedded />
         </section>
+
+        {/* DEX Swap & Private Wallet */}
+        <DexSwap />
+        {RAILGUN_ENABLED && <PrivateWallet />}
 
         {/* Laboratory tools */}
         <section className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">

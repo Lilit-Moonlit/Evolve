@@ -1192,5 +1192,20 @@
     "marketShare": "حصة الإيرادات",
     "noRoses": "لا هدايا بعد",
     "explainerIntro": "الهدايا خاصة افتراضيًا: يمكن أن يكون اسمك علنيًا، أو مرئيًا للمستلم فقط، أو مجهولً تمامًا — الخيار لك."
+  },
+  "privacy": {
+    "wallet": {
+      "title": "المحفظة الخاصة (Railgun)",
+      "shield": "حماية (Shield) EVOLVE",
+      "unshield": "إلغاء حماية (Unshield) EVOLVE",
+      "sendPrivate": "تحويل خاص",
+      "balance": "الرصيد المحمي",
+      "amount": "المبلغ (EVOLVE)",
+      "recipient": "عنوان المستلم (ETH)",
+      "recipient0zkPlaceholder": "0zk1q...",
+      "sdkMissing": "حزمة Railgun SDK غير مثبّتة",
+      "txSent": "تم إرسال المعاملة",
+      "error": "فشلت العملية"
+    }
   }
 }

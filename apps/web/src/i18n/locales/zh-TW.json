@@ -1187,5 +1187,20 @@
     "marketShare": "收益份額",
     "noRoses": "還沒有禮物",
     "explainerIntro": "禮物預設私密：你的名字可以公開、僅收禮人可見，或完全匿名 — 由你選擇。"
+  },
+  "privacy": {
+    "wallet": {
+      "title": "隱私錢包 (Railgun)",
+      "shield": "屏蔽 (Shield) EVOLVE",
+      "unshield": "解蔽 (Unshield) EVOLVE",
+      "sendPrivate": "隱私轉帳",
+      "balance": "隱私餘額",
+      "amount": "數量 (EVOLVE)",
+      "recipient": "接收人地址 (ETH)",
+      "recipient0zkPlaceholder": "0zk1q...",
+      "sdkMissing": "未安裝 Railgun SDK",
+      "txSent": "交易已發送",
+      "error": "操作失敗"
+    }
   }
 }

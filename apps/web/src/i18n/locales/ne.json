@@ -1161,5 +1161,20 @@
     "marketShare": "Revenue share",
     "noRoses": "No gifts yet",
     "explainerIntro": "Gifts are private by default: your name can be public, visible only to the recipient, or fully anonymous — your choice."
+  },
+  "privacy": {
+    "wallet": {
+      "title": "Private Wallet (Railgun)",
+      "shield": "Shield EVOLVE",
+      "unshield": "Unshield EVOLVE",
+      "sendPrivate": "Private Transfer",
+      "balance": "Shielded Balance",
+      "amount": "Amount (EVOLVE)",
+      "recipient": "Recipient Address (ETH)",
+      "recipient0zkPlaceholder": "0zk1q...",
+      "sdkMissing": "Railgun SDK not installed",
+      "txSent": "Transaction submitted",
+      "error": "Operation failed"
+    }
   }
 }

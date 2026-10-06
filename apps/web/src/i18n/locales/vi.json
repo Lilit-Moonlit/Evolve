@@ -1196,5 +1196,20 @@
     "marketShare": "Phần doanh thu",
     "noRoses": "Chưa có quà",
     "explainerIntro": "Quà tặng mặc định là riêng tư: tên bạn có thể công khai, chỉ người nhận thấy, hoặc hoàn toàn ẩn danh — bạn chọn."
+  },
+  "privacy": {
+    "wallet": {
+      "title": "Ví riêng tư (Railgun)",
+      "shield": "Bảo vệ (Shield) EVOLVE",
+      "unshield": "Bỏ bảo vệ (Unshield) EVOLVE",
+      "sendPrivate": "Chuyển khoản riêng tư",
+      "balance": "Số dư đã bảo vệ",
+      "amount": "Số lượng (EVOLVE)",
+      "recipient": "Địa chỉ người nhận (ETH)",
+      "recipient0zkPlaceholder": "0zk1q...",
+      "sdkMissing": "Chưa cài đặt Railgun SDK",
+      "txSent": "Đã gửi giao dịch",
+      "error": "Thao tác thất bại"
+    }
   }
 }

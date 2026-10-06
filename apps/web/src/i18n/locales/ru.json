@@ -1075,5 +1075,20 @@
     "marketShare": "Доля дохода",
     "noRoses": "Подарков пока нет",
     "explainerIntro": "Подарки приватны по умолчанию: ваше имя может быть публичным, видимым только получателю или полностью анонимным — на ваш выбор."
+  },
+  "privacy": {
+    "wallet": {
+      "title": "Приватный кошелёк (Railgun)",
+      "shield": "Защитить (Shield) EVOLVE",
+      "unshield": "Расшифровать (Unshield) EVOLVE",
+      "sendPrivate": "Приватный перевод",
+      "balance": "Приватный баланс",
+      "amount": "Сумма (EVOLVE)",
+      "recipient": "Адрес получателя (ETH)",
+      "recipient0zkPlaceholder": "0zk1q...",
+      "sdkMissing": "Railgun SDK не установлен",
+      "txSent": "Транзакция отправлена",
+      "error": "Ошибка операции"
+    }
   }
 }
