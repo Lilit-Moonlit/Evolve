@@ -1,30 +1,31 @@
 [English](README.md) | [العربية](README.ar.md) | [Български](README.bg.md) | [Čeština](README.cs.md) | [Dansk](README.da.md) | [Deutsch](README.de.md) | [Ελληνικά](README.el.md) | [Español](README.es.md) | [Eesti](README.et.md) | [Suomi](README.fi.md) | [Filipino](README.fil.md) | [Français](README.fr.md) | [עברית](README.he.md) | [Hrvatski](README.hr.md) | [Magyar](README.hu.md) | [Íslenska](README.is.md) | [Italiano](README.it.md) | [日本語](README.ja.md) | [Lietuvių](README.lt.md) | [Latviešu](README.lv.md) | [Norsk bokmål](README.nb.md) | [नेपाली](README.ne.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português](README.pt.md) | [Română](README.ro.md) | [Русский](README.ru.md) | [Slovenčina](README.sk.md) | [Slovenščina](README.sl.md) | [Svenska](README.sv.md) | [Kiswahili](README.sw.md) | [Українська](README.uk.md) | [Tiếng Việt](README.vi.md) | [繁體中文](README.zh-TW.md)
+<!-- evolve-readme-sync: 3796750887b0bd65 -->
 
 # EVOLVE
 
 **Upoznavanje, začeće i provjereno zdravlje — privatnost po zadanim postavkama, povjerenje tamo gdje je važno.**
 
-EVOLVE je open-source, decentralizirana platforma za ljude kojima je dosta prepuštanja svog broja telefona, svog lica i svojih najintimnijih zdravstvenih podataka u tuđu bazu podataka. Prijavljujete se vlastitim kripto novčanikom — bez telefona, bez e-pošte, bez KYC-a — a račun možete vratiti putem on-chain obveze DNK. Vaši zdravstveni podaci ostaju vaši: rezultati testova se automatski raščlanjuju, statusi pojedinačnih patogena se **nikada** ne pokazuju nikome, a uparivanje se oslanja samo na anonimne verdikte kompatibilnosti (Safe / Compatible / Caution / Risk). Chat radi peer-to-peer preko libp2p i Nostr-a, s HTTP fallbackom za udobnost.
+EVOLVE je open-source, decentralizirana platforma za ljude kojima je dosta prepuštanja svog broja telefona, svog lica i svojih najintimnijih zdravstvenih podataka u tuđu bazu podataka. Prijavljujete se vlastitim kripto novčanikom — bez telefona, bez e-pošte, bez KYC-a — a račun možete vratiti putem on-chain obveze DNK. Vaši zdravstveni podaci ostaju vaši: rezultati testova se automatski raščlanjuju, statusi pojedinačnih patogena se **nikada** ne pokazuju nikome, a uparivanje se oslanja samo na anonimne verdikte kompatibilnosti (Safe / Compatible / Caution / Risk). Chat radi peer-to-peer preko libp2p i Nostr-a, s HTTP fallbackom za udobnost. Pokloni i prijenosi idu prema potpunoj povjerljivosti: pokloni privatni pošiljatelju su aktivni danas, a Railgun zaštićeni novčanik i Aztec prototip nultog znanja su na planu (vidi [Privatnost i povjerljive transakcije](#privatnost-i-povjerljive-transakcije)).
 
-> **Status — platforma radi već danas; mainnet i DEX su sljedeći korak.**
-> Upoznavanje, začeće, provjera zdravlja, laboratorijski tijek, P2P chat, token EVOLVE i governance — sve radi. Još ispred nas: **postavljanje na mainnet i DEX likvidnost**, plus **planirana javna prodaja** (vidi [Token EVOLVE](#token-evolve-samo-testna-mreža)).
+> **Status — demo način, u aktivnom razvoju.**
+> Upoznavanje, začeće, provjera zdravlja, laboratorijski tijek, P2P chat, token EVOLVE i governance — sve je implementirano i radi u **lokalnom demo načinu** — aplikacija **još nije javno postavljena**. Još ispred nas: **postavljanje na mainnet i DEX likvidnost**, plus **planirana javna prodaja** (vidi [Token EVOLVE](#token-evolve-samo-testna-mreža)).
 > Pametni ugovori su postavljeni **samo na Ethereum Sepolia testnet**. Ništa ovdje nije financijski savjet ni investicijska ponuda.
 
-> **Smatrate li EVOLVE korisnim? Podržite razvoj — svaka donacija ide u kod, laboratorijska partnerstva, hosting i prijevode → [DONATE.md](DONATE.md).**
+> **Smatrate li EVOLVE korisnim? Podržite razvoj — svaka donacija ide u kod, laboratorijska partnerstva, hosting i prijevode → [DONATE.MD](DONATE.MD).**
 
 ## Nema se čega bojati
 
 EVOLVE je izgrađen oko pitanja koja ljudi stvarno postavljaju prije nego što takvoj platformi povjere svoje povjerenje.
 
-| Briga                                            | Što EVOLVE već danas radi po tom pitanju                                                                                                                                      |
-| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| „Moji zdravstveni podaci će iscuriti."           | Rezultati pojedinačnih patogena se **nikada** ne pokazuju nikome — samo anonimni verdikt: Safe / Compatible / Caution / Risk.                                                 |
-| „Moje fotografije će završiti negdje."           | Fotografije su zadano zamagljene. Vlasnik dodjeljuje **15-sekundni** ili **trajni** uvid — na zahtjev ili proaktivno. Pregledavanje je besplatno.                             |
-| „Morat ću predati osobnu iskaznicu ili telefon." | Prijava novčanikom (SIWE). Bez telefona, bez e-pošte, bez KYC-a. Oporavak radi putem on-chain obveze DNK.                                                                     |
-| „On ili ona laže o zdravlju."                    | Rezultati su **laboratorijski provjereni** (QR + usporedba lica), a testovi para se uzimaju **na samom sastanku** — svježi STD rezultati su bitni, DNK ne stari.              |
-| „Hoće li mi netko uzeti novac i nestati?"        | Začeće radi na pravom, izloženom ulogu: muškarčev depozit mijenja vlasnika samo kada je očinstvo **potvrđeno**; inače mu se jednostavno vraća.                                |
-| „Je li token pump-and-dump?"                     | Danas nijedna prodaja nije aktivna; kod je otvoren (MIT); necirkulirajuća rezerva se planira zaključati u **nemoguće isprazniti trezoru** iz kojeg ne može podići ni osnivač. |
-| „Može li platforma biti ugašena ili zabranjena?" | Prije svega peer-to-peer poruke, decentralizirana pohrana (IPFS / Arweave), 18 konfiguracija EVM mreža i bez hardcodirane domene.                                             |
+| Briga                                            | Što EVOLVE već radi po tom pitanju                                                                                                                                                                           |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| „Moji zdravstveni podaci će iscuriti."           | Rezultati pojedinačnih patogena se **nikada** ne pokazuju nikome — samo anonimni verdikt: Safe / Compatible / Caution / Risk.                                                                                |
+| „Moje fotografije će završiti negdje."           | Fotografije su zadano zamagljene. Vlasnik dodjeljuje **15-sekundni** ili **trajni** uvid — na zahtjev ili proaktivno. Pregledavanje je besplatno.                                                            |
+| „Morat ću predati osobnu iskaznicu ili telefon." | Prijava novčanikom (SIWE). Bez telefona, bez e-pošte, bez KYC-a. Oporavak radi putem on-chain obveze DNK.                                                                                                    |
+| „On ili ona laže o zdravlju."                    | Rezultati su **laboratorijski provjereni** (QR + usporedba lica), a testovi para se uzimaju **na samom sastanku** — svježi STD rezultati su bitni, DNK ne stari.                                             |
+| „Hoće li mi netko uzeti novac i nestati?"        | Začeće radi na pravom, izloženom ulogu: muškarčev depozit mijenja vlasnika samo kada je očinstvo **potvrđeno**; inače mu se jednostavno vraća.                                                               |
+| „Je li token pump-and-dump?"                     | Kod je otvoren (MIT); gotovo cijela ponuda rezervirana je za korisničke nagrade, a necirkulirajuća rezerva planira se zaključati u **trezor koji se ne može isprazniti** iz kojeg ne može podići ni osnivač. |
+| „Može li platforma biti ugašena ili zabranjena?" | Prije svega peer-to-peer poruke, decentralizirana pohrana (IPFS / Arweave), 18 konfiguracija EVM mreža i bez hardcodirane domene.                                                                            |
 
 ## Što i zašto
 
@@ -62,6 +63,17 @@ Dva načina planiranja djeteta — i oba počivaju na istoj ideji: prava namjera
 
 **Poliandrično začeće.** Izbor pripada njoj — i ostaje privatan. Otvara sesiju koja traje 48 sati — bez vlastitog depozita (može ga dodati samo za reputaciju, ako želi). Muškarci s aktivnim depozitom mogu se pridružiti — do 50 — i potvrditi, čime se zaključava njihov ulog. Četrnaest dana nakon zatvaranja sesije bira se otac. On dobiva svoj depozit natrag plus nagradu iz fonda: dvostruki svoj depozit i 1 EVOLVE za svakog drugog sudionika. Muškarci koji nisu odabrani gube svoj ulog — 90% ide ženi, 10% odabranom ocu. Ona ne riskira ništa i može samo dobiti; muškarci ulažu svoj ulog za pravo da budu odabrani.
 
+## Privatnost i povjerljive transakcije
+
+Privatnost je zadana — i EVOLVE gradi plan prema potpuno povjerljivim on-chain prijenosima.
+
+- **Privatni pokloni** — pošaljite ružu 🌹 ili kaktus 🌵 (1 EVOLVE) i odaberite tko može vidjeti da ste to bili vi: _javno_, _anonimno svima osim primatelju_, ili _potpuno anonimno_. U anonimnim načinima poklon putuje kao jednokratni vaučer koji primatelj preuzima vlastitim novčanikom, tako da se pošiljatelj nikada ne pojavljuje on-chain. (Anonimnost pošiljatelja danas je povremene razine: transakcija financiranja može se korelirati po vremenu i iznosu.)
+- **Railgun zaštićeni novčanik** — privatni novčanik s oznakom značajke (`VITE_RAILGUN_ENABLED`, zadano isključeno) koji skriva iznose i adrese koristeći Railgunov live zero-knowledge pool. Ovo je put do prave anonimnosti pošiljatelja.
+- **Aztec prototip** — ista logika privatnog prijenosa i privatnog veza, izražena kao Noir krugovi nultog znanja i držana iza eksplicitne kapije dok Aztec ne bude spreman za proizvodnju. Vidi [docs/AZTEC-PROTOTYPE.md](docs/AZTEC-PROTOTYPE.md).
+- **Model s dva novčanika** — javni novčanik za ulog sudjeluje u upravljanju; privatni zaštićeni novčanik namjerno je **isključen** iz težine upravljanja, čime se privatnost i glasačka moć drže odvojenima.
+
+Detalji: [docs/RAILGUN-INTEGRATION.md](docs/RAILGUN-INTEGRATION.md) · [docs/SHIELDED-STAKES-DESIGN.md](docs/SHIELDED-STAKES-DESIGN.md) · [docs/AZTEC-PROTOTYPE.md](docs/AZTEC-PROTOTYPE.md).
+
 ## Token EVOLVE (samo testna mreža)
 
 - ERC-20, maksimalna ponuda **8,000,000,000 EVOLVE**. Admin akcije čuva 48-satni `TimelockController`.
@@ -86,10 +98,10 @@ Dva načina planiranja djeteta — i oba počivaju na istoj ideji: prava namjera
 
 EVOLVE je neovisan i open-source. Ako vam je koristan, možete podržati razvoj donacijom — svaki doprinos ide u kod, laboratorijska partnerstva, hosting i prijevode.
 
-- **Detalji donacija (EVM, Monero i više):** [DONATE.md](DONATE.md)
+- **Detalji donacija (EVM, Monero i više):** [DONATE.MD](DONATE.MD)
 - **Višejezična stranica za donacije (34 jezika):** **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**
 
-Javna prodaja tokena je na planu, ali danas **nije** aktivna. Donacije su darovi koji podržavaju open-source razvoj i ne daju nikakvo pravo na tokene, udjele, prinose ili dobit. Molimo dajte samo onoliko koliko možete izgubiti.
+Javna prodaja tokena je **planirana** — 5,000,000 EVOLVE, koje prodaje aplikacija (vidi [Token EVOLVE](#token-evolve-samo-testna-mreža)). Donacije su darovi koji podržavaju open-source razvoj i ne daju nikakvo pravo na tokene, udjele, prinose ili dobit. Molimo dajte samo onoliko koliko možete izgubiti.
 
 ## Arhitektura i tehnološki stack
 
@@ -115,9 +127,9 @@ Detalji: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](
 
 ## Roadmap
 
-U tijeku: produkcijska spremnost web aplikacije. Planirano: on-chain registar laboratorija i certifikacija testova, pravi adapter pružatelja pošte za prijem laboratorijskih izvještaja, on-chain potvrđene atestacije na profilima, **trustless RewardVault** s emisijom kontroliranom kroz governance ([dizajn](docs/REWARD-VAULT-PLAN.md)), **javna prodaja tokena**, ažuriranje vestinga za alokaciju osnivača te osiguravanje DEX likvidnosti (trenutno blokirano — zahtijeva postavljanje tokena na mainnet). Višemrežno širenje (Arbitrum, Avalanche i druge EVM mreže) slijedi nakon učvršćivanja testneta.
+U tijeku: produkcijska spremnost web aplikacije. Planirano: on-chain registar laboratorija i certifikacija testova, pravi adapter pružatelja pošte za prijem laboratorijskih izvještaja, on-chain potvrđene atestacije na profilima, **trustless RewardVault** s emisijom kontroliranom kroz governance ([dizajn](docs/REWARD-VAULT-PLAN.md)), **javna prodaja tokena**, ažuriranje vestinga za alokaciju osnivača te osiguravanje DEX likvidnosti (trenutno blokirano — zahtijeva postavljanje tokena na mainnet). S privatne strane, pokloni privatni pošiljatelju su gotovi, dok Railgun zaštićeni novčanik i Aztec migracija privatnog veza ostaju iza provjera u [docs/ROADMAP.md](docs/ROADMAP.md) i [docs/AZTEC-PROTOTYPE.md](docs/AZTEC-PROTOTYPE.md). Višemrežno širenje (Arbitrum, Avalanche i druge EVM mreže) slijedi nakon učvršćivanja testneta.
 
-Cijeli popis: [docs/ROADMAP.md](docs/ROADMAP.md).
+Cijeli popis: [docs/ROADMAP.MD](docs/ROADMAP.MD).
 
 ## Prvi koraci (developeri)
 
@@ -143,9 +155,9 @@ npm run deploy:local    # deploy all contracts to an in-process Hardhat network
 
 ## Doprinos
 
-Doprinosi su dobrodošli — kod, prijave grešaka, prijedlozi značajki i proposal. Prije početka molimo pročitajte [CONTRIBUTING.md](CONTRIBUTING.md) i naš [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+Doprinosi su dobrodošli — kod, prijave grešaka, prijedlozi značajki i proposal. Prije početka molimo pročitajte [CONTRIBUTING.MD](CONTRIBUTING.MD) i naš [CODE_OF_CONDUCT.MD](CODE_OF_CONDUCT.MD).
 
-## Repoitoriji (mirror)
+## Repozitoriji (mirror)
 
 | Mirror   | URL                                        |
 | -------- | ------------------------------------------ |
@@ -160,6 +172,9 @@ Doprinosi su dobrodošli — kod, prijave grešaka, prijedlozi značajki i propo
 - [Arhitektura](docs/ARCHITECTURE.md) — monorepo, paketi, tijekovi podataka
 - [Tokenomika](docs/TOKENOMICS.md) — model tokena i raspodjela ponude
 - [Plan RewardVault](docs/REWARD-VAULT-PLAN.md) — trustless emisija (planirana)
+- [Railgun integracija](docs/RAILGUN-INTEGRATION.md) — integracija zaštićenog novčanika
+- [Zaštićeni ulozi](docs/SHIELDED-STAKES-DESIGN.md) — privatni ulozi za začeće (dizajn)
+- [Aztec prototip](docs/AZTEC-PROTOTYPE.md) — ZK privatni prijenosi i veze (istraživanje)
 - [Roadmapa](docs/ROADMAP.md) — miljokazi i trenutni status
 - [FAQ](docs/FAQ.md) — često postavljana pitanja
 - [Vodič za novčanike](docs/WALLETS.md) — kako kreirati novčanike i dobiti adrese za donacije

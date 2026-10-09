@@ -40,7 +40,7 @@ Yes, EVOLVE is an ERC-20 token. It plays a crucial role in the platform's govern
 
 ### Can I buy EVOLVE tokens?
 
-**No, there is no public sale of EVOLVE tokens.** Tokens are primarily earned through active participation in the platform, such as through the emoji gift economy or as verification rewards for STD/DNA test confirmations. Donations are accepted as gifts, but they do not constitute a purchase of tokens or an investment.
+**Not yet — a public sale is planned.** 5,000,000 EVOLVE are planned to be sold by the app at $0.8 each (see the README's token section). Today, tokens are primarily earned through active participation in the platform, such as through the emoji gift economy or as verification rewards for STD/DNA test confirmations. Donations are accepted as gifts, but they do not constitute a purchase of tokens or an investment.
 
 ## Technology
 

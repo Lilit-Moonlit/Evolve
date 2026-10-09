@@ -1,99 +1,111 @@
 [English](README.md) | [العربية](README.ar.md) | [Български](README.bg.md) | [Čeština](README.cs.md) | [Dansk](README.da.md) | [Deutsch](README.de.md) | [Ελληνικά](README.el.md) | [Español](README.es.md) | [Eesti](README.et.md) | [Suomi](README.fi.md) | [Filipino](README.fil.md) | [Français](README.fr.md) | [עברית](README.he.md) | [Hrvatski](README.hr.md) | [Magyar](README.hu.md) | [Íslenska](README.is.md) | [Italiano](README.it.md) | [日本語](README.ja.md) | [Lietuvių](README.lt.md) | [Latviešu](README.lv.md) | [Norsk bokmål](README.nb.md) | [नेपाली](README.ne.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português](README.pt.md) | [Română](README.ro.md) | [Русский](README.ru.md) | [Slovenčina](README.sk.md) | [Slovenščina](README.sl.md) | [Svenska](README.sv.md) | [Kiswahili](README.sw.md) | [Українська](README.uk.md) | [Tiếng Việt](README.vi.md) | [繁體中文](README.zh-TW.md)
+<!-- evolve-readme-sync: 3796750887b0bd65 -->
 
 # EVOLVE
 
-**Stefnumót, getnaður og sannað heilsufar — persónuvernd að sjálfgefnu, traust þar sem máli skiptir.**
+**Stefnumót, getnaður og sannreynd heilsa — persónuvernd að sjálfgefnu, traust þar sem mest skiptir máli.**
 
-EVOLVE er opinn og dreifður vettvangur fyrir fólk sem er búið að láta símanúmer sitt, andlit sitt og mostu einkalífsheilbrigðisgögn sín fara í gagnagrunn annarra. Þú skráir þig inn með eigin kryptoveski — enginn sími, enginn tölvupóstur, engin KYC — og þú getur fengið reikninginn þinn aftur með DNA-skuldbindingu á blokkkeðju. Heilbrigðisgögnin þín verða áfram þín: prófniðurstöður eru þáttaðar sjálfvirkt, stöður einstakra sýkla eru **aldrei** sýndar neinum, og samsvörun byggir aðeins á nafnlausum samhæfnisdómum (Safe / Compatible / Caution / Risk). Spjallið keyrir jafningja til jafningja (peer-to-peer) yfir libp2p og Nostr, með HTTP-varasíðu þæginda sakar.
+EVOLVE er opinn, dreifður vettvangur fyrir fólk sem er búið að þreyta á að afhenda símanúmerið sitt, andlitið og einkasömustu heilsugögn sín í gagnagrunn annarra. Þú skráir þig inn með eigin rafmyntaveski — enginn sími, enginn tölvupóstur, ekkert KYC — og þú getur endurheimt aðganginn þinn með DNA-skuldbindingu á blokkkeðjunni. Heilsugögnin þín eru áfram þín: prófniðurstöður eru þáttaðar sjálfkrafa, staða einstakra sýkla er **aldrei** sýnd neinum og pörun byggist aðeins á nafnlausum samhæfnisdómum (Safe / Compatible / Caution / Risk). Spjall keyrir jafningjakennt yfir libp2p og Nostr, með HTTP-varasíðu til þæginda. Gjafir og yfirfærslur stefna að fullkomnum trúnaði: gjafir með falinn sendanda eru komnar í notkun í dag, og skýjað Railgun-veski ásamt núllþekkingarfrumgerð frá Aztec eru á vegvísinni (sjá [Persónuvernd og trúnaðarviðskipti](#persónuvernd-og-trúnaðarviðskipti)).
 
-> **Staða — vettvangurinn virkar í dag; aðalnet (mainnet) og DEX eru næst.**
-> Stefnumót, getnaður, heilbrigðissannprófun, rannsóknarstofuferlið, P2P-spjall, EVOLVE-táknið og stjórn eru öll í gangi. Enn þá vantar: **uppsetningu á aðalneti og DEX-miðlægni**, auk **skipulagðs opinbers sölu** (sjá [EVOLVE-táknið](#evolve-táknmyntin-aðeins-prófunarnet)).
-> Samningarnir eru settir upp **aðeins á Ethereum Sepolia prófunarnetinu**. Ekkert hér er fjármálaráðgjöf eða fjárfestingartilboð.
+> **Staða — kynningarhamur (demo), í virkri þróun.**
+> Stefnumót, getnaður, heilbrigðissannvottun, rannsóknarstofuferlið, P2P-spjall, EVOLVE-táknið og stjórnkerfið eru öll útfærð og keyra í **staðværum kynningarham** — forritið er **ekki ennþá uppsett opinberlega**. Enn á eftir: **uppsetning á aðalneti og DEX-miðlægni**, auk **áætlaðrar opinberar sölu** (sjá [EVOLVE-táknið](#evolve-táknið-aðeins-prófunarnet)).
+> Samningarnir (smart contracts) eru settir upp **aðeins á Ethereum Sepolia-prófunarnetinu**. Ekkert hér er fjármálaráðgjöf eða fjárfestingartilboð.
 
-> **Finndu EVOLVE gagnlegt? Styddu þróunina — hvert framlag fer í kóða, samstarf við rannsóknarstofur, hýsingu og þýðingu → [DONATE.md](DONATE.md).**
+> **Nýtir þér EVOLVE? Styddu þróunina — hvert framlag fer í kóða, samstarf við rannsóknarstofur, hýsingu og þýðingar → [DONATE.md](DONATE.md).**
 
 ## Ekkert að óttast
 
-EVOLVE var byggt í kringum þau spurningar sem fólk spyr í raun áður en það byrjar að treysta slíkum vettvangi.
+EVOLVE var byggt í kringum þær spurningar sem fólk spyr í raun og veru áður en það treystir slíkum vettvangi.
 
-| Áhyggjuna                                              | Það sem EVOLVE gerir þegar við henni                                                                                                                                          |
-| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| „Heilbrigðisgögnin mín leka."                          | Niðurstöður einstakra sýkla eru **aldrei** sýndar neinum — aðeins nafnlaus dómgildurdómur: Safe / Compatible / Caution / Risk.                                                |
-| „Myndirnar mínar enda einhvers staðar."                | Myndir eru óskýrar að sjálfgefnu. Eigandinn veitir **15 sekúndna** eða **varanlega** sýn — fyrirspurn eða frumkvæði. Að skoða er ókeypis.                                     |
-| „Ég þarf að afhenda skilríki eða síma."                | Innskráning með veski (SIWE). Enginn sími, enginn tölvupóstur, engin KYC. Endurheimt fer fram með DNA-skuldbindingu á blokkkeðju.                                             |
-| „Hann eða hún lygur um að vera heilbrigð/ur."          | Niðurstöður eru **rannsóknarstofusannaðar** (QR + andlitsjöfnun), og próf parinu eru tekin **við sjálft fundinn** — nýlegar STD-niðurstöður skipta máli, DNA eldist ekki.     |
-| „Tekur einhver peningana mína og hvarfst?"             | Getnaðurinn byggir á raunverulegri, áhættusettinni veðsetningu: innborgun karlmanns hreyfist aðeins þegar feðravídd er **sönnuð**; annars er hún einfaldlega skilað til hans. |
-| „Er táknið pump-and-dump?"                             | Engin sala er í gangi í dag; kóðinn er opinn (MIT); óbrúkaða varasjóðnum er ætlað að vera læstur í **óþurrandi hvelfingu** sem ekki einu sinni stofnandinn getur tekið úr.    |
-| „Getur vettvangurnum verið lagður niður eða bannaður?" | Jafningjaskilaboð fyrst, dreifð geymsla (IPFS / Arweave), 18 EVM-netstillingar og engin harðkóðuð lén.                                                                        |
+| Áhyggjan                                          | Það sem EVOLVE gerir nú þegar við henni                                                                                                                                                                                        |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| „Heilsugögnin mín leki út."                       | Niðurstöður einstakra sýkla eru **aldrei** sýndar neinum — aðeins nafnlaus dómur: Safe / Compatible / Caution / Risk.                                                                                                          |
+| „Myndirnar mínar endi einhvers staðar."           | Myndir eru gerðar óskýrar (blur) sjálfgefið. Eigandinn veitir **15 sekúndna** eða **varanlega** sýn — um er beðið eða af eigin frumkvæði. Að skoða er ókeypis.                                                                 |
+| „Ég verð að afhenda skilríki eða síma."           | Innskráning með veski (SIWE). Enginn sími, enginn tölvupóstur, ekkert KYC. Endurheimt virkar í gegnum DNA-skuldbindingu á keðjunni.                                                                                            |
+| „Hann eða hún er að ljúga um að vera heilbrigð."  | Niðurstöður eru **sannprófaðar í rannsóknarstofu** (QR + andlitsjöfnun) og próf parsins eru tekin **á fundinum sjálfum** — nýlegar STD-niðurstöður skipta máli, DNA eldist ekki.                                               |
+| „Tekur einhver peningana mína og hvarfli?"        | Getnaður byggir á raunverulegri, áhættusettri veðsetningu: innborgun karlmanns hreyfist aðeins þegar feðgni er **staðfest**; annars er hún einfaldlega skilað til hans.                                                        |
+| „Er táknið pump-and-dump?"                        | Kóðinn er opinn (MIT); nánast allt framboðið er frátekið til verðlauna fyrir notendur, og varasjóðnum sem ekki er komið í umferð er ætlað að læsast í **ótæmanlegu þjóðhólfi** sem ekki einu sinni stofnandinn getur tekið úr. |
+| „Getur vettvangurinn verið lokaður eða bannaður?" | Jafningjaspjall fyrst, dreifð geymsla (IPFS / Arweave), 18 EVM-netuppsetningar og engin harðkóðuð lén.                                                                                                                         |
 
-## Hvað & hvers vegna
+## Hvað og af hverju
 
-Hefðbundnar stefnumótssmáforrit biðja þig að skipta á símanúmeri, tölvupósti, myndum og nákvæmum heilsuupplýsingum gegn miðlægum gagnagrunni — og treysta svo honum að eilífu. EVOLVE byrjar á gagnstæðu forsendunum: **persónuvernd að sjálfgefnu, eigin varðveisla og ekkert stakt bilunarpunktur**.
+Venjuleg stefnumótaforrit biðja þig um að skipta á símanúmeri, tölvupósti, myndum og náinnum heilsuupplýsingum gegn aðalgagnagrunni — og svo að treysta þeim gagnagrunni að eilífu. EVOLVE byrjar á öfugu inntaki: **persónuvernd að sjálfgefnu, eigin varðveisla gilda og enginn einn bilunarpunktur**.
 
-- **Persónuvernd að sjálfgefnu** — heilsugögnum er aldrei haldið upp á; aðeins nafnlausir dómar.
-- **Viðnám gegn bönnum** — jafningjaskilaboð fyrst, dreifð geymsla, margnetahönnun, engin harðkóðuð lén.
-- **Sjálfvarðveitt auðkenni** — veskið þitt er innskráningin þín; DNA-byggð endurheimt í stað tölvupósts eða síma.
-- **Engin KYC-hurð** — engin ríkisauðkenni, sími eða tölvupóstur nauðsynlegur til að nota vettvanginn.
+- **Persónuvernd að sjálfgefnu** — heilsugögn eru aldrei gefnar út; aðeins nafnlausir dómar.
+- **Mótþró gegn bönnum** — P2P-fyrst spjall, dreifð geymsla, margnetshönnun, engin harðkóðuð lén.
+- **Eiginvarðveitt auðkenni** — veskið þitt er innskráningin þín; DNA-endurheimt í stað tölvupósts eða síma.
+- **Ekkert KYC-hlið** — engin ríkisskilríki, sími né tölvupóstur nauðsynlegur til að nota vettvanginn.
 
-Lestu öll röksemdafærsluna í [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md).
+Lestu öll rökin í [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md).
 
-## Heilsufar sem þú getur í raun treyst
+## Heilsa sem þú getur treyst í raun og veru
 
-- Hladdu upp STD-prófi sem hrám texta eða PDF (þáttun textalags, með OCR-varasíðu fyrir skönnun).
-- Þáttarinn þekkir 8 sýkla: HIV-1/2, syfils, klamydíu, gonnórru, HSV-1, HSV-2, lifrarbólgu B, lifrarbólgu C — á ensku, úkraínsku og rússnesku skýrslusniði.
-- **Staða einstakra sýkla er aldrei sýnd öðrum notendum.** Síður sýna aðeins nafnlausa dóminn: **Safe / Compatible / Caution / Risk**.
-- DNA-færslur á blokkkeðju (`DNAVerification.sol`) knýja endurheimt og sannprófun.
+- Hlaðið inn STD-prófi sem hrám texta eða PDF (útdráttur textalags, með OCR-varasíðu fyrir skönnun).
+- Þáttarinn þekkir 8 sýkla: HIV-1/2, syfils, klamydíu, gonorea, HSV-1, HSV-2, lifrarbólgu B og lifrarbólgu C — á ensku, úkraínsku og rússnesku skýrslusniði.
+- **Staða einstakra sýkla er aldrei sýnd öðrum notendum.** Prófílar sýna aðeins nafnlausann dóm: **Safe / Compatible / Caution / Risk**.
+- DNA-færslur á keðjunni (`DNAVerification.sol`) knýja endurheimtu og sannvottun.
 
 ### Samstarfsrannsóknarstofur — sönnun, ekki fyrirheit
 
-Gakktu inn í samstarfsrannsóknarstofu og sýndu QR-kóðann þinn. Stofan skannar hann, staðfestir auðkenni þitt með **andlitsjöfnun** (svo að enginn annar geti sótt niðurstöðu þína) og hengir STD-skýrlsuna við — PDF, skönnun eða texta, jafnvel með slæmri OCR. Niðurstaðan er undirrituð af alvöru rannsóknarstofu, ekki af þér, svo aðrir sjá **sannaða staðreynd** í stað orða þinna. Og hver staðfest sannprófun greiðir **1 EVOLVE til sjúklingsins og 1 EVOLVE til rannsóknarstofunnar** — báðir aðilar hafa ástæðu til að vera heiðarlegir. Einstakir sýklar eru samt aldrei sýndir neinum.
+Gakktu inn í samstarfsrannsóknarstofu og sýndu QR-kóðann þinn. Rannsóknarstofan skannar hann, staðfestir auðkenni þín með **andlitsjöfnun** (svo aðrir geta ekki sótt niðurstöðuna þína) og hengir STD-skýrsluna við — PDF, skanna eða texta, jafnvel slæmt OCR. Niðurstaðan er undirrituð af alvöru rannsóknarstofu, ekki af þér, svo aðrir sjá **sannreynda staðreynd** í stað orða þinna. Og hver staðfest sannvottun greiðir **1 EVOLVE til sjúklingsins og 1 EVOLVE til rannsóknarstofunnar** — báðir aðilar hafa ástæðu til að vera heiðarlegir. Stakir sýklar eru áfram aldrei sýndir neinum.
 
 ## Að finna einhvern
 
-- Leitarsíur: „Hvað ert þú að leita að" (stefnumót / getnaður / fjölkarlsgetnaður / STD-prófun), „Hverjum ert þú að leita að" (karlar, konur, par), fallval ríki → borg, „getur komið í landið þitt" með listum fyrir hvert land, húðlit, prófunarstilling, aðeins STD-samhæft.
-- Kynningarálfur: aldur (hægt að fela), tungumál, æviágrip, mynd.
-- **P2P-spjall** yfir libp2p (gossipsub) + Nostr, með HTTP-API varasíðu.
+- Leitarsíur: „Hvað ertu að leita að" (stefnumót / getnaður / fjölkarlgetnaður / STD-prófun), „Hverjum ertu að leita að" (karlar, konur, pör), keðjuð land → borg veldi, „getur komið til lands þíns" með landalistum, húðlit, prófunarstilling, aðeins STD-samhæft.
+- Kynningarferli (wizard): aldur (hægt að fela), tungumál, stutt eiginlýsing, mynd.
+- **P2P-spjall** yfir libp2p (gossipsub) + Nostr, með HTTP API-varasíðu.
 
 ## Getnaður
 
-Tvær leiðir til að skipuleggja barn, og hvort tveggja byggir á sömu hugmynd: raunverulegur hugur er sýndur með raunverulegri veðsetningu í EVOLVE — aldrei með fyrirheitum. Skuldbinding karlmanns lifir í EvolveFund-innborgun hans (frá 15 EVOLVE, læst í að minnsta kosti 30 daga), og kona getur sett eigin lágmarksinnborgun fyrir karlmenn sem ná til hennar.
+Tvær leiðir til að skipuleggja barnseign, og hvíla báðar á sömu hugmynd: raunverulegur ásetningur er sýndur fram á með raunverulegu veði í EVOLVE — aldrei með fyrirheitum. Ábyrgð karlmanns býr í EvolveFund-innborgun hans (frá 15 EVOLVE, læst í að minnsta kosti 30 daga), og kona getur sett eigin lágmarksinborgun fyrir þá karlmenn sem ná til hennar.
 
-**Getnaður.** Konan leiðir: hún býður ákveðnum karlmanni og nefnir hann í skuldaviðkvæði. Hann þarf virka EvolveFund-innborgun; þegar bæði staðfesta er hún læst og niðurtalningin byrjar. Meðganga er tilkynnt 14 til 30 dögum eftir staðfestingu, og STD- og DNA-próf parinu eru tekin við sjálft fundinn — nýlegar STD-niðurstöður skipta máli, DNA eldist ekki. Þegar feðravídd er sönnuð fer innborgun karlmanns til konunnar; ef hún er ekki sönnuð er innborgunin einfaldlega leyst til baka til hans. Ekkert skiptir um hönd fyrr en staðreyndir eru ljósar.
+**Getnaður.** Konan stjórnar: hún býður tilteknum karlmanni og nefnir hann í bandi. Hann þarf virka EvolveFund-innborgun; þegar bæði staðfesta er hún læst og niðurtalningin byrjar. Þungun er tilkynnt milli 14 og 30 daga eftir staðfestingu, og STD- og DNA-próf parsins eru tekin á fundinum sjálfum — nýlegar STD-niðurstöður skipta máli, DNA eldist ekki. Þegar feðgni er staðfest fer innborgun karlmannsins til konunnar; ef hún er ekki staðfest er innborgunin einfaldlega leyst til baka til hans. Ekkert skiptir um hendur fyrr en staðreyndunum hefur verið komið á skýrt.
 
-**Fjölkarlsgetnaður.** Valið tilheyrir henni og helst nafnlaust. Hún opnar setu sem stendur í 48 klukkustundir — án eigin innborgunar (aðeins vegna orðspors má hún bæta við einni, ef hún vill). Karlmenn með virka innborgun geta gengið í — allt að 50 — og staðfest, sem læsir veðsetningu þeirra. Fjórtán dögum eftir að setan lokast er faðirinn valinn. Hann fær innborgun sína aftur auk verðlauna úr safninu: tvöfalt innborgunina sína og 1 EVOLVE fyrir hvern annan þátttakanda. Karlmennirnir sem ekki eru valdir missa veðsetningu sína — 90 % til konunnar, 10 % til valda föður. Hún á enga áhættu og getur aðeins unnið; karlmennirnir setja veðsetningu sína á bak við réttinn til að vera valdir.
+**Fjölkarlgetnaður.** Valið er á hennar höndum, og helst í einkahaldi. Hún opnar setu sem stendur í 48 klukkustundir — án eigin innborgunar (hún má aðeins bæta við slíkri til mannorðs, ef hún vill). Karlmenn með virkri innborgun mega ganga í setuna — allt að 50 — og staðfesta, sem læsir veðinu þeirra. Fjórtán dögum eftir að setunni er lokað er faðirinn valinn. Hann fær innborgun sína aftur auk verðlauna úr verðlaunasjóðnum: tvöfaldri innborgun sinni og 1 EVOLVE fyrir hvern annan þátttakanda. Karlmennirnir sem ekki eru valdir missa veðið sitt — 90% fara til konunnar, 10% til þess föður sem valinn var. Hún á enga áhættu og getur aðeins hlotið; karlmennirnir setja veðið sitt að baki réttinum til að vera valdir.
 
-## EVOLVE-táknmyntin (aðeins prófunarnet)
+## Persónuvernd og trúnaðarviðskipti
 
-- ERC-20, hámarksframboð **8,000,000,000 EVOLVE**. Stjórnendaaðgerðir eru læstar af 48 klukkustunda `TimelockController`.
-- **Skipulögð úthlutun framboðs** — hönnuð til að setja næstum allt framboðið í vinnu fyrir notendur, ekki fyrir innvingaða:
+Persónuvernd er sjálfgefin — og EVOLVE er að móta vegvísi að fullkomnum trúnaði við yfirfærslur á keðjunni.
+
+- **Einkagjafir** — sendu rós 🌹 eða kaktus 🌵 (1 EVOLVE) og veldu hver getur séð að þú girst: _opinbert_, _nafnlaust gagnvart öllum nema viðtakandanum_ eða _fullkomnlega nafnlaust_. Í nafnlausu hamunum fer gjöfin sem eins-nota kvittun sem viðtakandinn leysir inn með eigin veski, svo sendandinn birtist aldrei á keðjunni. (Nafnleysi sendanda er í dag aðeins hversdagslegt: hægt er að tengja fjármögnunarfærsluna saman eftir tíma og upphæð.)
+- **Skýjað Railgun-veski** — einkaveski undir eiginleikaflaggi (`VITE_RAILGUN_ENABLED`, slökkt að sjálfgefnu) sem felur upphæðir og vistföng með lifandi núllþekkingarsafni Railgun. Þetta er leiðin að sönnu nafnleysi sendanda.
+- **Aztec-frumgerð** — sama rökfræði einkayfirfærslna og einkabanda, sett fram sem núllþekkingar Noir-rásir og haldið bak við skýrt opnunarskilyrði þar til Aztec er framleiðsluviðbúið. Sjá [docs/AZTEC-PROTOTYPE.md](docs/AZTEC-PROTOTYPE.md).
+- **Tveggja-veskja líkan** — opið veðveski tekur þátt í stjórnkerfinu; einkaskýjað veski er meðvitað **undanskilið** stjórnarþunga og heldur þar með persónuvernd og kosningavaldi aðskildu.
+
+Nánar: [docs/RAILGUN-INTEGRATION.md](docs/RAILGUN-INTEGRATION.md) · [docs/SHIELDED-STAKES-DESIGN.md](docs/SHIELDED-STAKES-DESIGN.md) · [docs/AZTEC-PROTOTYPE.md](docs/AZTEC-PROTOTYPE.md).
+
+## EVOLVE-táknið (aðeins prófunarnet)
+
+- ERC-20, hámarksframboð **8,000,000,000 EVOLVE**. Stjórnendaaðgerðir eru háðar 48 klukkustunda `TimelockController`.
+- **Áætluð úthlutun framboðs** — hönnuð til að setja nánast allt framboðið í vinnu fyrir notendur, ekki fyrir innherja:
 
 | Tilgangur                                                    |        EVOLVE |
 | ------------------------------------------------------------ | ------------: |
 | Stofnendur og teymi (laun / verðlaun)                        |    25,000,000 |
 | DEX-varasjóður (framtíð)                                     |     4,000,000 |
-| Opinber sala (skipulögð)                                     |     5,000,000 |
+| Opinber sala (áætluð)                                        |     5,000,000 |
 | Verðlaunasjóður — rannsóknarstofur, sjúklingar, mæður, feður | 7,966,000,000 |
 
-- **Skipulöguð opinber sala** — 5,000,000 EVOLVE eru seld af smáforritinu á **$0.8 stykk**, greiðanlegt í hvaða táknmynd sem smáforritið styður; tekjur fjármagna þróunina. _(Skipulagt — ekki komið live.)_
-- **Trustless-lausun (skipulögð)** — verðlaunasjóðurinn ~7,966,000,000 á að vera læstur í óþurrandi `RewardVault`: aðeins lausað hægt og rólega í gegnum verðlaun til rannsóknarstofna, sjúklinga, mæðra og feðra, og breytingar á reglum krefjast kosningar í stjórn. Ekki einu sinni stofnandinn getur tekið úr honum. Hönnun: [docs/REWARD-VAULT-PLAN.md](docs/REWARD-VAULT-PLAN.md).
-- **Emoji-gjafahagkerfi** — gjöf kostar 1 EVOLVE, skipt hlutfallslega milli núverandi gjafaeigenda; endalaust tekjulíkan, og gjafir eru færanlegar.
-- **EvolveFund** — karlveðsetning (min. 15 EVOLVE, 30 daga læsing) sem telst í stjórnarþunga; konur nota veskisjöfnuð sinn.
-- **Sannprófunarverðlaun** — 1 EVOLVE til staðfests notanda og 1 EVOLVE til staðfestandi stofu fyrir hverja STD-/DNA-sannprófun (auk takmarkaðs krana (faucet)).
-- **Stjórn** — atkvæðaþungi sameinar endurtekið orðspor (8 atkvæði, dýpt 3), hlutdeild barna/feðravíddar, og veðsett eða haldið EVOLVE.
-- **LayerZero OFT** samþætting fyrir framtíðarmargkeðju EVOLVE-yfirfærslur (kerfiskröfur á stað; ekkert uppsett fyrir utan Sepolia ennþá).
+- **Áætluð opinber sala** — 5,000,000 EVOLVE seld af forritinu á **0,8 USD stykkið**, greinanlegt í hvaða tákn sem forritið styður; hagnaðurinn fer í þróun. _(Áætlun — ekki komið í gang ennþá.)_
+- **Traustlaus losun (áætluð)** — u.þ.b. 7,966,000,000 verðlaunaforðinn á að læsast í ótæmanlegan `RewardVault`: aðeins losað hægt og rólega í gegnum verðlaun til rannsóknarstofna, sjúklinga, mæðra og feðra, og breytingar á reglum krefjast stjórnaratkvæðagreiðslu. Ekki einu sinni getur stofnandinn tekið úr honum. Hönnun: [docs/REWARD-VAULT-PLAN.md](docs/REWARD-VAULT-PLAN.md).
+- **Emoji-gjafahagkerfi** — gjöf kostar 1 EVOLVE, skipt hlutfallslega milli núverandi gjafaeigenda; varanlegt tekjulíkan, og gjafir eru færanlegar.
+- **EvolveFund** — veðsetning karlmanna (lágmark 15 EVOLVE, 30 daga læsing) sem telst með í stjórnarþunga; konur nota veskisjöfnuð sinn.
+- **Sannvottunarverðlaun** — 1 EVOLVE til sannvottaðs notanda og 1 EVOLVE til staðfestandi rannsóknarstofu fyrir hverja STD/DNA-sannvottun (auk hraðatakmarkaðs krana).
+- **Stjórn** — atkvæðaþungi sameinar endurkvæmt mannorð (8 atkvæði, dýpt 3), hlutfall barna/feðrna og veðsett eða haldið EVOLVE.
+- **LayerZero OFT**-samþætting fyrir framtíðar fjölkeðju-yfirfærslur EVOLVE (kerfiskröfur komnar á sinn stað; ekkert uppsett handan Sepolia ennþá).
 
 ## Styðja verkefnið
 
-EVOLVE er sjálfstætt og með opinn kóða. Ef það er gagnlegt fyrir þig geturðu stutt þróunina með framlagi — hvert framlag fer í kóða, samstarf við rannsóknarstofur, hýsingu og þýðingu.
+EVOLVE er sjálfstætt og opinn hugbúnaður. Ef það nýtist þér getur þú stytt þróunina með framlagi — hvert framlag fer í kóða, rannsóknarstofusamstarf, hýsingu og þýðingar.
 
 - **Nánar um framlög (EVM, Monero og fleira):** [DONATE.md](DONATE.md)
 - **Fjöltyngd framlagssíða (34 tungumál):** **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**
 
-Opinber táknmyndasala er á vegvísinn en er **ekki** í gangi í dag. Framlög eru gjafir sem styðja opinn hugbúnaðarþróun og veita enga kröfu á táknmyndir, eignarhlut, ávöxtun eða hagnað. Gefðu aðeins það sem þú getur leyft þér að missa.
+Opinber táknsala er **áætluð** — 5,000,000 EVOLVE, seld af forritinu (sjá [EVOLVE-táknið](#evolve-táknið-aðeins-prófunarnet)). Framlög eru gjafir sem styðja þróun opinns hugbúnaðar og veita enga kröfu á tákn, eignarhlut, ávöxtun eða gróða. Gefðu aðeins það sem þú ræður við að tapa.
 
-## Uppbygging & tækni
+## Uppbygging og tækni
 
-Eitt geymslusvæði (monorepo) stjórnað með npm workspaces + Turborepo:
+Mónorepo stýrt með npm workspaces + Turborepo:
 
 ```
 apps/
@@ -109,17 +121,17 @@ packages/
 docs/           # Architecture, tokenomics, roadmap, FAQ
 ```
 
-Lykilsamningarnir: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (emoji-gjafir + verðlaun), `Governance.sol`, `BondManager.sol` (getnaður og fjölkarlsgetnaður), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster`, og OpenZeppelin `TimelockController`.
+Aðalsamningarnir: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (emoji-gjafir + verðlaun), `Governance.sol`, `BondManager.sol` (getnaður og fjölkarlgetnaður), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster`, og OpenZeppelin `TimelockController`.
 
 Nánar: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md)
 
 ## Vegvísir
 
-Í vinnslu: framleiðsluþrek vefsmáforritsins. Skipulagt: blokkkeðjuskrá rannsóknarstofna og vottun prófa, alvöru póstveituþjónusta fyrir móttöku rannsóknarstofuskýrslna, staðfestar vottanir á blokkkeðju í síðum, **trustless RewardVault** með stjórnstýrðri losun ([hönnun](docs/REWARD-VAULT-PLAN.md)), **opinber táknmyndasala**, uppfærsla á táknmyndavestingu fyrir stofnendaúthlutun, og DEX-miðlægniveiting (nú lokað — hún krefst aðalnetuppsetningar táknmyndarinnar). Margnetaviðbót (Arbitrum, Avalanche og aðrar EVM-keðjur) kemur eftir að prófunarnetið er hermt.
+Í gangi: að gera vefforritið framleiðsluviðbúið. Áætlað: rannsóknarstofaskrá og prófavottun á keðju, raunverulegt viðmót fyrir tölvupóstþjónustu við móttöku rannsóknarstofuskýrslna, sannvottuð vottorð á prófílum á keðju, **traustlaust RewardVault** með stjórnvarðri losun ([hönnun](docs/REWARD-VAULT-PLAN.md)), **opinber táknsala**, uppfærsla á vesting fyrir úthlutun stofnenda og DEX-miðlægniveiting (nú stöðvuð — krefst tákn-uppsetninga á aðalneti). Á persónuverndarsviðinu eru einkagjafir með falnum sendanda kláraðar, en skýjaða Railgun-veskið og flutningur Aztec-einkabanda helst á bak við athuganir í [docs/ROADMAP.md](docs/ROADMAP.md) og [docs/AZTEC-PROTOTYPE.md](docs/AZTEC-PROTOTYPE.md). Margnetsútvíkkun (Arbitrum, Avalanche og aðrar EVM-keðjur) kemur eftir herðingu prófunarnetsins.
 
 Fullur listi: [docs/ROADMAP.md](docs/ROADMAP.md).
 
-## Byrja (hönnuðir)
+## Til að byrja (þróunaraðilar)
 
 Kröfur: **Node.js 20+** og npm 10.x.
 
@@ -143,9 +155,9 @@ npm run deploy:local    # deploy all contracts to an in-process Hardhat network
 
 ## Þátttaka
 
-Þátttaka er velkomin — kóði, villuskýrslur, tillögur að eiginleikum og uppástungur. Lestu [CONTRIBUTING.md](CONTRIBUTING.md) og [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) okkar áður en þú byrjar.
+Framlög eru velkomin — kóði, villuskýrslur, tillögur að eiginleikum og máltillögur. Lestu [CONTRIBUTING.md](CONTRIBUTING.md) og [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) okkar áður en þú byrjar.
 
-## Geymslur (spegill)
+## Hugbúnaðarsöfn (spegillar)
 
 | Spegill  | URL                                        |
 | -------- | ------------------------------------------ |
@@ -153,17 +165,20 @@ npm run deploy:local    # deploy all contracts to an in-process Hardhat network
 | Codeberg | https://codeberg.org/limitafternoon/Evolve |
 | GitLab   | https://gitlab.com/evolve-group3/evolve    |
 
-## Skjöl
+## Skjölun
 
-- [Hvað & hvers vegna](docs/WHAT-AND-WHY.md) — vandamál, sýn, kjargildi
+- [Hvað og af hverju](docs/WHAT-AND-WHY.md) — vandamál, sýn, kjargildi
 - [Hvernig það virkar](docs/HOW-IT-WORKS.md) — notendaferli, skref fyrir skref
-- [Uppbygging](docs/ARCHITECTURE.md) — monorepo, pakkar, gagnaflæði
-- [Tokenomics](docs/TOKENOMICS.md) — táknmyndlíkan og úthlutun framboðs
-- [RewardVault-áætlun](docs/REWARD-VAULT-PLAN.md) — trustless losun (skipulögð)
-- [Vegvísir](docs/ROADMAP.md) — áfangar og núverandi staða
-- [FAQ](docs/FAQ.md) — algengar spurningar
-- [Veskishandbók](docs/WALLETS.md) — hvernig á að búa til vaski og fá framlagsföng
+- [Uppbygging](docs/ARCHITECTURE.md) — mónorepo, pakkar, gagnaflæði
+- [Táknfræði](docs/TOKENOMICS.md) — táknlíkan og úthlutun framboðs
+- [RewardVault-áætlun](docs/REWARD-VAULT-PLAN.md) — traustlaus losun (áætluð)
+- [Railgun-samþætting](docs/RAILGUN-INTEGRATION.md) — samþættingarprófun skýjaðs veskis
+- [Skýjaðar veðsetningar](docs/SHIELDED-STAKES-DESIGN.md) — einkaveðsetningar getnaðar (hönnun)
+- [Aztec-frumgerð](docs/AZTEC-PROTOTYPE.md) — ZK-einkayfirfærslur og bönd (rannsókn)
+- [Vegvísir](docs/ROADMAP.md) — áföng og núverandi staða
+- [Algengar spurningar](docs/FAQ.md) — tíðar spurningar
+- [Veskishandbók](docs/WALLETS.md) — hvernig á að búa til veski og fá framlagsvistföng
 
 ## Leyfi
 
-Leyft samkvæmt [MIT-leyfinu](LICENSE).
+Gefið út undir [MIT-notkunarleyfinu](LICENSE).

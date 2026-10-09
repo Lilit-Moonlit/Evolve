@@ -19,7 +19,10 @@
     "format": "prettier --write \"**/*.{ts,tsx,md,sol}\"",
     "prepare": "husky install",
     "generate:files": "node scripts/generate-files.js",
-    "sync-proposals": "tsx scripts/sync-proposals.mjs"
+    "sync-proposals": "tsx scripts/sync-proposals.mjs",
+    "translate-readme": "node scripts/translate-readme.mjs",
+    "translate-readme:check": "node scripts/translate-readme.mjs --check",
+    "translate-readme:stamp": "node scripts/translate-readme.mjs --stamp"
   },
   "devDependencies": {
     "@chainsafe/libp2p-gossipsub": "^14.1.2",

@@ -1,0 +1,92 @@
+# README translation sync — NO central server.
+# Detects when README.md (the English source of truth) drifts from its 34
+# README.<code>.md translations. If a translation service is configured
+# (EVOLVE_TRANSLATE_API_URL + EVOLVE_TRANSLATE_API_KEY) it translates the stale
+# languages automatically and commits them; otherwise it opens a tracking issue
+# listing the stale languages. The hash-marker convention lives in
+# scripts/translate-readme.mjs.
+name: Sync README Translations
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "README.md"
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: translate-readme
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build translation manifest
+        run: node scripts/translate-readme.mjs --manifest
+
+      - name: Detect staleness
+        id: stale
+        run: |
+          COUNT=$(node -e "console.log(JSON.parse(require('fs').readFileSync('scripts/.readme-translation-manifest.json','utf8')).staleCount)")
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+
+      - name: Detect translator
+        id: gate
+        env:
+          EVOLVE_TRANSLATE_API_URL: ${{ secrets.EVOLVE_TRANSLATE_API_URL }}
+          EVOLVE_TRANSLATE_API_KEY: ${{ secrets.EVOLVE_TRANSLATE_API_KEY }}
+        run: |
+          if [ -n "$EVOLVE_TRANSLATE_API_URL" ] && [ -n "$EVOLVE_TRANSLATE_API_KEY" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Translate stale languages
+        if: steps.stale.outputs.count != '0' && steps.gate.outputs.enabled == 'true'
+        run: node scripts/translate-readme.mjs --translate
+        env:
+          EVOLVE_TRANSLATE_API_URL: ${{ secrets.EVOLVE_TRANSLATE_API_URL }}
+          EVOLVE_TRANSLATE_API_KEY: ${{ secrets.EVOLVE_TRANSLATE_API_KEY }}
+
+      - name: Commit translations if changed
+        if: steps.stale.outputs.count != '0' && steps.gate.outputs.enabled == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.*.md
+          if git diff --cached --quiet; then
+            echo "translations unchanged — nothing to commit"
+          else
+            git commit -m "docs(i18n): refresh README translations"
+            git push
+          fi
+
+      - name: Open issue when no translator is configured
+        if: steps.stale.outputs.count != '0' && steps.gate.outputs.enabled != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          STALE=$(node -e "console.log(JSON.parse(require('fs').readFileSync('scripts/.readme-translation-manifest.json','utf8')).stale.join(', '))")
+          TITLE="README translations out of date"
+          BODY="README.md changed but the following translations are stale: ${STALE}. Run \`npm run translate-readme\` (see AGENTS.md)."
+          if gh issue list --state open --search "\"${TITLE}\"" --json number | grep -q number; then
+            echo "issue already open — skipping"
+          else
+            gh issue create --title "${TITLE}" --body "${BODY}" --label i18n
+          fi

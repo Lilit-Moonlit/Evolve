@@ -4,10 +4,10 @@
 
 **Dating, conception and verified health — private by default, trusted where it counts.**
 
-EVOLVE is an open-source, decentralized platform for people who are done handing their phone number, their face and their most intimate health data to somebody else's database. You sign in with your own crypto wallet — no phone, no email, no KYC — and you can get your account back through an on-chain DNA commitment. Your health data stays yours: test results are parsed automatically, individual pathogen statuses are **never** shown to anyone, and matching relies only on anonymous compatibility verdicts (Safe / Compatible / Caution / Risk). Chat runs peer-to-peer over libp2p and Nostr, with an HTTP fallback for convenience.
+EVOLVE is an open-source, decentralized platform for people who are done handing their phone number, their face and their most intimate health data to somebody else's database. You sign in with your own crypto wallet — no phone, no email, no KYC — and you can get your account back through an on-chain DNA commitment. Your health data stays yours: test results are parsed automatically, individual pathogen statuses are **never** shown to anyone, and matching relies only on anonymous compatibility verdicts (Safe / Compatible / Caution / Risk). Chat runs peer-to-peer over libp2p and Nostr, with an HTTP fallback for convenience. Gifts and transfers are heading toward full confidentiality: sender-private gifts are live today, with a Railgun shielded wallet and an Aztec zero-knowledge prototype on the roadmap (see [Privacy & confidential transactions](#privacy--confidential-transactions)).
 
-> **Status — the platform works today; mainnet and DEX are next.**
-> Dating, conception, health verification, the laboratory flow, P2P chat, the EVOLVE token and governance are all up and running. Still ahead: a **mainnet deployment and DEX liquidity**, plus a **planned public sale** (see [The EVOLVE token](#the-evolve-token-testnet-only)).
+> **Status — demo mode, in active development.**
+> Dating, conception, health verification, the laboratory flow, P2P chat, the EVOLVE token and governance are all implemented and run in a **local demo** — the app is **not yet publicly deployed**. Still ahead: a **mainnet deployment and DEX liquidity**, plus a **planned public sale** (see [The EVOLVE token](#the-evolve-token-testnet-only)).
 > Smart contracts are deployed on the **Ethereum Sepolia testnet only**. Nothing here is financial advice or an investment offer.
 
 > **Find EVOLVE useful? Support development — every donation goes to code, lab partnerships, hosting and translation → [DONATE.md](DONATE.md).**
@@ -16,15 +16,15 @@ EVOLVE is an open-source, decentralized platform for people who are done handing
 
 EVOLVE was built around the questions people actually ask before trusting a platform like this.
 
-| The worry                                  | What EVOLVE already does about it                                                                                                                                          |
-| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| "My health data will leak."                | Individual pathogen results are **never** shown to anyone — only an anonymous verdict: Safe / Compatible / Caution / Risk.                                                 |
-| "My photos will end up somewhere."         | Photos are blurred by default. The owner grants a **15-second** or **permanent** view — on request or proactively. Viewing is free.                                        |
-| "I'll have to hand over my ID or phone."   | Wallet login (SIWE). No phone, no email, no KYC. Recovery works through an on-chain DNA commitment.                                                                        |
-| "He or she is lying about being healthy."  | Results are **lab-verified** (QR + face match), and the couple's tests are taken **at the meeting** — recent STD results matter, DNA does not age.                         |
-| "Will someone take my money and vanish?"   | Conception runs on a real, at-risk stake: a man's deposit only moves when paternity is **confirmed**; otherwise it is simply returned to him.                              |
-| "Is the token a pump-and-dump?"            | No sale is live today; the code is open (MIT); the un-circulated reserve is planned to be locked in a **non-drainable vault** that not even the founder can withdraw from. |
-| "Can the platform be shut down or banned?" | Peer-to-peer messaging first, decentralized storage (IPFS / Arweave), 18 EVM network configs, and no hardcoded domain.                                                     |
+| The worry                                  | What EVOLVE already does about it                                                                                                                                                                             |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| "My health data will leak."                | Individual pathogen results are **never** shown to anyone — only an anonymous verdict: Safe / Compatible / Caution / Risk.                                                                                    |
+| "My photos will end up somewhere."         | Photos are blurred by default. The owner grants a **15-second** or **permanent** view — on request or proactively. Viewing is free.                                                                           |
+| "I'll have to hand over my ID or phone."   | Wallet login (SIWE). No phone, no email, no KYC. Recovery works through an on-chain DNA commitment.                                                                                                           |
+| "He or she is lying about being healthy."  | Results are **lab-verified** (QR + face match), and the couple's tests are taken **at the meeting** — recent STD results matter, DNA does not age.                                                            |
+| "Will someone take my money and vanish?"   | Conception runs on a real, at-risk stake: a man's deposit only moves when paternity is **confirmed**; otherwise it is simply returned to him.                                                                 |
+| "Is the token a pump-and-dump?"            | The code is open (MIT); almost the whole supply is reserved for user rewards, and the un-circulated reserve is planned to be locked in a **non-drainable vault** that not even the founder can withdraw from. |
+| "Can the platform be shut down or banned?" | Peer-to-peer messaging first, decentralized storage (IPFS / Arweave), 18 EVM network configs, and no hardcoded domain.                                                                                        |
 
 ## What & Why
 
@@ -62,6 +62,17 @@ Two ways to plan a child, and both rest on the same idea: real intention is show
 
 **Polyandrous conception.** The choice belongs to her, and stays private. She opens a session that runs for 48 hours — with no deposit of her own (she may add one only for reputation, if she wishes). Men with an active deposit may join — up to 50 — and confirm, which locks their stake. Fourteen days after the session closes, the father is chosen. He gets his deposit back plus a reward from the pool: twice his deposit and 1 EVOLVE for every other participant. The men who are not chosen lose their stake — 90% to the woman, 10% to the chosen father. She risks nothing and can only gain; the men put their stake behind the right to be chosen.
 
+## Privacy & confidential transactions
+
+Privacy is the default — and EVOLVE is building a roadmap toward fully confidential on-chain transfers.
+
+- **Private gifts** — send a rose 🌹 or a cactus 🌵 (1 EVOLVE) and choose who can see it was you: _public_, _anonymous to everyone except the recipient_, or _fully anonymous_. In the anonymous modes the gift travels as a single-use voucher that the recipient claims with their own wallet, so the sender never appears on-chain. (Sender anonymity today is casual-grade: the funding transaction can be correlated by time and amount.)
+- **Railgun shielded wallet** — a feature-flagged private wallet (`VITE_RAILGUN_ENABLED`, off by default) that hides amounts and addresses using Railgun's live zero-knowledge pool. This is the path to true sender anonymity.
+- **Aztec prototype** — the same private-transfer and private-bond logic, expressed as zero-knowledge Noir circuits and kept behind an explicit gate until Aztec is production-ready. See [docs/AZTEC-PROTOTYPE.md](docs/AZTEC-PROTOTYPE.md).
+- **Two-wallet model** — a public stake-wallet participates in governance; a private shielded wallet is deliberately **excluded** from governance weight, keeping privacy and voting power separate.
+
+Details: [docs/RAILGUN-INTEGRATION.md](docs/RAILGUN-INTEGRATION.md) · [docs/SHIELDED-STAKES-DESIGN.md](docs/SHIELDED-STAKES-DESIGN.md) · [docs/AZTEC-PROTOTYPE.md](docs/AZTEC-PROTOTYPE.md).
+
 ## The EVOLVE token (testnet only)
 
 - ERC-20, max supply **8,000,000,000 EVOLVE**. Admin actions are gated by a 48-hour `TimelockController`.
@@ -89,7 +100,7 @@ EVOLVE is independent and open-source. If it is useful to you, you can support d
 - **Donation details (EVM, Monero and more):** [DONATE.md](DONATE.md)
 - **Multilingual donation page (34 languages):** **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**
 
-A public token sale is on the roadmap but is **not** live today. Donations are gifts that support open-source development and give no claim to tokens, equity, returns or profit. Please only give what you can afford to lose.
+A public token sale is **planned** — 5,000,000 EVOLVE, sold by the app (see [The EVOLVE token](#the-evolve-token-testnet-only)). Donations are gifts that support open-source development and give no claim to tokens, equity, returns or profit. Please only give what you can afford to lose.
 
 ## Architecture & Tech Stack
 
@@ -115,7 +126,7 @@ Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](
 
 ## Roadmap
 
-In progress: production-readiness of the web app. Planned: on-chain lab registry and test certification, a real mail-provider adapter for lab report ingestion, on-chain verified attestations on profiles, the **trustless RewardVault** with governance-gated emission ([design](docs/REWARD-VAULT-PLAN.md)), the **public token sale**, token vesting update for the founder allocation, and DEX liquidity provisioning (currently blocked — it requires mainnet token deployments). Multi-network expansion (Arbitrum, Avalanche and other EVM chains) follows after testnet hardening.
+In progress: production-readiness of the web app. Planned: on-chain lab registry and test certification, a real mail-provider adapter for lab report ingestion, on-chain verified attestations on profiles, the **trustless RewardVault** with governance-gated emission ([design](docs/REWARD-VAULT-PLAN.md)), the **public token sale**, token vesting update for the founder allocation, and DEX liquidity provisioning (currently blocked — it requires mainnet token deployments). On the privacy side, sender-private gifts are done, while the Railgun shielded wallet and the Aztec private-bond migration stay gated behind the checks in [docs/ROADMAP.md](docs/ROADMAP.md) and [docs/AZTEC-PROTOTYPE.md](docs/AZTEC-PROTOTYPE.md). Multi-network expansion (Arbitrum, Avalanche and other EVM chains) follows after testnet hardening.
 
 Full list: [docs/ROADMAP.md](docs/ROADMAP.md).
 
@@ -160,6 +171,9 @@ Contributions are welcome — code, bug reports, feature suggestions and proposa
 - [Architecture](docs/ARCHITECTURE.md) — monorepo, packages, data flows
 - [Tokenomics](docs/TOKENOMICS.md) — token model and supply distribution
 - [RewardVault plan](docs/REWARD-VAULT-PLAN.md) — trustless emission (planned)
+- [Railgun integration](docs/RAILGUN-INTEGRATION.md) — shielded-wallet integration spike
+- [Shielded stakes](docs/SHIELDED-STAKES-DESIGN.md) — private conception stakes (design)
+- [Aztec prototype](docs/AZTEC-PROTOTYPE.md) — ZK private transfers & bonds (research)
 - [Roadmap](docs/ROADMAP.md) — milestones and current status
 - [FAQ](docs/FAQ.md) — frequently asked questions
 - [Wallet guide](docs/WALLETS.md) — how to create wallets and get donation addresses

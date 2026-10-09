@@ -1,99 +1,111 @@
 [English](README.md) | [العربية](README.ar.md) | [Български](README.bg.md) | [Čeština](README.cs.md) | [Dansk](README.da.md) | [Deutsch](README.de.md) | [Ελληνικά](README.el.md) | [Español](README.es.md) | [Eesti](README.et.md) | [Suomi](README.fi.md) | [Filipino](README.fil.md) | [Français](README.fr.md) | [עברית](README.he.md) | [Hrvatski](README.hr.md) | [Magyar](README.hu.md) | [Íslenska](README.is.md) | [Italiano](README.it.md) | [日本語](README.ja.md) | [Lietuvių](README.lt.md) | [Latviešu](README.lv.md) | [Norsk bokmål](README.nb.md) | [नेपाली](README.ne.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português](README.pt.md) | [Română](README.ro.md) | [Русский](README.ru.md) | [Slovenčina](README.sk.md) | [Slovenščina](README.sl.md) | [Svenska](README.sv.md) | [Kiswahili](README.sw.md) | [Українська](README.uk.md) | [Tiếng Việt](README.vi.md) | [繁體中文](README.zh-TW.md)
+<!-- evolve-readme-sync: 3796750887b0bd65 -->
 
 # EVOLVE
 
-**Dejting, befruktning och verifierad hälsa — privat som standard, tillit där det spelar roll.**
+**Dejting, befruktning och verifierad hälsa — privat som standard, pålitligt där det verkligen spelar roll.**
 
-EVOLVE är en decentraliserad plattform med öppen källkod för människor som är trötta på att lämna sitt telefonnummer, sitt ansikte och sina mest intimaste hälsodata till någon annans databas. Du loggar in med din egen kryptoplånbok — ingen telefon, ingen e-post, inget KYC — och du kan få tillbaka ditt konto via ett DNA-åtagande on-chain. Dina hälsodata förblir dina: testresultat tolkas automatiskt, enskilda patogenstatus visas **aldrig** för någon, och matchning bygger endast på anonyma kompatibilitetsutlåtanden (Safe / Compatible / Caution / Risk). Chatt sker peer-to-peer över libp2p och Nostr, med en HTTP-fallback för bekvämlighet.
+EVOLVE är en decentraliserad plattform med öppen källkod för människor som är trötta på att lämna ifrån sig sitt telefonnummer, sitt ansikte och sina allra känsligaste hälsodata till någon annans databas. Du loggar in med din egen kryptoplånbok — ingen telefon, ingen e-post, ingen KYC — och du kan få tillbaka ditt konto via ett on-chain DNA-åtagande. Dina hälsodata förblir dina: testresultat tolkas automatiskt, enskilda patogeners status visas **aldrig** för någon, och matchningen vilar endast på anonyma kompatibilitetsutlåtanden (Safe / Compatible / Caution / Risk). Chatt sker peer-to-peer över libp2p och Nostr, med ett HTTP-fallback för bekvämlighetens skull. Gåvor och överföringar är på väg mot fullständig konfidentialitet: gåvor med skyddad avsändare finns redan idag, och en skyddad Railgun-plånbok samt en nollkunskapsprototyp på Aztec står på roadmapen (se [Privatliv & konfidentiella transaktioner](#privatliv--konfidentiella-transaktioner)).
 
-> **Status — plattformen fungerar redan idag; mainnet och DEX är nästa steg.**
-> Dejting, befruktning, hälsöverifiering, labbflödet, P2P-chatt, EVOLVE-token och styrning är alla igång. Fortfarande på väg: en **mainnet-distribution och DEX-likviditet**, samt en **planerad offentlig försäljning** (se [EVOLVE-token](#evolve-token-endast-testnet)).
-> Smarta kontrakt är distribuerade **endast på Ethereum Sepolia testnet**. Inget här är finansiell rådgivning eller ett investeringserbjudande.
+> **Status — demoläge, under aktiv utveckling.**
+> Dejting, befruktning, hälsoverifiering, labbflödet, P2P-chatt, EVOLVE-token och styrningen är alla implementerade och körs i en **lokal demo** — appen är **ännu inte publikt distribuerad**. Det som återstår: en **mainnet-distribution och DEX-likviditet**, plus en **planerad offentlig försäljning** (se [EVOLVE-token](#evolve-token-endast-testnet)).
+> De smarta kontrakten är distribuerade **endast på Ethereum Sepolia testnet**. Inget här är finansiell rådgivning eller ett investeringserbjudande.
 
-> **Tycker du EVOLVE är användbar? Stöd utvecklingen — varje donation går till kod, labbpartnerskap, hosting och översättning → [DONATE.md](DONATE.md).**
+> **Hittar du EVOLVE användbart? Stöd utvecklingen — varje donation går till kod, labbpartnerskap, hosting och översättning → [DONATE.md](DONATE.md).**
 
-## Inget att frukta
+## Ingenting att frukta
 
-EVOLVE byggdes kring de frågor människor faktiskt ställer innan de litar på en plattform som denna.
+EVOLVE byggdes kring de frågor människor faktiskt ställer sig innan de litar på en plattform av det här slaget.
 
-| Oro                                            | Vad EVOLVE redan gör åt det                                                                                                                                                  |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ”Mina hälsodata kommer att läcka."             | Enskilda patogenresultat visas **aldrig** för någon — endast ett anonymt utlåtande: Safe / Compatible / Caution / Risk.                                                      |
-| ”Mina foton hamnar någonstans."                | Foton är suddiga som standard. Ägaren beviljar en **15-sekunders** eller **permanent** visning — på begäran eller proaktivt. Att titta är gratis.                            |
-| ”Jag måste lämna ID eller telefon."            | Plånbokslogin (SIWE). Ingen telefon, ingen e-post, inget KYC. Återställning sker via ett DNA-åtagande on-chain.                                                              |
-| ”Han eller hon ljuger om att vara frisk."      | Resultaten är **labbverifierade** (QR + ansiktsmatchning), och parets tester tas **vid själva mötet** — färska STD-resultat spelar roll, DNA åldras inte.                    |
-| ”Kommer någon ta mina pengar och försvinna?"   | Befruktning vilar på en verklig, risktagande insats: en mans insats flyttas endast när faderskapet är **bekräftat**; annars returneras den enkelt till honom.                |
-| ”Är tokenen ett pump-and-dump?"                | Ingen försäljning är live idag; koden är öppen (MIT); reserven utanför cirkulation planeras låsas i ett **valv som inte kan tömmas**, som inte ens grundaren kan ta ut från. |
-| ”Kan plattformen stängas ner eller förbjudas?" | Peer-to-peer-meddelanden först, decentraliserad lagring (IPFS / Arweave), 18 EVM-nätverkskonfigurationer och ingen hårdkodad domän.                                          |
+| Oro                                              | Vad EVOLVE redan gör åt saken                                                                                                                                                                                               |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| "Mina hälsodata kommer att läcka."               | Enskilda patogenresultat visas **aldrig** för någon — endast ett anonymt utlåtande: Safe / Compatible / Caution / Risk.                                                                                                     |
+| "Mina foton kan hamna var som helst."            | Foton visas suddiga som standard. Ägaren beviljar en **15-sekunders** eller **permanent** visning — på begäran eller proaktivt. Att titta är gratis.                                                                        |
+| "Jag måste lämna över min ID eller telefon."     | Inloggning med plånbok (SIWE). Ingen telefon, ingen e-post, ingen KYC. Återställning sker via ett on-chain DNA-åtagande.                                                                                                    |
+| "Han eller hon ljuger om att vara frisk."        | Resultaten är **labbverifierade** (QR + ansiktsmatchning), och parets tester tas **vid själva mötet** — färska STD-resultat spelar roll, DNA åldras inte.                                                                   |
+| "Kommer någon att ta mina pengar och försvinna?" | Befruktningen vilar på en verklig insats med verklig risk: en mans insättning flyttas endast när faderskapet är **bekräftat**; annars returneras den helt enkelt till honom.                                                |
+| "Är token en pump-and-dump?"                     | Koden är öppen (MIT); nästan hela utbudet är reserverat för belöningar till användare, och reserven som inte hunnit cirkulera planeras låsas i ett **valv som inte kan tömmas** — inte ens grundaren kan göra uttag ur det. |
+| "Kan plattformen stängas av eller förbjudas?"    | Peer-to-peer-meddelanden i första hand, decentraliserad lagring (IPFS / Arweave), 18 EVM-nätverkskonfigurationer och ingen hårdkodad domän.                                                                                 |
 
 ## Vad & varför
 
-Traditionella dejtingappar ber dig byta ditt telefonnummer, din e-post, dina foton och intima hälsoinformation mot en central databas — och sedan lita på den databasen för alltid. EVOLVE utgår från motsatt förutsättning: **integritet som standard, självförvaring (self-custody) och ingen enskild felpunkt**.
+Traditionella dejtingappar ber dig byta ditt telefonnummer, din e-post, dina foton och intima hälsouppgifter mot en plats i en central databas — och sedan att lita på den databasen för alltid. EVOLVE utgår från den motsatta premissen: **privatliv som standard, self-custody och ingen enskild felkälla**.
 
-- **Integritet som standard** — hälsodata exponeras aldrig; endast anonyma utlåtanden.
-- **Motståndskraft mot förbud** — P2P-först-meddelanden, decentraliserad lagring, flernätverksdesign, inga hårdkodade domäner.
-- **Självförvarad identitet** — din plånbok är din inloggning; DNA-baserad återställning istället för e-post eller telefon.
-- **Ingen KYC-grind** — ingen myndighetslegitimation, telefon eller e-post krävs för att använda plattformen.
+- **Privatliv som standard** — hälsodata exponeras aldrig; endast anonyma utlåtanden.
+- **Motståndskraft mot avstängning** — meddelanden P2P-först, decentraliserad lagring, design för flera nätverk, inga hårdkodade domäner.
+- **Identitet i egen förvaring** — din plånbok är din inloggning; DNA-baserad återställning i stället för e-post eller telefon.
+- **Ingen KYC-grind** — ingen legitimation, telefon eller e-post krävs för att använda plattformen.
 
 Läs hela motiveringen i [docs/WHAT-AND-WHY.md](docs/WHAT-AND-WHY.md).
 
 ## Hälsa du faktiskt kan lita på
 
-- Ladda upp ett STD-test som råtext eller PDF (textlagersextraktion, med OCR-fallback för skanningar).
-- Parsern känner till 8 patogener: HIV-1/2, syfilis, klamydia, gonorré, HSV-1, HSV-2, hepatit B, hepatit C — i engelska, ukrainska och ryska rapportformat.
-- **Enskild patogenstatus visas aldrig för andra användare.** Profiler visar endast det anonyma utlåtandet: **Safe / Compatible / Caution / Risk**.
-- On-chain DNA-register (`DNAVerification.sol`) driver återställning och verifiering.
+- Ladda upp ett STD-test som råtext eller PDF (utvinning ur textlagret, med OCR-fallback för skanningar).
+- Tolken känner igen 8 patogener: HIV-1/2, syfilis, klamydia, gonorré, HSV-1, HSV-2, hepatit B, hepatit C — i engelska, ukrainska och ryska rapportformat.
+- **Enskilda patogeners status visas aldrig för andra användare.** Profiler visar endast det anonyma utlåtandet: **Safe / Compatible / Caution / Risk**.
+- On-chain-DNA-register (`DNAVerification.sol`) driver återställning och verifiering.
 
-### Partnerlaboratorier — bevis, inte löften
+### Partnerlabb — bevis, inte löften
 
-Kliv in i ett partnerlabb och visa din QR-kod. Labbet skannar den, bekräftar din identitet med **ansiktsmatchning** (så att ingen annan kan hämta ditt resultat) och bifogar STD-rapporten — PDF, skanning eller text, även med dålig OCR. Resultatet signeras av ett riktigt laboratorium, inte av dig, så andra ser ett **verifierat faktum** istället för ditt ord. Och varje bekräftad verifiering betalar **1 EVOLVE till patienten och 1 EVOLVE till laboratoriet** — båda sidor har ett skäl att vara ärliga. Enskilda patogener visas fortfarande aldrig för någon.
+Kliv in på ett partnerlabb och visa din QR-kod. Labbet skannar den, bekräftar din identitet med **ansiktsmatchning** (så att ingen annan kan hämta ditt resultat) och bifogar STD-rapporten — PDF, skanning eller text, även en dålig OCR. Resultatet signeras av ett riktigt laboratorium, inte av dig, så andra ser ett **verifierat faktum** i stället för ditt ord. Och varje bekräftad verifiering betalar ut **1 EVOLVE till patienten och 1 EVOLVE till labbet** — båda sidor har ett incitament att vara ärliga. Enskilda patogener visas fortfarande aldrig för någon.
 
-## Hitta någon
+## Att hitta någon
 
-- Sökfilter: ”Vad söker du” (dejting / befruktning / polyandrisk befruktning / STD-testning), ”Vem söker du” (män, kvinnor, par), kaskadval land → stad, ”kan resa till ditt land” med listor per land, hudfärg, testpreferens, endast STD-kompatibla.
-- Onboarding-guide: ålder (kan döljas), språk, bio, foto.
+- Sökfilter: "Vad söker du" (dejting / befruktning / polyandrisk befruktning / STD-testning), "Vem söker du" (män, kvinnor, par), kaskadval för land → stad, "kan resa till ditt land" med listor per land, hudfärg, testpreferens, endast STD-kompatibla.
+- Onboarding-guide: ålder (kan döljas), språk, presentation, foto.
 - **P2P-chatt** över libp2p (gossipsub) + Nostr, med ett HTTP-API som fallback.
 
 ## Befruktning
 
-Två sätt att planera ett barn — och båda vilar på samma idé: verklig avsikt visas med en verklig insats i EVOLVE — aldrig med löften. En mans åtagande lever i hans EvolveFund-insats (från 15 EVOLVE, låst i minst 30 dagar), och en kvinna kan sätta sin egen minimiinsats för männen som når henne.
+Två sätt att planera ett barn, och båda vilar på samma idé: verklig avsikt visas med en verklig insats i EVOLVE — aldrig med löften. En mans åtagande lever i hans EvolveFund-insättning (från 15 EVOLVE, låst i minst 30 dagar), och en kvinna kan sätta sin egen minimiinsättning för de män som når fram till henne.
 
-**Befruktning.** Kvinnan leder: hon bjuder in en specifik man och namnger honom i en bond. Han behöver en aktiv EvolveFund-insats; när båda bekräftar låses den och nedräkningen börjar. Graviditet rapporteras mellan 14 och 30 dagar efter bekräftelsen, och parets STD- och DNA-tester tas vid själva mötet — färska STD-resultat spelar roll, DNA åldras inte. När faderskapet är bekräftat går mannens insats till kvinnan; om det inte bekräftas återlämnas insatsen enkelt till honom. Inget byter ägare innan fakta är klarlagda.
+**Befruktning.** Kvinnan leder: hon bjuder in en bestämd man och namnger honom i en bond. Han behöver en aktiv EvolveFund-insättning; när båda bekräftar låses den och nedräkningen börjar. Graviditet rapporteras mellan 14 och 30 dagar efter bekräftelsen, och parets STD- och DNA-tester tas vid själva mötet — färska STD-resultat spelar roll, DNA åldras inte. När faderskapet har bekräftats går mannens insättning till kvinnan; om det inte bekräftas släpps insättningen helt enkelt tillbaka till honom. Inget byter ägare innan sakläget är fastslaget.
 
-**Polyandrisk befruktning.** Valet tillhör henne — och förblir privat. Hon öppnar en session som pågår i 48 timmar — utan egen insats (hon kan lägga till en endast för ryktets skull, om hon vill). Män med aktiv insats kan gå med — upp till 50 — och bekräfta, vilket låser deras satsning. Fjorton dagar efter att sessionen stängs väljs fadern. Han får tillbaka sin insats plus en belöning från poolen: dubbla hans insats och 1 EVOLVE för varje annan deltagare. Männen som inte väljs förlorar sin satsning — 90% till kvinnan, 10% till den valde fadern. Hon riskerar inget och kan bara vinna; männen sätter sin satsning bakom rätten att bli vald.
+**Polyandrisk befruktning.** Valet är hennes, och det förblir privat. Hon öppnar en session som pågår i 48 timmar — utan egen insättning (hon kan lägga till en endast för ryktets skull, om hon vill). Män med en aktiv insättning kan gå med — upp till 50 — och bekräfta, vilket låser deras insats. Fjorton dagar efter att sessionen stängts väljs fadern. Han får tillbaka sin insättning plus en belöning från poolen: dubbelt så mycket som sin insättning och 1 EVOLVE för varje övrig deltagare. Männen som inte blir valda förlorar sin insats — 90 % går till kvinnan och 10 % till den utvalde fadern. Hon riskerar ingenting och kan bara vinna; männen sätter sin insats på rätten att bli valda.
+
+## Privatliv & konfidentiella transaktioner
+
+Privatliv är utgångsläget — och EVOLVE bygger en roadmap mot fullt konfidentiella on-chain-transaktioner.
+
+- **Privata gåvor** — skicka en ros 🌹 eller en kaktus 🌵 (1 EVOLVE) och välj vem som ska kunna se att det var du: _publikt_, _anonymt för alla utom mottagaren_ eller _helt anonymt_. I de anonyma lägena reser gåvan som en engångs-voucher som mottagaren löser in med sin egen plånbok, så att avsändaren aldrig syns på kedjan. (Avsändaranonymiteten är idag av vardagsklass: finansieringstransaktionen kan kopplas samman via tidpunkt och belopp.)
+- **Skyddad Railgun-plånbok** — en funktionsflaggad privat plånbok (`VITE_RAILGUN_ENABLED`, av som standard) som döljer belopp och adresser med Railguns nollkunskaps-pool i drift. Detta är vägen till verklig avsändaranonymitet.
+- **Aztec-prototyp** — samma logik för privata överföringar och privata bond, uttryckt som nollkunskapskretsar i Noir och hålls bakom en explicit grind tills Aztec är produktionsklart. Se [docs/AZTEC-PROTOTYPE.md](docs/AZTEC-PROTOTYPE.md).
+- **Modell med två plånböcker** — en publik insatsplånbok deltar i styrningen; en privat skyddad plånbok är medvetet **exkluderad** från styrningsvikten, vilket håller privatliv och röststyrka åtskilda.
+
+Detaljer: [docs/RAILGUN-INTEGRATION.md](docs/RAILGUN-INTEGRATION.md) · [docs/SHIELDED-STAKES-DESIGN.md](docs/SHIELDED-STAKES-DESIGN.md) · [docs/AZTEC-PROTOTYPE.md](docs/AZTEC-PROTOTYPE.md).
 
 ## EVOLVE-token (endast testnet)
 
-- ERC-20, maxtillgång **8,000,000,000 EVOLVE**. Adminåtgärder begränsas av en 48-timmars `TimelockController`.
-- **Planerad tillgångsallokering** — designad för att sätta nästan hela tillgången i arbete för användarna, inte för insidare:
+- ERC-20, maximalt utbud **8,000,000,000 EVOLVE**. Adminåtgärder styrs av en `TimelockController` på 48 timmar.
+- **Planerad utbudsfördelning** — utformad för att sätta nästan hela utbudet i arbete för användarna, inte för insiders:
 
-| Syfte                                             |        EVOLVE |
-| ------------------------------------------------- | ------------: |
-| Grundare och team (lön / belöning)                |    25,000,000 |
-| DEX-reserv (framtida)                             |     4,000,000 |
-| Offentlig försäljning (planerad)                  |     5,000,000 |
-| Belönningsreserv — labb, patienter, mödrar, fäder | 7,966,000,000 |
+| Syfte                                            |        EVOLVE |
+| ------------------------------------------------ | ------------: |
+| Grundare och team (lön / belöning)               |    25,000,000 |
+| DEX-reserv (framtida)                            |     4,000,000 |
+| Publik försäljning (planerad)                    |     5,000,000 |
+| Belöningsreserv — labb, patienter, mödrar, fäder | 7,966,000,000 |
 
-- **Planerad offentlig försäljning** — 5,000,000 EVOLVE sålda av appen till **$0.8 styck**, betalbara i vilken token som helst som appen stöder; intäkterna finansierar utvecklingen. _(Planerad — inte live än.)_
-- **Trustless-emission (planerad)** — belönningsreserven på ~7,966,000,000 ska låsas i ett `RewardVault` som inte kan tömmas: det frigörs endast gradvis genom belöningar till labb, patienter, mödrar och fäder, och regeländringar kräver en governance-omröstning. Inte ens grundaren kan ta ut från det. Design: [docs/REWARD-VAULT-PLAN.md](docs/REWARD-VAULT-PLAN.md).
-- **Emojipresentekonomi** — en present kostar 1 EVOLVE, fördelas proportionellt bland befintliga presentägare; en evig intäktsmodell, och presenter är överförbara.
-- **EvolveFund** — manlig staking (min. 15 EVOLVE, 30-dagars lås) som räknas in i styrningsvikten; kvinnor använder sin plånbokssaldo.
+- **Planerad offentlig försäljning** — 5,000,000 EVOLVE sålda av appen till **$0.8 styck**, betalning sker med vilken token som helst som appen stöder; intäkterna finansierar utvecklingen. _(Planerad — inte igång än.)_
+- **Trustless-emission (planerad)** — belöningsreserven på ~7,966,000,000 ska låsas i en icke-tömbar `RewardVault`: den släpps endast ut gradvis genom belöningar till labb, patienter, mödrar och fäder, och regeländringar kräver omröstning i styrningen. Inte ens grundaren kan ta ut den. Design: [docs/REWARD-VAULT-PLAN.md](docs/REWARD-VAULT-PLAN.md).
+- **Emoji-gåvoekonomi** — en gåva kostar 1 EVOLVE och fördelas proportionellt bland befintliga gåvoägare; en evig intäktsmodell, och gåvor går att överföra.
+- **EvolveFund** — manlig staking (minst 15 EVOLVE, 30 dagars lås) som räknas in i styrningsvikten; kvinnor använder sitt plånbokssaldo.
 - **Verifieringsbelöningar** — 1 EVOLVE till den verifierade användaren och 1 EVOLVE till det bekräftande labbet per STD/DNA-verifiering (plus en hastighetsbegränsad faucet).
-- **Styrning** — röstvikt kombinerar rekursivt rykte (8 röster, djup 3), andel barn/faderskap samt stakade eller hållna EVOLVE.
-- **LayerZero OFT**-integration för framtida multichain-överföringar av EVOLVE (beroenden på plats; inget distribuerat utanför Sepolia än).
+- **Styrning** — röstvikten kombinerar rekursivt anseende (8 röster, djup 3), andelen barn/faderskap samt insatta eller innestående EVOLVE.
+- **LayerZero OFT**-integration för framtida EVOLVE-överföringar över flera kedjor (beroenden på plats; ingenting distribuerat bortom Sepolia ännu).
 
 ## Stöd projektet
 
-EVOLVE är oberoende och har öppen källkod. Om den är användbar för dig kan du stödja utvecklingen med en donation — varje bidrag går till kod, labbpartnerskap, hosting och översättning.
+EVOLVE är oberoende och byggs med öppen källkod. Om det är användbart för dig kan du stödja utvecklingen med en donation — varje bidrag går till kod, labbpartnerskap, hosting och översättning.
 
-- **Donationsdetaljer (EVM, Monero med mera):** [DONATE.md](DONATE.md)
+- **Donationsuppgifter (EVM, Monero med mera):** [DONATE.md](DONATE.md)
 - **Flerspråkig donationssida (34 språk):** **https://lilit-moonlit.github.io/Evolve/** · **https://limitafternoon.codeberg.page/Evolve/**
 
-En offentlig tokenförsäljning står på roadmapen men är **inte** live idag. Donationer är gåvor som stödjer utveckling med öppen källkod och ger ingen rätt till tokens, ägarandelar, avkastning eller vinst. Ge endast det du har råd att förlora.
+En offentlig tokenförsäljning är **planerad** — 5,000,000 EVOLVE, sålda av appen (se [EVOLVE-token](#evolve-token-endast-testnet)). Donationer är gåvor som stödjer utveckling av öppen källkod och ger ingen rätt till tokens, ägandeandelar, avkastning eller vinst. Ge bara det du har råd att förlora.
 
 ## Arkitektur & teknikstack
 
-Monorepo hanterad med npm workspaces + Turborepo:
+Monorepo som hanteras med npm workspaces + Turborepo:
 
 ```
 apps/
@@ -109,13 +121,13 @@ packages/
 docs/           # Architecture, tokenomics, roadmap, FAQ
 ```
 
-Nyckelkontrakt: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (emojipresenter + belöningar), `Governance.sol`, `BondManager.sol` (befruktning och polyandrisk befruktning), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster` samt en OpenZeppelin-`TimelockController`.
+Viktiga smarta kontrakt: `EVOLVE.sol` (ERC-20), `ProfileNFT.sol` (ERC-721), `TrustScore.sol`, `Voting.sol`, `Evolve2Earn.sol` (emoji-gåvor + belöningar), `Governance.sol`, `BondManager.sol` (befruktning och polyandrisk befruktning), `EvolveFund.sol`, `VerificationRegistry.sol`, `DNAVerification.sol`, ERC-4337 `SmartAccountFactory` + `Paymaster` samt en OpenZeppelin `TimelockController`.
 
 Detaljer: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) · [docs/TOKENOMICS.md](docs/TOKENOMICS.md)
 
 ## Roadmap
 
-Pågår: produktionsberedskap för webbappen. Planerat: on-chain labbregister och testcertifiering, en riktig adapter för e-postleverantör för mottagning av labbrapporter, verifierade attesteringar on-chain på profiler, **trustless RewardVault** med styrningsstyrd emission ([design](docs/REWARD-VAULT-PLAN.md)), den **offentliga tokenförsäljningen**, uppdatering av token-vesting för grundarallokeringen samt DEX-likviditetsförsörjning (för närvarande blockerat — det kräver mainnet-distributioner av token). Flernätverksutbyggnad (Arbitrum, Avalanche och andra EVM-kedjor) följer efter testnet-härdning.
+Pågår: produktionsberedskap för webbappen. Planerat: ett on-chain-labbregister och testcertifiering, en riktig adapter för e-postleverantör för mottagning av labbrapporter, verifierade on-chain-attesteringar på profiler, den **trustless RewardVault** med emissionsregler via styrning ([design](docs/REWARD-VAULT-PLAN.md)), den **offentliga tokenförsäljningen**, uppdatering av token-vestingen för grundarallokeringen samt tillhandahållande av DEX-likviditet (för tillfället blockerat — det kräver token-distributioner på mainnet). På integritetssidan är gåvor med privat avsändare klara, medan den skyddade Railgun-plånboken och Aztec-migreringen av privata bond ligger bakom kontrollerna i [docs/ROADMAP.md](docs/ROADMAP.md) och [docs/AZTEC-PROTOTYPE.md](docs/AZTEC-PROTOTYPE.md). Utbyggnad till flera nätverk (Arbitrum, Avalanche och andra EVM-kedjor) följer efter att testnätet härdats.
 
 Fullständig lista: [docs/ROADMAP.md](docs/ROADMAP.md).
 
@@ -143,11 +155,11 @@ npm run deploy:local    # deploy all contracts to an in-process Hardhat network
 
 ## Bidra
 
-Bidrag är välkomna — kod, felrapporter, funktionsförslag och förslag. Läs [CONTRIBUTING.md](CONTRIBUTING.md) och vår [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) innan du börjar.
+Bidrag är välkomna — kod, felrapporter, förslag på funktioner och andra idéer. Läs [CONTRIBUTING.md](CONTRIBUTING.md) och vår [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) innan du sätter igång.
 
 ## Repositorier (speglingar)
 
-| Spegling | URL                                        |
+| Spegel   | URL                                        |
 | -------- | ------------------------------------------ |
 | GitHub   | https://github.com/Lilit-Moonlit/Evolve    |
 | Codeberg | https://codeberg.org/limitafternoon/Evolve |
@@ -156,13 +168,16 @@ Bidrag är välkomna — kod, felrapporter, funktionsförslag och förslag. Läs
 ## Dokumentation
 
 - [Vad & varför](docs/WHAT-AND-WHY.md) — problem, vision, kärnvärden
-- [Hur det fungerar](docs/HOW-IT-WORKS.md) — användarflöden, steg för steg
+- [Så fungerar det](docs/HOW-IT-WORKS.md) — användarflöden, steg för steg
 - [Arkitektur](docs/ARCHITECTURE.md) — monorepo, paket, dataflöden
-- [Tokenomics](docs/TOKENOMICS.md) — tokenmodell och tillgångsfördelning
+- [Tokenomics](docs/TOKENOMICS.md) — tokenmodell och utbudsfördelning
 - [RewardVault-planen](docs/REWARD-VAULT-PLAN.md) — trustless-emission (planerad)
+- [Railgun-integration](docs/RAILGUN-INTEGRATION.md) — integrationsstudie av skyddad plånbok
+- [Skyddade insatser](docs/SHIELDED-STAKES-DESIGN.md) — privata befruktningsinsatser (design)
+- [Aztec-prototypen](docs/AZTEC-PROTOTYPE.md) — ZK privata överföringar & bond (forskning)
 - [Roadmap](docs/ROADMAP.md) — milstolpar och aktuell status
 - [FAQ](docs/FAQ.md) — vanliga frågor
-- [Plånboksguide](docs/WALLETS.md) — hur man skapar plånböcker och får donationsadresser
+- [Plånboksguide](docs/WALLETS.md) — hur man skapar plånböcker och hittar donationsadresser
 
 ## Licens
 
