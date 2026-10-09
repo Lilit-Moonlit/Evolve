@@ -23,6 +23,7 @@ The following key features and infrastructure components have been successfully 
 ## In Progress Milestones
 
 - **Full Production Build**: Ongoing efforts to prepare the entire application for a production-ready release.
+- **Private Gifts & Confidential Transfers**: Sender-private gifts (rose/cactus, 3 privacy modes) are shipped; the Railgun shielded wallet is feature-flagged (`VITE_RAILGUN_ENABLED`, default OFF); shielded Mode 2/3 stakes and the Aztec-native prototype are documented as future, gated work. Canonical plan: `.omo/plans/evolve-privacy-roadmap.md`.
 
 ## Planned Milestones
 

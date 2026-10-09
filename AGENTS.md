@@ -784,6 +784,8 @@ cd apps/web && npx tsc --noEmit   # ignore db.ts:270
 
 | 45 | Woman-deposit fix + Sepolia redeploy + tokenomics v2 (planned public sale & trustless RewardVault) | ✅ **Done** (BondManager 14/14 tests PASS; `tsc` clean; live `createSession` from an unfunded address OK; docs synced) | `packages/contracts/src/BondManager.sol` (`createSession`: removed `_requireActiveFund(msg.sender)` — a woman needs no deposit; men still need a fund to join), `test/BondManager.test.js` (+2), `apps/web/src/components/Mode3Dashboard.tsx` (create button not fund-gated; fund notice only for joining men), `apps/web/src/lib/addresses.ts` (`BOND_MANAGER` → `0x3b0542d13e8d196A53e01b3C1EBA81dfB4049177`), `script/redeploy-bondmanager.mjs` (4-arg ctor + `EvolveFund`/`Evolve2Earn` wiring); redeployed on Sepolia, verified on-chain. Tokenomics v2 (allocation: Founders & team **25M** 0.3125% / DEX reserve **4M** / Public sale **5M @ $0.8** (planned, app-sold, any supported token, proceeds → development) / Reward reserve **7,966,000,000**; removed the "no token sale ever" stance): `docs/REWARD-VAULT-PLAN.md` (future non-drainable `RewardVault`, **Governance = sole timelock proposer**, migration steps, invariants + tests, "don't rush — must work like clockwork"), `docs/TOKENOMICS.md` + `AGENTS.md §7` + `DONATE.md`, `docs/ROADMAP.md` (+Planned vault), `site/locales/*` (34× `noSale` → "planned, not live"). Commits `069a737` + `39bac81` + `9cc3436`. | sisyphus |
 
+| 46 | Privacy roadmap (gifts → Railgun → Aztec) | 🔄 **In Progress** | `apps/web/src/lib/private-gift.ts`+test (28), `apps/web/src/lib/railgun.ts`+test (12), `apps/web/src/components/GiftDialog.tsx`+test, `apps/web/src/components/PrivateWallet.tsx`+test (4), `apps/web/src/lib/roses*` + GIFT chat message + `Profile.roses`/`ethAddress` exposure, `Evolve2Earn.giftTo`+`importGiftState` (51 tests) + Sepolia redeploy `0x585f1242…aEa8`, `docs/RAILGUN-INTEGRATION.md`, `docs/SHIELDED-STAKES-DESIGN.md`, `docs/AZTEC-PROTOTYPE.md` (BLOCKED: no Docker). Canonical plan: `.omo/plans/evolve-privacy-roadmap.md` (change control there). | sisyphus |
+
 ### Deployed Addresses — Ethereum Sepolia (2026-08-21, Mode3-rewards redeploy 2026-09-05)
 
 | Contract             | Address                                      |
@@ -927,6 +929,61 @@ cd apps/web && npx vitest run src/lib/__tests__/dex-integration.test.ts src/comp
 cd apps/web && npx tsc --noEmit   # ignore db.ts:270
 cd packages/contracts && node script/deploy-liquidity.mjs --dry-run
 ```
+
+## 29. Private Gifts & Confidential Transfers
+
+> **Feature**: User-to-user gifts (rose 🌹 / cactus 🌵, 1 EVOLVE each) where the **sender** picks the privacy level, plus a feature-flagged Railgun shielded wallet (`VITE_RAILGUN_ENABLED`, default OFF) for full amount/address hiding. The perpetual revenue-split semantics of `Evolve2Earn` are **UNCHANGED** — `giftTo`/`importGiftState` are strictly additive.
+
+### Sender modes
+
+| Mode                    | Sender identity    | Voucher key | On-chain `Gifted.from` |
+| ----------------------- | ------------------ | ----------- | ---------------------- |
+| `public`                | visible to all     | none        | sender                 |
+| `anon-except-recipient` | only the recipient | yes         | recipient (self-claim) |
+| `anon`                  | hidden             | yes         | recipient (self-claim) |
+
+- `public`: sender calls `Evolve2Earn.giftTo(recipient)` directly — the sender appears as `Gifted.from`, the rose registers to the recipient.
+- `anon-except-recipient` / `anon`: the sender creates a fresh voucher keypair (`createVoucher()`), funds it with 1 EVOLVE, and sends a chat message carrying the voucher payload. The recipient imports the key, sweeps the voucher (fund ETH → transfer EVOLVE → sweep dust) with a local viem account, then calls `giftTo(self)` from her own wallet — she becomes the rose owner and `Gifted.from` = recipient.
+
+### Key files
+
+- `apps/web/src/lib/private-gift.ts` + `__tests__/private-gift.test.ts` — pure voucher/sender-mode lib: `GiftSenderMode`, `createVoucher`, `voucherMessage`, `parseVoucherMessage`, `sweepPlan`, `sanitizeRoseRecord`, `RoseRecord` (type consumed by tasks 7/9).
+- `apps/web/src/lib/railgun.ts` + `__tests__/railgun.test.ts` — DI wrapper (pdf-text pattern): `initRailgun`/`shieldEVOLVE`/`unshieldEVOLVE`/`privateTransfer`/`getShieldedBalance`/`isRailgunAddress`/`RailgunError`; NO SDK import at module top-level.
+- `apps/web/src/lib/config.ts` — `RAILGUN_ENABLED = import.meta.env?.VITE_RAILGUN_ENABLED === "true"` (default OFF).
+- `apps/web/src/components/GiftDialog.tsx` + `__tests__/GiftDialog.test.tsx` — 3-mode gift flow + recipient claim flow.
+- `apps/web/src/components/PrivateWallet.tsx` + `__tests__/PrivateWallet.test.tsx` — shield/unshield/private-send forms (mounted only when flag on).
+- `apps/web/src/pages/UserProfile.tsx` — rose garden (random scatter) + "Подарувати" button + claim flow.
+- `apps/web/src/pages/Profile.tsx` — "Мої троянди" card (on-chain `ownerGiftCount` read + market share).
+- `apps/web/prisma/schema.prisma` (`Profile.roses String?`) + `apps/web/src/lib/db.ts` (`PROFILE_JSON_COLUMNS` += `roses`; `getProfiles()` exposes linked `User.ethAddress`).
+- `packages/contracts/src/Evolve2Earn.sol` — additive `giftTo(address)` + owner-only one-shot `importGiftState(...)`; `buyEmojiGift`/`transferEmojiGift`/`_distributeEmojiRevenue` semantics byte-identical.
+- `docs/RAILGUN-INTEGRATION.md`, `docs/SHIELDED-STAKES-DESIGN.md`, `docs/AZTEC-PROTOTYPE.md`.
+
+### i18n keys
+
+`gift.*` (`gift.mode.public|anonExcept|anon`, `gift.explainerIntro`, `gift.claim*`, `gift.garden`, `gift.myRoses`, …) and `privacy.wallet.*` (`privacy.wallet.title|shield|unshield|sendPrivate|balance|amount|recipient|recipient0zkPlaceholder|sdkMissing|txSent|error`) — all 34 locales (via `scripts/add-gift-locales.mjs` + `scripts/add-railgun-locales.mjs`).
+
+### Privacy model
+
+- **Voucher caveat**: voucher anonymity is **CASUAL-GRADE** — the funding transaction is traceable by time/amount on-chain. True sender anonymity arrives only with Railgun (Phase 2). Treat vouchers as "private to the casual observer", never as strong anonymity.
+- **Two-wallet model**: the public stake-wallet governs (EvolveFund deposits / wallet balance per §7); the private shielded Railgun wallet is **EXCLUDED** from governance weight (see `docs/TOKENOMICS.md#two-wallet-model-privacy--governance`).
+- **STD/DNA**: unchanged — anonymous verdicts only (§9).
+
+### Accepted v1 limitations (do NOT "fix" without a new plan)
+
+1. **Casual-grade sender anonymity** until Phase 2 Railgun integration.
+2. **Voucher key readable by the app-server DB + P2P peers until claimed** — single-use by design (1 EVOLVE, the sweep empties it); superseded by Railgun 0zk transfers in Phase 2.
+3. **`/api/profiles` now exposes the linked `User.ethAddress`** — required for public-mode gifting; recipients are on-chain-public in public mode anyway.
+4. **`emojiOwner` legacy-registry reset** after the Evolve2Earn redeploy (2026-09-05): the new `Evolve2Earn` was re-wired via `importGiftState`; the legacy `emojiOwner` mapping was not migrated (see `redeploy-evolve2earn-giftto.mjs` step 5).
+
+### NEVER CHANGE WITHOUT RUNNING TESTS
+
+```bash
+cd apps/web ; npx vitest run src/lib/__tests__/private-gift.test.ts src/lib/__tests__/roses-roundtrip.test.ts src/lib/__tests__/railgun.test.ts src/components/__tests__/GiftDialog.test.tsx src/components/__tests__/PrivateWallet.test.tsx --pool=threads
+cd packages/contracts ; npx hardhat test test/Evolve2EarnGiftTo.test.js test/Evolve2EarnGifts.test.js
+cd apps/web ; npx tsc --noEmit   # ignore db.ts:270
+```
+
+> Canonical plan & change control: `.omo/plans/evolve-privacy-roadmap.md` (the anchor for the whole privacy effort; deviations are recorded there as dated Amendments).
 
 ### Agent Instructions for New Session
 
