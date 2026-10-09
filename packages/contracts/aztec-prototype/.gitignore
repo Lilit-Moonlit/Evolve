@@ -1,0 +1,3 @@
+# Build artifacts (nargo target/) and default proof inputs are never committed.
+target/
+Prover.toml
