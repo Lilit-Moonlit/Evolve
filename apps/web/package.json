@@ -21,6 +21,7 @@
   "dependencies": {
     "@evolve/config": "*",
     "@evolve/core": "*",
+    "@evolve/p2p": "*",
     "@mediapipe/tasks-vision": "^1.0.1",
     "@noble/curves": "1.9.1",
     "@prisma/client": "^5.14.0",

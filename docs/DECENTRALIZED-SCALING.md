@@ -104,6 +104,16 @@ that makes 1M users free: no single relay ever sees 1M users.
 
 ## 7. Migration phases (ordered)
 
+> **Progress (2026-10-11):** Phase 1 ✅ **DONE** — 1:1 chat is P2P-first and the
+> libp2p runtime is ACTIVE (`libp2p@3.3.12` + `@libp2p/gossipsub@17`; two peers
+> exchange messages via a WebSocket gossipsub relay with the HTTP API stopped —
+> `cd packages/p2p && npm run verify:p2p`). Phase 2 ✅ **DONE (local dev)** — the
+> local chat talks to a Nostr relay (`VITE_NOSTR_CITY_RELAY_URL`; city-tagged
+> kind-1 + NIP-29 groups — `npm run verify:localchat`), with an in-repo minimal
+> NIP-01 relay replacing the Docker `nostr-rs-relay` on this machine. **Remaining
+> gap:** a public, volunteer-hosted city relay (per-city) and a NIP-07 signer in
+> the client (key management) — both documented blockers, not protocol work.
+
 1. **Wire the existing P2P chat** as the default transport (largest win, least
    new work — the code already exists).
 2. **Local chat → Nostr relays** per city (migrate my `join_local` server model;

@@ -18,6 +18,18 @@ services:
       # the dashboard shows the intended mode. Rebuild after changing it.
       - key: VITE_PRODUCT_MODE
         value: full
+      # P2P 1:1 chat bootstrap relay multiaddr (a volunteer/self-hosted
+      # gossipsub relay). Empty until a public relay is provisioned — the app
+      # then falls back to the HTTP chat mirror (Ban Resistance §23 rule 2).
+      # No hardcoded domain: keep it env-driven.
+      - key: VITE_P2P_BOOTSTRAP_PEERS
+        sync: false
+      # Local chat city Nostr relay. Empty until a public city relay is
+      # provisioned (per-city volunteer relay — DECENTRALIZED-SCALING §6.2).
+      # The client requires a NIP-07 signer (window.nostr) to publish; without
+      # one it falls back to HTTP. No hardcoded domain.
+      - key: VITE_NOSTR_CITY_RELAY_URL
+        sync: false
       # Optional. Leave empty for the ephemeral JSON store. Set a Postgres URL
       # (Neon/Supabase/Render) later if profiles should survive sleep/redeploy.
       - key: DATABASE_URL

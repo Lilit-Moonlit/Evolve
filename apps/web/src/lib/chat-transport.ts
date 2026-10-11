@@ -216,13 +216,12 @@ interface P2pModule {
 /**
  * Real P2P bridge backed by `@evolve/p2p` `ChatManager`.
  *
- * The module specifier is computed (`/* @vite-ignore *​/`) ON PURPOSE so the
- * bundler does not resolve the `@evolve/p2p` graph at build time: that
- * workspace's `libp2p@0.46` dependency tree is currently incomplete
- * (`@libp2p/keychain`, `@libp2p/peer-id-factory`, … are not installed), so a
- * static import would fail `vite build`. This import resolves and P2P activates
- * as soon as that tree is complete; until then it rejects and the adapter falls
- * back to HTTP. See the "p2p reality check" in the integration report.
+ * The module is loaded with a STATIC specifier (`import("@evolve/p2p")`) so
+ * Vite resolves and bundles the `@evolve/p2p` graph — this is what makes the
+ * P2P runtime active. The `@evolve/p2p` entry is browser-pure (WebSockets +
+ * Noise + yamux + gossipsub; no Node-only transports) and its dependency tree is
+ * a coherent `libp2p@3.3.12` set. If the graph ever fails to load (e.g. libp2p
+ * unavailable), the adapter rejects and falls back to HTTP.
  *
  * NOTE: chat participants here are application userIds. `ChatManager.sendMessage`
  * routes over a single shared gossipsub topic (`evolve-chat`) using the from/to
@@ -231,8 +230,7 @@ interface P2pModule {
  * Nostr path is disabled by default (it would throw and abort every send).
  */
 export async function defaultP2pBridgeFactory(): Promise<P2pBridge> {
-  const specifier = "@evolve/p2p";
-  const mod = (await import(/* @vite-ignore */ specifier)) as P2pModule;
+  const mod = (await import("@evolve/p2p")) as P2pModule;
 
   const bootstrapPeers = (import.meta.env?.VITE_P2P_BOOTSTRAP_PEERS as string | undefined)
     ?.split(",")
@@ -247,7 +245,9 @@ export async function defaultP2pBridgeFactory(): Promise<P2pBridge> {
     libp2pConfig: {
       enableDHT: false, // DHT is unreliable in browsers
       enableGossipsub: true,
-      listenAddresses: ["/ip4/0.0.0.0/tcp/0/ws", "/ip4/0.0.0.0/tcp/0/wss"],
+      // Browsers are dial-only — empty listen addresses. The shared bootstrap
+      // node (relay) provides the gossipsub mesh via VITE_P2P_BOOTSTRAP_PEERS.
+      listenAddresses: [],
       ...(bootstrapPeers && bootstrapPeers.length > 0 ? { bootstrapPeers } : {}),
     },
     heartbeat: { enabled: true, interval: 30000, timeout: 90000 },
