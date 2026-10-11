@@ -1,8 +1,4 @@
-import {
-  generateSecretKey,
-  getPublicKey,
-  finalizeEvent,
-} from "nostr-tools/pure";
+import { generateSecretKey, getPublicKey, finalizeEvent } from "nostr-tools/pure";
 import { Relay, SimplePool } from "nostr-tools";
 import * as nip04 from "nostr-tools/nip04";
 import type { Filter } from "nostr-tools/filter";
@@ -73,15 +69,11 @@ export class NostrClient {
       }
 
       this.state = "connected";
-      this.logger.info(
-        `Nostr client initialized with pubkey: ${this.publicKey}`,
-      );
+      this.logger.info(`Nostr client initialized with pubkey: ${this.publicKey}`);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown error";
       this.logger.error(`Nostr initialization failed: ${message}`);
-      throw new InitializationError(
-        `Failed to initialize Nostr client: ${message}`,
-      );
+      throw new InitializationError(`Failed to initialize Nostr client: ${message}`);
     }
   }
 
@@ -127,10 +119,7 @@ export class NostrClient {
     }
 
     this.state = "reconnecting";
-    const delay = Math.min(
-      baseDelay * Math.pow(2, this.reconnectAttempts),
-      maxDelay,
-    );
+    const delay = Math.min(baseDelay * Math.pow(2, this.reconnectAttempts), maxDelay);
     this.reconnectAttempts++;
 
     this.logger.info(
@@ -152,19 +141,14 @@ export class NostrClient {
         this.reconnectAttempts = 0;
         this.logger.info("Nostr relays reconnected successfully");
       } catch (error) {
-        const message =
-          error instanceof Error ? error.message : "Unknown error";
+        const message = error instanceof Error ? error.message : "Unknown error";
         this.logger.error(`Relay reconnect failed: ${message}`);
         await this.reconnect();
       }
     }, delay);
   }
 
-  withRetry<T>(
-    fn: () => Promise<T>,
-    maxRetries = 3,
-    baseDelayMs = 500,
-  ): Promise<T> {
+  withRetry<T>(fn: () => Promise<T>, maxRetries = 3, baseDelayMs = 500): Promise<T> {
     return fn().catch(async (error) => {
       for (let attempt = 1; attempt < maxRetries; attempt++) {
         const delay = baseDelayMs * Math.pow(2, attempt - 1);
@@ -202,11 +186,7 @@ export class NostrClient {
     return this.publicKey;
   }
 
-  async publishEvent(
-    kind: number,
-    content: string,
-    tags: string[][] = [],
-  ): Promise<NostrEvent> {
+  async publishEvent(kind: number, content: string, tags: string[][] = []): Promise<NostrEvent> {
     this.ensureInitialized();
 
     try {
@@ -323,26 +303,16 @@ export class NostrClient {
     return this.publishEvent(0, content);
   }
 
-  async publishTextNote(
-    content: string,
-    replyTo?: string,
-  ): Promise<NostrEvent> {
+  async publishTextNote(content: string, replyTo?: string): Promise<NostrEvent> {
     const tags = replyTo !== undefined ? [["e", replyTo]] : [];
     return this.publishEvent(1, content, tags);
   }
 
-  async publishDirectMessage(
-    content: string,
-    recipientPubkey: string,
-  ): Promise<NostrEvent> {
+  async publishDirectMessage(content: string, recipientPubkey: string): Promise<NostrEvent> {
     this.ensureInitialized();
 
     try {
-      const encrypted = await nip04.encrypt(
-        this.secretKey!,
-        recipientPubkey,
-        content,
-      );
+      const encrypted = await nip04.encrypt(this.secretKey!, recipientPubkey, content);
       const tags = [["p", recipientPubkey]];
       return this.publishEvent(4, encrypted, tags);
     } catch (error) {
@@ -352,18 +322,11 @@ export class NostrClient {
     }
   }
 
-  async decryptDirectMessage(
-    encryptedContent: string,
-    senderPubkey: string,
-  ): Promise<string> {
+  async decryptDirectMessage(encryptedContent: string, senderPubkey: string): Promise<string> {
     this.ensureInitialized();
 
     try {
-      return await nip04.decrypt(
-        this.secretKey!,
-        senderPubkey,
-        encryptedContent,
-      );
+      return await nip04.decrypt(this.secretKey!, senderPubkey, encryptedContent);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown error";
       this.logger.error(`NIP-04 decryption failed: ${message}`);
@@ -384,13 +347,169 @@ export class NostrClient {
     return JSON.parse(events[0].content) as Record<string, unknown>;
   }
 
-  async fetchEventsFromUser(
-    pubkey: string,
-    kinds: number[] = [1],
-  ): Promise<NostrEvent[]> {
+  async fetchEventsFromUser(pubkey: string, kinds: number[] = [1]): Promise<NostrEvent[]> {
     const filter: Filter = {
       kinds,
       authors: [pubkey],
+    };
+
+    return this.fetchEvents(filter);
+  }
+
+  /**
+   * NIP-29: Create a relay-based group.
+   * Publishes a kind 34550 event with group metadata.
+   *
+   * @param groupId - Unique identifier for the group
+   * @param metadata - Group metadata (name, description, picture, etc.)
+   * @param isClosed - Whether the group requires admin approval to join
+   * @returns The published group metadata event
+   */
+  async createGroup(
+    groupId: string,
+    metadata: {
+      name?: string;
+      description?: string;
+      picture?: string;
+    },
+    isClosed: boolean = false,
+  ): Promise<NostrEvent> {
+    this.ensureInitialized();
+
+    const content = JSON.stringify(metadata);
+    const tags = [
+      ["d", groupId],
+      ["closed", isClosed ? "true" : "false"],
+    ];
+
+    return this.publishEvent(34550, content, tags);
+  }
+
+  /**
+   * NIP-29: Request to join a closed group.
+   * Publishes a kind 34553 event to request membership.
+   *
+   * @param groupId - The group identifier
+   * @param reason - Optional reason for joining
+   * @returns The published join request event
+   */
+  async requestJoinGroup(groupId: string, reason: string = ""): Promise<NostrEvent> {
+    this.ensureInitialized();
+
+    const tags = [["d", groupId]];
+    if (reason) {
+      tags.push(["reason", reason]);
+    }
+
+    return this.publishEvent(34553, reason, tags);
+  }
+
+  /**
+   * NIP-29: Approve a join request for a closed group.
+   * Publishes a kind 34552 event to add a member to the group.
+   *
+   * @param groupId - The group identifier
+   * @param memberPubkey - The pubkey of the user to approve
+   * @returns The published membership event
+   */
+  async approveJoinGroup(groupId: string, memberPubkey: string): Promise<NostrEvent> {
+    this.ensureInitialized();
+
+    const tags = [
+      ["d", groupId],
+      ["p", memberPubkey],
+    ];
+
+    return this.publishEvent(34552, "", tags);
+  }
+
+  /**
+   * NIP-29: Leave a group.
+   * Publishes a kind 34552 event with a "remove" action to remove self from membership.
+   *
+   * @param groupId - The group identifier
+   * @returns The published membership event
+   */
+  async leaveGroup(groupId: string): Promise<NostrEvent> {
+    this.ensureInitialized();
+
+    const tags = [
+      ["d", groupId],
+      ["p", this.publicKey!],
+      ["remove", "true"],
+    ];
+
+    return this.publishEvent(34552, "", tags);
+  }
+
+  /**
+   * NIP-29: Publish a message to a public group.
+   * Publishes a kind 34554 event.
+   *
+   * @param groupId - The group identifier
+   * @param content - The message content
+   * @param replyTo - Optional event ID being replied to
+   * @returns The published group message event
+   */
+  async publishGroupMessage(
+    groupId: string,
+    content: string,
+    replyTo?: string,
+  ): Promise<NostrEvent> {
+    this.ensureInitialized();
+
+    const tags = [["d", groupId]];
+    if (replyTo !== undefined) {
+      tags.push(["e", replyTo]);
+    }
+
+    return this.publishEvent(34554, content, tags);
+  }
+
+  /**
+   * NIP-29: Fetch group metadata.
+   *
+   * @param groupId - The group identifier
+   * @returns The group metadata event if found, null otherwise
+   */
+  async fetchGroupMetadata(groupId: string): Promise<NostrEvent | null> {
+    const filter: Filter = {
+      kinds: [34550],
+      "#d": [groupId],
+      limit: 1,
+    };
+
+    const events = await this.fetchEvents(filter);
+    if (events.length === 0) return null;
+
+    return events[0];
+  }
+
+  /**
+   * NIP-29: Fetch group members.
+   *
+   * @param groupId - The group identifier
+   * @returns Array of membership events (kind 34552)
+   */
+  async fetchGroupMembers(groupId: string): Promise<NostrEvent[]> {
+    const filter: Filter = {
+      kinds: [34552],
+      "#d": [groupId],
+    };
+
+    return this.fetchEvents(filter);
+  }
+
+  /**
+   * NIP-29: Fetch pending join requests for a group.
+   *
+   * @param groupId - The group identifier
+   * @returns Array of join request events (kind 34553)
+   */
+  async fetchGroupJoinRequests(groupId: string): Promise<NostrEvent[]> {
+    const filter: Filter = {
+      kinds: [34553],
+      "#d": [groupId],
     };
 
     return this.fetchEvents(filter);

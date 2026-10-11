@@ -1,0 +1,30 @@
+# Basic configuration for a city-scoped Nostr relay
+# Based on nostr-rs-relay (https://github.com/scsibug/nostr-rs-relay)
+
+[network]
+address = "0.0.0.0"
+port = 7000
+
+[database]
+# Data directory is mounted as a volume in docker-compose.yml
+# This file is for reference only; actual path is ./data in the container
+
+[limits]
+# Basic rate limiting
+events_per_second = 10
+max_event_bytes = 100000
+max_subscription_id_length = 256
+
+[options]
+# Enable NIP-29 for group support
+nip29 = true
+
+# Reject events without tags (helps enforce city tagging)
+reject_events_without_tags = false
+
+# Relay information (optional metadata)
+[info]
+name = "EVOLVE City Relay"
+description = "A city-scoped Nostr relay for EVOLVE P2P local chat"
+contact = ""
+pubkey = ""
