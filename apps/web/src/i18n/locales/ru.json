@@ -197,7 +197,8 @@
       "verificationError": "Face verification failed. Please try again.",
       "systemMessageSuccess": "🛡️ Identity check passed",
       "systemMessageFailed": "⚠️ Identity check failed"
-    }
+    },
+    "chats": "Чаты"
   },
   "language": {
     "select": "Select Language",
@@ -1089,6 +1090,39 @@
       "sdkMissing": "Railgun SDK не установлен",
       "txSent": "Транзакция отправлена",
       "error": "Ошибка операции"
+    }
+  },
+  "localChat": {
+    "title": "Местный чат",
+    "country": "Страна",
+    "city": "Город",
+    "group": "Группа",
+    "selectCity": "Выберите город",
+    "noMessages": "Пока нет сообщений",
+    "inputPlaceholder": "Написать в местный чат…",
+    "loadingCities": "Загрузка городов…",
+    "createGroup": "Создать группу",
+    "groupName": "Название группы",
+    "groupNameExists": "Группа с таким названием уже существует",
+    "create": "Создать",
+    "cancel": "Отмена",
+    "closedGroup": "Эта группа закрытая. Подайте запрос на присоединение.",
+    "requestJoin": "Запросить присоединение",
+    "pendingApproval": "Ожидает подтверждения администратором",
+    "admin": "Админ",
+    "pendingMembers": "Запросы на присоединение",
+    "approve": "Принять",
+    "decline": "Отклонить",
+    "typing": "печатает…",
+    "groups": {
+      "all": "Все",
+      "dating": "Знакомства",
+      "conception": "Зачатие",
+      "polyandrous": "Полиандрическое зачатие"
+    },
+    "groupType": {
+      "public": "Общедоступная",
+      "closed": "Закрытая"
     }
   }
 }

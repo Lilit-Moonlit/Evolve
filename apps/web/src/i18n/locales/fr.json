@@ -190,7 +190,8 @@
       "verificationError": "Face verification failed. Please try again.",
       "systemMessageSuccess": "🛡️ Identity check passed",
       "systemMessageFailed": "⚠️ Identity check failed"
-    }
+    },
+    "chats": "Discussions"
   },
   "language": {
     "select": "Choisir la langue",
@@ -1201,6 +1202,39 @@
       "sdkMissing": "SDK Railgun non installé",
       "txSent": "Transaction envoyée",
       "error": "Échec de l'opération"
+    }
+  },
+  "localChat": {
+    "title": "Chat local",
+    "country": "Pays",
+    "city": "Ville",
+    "group": "Groupe",
+    "selectCity": "Choisir une ville",
+    "noMessages": "Aucun message pour l'instant",
+    "inputPlaceholder": "Écrire dans le chat local…",
+    "loadingCities": "Chargement des villes…",
+    "createGroup": "Créer un groupe",
+    "groupName": "Nom du groupe",
+    "groupNameExists": "Un groupe avec ce nom existe déjà",
+    "create": "Créer",
+    "cancel": "Annuler",
+    "closedGroup": "Ce groupe est fermé. Demandez à rejoindre.",
+    "requestJoin": "Demander à rejoindre",
+    "pendingApproval": "En attente de validation par l'admin",
+    "admin": "Admin",
+    "pendingMembers": "Demandes d'adhésion",
+    "approve": "Accepter",
+    "decline": "Refuser",
+    "typing": "est en train d'écrire…",
+    "groups": {
+      "all": "Tous",
+      "dating": "Rencontres",
+      "conception": "Conception",
+      "polyandrous": "Conception polyandre"
+    },
+    "groupType": {
+      "public": "Public",
+      "closed": "Fermé"
     }
   }
 }

@@ -63,15 +63,17 @@ header {
   z-index: 100;
 }
 
-/* Top panel items (logo+EVOLVE, nav links, install button) share one
-   font/weight and a light, almost-white color per design request. */
-header h1 {
+/* Top panel items (brand logo+EVOLVE, nav links, install button) share one
+   font/weight and a light, almost-white color per design request. The brand
+   link renders INSIDE the nav so it groups with the other items. */
+header nav .brand {
   font-size: 1rem;
   font-weight: 500;
   color: #eef2f7;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  text-decoration: none;
 }
 
 header nav {

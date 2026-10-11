@@ -14,15 +14,19 @@ export default function Layout() {
   return (
     <div className="layout">
       <header>
-        <h1>
-          {/* Logo + EVOLVE as a single clickable link — replaces the old
-              "Головна" nav item (all of its functionality lives here). */}
-          <Link to="/" aria-label={t("app.name")} className="flex items-center gap-2">
+        <nav>
+          {/* Logo + EVOLVE lives INSIDE the nav flow, grouped with the other
+              items (Комунікації, Профіль, …) instead of floating alone in the
+              corner. It still replaces the old "Головна" nav item — clicking
+              it navigates home. */}
+          <Link
+            to="/"
+            aria-label={t("app.name")}
+            className="brand flex items-center gap-2 shrink-0"
+          >
             <img src="/logo.jpg" alt={t("app.name")} className="h-8" />
             <span className="uppercase tracking-widest">{t("app.name")}</span>
           </Link>
-        </h1>
-        <nav>
           {isAuthenticated && safety && (
             <NavLink to="/scan" className={({ isActive }) => (isActive ? "active" : "")}>
               {t("navigation.check")}

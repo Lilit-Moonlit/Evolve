@@ -114,7 +114,7 @@ export const PwaInstallNavItem: React.FC = () => {
       <button
         type="button"
         onClick={handleClick}
-        className="bg-transparent border-none cursor-pointer p-0 text-base font-medium text-[color:#eef2f7] transition-colors hover:text-white"
+        className="rounded-lg px-3 py-1.5 text-sm font-medium text-white transition-colors bg-[#2563eb] hover:bg-[#3b82f6] border border-[#3b82f6]/40"
       >
         {t("navigation.downloadApp")}
       </button>

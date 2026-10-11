@@ -192,7 +192,8 @@
       "verificationError": "Не вдалося перевірити обличчя. Спробуйте ще раз.",
       "systemMessageSuccess": "🛡️ Перевірку особи пройдено",
       "systemMessageFailed": "⚠️ Перевірку особи не пройдено"
-    }
+    },
+    "chats": "Чати"
   },
   "language": {
     "select": "Обрати мову",
@@ -1210,6 +1211,39 @@
       "sdkMissing": "Railgun SDK не встановлено",
       "txSent": "Транзакцію відправлено",
       "error": "Помилка операції"
+    }
+  },
+  "localChat": {
+    "title": "Місцевий чат",
+    "country": "Країна",
+    "city": "Місто",
+    "group": "Група",
+    "selectCity": "Оберіть місто",
+    "noMessages": "Поки що немає повідомлень",
+    "inputPlaceholder": "Написати у місцевий чат…",
+    "loadingCities": "Завантаження міст…",
+    "createGroup": "Створити групу",
+    "groupName": "Назва групи",
+    "groupNameExists": "Група з такою назвою вже існує",
+    "create": "Створити",
+    "cancel": "Скасувати",
+    "closedGroup": "Ця група закрита. Подайте запит на приєднання.",
+    "requestJoin": "Запросити приєднання",
+    "pendingApproval": "Очікує на підтвердження адміном",
+    "admin": "Адмін",
+    "pendingMembers": "Запити на приєднання",
+    "approve": "Прийняти",
+    "decline": "Відхилити",
+    "typing": "друкує…",
+    "groups": {
+      "all": "Всі",
+      "dating": "Знайомства",
+      "conception": "Зачаття",
+      "polyandrous": "Поліандрічне зачаття"
+    },
+    "groupType": {
+      "public": "Загальнодоступна",
+      "closed": "Закрита"
     }
   }
 }

@@ -12,6 +12,8 @@ export interface LocationIndex {
   countries: string[];
   /** Sorted, deduped city names of one country. Unknown country → []. */
   citiesFor: (country: string) => string[];
+  /** ISO 3166-1 alpha-2 code of one country (e.g. "UA"). Unknown → "". */
+  isoFor: (country: string) => string;
 }
 
 /**
@@ -19,12 +21,16 @@ export interface LocationIndex {
  * into sorted, deduped name lists keyed by country name.
  */
 export function buildLocationIndex(
-  rawCountries: { name: string }[],
+  rawCountries: { name: string; isoCode?: string }[],
   citiesByCountryName: Record<string, { name: string }[]>,
 ): LocationIndex {
   const countries = [...new Set(rawCountries.map((c) => c.name).filter(Boolean))].sort((a, b) =>
     a.localeCompare(b),
   );
+  const iso = new Map<string, string>();
+  for (const c of rawCountries) {
+    if (c.name && c.isoCode && !iso.has(c.name)) iso.set(c.name, c.isoCode);
+  }
   const cities = new Map<string, string[]>();
   for (const [country, list] of Object.entries(citiesByCountryName)) {
     cities.set(
@@ -35,6 +41,7 @@ export function buildLocationIndex(
   return {
     countries,
     citiesFor: (country: string) => cities.get(country) ?? [],
+    isoFor: (country: string) => iso.get(country) ?? "",
   };
 }
 

@@ -26,6 +26,15 @@ import {
   parseSwapResponse,
   type QuoteParams,
 } from "./dex-integration";
+import {
+  canAccessGroup,
+  isDefaultLocalChatGroupId,
+  isValidCityKey,
+  localChatChannelId,
+  validateGroupName,
+  validateLocalChatMessage,
+  LOCAL_CHAT_HISTORY_LIMIT,
+} from "./local-chat";
 
 // --- WebSocket Chat Server ---
 interface WsClient {
@@ -109,7 +118,69 @@ export function setupWebSocketServer(server: any) {
           );
         }
 
-        if (msg.type === "message" && channelId && userId && targetUserId) {
+        // City-scoped local chat join: { userId, username, city, group }.
+        // Messages on local channels arrive via the session-verified HTTP
+        // POST /api/localchat (which broadcasts) — never via WS sends.
+        if (msg.type === "join_local") {
+          userId = msg.userId;
+          username = msg.username || "Anonymous";
+          const city = String(msg.city || "");
+          const group = String(msg.group || "");
+          if (!userId || !isValidCityKey(city) || !group) {
+            ws.close(1008, "Invalid local chat channel");
+            return;
+          }
+          // Closed custom groups require membership (creator = admin);
+          // default thematic groups and public groups are open.
+          if (!isDefaultLocalChatGroupId(group)) {
+            const customGroup = await dbService.getLocalChatGroupById(group);
+            if (customGroup && !canAccessGroup(customGroup, userId)) {
+              ws.close(1008, "No access to closed group");
+              return;
+            }
+          }
+          channelId = localChatChannelId(city, group);
+
+          if (!wsClients.has(channelId)) {
+            wsClients.set(channelId, []);
+          }
+          wsClients.get(channelId)!.push({ ws, userId: userId!, username: username! });
+
+          ws.send(JSON.stringify({ type: "joined", channelId }));
+          const history = await dbService.getLocalChatMessages(city, group);
+          ws.send(
+            JSON.stringify({
+              type: "history",
+              messages: history.map((message: any) => ({
+                type: "message",
+                id: message.id,
+                senderId: message.senderId,
+                senderName: message.senderName || "",
+                text: message.text,
+                timestamp: message.createdAt,
+              })),
+            }),
+          );
+          broadcastToChannel(
+            channelId,
+            {
+              type: "user_joined",
+              userId,
+              username,
+            },
+            ws,
+          );
+        }
+
+        // 1:1 chat messages only — local channels ("local:") must go through
+        // the session-verified HTTP POST so senderId can be trusted.
+        if (
+          msg.type === "message" &&
+          channelId &&
+          userId &&
+          targetUserId &&
+          !channelId.startsWith("local:")
+        ) {
           const text = typeof msg.text === "string" ? msg.text.trim() : "";
           if (!text) return;
           const chatMsg = {
@@ -1323,6 +1394,209 @@ export async function handleApiRequest(
       const message = await dbService.updateMessageRequestStatus(messageId, status);
       res.statusCode = 200;
       res.end(JSON.stringify(message));
+      return true;
+    }
+
+    // --- 5b. LOCAL CHAT ENDPOINTS (city-scoped group chat) ---
+
+    // GET /api/localchat?city=<cityKey>&group=<groupId> — recent history for
+    // one (city, group) stream. Public read (mirrors GET /api/messages).
+    if (pathname === "/api/localchat" && req.method === "GET") {
+      const city = String(parsedUrl.query.city || "");
+      const group = String(parsedUrl.query.group || "");
+      if (!isValidCityKey(city) || !group) {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "valid city and group are required" }));
+        return true;
+      }
+      const parsedLimit = Number(parsedUrl.query.limit);
+      const limit =
+        Number.isInteger(parsedLimit) && parsedLimit > 0 && parsedLimit <= LOCAL_CHAT_HISTORY_LIMIT
+          ? parsedLimit
+          : LOCAL_CHAT_HISTORY_LIMIT;
+      const messages = await dbService.getLocalChatMessages(city, group, limit);
+      res.statusCode = 200;
+      res.end(JSON.stringify({ messages }));
+      return true;
+    }
+
+    // POST /api/localchat — session-required send. The message is persisted
+    // with senderId taken from the session, then pushed live to the group's
+    // WS channel (local-chat clients never broadcast their own sends).
+    if (pathname === "/api/localchat" && req.method === "POST") {
+      if (!session || session.kind === "partner" || !session.userId) {
+        res.statusCode = 401;
+        res.end(JSON.stringify({ error: "Unauthorized" }));
+        return true;
+      }
+      const body = await getJsonBody(req);
+      const city = String(body.city || "");
+      const group = String(body.group || "");
+      const text = typeof body.text === "string" ? body.text : "";
+      if (validateLocalChatMessage(text)) {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "invalid message" }));
+        return true;
+      }
+      if (!isValidCityKey(city) || !group) {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "valid city and group are required" }));
+        return true;
+      }
+      // Default thematic groups are implicit/open; custom ones must exist
+      // and grant access (public → everyone, closed → members + admin).
+      if (!isDefaultLocalChatGroupId(group)) {
+        const customGroup = await dbService.getLocalChatGroupById(group);
+        if (!customGroup) {
+          res.statusCode = 404;
+          res.end(JSON.stringify({ error: "group not found" }));
+          return true;
+        }
+        if (!canAccessGroup(customGroup, session.userId)) {
+          res.statusCode = 403;
+          res.end(JSON.stringify({ error: "no access to group" }));
+          return true;
+        }
+      }
+      const created = await dbService.createLocalChatMessage({
+        cityKey: city,
+        groupId: group,
+        senderId: session.userId,
+        senderName: String(body.senderName ?? "").slice(0, 80),
+        text,
+      });
+      broadcastToChannel(localChatChannelId(city, group), {
+        type: "message",
+        id: created.id,
+        senderId: created.senderId,
+        senderName: created.senderName,
+        text: created.text,
+        timestamp: created.createdAt,
+      });
+      res.statusCode = 200;
+      res.end(JSON.stringify(created));
+      return true;
+    }
+
+    // GET /api/localchat/groups?city=<cityKey> — custom groups for a city.
+    if (pathname === "/api/localchat/groups" && req.method === "GET") {
+      const city = String(parsedUrl.query.city || "");
+      if (!isValidCityKey(city)) {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "valid city is required" }));
+        return true;
+      }
+      const groups = await dbService.getLocalChatGroups(city);
+      res.statusCode = 200;
+      res.end(JSON.stringify({ groups }));
+      return true;
+    }
+
+    // POST /api/localchat/groups — create a custom group (creator = admin).
+    if (pathname === "/api/localchat/groups" && req.method === "POST") {
+      if (!session || session.kind === "partner" || !session.userId) {
+        res.statusCode = 401;
+        res.end(JSON.stringify({ error: "Unauthorized" }));
+        return true;
+      }
+      const body = await getJsonBody(req);
+      const city = String(body.city || "");
+      const name = typeof body.name === "string" ? body.name : "";
+      const type = body.type;
+      if (validateGroupName(name)) {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "invalid group name" }));
+        return true;
+      }
+      if (type !== "public" && type !== "closed") {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "group type must be public or closed" }));
+        return true;
+      }
+      if (!isValidCityKey(city)) {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "valid city is required" }));
+        return true;
+      }
+      const group = await dbService.createLocalChatGroup({
+        cityKey: city,
+        name,
+        type,
+        createdBy: session.userId,
+      });
+      if (!group) {
+        res.statusCode = 409;
+        res.end(JSON.stringify({ error: "group name already exists in this city" }));
+        return true;
+      }
+      res.statusCode = 200;
+      res.end(JSON.stringify(group));
+      return true;
+    }
+
+    // POST /api/localchat/groups/join — request membership in a group.
+    // Closed groups queue the user for admin approval; public groups and
+    // existing members/pending users are a no-op returning the group.
+    if (pathname === "/api/localchat/groups/join" && req.method === "POST") {
+      if (!session || session.kind === "partner" || !session.userId) {
+        res.statusCode = 401;
+        res.end(JSON.stringify({ error: "Unauthorized" }));
+        return true;
+      }
+      const body = await getJsonBody(req);
+      const groupId = String(body.groupId || "");
+      if (!groupId) {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "groupId is required" }));
+        return true;
+      }
+      const group = await dbService.requestJoinLocalChatGroup(groupId, session.userId);
+      if (!group) {
+        res.statusCode = 404;
+        res.end(JSON.stringify({ error: "group not found" }));
+        return true;
+      }
+      res.statusCode = 200;
+      res.end(JSON.stringify(group));
+      return true;
+    }
+
+    // POST /api/localchat/groups/resolve — admin approves/rejects a pending
+    // join request. Admin check happens here (not in dbService).
+    if (pathname === "/api/localchat/groups/resolve" && req.method === "POST") {
+      if (!session || session.kind === "partner" || !session.userId) {
+        res.statusCode = 401;
+        res.end(JSON.stringify({ error: "Unauthorized" }));
+        return true;
+      }
+      const body = await getJsonBody(req);
+      const groupId = String(body.groupId || "");
+      const targetUserId = String(body.userId || "");
+      const approve = Boolean(body.approve);
+      if (!groupId || !targetUserId) {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "groupId and userId are required" }));
+        return true;
+      }
+      const existing = await dbService.getLocalChatGroupById(groupId);
+      if (!existing) {
+        res.statusCode = 404;
+        res.end(JSON.stringify({ error: "group not found" }));
+        return true;
+      }
+      if (existing.createdBy !== session.userId) {
+        res.statusCode = 403;
+        res.end(JSON.stringify({ error: "only the group admin can resolve join requests" }));
+        return true;
+      }
+      const group = await dbService.resolveJoinLocalChatGroup(groupId, targetUserId, approve);
+      if (!group) {
+        res.statusCode = 404;
+        res.end(JSON.stringify({ error: "group not found" }));
+        return true;
+      }
+      res.statusCode = 200;
+      res.end(JSON.stringify(group));
       return true;
     }
 

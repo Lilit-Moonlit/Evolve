@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import fs from "fs";
 import path from "path";
+import { LOCAL_CHAT_HISTORY_LIMIT } from "./local-chat";
 
 // Dual-mode DB handler: uses Prisma if available, falls back to local JSON file or memory.
 let prisma: PrismaClient | null = null;
@@ -576,6 +577,8 @@ const initialFallbackData = {
   compatibilityChecks: [] as any[],
   companionPatients: [] as any[],
   companionLabs: [] as any[],
+  localChatMessages: [] as any[],
+  localChatGroups: [] as any[],
 };
 
 function readFallback() {
@@ -604,6 +607,21 @@ function safeParseJsonArray(value: any): string[] {
   } catch {
     return [];
   }
+}
+
+// Normalize a local chat group row: the fallback stores members/pending as
+// arrays while Prisma stores them as serialized JSON strings.
+function deserializeLocalChatGroup(row: any) {
+  return {
+    ...row,
+    members: safeParseJsonArray(row.members),
+    pending: safeParseJsonArray(row.pending),
+  };
+}
+
+// Group names are unique per city (case-insensitive, trimmed).
+function normalizeGroupName(name: string): string {
+  return (name || "").trim().toLowerCase();
 }
 
 // Wrapper to try Prisma with retry and fallback if it can't connect
@@ -2082,6 +2100,236 @@ export const dbService = {
           .filter((r: any) => (!c || norm(r.country) === c) && (!ci || norm(r.city).includes(ci)));
       },
       "listCompanionLabs",
+    );
+  },
+
+  // --- LOCAL CHAT (city-scoped group messages + custom groups) ---
+  // A stream is identified by (cityKey, groupId); the four thematic groups
+  // ("all"|"dating"|"conception"|"polyandrous") are implicit and never stored
+  // here — only user-created groups live in localChatGroups.
+
+  /** Last `limit` messages for (cityKey, groupId), ascending by createdAt. */
+  async getLocalChatMessages(cityKey: string, groupId: string, limit = LOCAL_CHAT_HISTORY_LIMIT) {
+    return runWithDb(
+      async (p) => {
+        const rows = await (p as any).localChatMessage.findMany({
+          where: { cityKey, groupId },
+          orderBy: { createdAt: "asc" },
+          take: -limit, // negative take = the LAST N rows, order preserved
+        });
+        return (rows || []) as any[];
+      },
+      () => {
+        const data = readFallback();
+        if (!data.localChatMessages) return [];
+        return data.localChatMessages
+          .filter((x: any) => x.cityKey === cityKey && x.groupId === groupId)
+          .sort((a: any, b: any) => String(a.createdAt).localeCompare(String(b.createdAt)))
+          .slice(-limit);
+      },
+      "getLocalChatMessages",
+    );
+  },
+
+  async createLocalChatMessage(input: {
+    cityKey: string;
+    groupId: string;
+    senderId: string;
+    senderName: string;
+    text: string;
+  }) {
+    return runWithDb(
+      async (p) =>
+        (p as any).localChatMessage.create({
+          data: { ...input },
+        }) as Promise<any>,
+      () => {
+        const data = readFallback();
+        if (!data.localChatMessages) data.localChatMessages = [];
+        const message = {
+          id: Math.random().toString(36).substring(2, 11),
+          ...input,
+          createdAt: new Date().toISOString(),
+        };
+        data.localChatMessages.push(message);
+        writeFallback(data);
+        return message;
+      },
+      "createLocalChatMessage",
+    );
+  },
+
+  /** All custom groups for a city, newest first. */
+  async getLocalChatGroups(cityKey: string) {
+    return runWithDb(
+      async (p) => {
+        const rows = await (p as any).localChatGroup.findMany({
+          where: { cityKey },
+          orderBy: { createdAt: "desc" },
+        });
+        return (rows || []).map((r: any) => deserializeLocalChatGroup(r));
+      },
+      () => {
+        const data = readFallback();
+        if (!data.localChatGroups) return [];
+        return data.localChatGroups
+          .filter((x: any) => x.cityKey === cityKey)
+          .sort((a: any, b: any) => String(b.createdAt).localeCompare(String(a.createdAt)))
+          .map((r: any) => deserializeLocalChatGroup(r));
+      },
+      "getLocalChatGroups",
+    );
+  },
+
+  async getLocalChatGroupById(id: string) {
+    return runWithDb(
+      async (p) => {
+        const row = await (p as any).localChatGroup.findUnique({ where: { id } });
+        return row ? deserializeLocalChatGroup(row) : null;
+      },
+      () => {
+        const data = readFallback();
+        if (!data.localChatGroups) return null;
+        const row = data.localChatGroups.find((x: any) => x.id === id) || null;
+        return row ? deserializeLocalChatGroup(row) : null;
+      },
+      "getLocalChatGroupById",
+    );
+  },
+
+  /** Creates a group (creator = admin); null when the name is taken in the city. */
+  async createLocalChatGroup(input: {
+    cityKey: string;
+    name: string;
+    type: "public" | "closed";
+    createdBy: string;
+  }) {
+    return runWithDb(
+      async (p) => {
+        // SQLite has no case-insensitive mode — compare in JS.
+        const rows = await (p as any).localChatGroup.findMany({
+          where: { cityKey: input.cityKey },
+        });
+        const nameTaken = (rows || []).some(
+          (r: any) => normalizeGroupName(r.name) === normalizeGroupName(input.name),
+        );
+        if (nameTaken) return null;
+        const row = await (p as any).localChatGroup.create({
+          data: {
+            cityKey: input.cityKey,
+            name: input.name.trim(),
+            type: input.type,
+            createdBy: input.createdBy,
+            members: JSON.stringify([input.createdBy]),
+            pending: "[]",
+          },
+        });
+        return deserializeLocalChatGroup(row);
+      },
+      () => {
+        const data = readFallback();
+        if (!data.localChatGroups) data.localChatGroups = [];
+        const nameTaken = data.localChatGroups.some(
+          (x: any) =>
+            x.cityKey === input.cityKey &&
+            normalizeGroupName(x.name) === normalizeGroupName(input.name),
+        );
+        if (nameTaken) return null;
+        const group = {
+          id: Math.random().toString(36).substring(2, 11),
+          cityKey: input.cityKey,
+          name: input.name.trim(),
+          type: input.type,
+          createdBy: input.createdBy,
+          createdAt: new Date().toISOString(),
+          members: [input.createdBy],
+          pending: [],
+        };
+        data.localChatGroups.push(group);
+        writeFallback(data);
+        return group;
+      },
+      "createLocalChatGroup",
+    );
+  },
+
+  /** Join request: no-op (returns the group) for public groups, members and
+   *  already-pending users; otherwise adds the user to `pending`. */
+  async requestJoinLocalChatGroup(groupId: string, userId: string) {
+    return runWithDb(
+      async (p) => {
+        const row = await (p as any).localChatGroup.findUnique({ where: { id: groupId } });
+        if (!row) return null;
+        const group = deserializeLocalChatGroup(row);
+        if (
+          group.type === "public" ||
+          group.members.includes(userId) ||
+          group.pending.includes(userId)
+        ) {
+          return group;
+        }
+        const updated = await (p as any).localChatGroup.update({
+          where: { id: groupId },
+          data: { pending: JSON.stringify([...group.pending, userId]) },
+        });
+        return deserializeLocalChatGroup(updated);
+      },
+      () => {
+        const data = readFallback();
+        if (!data.localChatGroups) return null;
+        const idx = data.localChatGroups.findIndex((x: any) => x.id === groupId);
+        if (idx === -1) return null;
+        const group = deserializeLocalChatGroup(data.localChatGroups[idx]);
+        if (
+          group.type !== "public" &&
+          !group.members.includes(userId) &&
+          !group.pending.includes(userId)
+        ) {
+          group.pending = [...group.pending, userId];
+          data.localChatGroups[idx] = group;
+          writeFallback(data);
+        }
+        return group;
+      },
+      "requestJoinLocalChatGroup",
+    );
+  },
+
+  /** Approve/reject a pending join. The ADMIN CHECK IS THE CALLER'S DUTY
+   *  (see POST /api/localchat/groups/resolve); here we only guard that the
+   *  user is actually pending. No-op (returns the group) otherwise. */
+  async resolveJoinLocalChatGroup(groupId: string, userId: string, approve: boolean) {
+    return runWithDb(
+      async (p) => {
+        const row = await (p as any).localChatGroup.findUnique({ where: { id: groupId } });
+        if (!row) return null;
+        const group = deserializeLocalChatGroup(row);
+        if (!group.pending.includes(userId)) return group;
+        const updated = await (p as any).localChatGroup.update({
+          where: { id: groupId },
+          data: {
+            pending: JSON.stringify(group.pending.filter((id: string) => id !== userId)),
+            members: approve
+              ? JSON.stringify([...group.members, userId])
+              : JSON.stringify(group.members),
+          },
+        });
+        return deserializeLocalChatGroup(updated);
+      },
+      () => {
+        const data = readFallback();
+        if (!data.localChatGroups) return null;
+        const idx = data.localChatGroups.findIndex((x: any) => x.id === groupId);
+        if (idx === -1) return null;
+        const group = deserializeLocalChatGroup(data.localChatGroups[idx]);
+        if (!group.pending.includes(userId)) return group;
+        group.pending = group.pending.filter((id: string) => id !== userId);
+        if (approve) group.members = [...group.members, userId];
+        data.localChatGroups[idx] = group;
+        writeFallback(data);
+        return group;
+      },
+      "resolveJoinLocalChatGroup",
     );
   },
 };

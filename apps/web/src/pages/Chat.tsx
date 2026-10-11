@@ -6,11 +6,33 @@ import { getCompatibilityLabel } from "../lib/std-parser";
 import PhotoView from "../components/PhotoView";
 import ProposalsPanel from "../components/ProposalsPanel";
 import LivenessChallenge from "../components/LivenessChallenge";
+import LocalChat, { type LocalChatSelection } from "../components/LocalChat";
 import { TEMP_PHOTO_VIEW_MS } from "../lib/photo-access";
 import { useWebSocket, WsMessage } from "../lib/useWebSocket";
 import { getNextLivenessDelayMs, type LivenessCheckResult } from "../lib/face-verification";
 
-type Tab = "messages" | "discover";
+const LOCAL_CHAT_SEL_KEY = "evolve_local_chat_sel";
+
+/** Stored (country, city, groupId) local-chat selection; falls back to the
+ *  user's residence city from their profile. */
+function readLocalChatSelection(residence: { country: string; city: string }): LocalChatSelection {
+  try {
+    const raw = localStorage.getItem(LOCAL_CHAT_SEL_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw) as Record<string, unknown>;
+      if (parsed && typeof parsed === "object" && typeof parsed.country === "string") {
+        return {
+          country: parsed.country,
+          city: typeof parsed.city === "string" ? parsed.city : "",
+          groupId: typeof parsed.groupId === "string" ? parsed.groupId : "all",
+        };
+      }
+    }
+  } catch (e) {
+    console.warn("corrupted local chat selection", e);
+  }
+  return { country: residence.country, city: residence.city, groupId: "all" };
+}
 
 const levelOrder = { normal: 1, "pregnancy-bond": 2, "cryptic-choice": 3 };
 
@@ -48,10 +70,19 @@ export default function Chat() {
     canViewTheirPhoto,
     myPhotoGrantFor,
     loadChatHistory,
+    appendIncomingMessage,
   } = useAppState();
   const [selectedProfileId, setSelectedProfileId] = useState<string | null>(null);
   const [messageText, setMessageText] = useState("");
-  const [activeTab, setActiveTab] = useState<Tab>("messages");
+  /** The local (city) chat is the landing view — messenger-style. Selecting
+   *  a private conversation switches the main area to the 1:1 chat. */
+  const [localChatActive, setLocalChatActive] = useState(true);
+  const [localChatSel, setLocalChatSel] = useState<LocalChatSelection>(() =>
+    readLocalChatSelection({
+      country: myProfile.searchDetails?.country ?? "",
+      city: myProfile.searchDetails?.city ?? "",
+    }),
+  );
   const chatEndRef = useRef<HTMLDivElement>(null);
   /** Local reveal of a counterpart's photo from an offer/approval message. */
   const [localReveal, setLocalReveal] = useState<{
@@ -73,10 +104,25 @@ export default function Chat() {
   const handleWsMessage = useCallback(
     (msg: WsMessage) => {
       if (selectedProfileId && msg.senderId !== myProfile.id) {
-        addMessage(selectedProfileId, msg.text, "them");
+        // Append locally only — the message already travelled to us over P2P/WS;
+        // re-sending (the old addMessage(..., "them") path) echoed on P2P and
+        // 403'd on HTTP.
+        appendIncomingMessage(selectedProfileId, {
+          id: msg.id,
+          text: msg.text,
+          time: msg.timestamp,
+          isRequest: msg.isRequest,
+          requestType: msg.requestType,
+          requestStatus: msg.requestStatus,
+          photoGrantKind: msg.photoGrantKind,
+          photoAction: msg.photoAction,
+          giftKind: msg.giftKind,
+          giftMode: msg.giftMode,
+          voucherPrivateKey: msg.voucherPrivateKey,
+        });
       }
     },
-    [selectedProfileId, myProfile.id, addMessage],
+    [selectedProfileId, myProfile.id, appendIncomingMessage],
   );
 
   const handleWsTyping = useCallback((userId: string, username: string) => {
@@ -171,9 +217,30 @@ export default function Chat() {
   }, []);
 
   const matchedProfiles = profiles.filter((p) => p.hasChat || p.chatHistory.length > 0);
-  const allProfiles = profiles;
 
-  const visibleProfiles = activeTab === "messages" ? matchedProfiles : allProfiles;
+  const handleLocalChatSelectionChange = useCallback((selection: LocalChatSelection) => {
+    setLocalChatSel(selection);
+    try {
+      localStorage.setItem(LOCAL_CHAT_SEL_KEY, JSON.stringify(selection));
+    } catch (e) {
+      console.warn("failed to persist local chat selection", e);
+    }
+  }, []);
+
+  // The profile loads asynchronously, so the residence city may arrive AFTER
+  // the local-chat selection was initialized. Adopt it once as the default
+  // (a stored user choice always wins — it has a non-empty country).
+  const residenceCountry = myProfile.searchDetails?.country ?? "";
+  const residenceCity = myProfile.searchDetails?.city ?? "";
+  useEffect(() => {
+    if (!localChatSel.country && residenceCountry) {
+      handleLocalChatSelectionChange({
+        country: residenceCountry,
+        city: localChatSel.city || residenceCity,
+        groupId: localChatSel.groupId,
+      });
+    }
+  }, [residenceCountry, residenceCity, localChatSel, handleLocalChatSelectionChange]);
 
   const handleSend = async () => {
     if (!messageText.trim() || !selectedProfileId) return;
@@ -229,45 +296,51 @@ export default function Chat() {
     <div className="flex h-[calc(100vh-12rem)] w-full max-w-6xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
       {/* Sidebar */}
       <aside className="w-72 border-r border-gray-200 bg-gray-50 flex flex-col">
-        {/* Tabs */}
-        <div className="flex border-b border-gray-200">
-          <button
-            onClick={() => setActiveTab("messages")}
-            className={`flex-1 py-3 text-sm font-medium transition-colors ${
-              activeTab === "messages"
-                ? "text-blue-600 border-b-2 border-blue-600"
-                : "text-gray-500 hover:text-gray-700"
-            }`}
-          >
-            {t("chat.title")}
-          </button>
-          <button
-            onClick={() => setActiveTab("discover")}
-            className={`flex-1 py-3 text-sm font-medium transition-colors ${
-              activeTab === "discover"
-                ? "text-blue-600 border-b-2 border-blue-600"
-                : "text-gray-500 hover:text-gray-700"
-            }`}
-          >
-            {t("navigation.home")}
-          </button>
+        {/* Column header — "Чати": the list of private conversations */}
+        <div className="px-4 py-3 border-b border-gray-200 bg-gray-100/60">
+          <h2 className="text-sm font-semibold text-gray-700">{t("chat.chats")}</h2>
         </div>
 
-        {/* Profile list */}
+        {/* Chat list (pinned Місцевий чат + private conversations) */}
         <div className="flex-1 overflow-y-auto">
-          {visibleProfiles.length === 0 && (
-            <p className="p-4 text-sm text-gray-400 text-center">
-              {activeTab === "messages" ? t("chat.noMatches") : t("home.filters.noProfiles")}
-            </p>
+          {/* Pinned local (city) chat entry — the messenger landing view */}
+          <button
+            onClick={() => {
+              setSelectedProfileId(null);
+              setLocalChatActive(true);
+            }}
+            className={`w-full text-left p-4 border-b transition-colors flex items-center gap-3 ${
+              localChatActive
+                ? "bg-white shadow-sm border-gray-200"
+                : "border-gray-100 hover:bg-white"
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg flex-shrink-0">
+              🌍
+            </div>
+            <div className="min-w-0">
+              <div className="font-semibold text-gray-900 truncate">{t("localChat.title")}</div>
+              <div className="text-xs text-gray-500 truncate">
+                {localChatSel.city || t("localChat.selectCity")}
+              </div>
+            </div>
+          </button>
+
+          {/* Private conversations */}
+          {matchedProfiles.length === 0 && (
+            <p className="p-4 text-sm text-gray-400 text-center">{t("chat.noMatches")}</p>
           )}
-          {visibleProfiles.map((profile) => {
+          {matchedProfiles.map((profile) => {
             const visible = canSeeProfile(authMode, profile);
             return (
               <button
                 key={profile.id}
-                onClick={() => setSelectedProfileId(profile.id)}
+                onClick={() => {
+                  setSelectedProfileId(profile.id);
+                  setLocalChatActive(false);
+                }}
                 className={`w-full text-left p-4 border-b border-gray-100 hover:bg-white transition-colors ${
-                  selectedProfileId === profile.id ? "bg-white shadow-sm" : ""
+                  !localChatActive && selectedProfileId === profile.id ? "bg-white shadow-sm" : ""
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -338,7 +411,14 @@ export default function Chat() {
 
       {/* Chat area */}
       <main className="flex-1 flex flex-col">
-        {!selectedProfile ? (
+        {localChatActive ? (
+          <LocalChat
+            myProfile={myProfile}
+            profiles={profiles}
+            selection={localChatSel}
+            onSelectionChange={handleLocalChatSelectionChange}
+          />
+        ) : !selectedProfile ? (
           <div className="flex-1 flex items-center justify-center text-gray-400">
             <p>{t("chat.selectChat")}</p>
           </div>
@@ -420,23 +500,6 @@ export default function Chat() {
               )}
               <div ref={chatEndRef} />
             </div>
-
-            {/* Profile info (when viewing discover tab and profile is visible) */}
-            {activeTab === "discover" && showContent && (
-              <div className="px-4 py-3 border-t border-gray-100 bg-gray-50">
-                <div className="flex items-center gap-4 text-sm text-gray-600">
-                  <span>
-                    {t("profile.reputation.score")}:{" "}
-                    <strong className="text-gray-900">{selectedProfile.reputationScore}</strong>
-                  </span>
-                  {selectedProfile.interests.length > 0 && (
-                    <span className="truncate">
-                      {selectedProfile.interests.slice(0, 3).join(", ")}
-                    </span>
-                  )}
-                </div>
-              </div>
-            )}
 
             {/* Access request buttons */}
             {permissions && showContent && (

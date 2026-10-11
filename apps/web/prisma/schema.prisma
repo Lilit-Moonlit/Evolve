@@ -185,7 +185,7 @@ model CompanionPatient {
 // is the lab's client-generated `lab_id` so its own dashboard keeps working
 // from the same device while other users discover the lab from anywhere.
 model CompanionLab {
-  id          String   @id
+  id          String   @id @default(cuid())
   name        String
   description String?
   address     String?
@@ -194,4 +194,34 @@ model CompanionLab {
   city        String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+// City-scoped local chat message. Stream key = (cityKey, groupId) where
+// groupId is a default thematic id ("all"|"dating"|"conception"|"polyandrous")
+// or a custom LocalChatGroup id.
+model LocalChatMessage {
+  id         String   @id @default(cuid())
+  cityKey    String   // canonical "Country::City" key
+  groupId    String
+  senderId   String
+  senderName String
+  text       String
+  createdAt  DateTime @default(now())
+
+  @@index([cityKey, groupId])
+}
+
+// User-created local chat group (public/closed) per city; the creator is the
+// admin. members/pending are serialized JSON arrays of userIds.
+model LocalChatGroup {
+  id        String   @id @default(cuid())
+  cityKey   String
+  name      String
+  type      String   // "public" | "closed"
+  createdBy String
+  createdAt DateTime @default(now())
+  members   String   @default("[]") // JSON array of userIds
+  pending   String   @default("[]") // JSON array of userIds awaiting admin approval
+
+  @@index([cityKey])
 }

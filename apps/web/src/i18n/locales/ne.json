@@ -192,7 +192,8 @@
       "verificationError": "Face verification failed. Please try again.",
       "systemMessageSuccess": "🛡️ Identity check passed",
       "systemMessageFailed": "⚠️ Identity check failed"
-    }
+    },
+    "chats": "Chats"
   },
   "language": {
     "select": "भाषा चयन गर्नुहोस्",
@@ -1175,6 +1176,39 @@
       "sdkMissing": "Railgun SDK not installed",
       "txSent": "Transaction submitted",
       "error": "Operation failed"
+    }
+  },
+  "localChat": {
+    "title": "Local chat",
+    "country": "Country",
+    "city": "City",
+    "group": "Group",
+    "selectCity": "Select a city",
+    "noMessages": "No messages yet",
+    "inputPlaceholder": "Write in the local chat…",
+    "loadingCities": "Loading cities…",
+    "createGroup": "Create group",
+    "groupName": "Group name",
+    "groupNameExists": "A group with this name already exists",
+    "create": "Create",
+    "cancel": "Cancel",
+    "closedGroup": "This group is closed. Request to join.",
+    "requestJoin": "Request to join",
+    "pendingApproval": "Waiting for admin approval",
+    "admin": "Admin",
+    "pendingMembers": "Join requests",
+    "approve": "Approve",
+    "decline": "Decline",
+    "typing": "is typing…",
+    "groups": {
+      "all": "All",
+      "dating": "Dating",
+      "conception": "Conception",
+      "polyandrous": "Polyandrous conception"
+    },
+    "groupType": {
+      "public": "Public",
+      "closed": "Closed"
     }
   }
 }

@@ -190,7 +190,8 @@
       "verificationError": "Face verification failed. Please try again.",
       "systemMessageSuccess": "🛡️ Identity check passed",
       "systemMessageFailed": "⚠️ Identity check failed"
-    }
+    },
+    "chats": "المحادثات"
   },
   "language": {
     "select": "Select Language",
@@ -1206,6 +1207,39 @@
       "sdkMissing": "حزمة Railgun SDK غير مثبّتة",
       "txSent": "تم إرسال المعاملة",
       "error": "فشلت العملية"
+    }
+  },
+  "localChat": {
+    "title": "الدردشة المحلية",
+    "country": "الدولة",
+    "city": "المدينة",
+    "group": "المجموعة",
+    "selectCity": "اختر مدينة",
+    "noMessages": "لا توجد رسائل بعد",
+    "inputPlaceholder": "اكتب في الدردشة المحلية…",
+    "loadingCities": "جارٍ تحميل المدن…",
+    "createGroup": "إنشاء مجموعة",
+    "groupName": "اسم المجموعة",
+    "groupNameExists": "توجد مجموعة بهذا الاسم بالفعل",
+    "create": "إنشاء",
+    "cancel": "إلغاء",
+    "closedGroup": "هذه المجموعة مغلقة. اطلب الانضمام.",
+    "requestJoin": "طلب الانضمام",
+    "pendingApproval": "بانتظار موافقة المشرف",
+    "admin": "المشرف",
+    "pendingMembers": "طلبات الانضمام",
+    "approve": "قبول",
+    "decline": "رفض",
+    "typing": "يكتب…",
+    "groups": {
+      "all": "الجميع",
+      "dating": "التعارف",
+      "conception": "الإنجاب",
+      "polyandrous": "الإنجاب بتعدد الأزواج"
+    },
+    "groupType": {
+      "public": "عامة",
+      "closed": "مغلقة"
     }
   }
 }

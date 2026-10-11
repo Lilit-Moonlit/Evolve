@@ -1,9 +1,15 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { beforeAll, expect, test, vi } from "vitest";
 import Chat from "./Chat";
 import { AppStateProvider } from "../store/AppContext";
 
-test("renders Chat component placeholder", () => {
+beforeAll(() => {
+  // jsdom does not implement scrollIntoView (LocalChat auto-scroll effect)
+  Element.prototype.scrollIntoView = vi.fn();
+});
+
+test("renders the local chat as the messenger landing view", () => {
   render(
     <MemoryRouter>
       <AppStateProvider>
@@ -11,7 +17,11 @@ test("renders Chat component placeholder", () => {
       </AppStateProvider>
     </MemoryRouter>,
   );
-  // Component uses i18n key chat.title - look for the tab button
-  const chatTab = screen.getByRole("button", { name: /chat\.title/i });
-  expect(chatTab).toBeInTheDocument();
+  // The pinned "Місцевий чат" entry is present in the sidebar
+  const localChatEntry = screen.getByRole("button", { name: /localChat\.title/i });
+  expect(localChatEntry).toBeInTheDocument();
+  // The old "Головна" tab was removed from the sidebar
+  expect(screen.queryByRole("button", { name: /navigation\.home/i })).not.toBeInTheDocument();
+  // Without a selected city the local chat shows the select-city hint
+  expect(screen.getAllByText(/localChat\.selectCity/i).length).toBeGreaterThan(0);
 });

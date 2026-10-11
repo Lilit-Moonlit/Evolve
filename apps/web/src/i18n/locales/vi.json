@@ -192,7 +192,8 @@
       "verificationError": "Face verification failed. Please try again.",
       "systemMessageSuccess": "🛡️ Identity check passed",
       "systemMessageFailed": "⚠️ Identity check failed"
-    }
+    },
+    "chats": "Trò chuyện"
   },
   "language": {
     "select": "Chọn ngôn ngữ",
@@ -1210,6 +1211,39 @@
       "sdkMissing": "Chưa cài đặt Railgun SDK",
       "txSent": "Đã gửi giao dịch",
       "error": "Thao tác thất bại"
+    }
+  },
+  "localChat": {
+    "title": "Trò chuyện địa phương",
+    "country": "Quốc gia",
+    "city": "Thành phố",
+    "group": "Nhóm",
+    "selectCity": "Chọn thành phố",
+    "noMessages": "Chưa có tin nhắn",
+    "inputPlaceholder": "Viết vào trò chuyện địa phương…",
+    "loadingCities": "Đang tải thành phố…",
+    "createGroup": "Tạo nhóm",
+    "groupName": "Tên nhóm",
+    "groupNameExists": "Đã có nhóm với tên này",
+    "create": "Tạo",
+    "cancel": "Hủy",
+    "closedGroup": "Nhóm này kín. Hãy gửi yêu cầu tham gia.",
+    "requestJoin": "Yêu cầu tham gia",
+    "pendingApproval": "Đang chờ quản trị viên duyệt",
+    "admin": "Quản trị viên",
+    "pendingMembers": "Yêu cầu tham gia",
+    "approve": "Chấp nhận",
+    "decline": "Từ chối",
+    "typing": "đang nhập…",
+    "groups": {
+      "all": "Tất cả",
+      "dating": "Hẹn hò",
+      "conception": "Mang thai",
+      "polyandrous": "Mang thai đa phu"
+    },
+    "groupType": {
+      "public": "Công khai",
+      "closed": "Kín"
     }
   }
 }

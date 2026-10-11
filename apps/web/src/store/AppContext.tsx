@@ -25,6 +25,7 @@ import {
 } from "../lib/photo-access";
 import type { GiftSenderMode, RoseRecord } from "../lib/private-gift";
 import { sanitizeRoseRecord } from "../lib/private-gift";
+import { getChatTransport } from "../lib/chat-transport";
 
 export type { STRProfile }; // Exporting for external use
 
@@ -61,6 +62,24 @@ export interface ChatMessage {
   /** Gift (rose/cactus) message fields. */
   giftKind?: "rose" | "cactus";
   giftMode?: "public" | "anon-except-recipient" | "anon";
+  voucherPrivateKey?: string;
+}
+
+/**
+ * A message received in real time (P2P or WebSocket). Appended to the local
+ * conversation WITHOUT re-sending — unlike `addMessage`, which transmits.
+ */
+export interface IncomingChatMessage {
+  id?: string;
+  text: string;
+  time?: string;
+  isRequest?: boolean;
+  requestType?: ChatMessage["requestType"];
+  requestStatus?: ChatMessage["requestStatus"];
+  photoGrantKind?: ChatMessage["photoGrantKind"];
+  photoAction?: ChatMessage["photoAction"];
+  giftKind?: ChatMessage["giftKind"];
+  giftMode?: ChatMessage["giftMode"];
   voucherPrivateKey?: string;
 }
 
@@ -263,6 +282,8 @@ interface AppContextType {
   ) => Promise<void>;
   /** Lazy-loads the chat history for one profile (called when a chat opens). */
   loadChatHistory: (profileId: string) => Promise<void>;
+  /** Appends a real-time received message locally (no re-send / no echo). */
+  appendIncomingMessage: (profileId: string, msg: IncomingChatMessage) => void;
   checkCompatibility: (profile: ProfileData) => StdCompatibilityResult;
   saveProfile: (patch: ProfilePatch) => Promise<void>;
   completeOnboarding: (patch: ProfilePatch) => Promise<void>;
@@ -943,25 +964,22 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         hour: "2-digit",
         minute: "2-digit",
       });
-      const res = await apiFetch("/api/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          senderId: sender === "me" ? myProfile.id : profileId,
-          receiverId: sender === "me" ? profileId : myProfile.id,
-          text,
-          time: timeStr,
-          isRequest: !!isRequest,
-          requestType,
-          requestStatus: isRequest ? "pending" : undefined,
-          photoGrantKind,
-          photoAction,
-          giftKind,
-          giftMode,
-          voucherPrivateKey,
-        }),
+      // P2P-first (libp2p gossipsub); HTTP `/api/messages` is the fallback
+      // mirror (§23 rule 2). The adapter returns the persisted message.
+      const savedMsg = await getChatTransport().send({
+        senderId: sender === "me" ? myProfile.id : profileId,
+        receiverId: sender === "me" ? profileId : myProfile.id,
+        text,
+        time: timeStr,
+        isRequest: !!isRequest,
+        requestType,
+        requestStatus: isRequest ? "pending" : undefined,
+        photoGrantKind,
+        photoAction,
+        giftKind,
+        giftMode,
+        voucherPrivateKey,
       });
-      const savedMsg = await res.json();
 
       setProfiles((prev) =>
         prev.map((p) => {
@@ -974,7 +992,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
                   id: savedMsg.id,
                   sender,
                   text,
-                  time: timeStr,
+                  time: savedMsg.time || timeStr,
                   isRequest,
                   requestType,
                   requestStatus: isRequest ? "pending" : undefined,
@@ -995,15 +1013,52 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   };
 
+  /**
+   * Appends a message received in real time to the local conversation WITHOUT
+   * re-sending it over any transport. Used for P2P/WebSocket inbound messages —
+   * re-sending here previously caused an echo loop (P2P) and a 403 (HTTP, since
+   * the server rejects a senderId that is not the session user).
+   */
+  const appendIncomingMessage = (profileId: string, msg: IncomingChatMessage) => {
+    const timeStr =
+      msg.time ||
+      new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    setProfiles((prev) =>
+      prev.map((p) => {
+        if (p.id !== profileId) return p;
+        return {
+          ...p,
+          chatHistory: [
+            ...p.chatHistory,
+            {
+              id: msg.id || `in-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+              sender: "them",
+              text: msg.text,
+              time: timeStr,
+              isRequest: msg.isRequest,
+              requestType: msg.requestType,
+              requestStatus: msg.requestStatus,
+              photoGrantKind: msg.photoGrantKind,
+              photoAction: msg.photoAction,
+              giftKind: msg.giftKind,
+              giftMode: msg.giftMode,
+              voucherPrivateKey: msg.voucherPrivateKey,
+            },
+          ],
+        };
+      }),
+    );
+  };
+
   const loadChatHistory = async (profileId: string) => {
     if (!myProfile.id) return;
     try {
-      const msgRes = await apiFetch(
-        `/api/messages?senderId=${myProfile.id}&receiverId=${profileId}`,
-      );
-      const msgData = await msgRes.json();
-      const rawMsgs = Array.isArray(msgData) ? msgData : [];
-      const chatHistory: ChatMessage[] = rawMsgs.map((m: any) => ({
+      // HTTP mirror merged with the live P2P in-memory history (deduplicated).
+      const msgs = await getChatTransport().history(myProfile.id, profileId);
+      const chatHistory: ChatMessage[] = msgs.map((m) => ({
         id: m.id,
         sender: m.senderId === myProfile.id ? "me" : "them",
         text: m.text,
@@ -1301,6 +1356,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         denyAccess,
         addMessage,
         loadChatHistory,
+        appendIncomingMessage,
         checkCompatibility,
         saveProfile,
         completeOnboarding,

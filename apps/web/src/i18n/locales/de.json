@@ -190,7 +190,8 @@
       "verificationError": "Gesichtsprüfung fehlgeschlagen. Bitte erneut versuchen.",
       "systemMessageSuccess": "🛡️ Identitätsprüfung bestanden",
       "systemMessageFailed": "⚠️ Identitätsprüfung fehlgeschlagen"
-    }
+    },
+    "chats": "Chats"
   },
   "language": {
     "select": "Sprache auswählen",
@@ -1201,6 +1202,39 @@
       "sdkMissing": "Railgun SDK nicht installiert",
       "txSent": "Transaktion gesendet",
       "error": "Vorgang fehlgeschlagen"
+    }
+  },
+  "localChat": {
+    "title": "Lokaler Chat",
+    "country": "Land",
+    "city": "Stadt",
+    "group": "Gruppe",
+    "selectCity": "Stadt auswählen",
+    "noMessages": "Noch keine Nachrichten",
+    "inputPlaceholder": "In den lokalen Chat schreiben…",
+    "loadingCities": "Städte werden geladen…",
+    "createGroup": "Gruppe erstellen",
+    "groupName": "Gruppenname",
+    "groupNameExists": "Eine Gruppe mit diesem Namen existiert bereits",
+    "create": "Erstellen",
+    "cancel": "Abbrechen",
+    "closedGroup": "Diese Gruppe ist geschlossen. Beitritt anfordern.",
+    "requestJoin": "Beitritt anfordern",
+    "pendingApproval": "Wartet auf Bestätigung durch den Admin",
+    "admin": "Admin",
+    "pendingMembers": "Beitrittsanfragen",
+    "approve": "Annehmen",
+    "decline": "Ablehnen",
+    "typing": "schreibt…",
+    "groups": {
+      "all": "Alle",
+      "dating": "Dating",
+      "conception": "Kinderwunsch",
+      "polyandrous": "Polyandrischer Kinderwunsch"
+    },
+    "groupType": {
+      "public": "Öffentlich",
+      "closed": "Geschlossen"
     }
   }
 }

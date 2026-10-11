@@ -36,6 +36,25 @@ describe("buildLocationIndex", () => {
     });
     expect(index.citiesFor("Ukraine")).toEqual(["Kyiv"]);
   });
+
+  it("maps country names to ISO codes and keeps the first code on duplicates", () => {
+    const index = buildLocationIndex(
+      [
+        { name: "Ukraine", isoCode: "UA" },
+        { name: "Poland", isoCode: "PL" },
+        { name: "Ukraine", isoCode: "XX" },
+      ],
+      {},
+    );
+    expect(index.isoFor("Ukraine")).toBe("UA");
+    expect(index.isoFor("Poland")).toBe("PL");
+  });
+
+  it("returns an empty ISO code for unknown countries or missing isoCode", () => {
+    const index = buildLocationIndex([{ name: "Ukraine" }, { name: "Nowhere" }], {});
+    expect(index.isoFor("Ukraine")).toBe("");
+    expect(index.isoFor("Germany")).toBe("");
+  });
 });
 
 describe("withLegacyOption", () => {

@@ -190,7 +190,8 @@
       "verificationError": "Face verification failed. Please try again.",
       "systemMessageSuccess": "🛡️ Identity check passed",
       "systemMessageFailed": "⚠️ Identity check failed"
-    }
+    },
+    "chats": "Conversas"
   },
   "language": {
     "select": "Selecionar idioma",
@@ -1209,6 +1210,39 @@
       "sdkMissing": "SDK do Railgun não instalado",
       "txSent": "Transação enviada",
       "error": "Falha na operação"
+    }
+  },
+  "localChat": {
+    "title": "Chat local",
+    "country": "País",
+    "city": "Cidade",
+    "group": "Grupo",
+    "selectCity": "Escolha uma cidade",
+    "noMessages": "Ainda não há mensagens",
+    "inputPlaceholder": "Escrever no chat local…",
+    "loadingCities": "A carregar cidades…",
+    "createGroup": "Criar grupo",
+    "groupName": "Nome do grupo",
+    "groupNameExists": "Já existe um grupo com este nome",
+    "create": "Criar",
+    "cancel": "Cancelar",
+    "closedGroup": "Este grupo é fechado. Peça para entrar.",
+    "requestJoin": "Pedir para entrar",
+    "pendingApproval": "A aguardar aprovação do administrador",
+    "admin": "Administrador",
+    "pendingMembers": "Pedidos de adesão",
+    "approve": "Aceitar",
+    "decline": "Recusar",
+    "typing": "está a escrever…",
+    "groups": {
+      "all": "Todos",
+      "dating": "Namoro",
+      "conception": "Conceção",
+      "polyandrous": "Conceção poliândrica"
+    },
+    "groupType": {
+      "public": "Público",
+      "closed": "Fechado"
     }
   }
 }

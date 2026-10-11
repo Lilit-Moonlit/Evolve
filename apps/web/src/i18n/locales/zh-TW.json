@@ -190,7 +190,8 @@
       "verificationError": "Face verification failed. Please try again.",
       "systemMessageSuccess": "🛡️ Identity check passed",
       "systemMessageFailed": "⚠️ Identity check failed"
-    }
+    },
+    "chats": "聊天"
   },
   "language": {
     "select": "Select Language",
@@ -1201,6 +1202,39 @@
       "sdkMissing": "未安裝 Railgun SDK",
       "txSent": "交易已發送",
       "error": "操作失敗"
+    }
+  },
+  "localChat": {
+    "title": "本地聊天",
+    "country": "國家",
+    "city": "城市",
+    "group": "群組",
+    "selectCity": "選擇城市",
+    "noMessages": "尚無訊息",
+    "inputPlaceholder": "在本地聊天中發言…",
+    "loadingCities": "正在載入城市…",
+    "createGroup": "建立群組",
+    "groupName": "群組名稱",
+    "groupNameExists": "已存在同名群組",
+    "create": "建立",
+    "cancel": "取消",
+    "closedGroup": "該群組為封閉群組，請申請加入。",
+    "requestJoin": "申請加入",
+    "pendingApproval": "等待管理員核准",
+    "admin": "管理員",
+    "pendingMembers": "加入申請",
+    "approve": "核准",
+    "decline": "拒絕",
+    "typing": "正在輸入…",
+    "groups": {
+      "all": "所有人",
+      "dating": "交友",
+      "conception": "備孕",
+      "polyandrous": "多夫備孕"
+    },
+    "groupType": {
+      "public": "公開",
+      "closed": "封閉"
     }
   }
 }

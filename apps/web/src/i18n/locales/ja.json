@@ -190,7 +190,8 @@
       "verificationError": "Face verification failed. Please try again.",
       "systemMessageSuccess": "🛡️ Identity check passed",
       "systemMessageFailed": "⚠️ Identity check failed"
-    }
+    },
+    "chats": "チャット"
   },
   "language": {
     "select": "言語を選択",
@@ -1200,6 +1201,39 @@
       "sdkMissing": "Railgun SDKがインストールされていません",
       "txSent": "トランザクションを送信しました",
       "error": "操作に失敗しました"
+    }
+  },
+  "localChat": {
+    "title": "ローカルチャット",
+    "country": "国",
+    "city": "都市",
+    "group": "グループ",
+    "selectCity": "都市を選択",
+    "noMessages": "メッセージはまだありません",
+    "inputPlaceholder": "ローカルチャットに書き込む…",
+    "loadingCities": "都市を読み込み中…",
+    "createGroup": "グループを作成",
+    "groupName": "グループ名",
+    "groupNameExists": "同じ名前のグループが既に存在します",
+    "create": "作成",
+    "cancel": "キャンセル",
+    "closedGroup": "このグループは非公開です。参加をリクエストしてください。",
+    "requestJoin": "参加をリクエスト",
+    "pendingApproval": "管理者の承認待ち",
+    "admin": "管理者",
+    "pendingMembers": "参加リクエスト",
+    "approve": "承認",
+    "decline": "却下",
+    "typing": "が入力中…",
+    "groups": {
+      "all": "すべて",
+      "dating": "出会い",
+      "conception": "妊娠希望",
+      "polyandrous": "多夫制の妊娠希望"
+    },
+    "groupType": {
+      "public": "公開",
+      "closed": "非公開"
     }
   }
 }
