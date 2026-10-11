@@ -319,8 +319,7 @@ export default function Chat() {
               🌍
             </div>
             <div className="min-w-0">
-              <div className="font-semibold text-gray-900 truncate">{t("localChat.title")}</div>
-              <div className="text-xs text-gray-500 truncate">
+              <div className="font-semibold text-gray-900 truncate">
                 {localChatSel.city || t("localChat.selectCity")}
               </div>
             </div>

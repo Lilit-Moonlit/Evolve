@@ -17,8 +17,9 @@ test("renders the local chat as the messenger landing view", () => {
       </AppStateProvider>
     </MemoryRouter>,
   );
-  // The pinned "Місцевий чат" entry is present in the sidebar
-  const localChatEntry = screen.getByRole("button", { name: /localChat\.title/i });
+  // The pinned city-chat entry is present in the sidebar (shows the city,
+  // or the select-city hint when none is chosen — no redundant "Місцевий чат" label)
+  const localChatEntry = screen.getByRole("button", { name: /localChat\.selectCity/i });
   expect(localChatEntry).toBeInTheDocument();
   // The old "Головна" tab was removed from the sidebar
   expect(screen.queryByRole("button", { name: /navigation\.home/i })).not.toBeInTheDocument();
