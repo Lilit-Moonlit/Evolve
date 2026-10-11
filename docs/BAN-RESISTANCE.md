@@ -68,11 +68,15 @@ opening even if the origin later becomes unreachable (offline shell).
 
 ## 5. Remaining hardening (roadmap)
 
-These are architectural, tracked in `packages/p2p` + `packages/storage`:
+These are architectural, tracked in `packages/p2p` + `packages/storage`, and are
+now part of the canonical scaling strategy — [`docs/DECENTRALIZED-SCALING.md`](DECENTRALIZED-SCALING.md):
 
 - **P2P-first messaging**: chat currently uses the `/ws` API fallback; the
   libp2p gossipsub + Nostr path in `packages/p2p` must be wired as the default
   so messaging survives API takedown.
+- **Local chat on city relays**: the `Місцевий чат` currently runs on the
+  server (`join_local` WS); it must move to city-scoped Nostr relays so a city
+  conversation survives any single server.
 - **Decentralized content**: user content (photos, documents) should be
   written to IPFS/Arweave first, with the server copy as a mirror only.
 - **Static full-mirror**: serving the entire app (including data layer) from

@@ -50,6 +50,38 @@ _Auto-scaffolded by /start-work. Append new entries below - never overwrite._
 - Ledger jsonl is write-restricted for this agent; this notepad + plan checkboxes are the durable progress record.
 - **Scheduling decision**: Task 3 (RewardMinter) and Task 5 (docs) dispatched in parallel — disjoint file sets. Task 4 (VestingWallet) serialized AFTER Task 3 because both register ignition modules in `index.js` (edit-conflict risk). Task 3 worker instructed NOT to touch `packages/contracts/README.md` (owned by Task 5 this wave).
 
+## Tasks 3/5/10 verification round (2026-09-28, same session)
+
+- **Task 3 — CONFIRMED**: RewardMinter.sol reviewed line-by-line (fixed 1e18/50e18, separate lazy-reset daily counters, onlyMinter whitelist, setMinter onlyRole admin=timelock, NO arbitrary-amount mint). 16 tests, full suite 199 PASS, deploy:local 14 futures. Worker correctly rejected a typo'd hardhat#0 address in my prompt and used the true `0xf39F...92266`. Checkbox → `[x]`.
+- **Task 10 — CONFIRMED**: schema.prisma:62 `registrationRewarded Boolean @default(false)`, :113 `walletAddress String?`; prisma generate OK; tsc 0 new errors; commit 40f91fe. Checkbox → `[x]`.
+- **Task 5 — FALSE COMPLETION caught**: "writing"-category worker reported done in 11 seconds with ZERO file edits (TOKENOMICS.md still `100,000,000`, Pausable still in TokenDeployment.md:250,260). Lesson: (1) always verify doc tasks with the acceptance grep BEFORE marking the checkbox — duration is a free tell (11s cannot edit 4 files + prettier + commit); (2) re-dispatched via task_id session reuse with the EXACT failing greps quoted in the fix prompt. Checkbox stays `[ ]` until greps come back clean.
+- **Parallel wave 2**: Task 6 (OFT rewrite, critical path) + Task 5-fix + Task 11 (db.ts) + Task 12 (adminChain.ts) — four workers, disjoint file sets (contracts core vs docs vs apps/web db vs apps/web chain lib). Task 4 + Task 15 held: both would edit index.js / deploy EVOLVE while Task 6 rewrites EVOLVE.sol.
+
+## Model-infrastructure degradation + recovery (2026-09-28, later)
+
+- `zai-coding-plan/glm-5.2` (deep/quick/writing category models) hit a hard **5-hour usage limit** (reset 2026-09-29 01:48). Fallback `cerebras/gpt-oss-120b` completes IMPLEMENTATION but **stalls ~30 min then "timed out after 30 minutes of inactivity"** during the verify/commit phase — evidence: Task 11's db.ts code was fully written (all 6 methods correct) but no evidence file + no commit existed; Task 12 produced zero edits before its 30-min stall.
+- **False-completion / zero-edit loop is the recurring failure**: writing-category worker failed Task 5 TWICE (11s and 15m59s) with zero edits; quick-category worker looped 8 min on indentation reasoning with zero edits. Root cause: these models emit planning prose and never call `edit`. Countermeasures: (1) exact oldString→newString in the prompt (remove all ambiguity), (2) require the acceptance grep output IN the report, (3) switch agent type to `general` (subagent_type), (4) for a partially-done task, dispatch a NARROW "verify + commit only, do not re-implement" follow-up instead of a full re-run.
+- **Queue saturation**: 4 concurrent `deep` dispatches caused "Task timed out while queued (30 minutes)". Keep ≤2-3 concurrent heavy tasks during degraded-model windows.
+- Valid `subagent_type` here (NOT "build"): general, explore, librarian, oracle, Sisyphus-Junior (via category), Metis, Momus. "build" is not registered in this harness.
+- Current: Task 11 = code done, verifying+committing via general; Task 5 = surgical docs via general; Task 6 (OFT) = retrying on fallback; Task 12 = not re-dispatched yet (hold until general agent proven).
+
+## Task 6 (OFT) partial/false completion — verify EVERY deliverable, not just the headline (2026-09-28)
+
+- `general` agent reported Task 6 "COMPLETED" but delivered only the EVOLVE.sol rewrite. Orchestrator grep/glob caught the gaps: (1) `sharedDecimals=6` MISSING (no `ld2sdRate`/`_sd2ldRate` override), (2) `test/EVOLVEOFT.test.js` NOT created, (3) **8 test files still deploy EVOLVE with the old 2-arg constructor** → the entire contracts suite would fail to compile (constructor is now `(initialOwner, maxSupply, lzEndpoint)`), (4) no evidence file, no commit.
+- Lesson: after a big cross-cutting contract change, the FIRST thing to verify is "did the worker update every constructor call site in the suite?" — grep `test/*.js` for `.deploy(` and the contract name. A contract signature change silently breaks every fixture the worker forgot.
+- Recovery: split Task 6 into 6a (fix EVOLVE.sol sharedDecimals + update all 8 fixtures + compile + full suite GREEN + commit) then 6b (add EVOLVEOFT.test.js). Smaller chunks = clearer done-state + less stall.
+- Also note: OFT v4 import path the worker used is `@layerzerolabs/oft-evm/contracts/OFT.sol` (verify against node_modules — package layout differs by version; do NOT trust the import string blindly).
+
+## OFT facts confirmed by orchestrator (read node_modules source directly) — do NOT re-investigate
+
+- Packages are installed HOISTED at `C:\CFC\node_modules\@layerzerolabs\` (monorepo workspaces), NOT `packages/contracts/node_modules`. Imports resolve from root.
+- `@layerzerolabs/oft-evm/contracts/OFT.sol`: `abstract contract OFT is OFTCore, ERC20`; constructor `OFT(name, symbol, lzEndpoint, delegate) ERC20(name,symbol) OFTCore(decimals(), lzEndpoint, delegate)`. So `OFT("EVOLVE","EVOLVE",lzEndpoint,address(0))` is correct (delegate=0 → self-delegates).
+- **`sharedDecimals()` returns 6 BY DEFAULT** (OFTCore.sol:85-87). `decimalConversionRate = 10**(localDecimals - sharedDecimals) = 10^(18-6) = 10^12`. So sharedDecimals=6 is ALREADY satisfied — no override strictly needed; add an explicit override/comment for clarity + a guard against future default changes.
+- **Supply-neutrality is inherited correctly**: `_debit` burns (`_burn(from, amountSentLD)` OFT.sol:68), `_credit` mints (`_mint(to, amountLD)` OFT.sol:85) — does NOT touch `totalMinted`, does NOT check MAX_SUPPLY. `_credit` is `internal`, only reachable via `_lzReceive` (OFTCore.sol:277). No public bridge-mint exists. So the plan's "bridge-mint = internal _mint in OFT _credit, supply-neutral, uncapped" is satisfied by the stock OFT base.
+- **The ONLY real Task 6 blocker was the 8 test fixtures** using the old 2-arg EVOLVE constructor (now `(initialOwner, maxSupply, lzEndpoint)`). Sites: EVOLVE.test.js:10, EVOLVEAdmin.test.js:16, RewardMinter.test.js:21+292, Evolve2EarnGifts.test.js:9, Evolve2Earn.test.js:9, Paymaster.test.js:14, Governance.test.js:22, BondManager.test.js:28. Fix = add `ethers.ZeroAddress` as 3rd arg (OFT constructor does not zero-check the endpoint; non-bridging tests never touch it).
+- Remaining for Task 6b: `test/EVOLVEOFT.test.js` via `@layerzerolabs/test-devtools-evm-hardhat` (EndpointV2Mock) — installed. Task 9 will deepen the supply-conservation tests.
+
+
 ---
 
 ## Task 3 — RewardMinter (2026-09-28)
@@ -74,3 +106,26 @@ _Auto-scaffolded by /start-work. Append new entries below - never overwrite._
 - Full suite `npx hardhat test` → **199 passing, 0 failing** (183 + 16).
 - `npm run deploy:local` → 14 futures incl. `RewardMinterModule#RewardMinter - 0x9A676e781A523b5d0C0e43731313A708CB607508`; no exit-hang this run.
 - MINTER_ROLE grant for RewardMinter deliberately NOT wired in `index.js` — production path is a 48h timelock proposal (post-deploy ops step for the runbook).
+
+## Task 6 — EVOLVE inherits LayerZero OFT (2026-09-29) — CRITICAL for Tasks 7/8/9
+
+### Contract-level facts (verified empirically, commits 488b11e + 996eeff + b50c5c2)
+
+- **Ownable base-ctor gotcha**: `OFT → OFTCore → OApp → OAppCore` does NOT forward constructor args to `Ownable` → solc error "No arguments passed to the base constructor". Most-derived contract must add `Ownable(initialOwner)` to its ctor modifier list (+ direct `import { Ownable }` — transitive imports are NOT visible). Also `OAppCore` ctor reverts `InvalidDelegate` on zero delegate → pass `initialOwner` as the OFT delegate, NOT address(0).
+- **ZeroAddress lzEndpoint reverts at DEPLOY**: OAppCore ctor calls `endpoint.setDelegate(delegate)` — empirically reverts with endpoint=0 on hardhat/EDR. ALL test fixtures must deploy a real mock endpoint.
+- **EVOLVE final ctor**: `(address initialOwner, uint256 maxSupply, address lzEndpoint)`; delegate = initialOwner; Ownable owner = initialOwner (so `setPeer` onlyOwner works for the deployer in tests).
+
+### Test infrastructure (reusable for Tasks 8/9)
+
+- **`test/helpers/lz-endpoint.js`** — shared `deployLzEndpointMock(owner)` helper: loads the PRECOMPILED `EndpointV2Mock` artifact from `@layerzerolabs/test-devtools-evm-hardhat` (v0.5.3) via `createRequire` + resolving `package.json` (its `exports` map only exposes `.` and `./package.json` — deep imports are blocked, file-read bypass is required). Artifact has no linkReferences/immutables → directly deployable.
+- **`hardhat.config.js`: `hardhat: { allowUnlimitedContractSize: true }`** — the mock bytecode is ~26KB > EIP-170 24KB. DO NOT remove.
+- **Two-chain bridge wiring** (see EVOLVEOFT.test.js): mockA(eid=1) + mockB(eid=2); `mockX.setDestLzEndpoint(remoteToken, remoteMock)` both ways; `tokenX.setPeer(remoteEid, zeroPadValue(remoteToken,32))` both ways; owner is LZ delegate+Ownable owner.
+- **Type-1 executor options REQUIRED**: `0x0001` + 32-byte big-endian gas (34 bytes total, e.g. 200k). Empty options revert in the mock's ULN decoder (`LZ_ULN_InvalidWorkerOptions`). No `@layerzerolabs/lz-v2-utilities` installed — handcraft the bytes.
+- **`_lzSend` requires msg.value EXACTLY == quoteSend(...).nativeFee** (`NotEnoughNative` otherwise). Mock's `receivePayload` try-catches lzReceive failures SILENTLY — if balances don't move, the wiring (peers/delegate) is wrong, not the token.
+- **Bridge amounts must be divisible by 10^12** (sharedDecimals=6 dust removal): use `N * 10n**12n`.
+- **Fee math sanity**: mock nativeFee ≈ 3e15 wei (~0.003 ETH) at gas=200k — signers have plenty.
+
+### Suite state
+
+- **NEW BASELINE: 208 tests / 15 files passing, 0 failing** (was 199/14). EVOLVEOFT.test.js adds 9: sharedDecimals=6, rate=10^12, totalMinted integrity (transfers/burns), burn-does-NOT-free-capacity (totalMinted-based, not totalSupply), ABI has no credit/debit/_credit/_debit, low-level credit call reverts, MAX_SUPPLY=8B default, over-cap revert, REAL bridge E2E (burn on A = mint on B, combined supply constant, totalMinted unchanged both chains).
+- `grep` the EVOLVE artifact ABI for send/quoteSend/setPeer/peers — all inherited from OFTCore/OAppCore, present in flattened ABI. SendParam tuple: `{dstEid, to(bytes32), amountLD, minAmountLD, extraOptions, composeMsg, oftCmd}`; MessagingFee `{nativeFee, lzTokenFee}`.

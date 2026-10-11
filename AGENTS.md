@@ -692,7 +692,7 @@ cd apps/web && npx tsc --noEmit   # ignore db.ts:270
 
 ## 23. Ban Resistance
 
-> **Constitutional rule set**: EVOLVE is designed to survive platform bans, geo-blocking, store removal, domain seizure, and infrastructure takedowns. All agents MUST preserve the properties below; never remove or weaken them "for convenience".
+> **Constitutional rule set**: EVOLVE is designed to survive platform bans, geo-blocking, store removal, domain seizure, and infrastructure takedowns. All agents MUST preserve the properties below; never remove or weaken them "for convenience". Scaling strategy counterpart: §32 + `docs/DECENTRALIZED-SCALING.md`.
 
 ### Core Principles
 
@@ -788,6 +788,16 @@ cd apps/web && npx tsc --noEmit   # ignore db.ts:270
 | 46 | Privacy roadmap (gifts → Railgun → Aztec) | ✅ **Done** | `apps/web/src/lib/private-gift.ts`+test (28), `apps/web/src/lib/railgun.ts`+test (12), `apps/web/src/components/GiftDialog.tsx`+test, `apps/web/src/components/PrivateWallet.tsx`+test (4), `apps/web/src/lib/roses*` + GIFT chat message + `Profile.roses`/`ethAddress` exposure, `Evolve2Earn.giftTo`+`importGiftState` (51 tests) + Sepolia redeploy `0x585f1242…aEa8`, `docs/RAILGUN-INTEGRATION.md`, `docs/SHIELDED-STAKES-DESIGN.md`, `docs/AZTEC-PROTOTYPE.md`, `packages/contracts/aztec-prototype/` (`private_gift` + `private_bond`, dockerless `aztec-nargo test` 8/8). Canonical plan: `.omo/plans/evolve-privacy-roadmap.md` (change control there). | sisyphus |
 
 | 47 | README description rewrite (status → demo, remove "tokens not sold", confidential-blockchain section) + 34-language auto-translation mechanism | ✅ **Done** (34/34 README files updated, natural translations; `node scripts/translate-readme.mjs --check` = in sync) | `README.md` (English source: status → "demo mode, in active development / not yet publicly deployed"; removed "No sale is live today" + reworked pump-and-dump row + support section; NEW §"Privacy & confidential transactions" — private gifts (3 sender modes), Railgun shielded wallet (`VITE_RAILGUN_ENABLED`), Aztec prototype, two-wallet model; +3 privacy doc links), `README.<code>.md` ×33 (natural re-translation), `docs/FAQ.md` ("Can I buy EVOLVE tokens?" → "Not yet — planned"), `scripts/translate-readme.mjs` (NEW, zero-dep: hash-marker sync — each `README.<code>.md` carries `<!-- evolve-readme-sync: <hash> -->` on line 2; `--check`/`--stamp`/`--manifest`/`--translate`/`--lang`), `package.json` (`translate-readme`, `translate-readme:check`, `translate-readme:stamp`), `.github/workflows/translate-readme.yml` (NEW: on `README.md` change → auto-translate if `EVOLVE_TRANSLATE_API_URL`+`KEY` set, else open tracking issue). | sisyphus |
+
+| 48 | Header logo+EVOLVE grouping + dark-blue download button + Communications "Місцевий чат" (city-scoped group chat, messenger-style) | ✅ **Done** (tsc EXIT 0; **462/462 tests PASS** / 43 files; build GREEN 5m51s; 34 locales valid; browser QA: header grouped, button `#2563eb`, 3 filters default to residence city, group flow + admin approval verified E2E) | `lib/local-chat.ts`+test (17), `lib/locations.ts` (+`isoFor` +2 tests), `lib/useWebSocket.ts` (idle guard), `pages/Chat.tsx` (removed "Головна" tab; pinned local chat entry + lifted selection state), `components/LocalChat.tsx` (NEW: country/city/group selects centered, 4 default groups + user-created public/closed, admin join-approval, WS `join_local` live), `lib/db.ts` (+7 methods), `lib/apiServer.ts` (`/api/localchat*` + WS `join_local`), `prisma/schema.prisma` (`LocalChatMessage`/`LocalChatGroup`), `scripts/add-localchat-locales.mjs` (27 keys × 34 locales), `pages/Chat.test.tsx` (updated to new spec) | sisyphus |
+
+| 49 | Personal Render free deploy (Docker + Blueprint, full mode, HTTPS + PWA) | ✅ **Config ready** (account/push still required — Render cannot be created from this machine) | `Dockerfile`, `render.yaml`, `docker/start.sh`, `.dockerignore`, `apps/web/src/server/prod-server.ts` (bind `0.0.0.0`), `vite.config.ts` (`VITE_SOURCEMAP=false` opt-out) | sisyphus |
+
+| 50 | Decentralized scaling strategy (protocol-not-service: P2P-first, city-sharded Nostr relays, no token-for-infra) | ✅ **Docs committed** (canonical plan; chat migration targets defined; NOT yet implemented in code) | `docs/DECENTRALIZED-SCALING.md` (NEW — canonical strategy: §9 MUST/MUST-NOT rules), `docs/ROADMAP.md` (+6 planned milestones: P2P chat wiring, local chat → Nostr, local-first profiles, self-sovereign storage, reputation/moderation), `docs/BAN-RESISTANCE.md` (§5 + cross-ref), `AGENTS.md` (§32 normative section + §23 cross-ref) | sisyphus |
+
+| 51 | 1:1 chat → P2P (`chat-transport` wiring; main integration agent of the chat wave) | ⚠️ **Wired — P2P runtime BLOCKED** (chat-transport 10 tests PASS; **integrated & verified by sisyphus: full-tree `tsc` EXIT 0, web suite 45 files PASS, p2p 152 PASS, build GREEN 6m52s, browser smoke OK (1:1 + local chat over HTTP fallback, 0 console errors)**; **actual P2P delivery is inactive because `@evolve/p2p`'s `libp2p@0.46` tree is incomplete — `@libp2p/keychain` et al. missing — so the adapter runs on the HTTP fallback**) | `apps/web/src/lib/chat-transport.ts` (NEW — P2P-first `send`/`subscribe`/`history` + injectable bridge + JSON marker codec) + `__tests__/chat-transport.test.ts` (10), `apps/web/src/store/AppContext.tsx` (`addMessage`/`loadChatHistory` via adapter; new `appendIncomingMessage` local-only receive), `apps/web/src/lib/useWebSocket.ts` (P2P-first receive, WS fallback), `apps/web/src/pages/Chat.tsx` (inbound via `appendIncomingMessage`, no echo), `AGENTS.md` §30 note | sisyphus |
+| 52 | P2P package hardening + NIP-29 groups + reference city relay (parallel agent B) | ✅ **Done** (p2p 152/152 tests PASS, tsc clean; modules audited — none were stubs; backwards-compatible exports only) | `packages/p2p/src/city-tagging.ts`+test (17), `nostr-client.ts` (+NIP-29 createGroup/join/approve/leave/publishGroupMessage/fetch\*), `nostr-client-groups.test.ts` (11), `index.ts` (+city-tagging export), `packages/p2p/relay/` (docker-compose city relay + README, port 7000) | sisyphus-wave-b |
+| 53 | Local chat → Nostr relay transport (parallel agent C) | ✅ **Done** (local-chat-nostr tests PASS with local-chat suite; LocalChat UX/props unchanged; Nostr primary → HTTP/WS fallback; syntax slip at LocalChat.tsx:249 fixed during integration) | `apps/web/src/lib/local-chat-nostr.ts` (NEW — SimplePool transport, NIP-29 kinds 9000-9022/39000-39002, NIP-44 closed groups, `VITE_NOSTR_CITY_RELAY_URL` env) + `__tests__/local-chat-nostr.test.ts`, `apps/web/src/components/LocalChat.tsx` (data layer Nostr-first, fallback preserved) | sisyphus-wave-c |
 
 ### Deployed Addresses — Ethereum Sepolia (2026-08-21, Mode3-rewards redeploy 2026-09-05)
 
@@ -987,6 +997,70 @@ cd apps/web ; npx tsc --noEmit   # ignore db.ts:270
 ```
 
 > Canonical plan & change control: `.omo/plans/evolve-privacy-roadmap.md` (the anchor for the whole privacy effort; deviations are recorded there as dated Amendments).
+
+## 30. Local Chat (Місцевий чат) — city-scoped group chat
+
+> **Feature**: The Communications page is a messenger (Telegram/Viber/WhatsApp-style): the "Головна" tab was removed; the sidebar is a pinned "Місцевий чат" entry plus private conversations. The local chat is a message stream scoped to one city (canonical `Country::City` key) and one thematic group. Users with the same selected city can write there; any user can create a public or closed thematic group and become its admin. The city and group are chosen with two/three dropdown selects (like the language selector). The city defaults to the user's residence city (adopted once the async profile loads); the chat city is persisted independently in localStorage, so it can differ from the residence city.
+
+### Data model
+
+- Message: `{ id, cityKey ("Country::City"), groupId, senderId, senderName, text, createdAt }` — last 100 per (city, group), ascending.
+- Group: `{ id, cityKey, name, type: "public"|"closed", createdBy (admin), createdAt, members: string[], pending: string[] }`.
+- **4 built-in groups** (implicit, never stored): `all` («Всі»), `dating` («Знайомства»), `conception` («Зачаття»), `polyandrous` («Поліандрічне зачаття»).
+- Custom groups: public (everyone reads/writes) or closed (members + admin only); creator is admin and approves join requests; group names unique per city (case-insensitive).
+
+### Files
+
+- `apps/web/src/lib/local-chat.ts` + `__tests__/local-chat.test.ts` — pure domain lib: `cityKeyOf`/`parseCityKey`/`isValidCityKey`, `localChatChannelId`, `DEFAULT_LOCAL_CHAT_GROUPS` + label keys, `validateLocalChatMessage`, `validateGroupName`, `canAccessGroup`, `isGroupAdmin`, `hasRequestedJoin`, `mergeLocalChatMessages`, `sortLocalChatMessages` (17 tests).
+- `apps/web/src/lib/locations.ts` — `LocationIndex.isoFor(country)` added for the "UA — Ukraine" display (+2 tests).
+- `apps/web/src/lib/apiServer.ts` — `--- 5b. LOCAL CHAT ENDPOINTS ---`: `GET/POST /api/localchat` (POST session-required + closed-group access check + live `broadcastToChannel`), `GET/POST /api/localchat/groups`, `POST /api/localchat/groups/join`, `POST /api/localchat/groups/resolve` (admin-only). WS: `join_local` message type → channel `local:<cityKey>:<groupId>`, history on join, closed-group membership check; 1:1 `message` branch guarded with `!channelId.startsWith("local:")`.
+- `apps/web/src/lib/db.ts` — `localChatMessages`/`localChatGroups` fallback collections + 7 `dbService` methods (`getLocalChatMessages`, `createLocalChatMessage`, `getLocalChatGroups`, `getLocalChatGroupById`, `createLocalChatGroup`, `requestJoinLocalChatGroup`, `resolveJoinLocalChatGroup`) via the `runWithDb` dual-path pattern; `deserializeLocalChatGroup` normalizes members/pending (JSON strings in Prisma → arrays).
+- `apps/web/prisma/schema.prisma` — `LocalChatMessage` + `LocalChatGroup` (members/pending as serialized JSON strings).
+- `apps/web/src/pages/Chat.tsx` — removed `Tab` type + "Головна" tab; `localChatActive` (default true) + lifted `localChatSel` (persisted `evolve_local_chat_sel`); pinned local-chat sidebar entry; residence-city adoption effect.
+- `apps/web/src/components/LocalChat.tsx` — centered country/city/group selects, create-group inline form, closed-group join flow, admin pending-requests panel, WS live updates (`join_local`), message bubbles (own right/blue, others left/gray with sender name), timestamps.
+- `apps/web/src/lib/useWebSocket.ts` — idle guard: skip connect when no `targetUserId` (prevents invalid-join reconnect loop while the local chat is active).
+- `apps/web/scripts/add-localchat-locales.mjs` — 27 `localChat.*` keys × 34 locales (Tier-1 natural incl. zh-TW, English fallback).
+
+### 1:1 chat transport (P2P-first) — wired by the P2P chat wave
+
+> 1:1 direct messages route through a thin `chat-transport` adapter: **P2P-first** (libp2p gossipsub via `@evolve/p2p` `ChatManager`), with HTTP `/api/messages` as a **fallback mirror only** (Ban Resistance §23 rule 2; DECENTRALIZED-SCALING §6.1/§9). This is the direct-message counterpart to the city local chat above.
+
+- `apps/web/src/lib/chat-transport.ts` — `createChatTransport()` exposing `send(payload)` / `subscribe(myId, peerId, cb)` / `history(myId, peerId)`; P2P-first with transparent HTTP fallback. Rich payloads (STD/DNA/PHOTO/LIVENESS/GIFT metadata) are JSON-encoded behind the `evolve-p2p/v1:` marker and decoded on receipt; plain text is passed through. The `P2pBridge` is injectable; the real `@evolve/p2p` factory is loaded lazily. Env `VITE_P2P_BOOTSTRAP_PEERS` (comma-separated multiaddrs) injects libp2p bootstrap peers.
+- `apps/web/src/lib/__tests__/chat-transport.test.ts` — 10 tests (codec, P2P-first routing, HTTP fallback, loopback-free subscribe, history merge/dedupe).
+- `AppContext.tsx` — `addMessage` → `chat-transport.send()`; `loadChatHistory` → `chat-transport.history()`; new `appendIncomingMessage()` appends inbound messages locally **without re-sending** (the old `addMessage(..., "them")` echoed on P2P and 403'd on HTTP because the server rejects a non-session senderId).
+- `useWebSocket.ts` — receive is **P2P-first** (`chat-transport.subscribe`); WebSocket is retained as a fallback for typing + legacy delivery. `Chat.tsx` inbound path uses `appendIncomingMessage` (send-side ownership stays in `AppContext`).
+- **BUILD CONSTRAINT**: the default `@evolve/p2p` loader uses a computed (`/* @vite-ignore */`) specifier so `vite build` does not attempt to resolve the p2p graph — that workspace's `libp2p@0.46` dependency tree is currently incomplete (`@libp2p/keychain`, `@libp2p/peer-id-factory`, … are not installed), which otherwise fails the web build. Restore a static `import("@evolve/p2p")` once the tree is complete. `ChatManager` also exposes no public `connect`/`getMultiaddrs`/bootstrap injection, and Nostr NIP-04 DMs require real pubkeys (userIds are not) — see the wave report's "p2p reality check".
+
+### i18n keys
+
+`localChat.*` — `title`, `country`, `city`, `group`, `selectCity`, `groups.{all,dating,conception,polyandrous}`, `noMessages`, `inputPlaceholder`, `loadingCities`, `createGroup`, `groupName`, `groupNameExists`, `groupType.{public,closed}`, `create`, `cancel`, `closedGroup`, `requestJoin`, `pendingApproval`, `admin`, `pendingMembers`, `approve`, `decline`, `typing` — all 34 locales.
+
+### NEVER CHANGE WITHOUT RUNNING TESTS
+
+```bash
+cd apps/web && npx vitest run src/lib/__tests__/local-chat.test.ts src/lib/__tests__/locations.test.ts src/pages/Chat.test.tsx --pool=threads
+cd apps/web && npx tsc --noEmit   # ignore db.ts:270
+```
+
+## 31. Personal Render deploy (free)
+
+> **Not production.** A single free web service for the owner to open the full app from a phone or PC and install the PWA. Sleeps after 15 minutes without traffic (~1 minute to wake). Local JSON data is **lost** on sleep, restart, and redeploy (free plan has no disk). Add `DATABASE_URL` later if persistence is required.
+
+- **Files**: `Dockerfile`, `render.yaml`, `docker/start.sh`, `.dockerignore`
+- **Build**: Render Starter pipeline (8 GB). Vite runs with `VITE_SOURCEMAP=false` and a 6 GB heap. `VITE_PRODUCT_MODE` defaults to `full` so Communications is visible.
+- **Runtime**: `docker/start.sh` → `tsx src/server/prod-server.ts`. Listens on `0.0.0.0:$PORT`. Health: `GET /api/health`.
+- **Auto-update**: Render watches **GitHub `main`** (`autoDeploy: true`). Codeberg and GitLab mirrors do not trigger a deploy unless that commit is also on GitHub.
+- **PWA**: HTTPS on `*.onrender.com` makes «Завантажити додаток» work. No hardcoded domain.
+
+## 32. Decentralized Scaling Strategy (protocol, not service)
+
+> **Canonical plan: `docs/DECENTRALIZED-SCALING.md`.** Every agent MUST read it before adding features that move, store, or index user data. "Free at 1M users" is achieved by NOT having a central server to scale — the protocol is free, and serving is pushed to resources users already own (their device, a volunteer city relay, their own data pin).
+
+- **MUST** treat P2P/Nostr as the default transport for messaging, storage and discovery; HTTP/WS/DB are fallback mirrors, never the primary path.
+- **MUST** prefer city/local scoping for any new index or feed — geography is the free sharding key.
+- **MUST NOT** introduce EVOLVE (or any token) as payment for infrastructure (relays, hosting, bandwidth). Infrastructure is free-by-design + donations; the token stays for governance/stakes/gifts.
+- **MUST NOT** add a new centralized store for user content — owner-pinned IPFS/Arweave first, server copy as a mirror only.
+- **Chat migration targets**: 1:1 chat → wire the existing `packages/p2p` (`chat-manager` gossipsub + `direct-messaging` + `call-manager` WebRTC) as the default; `Місцевий чат` (currently server `join_local` WS, §30) → city-scoped Nostr relays (kind-1 city-tagged events, NIP-29 groups for closed-group/admin-approval).
 
 ### Agent Instructions for New Session
 
