@@ -1,6 +1,0 @@
-
-> evolve-web@0.0.0 build
-> prisma generate && tsc && vite build
-
-Environment variables loaded from .env
-Prisma schema loaded from prisma\schema.prisma

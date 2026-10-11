@@ -125,8 +125,8 @@ const server = http.createServer(async (req: IncomingMessage, res: ServerRespons
 // Attach the chat WebSocket on the same HTTP server (same as Vite dev).
 setupWebSocketServer(server);
 
-server.listen(PORT, () => {
-  console.log(`[evolve] Production server listening on http://localhost:${PORT}`);
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`[evolve] Production server listening on http://0.0.0.0:${PORT}`);
   console.log(`[evolve] Serving static files from: ${DIST_DIR}`);
 });
 

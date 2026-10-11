@@ -1,0 +1,24 @@
+# Render Blueprint — personal preview of the full Evolve web app.
+# Free web service: sleeps after 15 min idle, wakes in ~1 min, HTTPS + WebSockets.
+# Connect the GitHub repo and apply this Blueprint; pushes to `main` auto-deploy.
+# Codeberg/GitLab mirrors do not trigger Render unless the same commit is on GitHub.
+services:
+  - type: web
+    name: evolve-web
+    runtime: docker
+    plan: free
+    region: frankfurt
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      # Vite inlines this at image build time (see Dockerfile). Kept here so
+      # the dashboard shows the intended mode. Rebuild after changing it.
+      - key: VITE_PRODUCT_MODE
+        value: full
+      # Optional. Leave empty for the ephemeral JSON store. Set a Postgres URL
+      # (Neon/Supabase/Render) later if profiles should survive sleep/redeploy.
+      - key: DATABASE_URL
+        sync: false

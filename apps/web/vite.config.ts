@@ -40,7 +40,9 @@ export default defineConfig({
   },
   build: {
     outDir: "dist",
-    sourcemap: true,
+    // Docker/Render sets VITE_SOURCEMAP=false — source maps roughly double
+    // peak RAM and the production image does not need them.
+    sourcemap: process.env.VITE_SOURCEMAP !== "false",
     rollupOptions: {
       onwarn(warning, warn) {
         if (warning.code === "MODULE_NOT_FOUND") {

@@ -1,0 +1,14 @@
+.git
+.omo
+**/.env
+**/.env.*
+!**/.env.example
+**/node_modules
+apps/web/dist
+apps/web/fallback-db.json
+apps/web/coverage
+packages/contracts/artifacts
+packages/contracts/cache
+packages/contracts/typechain-types
+**/*.log
+.playwright-mcp
