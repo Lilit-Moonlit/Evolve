@@ -27,3 +27,6 @@ test.txt
 # Donation site build output
 site/build/
 
+# Gossipsub relay peer identity (private key) — generated locally, never commit
+packages/p2p/relay/relay-peer-id.json
+

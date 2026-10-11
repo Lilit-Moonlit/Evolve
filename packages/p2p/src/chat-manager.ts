@@ -5,23 +5,11 @@ import { Libp2pNode } from "./libp2p-node";
 import type { NostrConfig } from "./nostr-client";
 import { NostrClient } from "./nostr-client";
 import { ChatStorage, type ChatStorageConfig } from "./chat-storage";
-import {
-  DirectMessagingProtocol,
-  type DirectMessage,
-} from "./protocols/direct-messaging";
-import {
-  PeerDiscoveryProtocol,
-  type DiscoveredPeer,
-} from "./protocols/peer-discovery";
+import { DirectMessagingProtocol, type DirectMessage } from "./protocols/direct-messaging";
+import { PeerDiscoveryProtocol, type DiscoveredPeer } from "./protocols/peer-discovery";
 import { HeartbeatProtocol, type PeerStatus } from "./protocols/heartbeat";
 import { CallManager } from "./protocols/call-manager";
-import type {
-  ILogger,
-  ExtendedMessage,
-  MessageHandler,
-  MediaMessage,
-  CallSignal,
-} from "./types";
+import type { ILogger, ExtendedMessage, MessageHandler, MediaMessage, CallSignal } from "./types";
 import { ChatMessageStatus, ConnectionState, CallState } from "./types";
 import { InitializationError, NotInitializedError } from "./errors";
 
@@ -50,7 +38,7 @@ export class ChatManager {
   private peerDiscovery: PeerDiscoveryProtocol | null = null;
   private heartbeat: HeartbeatProtocol | null = null;
   private chats: Map<string, Chat> = new Map();
-  private messageCallbacks: Map<string, MessageHandler> = new Map();
+  private messageCallbacks: Map<string, Set<MessageHandler>> = new Map();
   private typingCallbacks: Map<string, (user: string) => void> = new Map();
   private mediaCallbacks: Map<string, (msg: MediaMessage) => void> = new Map();
   private callManager: CallManager | null = null;
@@ -71,10 +59,7 @@ export class ChatManager {
     return this.initialized;
   }
 
-  private libp2pSendAdapter = async (
-    topic: string,
-    data: unknown,
-  ): Promise<void> => {
+  private libp2pSendAdapter = async (topic: string, data: unknown): Promise<void> => {
     if (this.libp2pNode === null) {
       throw new NotInitializedError("Libp2p node");
     }
@@ -112,8 +97,7 @@ export class ChatManager {
             const p2pMessage = JSON.parse(messageStr) as P2PMessage;
             this.handleIncomingP2pMessage(p2pMessage);
           } catch (error) {
-            const msg =
-              error instanceof Error ? error.message : "Unknown error";
+            const msg = error instanceof Error ? error.message : "Unknown error";
             this.logger.error(`Failed to handle evolve-chat message: ${msg}`);
           }
         });
@@ -121,48 +105,34 @@ export class ChatManager {
         this.directMessaging = new DirectMessagingProtocol(this.logger);
         this.directMessaging.setHandler((msg) => this.handleDirectMessage(msg));
 
-        await this.libp2pNode.subscribe(
-          "direct-message",
-          async (data: Uint8Array) => {
-            try {
-              const parsed = JSON.parse(new TextDecoder().decode(data));
-              await this.directMessaging!.receive(parsed);
-            } catch (error) {
-              const msg =
-                error instanceof Error ? error.message : "Unknown error";
-              this.logger.error(`Failed to handle direct-message: ${msg}`);
-            }
-          },
-        );
+        await this.libp2pNode.subscribe("direct-message", async (data: Uint8Array) => {
+          try {
+            const parsed = JSON.parse(new TextDecoder().decode(data));
+            await this.directMessaging!.receive(parsed);
+          } catch (error) {
+            const msg = error instanceof Error ? error.message : "Unknown error";
+            this.logger.error(`Failed to handle direct-message: ${msg}`);
+          }
+        });
 
         this.peerDiscovery = new PeerDiscoveryProtocol(
           { peerTimeout: this.config.peerDiscovery?.peerTimeout },
           this.logger,
         );
 
-        await this.libp2pNode.subscribe(
-          "peer-discovery",
-          async (data: Uint8Array) => {
-            try {
-              const parsed = JSON.parse(new TextDecoder().decode(data));
-              await this.peerDiscovery!.receive(parsed);
-            } catch (error) {
-              const msg =
-                error instanceof Error ? error.message : "Unknown error";
-              this.logger.error(
-                `Failed to handle peer-discovery message: ${msg}`,
-              );
-            }
-          },
-        );
+        await this.libp2pNode.subscribe("peer-discovery", async (data: Uint8Array) => {
+          try {
+            const parsed = JSON.parse(new TextDecoder().decode(data));
+            await this.peerDiscovery!.receive(parsed);
+          } catch (error) {
+            const msg = error instanceof Error ? error.message : "Unknown error";
+            this.logger.error(`Failed to handle peer-discovery message: ${msg}`);
+          }
+        });
 
         const peerId = this.libp2pNode.getPeerId();
         const multiaddrs = this.libp2pNode.getMultiaddrs();
-        await this.peerDiscovery.announce(
-          this.libp2pSendAdapter,
-          peerId,
-          multiaddrs,
-        );
+        await this.peerDiscovery.announce(this.libp2pSendAdapter, peerId, multiaddrs);
 
         if (this.config.heartbeat?.enabled !== false) {
           this.heartbeat = new HeartbeatProtocol(
@@ -174,25 +144,19 @@ export class ChatManager {
             this.logger,
           );
 
-          await this.libp2pNode.subscribe(
-            "heartbeat",
-            async (data: Uint8Array) => {
-              try {
-                const parsed = JSON.parse(new TextDecoder().decode(data));
-                await this.heartbeat!.receive(parsed);
-              } catch (error) {
-                const msg =
-                  error instanceof Error ? error.message : "Unknown error";
-                this.logger.error(`Failed to handle heartbeat message: ${msg}`);
-              }
-            },
-          );
+          await this.libp2pNode.subscribe("heartbeat", async (data: Uint8Array) => {
+            try {
+              const parsed = JSON.parse(new TextDecoder().decode(data));
+              await this.heartbeat!.receive(parsed);
+            } catch (error) {
+              const msg = error instanceof Error ? error.message : "Unknown error";
+              this.logger.error(`Failed to handle heartbeat message: ${msg}`);
+            }
+          });
 
           this.heartbeat.start((stalePeerId) => {
             this.peerDiscovery?.removePeer(stalePeerId);
-            this.logger.debug(
-              `Peer ${stalePeerId} went down, removed from discovery`,
-            );
+            this.logger.debug(`Peer ${stalePeerId} went down, removed from discovery`);
             for (const cb of this.peerDownCallbacks) {
               cb(stalePeerId);
             }
@@ -201,21 +165,15 @@ export class ChatManager {
           await this.heartbeat.send(this.libp2pSendAdapter);
         }
 
-        await this.libp2pNode.subscribe(
-          "evolve-media",
-          async (data: Uint8Array) => {
-            try {
-              const parsed = JSON.parse(
-                new TextDecoder().decode(data),
-              ) as MediaMessage;
-              await this.handleIncomingMedia(parsed);
-            } catch (error) {
-              const msg =
-                error instanceof Error ? error.message : "Unknown error";
-              this.logger.error(`Failed to handle media message: ${msg}`);
-            }
-          },
-        );
+        await this.libp2pNode.subscribe("evolve-media", async (data: Uint8Array) => {
+          try {
+            const parsed = JSON.parse(new TextDecoder().decode(data)) as MediaMessage;
+            await this.handleIncomingMedia(parsed);
+          } catch (error) {
+            const msg = error instanceof Error ? error.message : "Unknown error";
+            this.logger.error(`Failed to handle media message: ${msg}`);
+          }
+        });
 
         this.callManager = new CallManager(this.logger);
 
@@ -228,43 +186,29 @@ export class ChatManager {
         });
 
         this.callManager.onHangup((callId, from, reason) => {
-          this.logger.info(
-            `Call ${callId} ended by ${from}: ${reason ?? "unknown"}`,
-          );
+          this.logger.info(`Call ${callId} ended by ${from}: ${reason ?? "unknown"}`);
         });
 
-        await this.libp2pNode.subscribe(
-          "evolve-call",
-          async (data: Uint8Array) => {
-            try {
-              const parsed = JSON.parse(
-                new TextDecoder().decode(data),
-              ) as CallSignal;
-              await this.callManager!.receive(parsed);
-            } catch (error) {
-              const msg =
-                error instanceof Error ? error.message : "Unknown error";
-              this.logger.error(`Failed to handle call signal: ${msg}`);
-            }
-          },
-        );
+        await this.libp2pNode.subscribe("evolve-call", async (data: Uint8Array) => {
+          try {
+            const parsed = JSON.parse(new TextDecoder().decode(data)) as CallSignal;
+            await this.callManager!.receive(parsed);
+          } catch (error) {
+            const msg = error instanceof Error ? error.message : "Unknown error";
+            this.logger.error(`Failed to handle call signal: ${msg}`);
+          }
+        });
 
         this.logger.info("Libp2p chat subscription active");
       }
 
       if (this.config.useNostr !== false) {
-        this.nostrClient = new NostrClient(
-          this.config.nostrConfig,
-          this.logger,
-        );
+        this.nostrClient = new NostrClient(this.config.nostrConfig, this.logger);
         await this.nostrClient.initialize();
 
-        await this.nostrClient.subscribeToEvents(
-          { kinds: [4] },
-          async (event) => {
-            await this.handleIncomingNostrMessage(event);
-          },
-        );
+        await this.nostrClient.subscribeToEvents({ kinds: [4] }, async (event) => {
+          await this.handleIncomingNostrMessage(event);
+        });
 
         this.logger.info("Nostr DM subscription active");
       }
@@ -274,9 +218,7 @@ export class ChatManager {
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown error";
       this.logger.error(`ChatManager initialization failed: ${message}`);
-      throw new InitializationError(
-        `Failed to initialize ChatManager: ${message}`,
-      );
+      throw new InitializationError(`Failed to initialize ChatManager: ${message}`);
     }
   }
 
@@ -339,8 +281,7 @@ export class ChatManager {
       content:
         typeof p2pMessage.data === "string"
           ? p2pMessage.data
-          : (((p2pMessage.data as Record<string, unknown>)
-              ?.content as string) ?? ""),
+          : (((p2pMessage.data as Record<string, unknown>)?.content as string) ?? ""),
       timestamp: p2pMessage.timestamp,
       encrypted:
         typeof p2pMessage.data === "object" && p2pMessage.data !== null
@@ -373,14 +314,9 @@ export class ChatManager {
     let content = event.content;
     if (this.nostrClient !== null) {
       try {
-        content = await this.nostrClient.decryptDirectMessage(
-          event.content,
-          event.pubkey,
-        );
+        content = await this.nostrClient.decryptDirectMessage(event.content, event.pubkey);
       } catch (error) {
-        this.logger.warn(
-          `Failed to decrypt Nostr DM from ${event.pubkey}, using raw content`,
-        );
+        this.logger.warn(`Failed to decrypt Nostr DM from ${event.pubkey}, using raw content`);
       }
     }
 
@@ -421,8 +357,9 @@ export class ChatManager {
 
   private notifyMessageListeners(message: ExtendedMessage): void {
     const chatId = this.getChatId(message.from, message.to);
-    const callback = this.messageCallbacks.get(chatId);
-    if (callback !== undefined) {
+    const callbacks = this.messageCallbacks.get(chatId);
+    if (callbacks === undefined) return;
+    for (const callback of callbacks) {
       callback(message);
     }
   }
@@ -491,8 +428,7 @@ export class ChatManager {
         );
       }
       this.messageQueue.push(message);
-      const errMessage =
-        error instanceof Error ? error.message : "Unknown error";
+      const errMessage = error instanceof Error ? error.message : "Unknown error";
       this.logger.error(`Failed to send message: ${errMessage}`);
       throw error;
     }
@@ -500,11 +436,7 @@ export class ChatManager {
     return message;
   }
 
-  async sendDirectMessage(
-    from: string,
-    to: string,
-    content: string,
-  ): Promise<void> {
+  async sendDirectMessage(from: string, to: string, content: string): Promise<void> {
     this.ensureInitialized();
     if (this.directMessaging === null || this.libp2pNode === null) {
       throw new NotInitializedError("Direct messaging requires libp2p");
@@ -544,6 +476,27 @@ export class ChatManager {
     await this.peerDiscovery.requestPeers(this.libp2pSendAdapter, peerId);
   }
 
+  async connect(peerMultiaddr: string): Promise<void> {
+    if (this.libp2pNode === null) {
+      throw new NotInitializedError("Libp2p node");
+    }
+    await this.libp2pNode.connect(peerMultiaddr);
+  }
+
+  getMultiaddrs(): string[] {
+    if (this.libp2pNode === null) {
+      return [];
+    }
+    return this.libp2pNode.getMultiaddrs();
+  }
+
+  getPeerId(): string {
+    if (this.libp2pNode === null) {
+      throw new NotInitializedError("Libp2p node");
+    }
+    return this.libp2pNode.getPeerId();
+  }
+
   onPeerDown(callback: (peerId: string) => void): void {
     this.peerDownCallbacks.push(callback);
   }
@@ -565,9 +518,7 @@ export class ChatManager {
   }
 
   getChatsForUser(userAddress: string): Chat[] {
-    return this.getAllChats().filter((chat) =>
-      chat.participants.includes(userAddress),
-    );
+    return this.getAllChats().filter((chat) => chat.participants.includes(userAddress));
   }
 
   markMessageAsRead(messageId: string): void {
@@ -593,7 +544,12 @@ export class ChatManager {
 
   onMessage(user1: string, user2: string, callback: MessageHandler): void {
     const chatId = this.getChatId(user1, user2);
-    this.messageCallbacks.set(chatId, callback);
+    let callbacks = this.messageCallbacks.get(chatId);
+    if (callbacks === undefined) {
+      callbacks = new Set();
+      this.messageCallbacks.set(chatId, callbacks);
+    }
+    callbacks.add(callback);
   }
 
   offMessage(user1: string, user2: string): void {
@@ -687,9 +643,7 @@ export class ChatManager {
       }
     }
 
-    this.logger.debug(
-      `Media message ${msg.id} (${fileName}) sent from ${from} to ${to}`,
-    );
+    this.logger.debug(`Media message ${msg.id} (${fileName}) sent from ${from} to ${to}`);
     return msg;
   }
 
@@ -705,11 +659,7 @@ export class ChatManager {
     }
   }
 
-  onMedia(
-    user1: string,
-    user2: string,
-    callback: (msg: MediaMessage) => void,
-  ): void {
+  onMedia(user1: string, user2: string, callback: (msg: MediaMessage) => void): void {
     const chatId = this.getChatId(user1, user2);
     this.mediaCallbacks.set(chatId, callback);
   }
@@ -792,21 +742,15 @@ export class ChatManager {
     });
   }
 
-  onCallOffer(
-    callback: (callId: string, from: string, to: string) => void,
-  ): void {
+  onCallOffer(callback: (callId: string, from: string, to: string) => void): void {
     this.callManager?.onOffer(callback);
   }
 
-  onCallAccept(
-    callback: (callId: string, from: string, to: string) => void,
-  ): void {
+  onCallAccept(callback: (callId: string, from: string, to: string) => void): void {
     this.callManager?.onAccept(callback);
   }
 
-  onCallHangup(
-    callback: (callId: string, from: string, reason?: string) => void,
-  ): void {
+  onCallHangup(callback: (callId: string, from: string, reason?: string) => void): void {
     this.callManager?.onHangup(callback);
   }
 
@@ -818,11 +762,7 @@ export class ChatManager {
     return this.callManager?.getActiveCalls() ?? new Map();
   }
 
-  onTyping(
-    user1: string,
-    user2: string,
-    callback: (user: string) => void,
-  ): void {
+  onTyping(user1: string, user2: string, callback: (user: string) => void): void {
     const chatId = this.getChatId(user1, user2);
     this.typingCallbacks.set(chatId, callback);
   }
@@ -842,20 +782,12 @@ export class ChatManager {
         message.status === ChatMessageStatus.Pending
       ) {
         try {
-          await this.sendMessage(
-            message.from,
-            message.to,
-            message.content,
-            message.encrypted,
-          );
+          await this.sendMessage(message.from, message.to, message.content, message.encrypted);
           this.logger.debug(`Flushed queued message ${message.id}`);
         } catch (error) {
           this.messageQueue.push(message);
-          const errMessage =
-            error instanceof Error ? error.message : "Unknown error";
-          this.logger.warn(
-            `Failed to flush message ${message.id}: ${errMessage}, re-queued`,
-          );
+          const errMessage = error instanceof Error ? error.message : "Unknown error";
+          this.logger.warn(`Failed to flush message ${message.id}: ${errMessage}, re-queued`);
         }
       }
     }
@@ -869,8 +801,6 @@ export class ChatManager {
 const consoleLogger: ILogger = {
   info: (message, ...args) => console.log(`[ChatManager] ${message}`, ...args),
   warn: (message, ...args) => console.warn(`[ChatManager] ${message}`, ...args),
-  error: (message, ...args) =>
-    console.error(`[ChatManager] ${message}`, ...args),
-  debug: (message, ...args) =>
-    console.debug(`[ChatManager] ${message}`, ...args),
+  error: (message, ...args) => console.error(`[ChatManager] ${message}`, ...args),
+  debug: (message, ...args) => console.debug(`[ChatManager] ${message}`, ...args),
 };

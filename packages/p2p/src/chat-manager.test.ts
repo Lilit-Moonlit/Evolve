@@ -2,15 +2,23 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { ChatManager } from "./chat-manager";
 import { ChatMessageStatus } from "./types";
 
+const { connectMock, getMultiaddrsMock, getPeerIdMock, subscribeMock } = vi.hoisted(() => ({
+  connectMock: vi.fn().mockResolvedValue(undefined),
+  getMultiaddrsMock: vi.fn().mockReturnValue(["/ip4/127.0.0.1/tcp/4001"]),
+  getPeerIdMock: vi.fn().mockReturnValue("mock-peer-id"),
+  subscribeMock: vi.fn().mockResolvedValue(undefined),
+}));
+
 vi.mock("./libp2p-node", () => ({
   Libp2pNode: class MockLibp2pNode {
     connectionState = "connected";
     initialize = vi.fn().mockResolvedValue(undefined);
     stop = vi.fn().mockResolvedValue(undefined);
-    subscribe = vi.fn().mockResolvedValue(undefined);
+    subscribe = subscribeMock;
     publish = vi.fn().mockResolvedValue(undefined);
-    getMultiaddrs = vi.fn().mockReturnValue(["/ip4/127.0.0.1/tcp/4001"]);
-    getPeerId = vi.fn().mockReturnValue("mock-peer-id");
+    connect = connectMock;
+    getMultiaddrs = getMultiaddrsMock;
+    getPeerId = getPeerIdMock;
   },
 }));
 
@@ -32,6 +40,7 @@ describe("ChatManager", () => {
   let manager: ChatManager;
 
   beforeEach(() => {
+    vi.clearAllMocks();
     manager = new ChatManager({
       useLibp2p: false,
       useNostr: false,
@@ -86,11 +95,7 @@ describe("ChatManager", () => {
         useNostr: false,
       });
       await managerWithTransport.initialize();
-      const message = await managerWithTransport.sendMessage(
-        "user1",
-        "user2",
-        "Hello",
-      );
+      const message = await managerWithTransport.sendMessage("user1", "user2", "Hello");
       expect(message.content).toBe("Hello");
       expect(message.from).toBe("user1");
       expect(message.to).toBe("user2");
@@ -98,9 +103,9 @@ describe("ChatManager", () => {
     });
 
     it("should throw if not initialized", async () => {
-      await expect(
-        manager.sendMessage("user1", "user2", "Hello"),
-      ).rejects.toThrow("ChatManager is not initialized");
+      await expect(manager.sendMessage("user1", "user2", "Hello")).rejects.toThrow(
+        "ChatManager is not initialized",
+      );
     });
   });
 
@@ -260,14 +265,7 @@ describe("ChatManager", () => {
 
     it("should throw if not initialized", async () => {
       await expect(
-        manager.sendMedia(
-          "alice",
-          "bob",
-          "QmCid",
-          "image/png",
-          "photo.png",
-          1024,
-        ),
+        manager.sendMedia("alice", "bob", "QmCid", "image/png", "photo.png", 1024),
       ).rejects.toThrow();
     });
   });
@@ -308,6 +306,127 @@ describe("ChatManager", () => {
       manager.onCallOffer(offerCb);
       manager.onCallAccept(acceptCb);
       manager.onCallHangup(hangupCb);
+    });
+  });
+
+  describe("multi-subscriber onMessage", () => {
+    it("should invoke every callback registered for the same chat", async () => {
+      const mgr = new ChatManager({ useLibp2p: true, useNostr: false });
+      await mgr.initialize();
+
+      const first = vi.fn();
+      const second = vi.fn();
+      mgr.onMessage("alice", "bob", first);
+      mgr.onMessage("alice", "bob", second);
+
+      const subscribeCall = subscribeMock.mock.calls.find((call) => call[0] === "evolve-chat");
+      if (subscribeCall === undefined) {
+        throw new Error("evolve-chat subscription was not registered");
+      }
+      const evolveChatHandler = subscribeCall[1];
+
+      const incoming = new TextEncoder().encode(
+        JSON.stringify({
+          type: "chat",
+          data: { content: "Hello", encrypted: false },
+          from: "alice",
+          to: "bob",
+          timestamp: Date.now(),
+        }),
+      );
+      evolveChatHandler(incoming);
+
+      const expected = expect.objectContaining({
+        from: "alice",
+        to: "bob",
+        content: "Hello",
+      });
+      expect(first).toHaveBeenCalledTimes(1);
+      expect(second).toHaveBeenCalledTimes(1);
+      expect(first).toHaveBeenCalledWith(expected);
+      expect(second).toHaveBeenCalledWith(expected);
+      await mgr.stop();
+    });
+
+    it("should not invoke any callback after offMessage", async () => {
+      const mgr = new ChatManager({ useLibp2p: true, useNostr: false });
+      await mgr.initialize();
+
+      const first = vi.fn();
+      const second = vi.fn();
+      mgr.onMessage("alice", "bob", first);
+      mgr.onMessage("alice", "bob", second);
+      mgr.offMessage("alice", "bob");
+
+      const subscribeCall = subscribeMock.mock.calls.find((call) => call[0] === "evolve-chat");
+      if (subscribeCall === undefined) {
+        throw new Error("evolve-chat subscription was not registered");
+      }
+      const evolveChatHandler = subscribeCall[1];
+
+      const incoming = new TextEncoder().encode(
+        JSON.stringify({
+          type: "chat",
+          data: { content: "Hello", encrypted: false },
+          from: "alice",
+          to: "bob",
+          timestamp: Date.now(),
+        }),
+      );
+      evolveChatHandler(incoming);
+
+      expect(first).not.toHaveBeenCalled();
+      expect(second).not.toHaveBeenCalled();
+      await mgr.stop();
+    });
+  });
+
+  describe("P2P primitives", () => {
+    it("should delegate connect to the libp2p node", async () => {
+      const mgr = new ChatManager({ useLibp2p: true, useNostr: false });
+      await mgr.initialize();
+
+      await mgr.connect("/ip4/127.0.0.1/tcp/4002");
+
+      expect(connectMock).toHaveBeenCalledTimes(1);
+      expect(connectMock).toHaveBeenCalledWith("/ip4/127.0.0.1/tcp/4002");
+      await mgr.stop();
+    });
+
+    it("should delegate getMultiaddrs to the libp2p node", async () => {
+      const mgr = new ChatManager({ useLibp2p: true, useNostr: false });
+      await mgr.initialize();
+
+      expect(mgr.getMultiaddrs()).toEqual(["/ip4/127.0.0.1/tcp/4001"]);
+
+      expect(getMultiaddrsMock).toHaveBeenCalled();
+      await mgr.stop();
+    });
+
+    it("should delegate getPeerId to the libp2p node", async () => {
+      const mgr = new ChatManager({ useLibp2p: true, useNostr: false });
+      await mgr.initialize();
+
+      expect(mgr.getPeerId()).toBe("mock-peer-id");
+
+      expect(getPeerIdMock).toHaveBeenCalled();
+      await mgr.stop();
+    });
+
+    it("should throw NotInitializedError from connect when libp2p is unavailable", async () => {
+      await manager.initialize();
+      await expect(manager.connect("/ip4/127.0.0.1/tcp/4002")).rejects.toThrow(
+        "Libp2p node is not initialized",
+      );
+    });
+
+    it("should return an empty multiaddr list when libp2p is unavailable", async () => {
+      await manager.initialize();
+      expect(manager.getMultiaddrs()).toEqual([]);
+    });
+
+    it("should throw NotInitializedError from getPeerId when libp2p is unavailable", () => {
+      expect(() => manager.getPeerId()).toThrow("Libp2p node is not initialized");
     });
   });
 });

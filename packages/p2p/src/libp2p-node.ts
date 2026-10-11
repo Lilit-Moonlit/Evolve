@@ -1,15 +1,13 @@
-import { createLibp2p } from "libp2p";
+import { createLibp2p, type Libp2p } from "libp2p";
 import { webSockets } from "@libp2p/websockets";
-import { webTransport } from "@libp2p/webtransport";
-import { mplex } from "@libp2p/mplex";
 import { noise } from "@libp2p/noise";
-import { gossipsub } from "@chainsafe/libp2p-gossipsub";
+import { yamux } from "@libp2p/yamux";
+import { gossipsub, type GossipSub, type Message } from "@libp2p/gossipsub";
 import { bootstrap } from "@libp2p/bootstrap";
-import { kadDHT } from "@libp2p/kad-dht";
-import { identify } from "@libp2p/identify";
-import { ping } from "@libp2p/ping";
-import { uPnPNAT } from "@libp2p/upnp-nat";
+import { identify, type Identify } from "@libp2p/identify";
+import { ping, type Ping } from "@libp2p/ping";
 import { peerIdFromString } from "@libp2p/peer-id";
+import { multiaddr } from "@multiformats/multiaddr";
 import { ConnectionState, type ILogger } from "./types";
 import {
   InitializationError,
@@ -21,9 +19,25 @@ import {
 
 export interface Libp2pConfig {
   bootstrapPeers?: string[];
+  /**
+   * Back-compat no-op: the DHT service is no longer part of this node. Kept
+   * so existing callers (ChatManager, browser config) keep compiling.
+   */
   enableDHT?: boolean;
+  /**
+   * Back-compat no-op: gossipsub is always enabled — chat runs on it.
+   */
   enableGossipsub?: boolean;
+  /**
+   * Multiaddrs to listen on. Defaults to `[]` (dial-only) which is the only
+   * mode browsers support; relays/Node.js servers pass explicit addresses.
+   */
   listenAddresses?: string[];
+  /**
+   * Multiaddrs to advertise to the network instead of the observed ones
+   * (e.g. a public relay address for a Node.js host behind NAT).
+   */
+  announceAddresses?: string[];
   reconnect?: {
     maxRetries?: number;
     baseDelayMs?: number;
@@ -31,15 +45,23 @@ export interface Libp2pConfig {
   };
 }
 
+/**
+ * The service map this node always installs: identify + ping + gossipsub.
+ * `enableDHT` / `enableGossipsub` are accepted as no-ops for back-compat.
+ */
+type Libp2pNodeServices = {
+  identify: Identify;
+  ping: Ping;
+  pubsub: GossipSub;
+};
+
 export class Libp2pNode {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private node: any = null;
+  private node: Libp2p<Libp2pNodeServices> | null = null;
   private state: ConnectionState = ConnectionState.Disconnected;
   private logger: ILogger;
   private subscribedTopics: Set<string> = new Set();
-  private topicHandlers: Map<string, Set<(data: Uint8Array) => void>> =
-    new Map();
-  private globalMessageListener: ((event: Event) => void) | null = null;
+  private topicHandlers: Map<string, Set<(data: Uint8Array) => void>> = new Map();
+  private globalMessageListener: ((event: CustomEvent<Message>) => void) | null = null;
   private reconnectTimer: ReturnType<typeof setTimeout> | null = null;
   private reconnectAttempts = 0;
   private stopped = false;
@@ -62,39 +84,32 @@ export class Libp2pNode {
     this.logger.info("Initializing Libp2p node...");
 
     try {
-      const listenAddresses = this.config.listenAddresses ?? [
-        "/ip4/0.0.0.0/tcp/0",
-        "/ip4/0.0.0.0/tcp/0/ws",
-      ];
+      const bootstrapPeers = this.config.bootstrapPeers;
 
-      const services: Record<string, unknown> = {
-        identify: identify(),
-        ping: ping(),
-        upnp: uPnPNAT(),
-      };
-
-      if (this.config.enableGossipsub !== false) {
-        services.pubsub = gossipsub();
-      }
-
-      if (this.config.enableDHT !== false) {
-        services.dht = kadDHT();
-      }
-
-      const peerDiscovery =
-        this.config.bootstrapPeers !== undefined &&
-        this.config.bootstrapPeers.length > 0
-          ? [bootstrap({ list: this.config.bootstrapPeers! })]
-          : undefined;
-
-      this.node = await createLibp2p({
-        addresses: { listen: listenAddresses },
-        transports: [webSockets(), webTransport()],
-        streamMuxers: [mplex()],
-        connectionEncryption: [noise()],
-        peerDiscovery,
-        services,
-      } as never); // Gossipsub@14 uses @libp2p/interface@^2.0.0, rest uses ^3.2.3 — cast bypasses version mismatch. Runtime works fine.
+      this.node = await createLibp2p<Libp2pNodeServices>({
+        start: false,
+        addresses: {
+          listen: this.config.listenAddresses ?? [],
+          ...(this.config.announceAddresses?.length
+            ? { announce: this.config.announceAddresses }
+            : {}),
+        },
+        transports: [webSockets()],
+        connectionEncrypters: [noise()],
+        streamMuxers: [yamux()],
+        ...(bootstrapPeers !== undefined && bootstrapPeers.length > 0
+          ? { peerDiscovery: [bootstrap({ list: bootstrapPeers })] }
+          : {}),
+        services: {
+          identify: identify(),
+          ping: ping(),
+          pubsub: gossipsub({
+            emitSelf: false,
+            floodPublish: true,
+            allowPublishToZeroTopicPeers: true,
+          }),
+        },
+      });
 
       await this.node.start();
       this.state = ConnectionState.Connected;
@@ -103,9 +118,7 @@ export class Libp2pNode {
       this.state = ConnectionState.Disconnected;
       const message = error instanceof Error ? error.message : "Unknown error";
       this.logger.error(`Libp2p initialization failed: ${message}`);
-      throw new InitializationError(
-        `Failed to initialize Libp2p node: ${message}`,
-      );
+      throw new InitializationError(`Failed to initialize Libp2p node: ${message}`);
     }
   }
 
@@ -124,6 +137,7 @@ export class Libp2pNode {
       this.node = null;
       this.state = ConnectionState.Disconnected;
       this.subscribedTopics.clear();
+      this.globalMessageListener = null;
       this.reconnectAttempts = 0;
       this.logger.info("Libp2p node stopped");
     } catch (error) {
@@ -147,10 +161,7 @@ export class Libp2pNode {
     }
 
     this.state = ConnectionState.Reconnecting;
-    const delay = Math.min(
-      baseDelay * Math.pow(2, this.reconnectAttempts),
-      maxDelay,
-    );
+    const delay = Math.min(baseDelay * Math.pow(2, this.reconnectAttempts), maxDelay);
     this.reconnectAttempts++;
 
     this.logger.info(
@@ -163,24 +174,25 @@ export class Libp2pNode {
         this.reconnectAttempts = 0;
         this.logger.info("Reconnected successfully");
 
-        for (const topic of this.subscribedTopics) {
-          this.node.services.pubsub.subscribe(topic);
-          this.logger.debug(`Re-subscribed to topic: ${topic}`);
+        const node = this.node;
+        if (node !== null) {
+          for (const topic of this.subscribedTopics) {
+            node.services.pubsub.subscribe(topic);
+            this.logger.debug(`Re-subscribed to topic: ${topic}`);
+          }
+          if (this.topicHandlers.size > 0) {
+            this.attachGlobalMessageListener();
+          }
         }
       } catch (error) {
-        const message =
-          error instanceof Error ? error.message : "Unknown error";
+        const message = error instanceof Error ? error.message : "Unknown error";
         this.logger.error(`Reconnect failed: ${message}`);
         await this.reconnect();
       }
     }, delay);
   }
 
-  withRetry<T>(
-    fn: () => Promise<T>,
-    maxRetries = 3,
-    baseDelayMs = 500,
-  ): Promise<T> {
+  withRetry<T>(fn: () => Promise<T>, maxRetries = 3, baseDelayMs = 500): Promise<T> {
     return fn().catch(async (error) => {
       for (let attempt = 1; attempt < maxRetries; attempt++) {
         const delay = baseDelayMs * Math.pow(2, attempt - 1);
@@ -196,7 +208,7 @@ export class Libp2pNode {
     });
   }
 
-  private ensureNode() {
+  private ensureNode(): Libp2p<Libp2pNodeServices> {
     if (this.node === null || this.state !== ConnectionState.Connected) {
       throw new NotInitializedError("Libp2p node");
     }
@@ -210,20 +222,17 @@ export class Libp2pNode {
   getMultiaddrs(): string[] {
     return this.ensureNode()
       .getMultiaddrs()
-      .map((ma: { toString(): string }) => ma.toString());
+      .map((ma) => ma.toString());
   }
 
   async connect(peerMultiaddr: string): Promise<void> {
     try {
-      const { multiaddr } = await import("@multiformats/multiaddr");
       await this.ensureNode().dial(multiaddr(peerMultiaddr));
       this.logger.info(`Connected to peer: ${peerMultiaddr}`);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown error";
       this.logger.error(`Connect to ${peerMultiaddr} failed: ${message}`);
-      throw new ConnectionError(
-        `Failed to connect to peer ${peerMultiaddr}: ${message}`,
-      );
+      throw new ConnectionError(`Failed to connect to peer ${peerMultiaddr}: ${message}`);
     }
   }
 
@@ -234,15 +243,13 @@ export class Libp2pNode {
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown error";
       this.logger.error(`Disconnect from ${peerId} failed: ${message}`);
-      throw new ConnectionError(
-        `Failed to disconnect from peer ${peerId}: ${message}`,
-      );
+      throw new ConnectionError(`Failed to disconnect from peer ${peerId}: ${message}`);
     }
   }
 
   getPeers(): { id: string; address: string; lastSeen: number }[] {
     const node = this.ensureNode();
-    return node.getPeers().map((peer: { toString(): string }) => ({
+    return node.getPeers().map((peer) => ({
       id: peer.toString(),
       address: peer.toString(),
       lastSeen: Date.now(),
@@ -260,10 +267,7 @@ export class Libp2pNode {
     }
   }
 
-  async subscribe(
-    topic: string,
-    handler: (data: Uint8Array) => void,
-  ): Promise<void> {
+  async subscribe(topic: string, handler: (data: Uint8Array) => void): Promise<void> {
     try {
       const node = this.ensureNode();
       const isFirstSubscriber = !this.topicHandlers.has(topic);
@@ -285,10 +289,7 @@ export class Libp2pNode {
     } catch (error) {
       const msg = error instanceof Error ? error.message : "Unknown error";
       this.logger.error(`Subscribe to ${topic} failed: ${msg}`);
-      throw new SubscribeError(
-        `Failed to subscribe to topic ${topic}: ${msg}`,
-        error,
-      );
+      throw new SubscribeError(`Failed to subscribe to topic ${topic}: ${msg}`, error);
     }
   }
 
@@ -308,37 +309,30 @@ export class Libp2pNode {
     } catch (error) {
       const msg = error instanceof Error ? error.message : "Unknown error";
       this.logger.error(`Unsubscribe from ${topic} failed: ${msg}`);
-      throw new SubscribeError(
-        `Failed to unsubscribe from topic ${topic}: ${msg}`,
-        error,
-      );
+      throw new SubscribeError(`Failed to unsubscribe from topic ${topic}: ${msg}`, error);
     }
   }
 
   private attachGlobalMessageListener(): void {
     if (this.globalMessageListener !== null) return;
     const node = this.ensureNode();
-    const listener = (event: Event) => {
-      const detail = (event as CustomEvent).detail;
-      const messageTopic = detail.msg.topic;
+    const listener = (event: CustomEvent<Message>): void => {
+      const messageTopic = event.detail.topic;
       const handlers = this.topicHandlers.get(messageTopic);
       if (handlers !== undefined) {
         for (const handler of handlers) {
-          handler(detail.msg.data as Uint8Array);
+          handler(event.detail.data);
         }
       }
     };
-    node.services.pubsub.addEventListener("gossipsub:message", listener);
+    node.services.pubsub.addEventListener("message", listener);
     this.globalMessageListener = listener;
   }
 
   private detachGlobalMessageListener(): void {
     if (this.globalMessageListener === null) return;
     const node = this.ensureNode();
-    node.services.pubsub.removeEventListener(
-      "gossipsub:message",
-      this.globalMessageListener,
-    );
+    node.services.pubsub.removeEventListener("message", this.globalMessageListener);
     this.globalMessageListener = null;
   }
 

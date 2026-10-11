@@ -25,10 +25,11 @@ export const defaultBrowserConfig = {
   useLibp2p: true,
   useNostr: true,
   libp2pConfig: {
-    // Use browser-friendly transports
-    enableDHT: false, // DHT may not work well in browsers
+    // Browser nodes are dial-only (no listen addresses): WebSockets +
+    // noise + yamux + gossipsub, no DHT
+    enableDHT: false, // accepted as a back-compat no-op
     enableGossipsub: true,
-    listenAddresses: ["/ip4/0.0.0.0/tcp/0/ws", "/ip4/0.0.0.0/tcp/0/wss"],
+    listenAddresses: [], // browsers cannot listen
   },
   nostrConfig: {
     // Default Nostr relays that work well in browsers
