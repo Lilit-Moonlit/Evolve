@@ -579,6 +579,7 @@ const initialFallbackData = {
   companionLabs: [] as any[],
   localChatMessages: [] as any[],
   localChatGroups: [] as any[],
+  sessions: {} as Record<string, any>,
 };
 
 function readFallback() {
@@ -595,6 +596,35 @@ function readFallback() {
 
 function writeFallback(data: any) {
   fs.writeFileSync(FALLBACK_FILE, JSON.stringify(data, null, 2));
+}
+
+/**
+ * Load persisted auth/lab sessions from fallback-db.json. This lets login
+ * survive a server restart (the session map in apiServer.ts is otherwise
+ * in-memory only). Returns {} when absent or unreadable.
+ */
+export function loadSessions(): Record<string, any> {
+  try {
+    const data = readFallback();
+    return data.sessions && typeof data.sessions === "object" ? data.sessions : {};
+  } catch {
+    return {};
+  }
+}
+
+/**
+ * Persist the in-memory auth/lab session map back to fallback-db.json. Called
+ * on every session create/delete so logins survive dev-server restarts.
+ * Failures are logged, never thrown (a failed write must not crash a request).
+ */
+export function saveSessions(sessions: Record<string, any>): void {
+  try {
+    const data = readFallback();
+    data.sessions = sessions;
+    writeFallback(data);
+  } catch (error) {
+    console.error("[db] failed to persist sessions:", error);
+  }
 }
 
 // Parse a JSON-stringified array (e.g. CompanionPatient.additionalPhotos).

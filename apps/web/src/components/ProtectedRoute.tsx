@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useTranslation } from "react-i18next";
@@ -46,12 +46,6 @@ export default function ProtectedRoute() {
 
   const [authView, setAuthView] = useState<AuthView>("landing");
 
-  // Debug: log auth view and wallet connection state
-  useEffect(() => {
-    console.log("[ProtectedRoute] authView:", authView);
-    console.log("[ProtectedRoute] isConnected:", isConnected, "isAuthenticated:", isAuthenticated);
-  }, [authView, isConnected, isAuthenticated]);
-
   // Authenticated → render children
   if (isAuthenticated) {
     return <Outlet />;
@@ -90,21 +84,6 @@ export default function ProtectedRoute() {
             {t("auth.signIn.button")}
           </button>
         )}
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <div className="max-w-md w-full bg-slate-800 border border-slate-700 rounded-xl p-8 text-center shadow-xl space-y-6">
-        <h2 className="text-2xl font-bold text-white">{t("auth.signIn.title")}</h2>
-        <p className="text-gray-400">{t("auth.signIn.description")}</p>
-        <button
-          onClick={signInWithEthereum}
-          className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition-all transform hover:scale-[1.02]"
-        >
-          {t("auth.signIn.button")}
-        </button>
       </div>
     );
   }

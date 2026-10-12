@@ -1,6 +1,6 @@
 import { IncomingMessage, ServerResponse } from "http";
 import { createHash } from "crypto";
-import { dbService } from "./db";
+import { dbService, loadSessions, saveSessions } from "./db";
 import { generateNonce, SiweMessage } from "siwe";
 import { parse as parseUrl } from "url";
 
@@ -304,12 +304,35 @@ setInterval(
   5 * 60 * 1000,
 );
 
-// Simple in-memory session store. Regular user sessions have a real `userId`
+// Simple session store. Regular user sessions have a real `userId`
 // (+ `ethAddress` for SIWE, `email` for email auth). Partner (lab) sessions
 // are distinguished by `kind: "partner"` and carry `partnerId`; their
 // `userId` is left empty — every existing route that checks `session.userId`
 // must also verify `session.kind !== "partner"` (see partner endpoints below).
-const sessions: Record<string, SessionData> = {};
+//
+// Sessions are persisted to fallback-db.json so login survives a server
+// restart (a Proxy auto-saves on every set/delete). See `saveSessions`.
+const sessions: Record<string, SessionData> = new Proxy(
+  (() => {
+    try {
+      return loadSessions() as Record<string, SessionData>;
+    } catch {
+      return {};
+    }
+  })(),
+  {
+    set(target: Record<string, SessionData>, prop: string | symbol, value: SessionData): boolean {
+      target[String(prop)] = value;
+      saveSessions(target);
+      return true;
+    },
+    deleteProperty(target: Record<string, SessionData>, prop: string | symbol): boolean {
+      delete target[String(prop)];
+      saveSessions(target);
+      return true;
+    },
+  },
+);
 
 interface SessionData {
   userId: string;
@@ -340,7 +363,12 @@ function createSessionId(): string {
 }
 
 function setSessionCookie(res: ServerResponse, cookieName: string, sessionId: string): void {
-  res.setHeader("Set-Cookie", `${cookieName}=${sessionId}; Path=/; HttpOnly; SameSite=Lax`);
+  // Max-Age=31536000 (1 year) so the login survives browser restarts; the
+  // session map is also persisted to fallback-db.json to survive server restarts.
+  res.setHeader(
+    "Set-Cookie",
+    `${cookieName}=${sessionId}; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000`,
+  );
 }
 
 function clearSessionCookie(res: ServerResponse, cookieName: string): void {
@@ -602,7 +630,10 @@ export async function handleApiRequest(
           Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         sessions[newSessionId] = { userId: user!.id, ethAddress };
 
-        res.setHeader("Set-Cookie", `siwe_session=${newSessionId}; Path=/; HttpOnly; SameSite=Lax`);
+        res.setHeader(
+          "Set-Cookie",
+          `siwe_session=${newSessionId}; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000`,
+        );
         res.statusCode = 200;
         res.end(JSON.stringify({ success: true, user, sessionId: newSessionId }));
       } else {
@@ -2063,6 +2094,16 @@ export async function handleApiRequest(
         res.statusCode = 404;
         res.end(JSON.stringify({ error: "Visit not found" }));
         return true;
+      }
+      // The lab already verified the patient (partner session + face confirm),
+      // so attach the parsed result to the profile immediately (verifiedStd),
+      // mirroring the API-key lab path. No reward minting (deferred).
+      if (updated.userId) {
+        await dbService.upsertProfile(updated.userId, {
+          verifiedStd: true,
+          stdTestResult: rawText,
+          parsedStd: parsed,
+        });
       }
       res.statusCode = 200;
       res.end(JSON.stringify({ ok: true, visitId: updated.id, status: updated.status }));

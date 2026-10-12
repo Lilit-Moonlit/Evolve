@@ -84,6 +84,8 @@ export interface IncomingChatMessage {
 }
 
 export interface ProfileData {
+  // ... existing fields
+  faceEmbedding?: number[];
   id: string;
   name: string;
   age: number;
@@ -393,6 +395,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     isDnaVerified: false,
     searchDetails: {} as SearchDetails,
     roses: [] as RoseRecord[],
+    faceEmbedding: [] as number[],
   });
 
   const [filters, setFilters] = useState<FilterState>(() => {
@@ -483,6 +486,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           faceVerified: (p as any).faceVerified || false,
           faceHash: (p as any).faceHash || null,
           lastLivenessCheck: (p as any).lastLivenessCheck || null,
+          faceEmbedding: (p as any).faceEmbedding ?? ([] as number[]),
           verifiedStd: p.verifiedStd,
           verifiedDna: p.verifiedDna,
           reputationScore: p.reputationScore,
@@ -623,13 +627,16 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
       const messageToSign = message.prepareMessage();
 
-      const ethereum = (window as Window & { ethereum?: unknown }).ethereum;
-      if (!ethereum) {
-        throw new Error("No Ethereum provider found");
+      // `walletClient` comes from the `useWalletClient()` hook at the top of the
+      // provider (closure scope) — never call the hook again inside this async
+      // function (React hooks rules).
+      if (!walletClient) {
+        throw new Error("Wallet not connected");
       }
-      const provider = new BrowserProvider(ethereum);
-      const signer = await provider.getSigner();
-      const signature = await signer.signMessage(messageToSign);
+      const signature = await walletClient.signMessage({
+        account: wagmiAddress as `0x${string}`,
+        message: messageToSign,
+      });
 
       const verifyRes = await apiFetch("/api/auth/siwe/verify", {
         method: "POST",
@@ -1230,6 +1237,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           reputationScore: myProfile.reputationScore,
           voters: myProfile.voters,
           searchDetails: mergedSearchDetails,
+          faceEmbedding: patch.faceEmbedding ?? myProfile.faceEmbedding ?? [],
           // Roses writes are ALWAYS sanitized client-side (pinned enforcement
           // point — the server re-sanitizes in /api/profiles/upsert too).
           roses: roses !== undefined ? roses.map(sanitizeRoseRecord) : undefined,
