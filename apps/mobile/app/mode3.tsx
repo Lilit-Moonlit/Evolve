@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, TextInput } from "react-native";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { BondManagerABI, BOND_MANAGER_ADDRESS } from "../../web/src/lib/abi/BondManagerABI";
 import { EvolveFundABI, FUND_ADDRESS } from "../../web/src/lib/abi/EvolveFundABI";
+import { EVOLVEABI, EVOLVE_ADDRESS } from "../../web/src/lib/abi/EVOLVEABI";
 
 const formatCountdown = (milliseconds: number) => {
   const totalSeconds = Math.max(0, Math.floor(milliseconds / 1000));
@@ -16,6 +17,11 @@ const formatCountdown = (milliseconds: number) => {
 };
 
 const truncateAddress = (addr: string) => `${addr.slice(0, 6)}...${addr.slice(-4)}`;
+
+// ─── Contract constants ───
+const MIN_DEPOSIT = 15n * 10n ** 18n;
+const MIN_DURATION = 30 * 24 * 60 * 60; // 30 days in seconds
+const FIXED_ROSE_WEI = 10n ** 18n; // this mode: exactly 1 birth rose (1 EVOLVE)
 
 export default function Mode3() {
   const router = useRouter();
@@ -29,11 +35,15 @@ export default function Mode3() {
   });
   const hasPendingTx = isPending || isConfirming;
 
-  // ─── EvolveFund: read user's deposit ───
+  // ─── EvolveFund deposit input (Postcopulation type, fixed 1 birth rose) ───
+  const [depositAmount, setDepositAmount] = useState("");
+  const [depositStep, setDepositStep] = useState<"idle" | "approving" | "depositing">("idle");
+
+  // ─── EvolveFund: read user's Postcopulation deposit (this mode's stake) ───
   const { data: fundStake, refetch: refetchFund } = useReadContract({
     address: FUND_ADDRESS,
     abi: EvolveFundABI,
-    functionName: "getStake",
+    functionName: "getPostCopulationStake",
     args: address ? [address] : undefined,
     query: { enabled: !!address },
   });
@@ -41,7 +51,25 @@ export default function Mode3() {
   const fundData = fundStake as [bigint, bigint, boolean, boolean] | undefined;
   const fundAmount = fundData ? fundData[0] : 0n;
   const fundExists = fundData ? fundData[3] : false;
-  const hasEnoughFund = fundExists && fundAmount >= 15n * 10n ** 18n;
+  const hasEnoughFund = fundExists && fundAmount >= MIN_DEPOSIT;
+
+  // ─── EVOLVE: read allowance for EvolveFund ───
+  const { data: allowance, refetch: refetchAllowance } = useReadContract({
+    address: EVOLVE_ADDRESS,
+    abi: EVOLVEABI,
+    functionName: "allowance",
+    args: address ? [address, FUND_ADDRESS] : undefined,
+    query: { enabled: !!address },
+  });
+
+  const depositAmountWei = depositAmount
+    ? BigInt(Math.floor(parseFloat(depositAmount) * 1e18))
+    : 0n;
+  // Deposit + the fixed 1 birth rose
+  const totalNeededWei = depositAmountWei + FIXED_ROSE_WEI;
+  const needsApproval =
+    totalNeededWei > 0n && (!allowance || (allowance as bigint) < totalNeededWei);
+  const canDeposit = depositAmountWei >= MIN_DEPOSIT && !needsApproval && !hasPendingTx;
 
   // ─── Read user's active session ID ───
   const { data: activeSessionId, refetch: refetchActiveSession } = useReadContract({
@@ -78,8 +106,16 @@ export default function Mode3() {
       refetchSession();
       refetchParticipants();
       refetchFund();
+      refetchAllowance();
     }
-  }, [isConfirmed, refetchActiveSession, refetchSession, refetchParticipants, refetchFund]);
+  }, [
+    isConfirmed,
+    refetchActiveSession,
+    refetchSession,
+    refetchParticipants,
+    refetchFund,
+    refetchAllowance,
+  ]);
 
   // ─── Derived session state ───
   const session = sessionData
@@ -272,6 +308,70 @@ export default function Mode3() {
           {address && !hasEnoughFund && !session?.resolved && (
             <View style={styles.warningBox}>
               <Text style={styles.warningText}>{t("dashboard.mode3.fundNotice")}</Text>
+            </View>
+          )}
+
+          {/* ─── Deposit to EvolveFund (Postcopulation, fixed 1 birth rose) ─── */}
+          {address && !isWoman && !hasEnoughFund && !session?.resolved && (
+            <View style={styles.depositSection}>
+              <Text style={styles.depositLabel}>{t("dashboard.mode3.deposit.prompt")}</Text>
+              <View style={styles.depositRow}>
+                <TextInput
+                  style={styles.depositInput}
+                  placeholder={t("dashboard.mode2.step0.amountPlaceholder")}
+                  placeholderTextColor="#64748b"
+                  value={depositAmount}
+                  onChangeText={setDepositAmount}
+                  keyboardType="numeric"
+                />
+                <TouchableOpacity
+                  onPress={() => {
+                    if (!address) return;
+                    if (needsApproval) {
+                      setDepositStep("approving");
+                      writeContract({
+                        address: EVOLVE_ADDRESS,
+                        abi: EVOLVEABI,
+                        functionName: "approve",
+                        args: [FUND_ADDRESS, totalNeededWei],
+                      });
+                    } else {
+                      setDepositStep("depositing");
+                      writeContract({
+                        address: FUND_ADDRESS,
+                        abi: EvolveFundABI,
+                        functionName: "depositWithRoses",
+                        args: [depositAmountWei, BigInt(MIN_DURATION), 1, 1n], // Postcopulation + exactly 1 rose
+                      });
+                    }
+                  }}
+                  disabled={!canDeposit}
+                  style={[styles.depositButton, !canDeposit && styles.buttonDisabled]}
+                >
+                  <Text style={styles.depositButtonText}>
+                    {hasPendingTx
+                      ? depositStep === "approving"
+                        ? t("dashboard.mode2.step0.approving")
+                        : t("dashboard.mode2.step0.depositing")
+                      : needsApproval
+                        ? t("dashboard.mode2.step0.approveAction")
+                        : t("dashboard.mode2.step0.depositAction")}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+              {/* Birth roses: fixed 1 rose in this mode — no increase allowed */}
+              <View style={styles.roseBox}>
+                <Text style={styles.roseTitle}>🌹 {t("dashboard.roses.title")}</Text>
+                <Text style={styles.roseHint}>{t("dashboard.roses.fixed")}</Text>
+                <Text style={styles.roseHint}>
+                  {t("dashboard.roses.total", {
+                    total: (parseFloat(depositAmount || "0") || 0) + 1,
+                  })}
+                </Text>
+              </View>
+
+              <Text style={styles.depositHint}>{t("dashboard.mode2.step0.lockHint")}</Text>
             </View>
           )}
 
@@ -493,6 +593,67 @@ const styles = StyleSheet.create({
   warningText: {
     color: "#fcd34d",
     fontSize: 14,
+  },
+  depositSection: {
+    backgroundColor: "#0f172a",
+    borderWidth: 1,
+    borderColor: "#475569",
+    borderRadius: 12,
+    padding: 16,
+    marginTop: 16,
+    gap: 10,
+  },
+  depositLabel: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "#cbd5e1",
+  },
+  depositRow: {
+    flexDirection: "row",
+    gap: 12,
+  },
+  depositInput: {
+    flex: 1,
+    backgroundColor: "#1e293b",
+    borderWidth: 1,
+    borderColor: "#475569",
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    color: "#fff",
+    fontSize: 14,
+  },
+  depositButton: {
+    backgroundColor: "#3b82f6",
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 12,
+  },
+  depositButtonText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  depositHint: {
+    fontSize: 12,
+    color: "#64748b",
+  },
+  roseBox: {
+    backgroundColor: "rgba(244,63,94,0.06)",
+    borderWidth: 1,
+    borderColor: "rgba(244,63,94,0.3)",
+    borderRadius: 12,
+    padding: 12,
+    gap: 6,
+  },
+  roseTitle: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#fda4af",
+  },
+  roseHint: {
+    fontSize: 12,
+    color: "#94a3b8",
   },
   resolvedBox: {
     backgroundColor: "#0f172a",

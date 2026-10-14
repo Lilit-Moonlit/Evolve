@@ -204,7 +204,19 @@
       "error": {
         "rejected": "Transação rejeitada pelo usuário.",
         "failed": "Erro de transação: {{message}}"
+      },
+      "deposit": {
+        "prompt": "Para participar é necessário um depósito ativo (mín. 15 EVOLVE, bloqueado por 30+ dias) do tipo «Póscópula» + 1 rosa de nascimento fixa."
       }
+    },
+    "roses": {
+      "title": "Rosas de nascimento",
+      "hint": "1 EVOLVE = 1 rosa do seu depósito EvolveFund. As rosas são oferecidas à mãe somente após a confirmação da paternidade, junto com a aposta. Se a paternidade não for confirmada, o EVOLVE retorna para você.",
+      "cost": "Custo das rosas: {{count}} EVOLVE",
+      "total": "Total a transferir: {{total}} EVOLVE",
+      "fixed": "1 rosa 🌹 (1 EVOLVE) — fixo para este modo",
+      "escrowed": "Em reserva: {{count}} 🌹",
+      "withdraw": "Devolver {{count}} 🌹 ({{amount}} EVOLVE)"
     }
   },
   "common": {

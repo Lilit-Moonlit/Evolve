@@ -34,6 +34,7 @@ export default function Mode2() {
 
   // ─── EvolveFund deposit input ───
   const [depositAmount, setDepositAmount] = useState("");
+  const [roseCount, setRoseCount] = useState(1); // default: 1 rose (1 EVOLVE)
   const [depositStep, setDepositStep] = useState<"idle" | "approving" | "depositing">("idle");
 
   // ─── Contract writes ───
@@ -69,6 +70,16 @@ export default function Mode2() {
     query: { enabled: !!address },
   });
 
+  // ─── EvolveFund: read birth-rose escrow ───
+  const { data: roseEscrowData, refetch: refetchRoses } = useReadContract({
+    address: FUND_ADDRESS,
+    abi: EvolveFundABI,
+    functionName: "roseEscrow",
+    args: address ? [address] : undefined,
+    query: { enabled: !!address },
+  });
+  const roseEscrowCount = roseEscrowData ? Number(roseEscrowData) : 0;
+
   // ─── Read user's bond IDs ───
   const { data: userBondIds, refetch: refetchUserBonds } = useReadContract({
     address: BOND_MANAGER_ADDRESS,
@@ -97,8 +108,9 @@ export default function Mode2() {
       refetchBond();
       refetchFund();
       refetchAllowance();
+      refetchRoses();
     }
-  }, [isConfirmed, refetchUserBonds, refetchBond, refetchFund, refetchAllowance]);
+  }, [isConfirmed, refetchUserBonds, refetchBond, refetchFund, refetchAllowance, refetchRoses]);
 
   // ─── Derived state from contract ───
   const bond = bondData
@@ -140,8 +152,12 @@ export default function Mode2() {
   const depositAmountWei = depositAmount
     ? BigInt(Math.floor(parseFloat(depositAmount) * 1e18))
     : 0n;
+  // Birth roses: 1 EVOLVE per rose, escrowed on top of the stake
+  const ROSE_WEI = 10n ** 18n;
+  const roseCostWei = BigInt(roseCount) * ROSE_WEI;
+  const totalNeededWei = depositAmountWei + roseCostWei;
   const needsApproval =
-    depositAmountWei > 0n && (!allowance || (allowance as bigint) < depositAmountWei);
+    totalNeededWei > 0n && (!allowance || (allowance as bigint) < totalNeededWei);
   const canDeposit = depositAmountWei >= MIN_DEPOSIT && !needsApproval && !hasPendingTx;
 
   // ─── Time-based pregnancy report eligibility ───
@@ -346,15 +362,15 @@ export default function Mode2() {
                         address: EVOLVE_ADDRESS,
                         abi: EVOLVEABI,
                         functionName: "approve",
-                        args: [FUND_ADDRESS, depositAmountWei],
+                        args: [FUND_ADDRESS, totalNeededWei],
                       });
                     } else {
                       setDepositStep("depositing");
                       writeContract({
                         address: FUND_ADDRESS,
                         abi: EvolveFundABI,
-                        functionName: "deposit",
-                        args: [depositAmountWei, BigInt(MIN_DURATION)],
+                        functionName: "depositWithRoses",
+                        args: [depositAmountWei, BigInt(MIN_DURATION), 0, BigInt(roseCount)],
                       });
                     }
                   }}
@@ -372,7 +388,70 @@ export default function Mode2() {
                   </Text>
                 </TouchableOpacity>
               </View>
+
+              {/* ─── Birth roses: 1 EVOLVE = 1 rose, default 1, adjustable ─── */}
+              <View style={styles.roseBox}>
+                <Text style={styles.roseTitle}>🌹 {t("dashboard.roses.title")}</Text>
+                <Text style={styles.roseHint}>{t("dashboard.roses.hint")}</Text>
+                <View style={styles.roseRow}>
+                  <TouchableOpacity
+                    onPress={() => setRoseCount((n) => Math.max(1, n - 1))}
+                    disabled={roseCount <= 1}
+                    style={[styles.roseButton, roseCount <= 1 && styles.roseButtonDisabled]}
+                  >
+                    <Text style={styles.roseButtonText}>−</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.roseCountText}>{roseCount} 🌹</Text>
+                  <TouchableOpacity
+                    onPress={() => setRoseCount((n) => n + 1)}
+                    style={styles.roseButton}
+                  >
+                    <Text style={styles.roseButtonText}>+</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.roseCost}>
+                    {t("dashboard.roses.cost", { count: roseCount })}
+                  </Text>
+                </View>
+                <Text style={styles.roseHint}>
+                  {t("dashboard.roses.total", {
+                    total: (parseFloat(depositAmount || "0") || 0) + roseCount,
+                  })}
+                </Text>
+              </View>
+
               <Text style={styles.depositHint}>{t("dashboard.mode2.step0.lockHint")}</Text>
+            </View>
+          )}
+
+          {/* ─── Birth-rose escrow status + reclaim ─── */}
+          {roseEscrowCount > 0 && (
+            <View style={styles.roseEscrowCard}>
+              <View style={styles.roseEscrowInfo}>
+                <Text style={styles.roseEscrowText}>
+                  {t("dashboard.roses.escrowed", { count: roseEscrowCount })}
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  writeContract({
+                    address: FUND_ADDRESS,
+                    abi: EvolveFundABI,
+                    functionName: "withdrawRoseEscrow",
+                  });
+                }}
+                disabled={hasPendingTx || fundIsLocked}
+                style={[
+                  styles.roseWithdrawButton,
+                  (hasPendingTx || fundIsLocked) && styles.buttonDisabled,
+                ]}
+              >
+                <Text style={styles.roseWithdrawButtonText}>
+                  {t("dashboard.roses.withdraw", {
+                    count: roseEscrowCount,
+                    amount: roseEscrowCount,
+                  })}
+                </Text>
+              </TouchableOpacity>
             </View>
           )}
         </View>
@@ -838,6 +917,89 @@ const styles = StyleSheet.create({
   depositHint: {
     fontSize: 12,
     color: "#64748b",
+  },
+  roseBox: {
+    marginTop: 12,
+    backgroundColor: "rgba(244,63,94,0.06)",
+    borderWidth: 1,
+    borderColor: "rgba(244,63,94,0.3)",
+    borderRadius: 12,
+    padding: 12,
+    gap: 8,
+  },
+  roseTitle: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#fda4af",
+  },
+  roseHint: {
+    fontSize: 12,
+    color: "#94a3b8",
+  },
+  roseRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  roseButton: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: "#334155",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  roseButtonDisabled: {
+    backgroundColor: "#1e293b",
+    opacity: 0.5,
+  },
+  roseButtonText: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "700",
+    lineHeight: 24,
+  },
+  roseCountText: {
+    minWidth: 64,
+    textAlign: "center",
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#fff",
+  },
+  roseCost: {
+    marginLeft: "auto",
+    fontSize: 13,
+    color: "#cbd5e1",
+  },
+  roseEscrowCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+    backgroundColor: "#0f172a",
+    borderWidth: 1,
+    borderColor: "#475569",
+    borderRadius: 12,
+    padding: 12,
+    marginTop: 12,
+  },
+  roseEscrowInfo: {
+    flex: 1,
+  },
+  roseEscrowText: {
+    fontSize: 13,
+    color: "#cbd5e1",
+  },
+  roseWithdrawButton: {
+    backgroundColor: "#e11d48",
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 12,
+  },
+  roseWithdrawButtonText: {
+    color: "#fff",
+    fontSize: 13,
+    fontWeight: "600",
   },
   createBondRow: {
     flexDirection: "row",

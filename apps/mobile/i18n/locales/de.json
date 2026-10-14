@@ -204,7 +204,19 @@
       "error": {
         "rejected": "Transaktion vom Benutzer abgelehnt.",
         "failed": "Transaktionsfehler: {{message}}"
+      },
+      "deposit": {
+        "prompt": "Für die Teilnahme ist eine aktive Einzahlung nötig (mind. 15 EVOLVE, 30+ Tage gesperrt) vom Typ „Postkopulation“ + 1 feste Rose zur Geburt."
       }
+    },
+    "roses": {
+      "title": "Rosen zur Geburt",
+      "hint": "1 EVOLVE = 1 Rose aus Ihrer EvolveFund-Einzahlung. Rosen werden der Mutter erst nach bestätigter Vaterschaft geschenkt — zusammen mit dem Einsatz. Wird die Vaterschaft nicht bestätigt, erhalten Sie die EVOLVE zurück.",
+      "cost": "Rosen kosten: {{count}} EVOLVE",
+      "total": "Insgesamt zu überweisen: {{total}} EVOLVE",
+      "fixed": "1 Rose 🌹 (1 EVOLVE) — für diesen Modus festgelegt",
+      "escrowed": "Im Rückhalt: {{count}} 🌹",
+      "withdraw": "{{count}} 🌹 zurückholen ({{amount}} EVOLVE)"
     }
   },
   "common": {

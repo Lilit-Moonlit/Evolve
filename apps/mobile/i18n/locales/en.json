@@ -364,7 +364,19 @@
       "error": {
         "rejected": "Transaction rejected by user.",
         "failed": "Transaction error: {{message}}"
+      },
+      "deposit": {
+        "prompt": "Men need an active deposit to join (min 15 EVOLVE, 30+ days lock). This deposit is of the Postcopulation type and includes 1 fixed birth rose."
       }
+    },
+    "roses": {
+      "title": "Birth roses",
+      "hint": "1 EVOLVE = 1 rose from your EvolveFund deposit. Roses are gifted to the mother only after paternity is confirmed, together with the stake. If paternity is not confirmed, the EVOLVE returns to you.",
+      "cost": "Roses cost: {{count}} EVOLVE",
+      "total": "Total to transfer: {{total}} EVOLVE",
+      "fixed": "1 rose 🌹 (1 EVOLVE) — fixed for this mode",
+      "escrowed": "In escrow: {{count}} 🌹",
+      "withdraw": "Return {{count}} 🌹 ({{amount}} EVOLVE)"
     }
   }
 }
