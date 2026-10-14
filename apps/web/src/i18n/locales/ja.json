@@ -885,7 +885,19 @@
       "error": {
         "rejected": "ユーザーによってトランザクションが拒否されました。",
         "failed": "トランザクションエラー: {{message}}"
+      },
+      "deposit": {
+        "prompt": "参加には有効なデポジットが必要です（最低15 EVOLVE、30日以上ロック）。「交尾後」タイプ + 出産のバラ1輪（固定）。"
       }
+    },
+    "roses": {
+      "title": "出産のバラ",
+      "hint": "1 EVOLVE = EvolveFundデポジットからのバラ1輪。バラは父性確認後にのみ、ステークと同時に母へ贈られます。父性が確認されなかった場合、EVOLVEはあなたに返却されます。",
+      "cost": "バラの費用：{{count}} EVOLVE",
+      "total": "合計送金額：{{total}} EVOLVE",
+      "fixed": "バラ1輪 🌹（1 EVOLVE）— このモードでは固定",
+      "escrowed": "保有中：{{count}} 🌹",
+      "withdraw": "{{count}} 🌹 を返却する（{{amount}} EVOLVE）"
     }
   },
   "safety": {
@@ -1234,6 +1246,7 @@
     "groupType": {
       "public": "公開",
       "closed": "非公開"
-    }
+    },
+    "otherRegion": "その他"
   }
 }

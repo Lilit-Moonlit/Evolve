@@ -885,7 +885,19 @@
       "error": {
         "rejected": "用户拒绝了交易。",
         "failed": "交易错误：{{message}}"
+      },
+      "deposit": {
+        "prompt": "參與需要有效存款（最少 15 EVOLVE，鎖定 30 天以上），類型為«交配後» + 1 朵固定的新生玫瑰。"
       }
+    },
+    "roses": {
+      "title": "新生玫瑰",
+      "hint": "1 EVOLVE = 從您的 EvolveFund 存款中扣除的 1 朵玫瑰。玫瑰僅在父權確認後與保證金一起贈送給母親。若父權未獲確認，EVOLVE 將退還給您。",
+      "cost": "玫瑰費用：{{count}} EVOLVE",
+      "total": "合計轉入：{{total}} EVOLVE",
+      "fixed": "1 朵玫瑰 🌹（1 EVOLVE）— 此模式下固定",
+      "escrowed": "託管中：{{count}} 🌹",
+      "withdraw": "取回 {{count}} 🌹（{{amount}} EVOLVE）"
     }
   },
   "safety": {
@@ -1235,6 +1247,7 @@
     "groupType": {
       "public": "公開",
       "closed": "封閉"
-    }
+    },
+    "otherRegion": "其他"
   }
 }

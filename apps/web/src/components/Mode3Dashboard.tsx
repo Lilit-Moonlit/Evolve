@@ -4,6 +4,7 @@ import { useAccount, useReadContract, useWriteContract, useWaitForTransactionRec
 import { useAppState } from "../store/AppContext";
 import { BondManagerABI, BOND_MANAGER_ADDRESS } from "../lib/abi/BondManagerABI";
 import { EvolveFundABI, FUND_ADDRESS } from "../lib/abi/EvolveFundABI";
+import { EVOLVEABI, EVOLVE_ADDRESS } from "../lib/abi/EVOLVEABI";
 import InfoProposalIcons from "./InfoProposalIcons";
 
 const formatCountdown = (milliseconds: number) => {
@@ -17,6 +18,11 @@ const formatCountdown = (milliseconds: number) => {
 
 const truncateAddress = (addr: string) => `${addr.slice(0, 6)}...${addr.slice(-4)}`;
 
+// ─── Contract constants ───
+const MIN_DEPOSIT = 15n * 10n ** 18n;
+const MIN_DURATION = 30 * 24 * 60 * 60; // 30 days in seconds
+const FIXED_ROSE_WEI = 10n ** 18n; // this mode: exactly 1 birth rose (1 EVOLVE)
+
 export default function Mode3Dashboard() {
   const { t } = useTranslation();
   const { profiles, myProfile } = useAppState();
@@ -29,11 +35,15 @@ export default function Mode3Dashboard() {
   });
   const hasPendingTx = isPending || isConfirming;
 
-  // ─── EvolveFund: read user's deposit ───
+  // ─── EvolveFund deposit input (Postcopulation type, fixed 1 birth rose) ───
+  const [depositAmount, setDepositAmount] = useState("");
+  const [depositStep, setDepositStep] = useState<"idle" | "approving" | "depositing">("idle");
+
+  // ─── EvolveFund: read user's Postcopulation deposit (this mode's stake) ───
   const { data: fundStake, refetch: refetchFund } = useReadContract({
     address: FUND_ADDRESS,
     abi: EvolveFundABI,
-    functionName: "getStake",
+    functionName: "getPostCopulationStake",
     args: address ? [address] : undefined,
     query: { enabled: !!address },
   });
@@ -41,7 +51,25 @@ export default function Mode3Dashboard() {
   const fundData = fundStake as [bigint, bigint, boolean, boolean] | undefined;
   const fundAmount = fundData ? fundData[0] : 0n;
   const fundExists = fundData ? fundData[3] : false;
-  const hasEnoughFund = fundExists && fundAmount >= 15n * 10n ** 18n;
+  const hasEnoughFund = fundExists && fundAmount >= MIN_DEPOSIT;
+
+  // ─── EVOLVE: read allowance for EvolveFund ───
+  const { data: allowance, refetch: refetchAllowance } = useReadContract({
+    address: EVOLVE_ADDRESS,
+    abi: EVOLVEABI,
+    functionName: "allowance",
+    args: address ? [address, FUND_ADDRESS] : undefined,
+    query: { enabled: !!address },
+  });
+
+  const depositAmountWei = depositAmount
+    ? BigInt(Math.floor(parseFloat(depositAmount) * 1e18))
+    : 0n;
+  // Deposit + the fixed 1 birth rose
+  const totalNeededWei = depositAmountWei + FIXED_ROSE_WEI;
+  const needsApproval =
+    totalNeededWei > 0n && (!allowance || (allowance as bigint) < totalNeededWei);
+  const canDeposit = depositAmountWei >= MIN_DEPOSIT && !needsApproval && !hasPendingTx;
 
   // ─── Read user's active session ID ───
   const { data: activeSessionId, refetch: refetchActiveSession } = useReadContract({
@@ -78,8 +106,16 @@ export default function Mode3Dashboard() {
       refetchSession();
       refetchParticipants();
       refetchFund();
+      refetchAllowance();
     }
-  }, [isConfirmed, refetchActiveSession, refetchSession, refetchParticipants, refetchFund]);
+  }, [
+    isConfirmed,
+    refetchActiveSession,
+    refetchSession,
+    refetchParticipants,
+    refetchFund,
+    refetchAllowance,
+  ]);
 
   // ─── Derived session state ───
   const session = sessionData
@@ -257,6 +293,72 @@ export default function Mode3Dashboard() {
         {address && sessionId != null && !isWoman && !hasEnoughFund && !session?.resolved && (
           <div className="mt-4 rounded-3xl border border-amber-500/30 p-4 bg-amber-500/10 text-amber-200 text-sm">
             {t("dashboard.mode3.fundNotice")}
+          </div>
+        )}
+
+        {/* ─── Deposit to EvolveFund (Postcopulation, fixed 1 birth rose) ─── */}
+        {address && !isWoman && !hasEnoughFund && !session?.resolved && (
+          <div className="mt-4 rounded-3xl border border-slate-600 bg-slate-900 p-4 space-y-3">
+            <p className="text-sm text-gray-300 font-medium">
+              {t("dashboard.mode3.deposit.prompt")}
+            </p>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <input
+                type="number"
+                min={15}
+                step={1}
+                value={depositAmount}
+                onChange={(e) => setDepositAmount(e.target.value)}
+                placeholder={t("dashboard.mode2.step0.amountPlaceholder")}
+                className="flex-1 rounded-2xl bg-slate-800 border border-slate-600 px-4 py-3 text-white placeholder-gray-500 text-sm"
+              />
+              <button
+                onClick={() => {
+                  if (!address) return;
+                  if (needsApproval) {
+                    setDepositStep("approving");
+                    writeContract({
+                      address: EVOLVE_ADDRESS,
+                      abi: EVOLVEABI,
+                      functionName: "approve",
+                      args: [FUND_ADDRESS, totalNeededWei],
+                    });
+                  } else {
+                    setDepositStep("depositing");
+                    writeContract({
+                      address: FUND_ADDRESS,
+                      abi: EvolveFundABI,
+                      functionName: "depositWithRoses",
+                      args: [depositAmountWei, BigInt(MIN_DURATION), 1, 1n], // Postcopulation + exactly 1 rose
+                    });
+                  }
+                }}
+                disabled={!canDeposit}
+                title={!canDeposit ? t("dashboard.mode2.step0.minDeposit") : undefined}
+                className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-semibold disabled:cursor-not-allowed disabled:bg-slate-600"
+              >
+                {hasPendingTx
+                  ? depositStep === "approving"
+                    ? t("dashboard.mode2.step0.approving")
+                    : t("dashboard.mode2.step0.depositing")
+                  : needsApproval
+                    ? t("dashboard.mode2.step0.approveAction")
+                    : t("dashboard.mode2.step0.depositAction")}
+              </button>
+            </div>
+
+            {/* Birth roses: fixed 1 rose in this mode — no increase allowed */}
+            <div className="rounded-2xl border border-rose-500/30 bg-rose-500/5 p-3 space-y-1">
+              <p className="text-sm font-semibold text-rose-200">🌹 {t("dashboard.roses.title")}</p>
+              <p className="text-sm text-gray-300">{t("dashboard.roses.fixed")}</p>
+              <p className="text-xs text-gray-400">
+                {t("dashboard.roses.total", {
+                  total: (parseFloat(depositAmount || "0") || 0) + 1,
+                })}
+              </p>
+            </div>
+
+            <p className="text-xs text-gray-500">{t("dashboard.mode2.step0.lockHint")}</p>
           </div>
         )}
 

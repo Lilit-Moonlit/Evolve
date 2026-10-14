@@ -885,7 +885,19 @@
       "error": {
         "rejected": "Transaction rejetée par l'utilisateur.",
         "failed": "Erreur de transaction : {{message}}"
+      },
+      "deposit": {
+        "prompt": "Une mise active est requise pour participer (min 15 EVOLVE, verrouillée 30+ jours), de type « Postcopulation », + 1 rose de naissance fixe."
       }
+    },
+    "roses": {
+      "title": "Roses de naissance",
+      "hint": "1 EVOLVE = 1 rose prélevée sur votre dépôt EvolveFund. Les roses sont offertes à la mère uniquement après confirmation de la paternité, en même temps que la mise. Si la paternité n'est pas confirmée, les EVOLVE vous sont restitués.",
+      "cost": "Coût des roses : {{count}} EVOLVE",
+      "total": "Total à transférer : {{total}} EVOLVE",
+      "fixed": "1 rose 🌹 (1 EVOLVE) — fixe pour ce mode",
+      "escrowed": "En réserve : {{count}} 🌹",
+      "withdraw": "Récupérer {{count}} 🌹 ({{amount}} EVOLVE)"
     }
   },
   "safety": {
@@ -1235,6 +1247,7 @@
     "groupType": {
       "public": "Public",
       "closed": "Fermé"
-    }
+    },
+    "otherRegion": "Autres"
   }
 }

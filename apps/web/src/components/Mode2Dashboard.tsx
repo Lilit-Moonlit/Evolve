@@ -34,6 +34,7 @@ export default function Mode2Dashboard() {
 
   // ─── EvolveFund deposit input ───
   const [depositAmount, setDepositAmount] = useState("");
+  const [roseCount, setRoseCount] = useState(1); // default: 1 rose (1 EVOLVE)
   const [depositStep, setDepositStep] = useState<"idle" | "approving" | "depositing">("idle");
 
   // ─── Contract writes ───
@@ -69,6 +70,16 @@ export default function Mode2Dashboard() {
     query: { enabled: !!address },
   });
 
+  // ─── EvolveFund: read birth-rose escrow ───
+  const { data: roseEscrowData, refetch: refetchRoses } = useReadContract({
+    address: FUND_ADDRESS,
+    abi: EvolveFundABI,
+    functionName: "roseEscrow",
+    args: address ? [address] : undefined,
+    query: { enabled: !!address },
+  });
+  const roseEscrowCount = roseEscrowData ? Number(roseEscrowData) : 0;
+
   // ─── Read user's bond IDs ───
   const { data: userBondIds, refetch: refetchUserBonds } = useReadContract({
     address: BOND_MANAGER_ADDRESS,
@@ -97,8 +108,9 @@ export default function Mode2Dashboard() {
       refetchBond();
       refetchFund();
       refetchAllowance();
+      refetchRoses();
     }
-  }, [isConfirmed, refetchUserBonds, refetchBond, refetchFund, refetchAllowance]);
+  }, [isConfirmed, refetchUserBonds, refetchBond, refetchFund, refetchAllowance, refetchRoses]);
 
   // ─── Derived state from contract ───
   const bond = bondData
@@ -140,8 +152,12 @@ export default function Mode2Dashboard() {
   const depositAmountWei = depositAmount
     ? BigInt(Math.floor(parseFloat(depositAmount) * 1e18))
     : 0n;
+  // Birth roses: 1 EVOLVE per rose, escrowed on top of the stake
+  const ROSE_WEI = 10n ** 18n;
+  const roseCostWei = BigInt(roseCount) * ROSE_WEI;
+  const totalNeededWei = depositAmountWei + roseCostWei;
   const needsApproval =
-    depositAmountWei > 0n && (!allowance || (allowance as bigint) < depositAmountWei);
+    totalNeededWei > 0n && (!allowance || (allowance as bigint) < totalNeededWei);
   const canDeposit = depositAmountWei >= MIN_DEPOSIT && !needsApproval && !hasPendingTx;
 
   // ─── Time-based pregnancy report eligibility ───
@@ -340,15 +356,15 @@ export default function Mode2Dashboard() {
                       address: EVOLVE_ADDRESS,
                       abi: EVOLVEABI,
                       functionName: "approve",
-                      args: [FUND_ADDRESS, depositAmountWei],
+                      args: [FUND_ADDRESS, totalNeededWei],
                     });
                   } else {
                     setDepositStep("depositing");
                     writeContract({
                       address: FUND_ADDRESS,
                       abi: EvolveFundABI,
-                      functionName: "deposit",
-                      args: [depositAmountWei, BigInt(MIN_DURATION)],
+                      functionName: "depositWithRoses",
+                      args: [depositAmountWei, BigInt(MIN_DURATION), 0, BigInt(roseCount)],
                     });
                   }
                 }}
@@ -365,7 +381,69 @@ export default function Mode2Dashboard() {
                     : t("dashboard.mode2.step0.depositAction")}
               </button>
             </div>
+
+            {/* ─── Birth roses: 1 EVOLVE = 1 rose, default 1, adjustable ─── */}
+            <div className="rounded-2xl border border-rose-500/30 bg-rose-500/5 p-3 space-y-2">
+              <p className="text-sm font-semibold text-rose-200">🌹 {t("dashboard.roses.title")}</p>
+              <p className="text-xs text-gray-400">{t("dashboard.roses.hint")}</p>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setRoseCount((n) => Math.max(1, n - 1))}
+                  disabled={roseCount <= 1}
+                  className="h-9 w-9 rounded-full bg-slate-700 hover:bg-slate-600 text-white text-lg font-bold disabled:cursor-not-allowed disabled:bg-slate-800 disabled:text-gray-600"
+                  aria-label="decrease roses"
+                >
+                  −
+                </button>
+                <span className="min-w-16 text-center text-lg font-semibold text-white">
+                  {roseCount} 🌹
+                </span>
+                <button
+                  onClick={() => setRoseCount((n) => n + 1)}
+                  className="h-9 w-9 rounded-full bg-slate-700 hover:bg-slate-600 text-white text-lg font-bold"
+                  aria-label="increase roses"
+                >
+                  +
+                </button>
+                <span className="ml-auto text-sm text-gray-300">
+                  {t("dashboard.roses.cost", { count: roseCount })}
+                </span>
+              </div>
+              <p className="text-xs text-gray-400">
+                {t("dashboard.roses.total", {
+                  total: (parseFloat(depositAmount || "0") || 0) + roseCount,
+                })}
+              </p>
+            </div>
+
             <p className="text-xs text-gray-500">{t("dashboard.mode2.step0.lockHint")}</p>
+          </div>
+        )}
+
+        {/* ─── Birth-rose escrow status + reclaim ─── */}
+        {roseEscrowCount > 0 && (
+          <div className="mt-4 rounded-3xl border border-slate-600 bg-slate-900 p-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-gray-300">
+              {t("dashboard.roses.escrowed", { count: roseEscrowCount })}{" "}
+              <span className="text-gray-500">({t("dashboard.roses.hint")})</span>
+            </p>
+            <button
+              onClick={() => {
+                writeContract({
+                  address: FUND_ADDRESS,
+                  abi: EvolveFundABI,
+                  functionName: "withdrawRoseEscrow",
+                });
+              }}
+              disabled={hasPendingTx || fundIsLocked}
+              title={fundIsLocked ? t("dashboard.mode2.step0.locked") : undefined}
+              className="sm:w-auto px-5 py-2.5 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white text-sm font-semibold disabled:cursor-not-allowed disabled:bg-slate-600"
+            >
+              {t("dashboard.roses.withdraw", {
+                count: roseEscrowCount,
+                amount: roseEscrowCount,
+              })}
+            </button>
           </div>
         )}
       </section>

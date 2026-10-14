@@ -882,7 +882,19 @@
         "noProfile": "No profile"
       },
       "joinButton": "Join session",
-      "waitingForParticipants": "Your session is active — waiting for participants"
+      "waitingForParticipants": "Your session is active — waiting for participants",
+      "deposit": {
+        "prompt": "Для участия нужен активный депозит (мин 15 EVOLVE, блокировка 30+ дней) типа «Посткопуляция» + 1 фиксированная роза за рождение ребёнка."
+      }
+    },
+    "roses": {
+      "title": "Розы за рождение ребёнка",
+      "hint": "1 EVOLVE = 1 роза из вашего депозита EvolveFund. Розы даруются матери только после подтверждения отцовства — одновременно со стейком. Если отцовство не подтверждено, EVOLVE возвращается вам.",
+      "cost": "Стоимость роз: {{count}} EVOLVE",
+      "total": "Всего к переводу: {{total}} EVOLVE",
+      "fixed": "1 роза 🌹 (1 EVOLVE) — фиксировано для этого режима",
+      "escrowed": "В резерве: {{count}} 🌹",
+      "withdraw": "Вернуть {{count}} 🌹 ({{amount}} EVOLVE)"
     }
   },
   "companion": {
@@ -1123,6 +1135,7 @@
     "groupType": {
       "public": "Общедоступная",
       "closed": "Закрытая"
-    }
+    },
+    "otherRegion": "Другие"
   }
 }

@@ -889,7 +889,19 @@
       "error": {
         "rejected": "Giao dịch bị người dùng từ chối.",
         "failed": "Lỗi giao dịch: {{message}}"
+      },
+      "deposit": {
+        "prompt": "Để tham gia cần khoản gửi hoạt động (tối thiểu 15 EVOLVE, khóa 30+ ngày) loại «Hậu giao hợp» + 1 hoa hồng chào đời cố định."
       }
+    },
+    "roses": {
+      "title": "Hoa hồng chào đời",
+      "hint": "1 EVOLVE = 1 hoa hồng từ khoản gửi EvolveFund của bạn. Hoa hồng chỉ được tặng cho người mẹ sau khi xác nhận cha, cùng với tiền đặt cọc. Nếu cha không được xác nhận, EVOLVE được hoàn lại cho bạn.",
+      "cost": "Chi phí hoa hồng: {{count}} EVOLVE",
+      "total": "Tổng chuyển: {{total}} EVOLVE",
+      "fixed": "1 hoa hồng 🌹 (1 EVOLVE) — cố định cho chế độ này",
+      "escrowed": "Đang giữ: {{count}} 🌹",
+      "withdraw": "Nhận lại {{count}} 🌹 ({{amount}} EVOLVE)"
     }
   },
   "safety": {
@@ -1244,6 +1256,7 @@
     "groupType": {
       "public": "Công khai",
       "closed": "Kín"
-    }
+    },
+    "otherRegion": "Khác"
   }
 }
