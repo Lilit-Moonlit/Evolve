@@ -349,6 +349,8 @@ User A votes for User B
 Woman creates bond → Man stakes ≥ 100 EVOLVE → Both confirm → Stake locked
   → Woman reports pregnancy (14-270 days) → Admin confirms paternity
   → Man's stake transfers to Woman
+  → Birth roses: man's escrowed roses (from depositWithRoses) gifted to the mother
+    (NOT gifted if paternity unconfirmed — man reclaims via withdrawRoseEscrow)
 ```
 
 ### Mode 3: Cryptic Choice
@@ -357,6 +359,8 @@ Woman creates bond → Man stakes ≥ 100 EVOLVE → Both confirm → Stake lock
 Woman creates session → Men join (stake ≥ 100 EVOLVE) → Confirm → Stakes locked
   → 48h window → Woman chooses father
   → Father: stake returned | Others: 90% to Woman, 10% to Father
+  → Birth roses: chosen father's escrowed roses gifted to the mother;
+    non-fathers reclaim theirs via withdrawRoseEscrow (see §33)
 ```
 
 ---
@@ -799,8 +803,11 @@ cd apps/web && npx tsc --noEmit   # ignore db.ts:270
 | 52 | P2P package hardening + NIP-29 groups + reference city relay (parallel agent B) | ✅ **Done** (p2p 152/152 tests PASS, tsc clean; modules audited — none were stubs; backwards-compatible exports only) | `packages/p2p/src/city-tagging.ts`+test (17), `nostr-client.ts` (+NIP-29 createGroup/join/approve/leave/publishGroupMessage/fetch\*), `nostr-client-groups.test.ts` (11), `index.ts` (+city-tagging export), `packages/p2p/relay/` (docker-compose city relay + README, port 7000) | sisyphus-wave-b |
 | 53 | Local chat → Nostr relay transport (parallel agent C) | ✅ **Done** (local-chat-nostr tests PASS with local-chat suite; LocalChat UX/props unchanged; Nostr primary → HTTP/WS fallback; syntax slip at LocalChat.tsx:249 fixed during integration) | `apps/web/src/lib/local-chat-nostr.ts` (NEW — SimplePool transport, NIP-29 kinds 9000-9022/39000-39002, NIP-44 closed groups, `VITE_NOSTR_CITY_RELAY_URL` env) + `__tests__/local-chat-nostr.test.ts`, `apps/web/src/components/LocalChat.tsx` (data layer Nostr-first, fallback preserved) | sisyphus-wave-c |
 | 54 | P2P 1:1 chat activation + city-relay local chat (libp2p@3 migration + relay runners) | ✅ **Done** (p2p **165/165** tests PASS; web `tsc` EXIT 0; web build GREEN — libp2p bundled into lazy chunk; `npm run verify:p2p` two-peer gossipsub roundtrip via relay with **no HTTP API**; `npm run verify:localchat` city message + NIP-29 group flow via Nostr relay; NIP-07 signer gap documented) | `packages/p2p/package.json` (pinned `libp2p@3.3.12` + `@libp2p/gossipsub@17` set; `relay`/`relay:nostr`/`verify:p2p`/`verify:localchat` scripts), `src/libp2p-node.ts`+test (libp2p@3 rewrite — `connectionEncrypters`/`yamux`/`message` event, browser-pure), `src/chat-manager.ts`+test (multi-subscriber `onMessage` Set, `connect`/`getMultiaddrs`/`getPeerId`), `src/browser.ts` (dial-only), `src/relay-node.ts` (NEW — WS gossipsub relay), `scripts/run-relay.ts` (deterministic peer id), `scripts/verify-roundtrip.ts` + `scripts/verify-localchat-nostr.ts`, `relay/nostr/` (NEW — minimal NIP-01 relay, Docker-unavailable alternative), `apps/web/src/lib/chat-transport.ts` (static `import("@evolve/p2p")`), `apps/web/package.json` (+`@evolve/p2p`), `apps/web/.env` + `render.yaml` (env wiring), `AGENTS.md` §30 note | sisyphus |
+| 55 | Комунікації: прибрано глобус+місто з сайдбару «Чати» + групування міст за областю (region-grouped city picker) | ✅ **Done** (web `tsc` EXIT 0; **520/520 tests PASS / 47 files**; build GREEN 6m44s; 34 locales valid; prettier clean) | `apps/web/src/pages/Chat.tsx` (прибрано pinned 🌍+city entry із сайдбару — лишився заголовок «Чати» + приватні чати), `apps/web/src/lib/locations.ts` (`RegionGroup`/`UA_REGION_CAPITALS` (26)/`buildRegionGroups`/`orderCitiesInRegion`/`regionsFor`; `loadLocationIndex` + `State`), `apps/web/src/lib/__tests__/locations-regions.test.ts` (23), `apps/web/src/components/CityRegionSelect.tsx` + `__tests__/CityRegionSelect.test.tsx` (14) — collapsible region-grouped dropdown (bold region headers, indented cities, capital-first), `apps/web/src/components/LocalChat.tsx` (flat city `<select>` → `<CityRegionSelect>`), `apps/web/src/pages/Chat.test.tsx` (оновлено), `apps/web/src/test/setup.ts` (+`State` mock), `apps/web/scripts/add-cityregion-locales.mjs` (`localChat.otherRegion` ×34) | sisyphus |
+| 56 | Birth Roses (народження дитини → троянди з EvolveFund) | ✅ **Done** (hardhat **273 PASS** / 15 files incl. BirthRoses.test.js 12 + 3 updated giftTo; `tsc --noEmit` EXIT 0; `deploy:local` GREEN; 34 locales VALID) | `EvolveFund.sol` (`ROSE_PRICE`/`roseEscrow`/`depositWithRoses`/`giftEscrowedRoses`/`withdrawRoseEscrow`/`setEvolve2Earn`), `Evolve2Earn.sol` (`giftToBatch` + recipient-exclusion у `giftTo` + `_distributeEmojiRevenue(amount,total,excluded)`), `BondManager.sol` (дарування в `submitPaternityResult`/`resolveSession` + `BirthRosesGifted`), `ignition/modules/index.js` (`setEvolve2Earn` wiring) + `LiquidityLocker.js` (ESM fix) + 2 params-файли (`unlockTime` → 1900000000), `test/BirthRoses.test.js` (NEW 12) + `test/Evolve2EarnGiftTo.test.js` (3), `apps/web/src/lib/abi/EvolveFundABI.ts` (`deposit` 3-арг fix + нові), `Mode2Dashboard.tsx` (лічильник троянд + escrow/повернення), `Mode3Dashboard.tsx` (PostCopulation deposit, фіксована 1 троянда), `scripts/add-birthroses-locales.mjs` (34 локалі) | sisyphus |
+| 57 | Birth Roses: Sepolia redeploy + mobile UI | ✅ **Done** (redeploy executed + Etherscan-verified on-chain; web `tsc` EXIT 0; mobile tsc — **0 errors in mode2/mode3** (18 pre-existing в auth/index/profile/settings/media); 33 mobile locales VALID; prettier clean) | `packages/contracts/script/redeploy-birthroses.mjs` (NEW — EvolveFund+Evolve2Earn+BondManager + `importGiftState` (totalGifts=2) + `transferToNewPool` (99M) + wiring; верифіковано на Etherscan), `apps/web/src/lib/addresses.ts` (нові адреси 2026-10-14: EvolveFund `0xDC2882…`, Evolve2Earn `0xf1aFc4…`, BondManager `0x28016f…`), `apps/mobile/app/mode2.tsx` (лічильник троянд + escrow/withdraw — імпортує web ABI/адреси напряму), `apps/mobile/app/mode3.tsx` (PostCopulation deposit форма з фіксованою 1 трояндою + `getPostCopulationStake`), `apps/mobile/scripts/add-mobile-birthroses-locales.mjs` (NEW — web→mobile sync `dashboard.roses.*` + `dashboard.mode3.deposit.*`, 33 локалі) | sisyphus |
 
-### Deployed Addresses — Ethereum Sepolia (2026-08-21, Mode3-rewards redeploy 2026-09-05)
+### Deployed Addresses — Ethereum Sepolia (2026-08-21, Mode3-rewards redeploy 2026-09-05, Birth-Roses redeploy 2026-10-14)
 
 | Contract             | Address                                      |
 | -------------------- | -------------------------------------------- |
@@ -809,10 +816,10 @@ cd apps/web && npx tsc --noEmit   # ignore db.ts:270
 | DNAVerification      | `0x2d6d770F7e5a8C10dC2B103B4f3Cb0e046Db649f` |
 | VerificationRegistry | `0x42E919C0f3218FE89AFB34B9f04d71d2cB02A189` |
 | TrustScore           | `0x0Cb18aa859f4A625aD3e8dE5958E577dfD9FEeB9` |
-| Evolve2Earn          | `0x585f12427d1133b7c00F6D6fdC0B2b8FF55adEa8` |
-| EvolveFund           | `0x016F6D873ed4B366098f9BE5C042ef583DC66DeE` |
+| Evolve2Earn          | `0xf1aFc44B7C65816E1eD05f3bd6194DA5d75b2f12` |
+| EvolveFund           | `0xDC2882cB5e5939Ed456c462b53174173345B8268` |
 | Governance           | `0x8f95C852114e0C01B3D722EA9653F5b3e4460000` |
-| BondManager          | `0x650FC8033286112Fc0369Da9A1337D856FF7795f` |
+| BondManager          | `0x28016f5e780E2D8bEbaD9B85C18708e1e8aF069e` |
 
 Post-deploy wiring: `EvolveFund.setBondManager()`, `VerificationRegistry.setDNAVerification()`, `TrustScore.setVotingContract()`, `EVOLVE.mint(Evolve2Earn, 100M)` (2026-09-05: 99M → new Evolve2Earn reward pool, 1M stays in legacy `0x0bbEee8…` p2p escrow vault).
 
@@ -1001,7 +1008,7 @@ cd apps/web ; npx tsc --noEmit   # ignore db.ts:270
 
 ## 30. Local Chat (Місцевий чат) — city-scoped group chat
 
-> **Feature**: The Communications page is a messenger (Telegram/Viber/WhatsApp-style): the "Головна" tab was removed; the sidebar is a pinned "Місцевий чат" entry plus private conversations. The local chat is a message stream scoped to one city (canonical `Country::City` key) and one thematic group. Users with the same selected city can write there; any user can create a public or closed thematic group and become its admin. The city and group are chosen with two/three dropdown selects (like the language selector). The city defaults to the user's residence city (adopted once the async profile loads); the chat city is persisted independently in localStorage, so it can differ from the residence city.
+> **Feature**: The Communications page is a messenger (Telegram/Viber/WhatsApp-style): the "Головна" tab was removed; the sidebar shows only the "Чати" heading plus private conversations (the local chat is the landing view, not a sidebar entry — the old pinned 🌍+city entry was removed). The local chat is a message stream scoped to one city (canonical `Country::City` key) and one thematic group. Users with the same selected city can write there; any user can create a public or closed thematic group and become its admin. The city and group are chosen with two/three dropdown selects (like the language selector). The city defaults to the user's residence city (adopted once the async profile loads); the chat city is persisted independently in localStorage, so it can differ from the residence city.
 
 ### Data model
 
@@ -1017,8 +1024,8 @@ cd apps/web ; npx tsc --noEmit   # ignore db.ts:270
 - `apps/web/src/lib/apiServer.ts` — `--- 5b. LOCAL CHAT ENDPOINTS ---`: `GET/POST /api/localchat` (POST session-required + closed-group access check + live `broadcastToChannel`), `GET/POST /api/localchat/groups`, `POST /api/localchat/groups/join`, `POST /api/localchat/groups/resolve` (admin-only). WS: `join_local` message type → channel `local:<cityKey>:<groupId>`, history on join, closed-group membership check; 1:1 `message` branch guarded with `!channelId.startsWith("local:")`.
 - `apps/web/src/lib/db.ts` — `localChatMessages`/`localChatGroups` fallback collections + 7 `dbService` methods (`getLocalChatMessages`, `createLocalChatMessage`, `getLocalChatGroups`, `getLocalChatGroupById`, `createLocalChatGroup`, `requestJoinLocalChatGroup`, `resolveJoinLocalChatGroup`) via the `runWithDb` dual-path pattern; `deserializeLocalChatGroup` normalizes members/pending (JSON strings in Prisma → arrays).
 - `apps/web/prisma/schema.prisma` — `LocalChatMessage` + `LocalChatGroup` (members/pending as serialized JSON strings).
-- `apps/web/src/pages/Chat.tsx` — removed `Tab` type + "Головна" tab; `localChatActive` (default true) + lifted `localChatSel` (persisted `evolve_local_chat_sel`); pinned local-chat sidebar entry; residence-city adoption effect.
-- `apps/web/src/components/LocalChat.tsx` — centered country/city/group selects, create-group inline form, closed-group join flow, admin pending-requests panel, WS live updates (`join_local`), message bubbles (own right/blue, others left/gray with sender name), timestamps.
+- `apps/web/src/pages/Chat.tsx` — removed `Tab` type + "Головна" tab + the pinned 🌍+city sidebar entry (sidebar = "Чати" heading + private conversations only); `localChatActive` (default true) + lifted `localChatSel` (persisted `evolve_local_chat_sel`); residence-city adoption effect.
+- `apps/web/src/components/LocalChat.tsx` — centered country / region-grouped-city (`CityRegionSelect`) / group selects, create-group inline form, closed-group join flow, admin pending-requests panel, WS live updates (`join_local`), message bubbles (own right/blue, others left/gray with sender name), timestamps.
 - `apps/web/src/lib/useWebSocket.ts` — idle guard: skip connect when no `targetUserId` (prevents invalid-join reconnect loop while the local chat is active).
 - `apps/web/scripts/add-localchat-locales.mjs` — 27 `localChat.*` keys × 34 locales (Tier-1 natural incl. zh-TW, English fallback).
 
@@ -1032,14 +1039,25 @@ cd apps/web ; npx tsc --noEmit   # ignore db.ts:270
 - `useWebSocket.ts` — receive is **P2P-first** (`chat-transport.subscribe`); WebSocket is retained as a fallback for typing + legacy delivery. `Chat.tsx` inbound path uses `appendIncomingMessage` (send-side ownership stays in `AppContext`).
 - **P2P runtime ACTIVE (2026-10-11)**: `defaultP2pBridgeFactory` now uses a STATIC `import("@evolve/p2p")` (was a computed `/* @vite-ignore */` specifier), and `@evolve/p2p` is a declared dependency of `apps/web`. The dependency tree was migrated from `libp2p@0.46` to a coherent `libp2p@3.3.12` set (`@libp2p/gossipsub@17`, `@libp2p/websockets@10`, `@libp2p/noise@17`, `@libp2p/yamux@8`, `@libp2p/identify@4`, `@libp2p/ping@3`, `@libp2p/bootstrap@12`, `@libp2p/peer-id@6`). Browsers are dial-only (empty `listenAddresses`) and connect through a WebSocket gossipsub relay (`packages/p2p` → `npm run relay`; bootstrap via `VITE_P2P_BOOTSTRAP_PEERS`). `ChatManager` now exposes `connect`/`getMultiaddrs`/`getPeerId` and supports multiple `onMessage` subscribers. Nostr NIP-04 DMs remain OFF (`useNostr: false` — userIds are not pubkeys). Verify with `npm run verify:p2p` (two-peer gossipsub roundtrip, no HTTP API).
 
+### Region-grouped city picker (область)
+
+> The local-chat city picker was a flat `<select>` of every city in a country (Ukraine has 1803). It is now a collapsible, region-grouped dropdown: bold region (state/область) headers, cities indented beneath each region, ordered capital-first then alphabetically.
+
+- `apps/web/src/lib/locations.ts` — `RegionGroup` (`{ name, cities }`), `regionsFor(country)`, `buildRegionGroups(states, cities)`, `orderCitiesInRegion(regionName, cityNames)`, `UA_REGION_CAPITALS` (26 verified entries — covers renamed/mismatched Ukrainian capitals: `Dnipro`, `Kropyvnytskyi`, `Lutsk`, `Uzhgorod`, `Mykolayiv`, `Zaporizhia`, `Bila Tserkva`, …). `loadLocationIndex` now also imports `State` from `country-state-city` (state.json is tiny; the lazy geo chunk is otherwise unchanged). Cities with a missing/unresolvable `stateCode` land in a trailing "Other" group (`name: ""`).
+- `apps/web/src/lib/__tests__/locations-regions.test.ts` — 23 tests (grouping, UA override capital-first, bidirectional prefix, alphabetical fallback, "Other" group, empty-states → `[]`, 2-arg `buildLocationIndex` backward-compat).
+- `apps/web/src/components/CityRegionSelect.tsx` + `__tests__/CityRegionSelect.test.tsx` (14) — presentational collapsible dropdown (`value`/`regionGroups`/`cityOptions`/`placeholder`/`otherRegionLabel`/`disabled`/`onChange`); bold region headers (`aria-expanded`), indented cities (`pl-6`), auto-expand the region containing `value`, Escape + outside-click close, flat `cityOptions` fallback when `regionGroups` is empty, legacy free-text `value` preserved in the trigger. No i18n imports, no data imports.
+- `apps/web/src/components/LocalChat.tsx` — flat city `<select>` replaced by `<CityRegionSelect>`; `regionGroups = locations.regionsFor(country)`.
+- `apps/web/scripts/add-cityregion-locales.mjs` — `localChat.otherRegion` × 34 locales (idempotent, Tier-1 natural).
+- `apps/web/src/test/setup.ts` — the global `country-state-city` mock now also exports `State` (required after `loadLocationIndex` started destructuring it).
+
 ### i18n keys
 
-`localChat.*` — `title`, `country`, `city`, `group`, `selectCity`, `groups.{all,dating,conception,polyandrous}`, `noMessages`, `inputPlaceholder`, `loadingCities`, `createGroup`, `groupName`, `groupNameExists`, `groupType.{public,closed}`, `create`, `cancel`, `closedGroup`, `requestJoin`, `pendingApproval`, `admin`, `pendingMembers`, `approve`, `decline`, `typing` — all 34 locales.
+`localChat.*` — `title`, `country`, `city`, `group`, `selectCity`, `otherRegion`, `groups.{all,dating,conception,polyandrous}`, `noMessages`, `inputPlaceholder`, `loadingCities`, `createGroup`, `groupName`, `groupNameExists`, `groupType.{public,closed}`, `create`, `cancel`, `closedGroup`, `requestJoin`, `pendingApproval`, `admin`, `pendingMembers`, `approve`, `decline`, `typing` — all 34 locales.
 
 ### NEVER CHANGE WITHOUT RUNNING TESTS
 
 ```bash
-cd apps/web && npx vitest run src/lib/__tests__/local-chat.test.ts src/lib/__tests__/locations.test.ts src/pages/Chat.test.tsx --pool=threads
+cd apps/web && npx vitest run src/lib/__tests__/local-chat.test.ts src/lib/__tests__/locations.test.ts src/lib/__tests__/locations-regions.test.ts src/components/__tests__/CityRegionSelect.test.tsx src/pages/Chat.test.tsx --pool=threads
 cd apps/web && npx tsc --noEmit   # ignore db.ts:270
 ```
 
@@ -1062,6 +1080,40 @@ cd apps/web && npx tsc --noEmit   # ignore db.ts:270
 - **MUST NOT** introduce EVOLVE (or any token) as payment for infrastructure (relays, hosting, bandwidth). Infrastructure is free-by-design + donations; the token stays for governance/stakes/gifts.
 - **MUST NOT** add a new centralized store for user content — owner-pinned IPFS/Arweave first, server copy as a mirror only.
 - **Chat migration targets**: 1:1 chat → wire the existing `packages/p2p` (`chat-manager` gossipsub + `direct-messaging` + `call-manager` WebRTC) as the default; `Місцевий чат` (currently server `join_local` WS, §30) → city-scoped Nostr relays (kind-1 city-tagged events, NIP-29 groups for closed-group/admin-approval).
+
+## 33. Birth Roses (винагорода за народження дитини)
+
+> **Feature**: 1 EVOLVE з депозиту EvolveFund чоловіка витрачається на подарункову троянду (та сама логіка розподілу Evolve2Earn). Троянди даруються матері **лише після підтвердження батьківства**, одночасно зі стейком; якщо батьківство не підтверджено — EVOLVE повертається чоловікові.
+
+### Семантика
+
+- **Mode 2 (Зачаття)**: `depositWithRoses` → за замовчуванням 1 троянда (1 EVOLVE) з депозиту; чоловік може збільшити кількість кнопкою «+» (1 EVOLVE = 1 троянда). На `submitPaternityResult(true)` **весь** escrow троянд чоловіка дарується матері.
+- **Mode 3 (Поліандрічне зачаття)**: фіксовано 1 троянда (без можливості збільшити). На `resolveSession(father≠0)` escrow обраного батька дарується жінці; не-батьки забирають свій escrow через `withdrawRoseEscrow()`.
+- **Не дарується** при `submitPaternityResult(false)` або `resolveSession(ZeroAddress)` — escrow лишається, чоловік повертає EVOLVE після `unlockStake`.
+
+### Правило розподілу (уточнене)
+
+Власниця троянд отримує частку **лише коли троянду дарують іншій людині**, пропорційно до всіх власників. Отримувач подарунка **виключається** з розподілу свого ж подарунка — `Evolve2Earn.giftTo` тепер виключає і платника, і отримувача (`_distributeEmojiRevenue(amount, currentTotal, excludedRecipient)`); незатребувана частка повертається платнику як dust.
+
+### Ключові файли
+
+- `packages/contracts/src/EvolveFund.sol` — `ROSE_PRICE`, `roseEscrow`, `depositWithRoses()`, `giftEscrowedRoses()` (onlyBondManager), `withdrawRoseEscrow()`, `setEvolve2Earn()`
+- `packages/contracts/src/Evolve2Earn.sol` — `giftToBatch(to, count)`, рефактор `_distributeEmojiRevenue`, recipient-exclusion у `giftTo`
+- `packages/contracts/src/BondManager.sol` — дарування в `submitPaternityResult` / `resolveSession`, `event BirthRosesGifted`
+- `apps/web/src/components/Mode2Dashboard.tsx` — лічильник троянд + статус escrow + кнопка повернення
+- `apps/web/src/components/Mode3Dashboard.tsx` — форма депозиту PostCopulation (фіксована 1 троянда)
+- `apps/web/src/lib/abi/EvolveFundABI.ts` — актуалізовано (`deposit` 3-арг, `depositWithRoses`, `roseEscrow`, `withdrawRoseEscrow`, …)
+- `apps/web/scripts/add-birthroses-locales.mjs` — `dashboard.roses.*` + `dashboard.mode3.deposit.*` (34 локалі)
+- Ignition: `index.js` вірить `evolveFund.setEvolve2Earn(evolve2Earn)`
+
+### NEVER CHANGE WITHOUT RUNNING TESTS
+
+```bash
+cd packages/contracts && npx hardhat test test/BirthRoses.test.js test/Evolve2EarnGiftTo.test.js
+cd apps/web && npx tsc --noEmit   # ignore db.ts:270
+```
+
+> **Redeployed 2026-10-14** via `script/redeploy-birthroses.mjs` — EvolveFund `0xDC2882cB5e5939Ed456c462b53174173345B8268`, Evolve2Earn `0xf1aFc44B7C65816E1eD05f3bd6194DA5d75b2f12`, BondManager `0x28016f5e780E2D8bEbaD9B85C18708e1e8aF069e`; gift registry мігровано (`importGiftState`, totalGifts=2), 99M пул перенесено (`transferToNewPool`), всі три верифіковані на Etherscan; `apps/web/src/lib/addresses.ts` оновлено. Старі контракти залишено як legacy.
 
 ### Agent Instructions for New Session
 
