@@ -89,8 +89,12 @@ describe("Evolve2Earn giftTo (user-to-user gifts)", function () {
       expect(await evolve2Earn.totalGifts()).to.equal(3n);
       expect(await evolve2Earn.getOwnerMarketShare(user3.address)).to.equal((2n * ONE) / 3n);
       expect(await evolve2Earn.getOwnerMarketShare(user1.address)).to.equal(ONE / 3n);
-      // Payer excluded from their own distribution; user2Before is captured AFTER the first gift, so only this second gift is deducted.
-      expect(await token.balanceOf(user2.address)).to.equal(user2Before - ONE);
+      // Payer excluded from their own distribution; recipient user3 is a prior
+      // owner but ALSO excluded (she earns only from gifts to OTHER people):
+      // only user1 is paid (1 of 2 = 0.5), the remaining 0.5 returns as dust.
+      // user2Before is captured AFTER the first gift, so only this second
+      // gift is deducted: -1 EVOLVE + 0.5 dust back.
+      expect(await token.balanceOf(user2.address)).to.equal(user2Before - ONE / 2n);
     });
 
     it("Should allow self-claim (to == msg.sender)", async function () {
@@ -163,7 +167,7 @@ describe("Evolve2Earn giftTo (user-to-user gifts)", function () {
       expect(await evolve2Earn.totalGifts()).to.equal(5n);
     });
 
-    it("Should include an already-owner recipient at their PRE-increment share", async function () {
+    it("Should exclude an already-owner recipient from their own gift's distribution", async function () {
       const { evolve2Earn, token, user1, user2, user3 } = await deployFixture();
 
       await evolve2Earn.connect(user1).buyEmojiGift(emojiId("u1-a"));
@@ -177,11 +181,13 @@ describe("Evolve2Earn giftTo (user-to-user gifts)", function () {
 
       await evolve2Earn.connect(user3).giftTo(user1.address);
 
-      // Recipient user1 already owned 3 of 4 gifts -> paid 3/4 share computed
-      // BEFORE their own increment; user2 gets 1/4; payer user3 excluded
-      expect(await token.balanceOf(user1.address)).to.equal(user1Before + 75n * 10n ** 16n);
+      // Recipient user1 already owned 3 of 4 gifts but is EXCLUDED from the
+      // distribution of the gift she receives — an owner earns only when a
+      // rose is gifted to ANOTHER person. Only user2 is paid (1/4 = 0.25);
+      // the unpaid 0.75 share returns to the payer as dust.
+      expect(await token.balanceOf(user1.address)).to.equal(user1Before);
       expect(await token.balanceOf(user2.address)).to.equal(user2Before + 25n * 10n ** 16n);
-      expect(await token.balanceOf(user3.address)).to.equal(user3Before - ONE);
+      expect(await token.balanceOf(user3.address)).to.equal(user3Before - ONE + 75n * 10n ** 16n);
       expect(await evolve2Earn.ownerGiftCount(user1.address)).to.equal(4n);
       expect(await evolve2Earn.totalGifts()).to.equal(5n);
     });
@@ -237,7 +243,7 @@ describe("Evolve2Earn giftTo (user-to-user gifts)", function () {
       expect(await evolve2Earn.giftStateImported()).to.equal(true);
     });
 
-    it("Should set isGiftOwner: giftTo(importedOwner) does not duplicate registry entries and pays exactly one share", async function () {
+    it("Should set isGiftOwner: giftTo(importedOwner) does not duplicate registry entries and pays only the OTHER owner", async function () {
       const { evolve2Earn, token, owner, user1, user2, user3 } = await deployFixture();
 
       await evolve2Earn
@@ -252,11 +258,11 @@ describe("Evolve2Earn giftTo (user-to-user gifts)", function () {
 
       // Registry did NOT grow: imported owner already flagged in isGiftOwner
       expect((await evolve2Earn.getGiftOwners()).length).to.equal(2);
-      // Recipient user1 (already an owner) receives exactly ONE share (1 of 2),
-      // not a doubled payout from a duplicated registry entry
-      expect(await token.balanceOf(user1.address)).to.equal(user1Before + ONE / 2n);
+      // user1 is the RECIPIENT → excluded from the distribution of this gift;
+      // only user2 is paid (1 of 2 = 0.5), the remaining 0.5 is dust → payer
+      expect(await token.balanceOf(user1.address)).to.equal(user1Before);
       expect(await token.balanceOf(user2.address)).to.equal(user2Before + ONE / 2n);
-      expect(await token.balanceOf(user3.address)).to.equal(user3Before - ONE);
+      expect(await token.balanceOf(user3.address)).to.equal(user3Before - ONE + ONE / 2n);
       expect(await evolve2Earn.ownerGiftCount(user1.address)).to.equal(2n);
       expect(await evolve2Earn.totalGifts()).to.equal(3n);
     });

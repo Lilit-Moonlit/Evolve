@@ -5,12 +5,19 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
+interface IEvolve2EarnGift {
+    function giftToBatch(address to, uint256 count) external;
+}
+
 contract EvolveFund is Ownable, ReentrancyGuard {
     IERC20 public immutable evolveToken;
 
     uint256 public constant MIN_DEPOSIT = 15 * 10**18;
     uint256 public constant MIN_DURATION = 30 days;
     uint256 public constant MIN_EXTENSION = 7 days;
+
+    // Birth roses: 1 EVOLVE = 1 rose (matches Evolve2Earn.EMOJI_GIFT_PRICE)
+    uint256 public constant ROSE_PRICE = 1 * 10**18;
 
     // Deposit types: Conception (Зачаття) and PostCopulation (Посткопуляція)
     enum DepositType { Conception, PostCopulation }
@@ -36,7 +43,15 @@ contract EvolveFund is Ownable, ReentrancyGuard {
     // Women's requirements for each mode
     mapping(address => WomanRequirements) public womanRequirements;
 
+    // Birth-rose escrow: EVOLVE held 1:1 (ROSE_PRICE per rose) for the roses
+    // a man adds at deposit time. Escrowed roses are gifted to the mother
+    // ONLY when paternity is confirmed (BondManager triggers it together
+    // with the stake payout); otherwise the man can reclaim the EVOLVE via
+    // withdrawRoseEscrow() once his stake is not locked by a bond.
+    mapping(address => uint256) public roseEscrow;
+
     address public bondManager;
+    address public evolve2Earn;
 
     event Deposited(address indexed user, uint256 amount, uint256 unlockTime, DepositType depositType);
     event Withdrawn(address indexed user, uint256 amount, DepositType depositType);
@@ -46,6 +61,10 @@ contract EvolveFund is Ownable, ReentrancyGuard {
     event StakeTransferred(address indexed from, address indexed to, uint256 amount, DepositType depositType);
     event BondManagerSet(address indexed manager);
     event WomanRequirementsSet(address indexed woman, uint256 conceptionRequired, uint256 postCopulationRequired);
+    event Evolve2EarnSet(address indexed giftContract);
+    event RoseEscrowAdded(address indexed user, uint256 count, uint256 newEscrowTotal);
+    event RoseEscrowGifted(address indexed from, address indexed to, uint256 count);
+    event RoseEscrowWithdrawn(address indexed user, uint256 count);
 
     error BelowMinimum();
     error DurationTooShort();
@@ -57,6 +76,9 @@ contract EvolveFund is Ownable, ReentrancyGuard {
     error InsufficientStake();
     error InvalidDepositType();
     error InsufficientForRequirements();
+    error NoRosesEscrowed();
+    error InsufficientRoses();
+    error Evolve2EarnNotSet();
 
     modifier onlyBondManager() {
         if (msg.sender != bondManager) revert NotBondManager();
@@ -70,6 +92,11 @@ contract EvolveFund is Ownable, ReentrancyGuard {
     function setBondManager(address manager) external onlyOwner {
         bondManager = manager;
         emit BondManagerSet(manager);
+    }
+
+    function setEvolve2Earn(address giftContract) external onlyOwner {
+        evolve2Earn = giftContract;
+        emit Evolve2EarnSet(giftContract);
     }
 
     // Women set their requirements for each mode
@@ -86,8 +113,38 @@ contract EvolveFund is Ownable, ReentrancyGuard {
         if (amount < MIN_DEPOSIT) revert BelowMinimum();
         if (duration < MIN_DURATION) revert DurationTooShort();
 
+        uint256 unlock = _stake(amount, duration, depositType);
+
+        if (!evolveToken.transferFrom(msg.sender, address(this), amount)) revert TransferFailed();
+        emit Deposited(msg.sender, amount, unlock, depositType);
+    }
+
+    /// @notice Deposit + birth-rose escrow in one call: `amount` is staked
+    ///         exactly like deposit(), and additionally `roseCount` EVOLVE
+    ///         (ROSE_PRICE per rose) is escrowed for the birth-rose gift.
+    ///         The escrowed roses are gifted to the mother ONLY when
+    ///         paternity is confirmed (BondManager); if paternity is never
+    ///         confirmed, the man reclaims the EVOLVE via withdrawRoseEscrow().
+    function depositWithRoses(uint256 amount, uint256 duration, DepositType depositType, uint256 roseCount) external nonReentrant {
+        if (amount < MIN_DEPOSIT) revert BelowMinimum();
+        if (duration < MIN_DURATION) revert DurationTooShort();
+
+        uint256 unlock = _stake(amount, duration, depositType);
+
+        uint256 totalPull = amount;
+        if (roseCount > 0) {
+            roseEscrow[msg.sender] += roseCount;
+            totalPull += roseCount * ROSE_PRICE;
+            emit RoseEscrowAdded(msg.sender, roseCount, roseEscrow[msg.sender]);
+        }
+
+        if (!evolveToken.transferFrom(msg.sender, address(this), totalPull)) revert TransferFailed();
+        emit Deposited(msg.sender, amount, unlock, depositType);
+    }
+
+    function _stake(uint256 amount, uint256 duration, DepositType depositType) private returns (uint256 unlock) {
         StakeInfo storage s = depositType == DepositType.Conception ? stakes[msg.sender] : postCopulationStakes[msg.sender];
-        uint256 unlock = block.timestamp + duration;
+        unlock = block.timestamp + duration;
 
         if (s.exists) {
             s.amount += amount;
@@ -98,9 +155,6 @@ contract EvolveFund is Ownable, ReentrancyGuard {
             s.exists = true;
             s.depositType = depositType;
         }
-
-        if (!evolveToken.transferFrom(msg.sender, address(this), amount)) revert TransferFailed();
-        emit Deposited(msg.sender, amount, unlock, depositType);
     }
 
     function extend(uint256 additionalDuration, DepositType depositType) external {
@@ -131,6 +185,41 @@ contract EvolveFund is Ownable, ReentrancyGuard {
     function lockStake(address user, DepositType depositType) external onlyBondManager {
         lockedByBond[user] = true;
         emit Locked(user, depositType);
+    }
+
+    /// @notice BondManager-only: gift `count` of `from`'s escrowed birth
+    ///         roses to the mother — executed at the moment paternity is
+    ///         confirmed, together with the stake payout. The escrowed
+    ///         EVOLVE is spent through the Evolve2Earn gift economy, so the
+    ///         1 EVOLVE per rose is distributed proportionally among the
+    ///         existing rose owners (perpetual revenue split) and the mother
+    ///         becomes the owner of `count` roses.
+    function giftEscrowedRoses(address from, address to, uint256 count) external onlyBondManager nonReentrant {
+        if (evolve2Earn == address(0)) revert Evolve2EarnNotSet();
+        if (count == 0 || count > roseEscrow[from]) revert InsufficientRoses();
+
+        roseEscrow[from] -= count;
+        uint256 amount = count * ROSE_PRICE;
+
+        if (!evolveToken.approve(evolve2Earn, amount)) revert TransferFailed();
+        IEvolve2EarnGift(evolve2Earn).giftToBatch(to, count);
+        if (!evolveToken.approve(evolve2Earn, 0)) revert TransferFailed();
+
+        emit RoseEscrowGifted(from, to, count);
+    }
+
+    /// @notice Reclaim the birth-rose escrow when paternity was NOT
+    ///         confirmed. Available only while the caller's stake is not
+    ///         locked by an active bond/session.
+    function withdrawRoseEscrow() external nonReentrant {
+        uint256 count = roseEscrow[msg.sender];
+        if (count == 0) revert NoRosesEscrowed();
+        if (lockedByBond[msg.sender]) revert LockedByBond();
+
+        roseEscrow[msg.sender] = 0;
+        uint256 amount = count * ROSE_PRICE;
+        if (!evolveToken.transfer(msg.sender, amount)) revert TransferFailed();
+        emit RoseEscrowWithdrawn(msg.sender, count);
     }
 
     function unlockStake(address user, DepositType depositType) external onlyBondManager {

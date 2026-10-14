@@ -79,6 +79,9 @@ const DeployAllModule = buildModule("DeployAllModule", (m) => {
   // Wire fund → bondManager
   m.call(evolveFund, "setBondManager", [bondManager]);
 
+  // Wire fund → evolve2Earn (birth-rose escrow gifting on confirmed paternity)
+  m.call(evolveFund, "setEvolve2Earn", [evolve2Earn]);
+
   // Wire registry → dnaVerification (registry queries on-chain DNA status)
   m.call(registry, "setDNAVerification", [dnaVerification]);
 

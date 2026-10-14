@@ -10,6 +10,8 @@ interface IEvolveFund {
     function bondWithdraw(address user, uint256 amount, address to, uint8 depositType) external;
     function getStake(address user) external view returns (uint256 amount, uint256 unlockTime, bool isLocked, bool exists);
     function getPostCopulationStake(address user) external view returns (uint256 amount, uint256 unlockTime, bool isLocked, bool exists);
+    function roseEscrow(address user) external view returns (uint256);
+    function giftEscrowedRoses(address from, address to, uint256 count) external;
 }
 
 interface IVerificationRegistry {
@@ -99,6 +101,10 @@ contract BondManager is Ownable, ReentrancyGuard {
     event SessionJoined(uint256 indexed id, address indexed man);
     event SessionConfirmed(uint256 indexed id, address indexed participant);
     event SessionResolved(uint256 indexed id, address indexed father, uint256 totalDistributed);
+    // Birth roses: the man's escrowed EvolveFund roses (1 EVOLVE = 1 rose)
+    // gifted to the mother at the moment paternity is confirmed — together
+    // with the stake payout, never on a negative result.
+    event BirthRosesGifted(address indexed man, address indexed mother, uint256 roseCount);
 
     // Test status events with user-friendly descriptions
     event STDTestSubmitted(uint256 indexed bondId, address indexed user, TestStatus status, string description);
@@ -321,6 +327,16 @@ contract BondManager is Ownable, ReentrancyGuard {
                 evolveFund.bondWithdraw(bond.man, amount, bond.woman, 0); // 0 = Conception type
             }
 
+            // Birth roses: ALL of the man's escrowed roses go to the mother
+            // together with the stake (only on CONFIRMED paternity; on a
+            // negative result the escrow stays and he reclaims it via
+            // EvolveFund.withdrawRoseEscrow() after the unlock below).
+            uint256 roses = evolveFund.roseEscrow(bond.man);
+            if (roses > 0) {
+                evolveFund.giftEscrowedRoses(bond.man, bond.woman, roses);
+                emit BirthRosesGifted(bond.man, bond.woman, roses);
+            }
+
             _childrenCount[bond.man] += 1;
             _childrenCount[bond.woman] += 1;
             if (!_isFather[bond.man]) { _isFather[bond.man] = true; _totalFathers += 1; }
@@ -456,6 +472,16 @@ contract BondManager is Ownable, ReentrancyGuard {
                 evolveFund.bondWithdraw(father, fatherDeposit, father, 1);
                 // Pay the reward (2x deposit + 1 per other participant) from the Evolve2Earn pool
                 evolve2Earn.rewardMode3Father(father, fatherDeposit, otherParticipants);
+            }
+
+            // Birth roses: the CHOSEN father's escrowed roses go to the mother
+            // (paternity confirmed for him only). Non-fathers keep their
+            // escrow and reclaim it via EvolveFund.withdrawRoseEscrow() —
+            // their stakes were unlocked in the loop above.
+            uint256 roses = evolveFund.roseEscrow(father);
+            if (roses > 0) {
+                evolveFund.giftEscrowedRoses(father, woman, roses);
+                emit BirthRosesGifted(father, woman, roses);
             }
 
             _childrenCount[father] += 1;

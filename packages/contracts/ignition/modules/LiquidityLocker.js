@@ -1,6 +1,6 @@
-const { buildModule } = require("@nomicfoundation/hardhat-ignition/modules");
+import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
 
-module.exports = buildModule("LiquidityLockerModule", (m) => {
+export default buildModule("LiquidityLockerModule", (m) => {
   const owner = m.getParameter("owner");
   const unlockTime = m.getParameter("unlockTime");
 

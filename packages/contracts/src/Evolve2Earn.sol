@@ -164,7 +164,7 @@ contract Evolve2Earn is Ownable, ReentrancyGuard, Pausable {
         uint256[] memory amounts;
         uint256 currentTotal = totalGifts;
         if (currentTotal > 0) {
-            (recipients, amounts) = _distributeEmojiRevenue(currentTotal);
+            (recipients, amounts) = _distributeEmojiRevenue(EMOJI_GIFT_PRICE, currentTotal, address(0));
         }
 
         emojiOwner[emojiId] = msg.sender;
@@ -181,8 +181,10 @@ contract Evolve2Earn is Ownable, ReentrancyGuard, Pausable {
     /// @notice User-to-user emoji gift: the payer spends 1 EVOLVE and the
     ///         recipient `to` is registered as the gift owner. Revenue-split
     ///         semantics are identical to buyEmojiGift (split over prior
-    ///         owners, payer excluded); `to == msg.sender` is allowed
-    ///         (anonymous claim path).
+    ///         owners), except BOTH the payer AND the recipient are excluded
+    ///         from the split: an owner earns only when a rose is gifted to
+    ///         ANOTHER person, never from the gift she receives herself.
+    ///         `to == msg.sender` is allowed (anonymous claim path).
     function giftTo(address to) external nonReentrant whenNotPaused {
         if (to == address(0)) revert ZeroAddress();
 
@@ -192,7 +194,7 @@ contract Evolve2Earn is Ownable, ReentrancyGuard, Pausable {
         uint256[] memory amounts;
         uint256 currentTotal = totalGifts;
         if (currentTotal > 0) {
-            (recipients, amounts) = _distributeEmojiRevenue(currentTotal);
+            (recipients, amounts) = _distributeEmojiRevenue(EMOJI_GIFT_PRICE, currentTotal, to);
         }
 
         ownerGiftCount[to] += 1;
@@ -202,6 +204,39 @@ contract Evolve2Earn is Ownable, ReentrancyGuard, Pausable {
         emit Gifted(msg.sender, to, EMOJI_GIFT_PRICE);
         if (recipients.length > 0) {
             emit EmojiRevenueDistributed(msg.sender, EMOJI_GIFT_PRICE, recipients, amounts);
+        }
+    }
+
+    /// @notice Batch user-to-user gift (birth roses): the payer spends
+    ///         `count` × EMOJI_GIFT_PRICE and `to` is registered as the owner
+    ///         of `count` gifts. A SINGLE proportional distribution runs over
+    ///         PRIOR owners; both the payer and `to` are excluded from it —
+    ///         the recipient starts earning her percentage share only from
+    ///         FUTURE gifts (the "business share" model). Called by
+    ///         EvolveFund.giftEscrowedRoses when paternity is confirmed, but
+    ///         open to any payer like giftTo.
+    function giftToBatch(address to, uint256 count) external nonReentrant whenNotPaused {
+        if (to == address(0)) revert ZeroAddress();
+        if (count == 0) revert InvalidAmount();
+
+        uint256 totalAmount = count * EMOJI_GIFT_PRICE;
+        evolveToken.safeTransferFrom(msg.sender, address(this), totalAmount);
+
+        uint256 currentTotal = totalGifts;
+
+        ownerGiftCount[to] += count;
+        _registerGiftOwner(to);
+        totalGifts += count;
+
+        address[] memory recipients;
+        uint256[] memory amounts;
+        if (currentTotal > 0) {
+            (recipients, amounts) = _distributeEmojiRevenue(totalAmount, currentTotal, to);
+        }
+
+        emit Gifted(msg.sender, to, totalAmount);
+        if (recipients.length > 0) {
+            emit EmojiRevenueDistributed(msg.sender, totalAmount, recipients, amounts);
         }
     }
 
@@ -475,10 +510,11 @@ contract Evolve2Earn is Ownable, ReentrancyGuard, Pausable {
         }
     }
 
-    function _distributeEmojiRevenue(uint256 currentTotal) internal returns (address[] memory recipients, uint256[] memory amounts) {
+    function _distributeEmojiRevenue(uint256 amount, uint256 currentTotal, address excludedRecipient) internal returns (address[] memory recipients, uint256[] memory amounts) {
         uint256 activeOwnerCount = 0;
         for (uint256 i = 0; i < giftOwners.length; i++) {
-            if (ownerGiftCount[giftOwners[i]] > 0 && giftOwners[i] != msg.sender) {
+            address o = giftOwners[i];
+            if (ownerGiftCount[o] > 0 && o != msg.sender && o != excludedRecipient) {
                 activeOwnerCount++;
             }
         }
@@ -490,10 +526,10 @@ contract Evolve2Earn is Ownable, ReentrancyGuard, Pausable {
 
         for (uint256 i = 0; i < giftOwners.length; i++) {
             address owner = giftOwners[i];
-            if (owner == msg.sender) continue;
+            if (owner == msg.sender || owner == excludedRecipient) continue;
             uint256 count = ownerGiftCount[owner];
             if (count > 0) {
-                uint256 share = (count * EMOJI_GIFT_PRICE) / currentTotal;
+                uint256 share = (count * amount) / currentTotal;
                 recipients[idx] = owner;
                 amounts[idx] = share;
                 idx++;
@@ -504,8 +540,8 @@ contract Evolve2Earn is Ownable, ReentrancyGuard, Pausable {
             }
         }
 
-        if (distributed > 0 && distributed < EMOJI_GIFT_PRICE && evolveToken.balanceOf(address(this)) > 0) {
-            uint256 dust = EMOJI_GIFT_PRICE - distributed;
+        if (distributed > 0 && distributed < amount && evolveToken.balanceOf(address(this)) > 0) {
+            uint256 dust = amount - distributed;
             uint256 contractBalance = evolveToken.balanceOf(address(this));
             if (dust > contractBalance) dust = contractBalance;
             if (dust > 0) {
